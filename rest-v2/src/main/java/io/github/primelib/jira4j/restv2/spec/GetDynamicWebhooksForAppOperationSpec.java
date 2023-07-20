@@ -1,0 +1,63 @@
+package io.github.primelib.jira4j.restv2.spec;
+
+import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.Nullable;
+import javax.annotation.processing.Generated;
+
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.experimental.Accessors;
+import java.util.function.Consumer;
+
+/**
+ * GetDynamicWebhooksForAppSpec
+ * <p>
+ * Specification for the GetDynamicWebhooksForApp operation.
+ * <p>
+ * Get dynamic webhooks for app
+ */
+@Data
+@Accessors(fluent = true)
+@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
+public class GetDynamicWebhooksForAppOperationSpec {
+    /**
+     * allows to disable validation of the spec, use with care!
+     */
+    @ApiStatus.Experimental
+    public static Boolean VALIDATION_ENABLED = true;
+
+    /**
+     * The index of the first item to return in a page of results (page offset).
+     */
+    @Nullable 
+    private Long startAt = 0L;
+
+    /**
+     * The maximum number of items to return per page.
+     */
+    @Nullable 
+    private Integer maxResults = 100;
+
+    /**
+     * Constructs a validated implementation of {@link GetDynamicWebhooksForAppOperationSpec}.
+     *
+     * @param spec the specification to process
+     */
+    @ApiStatus.Internal
+    public GetDynamicWebhooksForAppOperationSpec(Consumer<GetDynamicWebhooksForAppOperationSpec> spec) {
+        spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Validates the Spec, will throw a exception if required parameters are missing
+     *
+     * @throws NullPointerException
+     */
+    public void validate() {
+    }
+
+}

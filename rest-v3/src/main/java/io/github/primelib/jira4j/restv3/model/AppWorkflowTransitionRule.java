@@ -1,0 +1,63 @@
+package io.github.primelib.jira4j.restv3.model;
+
+import java.util.function.Consumer;
+import org.jetbrains.annotations.ApiStatus;
+import javax.annotation.processing.Generated;
+import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.AccessLevel;
+import lombok.experimental.Accessors;
+
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+/**
+ * AppWorkflowTransitionRule
+ *
+ */
+@Data
+@AllArgsConstructor
+@Accessors(fluent = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@JsonPropertyOrder({
+    "configuration",
+    "id",
+    "key",
+    "transition"
+})
+@JsonTypeName("AppWorkflowTransitionRule")
+@Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
+public class AppWorkflowTransitionRule {
+
+    /**
+     * Constructs a validated implementation of {@link AppWorkflowTransitionRule}.
+     *
+     * @param spec the specification to process
+     */
+    @ApiStatus.Internal
+    public AppWorkflowTransitionRule(Consumer<AppWorkflowTransitionRule> spec) {
+        spec.accept(this);
+    }
+
+    @JsonProperty("configuration")
+    protected RuleConfiguration _configuration;
+
+    /**
+     * The ID of the transition rule.
+     */
+    @JsonProperty("id")
+    protected String id;
+
+    /**
+     * The key of the rule, as defined in the Connect or the Forge app descriptor.
+     */
+    @JsonProperty("key")
+    protected String key;
+
+    @JsonProperty("transition")
+    protected WorkflowTransition transition;
+
+
+}

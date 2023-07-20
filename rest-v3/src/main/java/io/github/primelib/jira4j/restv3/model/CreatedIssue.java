@@ -1,0 +1,70 @@
+package io.github.primelib.jira4j.restv3.model;
+
+import java.util.function.Consumer;
+import org.jetbrains.annotations.ApiStatus;
+import javax.annotation.processing.Generated;
+import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
+import lombok.AccessLevel;
+import lombok.experimental.Accessors;
+
+import com.fasterxml.jackson.annotation.JsonPropertyOrder;
+import com.fasterxml.jackson.annotation.JsonTypeName;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+/**
+ * CreatedIssue
+ *
+ */
+@Data
+@AllArgsConstructor
+@Accessors(fluent = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@JsonPropertyOrder({
+    "id",
+    "key",
+    "self",
+    "transition",
+    "watchers"
+})
+@JsonTypeName("CreatedIssue")
+@Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
+public class CreatedIssue {
+
+    /**
+     * Constructs a validated implementation of {@link CreatedIssue}.
+     *
+     * @param spec the specification to process
+     */
+    @ApiStatus.Internal
+    public CreatedIssue(Consumer<CreatedIssue> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * The ID of the created issue or subtask.
+     */
+    @JsonProperty("id")
+    protected String id;
+
+    /**
+     * The key of the created issue or subtask.
+     */
+    @JsonProperty("key")
+    protected String key;
+
+    /**
+     * The URL of the created issue or subtask.
+     */
+    @JsonProperty("self")
+    protected String self;
+
+    @JsonProperty("transition")
+    protected CreatedIssueTransition transition;
+
+    @JsonProperty("watchers")
+    protected CreatedIssueWatchers watchers;
+
+
+}
