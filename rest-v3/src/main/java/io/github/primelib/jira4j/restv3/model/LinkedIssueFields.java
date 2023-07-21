@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -17,14 +20,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * LinkedIssueFields
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "assignee",
     "issueType",
-    "issuetype",
     "priority",
     "status",
     "summary",
@@ -34,24 +39,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class LinkedIssueFields {
 
-    /**
-     * Constructs a validated implementation of {@link LinkedIssueFields}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public LinkedIssueFields(Consumer<LinkedIssueFields> spec) {
-        spec.accept(this);
-    }
-
     @JsonProperty("assignee")
     protected FieldsAssignee assignee;
 
     @JsonProperty("issueType")
     protected FieldsIssueType issueType;
-
-    @JsonProperty("issuetype")
-    protected IssueTypeDetails issuetype;
 
     @JsonProperty("priority")
     protected FieldsPriority priority;
@@ -68,5 +60,34 @@ public class LinkedIssueFields {
     @JsonProperty("timetracking")
     protected FieldsTimetracking timetracking;
 
+    /**
+     * Constructs a validated instance of {@link LinkedIssueFields}.
+     *
+     * @param spec the specification to process
+     */
+    public LinkedIssueFields(Consumer<LinkedIssueFields> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link LinkedIssueFields}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #LinkedIssueFields(Consumer)} instead.
+     * @param assignee var.name
+     * @param issueType var.name
+     * @param priority var.name
+     * @param status var.name
+     * @param summary The summary description of the linked issue.
+     * @param timetracking var.name
+     */
+    @ApiStatus.Internal
+    public LinkedIssueFields(FieldsAssignee assignee, FieldsIssueType issueType, FieldsPriority priority, FieldsStatus status, String summary, FieldsTimetracking timetracking) {
+        this.assignee = assignee;
+        this.issueType = issueType;
+        this.priority = priority;
+        this.status = status;
+        this.summary = summary;
+        this.timetracking = timetracking;
+    }
 
 }

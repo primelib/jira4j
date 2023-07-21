@@ -8,7 +8,11 @@ import javax.annotation.processing.Generated;
 import io.github.primelib.jira4j.restv2.model.CustomFieldContextDefaultValueUpdate;
 import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -20,9 +24,13 @@ import java.util.function.Consumer;
  * <p>
  * Set custom field contexts default values
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class SetDefaultValuesOperationSpec {
     /**
@@ -43,13 +51,29 @@ public class SetDefaultValuesOperationSpec {
     private CustomFieldContextDefaultValueUpdate customFieldContextDefaultValueUpdate;
 
     /**
-     * Constructs a validated implementation of {@link SetDefaultValuesOperationSpec}.
+     * Constructs a validated instance of {@link SetDefaultValuesOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public SetDefaultValuesOperationSpec(Consumer<SetDefaultValuesOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link SetDefaultValuesOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param fieldId              The ID of the custom field.
+     * @param customFieldContextDefaultValueUpdate 
+     */
+    @ApiStatus.Internal
+    public SetDefaultValuesOperationSpec(String fieldId, CustomFieldContextDefaultValueUpdate customFieldContextDefaultValueUpdate) {
+        this.fieldId = fieldId;
+        this.customFieldContextDefaultValueUpdate = customFieldContextDefaultValueUpdate;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -63,5 +87,4 @@ public class SetDefaultValuesOperationSpec {
         Objects.requireNonNull(fieldId, "fieldId is a required parameter!");
         Objects.requireNonNull(customFieldContextDefaultValueUpdate, "customFieldContextDefaultValueUpdate is a required parameter!");
     }
-
 }

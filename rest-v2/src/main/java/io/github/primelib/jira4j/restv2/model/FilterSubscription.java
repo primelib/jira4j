@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -17,10 +20,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * FilterSubscription
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "group",
     "id",
@@ -29,16 +35,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("FilterSubscription")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class FilterSubscription {
-
-    /**
-     * Constructs a validated implementation of {@link FilterSubscription}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public FilterSubscription(Consumer<FilterSubscription> spec) {
-        spec.accept(this);
-    }
 
     @JsonProperty("group")
     protected FilterSubscriptionGroup group;
@@ -52,5 +48,28 @@ public class FilterSubscription {
     @JsonProperty("user")
     protected FilterSubscriptionUser user;
 
+    /**
+     * Constructs a validated instance of {@link FilterSubscription}.
+     *
+     * @param spec the specification to process
+     */
+    public FilterSubscription(Consumer<FilterSubscription> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link FilterSubscription}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #FilterSubscription(Consumer)} instead.
+     * @param group var.name
+     * @param id The ID of the filter subscription.
+     * @param user var.name
+     */
+    @ApiStatus.Internal
+    public FilterSubscription(FilterSubscriptionGroup group, Long id, FilterSubscriptionUser user) {
+        this.group = group;
+        this.id = id;
+        this.user = user;
+    }
 
 }

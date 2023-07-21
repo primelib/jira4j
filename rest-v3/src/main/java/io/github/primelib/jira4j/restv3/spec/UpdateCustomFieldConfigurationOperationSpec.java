@@ -5,10 +5,16 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import javax.annotation.processing.Generated;
 
+import io.github.primelib.jira4j.restv3.model.Configuration;
 import io.github.primelib.jira4j.restv3.model.CustomFieldConfigurations;
 import io.github.primelib.jira4j.restv3.model.FieldConfiguration;
+import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -20,9 +26,13 @@ import java.util.function.Consumer;
  * <p>
  * Update custom field configurations
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class UpdateCustomFieldConfigurationOperationSpec {
     /**
@@ -32,7 +42,7 @@ public class UpdateCustomFieldConfigurationOperationSpec {
     public static Boolean VALIDATION_ENABLED = true;
 
     /**
-     * The ID or key of the custom field, for example `customfield_10000`.
+     * The ID or key of the custom field, for example {@code customfield_10000}.
      */
     @NotNull 
     private String fieldIdOrKey;
@@ -43,13 +53,29 @@ public class UpdateCustomFieldConfigurationOperationSpec {
     private CustomFieldConfigurations customFieldConfigurations;
 
     /**
-     * Constructs a validated implementation of {@link UpdateCustomFieldConfigurationOperationSpec}.
+     * Constructs a validated instance of {@link UpdateCustomFieldConfigurationOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public UpdateCustomFieldConfigurationOperationSpec(Consumer<UpdateCustomFieldConfigurationOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link UpdateCustomFieldConfigurationOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param fieldIdOrKey         The ID or key of the custom field, for example {@code customfield_10000}.
+     * @param customFieldConfigurations 
+     */
+    @ApiStatus.Internal
+    public UpdateCustomFieldConfigurationOperationSpec(String fieldIdOrKey, CustomFieldConfigurations customFieldConfigurations) {
+        this.fieldIdOrKey = fieldIdOrKey;
+        this.customFieldConfigurations = customFieldConfigurations;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -63,5 +89,4 @@ public class UpdateCustomFieldConfigurationOperationSpec {
         Objects.requireNonNull(fieldIdOrKey, "fieldIdOrKey is a required parameter!");
         Objects.requireNonNull(customFieldConfigurations, "customFieldConfigurations is a required parameter!");
     }
-
 }

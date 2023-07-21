@@ -3,15 +3,15 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.HashMap;
-import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -20,31 +20,23 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * NotificationSchemeNotificationDetails
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
-@EqualsAndHashCode(callSuper = true)
+@Builder
 @JsonPropertyOrder({
     "notificationType",
     "parameter"
 })
 @JsonTypeName("NotificationSchemeNotificationDetails")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
-public class NotificationSchemeNotificationDetails extends HashMap<String, Object> {
+public class NotificationSchemeNotificationDetails {
 
     /**
-     * Constructs a validated implementation of {@link NotificationSchemeNotificationDetails}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public NotificationSchemeNotificationDetails(Consumer<NotificationSchemeNotificationDetails> spec) {
-        spec.accept(this);
-    }
-
-    /**
-     * The notification type, e.g `CurrentAssignee`, `Group`, `EmailAddress`.
+     * The notification type, e.g {@code CurrentAssignee}, {@code Group}, {@code EmailAddress}.
      */
     @JsonProperty("notificationType")
     protected String notificationType;
@@ -55,5 +47,26 @@ public class NotificationSchemeNotificationDetails extends HashMap<String, Objec
     @JsonProperty("parameter")
     protected String parameter;
 
+    /**
+     * Constructs a validated instance of {@link NotificationSchemeNotificationDetails}.
+     *
+     * @param spec the specification to process
+     */
+    public NotificationSchemeNotificationDetails(Consumer<NotificationSchemeNotificationDetails> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link NotificationSchemeNotificationDetails}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #NotificationSchemeNotificationDetails(Consumer)} instead.
+     * @param notificationType The notification type, e.g {@code CurrentAssignee}, {@code Group}, {@code EmailAddress}.
+     * @param parameter The value corresponding to the specified notification type.
+     */
+    @ApiStatus.Internal
+    public NotificationSchemeNotificationDetails(String notificationType, String parameter) {
+        this.notificationType = notificationType;
+        this.parameter = parameter;
+    }
 
 }

@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.util.List;
@@ -18,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * SecuritySchemes
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "issueSecuritySchemes"
 })
@@ -30,20 +36,29 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class SecuritySchemes {
 
     /**
-     * Constructs a validated implementation of {@link SecuritySchemes}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public SecuritySchemes(Consumer<SecuritySchemes> spec) {
-        spec.accept(this);
-    }
-
-    /**
      * List of security schemes.
      */
     @JsonProperty("issueSecuritySchemes")
     protected List<SecurityScheme> issueSecuritySchemes;
 
+    /**
+     * Constructs a validated instance of {@link SecuritySchemes}.
+     *
+     * @param spec the specification to process
+     */
+    public SecuritySchemes(Consumer<SecuritySchemes> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link SecuritySchemes}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #SecuritySchemes(Consumer)} instead.
+     * @param issueSecuritySchemes List of security schemes.
+     */
+    @ApiStatus.Internal
+    public SecuritySchemes(List<SecurityScheme> issueSecuritySchemes) {
+        this.issueSecuritySchemes = issueSecuritySchemes;
+    }
 
 }

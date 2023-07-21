@@ -3,10 +3,14 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -17,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * WorkflowScope
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "project",
     "type"
@@ -29,28 +36,39 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class WorkflowScope {
 
-    /**
-     * Constructs a validated implementation of {@link WorkflowScope}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public WorkflowScope(Consumer<WorkflowScope> spec) {
-        spec.accept(this);
-    }
-
     @JsonProperty("project")
     protected ProjectId project;
 
     /**
-     * The scope of the workflow. `GLOBAL` for company-managed projects and `PROJECT` for team-managed projects.
+     * The scope of the workflow. {@code GLOBAL} for company-managed projects and {@code PROJECT} for team-managed projects.
      */
     @JsonProperty("type")
     protected TypeEnum type;
 
+    /**
+     * Constructs a validated instance of {@link WorkflowScope}.
+     *
+     * @param spec the specification to process
+     */
+    public WorkflowScope(Consumer<WorkflowScope> spec) {
+        spec.accept(this);
+    }
 
     /**
-     * The scope of the workflow. `GLOBAL` for company-managed projects and `PROJECT` for team-managed projects.
+     * Constructs a validated instance of {@link WorkflowScope}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #WorkflowScope(Consumer)} instead.
+     * @param project var.name
+     * @param type The scope of the workflow. {@code GLOBAL} for company-managed projects and {@code PROJECT} for team-managed projects.
+     */
+    @ApiStatus.Internal
+    public WorkflowScope(ProjectId project, TypeEnum type) {
+        this.project = project;
+        this.type = type;
+    }
+
+    /**
+     * The scope of the workflow. {@code GLOBAL} for company-managed projects and {@code PROJECT} for team-managed projects.
      */
     @AllArgsConstructor
     public enum TypeEnum {

@@ -3,10 +3,14 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.util.Set;
@@ -18,10 +22,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * JiraWorkflowStatus
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "description",
     "id",
@@ -34,16 +41,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("JiraWorkflowStatus")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class JiraWorkflowStatus {
-
-    /**
-     * Constructs a validated implementation of {@link JiraWorkflowStatus}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public JiraWorkflowStatus(Consumer<JiraWorkflowStatus> spec) {
-        spec.accept(this);
-    }
 
     /**
      * The description of the status.
@@ -79,11 +76,42 @@ public class JiraWorkflowStatus {
     protected String statusReference;
 
     /**
-     * The `statuses.usages` expand is an optional parameter that can be used when reading and updating statuses in Jira. It provides additional information about the projects and issue types associated with the requested statuses.
+     * The {@code statuses.usages} expand is an optional parameter that can be used when reading and updating statuses in Jira. It provides additional information about the projects and issue types associated with the requested statuses.
      */
     @JsonProperty("usages")
     protected Set<ProjectIssueTypes> usages;
 
+    /**
+     * Constructs a validated instance of {@link JiraWorkflowStatus}.
+     *
+     * @param spec the specification to process
+     */
+    public JiraWorkflowStatus(Consumer<JiraWorkflowStatus> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link JiraWorkflowStatus}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #JiraWorkflowStatus(Consumer)} instead.
+     * @param description The description of the status.
+     * @param id The ID of the status.
+     * @param name The name of the status.
+     * @param scope var.name
+     * @param statusCategory The category of the status.
+     * @param statusReference The reference of the status.
+     * @param usages The {@code statuses.usages} expand is an optional parameter that can be used when reading and updating statuses in Jira. It provides additional information about the projects and issue types associated with the requested statuses.
+     */
+    @ApiStatus.Internal
+    public JiraWorkflowStatus(String description, String id, String name, WorkflowScope scope, StatusCategoryEnum statusCategory, String statusReference, Set<ProjectIssueTypes> usages) {
+        this.description = description;
+        this.id = id;
+        this.name = name;
+        this.scope = scope;
+        this.statusCategory = statusCategory;
+        this.statusReference = statusReference;
+        this.usages = usages;
+    }
 
     /**
      * The category of the status.

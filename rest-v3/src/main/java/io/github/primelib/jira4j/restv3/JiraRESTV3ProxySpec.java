@@ -12,6 +12,7 @@ import java.net.Proxy;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Objects;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Consumer;
 
@@ -75,11 +76,12 @@ public class JiraRESTV3ProxySpec {
      * Creates a new {@link JiraRESTV3ProxySpec} with values taken from the proxy environment variables, if applicable.
      */
     public static JiraRESTV3ProxySpec detect() {
-        String httpProxy = System.getenv("http_proxy");
-        String httpsProxy = System.getenv("https_proxy");
+        Set<String> proxies = new HashSet<>(2);
+        proxies.add(System.getenv("http_proxy"));
+        proxies.add(System.getenv("https_proxy"));
 
         // check if a proxy is configured
-        for (String p : Set.of(httpProxy, httpsProxy)) {
+        for (String p : proxies) {
             try {
                 URI proxyUri = new URI(p);
                 return new JiraRESTV3ProxySpec(spec -> {

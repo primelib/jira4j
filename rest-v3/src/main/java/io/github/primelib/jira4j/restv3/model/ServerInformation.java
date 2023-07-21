@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.time.OffsetDateTime;
@@ -19,10 +22,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * ServerInformation
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "baseUrl",
     "buildDate",
@@ -38,16 +44,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("ServerInformation")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class ServerInformation {
-
-    /**
-     * Constructs a validated implementation of {@link ServerInformation}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public ServerInformation(Consumer<ServerInformation> spec) {
-        spec.accept(this);
-    }
 
     /**
      * The base URL of the Jira instance.
@@ -109,5 +105,42 @@ public class ServerInformation {
     @JsonProperty("versionNumbers")
     protected List<Integer> versionNumbers;
 
+    /**
+     * Constructs a validated instance of {@link ServerInformation}.
+     *
+     * @param spec the specification to process
+     */
+    public ServerInformation(Consumer<ServerInformation> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link ServerInformation}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #ServerInformation(Consumer)} instead.
+     * @param baseUrl The base URL of the Jira instance.
+     * @param buildDate The timestamp when the Jira version was built.
+     * @param buildNumber The build number of the Jira version.
+     * @param deploymentType The type of server deployment. This is always returned as *Cloud*.
+     * @param healthChecks Jira instance health check results. Deprecated and no longer returned.
+     * @param scmInfo The unique identifier of the Jira version.
+     * @param serverTime The time in Jira when this request was responded to.
+     * @param serverTitle The name of the Jira instance.
+     * @param version The version of Jira.
+     * @param versionNumbers The major, minor, and revision version numbers of the Jira version.
+     */
+    @ApiStatus.Internal
+    public ServerInformation(String baseUrl, OffsetDateTime buildDate, Integer buildNumber, String deploymentType, List<HealthCheckResult> healthChecks, String scmInfo, OffsetDateTime serverTime, String serverTitle, String version, List<Integer> versionNumbers) {
+        this.baseUrl = baseUrl;
+        this.buildDate = buildDate;
+        this.buildNumber = buildNumber;
+        this.deploymentType = deploymentType;
+        this.healthChecks = healthChecks;
+        this.scmInfo = scmInfo;
+        this.serverTime = serverTime;
+        this.serverTitle = serverTitle;
+        this.version = version;
+        this.versionNumbers = versionNumbers;
+    }
 
 }

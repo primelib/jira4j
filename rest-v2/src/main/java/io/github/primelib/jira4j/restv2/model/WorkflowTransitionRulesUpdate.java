@@ -3,13 +3,15 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.ArrayList;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -19,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * WorkflowTransitionRulesUpdate
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "workflows"
 })
@@ -31,20 +36,29 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class WorkflowTransitionRulesUpdate {
 
     /**
-     * Constructs a validated implementation of {@link WorkflowTransitionRulesUpdate}.
+     * The list of workflows with transition rules to update.
+     */
+    @JsonProperty("workflows")
+    protected List<WorkflowTransitionRules> workflows;
+
+    /**
+     * Constructs a validated instance of {@link WorkflowTransitionRulesUpdate}.
      *
      * @param spec the specification to process
      */
-    @ApiStatus.Internal
     public WorkflowTransitionRulesUpdate(Consumer<WorkflowTransitionRulesUpdate> spec) {
         spec.accept(this);
     }
 
     /**
-     * The list of workflows with transition rules to update.
+     * Constructs a validated instance of {@link WorkflowTransitionRulesUpdate}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #WorkflowTransitionRulesUpdate(Consumer)} instead.
+     * @param workflows The list of workflows with transition rules to update.
      */
-    @JsonProperty("workflows")
-    protected List<WorkflowTransitionRules> workflows = new ArrayList<>();
-
+    @ApiStatus.Internal
+    public WorkflowTransitionRulesUpdate(List<WorkflowTransitionRules> workflows) {
+        this.workflows = workflows;
+    }
 
 }

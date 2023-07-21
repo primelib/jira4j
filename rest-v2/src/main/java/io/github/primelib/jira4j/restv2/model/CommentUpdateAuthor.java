@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -17,10 +20,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * CommentUpdateAuthor
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "accountId",
     "accountType",
@@ -36,16 +42,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("Comment_updateAuthor")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class CommentUpdateAuthor {
-
-    /**
-     * Constructs a validated implementation of {@link CommentUpdateAuthor}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public CommentUpdateAuthor(Consumer<CommentUpdateAuthor> spec) {
-        spec.accept(this);
-    }
 
     /**
      * The account ID of the user, which uniquely identifies the user across all Atlassian products. For example, *5b10ac8d82e05b22cc7d4ef5*.
@@ -104,5 +100,42 @@ public class CommentUpdateAuthor {
     @JsonProperty("timeZone")
     protected String timeZone;
 
+    /**
+     * Constructs a validated instance of {@link CommentUpdateAuthor}.
+     *
+     * @param spec the specification to process
+     */
+    public CommentUpdateAuthor(Consumer<CommentUpdateAuthor> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link CommentUpdateAuthor}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #CommentUpdateAuthor(Consumer)} instead.
+     * @param accountId The account ID of the user, which uniquely identifies the user across all Atlassian products. For example, *5b10ac8d82e05b22cc7d4ef5*.
+     * @param accountType The type of account represented by this user. This will be one of 'atlassian' (normal users), 'app' (application user) or 'customer' (Jira Service Desk customer user)
+     * @param active Whether the user is active.
+     * @param avatarUrls var.name
+     * @param displayName The display name of the user. Depending on the user’s privacy settings, this may return an alternative value.
+     * @param emailAddress The email address of the user. Depending on the user’s privacy settings, this may be returned as null.
+     * @param key This property is no longer available and will be removed from the documentation soon. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.
+     * @param name This property is no longer available and will be removed from the documentation soon. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.
+     * @param self The URL of the user.
+     * @param timeZone The time zone specified in the user's profile. Depending on the user’s privacy settings, this may be returned as null.
+     */
+    @ApiStatus.Internal
+    public CommentUpdateAuthor(String accountId, String accountType, Boolean active, UserAvatarUrls avatarUrls, String displayName, String emailAddress, String key, String name, String self, String timeZone) {
+        this.accountId = accountId;
+        this.accountType = accountType;
+        this.active = active;
+        this.avatarUrls = avatarUrls;
+        this.displayName = displayName;
+        this.emailAddress = emailAddress;
+        this.key = key;
+        this.name = name;
+        this.self = self;
+        this.timeZone = timeZone;
+    }
 
 }

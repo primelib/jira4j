@@ -4,13 +4,15 @@ import java.util.List;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.LinkedHashSet;
 import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -20,10 +22,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * IssueCommentListRequestBean
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "ids"
 })
@@ -32,20 +37,29 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class IssueCommentListRequestBean {
 
     /**
-     * Constructs a validated implementation of {@link IssueCommentListRequestBean}.
+     * The list of comment IDs. A maximum of 1000 IDs can be specified.
+     */
+    @JsonProperty("ids")
+    protected Set<Long> ids;
+
+    /**
+     * Constructs a validated instance of {@link IssueCommentListRequestBean}.
      *
      * @param spec the specification to process
      */
-    @ApiStatus.Internal
     public IssueCommentListRequestBean(Consumer<IssueCommentListRequestBean> spec) {
         spec.accept(this);
     }
 
     /**
-     * The list of comment IDs. A maximum of 1000 IDs can be specified.
+     * Constructs a validated instance of {@link IssueCommentListRequestBean}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #IssueCommentListRequestBean(Consumer)} instead.
+     * @param ids The list of comment IDs. A maximum of 1000 IDs can be specified.
      */
-    @JsonProperty("ids")
-    protected Set<Long> ids = new LinkedHashSet<>();
-
+    @ApiStatus.Internal
+    public IssueCommentListRequestBean(Set<Long> ids) {
+        this.ids = ids;
+    }
 
 }

@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.net.URI;
@@ -19,10 +22,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Votes
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "hasVoted",
     "self",
@@ -32,16 +38,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("Votes")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class Votes {
-
-    /**
-     * Constructs a validated implementation of {@link Votes}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public Votes(Consumer<Votes> spec) {
-        spec.accept(this);
-    }
 
     /**
      * Whether the user making this request has voted on the issue.
@@ -67,5 +63,30 @@ public class Votes {
     @JsonProperty("votes")
     protected Long votes;
 
+    /**
+     * Constructs a validated instance of {@link Votes}.
+     *
+     * @param spec the specification to process
+     */
+    public Votes(Consumer<Votes> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link Votes}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #Votes(Consumer)} instead.
+     * @param hasVoted Whether the user making this request has voted on the issue.
+     * @param self The URL of these issue vote details.
+     * @param voters List of the users who have voted on this issue. An empty list is returned when the calling user doesn't have the *View voters and watchers* project permission.
+     * @param votes The number of votes on the issue.
+     */
+    @ApiStatus.Internal
+    public Votes(Boolean hasVoted, URI self, List<User> voters, Long votes) {
+        this.hasVoted = hasVoted;
+        this.self = self;
+        this.voters = voters;
+        this.votes = votes;
+    }
 
 }

@@ -3,13 +3,15 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.ArrayList;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -19,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * DashboardDetails
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "description",
     "editPermissions",
@@ -34,16 +39,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class DashboardDetails {
 
     /**
-     * Constructs a validated implementation of {@link DashboardDetails}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public DashboardDetails(Consumer<DashboardDetails> spec) {
-        spec.accept(this);
-    }
-
-    /**
      * The description of the dashboard.
      */
     @JsonProperty("description")
@@ -53,7 +48,7 @@ public class DashboardDetails {
      * The edit permissions for the dashboard.
      */
     @JsonProperty("editPermissions")
-    protected List<SharePermission> editPermissions = new ArrayList<>();
+    protected List<SharePermission> editPermissions;
 
     /**
      * The name of the dashboard.
@@ -65,7 +60,32 @@ public class DashboardDetails {
      * The share permissions for the dashboard.
      */
     @JsonProperty("sharePermissions")
-    protected List<SharePermission> sharePermissions = new ArrayList<>();
+    protected List<SharePermission> sharePermissions;
 
+    /**
+     * Constructs a validated instance of {@link DashboardDetails}.
+     *
+     * @param spec the specification to process
+     */
+    public DashboardDetails(Consumer<DashboardDetails> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link DashboardDetails}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #DashboardDetails(Consumer)} instead.
+     * @param description The description of the dashboard.
+     * @param editPermissions The edit permissions for the dashboard.
+     * @param name The name of the dashboard.
+     * @param sharePermissions The share permissions for the dashboard.
+     */
+    @ApiStatus.Internal
+    public DashboardDetails(String description, List<SharePermission> editPermissions, String name, List<SharePermission> sharePermissions) {
+        this.description = description;
+        this.editPermissions = editPermissions;
+        this.name = name;
+        this.sharePermissions = sharePermissions;
+    }
 
 }

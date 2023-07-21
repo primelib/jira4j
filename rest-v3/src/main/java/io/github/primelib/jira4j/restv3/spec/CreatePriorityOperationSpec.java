@@ -1,14 +1,19 @@
 package io.github.primelib.jira4j.restv3.spec;
 
-import java.util.Map;
 import java.util.Objects;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import javax.annotation.processing.Generated;
 
+import io.github.primelib.jira4j.restv3.model.CreatePriorityDetails;
 import io.github.primelib.jira4j.restv3.model.Priority;
+import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -20,9 +25,13 @@ import java.util.function.Consumer;
  * <p>
  * Create priority
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class CreatePriorityOperationSpec {
     /**
@@ -34,10 +43,10 @@ public class CreatePriorityOperationSpec {
     /**
      */
     @NotNull 
-    private Map<String, Object> requestBody;
+    private CreatePriorityDetails createPriorityDetails;
 
     /**
-     * Constructs a validated implementation of {@link CreatePriorityOperationSpec}.
+     * Constructs a validated instance of {@link CreatePriorityOperationSpec}.
      *
      * @param spec the specification to process
      */
@@ -49,12 +58,25 @@ public class CreatePriorityOperationSpec {
     }
 
     /**
+     * Constructs a validated instance of {@link CreatePriorityOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param createPriorityDetails 
+     */
+    @ApiStatus.Internal
+    public CreatePriorityOperationSpec(CreatePriorityDetails createPriorityDetails) {
+        this.createPriorityDetails = createPriorityDetails;
+
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
      * Validates the Spec, will throw a exception if required parameters are missing
      *
      * @throws NullPointerException
      */
     public void validate() {
-        Objects.requireNonNull(requestBody, "requestBody is a required parameter!");
+        Objects.requireNonNull(createPriorityDetails, "createPriorityDetails is a required parameter!");
     }
-
 }

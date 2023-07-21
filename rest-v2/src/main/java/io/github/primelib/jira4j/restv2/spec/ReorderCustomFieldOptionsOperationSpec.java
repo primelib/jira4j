@@ -7,8 +7,13 @@ import javax.annotation.processing.Generated;
 
 import io.github.primelib.jira4j.restv2.model.CustomFieldOption;
 import io.github.primelib.jira4j.restv2.model.OrderOfCustomFieldOptions;
+import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -20,9 +25,13 @@ import java.util.function.Consumer;
  * <p>
  * Reorder custom field options (context)
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class ReorderCustomFieldOptionsOperationSpec {
     /**
@@ -49,13 +58,31 @@ public class ReorderCustomFieldOptionsOperationSpec {
     private OrderOfCustomFieldOptions orderOfCustomFieldOptions;
 
     /**
-     * Constructs a validated implementation of {@link ReorderCustomFieldOptionsOperationSpec}.
+     * Constructs a validated instance of {@link ReorderCustomFieldOptionsOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public ReorderCustomFieldOptionsOperationSpec(Consumer<ReorderCustomFieldOptionsOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link ReorderCustomFieldOptionsOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param fieldId              The ID of the custom field.
+     * @param contextId            The ID of the context.
+     * @param orderOfCustomFieldOptions 
+     */
+    @ApiStatus.Internal
+    public ReorderCustomFieldOptionsOperationSpec(String fieldId, Long contextId, OrderOfCustomFieldOptions orderOfCustomFieldOptions) {
+        this.fieldId = fieldId;
+        this.contextId = contextId;
+        this.orderOfCustomFieldOptions = orderOfCustomFieldOptions;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -70,5 +97,4 @@ public class ReorderCustomFieldOptionsOperationSpec {
         Objects.requireNonNull(contextId, "contextId is a required parameter!");
         Objects.requireNonNull(orderOfCustomFieldOptions, "orderOfCustomFieldOptions is a required parameter!");
     }
-
 }

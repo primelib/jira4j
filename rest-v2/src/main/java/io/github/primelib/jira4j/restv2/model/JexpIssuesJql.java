@@ -3,10 +3,14 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -17,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * JexpIssuesJql
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "maxResults",
     "query",
@@ -32,17 +39,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class JexpIssuesJql {
 
     /**
-     * Constructs a validated implementation of {@link JexpIssuesJql}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public JexpIssuesJql(Consumer<JexpIssuesJql> spec) {
-        spec.accept(this);
-    }
-
-    /**
-     * The maximum number of issues to return from the JQL query. Inspect `meta.issues.jql.maxResults` in the response to ensure the maximum value has not been exceeded.
+     * The maximum number of issues to return from the JQL query. Inspect {@code meta.issues.jql.maxResults} in the response to ensure the maximum value has not been exceeded.
      */
     @JsonProperty("maxResults")
     protected Integer maxResults;
@@ -63,8 +60,33 @@ public class JexpIssuesJql {
      * Determines how to validate the JQL query and treat the validation results.
      */
     @JsonProperty("validation")
-    protected ValidationEnum validation = ValidationEnum.STRICT;
+    protected ValidationEnum validation;
 
+    /**
+     * Constructs a validated instance of {@link JexpIssuesJql}.
+     *
+     * @param spec the specification to process
+     */
+    public JexpIssuesJql(Consumer<JexpIssuesJql> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link JexpIssuesJql}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #JexpIssuesJql(Consumer)} instead.
+     * @param maxResults The maximum number of issues to return from the JQL query. Inspect {@code meta.issues.jql.maxResults} in the response to ensure the maximum value has not been exceeded.
+     * @param query The JQL query.
+     * @param startAt The index of the first issue to return from the JQL query.
+     * @param validation Determines how to validate the JQL query and treat the validation results.
+     */
+    @ApiStatus.Internal
+    public JexpIssuesJql(Integer maxResults, String query, Long startAt, ValidationEnum validation) {
+        this.maxResults = maxResults;
+        this.query = query;
+        this.startAt = startAt;
+        this.validation = validation;
+    }
 
     /**
      * Determines how to validate the JQL query and treat the validation results.

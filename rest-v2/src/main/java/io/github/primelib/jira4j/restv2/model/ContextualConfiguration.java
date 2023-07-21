@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -17,10 +20,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * ContextualConfiguration
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "configuration",
     "fieldContextId",
@@ -32,20 +38,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class ContextualConfiguration {
 
     /**
-     * Constructs a validated implementation of {@link ContextualConfiguration}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public ContextualConfiguration(Consumer<ContextualConfiguration> spec) {
-        spec.accept(this);
-    }
-
-    /**
      * The field configuration.
      */
     @JsonProperty("configuration")
-    protected Object _configuration = null;
+    protected Object configuration;
 
     /**
      * The ID of the field context the configuration is associated with.
@@ -63,7 +59,32 @@ public class ContextualConfiguration {
      * The field value schema.
      */
     @JsonProperty("schema")
-    protected Object schema = null;
+    protected Object schema;
 
+    /**
+     * Constructs a validated instance of {@link ContextualConfiguration}.
+     *
+     * @param spec the specification to process
+     */
+    public ContextualConfiguration(Consumer<ContextualConfiguration> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link ContextualConfiguration}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #ContextualConfiguration(Consumer)} instead.
+     * @param configuration The field configuration.
+     * @param fieldContextId The ID of the field context the configuration is associated with.
+     * @param id The ID of the configuration.
+     * @param schema The field value schema.
+     */
+    @ApiStatus.Internal
+    public ContextualConfiguration(Object configuration, String fieldContextId, String id, Object schema) {
+        this.configuration = configuration;
+        this.fieldContextId = fieldContextId;
+        this.id = id;
+        this.schema = schema;
+    }
 
 }

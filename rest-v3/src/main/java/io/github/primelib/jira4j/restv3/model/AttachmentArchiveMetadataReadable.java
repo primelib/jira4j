@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.util.List;
@@ -18,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * AttachmentArchiveMetadataReadable
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "entries",
     "id",
@@ -32,16 +38,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("AttachmentArchiveMetadataReadable")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class AttachmentArchiveMetadataReadable {
-
-    /**
-     * Constructs a validated implementation of {@link AttachmentArchiveMetadataReadable}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public AttachmentArchiveMetadataReadable(Consumer<AttachmentArchiveMetadataReadable> spec) {
-        spec.accept(this);
-    }
 
     /**
      * The list of the items included in the archive.
@@ -73,5 +69,32 @@ public class AttachmentArchiveMetadataReadable {
     @JsonProperty("totalEntryCount")
     protected Long totalEntryCount;
 
+    /**
+     * Constructs a validated instance of {@link AttachmentArchiveMetadataReadable}.
+     *
+     * @param spec the specification to process
+     */
+    public AttachmentArchiveMetadataReadable(Consumer<AttachmentArchiveMetadataReadable> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link AttachmentArchiveMetadataReadable}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #AttachmentArchiveMetadataReadable(Consumer)} instead.
+     * @param entries The list of the items included in the archive.
+     * @param id The ID of the attachment.
+     * @param mediaType The MIME type of the attachment.
+     * @param name The name of the archive file.
+     * @param totalEntryCount The number of items included in the archive.
+     */
+    @ApiStatus.Internal
+    public AttachmentArchiveMetadataReadable(List<AttachmentArchiveItemReadable> entries, Long id, String mediaType, String name, Long totalEntryCount) {
+        this.entries = entries;
+        this.id = id;
+        this.mediaType = mediaType;
+        this.name = name;
+        this.totalEntryCount = totalEntryCount;
+    }
 
 }

@@ -3,17 +3,16 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -22,33 +21,44 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * SetDefaultLevelsRequest
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
-@EqualsAndHashCode(callSuper = true)
+@Builder
 @JsonPropertyOrder({
     "defaultValues"
 })
 @JsonTypeName("SetDefaultLevelsRequest")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
-public class SetDefaultLevelsRequest extends HashMap<String, Object> {
-
-    /**
-     * Constructs a validated implementation of {@link SetDefaultLevelsRequest}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public SetDefaultLevelsRequest(Consumer<SetDefaultLevelsRequest> spec) {
-        spec.accept(this);
-    }
+public class SetDefaultLevelsRequest {
 
     /**
      * List of objects with issue security scheme ID and new default level ID.
      */
     @JsonProperty("defaultValues")
-    protected List<DefaultLevelValue> defaultValues = new ArrayList<>();
+    protected List<DefaultLevelValue> defaultValues;
 
+    /**
+     * Constructs a validated instance of {@link SetDefaultLevelsRequest}.
+     *
+     * @param spec the specification to process
+     */
+    public SetDefaultLevelsRequest(Consumer<SetDefaultLevelsRequest> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link SetDefaultLevelsRequest}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #SetDefaultLevelsRequest(Consumer)} instead.
+     * @param defaultValues List of objects with issue security scheme ID and new default level ID.
+     */
+    @ApiStatus.Internal
+    public SetDefaultLevelsRequest(List<DefaultLevelValue> defaultValues) {
+        this.defaultValues = defaultValues;
+    }
 
 }

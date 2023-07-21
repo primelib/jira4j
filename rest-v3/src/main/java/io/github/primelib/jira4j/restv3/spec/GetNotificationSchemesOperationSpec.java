@@ -8,7 +8,11 @@ import io.github.primelib.jira4j.restv3.model.Notification;
 import io.github.primelib.jira4j.restv3.model.NotificationScheme;
 import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -20,9 +24,13 @@ import java.util.function.Consumer;
  * <p>
  * Get notification schemes paginated
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class GetNotificationSchemesOperationSpec {
     /**
@@ -35,13 +43,13 @@ public class GetNotificationSchemesOperationSpec {
      * The index of the first item to return in a page of results (page offset).
      */
     @Nullable 
-    private String startAt = "0";
+    private String startAt;
 
     /**
      * The maximum number of items to return per page.
      */
     @Nullable 
-    private String maxResults = "50";
+    private String maxResults;
 
     /**
      * The list of notification schemes IDs to be filtered by
@@ -59,28 +67,28 @@ public class GetNotificationSchemesOperationSpec {
      * When set to true, returns only the default notification scheme. If you provide project IDs not associated with the default, returns an empty page. The default value is false.
      */
     @Nullable 
-    private Boolean onlyDefault = false;
+    private Boolean onlyDefault;
 
     /**
      * Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:
      *  *
-     * `all` Returns all expandable information
+     * {@code all} Returns all expandable information
      * *
-     * `field` Returns information about any custom fields assigned to receive an event
+     * {@code field} Returns information about any custom fields assigned to receive an event
      * *
-     * `group` Returns information about any groups assigned to receive an event
+     * {@code group} Returns information about any groups assigned to receive an event
      * *
-     * `notificationSchemeEvents` Returns a list of event associations. This list is returned for all expandable information
+     * {@code notificationSchemeEvents} Returns a list of event associations. This list is returned for all expandable information
      * *
-     * `projectRole` Returns information about any project roles assigned to receive an event
+     * {@code projectRole} Returns information about any project roles assigned to receive an event
      * *
-     * `user` Returns information about any users assigned to receive an event
+     * {@code user} Returns information about any users assigned to receive an event
      */
     @Nullable 
     private String expand;
 
     /**
-     * Constructs a validated implementation of {@link GetNotificationSchemesOperationSpec}.
+     * Constructs a validated instance of {@link GetNotificationSchemesOperationSpec}.
      *
      * @param spec the specification to process
      */
@@ -92,11 +100,34 @@ public class GetNotificationSchemesOperationSpec {
     }
 
     /**
+     * Constructs a validated instance of {@link GetNotificationSchemesOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param startAt              The index of the first item to return in a page of results (page offset).
+     * @param maxResults           The maximum number of items to return per page.
+     * @param id                   The list of notification schemes IDs to be filtered by
+     * @param projectId            The list of projects IDs to be filtered by
+     * @param onlyDefault          When set to true, returns only the default notification scheme. If you provide project IDs not associated with the default, returns an empty page. The default value is false.
+     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code all} Returns all expandable information  *  {@code field} Returns information about any custom fields assigned to receive an event  *  {@code group} Returns information about any groups assigned to receive an event  *  {@code notificationSchemeEvents} Returns a list of event associations. This list is returned for all expandable information  *  {@code projectRole} Returns information about any project roles assigned to receive an event  *  {@code user} Returns information about any users assigned to receive an event
+     */
+    @ApiStatus.Internal
+    public GetNotificationSchemesOperationSpec(String startAt, String maxResults, Set<String> id, Set<String> projectId, Boolean onlyDefault, String expand) {
+        this.startAt = startAt;
+        this.maxResults = maxResults;
+        this.id = id;
+        this.projectId = projectId;
+        this.onlyDefault = onlyDefault;
+        this.expand = expand;
+
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
      * Validates the Spec, will throw a exception if required parameters are missing
      *
      * @throws NullPointerException
      */
     public void validate() {
     }
-
 }

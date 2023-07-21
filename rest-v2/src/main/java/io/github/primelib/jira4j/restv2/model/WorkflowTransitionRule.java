@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -17,10 +20,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * WorkflowTransitionRule
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "configuration",
     "type"
@@ -30,20 +36,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class WorkflowTransitionRule {
 
     /**
-     * Constructs a validated implementation of {@link WorkflowTransitionRule}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public WorkflowTransitionRule(Consumer<WorkflowTransitionRule> spec) {
-        spec.accept(this);
-    }
-
-    /**
      * EXPERIMENTAL. The configuration of the transition rule.
      */
     @JsonProperty("configuration")
-    protected Object _configuration = null;
+    protected Object configuration;
 
     /**
      * The type of the transition rule.
@@ -51,5 +47,26 @@ public class WorkflowTransitionRule {
     @JsonProperty("type")
     protected String type;
 
+    /**
+     * Constructs a validated instance of {@link WorkflowTransitionRule}.
+     *
+     * @param spec the specification to process
+     */
+    public WorkflowTransitionRule(Consumer<WorkflowTransitionRule> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link WorkflowTransitionRule}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #WorkflowTransitionRule(Consumer)} instead.
+     * @param configuration EXPERIMENTAL. The configuration of the transition rule.
+     * @param type The type of the transition rule.
+     */
+    @ApiStatus.Internal
+    public WorkflowTransitionRule(Object configuration, String type) {
+        this.configuration = configuration;
+        this.type = type;
+    }
 
 }

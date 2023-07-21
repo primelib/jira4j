@@ -3,16 +3,16 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -21,11 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * NotificationRecipients
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
-@EqualsAndHashCode(callSuper = true)
+@Builder
 @JsonPropertyOrder({
     "assignee",
     "groupIds",
@@ -37,17 +39,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 })
 @JsonTypeName("NotificationRecipients")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
-public class NotificationRecipients extends HashMap<String, Object> {
-
-    /**
-     * Constructs a validated implementation of {@link NotificationRecipients}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public NotificationRecipients(Consumer<NotificationRecipients> spec) {
-        spec.accept(this);
-    }
+public class NotificationRecipients {
 
     /**
      * Whether the notification should be sent to the issue's assignees.
@@ -91,5 +83,36 @@ public class NotificationRecipients extends HashMap<String, Object> {
     @JsonProperty("watchers")
     protected Boolean watchers;
 
+    /**
+     * Constructs a validated instance of {@link NotificationRecipients}.
+     *
+     * @param spec the specification to process
+     */
+    public NotificationRecipients(Consumer<NotificationRecipients> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link NotificationRecipients}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #NotificationRecipients(Consumer)} instead.
+     * @param assignee Whether the notification should be sent to the issue's assignees.
+     * @param groupIds List of groupIds to receive the notification.
+     * @param groups List of groups to receive the notification.
+     * @param reporter Whether the notification should be sent to the issue's reporter.
+     * @param users List of users to receive the notification.
+     * @param voters Whether the notification should be sent to the issue's voters.
+     * @param watchers Whether the notification should be sent to the issue's watchers.
+     */
+    @ApiStatus.Internal
+    public NotificationRecipients(Boolean assignee, List<String> groupIds, List<GroupName> groups, Boolean reporter, List<UserDetails> users, Boolean voters, Boolean watchers) {
+        this.assignee = assignee;
+        this.groupIds = groupIds;
+        this.groups = groups;
+        this.reporter = reporter;
+        this.users = users;
+        this.voters = voters;
+        this.watchers = watchers;
+    }
 
 }

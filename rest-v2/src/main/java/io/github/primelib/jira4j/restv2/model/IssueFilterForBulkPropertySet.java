@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.util.Set;
@@ -19,10 +22,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * IssueFilterForBulkPropertySet
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "currentValue",
     "entityIds",
@@ -33,20 +39,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class IssueFilterForBulkPropertySet {
 
     /**
-     * Constructs a validated implementation of {@link IssueFilterForBulkPropertySet}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public IssueFilterForBulkPropertySet(Consumer<IssueFilterForBulkPropertySet> spec) {
-        spec.accept(this);
-    }
-
-    /**
      * The value of properties to perform the bulk operation on.
      */
     @JsonProperty("currentValue")
-    protected Object currentValue = null;
+    protected Object currentValue;
 
     /**
      * List of issues to perform the bulk operation on.
@@ -60,5 +56,28 @@ public class IssueFilterForBulkPropertySet {
     @JsonProperty("hasProperty")
     protected Boolean hasProperty;
 
+    /**
+     * Constructs a validated instance of {@link IssueFilterForBulkPropertySet}.
+     *
+     * @param spec the specification to process
+     */
+    public IssueFilterForBulkPropertySet(Consumer<IssueFilterForBulkPropertySet> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link IssueFilterForBulkPropertySet}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #IssueFilterForBulkPropertySet(Consumer)} instead.
+     * @param currentValue The value of properties to perform the bulk operation on.
+     * @param entityIds List of issues to perform the bulk operation on.
+     * @param hasProperty Whether the bulk operation occurs only when the property is present on or absent from an issue.
+     */
+    @ApiStatus.Internal
+    public IssueFilterForBulkPropertySet(Object currentValue, Set<Long> entityIds, Boolean hasProperty) {
+        this.currentValue = currentValue;
+        this.entityIds = entityIds;
+        this.hasProperty = hasProperty;
+    }
 
 }

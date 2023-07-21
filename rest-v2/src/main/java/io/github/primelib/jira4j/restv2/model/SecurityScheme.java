@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.util.List;
@@ -18,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * SecurityScheme
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "defaultSecurityLevelId",
     "description",
@@ -33,16 +39,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("SecurityScheme")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class SecurityScheme {
-
-    /**
-     * Constructs a validated implementation of {@link SecurityScheme}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public SecurityScheme(Consumer<SecurityScheme> spec) {
-        spec.accept(this);
-    }
 
     /**
      * The ID of the default security level.
@@ -77,5 +73,34 @@ public class SecurityScheme {
     @JsonProperty("self")
     protected String self;
 
+    /**
+     * Constructs a validated instance of {@link SecurityScheme}.
+     *
+     * @param spec the specification to process
+     */
+    public SecurityScheme(Consumer<SecurityScheme> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link SecurityScheme}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #SecurityScheme(Consumer)} instead.
+     * @param defaultSecurityLevelId The ID of the default security level.
+     * @param description The description of the issue security scheme.
+     * @param id The ID of the issue security scheme.
+     * @param levels var.name
+     * @param name The name of the issue security scheme.
+     * @param self The URL of the issue security scheme.
+     */
+    @ApiStatus.Internal
+    public SecurityScheme(Long defaultSecurityLevelId, String description, Long id, List<SecurityLevel> levels, String name, String self) {
+        this.defaultSecurityLevelId = defaultSecurityLevelId;
+        this.description = description;
+        this.id = id;
+        this.levels = levels;
+        this.name = name;
+        this.self = self;
+    }
 
 }

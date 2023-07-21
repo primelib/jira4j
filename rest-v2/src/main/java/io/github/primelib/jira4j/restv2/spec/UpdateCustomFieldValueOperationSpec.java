@@ -7,8 +7,13 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.processing.Generated;
 
 import io.github.primelib.jira4j.restv2.model.CustomFieldValueUpdateDetails;
+import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -20,9 +25,13 @@ import java.util.function.Consumer;
  * <p>
  * Update custom field value
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class UpdateCustomFieldValueOperationSpec {
     /**
@@ -32,7 +41,7 @@ public class UpdateCustomFieldValueOperationSpec {
     public static Boolean VALIDATION_ENABLED = true;
 
     /**
-     * The ID or key of the custom field. For example, `customfield_10010`.
+     * The ID or key of the custom field. For example, {@code customfield_10010}.
      */
     @NotNull 
     private String fieldIdOrKey;
@@ -46,16 +55,34 @@ public class UpdateCustomFieldValueOperationSpec {
      * Whether to generate a changelog for this update.
      */
     @Nullable 
-    private Boolean generateChangelog = true;
+    private Boolean generateChangelog;
 
     /**
-     * Constructs a validated implementation of {@link UpdateCustomFieldValueOperationSpec}.
+     * Constructs a validated instance of {@link UpdateCustomFieldValueOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public UpdateCustomFieldValueOperationSpec(Consumer<UpdateCustomFieldValueOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link UpdateCustomFieldValueOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param fieldIdOrKey         The ID or key of the custom field. For example, {@code customfield_10010}.
+     * @param customFieldValueUpdateDetails 
+     * @param generateChangelog    Whether to generate a changelog for this update.
+     */
+    @ApiStatus.Internal
+    public UpdateCustomFieldValueOperationSpec(String fieldIdOrKey, CustomFieldValueUpdateDetails customFieldValueUpdateDetails, Boolean generateChangelog) {
+        this.fieldIdOrKey = fieldIdOrKey;
+        this.customFieldValueUpdateDetails = customFieldValueUpdateDetails;
+        this.generateChangelog = generateChangelog;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -69,5 +96,4 @@ public class UpdateCustomFieldValueOperationSpec {
         Objects.requireNonNull(fieldIdOrKey, "fieldIdOrKey is a required parameter!");
         Objects.requireNonNull(customFieldValueUpdateDetails, "customFieldValueUpdateDetails is a required parameter!");
     }
-
 }

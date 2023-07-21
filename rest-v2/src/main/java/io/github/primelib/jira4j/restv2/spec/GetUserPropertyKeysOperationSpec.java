@@ -5,9 +5,14 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.processing.Generated;
 
 import io.github.primelib.jira4j.restv2.model.PropertyKeys;
+import java.util.Set;
 import io.github.primelib.jira4j.restv2.model.User;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -19,9 +24,13 @@ import java.util.function.Consumer;
  * <p>
  * Get user property keys
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class GetUserPropertyKeysOperationSpec {
     /**
@@ -49,7 +58,7 @@ public class GetUserPropertyKeysOperationSpec {
     private String username;
 
     /**
-     * Constructs a validated implementation of {@link GetUserPropertyKeysOperationSpec}.
+     * Constructs a validated instance of {@link GetUserPropertyKeysOperationSpec}.
      *
      * @param spec the specification to process
      */
@@ -61,11 +70,28 @@ public class GetUserPropertyKeysOperationSpec {
     }
 
     /**
+     * Constructs a validated instance of {@link GetUserPropertyKeysOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param accountId            The account ID of the user, which uniquely identifies the user across all Atlassian products. For example, *5b10ac8d82e05b22cc7d4ef5*.
+     * @param userKey              This parameter is no longer available and will be removed from the documentation soon. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.
+     * @param username             This parameter is no longer available and will be removed from the documentation soon. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.
+     */
+    @ApiStatus.Internal
+    public GetUserPropertyKeysOperationSpec(String accountId, String userKey, String username) {
+        this.accountId = accountId;
+        this.userKey = userKey;
+        this.username = username;
+
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
      * Validates the Spec, will throw a exception if required parameters are missing
      *
      * @throws NullPointerException
      */
     public void validate() {
     }
-
 }

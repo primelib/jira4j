@@ -48067,8 +48067,7 @@
             "type": "string",
             "description": "The name of the group."
           }
-        },
-        "additionalProperties": true
+        }
       },
       "AddNotificationsDetails": {
         "required": [
@@ -48085,7 +48084,6 @@
             }
           }
         },
-        "additionalProperties": true,
         "description": "Details of notifications which should be added to the notification scheme."
       },
       "AddSecuritySchemeLevelsRequestBean": {
@@ -48206,7 +48204,6 @@
             "description": "The name-spaced type of the application, used by registered rendering apps."
           }
         },
-        "additionalProperties": true,
         "description": "The application the linked item is in."
       },
       "ApplicationProperty": {
@@ -48469,7 +48466,6 @@
             "readOnly": true
           }
         },
-        "additionalProperties": true,
         "description": "Details about an attachment."
       },
       "AttachmentArchive": {
@@ -49091,7 +49087,6 @@
             "readOnly": true
           }
         },
-        "additionalProperties": true,
         "description": "Details of an avatar."
       },
       "AvatarUrlsBean": {
@@ -49637,7 +49632,6 @@
             ]
           }
         },
-        "additionalProperties": true,
         "description": "A comment."
       },
       "ComponentIssuesCount": {
@@ -50298,7 +50292,6 @@
             "writeOnly": true
           }
         },
-        "additionalProperties": true,
         "description": "Issue security scheme and it's details"
       },
       "CreateNotificationSchemeDetails": {
@@ -50328,7 +50321,6 @@
             }
           }
         },
-        "additionalProperties": true,
         "description": "Details of an notification scheme."
       },
       "CreatePriorityDetails": {
@@ -50374,7 +50366,6 @@
             "writeOnly": true
           }
         },
-        "additionalProperties": true,
         "description": "Details of an issue priority."
       },
       "CreateProjectDetails": {
@@ -50531,7 +50522,6 @@
             "writeOnly": true
           }
         },
-        "additionalProperties": true,
         "description": "Details of an issue resolution."
       },
       "CreateUiModificationDetails": {
@@ -52250,7 +52240,6 @@
             "writeOnly": true
           }
         },
-        "additionalProperties": true,
         "description": "Details of scheme and new default level.",
         "writeOnly": true
       },
@@ -53257,10 +53246,6 @@
               }
             ]
           },
-          "issuetype": {
-            "description": "The type of the linked issue.",
-            "$ref": "#/components/schemas/IssueTypeDetails"
-          },
           "priority": {
             "description": "The priority of the linked issue.",
             "readOnly": true,
@@ -53946,7 +53931,6 @@
             "description": "The type of the history record."
           }
         },
-        "additionalProperties": true,
         "description": "Details of issue history metadata."
       },
       "HistoryMetadataParticipant": {
@@ -53977,7 +53961,6 @@
             "description": "The URL of the user or system associated with a history record."
           }
         },
-        "additionalProperties": true,
         "description": "Details of user or system associated with a issue history metadata item."
       },
       "Icon": {
@@ -53996,7 +53979,6 @@
             "description": "The URL of an icon that displays at 16x16 pixel in Jira."
           }
         },
-        "additionalProperties": true,
         "description": "An icon. If no icon is defined:\n\n *  for a status icon, no status icon displays in Jira.\n *  for the remote object icon, the default link icon displays in Jira."
       },
       "IconBean": {
@@ -54421,8 +54403,7 @@
             "type": "string",
             "description": "The option's name, which is displayed in Jira."
           }
-        },
-        "additionalProperties": true
+        }
       },
       "IssueFieldOptionScopeBean": {
         "type": "object",
@@ -54752,7 +54733,6 @@
             "readOnly": true
           }
         },
-        "additionalProperties": true,
         "description": "Details about an project using security scheme mapping."
       },
       "IssueTransition": {
@@ -54818,7 +54798,6 @@
             ]
           }
         },
-        "additionalProperties": true,
         "description": "Details of an issue transition."
       },
       "IssueTypeCreateBean": {
@@ -55585,7 +55564,6 @@
             "description": "A Map containing the field field name and a list of operations to perform on the issue screen field. Note that fields included in here cannot be included in `fields`."
           }
         },
-        "additionalProperties": true,
         "description": "Details of an issue update request."
       },
       "IssueUpdateMetadata": {
@@ -55689,8 +55667,7 @@
               "$ref": "#/components/schemas/IssueUpdateDetails"
             }
           }
-        },
-        "additionalProperties": true
+        }
       },
       "JQLPersonalDataMigrationRequest": {
         "type": "object",
@@ -57151,7 +57128,6 @@
             "readOnly": true
           }
         },
-        "additionalProperties": true,
         "description": "The user details."
       },
       "Notification": {
@@ -57186,7 +57162,6 @@
             ]
           }
         },
-        "additionalProperties": true,
         "description": "Details about a notification."
       },
       "NotificationEvent": {
@@ -57258,7 +57233,6 @@
             "description": "Whether the notification should be sent to the issue's watchers."
           }
         },
-        "additionalProperties": true,
         "description": "Details of the users and groups to receive the notification."
       },
       "NotificationRecipientsRestrictions": {
@@ -57392,7 +57366,6 @@
             }
           }
         },
-        "additionalProperties": true,
         "description": "Details of a notification scheme event.",
         "writeOnly": true
       },
@@ -57408,7 +57381,6 @@
             "writeOnly": true
           }
         },
-        "additionalProperties": true,
         "description": "The ID of an event that is being mapped to notifications.",
         "writeOnly": true
       },
@@ -57424,7 +57396,6 @@
             "readOnly": true
           }
         },
-        "additionalProperties": true,
         "description": "The ID of a notification scheme."
       },
       "NotificationSchemeNotificationDetails": {
@@ -57445,7 +57416,6 @@
             "writeOnly": true
           }
         },
-        "additionalProperties": true,
         "description": "Details of a notification within a notification scheme.",
         "writeOnly": true
       },
@@ -57504,7 +57474,6 @@
             }
           }
         },
-        "additionalProperties": true,
         "description": "Details of the operations that can be performed on the issue."
       },
       "OrderOfCustomFieldOptions": {
@@ -60237,7 +60206,6 @@
             "readOnly": true
           }
         },
-        "additionalProperties": true,
         "description": "A page of comments."
       },
       "PageOfDashboards": {
@@ -60353,7 +60321,6 @@
             }
           }
         },
-        "additionalProperties": true,
         "description": "Paginated list of worklog details"
       },
       "PagedListUserDetailsApplicationUser": {
@@ -60608,7 +60575,6 @@
             "readOnly": true
           }
         },
-        "additionalProperties": true,
         "description": "Details of a permission scheme."
       },
       "PermissionSchemes": {
@@ -60704,7 +60670,6 @@
             "description": "The color used to indicate the issue priority."
           }
         },
-        "additionalProperties": true,
         "description": "An issue priority."
       },
       "PriorityId": {
@@ -60719,7 +60684,6 @@
             "readOnly": true
           }
         },
-        "additionalProperties": true,
         "description": "The ID of an issue priority."
       },
       "Project": {
@@ -62041,7 +62005,6 @@
             "description": "Description of the relationship between the issue and the linked item. If not set, the relationship description \"links to\" is used in Jira."
           }
         },
-        "additionalProperties": true,
         "description": "Details of a remote issue link."
       },
       "RemoteObject": {
@@ -62080,7 +62043,6 @@
             "description": "The URL of the item."
           }
         },
-        "additionalProperties": true,
         "description": "The linked item."
       },
       "RemoveOptionFromIssuesResult": {
@@ -62210,7 +62172,6 @@
             "readOnly": true
           }
         },
-        "additionalProperties": true,
         "description": "The ID of an issue resolution."
       },
       "ResolutionJsonBean": {
@@ -62249,7 +62210,6 @@
             "description": "The key of the permission. Either `id` or `key` must be specified. Use [Get all permissions](#api-rest-api-2-permissions-get) to get the list of permissions."
           }
         },
-        "additionalProperties": true,
         "description": "Details of the permission."
       },
       "RichText": {
@@ -62416,7 +62376,6 @@
             ]
           }
         },
-        "additionalProperties": true,
         "description": "The projects the item is associated with. Indicated for items associated with [next-gen projects](https://confluence.atlassian.com/x/loMyO)."
       },
       "Screen": {
@@ -62869,7 +62828,6 @@
             "readOnly": true
           }
         },
-        "additionalProperties": true,
         "description": "Issue security level member."
       },
       "SecurityScheme": {
@@ -62924,7 +62882,6 @@
             "readOnly": true
           }
         },
-        "additionalProperties": true,
         "description": "The ID of the issue security scheme."
       },
       "SecuritySchemeLevelBean": {
@@ -63047,7 +63004,6 @@
             "readOnly": true
           }
         },
-        "additionalProperties": true,
         "description": "Details about an issue security scheme."
       },
       "SecuritySchemes": {
@@ -63153,7 +63109,6 @@
             }
           }
         },
-        "additionalProperties": true,
         "description": "Details of new default levels."
       },
       "SetDefaultPriorityRequest": {
@@ -63526,7 +63481,6 @@
             "description": "Whether the item is resolved. If set to \"true\", the link to the issue is displayed in a strikethrough font, otherwise the link displays in normal font."
           }
         },
-        "additionalProperties": true,
         "description": "The status of the item."
       },
       "StatusCategory": {
@@ -63559,7 +63513,6 @@
             "readOnly": true
           }
         },
-        "additionalProperties": true,
         "description": "A status category."
       },
       "StatusCreate": {
@@ -63650,7 +63603,6 @@
             ]
           }
         },
-        "additionalProperties": true,
         "description": "A status."
       },
       "StatusLayoutUpdate": {
@@ -63676,7 +63628,6 @@
             "description": "A unique ID which the status will use to refer to this layout configuration."
           }
         },
-        "additionalProperties": true,
         "description": "The statuses associated with this workflow."
       },
       "StatusMapping": {
@@ -63727,7 +63678,6 @@
             }
           }
         },
-        "additionalProperties": true,
         "description": "The mapping of old to new status ID for a specific project and issue type."
       },
       "StatusMigration": {
@@ -63746,7 +63696,6 @@
             "description": "The old status ID."
           }
         },
-        "additionalProperties": true,
         "description": "The mapping of old to new status ID."
       },
       "StatusReferenceAndPort": {
@@ -63820,7 +63769,6 @@
             ]
           }
         },
-        "additionalProperties": true,
         "description": "Details of the status being updated."
       },
       "StatusUpdateRequest": {
@@ -64332,7 +64280,6 @@
             }
           }
         },
-        "additionalProperties": true,
         "description": "The transitions of this workflow."
       },
       "Transitions": {
@@ -64470,8 +64417,7 @@
             "type": "string",
             "description": "The email of the user"
           }
-        },
-        "additionalProperties": true
+        }
       },
       "UpdateCustomFieldDetails": {
         "type": "object",
@@ -64561,7 +64507,6 @@
             "writeOnly": true
           }
         },
-        "additionalProperties": true,
         "description": "Details of issue security scheme level."
       },
       "UpdateIssueSecuritySchemeRequestBean": {
@@ -64598,7 +64543,6 @@
             "writeOnly": true
           }
         },
-        "additionalProperties": true,
         "description": "Details of a notification scheme."
       },
       "UpdatePriorityDetails": {
@@ -64640,7 +64584,6 @@
             "writeOnly": true
           }
         },
-        "additionalProperties": true,
         "description": "Details of an issue priority."
       },
       "UpdateProjectDetails": {
@@ -64727,7 +64670,6 @@
             "writeOnly": true
           }
         },
-        "additionalProperties": true,
         "description": "Details of an issue resolution."
       },
       "UpdateScreenDetails": {
@@ -64842,8 +64784,7 @@
             "type": "string",
             "description": "This property is no longer available. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details."
           }
-        },
-        "additionalProperties": true
+        }
       },
       "UpdatedProjectCategory": {
         "type": "object",
@@ -65270,7 +65211,6 @@
             ]
           }
         },
-        "additionalProperties": true,
         "description": "Details of a permission and its availability to a user."
       },
       "UserPickerUser": {
@@ -65528,7 +65468,6 @@
             "readOnly": true
           }
         },
-        "additionalProperties": true,
         "description": "Counts of the number of issues in various statuses."
       },
       "VersionMoveBean": {
@@ -65628,7 +65567,6 @@
             "description": "The name of the group or role that visibility of this item is restricted to. Please note that the name of a group is mutable, to reliably identify a group use `identifier`."
           }
         },
-        "additionalProperties": true,
         "description": "The group or role to which this item is visible."
       },
       "Votes": {
@@ -66728,7 +66666,6 @@
             "description": "The reference of the status."
           }
         },
-        "additionalProperties": true,
         "description": "Details of the status being updated."
       },
       "WorkflowTransition": {
@@ -66772,7 +66709,6 @@
             "description": "The value of the transition property."
           }
         },
-        "additionalProperties": true,
         "description": "Details about the server Jira is running on."
       },
       "WorkflowTransitionRule": {
@@ -67078,7 +67014,6 @@
             "$ref": "#/components/schemas/DocumentVersion"
           }
         },
-        "additionalProperties": true,
         "description": "The details of the workflows to update."
       },
       "WorkflowUpdateRequest": {
@@ -67320,7 +67255,6 @@
             ]
           }
         },
-        "additionalProperties": true,
         "description": "Details of a worklog.",
         "xml": {
           "name": "worklog"

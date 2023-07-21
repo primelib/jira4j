@@ -10,7 +10,11 @@ import io.github.primelib.jira4j.restv3.model.DashboardGadget;
 import io.github.primelib.jira4j.restv3.model.DashboardGadgetSettings;
 import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -22,9 +26,13 @@ import java.util.function.Consumer;
  * <p>
  * Add gadget to dashboard
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class AddGadgetOperationSpec {
     /**
@@ -45,13 +53,29 @@ public class AddGadgetOperationSpec {
     private DashboardGadgetSettings dashboardGadgetSettings;
 
     /**
-     * Constructs a validated implementation of {@link AddGadgetOperationSpec}.
+     * Constructs a validated instance of {@link AddGadgetOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public AddGadgetOperationSpec(Consumer<AddGadgetOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link AddGadgetOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param dashboardId          The ID of the dashboard.
+     * @param dashboardGadgetSettings 
+     */
+    @ApiStatus.Internal
+    public AddGadgetOperationSpec(Long dashboardId, DashboardGadgetSettings dashboardGadgetSettings) {
+        this.dashboardId = dashboardId;
+        this.dashboardGadgetSettings = dashboardGadgetSettings;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -65,5 +89,4 @@ public class AddGadgetOperationSpec {
         Objects.requireNonNull(dashboardId, "dashboardId is a required parameter!");
         Objects.requireNonNull(dashboardGadgetSettings, "dashboardGadgetSettings is a required parameter!");
     }
-
 }

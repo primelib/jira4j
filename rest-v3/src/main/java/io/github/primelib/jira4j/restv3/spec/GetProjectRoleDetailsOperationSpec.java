@@ -9,8 +9,13 @@ import javax.annotation.processing.Generated;
 import io.github.primelib.jira4j.restv3.model.Project;
 import io.github.primelib.jira4j.restv3.model.ProjectRole;
 import io.github.primelib.jira4j.restv3.model.ProjectRoleDetails;
+import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -22,9 +27,13 @@ import java.util.function.Consumer;
  * <p>
  * Get project role details
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class GetProjectRoleDetailsOperationSpec {
     /**
@@ -43,21 +52,39 @@ public class GetProjectRoleDetailsOperationSpec {
      * Whether the roles should be filtered to include only those the user is assigned to.
      */
     @Nullable 
-    private Boolean currentMember = false;
+    private Boolean currentMember;
 
     /**
      */
     @Nullable 
-    private Boolean excludeConnectAddons = false;
+    private Boolean excludeConnectAddons;
 
     /**
-     * Constructs a validated implementation of {@link GetProjectRoleDetailsOperationSpec}.
+     * Constructs a validated instance of {@link GetProjectRoleDetailsOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public GetProjectRoleDetailsOperationSpec(Consumer<GetProjectRoleDetailsOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link GetProjectRoleDetailsOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param projectIdOrKey       The project ID or project key (case sensitive).
+     * @param currentMember        Whether the roles should be filtered to include only those the user is assigned to.
+     * @param excludeConnectAddons 
+     */
+    @ApiStatus.Internal
+    public GetProjectRoleDetailsOperationSpec(String projectIdOrKey, Boolean currentMember, Boolean excludeConnectAddons) {
+        this.projectIdOrKey = projectIdOrKey;
+        this.currentMember = currentMember;
+        this.excludeConnectAddons = excludeConnectAddons;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -70,5 +97,4 @@ public class GetProjectRoleDetailsOperationSpec {
     public void validate() {
         Objects.requireNonNull(projectIdOrKey, "projectIdOrKey is a required parameter!");
     }
-
 }

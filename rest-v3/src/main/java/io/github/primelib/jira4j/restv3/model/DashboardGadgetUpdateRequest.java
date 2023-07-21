@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -17,10 +20,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * DashboardGadgetUpdateRequest
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "color",
     "position",
@@ -31,17 +37,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class DashboardGadgetUpdateRequest {
 
     /**
-     * Constructs a validated implementation of {@link DashboardGadgetUpdateRequest}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public DashboardGadgetUpdateRequest(Consumer<DashboardGadgetUpdateRequest> spec) {
-        spec.accept(this);
-    }
-
-    /**
-     * The color of the gadget. Should be one of `blue`, `red`, `yellow`, `green`, `cyan`, `purple`, `gray`, or `white`.
+     * The color of the gadget. Should be one of {@code blue}, {@code red}, {@code yellow}, {@code green}, {@code cyan}, {@code purple}, {@code gray}, or {@code white}.
      */
     @JsonProperty("color")
     protected String color;
@@ -55,5 +51,28 @@ public class DashboardGadgetUpdateRequest {
     @JsonProperty("title")
     protected String title;
 
+    /**
+     * Constructs a validated instance of {@link DashboardGadgetUpdateRequest}.
+     *
+     * @param spec the specification to process
+     */
+    public DashboardGadgetUpdateRequest(Consumer<DashboardGadgetUpdateRequest> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link DashboardGadgetUpdateRequest}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #DashboardGadgetUpdateRequest(Consumer)} instead.
+     * @param color The color of the gadget. Should be one of {@code blue}, {@code red}, {@code yellow}, {@code green}, {@code cyan}, {@code purple}, {@code gray}, or {@code white}.
+     * @param position var.name
+     * @param title The title of the gadget.
+     */
+    @ApiStatus.Internal
+    public DashboardGadgetUpdateRequest(String color, DashboardGadgetUpdateRequestPosition position, String title) {
+        this.color = color;
+        this.position = position;
+        this.title = title;
+    }
 
 }

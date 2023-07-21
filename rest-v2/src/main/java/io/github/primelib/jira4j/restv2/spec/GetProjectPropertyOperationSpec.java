@@ -6,8 +6,13 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.processing.Generated;
 
 import io.github.primelib.jira4j.restv2.model.Project;
+import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -19,9 +24,13 @@ import java.util.function.Consumer;
  * <p>
  * Get project property
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class GetProjectPropertyOperationSpec {
     /**
@@ -43,13 +52,29 @@ public class GetProjectPropertyOperationSpec {
     private String propertyKey;
 
     /**
-     * Constructs a validated implementation of {@link GetProjectPropertyOperationSpec}.
+     * Constructs a validated instance of {@link GetProjectPropertyOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public GetProjectPropertyOperationSpec(Consumer<GetProjectPropertyOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link GetProjectPropertyOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param projectIdOrKey       The project ID or project key (case sensitive).
+     * @param propertyKey          The project property key. Use [Get project property keys](#api-rest-api-2-project-projectIdOrKey-properties-get) to get a list of all project property keys.
+     */
+    @ApiStatus.Internal
+    public GetProjectPropertyOperationSpec(String projectIdOrKey, String propertyKey) {
+        this.projectIdOrKey = projectIdOrKey;
+        this.propertyKey = propertyKey;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -63,5 +88,4 @@ public class GetProjectPropertyOperationSpec {
         Objects.requireNonNull(projectIdOrKey, "projectIdOrKey is a required parameter!");
         Objects.requireNonNull(propertyKey, "propertyKey is a required parameter!");
     }
-
 }

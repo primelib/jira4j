@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -17,10 +20,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * JiraExpressionsComplexityValueBean
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "limit",
     "value"
@@ -28,16 +34,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("JiraExpressionsComplexityValueBean")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class JiraExpressionsComplexityValueBean {
-
-    /**
-     * Constructs a validated implementation of {@link JiraExpressionsComplexityValueBean}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public JiraExpressionsComplexityValueBean(Consumer<JiraExpressionsComplexityValueBean> spec) {
-        spec.accept(this);
-    }
 
     /**
      * The maximum allowed complexity. The evaluation will fail if this value is exceeded.
@@ -51,5 +47,26 @@ public class JiraExpressionsComplexityValueBean {
     @JsonProperty("value")
     protected Integer value;
 
+    /**
+     * Constructs a validated instance of {@link JiraExpressionsComplexityValueBean}.
+     *
+     * @param spec the specification to process
+     */
+    public JiraExpressionsComplexityValueBean(Consumer<JiraExpressionsComplexityValueBean> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link JiraExpressionsComplexityValueBean}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #JiraExpressionsComplexityValueBean(Consumer)} instead.
+     * @param limit The maximum allowed complexity. The evaluation will fail if this value is exceeded.
+     * @param value The complexity value of the current expression.
+     */
+    @ApiStatus.Internal
+    public JiraExpressionsComplexityValueBean(Integer limit, Integer value) {
+        this.limit = limit;
+        this.value = value;
+    }
 
 }

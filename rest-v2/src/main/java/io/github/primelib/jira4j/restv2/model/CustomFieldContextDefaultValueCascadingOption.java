@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -17,10 +20,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * CustomFieldContextDefaultValueCascadingOption
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "cascadingOptionId",
     "contextId",
@@ -30,16 +36,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("CustomFieldContextDefaultValueCascadingOption")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class CustomFieldContextDefaultValueCascadingOption {
-
-    /**
-     * Constructs a validated implementation of {@link CustomFieldContextDefaultValueCascadingOption}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public CustomFieldContextDefaultValueCascadingOption(Consumer<CustomFieldContextDefaultValueCascadingOption> spec) {
-        spec.accept(this);
-    }
 
     /**
      * The ID of the default cascading option.
@@ -62,5 +58,30 @@ public class CustomFieldContextDefaultValueCascadingOption {
     @JsonProperty("type")
     protected String type;
 
+    /**
+     * Constructs a validated instance of {@link CustomFieldContextDefaultValueCascadingOption}.
+     *
+     * @param spec the specification to process
+     */
+    public CustomFieldContextDefaultValueCascadingOption(Consumer<CustomFieldContextDefaultValueCascadingOption> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link CustomFieldContextDefaultValueCascadingOption}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #CustomFieldContextDefaultValueCascadingOption(Consumer)} instead.
+     * @param cascadingOptionId The ID of the default cascading option.
+     * @param contextId The ID of the context.
+     * @param optionId The ID of the default option.
+     * @param type var.name
+     */
+    @ApiStatus.Internal
+    public CustomFieldContextDefaultValueCascadingOption(String cascadingOptionId, String contextId, String optionId, String type) {
+        this.cascadingOptionId = cascadingOptionId;
+        this.contextId = contextId;
+        this.optionId = optionId;
+        this.type = type;
+    }
 
 }

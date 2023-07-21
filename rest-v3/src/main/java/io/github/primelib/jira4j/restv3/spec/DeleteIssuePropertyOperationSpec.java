@@ -5,8 +5,13 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import javax.annotation.processing.Generated;
 
+import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -18,9 +23,13 @@ import java.util.function.Consumer;
  * <p>
  * Delete issue property
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class DeleteIssuePropertyOperationSpec {
     /**
@@ -42,13 +51,29 @@ public class DeleteIssuePropertyOperationSpec {
     private String propertyKey;
 
     /**
-     * Constructs a validated implementation of {@link DeleteIssuePropertyOperationSpec}.
+     * Constructs a validated instance of {@link DeleteIssuePropertyOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public DeleteIssuePropertyOperationSpec(Consumer<DeleteIssuePropertyOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link DeleteIssuePropertyOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param issueIdOrKey         The key or ID of the issue.
+     * @param propertyKey          The key of the property.
+     */
+    @ApiStatus.Internal
+    public DeleteIssuePropertyOperationSpec(String issueIdOrKey, String propertyKey) {
+        this.issueIdOrKey = issueIdOrKey;
+        this.propertyKey = propertyKey;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -62,5 +87,4 @@ public class DeleteIssuePropertyOperationSpec {
         Objects.requireNonNull(issueIdOrKey, "issueIdOrKey is a required parameter!");
         Objects.requireNonNull(propertyKey, "propertyKey is a required parameter!");
     }
-
 }

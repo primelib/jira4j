@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -17,10 +20,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * WorkflowOperations
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "canDelete",
     "canEdit"
@@ -28,16 +34,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("WorkflowOperations")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class WorkflowOperations {
-
-    /**
-     * Constructs a validated implementation of {@link WorkflowOperations}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public WorkflowOperations(Consumer<WorkflowOperations> spec) {
-        spec.accept(this);
-    }
 
     /**
      * Whether the workflow can be deleted.
@@ -51,5 +47,26 @@ public class WorkflowOperations {
     @JsonProperty("canEdit")
     protected Boolean canEdit;
 
+    /**
+     * Constructs a validated instance of {@link WorkflowOperations}.
+     *
+     * @param spec the specification to process
+     */
+    public WorkflowOperations(Consumer<WorkflowOperations> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link WorkflowOperations}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #WorkflowOperations(Consumer)} instead.
+     * @param canDelete Whether the workflow can be deleted.
+     * @param canEdit Whether the workflow can be updated.
+     */
+    @ApiStatus.Internal
+    public WorkflowOperations(Boolean canDelete, Boolean canEdit) {
+        this.canDelete = canDelete;
+        this.canEdit = canEdit;
+    }
 
 }

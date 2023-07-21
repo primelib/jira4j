@@ -7,9 +7,14 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import javax.annotation.processing.Generated;
 
+import java.util.Set;
 import io.github.primelib.jira4j.restv3.model.User;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -21,9 +26,13 @@ import java.util.function.Consumer;
  * <p>
  * Bulk get users
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class BulkGetUsersOperationSpec {
     /**
@@ -33,7 +42,7 @@ public class BulkGetUsersOperationSpec {
     public static Boolean VALIDATION_ENABLED = true;
 
     /**
-     * The account ID of a user. To specify multiple users, pass multiple `accountId` parameters. For example, `accountId=5b10a2844c20165700ede21g&amp;accountId=5b10ac8d82e05b22cc7d4ef5`.
+     * The account ID of a user. To specify multiple users, pass multiple {@code accountId} parameters. For example, {@code accountId=5b10a2844c20165700ede21g&amp;accountId=5b10ac8d82e05b22cc7d4ef5}.
      */
     @NotNull 
     private List<String> accountId;
@@ -42,13 +51,13 @@ public class BulkGetUsersOperationSpec {
      * The index of the first item to return in a page of results (page offset).
      */
     @Nullable 
-    private Long startAt = 0L;
+    private Long startAt;
 
     /**
      * The maximum number of items to return per page.
      */
     @Nullable 
-    private Integer maxResults = 10;
+    private Integer maxResults;
 
     /**
      * This parameter is no longer available and will be removed from the documentation soon. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.
@@ -63,13 +72,35 @@ public class BulkGetUsersOperationSpec {
     private List<String> key;
 
     /**
-     * Constructs a validated implementation of {@link BulkGetUsersOperationSpec}.
+     * Constructs a validated instance of {@link BulkGetUsersOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public BulkGetUsersOperationSpec(Consumer<BulkGetUsersOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link BulkGetUsersOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param accountId            The account ID of a user. To specify multiple users, pass multiple {@code accountId} parameters. For example, {@code accountId=5b10a2844c20165700ede21g&amp;accountId=5b10ac8d82e05b22cc7d4ef5}.
+     * @param startAt              The index of the first item to return in a page of results (page offset).
+     * @param maxResults           The maximum number of items to return per page.
+     * @param username             This parameter is no longer available and will be removed from the documentation soon. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.
+     * @param key                  This parameter is no longer available and will be removed from the documentation soon. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.
+     */
+    @ApiStatus.Internal
+    public BulkGetUsersOperationSpec(List<String> accountId, Long startAt, Integer maxResults, List<String> username, List<String> key) {
+        this.accountId = accountId;
+        this.startAt = startAt;
+        this.maxResults = maxResults;
+        this.username = username;
+        this.key = key;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -82,5 +113,4 @@ public class BulkGetUsersOperationSpec {
     public void validate() {
         Objects.requireNonNull(accountId, "accountId is a required parameter!");
     }
-
 }

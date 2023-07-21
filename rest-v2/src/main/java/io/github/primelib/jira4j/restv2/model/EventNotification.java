@@ -3,10 +3,14 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -17,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * EventNotification
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "emailAddress",
     "expand",
@@ -36,16 +43,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("EventNotification")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class EventNotification {
-
-    /**
-     * Constructs a validated implementation of {@link EventNotification}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public EventNotification(Consumer<EventNotification> spec) {
-        spec.accept(this);
-    }
 
     /**
      * The email address.
@@ -78,17 +75,17 @@ public class EventNotification {
     protected NotificationTypeEnum notificationType;
 
     /**
-     * As a group's name can change, use of `recipient` is recommended. The identifier associated with the `notificationType` value that defines the receiver of the notification, where the receiver isn't implied by `notificationType` value. So, when `notificationType` is:
+     * As a group's name can change, use of {@code recipient} is recommended. The identifier associated with the {@code notificationType} value that defines the receiver of the notification, where the receiver isn't implied by {@code notificationType} value. So, when {@code notificationType} is:
      *  *
-     * `User` The `parameter` is the user account ID.
+     * {@code User} The {@code parameter} is the user account ID.
      * *
-     * `Group` The `parameter` is the group name.
+     * {@code Group} The {@code parameter} is the group name.
      * *
-     * `ProjectRole` The `parameter` is the project role ID.
+     * {@code ProjectRole} The {@code parameter} is the project role ID.
      * *
-     * `UserCustomField` The `parameter` is the ID of the custom field.
+     * {@code UserCustomField} The {@code parameter} is the ID of the custom field.
      * *
-     * `GroupCustomField` The `parameter` is the ID of the custom field.
+     * {@code GroupCustomField} The {@code parameter} is the ID of the custom field.
      */
     @JsonProperty("parameter")
     protected String parameter;
@@ -97,17 +94,17 @@ public class EventNotification {
     protected EventNotificationProjectRole projectRole;
 
     /**
-     * The identifier associated with the `notificationType` value that defines the receiver of the notification, where the receiver isn't implied by the `notificationType` value. So, when `notificationType` is:
+     * The identifier associated with the {@code notificationType} value that defines the receiver of the notification, where the receiver isn't implied by the {@code notificationType} value. So, when {@code notificationType} is:
      *  *
-     * `User`, `recipient` is the user account ID.
+     * {@code User}, {@code recipient} is the user account ID.
      * *
-     * `Group`, `recipient` is the group ID.
+     * {@code Group}, {@code recipient} is the group ID.
      * *
-     * `ProjectRole`, `recipient` is the project role ID.
+     * {@code ProjectRole}, {@code recipient} is the project role ID.
      * *
-     * `UserCustomField`, `recipient` is the ID of the custom field.
+     * {@code UserCustomField}, {@code recipient} is the ID of the custom field.
      * *
-     * `GroupCustomField`, `recipient` is the ID of the custom field.
+     * {@code GroupCustomField}, {@code recipient} is the ID of the custom field.
      */
     @JsonProperty("recipient")
     protected String recipient;
@@ -115,6 +112,43 @@ public class EventNotification {
     @JsonProperty("user")
     protected EventNotificationUser user;
 
+    /**
+     * Constructs a validated instance of {@link EventNotification}.
+     *
+     * @param spec the specification to process
+     */
+    public EventNotification(Consumer<EventNotification> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link EventNotification}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #EventNotification(Consumer)} instead.
+     * @param emailAddress The email address.
+     * @param expand Expand options that include additional event notification details in the response.
+     * @param field var.name
+     * @param group var.name
+     * @param id The ID of the notification.
+     * @param notificationType Identifies the recipients of the notification.
+     * @param parameter As a group's name can change, use of {@code recipient} is recommended. The identifier associated with the {@code notificationType} value that defines the receiver of the notification, where the receiver isn't implied by {@code notificationType} value. So, when {@code notificationType} is:   *  {@code User} The {@code parameter} is the user account ID.  *  {@code Group} The {@code parameter} is the group name.  *  {@code ProjectRole} The {@code parameter} is the project role ID.  *  {@code UserCustomField} The {@code parameter} is the ID of the custom field.  *  {@code GroupCustomField} The {@code parameter} is the ID of the custom field.
+     * @param projectRole var.name
+     * @param recipient The identifier associated with the {@code notificationType} value that defines the receiver of the notification, where the receiver isn't implied by the {@code notificationType} value. So, when {@code notificationType} is:   *  {@code User}, {@code recipient} is the user account ID.  *  {@code Group}, {@code recipient} is the group ID.  *  {@code ProjectRole}, {@code recipient} is the project role ID.  *  {@code UserCustomField}, {@code recipient} is the ID of the custom field.  *  {@code GroupCustomField}, {@code recipient} is the ID of the custom field.
+     * @param user var.name
+     */
+    @ApiStatus.Internal
+    public EventNotification(String emailAddress, String expand, EventNotificationField field, EventNotificationGroup group, Long id, NotificationTypeEnum notificationType, String parameter, EventNotificationProjectRole projectRole, String recipient, EventNotificationUser user) {
+        this.emailAddress = emailAddress;
+        this.expand = expand;
+        this.field = field;
+        this.group = group;
+        this.id = id;
+        this.notificationType = notificationType;
+        this.parameter = parameter;
+        this.projectRole = projectRole;
+        this.recipient = recipient;
+        this.user = user;
+    }
 
     /**
      * Identifies the recipients of the notification.

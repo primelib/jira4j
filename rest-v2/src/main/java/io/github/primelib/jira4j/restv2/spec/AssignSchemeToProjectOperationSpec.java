@@ -6,10 +6,15 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.processing.Generated;
 
 import io.github.primelib.jira4j.restv2.model.Project;
+import java.util.Set;
 import io.github.primelib.jira4j.restv2.model.WorkflowScheme;
 import io.github.primelib.jira4j.restv2.model.WorkflowSchemeProjectAssociation;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -21,9 +26,13 @@ import java.util.function.Consumer;
  * <p>
  * Assign workflow scheme to project
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class AssignSchemeToProjectOperationSpec {
     /**
@@ -38,13 +47,27 @@ public class AssignSchemeToProjectOperationSpec {
     private WorkflowSchemeProjectAssociation workflowSchemeProjectAssociation;
 
     /**
-     * Constructs a validated implementation of {@link AssignSchemeToProjectOperationSpec}.
+     * Constructs a validated instance of {@link AssignSchemeToProjectOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public AssignSchemeToProjectOperationSpec(Consumer<AssignSchemeToProjectOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link AssignSchemeToProjectOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param workflowSchemeProjectAssociation 
+     */
+    @ApiStatus.Internal
+    public AssignSchemeToProjectOperationSpec(WorkflowSchemeProjectAssociation workflowSchemeProjectAssociation) {
+        this.workflowSchemeProjectAssociation = workflowSchemeProjectAssociation;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -57,5 +80,4 @@ public class AssignSchemeToProjectOperationSpec {
     public void validate() {
         Objects.requireNonNull(workflowSchemeProjectAssociation, "workflowSchemeProjectAssociation is a required parameter!");
     }
-
 }

@@ -4,13 +4,15 @@ import java.util.List;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.LinkedHashSet;
 import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -20,10 +22,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * BulkProjectPermissions
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "issues",
     "permissions",
@@ -32,16 +37,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("BulkProjectPermissions")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class BulkProjectPermissions {
-
-    /**
-     * Constructs a validated implementation of {@link BulkProjectPermissions}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public BulkProjectPermissions(Consumer<BulkProjectPermissions> spec) {
-        spec.accept(this);
-    }
 
     /**
      * List of issue IDs.
@@ -53,7 +48,7 @@ public class BulkProjectPermissions {
      * List of project permissions.
      */
     @JsonProperty("permissions")
-    protected Set<String> permissions = new LinkedHashSet<>();
+    protected Set<String> permissions;
 
     /**
      * List of project IDs.
@@ -61,5 +56,28 @@ public class BulkProjectPermissions {
     @JsonProperty("projects")
     protected Set<Long> projects;
 
+    /**
+     * Constructs a validated instance of {@link BulkProjectPermissions}.
+     *
+     * @param spec the specification to process
+     */
+    public BulkProjectPermissions(Consumer<BulkProjectPermissions> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link BulkProjectPermissions}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #BulkProjectPermissions(Consumer)} instead.
+     * @param issues List of issue IDs.
+     * @param permissions List of project permissions.
+     * @param projects List of project IDs.
+     */
+    @ApiStatus.Internal
+    public BulkProjectPermissions(Set<Long> issues, Set<String> permissions, Set<Long> projects) {
+        this.issues = issues;
+        this.permissions = permissions;
+        this.projects = projects;
+    }
 
 }

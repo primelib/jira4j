@@ -9,7 +9,11 @@ import io.github.primelib.jira4j.restv2.model.Filter;
 import io.github.primelib.jira4j.restv2.model.Project;
 import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -21,9 +25,13 @@ import java.util.function.Consumer;
  * <p>
  * Get projects paginated
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class SearchProjectsOperationSpec {
     /**
@@ -36,56 +44,56 @@ public class SearchProjectsOperationSpec {
      * The index of the first item to return in a page of results (page offset).
      */
     @Nullable 
-    private Long startAt = 0L;
+    private Long startAt;
 
     /**
      * The maximum number of items to return per page.
      */
     @Nullable 
-    private Integer maxResults = 50;
+    private Integer maxResults;
 
     /**
      * [Order](#ordering) the results by a field.
      *  *
-     * `category` Sorts by project category. A complete list of category IDs is found using [Get all project categories](#api-rest-api-2-projectCategory-get).
+     * {@code category} Sorts by project category. A complete list of category IDs is found using [Get all project categories](#api-rest-api-2-projectCategory-get).
      * *
-     * `issueCount` Sorts by the total number of issues in each project.
+     * {@code issueCount} Sorts by the total number of issues in each project.
      * *
-     * `key` Sorts by project key.
+     * {@code key} Sorts by project key.
      * *
-     * `lastIssueUpdatedTime` Sorts by the last issue update time.
+     * {@code lastIssueUpdatedTime} Sorts by the last issue update time.
      * *
-     * `name` Sorts by project name.
+     * {@code name} Sorts by project name.
      * *
-     * `owner` Sorts by project lead.
+     * {@code owner} Sorts by project lead.
      * *
-     * `archivedDate` EXPERIMENTAL. Sorts by project archived date.
+     * {@code archivedDate} EXPERIMENTAL. Sorts by project archived date.
      * *
-     * `deletedDate` EXPERIMENTAL. Sorts by project deleted date.
+     * {@code deletedDate} EXPERIMENTAL. Sorts by project deleted date.
      */
     @Nullable 
-    private String orderBy = "key";
+    private String orderBy;
 
     /**
-     * The project IDs to filter the results by. To include multiple IDs, provide an ampersand-separated list. For example, `id=10000&amp;id=10001`. Up to 50 project IDs can be provided.
+     * The project IDs to filter the results by. To include multiple IDs, provide an ampersand-separated list. For example, {@code id=10000&amp;id=10001}. Up to 50 project IDs can be provided.
      */
     @Nullable 
     private Set<Long> id;
 
     /**
-     * The project keys to filter the results by. To include multiple keys, provide an ampersand-separated list. For example, `keys=PA&amp;keys=PB`. Up to 50 project keys can be provided.
+     * The project keys to filter the results by. To include multiple keys, provide an ampersand-separated list. For example, {@code keys=PA&amp;keys=PB}. Up to 50 project keys can be provided.
      */
     @Nullable 
     private Set<String> keys;
 
     /**
-     * Filter the results using a literal string. Projects with a matching `key` or `name` are returned (case insensitive).
+     * Filter the results using a literal string. Projects with a matching {@code key} or {@code name} are returned (case insensitive).
      */
     @Nullable 
     private String query;
 
     /**
-     * Orders results by the [project type](https://confluence.atlassian.com/x/GwiiLQ#Jiraapplicationsoverview-Productfeaturesandprojecttypes). This parameter accepts a comma-separated list. Valid values are `business`, `service_desk`, and `software`.
+     * Orders results by the [project type](https://confluence.atlassian.com/x/GwiiLQ#Jiraapplicationsoverview-Productfeaturesandprojecttypes). This parameter accepts a comma-separated list. Valid values are {@code business}, {@code service_desk}, and {@code software}.
      */
     @Nullable 
     private String typeKey;
@@ -99,7 +107,7 @@ public class SearchProjectsOperationSpec {
     /**
      * Filter results by projects for which the user can:
      *  *
-     * `view` the project, meaning that they have one of the following permissions:
+     * {@code view} the project, meaning that they have one of the following permissions:
      * 
      * 
      * 
@@ -115,9 +123,9 @@ public class SearchProjectsOperationSpec {
      * *
      * *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * *
-     * `browse` the project, meaning that they have the *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.
+     * {@code browse} the project, meaning that they have the *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.
      * *
-     * `edit` the project, meaning that they have one of the following permissions:
+     * {@code edit} the project, meaning that they have one of the following permissions:
      * 
      * 
      * 
@@ -130,22 +138,22 @@ public class SearchProjectsOperationSpec {
      * *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      */
     @Nullable 
-    private String action = "view";
+    private String action;
 
     /**
      * Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expanded options include:
      *  *
-     * `description` Returns the project description.
+     * {@code description} Returns the project description.
      * *
-     * `projectKeys` Returns all project keys associated with a project.
+     * {@code projectKeys} Returns all project keys associated with a project.
      * *
-     * `lead` Returns information about the project lead.
+     * {@code lead} Returns information about the project lead.
      * *
-     * `issueTypes` Returns all issue types associated with the project.
+     * {@code issueTypes} Returns all issue types associated with the project.
      * *
-     * `url` Returns the URL associated with the project.
+     * {@code url} Returns the URL associated with the project.
      * *
-     * `insight` EXPERIMENTAL. Returns the insight details of total issue count and last issue update time for the project.
+     * {@code insight} EXPERIMENTAL. Returns the insight details of total issue count and last issue update time for the project.
      */
     @Nullable 
     private String expand;
@@ -153,11 +161,11 @@ public class SearchProjectsOperationSpec {
     /**
      * EXPERIMENTAL. Filter results by project status:
      *  *
-     * `live` Search live projects.
+     * {@code live} Search live projects.
      * *
-     * `archived` Search archived projects.
+     * {@code archived} Search archived projects.
      * *
-     * `deleted` Search deleted projects, those in the recycle bin.
+     * {@code deleted} Search deleted projects, those in the recycle bin.
      */
     @Nullable 
     private List<String> status;
@@ -169,13 +177,13 @@ public class SearchProjectsOperationSpec {
     private List<Object> properties;
 
     /**
-     * EXPERIMENTAL. A query string used to search properties. The query string cannot be specified using a JSON object. For example, to search for the value of `nested` from `{"something":{"nested":1,"other":2}}` use `[thepropertykey].something.nested=1`. Note that the propertyQuery key is enclosed in square brackets to enable searching where the propertyQuery key includes dot (.) or equals (=) characters. Note that `thepropertykey` is only returned when included in `properties`.
+     * EXPERIMENTAL. A query string used to search properties. The query string cannot be specified using a JSON object. For example, to search for the value of {@code nested} from {@code {"something":{"nested":1,"other":2}}} use {@code [thepropertykey].something.nested=1}. Note that the propertyQuery key is enclosed in square brackets to enable searching where the propertyQuery key includes dot (.) or equals (=) characters. Note that {@code thepropertykey} is only returned when included in {@code properties}.
      */
     @Nullable 
     private String propertyQuery;
 
     /**
-     * Constructs a validated implementation of {@link SearchProjectsOperationSpec}.
+     * Constructs a validated instance of {@link SearchProjectsOperationSpec}.
      *
      * @param spec the specification to process
      */
@@ -187,11 +195,48 @@ public class SearchProjectsOperationSpec {
     }
 
     /**
+     * Constructs a validated instance of {@link SearchProjectsOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param startAt              The index of the first item to return in a page of results (page offset).
+     * @param maxResults           The maximum number of items to return per page.
+     * @param orderBy              [Order](#ordering) the results by a field.   *  {@code category} Sorts by project category. A complete list of category IDs is found using [Get all project categories](#api-rest-api-2-projectCategory-get).  *  {@code issueCount} Sorts by the total number of issues in each project.  *  {@code key} Sorts by project key.  *  {@code lastIssueUpdatedTime} Sorts by the last issue update time.  *  {@code name} Sorts by project name.  *  {@code owner} Sorts by project lead.  *  {@code archivedDate} EXPERIMENTAL. Sorts by project archived date.  *  {@code deletedDate} EXPERIMENTAL. Sorts by project deleted date.
+     * @param id                   The project IDs to filter the results by. To include multiple IDs, provide an ampersand-separated list. For example, {@code id=10000&amp;id=10001}. Up to 50 project IDs can be provided.
+     * @param keys                 The project keys to filter the results by. To include multiple keys, provide an ampersand-separated list. For example, {@code keys=PA&amp;keys=PB}. Up to 50 project keys can be provided.
+     * @param query                Filter the results using a literal string. Projects with a matching {@code key} or {@code name} are returned (case insensitive).
+     * @param typeKey              Orders results by the [project type](https://confluence.atlassian.com/x/GwiiLQ#Jiraapplicationsoverview-Productfeaturesandprojecttypes). This parameter accepts a comma-separated list. Valid values are {@code business}, {@code service_desk}, and {@code software}.
+     * @param categoryId           The ID of the project's category. A complete list of category IDs is found using the [Get all project categories](#api-rest-api-2-projectCategory-get) operation.
+     * @param action               Filter results by projects for which the user can:   *  {@code view} the project, meaning that they have one of the following permissions:           *  *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.      *  *Administer projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.      *  *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).  *  {@code browse} the project, meaning that they have the *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.  *  {@code edit} the project, meaning that they have one of the following permissions:           *  *Administer projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.      *  *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
+     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expanded options include:   *  {@code description} Returns the project description.  *  {@code projectKeys} Returns all project keys associated with a project.  *  {@code lead} Returns information about the project lead.  *  {@code issueTypes} Returns all issue types associated with the project.  *  {@code url} Returns the URL associated with the project.  *  {@code insight} EXPERIMENTAL. Returns the insight details of total issue count and last issue update time for the project.
+     * @param status               EXPERIMENTAL. Filter results by project status:   *  {@code live} Search live projects.  *  {@code archived} Search archived projects.  *  {@code deleted} Search deleted projects, those in the recycle bin.
+     * @param properties           EXPERIMENTAL. A list of project properties to return for the project. This parameter accepts a comma-separated list.
+     * @param propertyQuery        EXPERIMENTAL. A query string used to search properties. The query string cannot be specified using a JSON object. For example, to search for the value of {@code nested} from {@code {"something":{"nested":1,"other":2}}} use {@code [thepropertykey].something.nested=1}. Note that the propertyQuery key is enclosed in square brackets to enable searching where the propertyQuery key includes dot (.) or equals (=) characters. Note that {@code thepropertykey} is only returned when included in {@code properties}.
+     */
+    @ApiStatus.Internal
+    public SearchProjectsOperationSpec(Long startAt, Integer maxResults, String orderBy, Set<Long> id, Set<String> keys, String query, String typeKey, Long categoryId, String action, String expand, List<String> status, List<Object> properties, String propertyQuery) {
+        this.startAt = startAt;
+        this.maxResults = maxResults;
+        this.orderBy = orderBy;
+        this.id = id;
+        this.keys = keys;
+        this.query = query;
+        this.typeKey = typeKey;
+        this.categoryId = categoryId;
+        this.action = action;
+        this.expand = expand;
+        this.status = status;
+        this.properties = properties;
+        this.propertyQuery = propertyQuery;
+
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
      * Validates the Spec, will throw a exception if required parameters are missing
      *
      * @throws NullPointerException
      */
     public void validate() {
     }
-
 }

@@ -6,8 +6,13 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.processing.Generated;
 
 import io.github.primelib.jira4j.restv3.model.IssueTypeUpdateBean;
+import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -19,9 +24,13 @@ import java.util.function.Consumer;
  * <p>
  * Update issue type
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class UpdateIssueTypeOperationSpec {
     /**
@@ -42,13 +51,29 @@ public class UpdateIssueTypeOperationSpec {
     private IssueTypeUpdateBean issueTypeUpdateBean;
 
     /**
-     * Constructs a validated implementation of {@link UpdateIssueTypeOperationSpec}.
+     * Constructs a validated instance of {@link UpdateIssueTypeOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public UpdateIssueTypeOperationSpec(Consumer<UpdateIssueTypeOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link UpdateIssueTypeOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param id                   The ID of the issue type.
+     * @param issueTypeUpdateBean  
+     */
+    @ApiStatus.Internal
+    public UpdateIssueTypeOperationSpec(String id, IssueTypeUpdateBean issueTypeUpdateBean) {
+        this.id = id;
+        this.issueTypeUpdateBean = issueTypeUpdateBean;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -62,5 +87,4 @@ public class UpdateIssueTypeOperationSpec {
         Objects.requireNonNull(id, "id is a required parameter!");
         Objects.requireNonNull(issueTypeUpdateBean, "issueTypeUpdateBean is a required parameter!");
     }
-
 }

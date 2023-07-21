@@ -6,9 +6,14 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import javax.annotation.processing.Generated;
 
+import java.util.Set;
 import io.github.primelib.jira4j.restv2.model.Version;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -20,9 +25,13 @@ import java.util.function.Consumer;
  * <p>
  * Get version
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class GetVersionOperationSpec {
     /**
@@ -40,21 +49,37 @@ public class GetVersionOperationSpec {
     /**
      * Use [expand](#expansion) to include additional information about version in the response. This parameter accepts a comma-separated list. Expand options include:
      *  *
-     * `operations` Returns the list of operations available for this version.
+     * {@code operations} Returns the list of operations available for this version.
      * *
-     * `issuesstatus` Returns the count of issues in this version for each of the status categories *to do*, *in progress*, *done*, and *unmapped*. The *unmapped* property represents the number of issues with a status other than *to do*, *in progress*, and *done*.
+     * {@code issuesstatus} Returns the count of issues in this version for each of the status categories *to do*, *in progress*, *done*, and *unmapped*. The *unmapped* property represents the number of issues with a status other than *to do*, *in progress*, and *done*.
      */
     @Nullable 
     private String expand;
 
     /**
-     * Constructs a validated implementation of {@link GetVersionOperationSpec}.
+     * Constructs a validated instance of {@link GetVersionOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public GetVersionOperationSpec(Consumer<GetVersionOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link GetVersionOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param id                   The ID of the version.
+     * @param expand               Use [expand](#expansion) to include additional information about version in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code operations} Returns the list of operations available for this version.  *  {@code issuesstatus} Returns the count of issues in this version for each of the status categories *to do*, *in progress*, *done*, and *unmapped*. The *unmapped* property represents the number of issues with a status other than *to do*, *in progress*, and *done*.
+     */
+    @ApiStatus.Internal
+    public GetVersionOperationSpec(String id, String expand) {
+        this.id = id;
+        this.expand = expand;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -67,5 +92,4 @@ public class GetVersionOperationSpec {
     public void validate() {
         Objects.requireNonNull(id, "id is a required parameter!");
     }
-
 }

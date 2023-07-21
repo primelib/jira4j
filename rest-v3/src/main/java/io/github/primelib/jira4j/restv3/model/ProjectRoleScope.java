@@ -3,10 +3,14 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -17,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * ProjectRoleScope
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "project",
     "type"
@@ -28,16 +35,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("ProjectRole_scope")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class ProjectRoleScope {
-
-    /**
-     * Constructs a validated implementation of {@link ProjectRoleScope}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public ProjectRoleScope(Consumer<ProjectRoleScope> spec) {
-        spec.accept(this);
-    }
 
     @JsonProperty("project")
     protected ScopeProject project;
@@ -48,6 +45,27 @@ public class ProjectRoleScope {
     @JsonProperty("type")
     protected TypeEnum type;
 
+    /**
+     * Constructs a validated instance of {@link ProjectRoleScope}.
+     *
+     * @param spec the specification to process
+     */
+    public ProjectRoleScope(Consumer<ProjectRoleScope> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link ProjectRoleScope}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #ProjectRoleScope(Consumer)} instead.
+     * @param project var.name
+     * @param type The type of scope.
+     */
+    @ApiStatus.Internal
+    public ProjectRoleScope(ScopeProject project, TypeEnum type) {
+        this.project = project;
+        this.type = type;
+    }
 
     /**
      * The type of scope.

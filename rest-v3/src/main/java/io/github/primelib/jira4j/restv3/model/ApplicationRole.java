@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.util.List;
@@ -19,10 +22,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * ApplicationRole
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "defaultGroups",
     "defaultGroupsDetails",
@@ -44,17 +50,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class ApplicationRole {
 
     /**
-     * Constructs a validated implementation of {@link ApplicationRole}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public ApplicationRole(Consumer<ApplicationRole> spec) {
-        spec.accept(this);
-    }
-
-    /**
-     * The groups that are granted default access for this application role. As a group's name can change, use of `defaultGroupsDetails` is recommended to identify a groups.
+     * The groups that are granted default access for this application role. As a group's name can change, use of {@code defaultGroupsDetails} is recommended to identify a groups.
      */
     @JsonProperty("defaultGroups")
     protected Set<String> defaultGroups;
@@ -78,7 +74,7 @@ public class ApplicationRole {
     protected List<GroupName> groupDetails;
 
     /**
-     * The groups associated with the application role. As a group's name can change, use of `groupDetails` is recommended to identify a groups.
+     * The groups associated with the application role. As a group's name can change, use of {@code groupDetails} is recommended to identify a groups.
      */
     @JsonProperty("groups")
     protected Set<String> groups;
@@ -105,7 +101,7 @@ public class ApplicationRole {
     protected Integer numberOfSeats;
 
     /**
-     * Indicates if the application role belongs to Jira platform (`jira-core`).
+     * Indicates if the application role belongs to Jira platform ({@code jira-core}).
      */
     @JsonProperty("platform")
     protected Boolean platform;
@@ -134,5 +130,50 @@ public class ApplicationRole {
     @JsonProperty("userCountDescription")
     protected String userCountDescription;
 
+    /**
+     * Constructs a validated instance of {@link ApplicationRole}.
+     *
+     * @param spec the specification to process
+     */
+    public ApplicationRole(Consumer<ApplicationRole> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link ApplicationRole}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #ApplicationRole(Consumer)} instead.
+     * @param defaultGroups The groups that are granted default access for this application role. As a group's name can change, use of {@code defaultGroupsDetails} is recommended to identify a groups.
+     * @param defaultGroupsDetails The groups that are granted default access for this application role.
+     * @param defined Deprecated.
+     * @param groupDetails The groups associated with the application role.
+     * @param groups The groups associated with the application role. As a group's name can change, use of {@code groupDetails} is recommended to identify a groups.
+     * @param hasUnlimitedSeats var.name
+     * @param key The key of the application role.
+     * @param name The display name of the application role.
+     * @param numberOfSeats The maximum count of users on your license.
+     * @param platform Indicates if the application role belongs to Jira platform ({@code jira-core}).
+     * @param remainingSeats The count of users remaining on your license.
+     * @param selectedByDefault Determines whether this application role should be selected by default on user creation.
+     * @param userCount The number of users counting against your license.
+     * @param userCountDescription The [type of users](https://confluence.atlassian.com/x/lRW3Ng) being counted against your license.
+     */
+    @ApiStatus.Internal
+    public ApplicationRole(Set<String> defaultGroups, List<GroupName> defaultGroupsDetails, Boolean defined, List<GroupName> groupDetails, Set<String> groups, Boolean hasUnlimitedSeats, String key, String name, Integer numberOfSeats, Boolean platform, Integer remainingSeats, Boolean selectedByDefault, Integer userCount, String userCountDescription) {
+        this.defaultGroups = defaultGroups;
+        this.defaultGroupsDetails = defaultGroupsDetails;
+        this.defined = defined;
+        this.groupDetails = groupDetails;
+        this.groups = groups;
+        this.hasUnlimitedSeats = hasUnlimitedSeats;
+        this.key = key;
+        this.name = name;
+        this.numberOfSeats = numberOfSeats;
+        this.platform = platform;
+        this.remainingSeats = remainingSeats;
+        this.selectedByDefault = selectedByDefault;
+        this.userCount = userCount;
+        this.userCountDescription = userCountDescription;
+    }
 
 }

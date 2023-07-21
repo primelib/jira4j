@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -17,10 +20,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * ResolutionJsonBean
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "default",
     "description",
@@ -32,16 +38,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("ResolutionJsonBean")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class ResolutionJsonBean {
-
-    /**
-     * Constructs a validated implementation of {@link ResolutionJsonBean}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public ResolutionJsonBean(Consumer<ResolutionJsonBean> spec) {
-        spec.accept(this);
-    }
 
     @JsonProperty("default")
     protected Boolean _default;
@@ -61,5 +57,34 @@ public class ResolutionJsonBean {
     @JsonProperty("self")
     protected String self;
 
+    /**
+     * Constructs a validated instance of {@link ResolutionJsonBean}.
+     *
+     * @param spec the specification to process
+     */
+    public ResolutionJsonBean(Consumer<ResolutionJsonBean> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link ResolutionJsonBean}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #ResolutionJsonBean(Consumer)} instead.
+     * @param _default var.name
+     * @param description var.name
+     * @param iconUrl var.name
+     * @param id var.name
+     * @param name var.name
+     * @param self var.name
+     */
+    @ApiStatus.Internal
+    public ResolutionJsonBean(Boolean _default, String description, String iconUrl, String id, String name, String self) {
+        this._default = _default;
+        this.description = description;
+        this.iconUrl = iconUrl;
+        this.id = id;
+        this.name = name;
+        this.self = self;
+    }
 
 }

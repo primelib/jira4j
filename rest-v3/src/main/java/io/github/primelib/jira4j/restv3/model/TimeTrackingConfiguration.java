@@ -3,10 +3,14 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -17,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * TimeTrackingConfiguration
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "defaultUnit",
     "timeFormat",
@@ -30,16 +37,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("TimeTrackingConfiguration")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class TimeTrackingConfiguration {
-
-    /**
-     * Constructs a validated implementation of {@link TimeTrackingConfiguration}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public TimeTrackingConfiguration(Consumer<TimeTrackingConfiguration> spec) {
-        spec.accept(this);
-    }
 
     /**
      * The default unit of time applied to logged time.
@@ -65,6 +62,31 @@ public class TimeTrackingConfiguration {
     @JsonProperty("workingHoursPerDay")
     protected Double workingHoursPerDay;
 
+    /**
+     * Constructs a validated instance of {@link TimeTrackingConfiguration}.
+     *
+     * @param spec the specification to process
+     */
+    public TimeTrackingConfiguration(Consumer<TimeTrackingConfiguration> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link TimeTrackingConfiguration}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #TimeTrackingConfiguration(Consumer)} instead.
+     * @param defaultUnit The default unit of time applied to logged time.
+     * @param timeFormat The format that will appear on an issue's *Time Spent* field.
+     * @param workingDaysPerWeek The number of days in a working week.
+     * @param workingHoursPerDay The number of hours in a working day.
+     */
+    @ApiStatus.Internal
+    public TimeTrackingConfiguration(DefaultUnitEnum defaultUnit, TimeFormatEnum timeFormat, Double workingDaysPerWeek, Double workingHoursPerDay) {
+        this.defaultUnit = defaultUnit;
+        this.timeFormat = timeFormat;
+        this.workingDaysPerWeek = workingDaysPerWeek;
+        this.workingHoursPerDay = workingHoursPerDay;
+    }
 
     /**
      * The default unit of time applied to logged time.

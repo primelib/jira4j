@@ -1,16 +1,21 @@
 package io.github.primelib.jira4j.restv2.spec;
 
-import java.util.Map;
 import java.util.Objects;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import javax.annotation.processing.Generated;
 
+import io.github.primelib.jira4j.restv2.model.IssueUpdateDetails;
 import io.github.primelib.jira4j.restv2.model.Screen;
+import java.util.Set;
 import io.github.primelib.jira4j.restv2.model.User;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -22,9 +27,13 @@ import java.util.function.Consumer;
  * <p>
  * Edit issue
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class EditIssueOperationSpec {
     /**
@@ -42,28 +51,28 @@ public class EditIssueOperationSpec {
     /**
      */
     @NotNull 
-    private Map<String, Object> requestBody;
+    private IssueUpdateDetails issueUpdateDetails;
 
     /**
      * Whether a notification email about the issue update is sent to all watchers. To disable the notification, administer Jira or administer project permissions are required. If the user doesn't have the necessary permission the request is ignored.
      */
     @Nullable 
-    private Boolean notifyUsers = true;
+    private Boolean notifyUsers;
 
     /**
      * Whether screen security is overridden to enable hidden fields to be edited. Available to Connect app users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) and Forge apps acting on behalf of users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      */
     @Nullable 
-    private Boolean overrideScreenSecurity = false;
+    private Boolean overrideScreenSecurity;
 
     /**
      * Whether screen security is overridden to enable uneditable fields to be edited. Available to Connect app users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) and Forge apps acting on behalf of users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      */
     @Nullable 
-    private Boolean overrideEditableFlag = false;
+    private Boolean overrideEditableFlag;
 
     /**
-     * Constructs a validated implementation of {@link EditIssueOperationSpec}.
+     * Constructs a validated instance of {@link EditIssueOperationSpec}.
      *
      * @param spec the specification to process
      */
@@ -75,13 +84,34 @@ public class EditIssueOperationSpec {
     }
 
     /**
+     * Constructs a validated instance of {@link EditIssueOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param issueIdOrKey         The ID or key of the issue.
+     * @param issueUpdateDetails   
+     * @param notifyUsers          Whether a notification email about the issue update is sent to all watchers. To disable the notification, administer Jira or administer project permissions are required. If the user doesn't have the necessary permission the request is ignored.
+     * @param overrideScreenSecurity Whether screen security is overridden to enable hidden fields to be edited. Available to Connect app users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) and Forge apps acting on behalf of users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
+     * @param overrideEditableFlag Whether screen security is overridden to enable uneditable fields to be edited. Available to Connect app users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) and Forge apps acting on behalf of users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
+     */
+    @ApiStatus.Internal
+    public EditIssueOperationSpec(String issueIdOrKey, IssueUpdateDetails issueUpdateDetails, Boolean notifyUsers, Boolean overrideScreenSecurity, Boolean overrideEditableFlag) {
+        this.issueIdOrKey = issueIdOrKey;
+        this.issueUpdateDetails = issueUpdateDetails;
+        this.notifyUsers = notifyUsers;
+        this.overrideScreenSecurity = overrideScreenSecurity;
+        this.overrideEditableFlag = overrideEditableFlag;
+
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
      * Validates the Spec, will throw a exception if required parameters are missing
      *
      * @throws NullPointerException
      */
     public void validate() {
         Objects.requireNonNull(issueIdOrKey, "issueIdOrKey is a required parameter!");
-        Objects.requireNonNull(requestBody, "requestBody is a required parameter!");
+        Objects.requireNonNull(issueUpdateDetails, "issueUpdateDetails is a required parameter!");
     }
-
 }

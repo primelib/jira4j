@@ -6,8 +6,13 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import javax.annotation.processing.Generated;
 
+import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -19,9 +24,13 @@ import java.util.function.Consumer;
  * <p>
  * Delete actors from project role
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class DeleteActorOperationSpec {
     /**
@@ -49,25 +58,47 @@ public class DeleteActorOperationSpec {
     private String user;
 
     /**
-     * The name of the group to remove from the project role. This parameter cannot be used with the `groupId` parameter. As a group's name can change, use of `groupId` is recommended.
+     * The name of the group to remove from the project role. This parameter cannot be used with the {@code groupId} parameter. As a group's name can change, use of {@code groupId} is recommended.
      */
     @Nullable 
     private String group;
 
     /**
-     * The ID of the group to remove from the project role. This parameter cannot be used with the `group` parameter.
+     * The ID of the group to remove from the project role. This parameter cannot be used with the {@code group} parameter.
      */
     @Nullable 
     private String groupId;
 
     /**
-     * Constructs a validated implementation of {@link DeleteActorOperationSpec}.
+     * Constructs a validated instance of {@link DeleteActorOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public DeleteActorOperationSpec(Consumer<DeleteActorOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link DeleteActorOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param projectIdOrKey       The project ID or project key (case sensitive).
+     * @param id                   The ID of the project role. Use [Get all project roles](#api-rest-api-3-role-get) to get a list of project role IDs.
+     * @param user                 The user account ID of the user to remove from the project role.
+     * @param group                The name of the group to remove from the project role. This parameter cannot be used with the {@code groupId} parameter. As a group's name can change, use of {@code groupId} is recommended.
+     * @param groupId              The ID of the group to remove from the project role. This parameter cannot be used with the {@code group} parameter.
+     */
+    @ApiStatus.Internal
+    public DeleteActorOperationSpec(String projectIdOrKey, Long id, String user, String group, String groupId) {
+        this.projectIdOrKey = projectIdOrKey;
+        this.id = id;
+        this.user = user;
+        this.group = group;
+        this.groupId = groupId;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -81,5 +112,4 @@ public class DeleteActorOperationSpec {
         Objects.requireNonNull(projectIdOrKey, "projectIdOrKey is a required parameter!");
         Objects.requireNonNull(id, "id is a required parameter!");
     }
-
 }

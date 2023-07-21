@@ -4,13 +4,15 @@ import java.util.List;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -21,10 +23,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * IssueTypeIssueCreateMetadata
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "avatarId",
     "description",
@@ -42,16 +47,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("IssueTypeIssueCreateMetadata")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class IssueTypeIssueCreateMetadata {
-
-    /**
-     * Constructs a validated implementation of {@link IssueTypeIssueCreateMetadata}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public IssueTypeIssueCreateMetadata(Consumer<IssueTypeIssueCreateMetadata> spec) {
-        spec.accept(this);
-    }
 
     /**
      * The ID of the issue type's avatar.
@@ -81,7 +76,7 @@ public class IssueTypeIssueCreateMetadata {
      * List of the fields available when creating an issue for the issue type.
      */
     @JsonProperty("fields")
-    protected Map<String, FieldMetadata> fields = new HashMap<>();
+    protected Map<String, FieldMetadata> fields;
 
     /**
      * Hierarchy level of the issue type.
@@ -122,5 +117,46 @@ public class IssueTypeIssueCreateMetadata {
     @JsonProperty("subtask")
     protected Boolean subtask;
 
+    /**
+     * Constructs a validated instance of {@link IssueTypeIssueCreateMetadata}.
+     *
+     * @param spec the specification to process
+     */
+    public IssueTypeIssueCreateMetadata(Consumer<IssueTypeIssueCreateMetadata> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link IssueTypeIssueCreateMetadata}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #IssueTypeIssueCreateMetadata(Consumer)} instead.
+     * @param avatarId The ID of the issue type's avatar.
+     * @param description The description of the issue type.
+     * @param entityId Unique ID for next-gen projects.
+     * @param expand Expand options that include additional issue type metadata details in the response.
+     * @param fields List of the fields available when creating an issue for the issue type.
+     * @param hierarchyLevel Hierarchy level of the issue type.
+     * @param iconUrl The URL of the issue type's avatar.
+     * @param id The ID of the issue type.
+     * @param name The name of the issue type.
+     * @param scope var.name
+     * @param self The URL of these issue type details.
+     * @param subtask Whether this issue type is used to create subtasks.
+     */
+    @ApiStatus.Internal
+    public IssueTypeIssueCreateMetadata(Long avatarId, String description, UUID entityId, String expand, Map<String, FieldMetadata> fields, Integer hierarchyLevel, String iconUrl, String id, String name, IssueTypeDetailsScope scope, String self, Boolean subtask) {
+        this.avatarId = avatarId;
+        this.description = description;
+        this.entityId = entityId;
+        this.expand = expand;
+        this.fields = fields;
+        this.hierarchyLevel = hierarchyLevel;
+        this.iconUrl = iconUrl;
+        this.id = id;
+        this.name = name;
+        this.scope = scope;
+        this.self = self;
+        this.subtask = subtask;
+    }
 
 }

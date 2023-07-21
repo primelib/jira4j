@@ -3,10 +3,14 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.net.URI;
@@ -18,10 +22,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * ComponentWithIssueCountAssignee
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "accountId",
     "accountType",
@@ -43,16 +50,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class ComponentWithIssueCountAssignee {
 
     /**
-     * Constructs a validated implementation of {@link ComponentWithIssueCountAssignee}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public ComponentWithIssueCountAssignee(Consumer<ComponentWithIssueCountAssignee> spec) {
-        spec.accept(this);
-    }
-
-    /**
      * The account ID of the user, which uniquely identifies the user across all Atlassian products. For example, *5b10ac8d82e05b22cc7d4ef5*. Required in requests.
      */
     @JsonProperty("accountId")
@@ -61,11 +58,11 @@ public class ComponentWithIssueCountAssignee {
     /**
      * The user account type. Can take the following values:
      *  *
-     * `atlassian` regular Atlassian user account
+     * {@code atlassian} regular Atlassian user account
      * *
-     * `app` system account used for Connect applications and OAuth to represent external systems
+     * {@code app} system account used for Connect applications and OAuth to represent external systems
      * *
-     * `customer` Jira Service Desk account representing an external service desk
+     * {@code customer} Jira Service Desk account representing an external service desk
      */
     @JsonProperty("accountType")
     protected AccountTypeEnum accountType;
@@ -133,15 +130,60 @@ public class ComponentWithIssueCountAssignee {
     @JsonProperty("timeZone")
     protected String timeZone;
 
+    /**
+     * Constructs a validated instance of {@link ComponentWithIssueCountAssignee}.
+     *
+     * @param spec the specification to process
+     */
+    public ComponentWithIssueCountAssignee(Consumer<ComponentWithIssueCountAssignee> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link ComponentWithIssueCountAssignee}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #ComponentWithIssueCountAssignee(Consumer)} instead.
+     * @param accountId The account ID of the user, which uniquely identifies the user across all Atlassian products. For example, *5b10ac8d82e05b22cc7d4ef5*. Required in requests.
+     * @param accountType The user account type. Can take the following values:   *  {@code atlassian} regular Atlassian user account  *  {@code app} system account used for Connect applications and OAuth to represent external systems  *  {@code customer} Jira Service Desk account representing an external service desk
+     * @param active Whether the user is active.
+     * @param applicationRoles var.name
+     * @param avatarUrls var.name
+     * @param displayName The display name of the user. Depending on the user’s privacy setting, this may return an alternative value.
+     * @param emailAddress The email address of the user. Depending on the user’s privacy setting, this may be returned as null.
+     * @param expand Expand options that include additional user details in the response.
+     * @param groups var.name
+     * @param key This property is no longer available and will be removed from the documentation soon. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.
+     * @param locale The locale of the user. Depending on the user’s privacy setting, this may be returned as null.
+     * @param name This property is no longer available and will be removed from the documentation soon. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.
+     * @param self The URL of the user.
+     * @param timeZone The time zone specified in the user's profile. Depending on the user’s privacy setting, this may be returned as null.
+     */
+    @ApiStatus.Internal
+    public ComponentWithIssueCountAssignee(String accountId, AccountTypeEnum accountType, Boolean active, UserApplicationRoles applicationRoles, UserAvatarUrls avatarUrls, String displayName, String emailAddress, String expand, UserGroups groups, String key, String locale, String name, URI self, String timeZone) {
+        this.accountId = accountId;
+        this.accountType = accountType;
+        this.active = active;
+        this.applicationRoles = applicationRoles;
+        this.avatarUrls = avatarUrls;
+        this.displayName = displayName;
+        this.emailAddress = emailAddress;
+        this.expand = expand;
+        this.groups = groups;
+        this.key = key;
+        this.locale = locale;
+        this.name = name;
+        this.self = self;
+        this.timeZone = timeZone;
+    }
 
     /**
      * The user account type. Can take the following values:
      *  *
-     * `atlassian` regular Atlassian user account
+     * {@code atlassian} regular Atlassian user account
      * *
-     * `app` system account used for Connect applications and OAuth to represent external systems
+     * {@code app} system account used for Connect applications and OAuth to represent external systems
      * *
-     * `customer` Jira Service Desk account representing an external service desk
+     * {@code customer} Jira Service Desk account representing an external service desk
      */
     @AllArgsConstructor
     public enum AccountTypeEnum {

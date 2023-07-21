@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.util.List;
@@ -18,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * NotificationSchemeEvent
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "event",
     "notifications"
@@ -30,21 +36,32 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class NotificationSchemeEvent {
 
-    /**
-     * Constructs a validated implementation of {@link NotificationSchemeEvent}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public NotificationSchemeEvent(Consumer<NotificationSchemeEvent> spec) {
-        spec.accept(this);
-    }
-
     @JsonProperty("event")
     protected NotificationEvent event;
 
     @JsonProperty("notifications")
     protected List<EventNotification> notifications;
 
+    /**
+     * Constructs a validated instance of {@link NotificationSchemeEvent}.
+     *
+     * @param spec the specification to process
+     */
+    public NotificationSchemeEvent(Consumer<NotificationSchemeEvent> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link NotificationSchemeEvent}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #NotificationSchemeEvent(Consumer)} instead.
+     * @param event var.name
+     * @param notifications var.name
+     */
+    @ApiStatus.Internal
+    public NotificationSchemeEvent(NotificationEvent event, List<EventNotification> notifications) {
+        this.event = event;
+        this.notifications = notifications;
+    }
 
 }

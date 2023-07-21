@@ -3,7 +3,6 @@ package io.github.primelib.jira4j.restv2.api;
 import java.util.List;
 import java.util.Map;
 import javax.annotation.processing.Generated;
-import lombok.Data;
 
 import io.github.primelib.jira4j.restv2.model.AnnouncementBannerConfiguration;
 import io.github.primelib.jira4j.restv2.model.ApplicationProperty;
@@ -25,6 +24,7 @@ import io.github.primelib.jira4j.restv2.model.ChangedWorklogs;
 import io.github.primelib.jira4j.restv2.model.ColumnItem;
 import io.github.primelib.jira4j.restv2.model.Comment;
 import io.github.primelib.jira4j.restv2.model.ComponentIssuesCount;
+import io.github.primelib.jira4j.restv2.model.Configuration;
 import io.github.primelib.jira4j.restv2.model.ConnectModules;
 import io.github.primelib.jira4j.restv2.model.ContainerForProjectFeatures;
 import io.github.primelib.jira4j.restv2.model.ContainerForRegisteredWebhooks;
@@ -80,7 +80,6 @@ import io.github.primelib.jira4j.restv2.model.JiraStatus;
 import io.github.primelib.jira4j.restv2.model.License;
 import io.github.primelib.jira4j.restv2.model.LicenseMetric;
 import io.github.primelib.jira4j.restv2.model.Locale;
-import io.github.primelib.jira4j.restv2.model.ModelConfiguration;
 import io.github.primelib.jira4j.restv2.model.Notification;
 import io.github.primelib.jira4j.restv2.model.NotificationScheme;
 import io.github.primelib.jira4j.restv2.model.NotificationSchemeId;
@@ -333,7 +332,6 @@ import io.github.primelib.jira4j.restv2.spec.DeleteIssueTypeOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.DeleteIssueTypePropertyOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.DeleteIssueTypeSchemeOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.DeleteIssueTypeScreenSchemeOperationSpec;
-import io.github.primelib.jira4j.restv2.spec.DeleteLocaleOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.DeleteNotificationSchemeOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.DeletePermissionSchemeOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.DeletePermissionSchemeEntityOperationSpec;
@@ -367,7 +365,6 @@ import io.github.primelib.jira4j.restv2.spec.DeleteWorkflowTransitionRuleConfigu
 import io.github.primelib.jira4j.restv2.spec.DeleteWorklogOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.DeleteWorklogPropertyOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.DoTransitionOperationSpec;
-import io.github.primelib.jira4j.restv2.spec.DynamicModulesResourceGetModulesGetOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.DynamicModulesResourceRegisterModulesPostOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.DynamicModulesResourceRemoveModulesDeleteOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.EditIssueOperationSpec;
@@ -386,10 +383,6 @@ import io.github.primelib.jira4j.restv2.spec.FindUsersWithAllPermissionsOperatio
 import io.github.primelib.jira4j.restv2.spec.FindUsersWithBrowsePermissionOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.FullyUpdateProjectRoleOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetAccessibleProjectTypeByKeyOperationSpec;
-import io.github.primelib.jira4j.restv2.spec.GetAdvancedSettingsOperationSpec;
-import io.github.primelib.jira4j.restv2.spec.GetAllAccessibleProjectTypesOperationSpec;
-import io.github.primelib.jira4j.restv2.spec.GetAllApplicationRolesOperationSpec;
-import io.github.primelib.jira4j.restv2.spec.GetAllAvailableDashboardGadgetsOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetAllDashboardsOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetAllFieldConfigurationSchemesOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetAllFieldConfigurationsOperationSpec;
@@ -398,11 +391,7 @@ import io.github.primelib.jira4j.restv2.spec.GetAllIssueFieldOptionsOperationSpe
 import io.github.primelib.jira4j.restv2.spec.GetAllIssueTypeSchemesOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetAllLabelsOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetAllPermissionSchemesOperationSpec;
-import io.github.primelib.jira4j.restv2.spec.GetAllPermissionsOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetAllProjectAvatarsOperationSpec;
-import io.github.primelib.jira4j.restv2.spec.GetAllProjectCategoriesOperationSpec;
-import io.github.primelib.jira4j.restv2.spec.GetAllProjectRolesOperationSpec;
-import io.github.primelib.jira4j.restv2.spec.GetAllProjectTypesOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetAllProjectsOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetAllScreenTabFieldsOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetAllScreenTabsOperationSpec;
@@ -416,22 +405,17 @@ import io.github.primelib.jira4j.restv2.spec.GetAlternativeIssueTypesOperationSp
 import io.github.primelib.jira4j.restv2.spec.GetApplicationPropertyOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetApplicationRoleOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetApproximateApplicationLicenseCountOperationSpec;
-import io.github.primelib.jira4j.restv2.spec.GetApproximateLicenseCountOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetAssignedPermissionSchemeOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetAttachmentOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetAttachmentContentOperationSpec;
-import io.github.primelib.jira4j.restv2.spec.GetAttachmentMetaOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetAttachmentThumbnailOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetAuditRecordsOperationSpec;
-import io.github.primelib.jira4j.restv2.spec.GetAutoCompleteOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetAutoCompletePostOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetAvailableScreenFieldsOperationSpec;
-import io.github.primelib.jira4j.restv2.spec.GetAvailableTimeTrackingImplementationsOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetAvatarImageByIDOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetAvatarImageByOwnerOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetAvatarImageByTypeOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetAvatarsOperationSpec;
-import io.github.primelib.jira4j.restv2.spec.GetBannerOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetBulkPermissionsOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetChangeLogsOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetChangeLogsByIdsOperationSpec;
@@ -443,7 +427,6 @@ import io.github.primelib.jira4j.restv2.spec.GetCommentsOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetCommentsByIdsOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetComponentOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetComponentRelatedIssuesOperationSpec;
-import io.github.primelib.jira4j.restv2.spec.GetConfigurationOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetContextsForFieldOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetContextsForFieldDeprecatedOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetCreateIssueMetaOperationSpec;
@@ -455,14 +438,12 @@ import io.github.primelib.jira4j.restv2.spec.GetDashboardOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetDashboardItemPropertyOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetDashboardItemPropertyKeysOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetDashboardsPaginatedOperationSpec;
-import io.github.primelib.jira4j.restv2.spec.GetDefaultShareScopeOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetDefaultValuesOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetDefaultWorkflowOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetDraftDefaultWorkflowOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetDraftWorkflowOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetDynamicWebhooksForAppOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetEditIssueMetaOperationSpec;
-import io.github.primelib.jira4j.restv2.spec.GetEventsOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetFailedWebhooksOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetFavouriteFiltersOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetFeaturesForProjectOperationSpec;
@@ -470,7 +451,6 @@ import io.github.primelib.jira4j.restv2.spec.GetFieldAutoCompleteForQueryStringO
 import io.github.primelib.jira4j.restv2.spec.GetFieldConfigurationItemsOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetFieldConfigurationSchemeMappingsOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetFieldConfigurationSchemeProjectMappingOperationSpec;
-import io.github.primelib.jira4j.restv2.spec.GetFieldsOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetFieldsPaginatedOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetFilterOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetFiltersPaginatedOperationSpec;
@@ -480,19 +460,15 @@ import io.github.primelib.jira4j.restv2.spec.GetIdsOfWorklogsDeletedSinceOperati
 import io.github.primelib.jira4j.restv2.spec.GetIdsOfWorklogsModifiedSinceOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetIsWatchingIssueBulkOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetIssueOperationSpec;
-import io.github.primelib.jira4j.restv2.spec.GetIssueAllTypesOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetIssueFieldOptionOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetIssueLinkOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetIssueLinkTypeOperationSpec;
-import io.github.primelib.jira4j.restv2.spec.GetIssueLinkTypesOperationSpec;
-import io.github.primelib.jira4j.restv2.spec.GetIssueNavigatorDefaultColumnsOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetIssuePickerResourceOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetIssuePropertyOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetIssuePropertyKeysOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetIssueSecurityLevelOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetIssueSecurityLevelMembersOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetIssueSecuritySchemeOperationSpec;
-import io.github.primelib.jira4j.restv2.spec.GetIssueSecuritySchemesOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetIssueTypeOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetIssueTypeMappingsForContextsOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetIssueTypePropertyOperationSpec;
@@ -505,8 +481,6 @@ import io.github.primelib.jira4j.restv2.spec.GetIssueTypeScreenSchemesOperationS
 import io.github.primelib.jira4j.restv2.spec.GetIssueTypesForProjectOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetIssueWatchersOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetIssueWorklogOperationSpec;
-import io.github.primelib.jira4j.restv2.spec.GetLicenseOperationSpec;
-import io.github.primelib.jira4j.restv2.spec.GetLocaleOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetMyFiltersOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetMyPermissionsOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetNotificationSchemeOperationSpec;
@@ -520,7 +494,6 @@ import io.github.primelib.jira4j.restv2.spec.GetPermissionSchemeGrantsOperationS
 import io.github.primelib.jira4j.restv2.spec.GetPermittedProjectsOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetPrecomputationsOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetPreferenceOperationSpec;
-import io.github.primelib.jira4j.restv2.spec.GetPrioritiesOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetPriorityOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetProjectOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetProjectCategoryByIdOperationSpec;
@@ -544,7 +517,6 @@ import io.github.primelib.jira4j.restv2.spec.GetRecentOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetRemoteIssueLinkByIdOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetRemoteIssueLinksOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetResolutionOperationSpec;
-import io.github.primelib.jira4j.restv2.spec.GetResolutionsOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetScreenSchemesOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetScreensOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetScreensForFieldOperationSpec;
@@ -552,15 +524,10 @@ import io.github.primelib.jira4j.restv2.spec.GetSecurityLevelMembersOperationSpe
 import io.github.primelib.jira4j.restv2.spec.GetSecurityLevelsOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetSecurityLevelsForProjectOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetSelectableIssueFieldOptionsOperationSpec;
-import io.github.primelib.jira4j.restv2.spec.GetSelectedTimeTrackingImplementationOperationSpec;
-import io.github.primelib.jira4j.restv2.spec.GetServerInfoOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetSharePermissionOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetSharePermissionsOperationSpec;
-import io.github.primelib.jira4j.restv2.spec.GetSharedTimeTrackingConfigurationOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetStatusOperationSpec;
-import io.github.primelib.jira4j.restv2.spec.GetStatusCategoriesOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetStatusCategoryOperationSpec;
-import io.github.primelib.jira4j.restv2.spec.GetStatusesOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetStatusesByIdOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetTaskOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.GetTransitionsOperationSpec;
@@ -744,7 +711,12 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Administer Projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project or *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectIdOrKey: The project ID or project key (case sensitive).</li>
+     *   <li>id: The ID of the project role. Use [Get all project roles](#api-rest-api-2-role-get) to get a list of project role IDs.</li>
+     *   <li>actorsMap: The groups or users to associate with the project role for this project. Provide the user account ID, group name, or group ID. As a group's name can change, use of group ID is recommended.</li>
+     * </ul>
      */
     public ProjectRole addActorUsers(Consumer<AddActorUsersOperationSpec> spec) {
         AddActorUsersOperationSpec r = new AddActorUsersOperationSpec(spec);
@@ -757,9 +729,9 @@ public class JiraRESTV2ConsumerApi {
      * Adds one or more attachments to an issue. Attachments are posted as multipart/form-data ([RFC 1867](https://www.ietf.org/rfc/rfc1867.txt)).
      * Note that:
      *  *
-     * The request must have a `X-Atlassian-Token: no-check` header, if not it is blocked. See [Special headers](#special-request-headers) for more information.
+     * The request must have a {@code X-Atlassian-Token: no-check} header, if not it is blocked. See [Special headers](#special-request-headers) for more information.
      * *
-     * The name of the multipart/form-data parameter that contains the attachments must be `file`.
+     * The name of the multipart/form-data parameter that contains the attachments must be {@code file}.
      * The following examples upload a file called *myfile.txt* to the issue *TEST-123*:
      * #### curl ####
      * 
@@ -900,7 +872,7 @@ public class JiraRESTV2ConsumerApi {
      * 
      * 
      * 
-     * `Response: ${response.status} ${response.statusText}`
+     * {@code Response: ${response.status} ${response.statusText}}
      * 
      * 
      * 
@@ -1137,7 +1109,7 @@ public class JiraRESTV2ConsumerApi {
      * #### Forge ####
      * 
      * 
-     * // This sample uses Atlassian Forge and the `form-data` library.
+     * // This sample uses Atlassian Forge and the {@code form-data} library.
      * 
      * 
      * // https://developer.atlassian.com/platform/forge/
@@ -1204,7 +1176,7 @@ public class JiraRESTV2ConsumerApi {
      * 
      * 
      * 
-     *  console.log(`Response: ${response.status} ${response.statusText}`);
+     *  console.log({@code Response: ${response.status} ${response.statusText}});
      * 
      * 
      * console.log(await response.json());
@@ -1217,7 +1189,10 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue that attachments are added to.</li>
+     * </ul>
      */
     public List<Attachment> addAttachment(Consumer<AddAttachmentOperationSpec> spec) {
         AddAttachmentOperationSpec r = new AddAttachmentOperationSpec(spec);
@@ -1235,11 +1210,16 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue.</li>
+     *   <li>comment: </li>
+     *   <li>expand: Use [expand](#expansion) to include additional information about comments in the response. This parameter accepts {@code renderedBody}, which returns the comment body rendered in HTML.</li>
+     * </ul>
      */
     public Comment addComment(Consumer<AddCommentOperationSpec> spec) {
         AddCommentOperationSpec r = new AddCommentOperationSpec(spec);
-        return api.addComment(r.issueIdOrKey(), r.requestBody(), r.expand());
+        return api.addComment(r.issueIdOrKey(), r.comment(), r.expand());
     }
 
     /**
@@ -1248,7 +1228,10 @@ public class JiraRESTV2ConsumerApi {
      * Adds a field to the default tab of the default screen.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldId: The ID of the field.</li>
+     * </ul>
      */
     public Object addFieldToDefaultScreen(Consumer<AddFieldToDefaultScreenOperationSpec> spec) {
         AddFieldToDefaultScreenOperationSpec r = new AddFieldToDefaultScreenOperationSpec(spec);
@@ -1261,7 +1244,11 @@ public class JiraRESTV2ConsumerApi {
      * Adds a gadget to a dashboard.
      * **[Permissions](#permissions) required:** None.
      * Authentication - Required Scopes: [write:jira-work, read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>dashboardId: The ID of the dashboard.</li>
+     *   <li>dashboardGadgetSettings: </li>
+     * </ul>
      */
     public DashboardGadget addGadget(Consumer<AddGadgetOperationSpec> spec) {
         AddGadgetOperationSpec r = new AddGadgetOperationSpec(spec);
@@ -1276,7 +1263,12 @@ public class JiraRESTV2ConsumerApi {
      * If any of the issue types exists in the custom field context, the operation fails and no issue types are added.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldId: The ID of the custom field.</li>
+     *   <li>contextId: The ID of the context.</li>
+     *   <li>issueTypeIds: </li>
+     * </ul>
      */
     public Object addIssueTypesToContext(Consumer<AddIssueTypesToContextOperationSpec> spec) {
         AddIssueTypesToContextOperationSpec r = new AddIssueTypesToContextOperationSpec(spec);
@@ -1291,7 +1283,11 @@ public class JiraRESTV2ConsumerApi {
      * If any of the issue types exist in the issue type scheme, the operation fails and no issue types are added.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueTypeSchemeId: The ID of the issue type scheme.</li>
+     *   <li>issueTypeIds: </li>
+     * </ul>
      */
     public Object addIssueTypesToIssueTypeScheme(Consumer<AddIssueTypesToIssueTypeSchemeOperationSpec> spec) {
         AddIssueTypesToIssueTypeSchemeOperationSpec r = new AddIssueTypesToIssueTypeSchemeOperationSpec(spec);
@@ -1302,14 +1298,18 @@ public class JiraRESTV2ConsumerApi {
      * Add notifications to notification scheme
      * <p>
      * Adds notifications to a notification scheme. You can add up to 1000 notifications per request.
-     * *Deprecated: The notification type `EmailAddress` is no longer supported in Cloud. Refer to the [changelog](https://developer.atlassian.com/cloud/jira/platform/changelog/#CHANGE-1031) for more details.*
+     * *Deprecated: The notification type {@code EmailAddress} is no longer supported in Cloud. Refer to the [changelog](https://developer.atlassian.com/cloud/jira/platform/changelog/#CHANGE-1031) for more details.*
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the notification scheme.</li>
+     *   <li>addNotificationsDetails: </li>
+     * </ul>
      */
     public Object addNotifications(Consumer<AddNotificationsOperationSpec> spec) {
         AddNotificationsOperationSpec r = new AddNotificationsOperationSpec(spec);
-        return api.addNotifications(r.id(), r.requestBody());
+        return api.addNotifications(r.id(), r.addNotificationsDetails());
     }
 
     /**
@@ -1319,7 +1319,11 @@ public class JiraRESTV2ConsumerApi {
      * Changing a project role's default actors does not affect project role members for projects already created.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the project role. Use [Get all project roles](#api-rest-api-2-role-get) to get a list of project role IDs.</li>
+     *   <li>actorInputBean: </li>
+     * </ul>
      */
     public ProjectRole addProjectRoleActorsToRole(Consumer<AddProjectRoleActorsToRoleOperationSpec> spec) {
         AddProjectRoleActorsToRoleOperationSpec r = new AddProjectRoleActorsToRoleOperationSpec(spec);
@@ -1332,7 +1336,11 @@ public class JiraRESTV2ConsumerApi {
      * Creates a tab for a screen.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>screenId: The ID of the screen.</li>
+     *   <li>screenableTab: </li>
+     * </ul>
      */
     public ScreenableTab addScreenTab(Consumer<AddScreenTabOperationSpec> spec) {
         AddScreenTabOperationSpec r = new AddScreenTabOperationSpec(spec);
@@ -1345,7 +1353,12 @@ public class JiraRESTV2ConsumerApi {
      * Adds a field to a screen tab.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>screenId: The ID of the screen.</li>
+     *   <li>tabId: The ID of the screen tab.</li>
+     *   <li>addFieldBean: </li>
+     * </ul>
      */
     public ScreenableField addScreenTabField(Consumer<AddScreenTabFieldOperationSpec> spec) {
         AddScreenTabFieldOperationSpec r = new AddScreenTabFieldOperationSpec(spec);
@@ -1358,7 +1371,11 @@ public class JiraRESTV2ConsumerApi {
      * Adds levels and levels' members to the issue security scheme. You can add up to 100 levels per request.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>schemeId: The ID of the issue security scheme.</li>
+     *   <li>addSecuritySchemeLevelsRequestBean: </li>
+     * </ul>
      */
     public Object addSecurityLevel(Consumer<AddSecurityLevelOperationSpec> spec) {
         AddSecurityLevelOperationSpec r = new AddSecurityLevelOperationSpec(spec);
@@ -1371,7 +1388,12 @@ public class JiraRESTV2ConsumerApi {
      * Adds members to the issue security level. You can add up to 100 members per request.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>schemeId: The ID of the issue security scheme.</li>
+     *   <li>levelId: The ID of the issue security level.</li>
+     *   <li>securitySchemeMembersRequest: </li>
+     * </ul>
      */
     public Object addSecurityLevelMembers(Consumer<AddSecurityLevelMembersOperationSpec> spec) {
         AddSecurityLevelMembersOperationSpec r = new AddSecurityLevelMembersOperationSpec(spec);
@@ -1385,7 +1407,11 @@ public class JiraRESTV2ConsumerApi {
      * Be aware that this operation uses different objects for updating share permissions compared to [Update filter](#api-rest-api-2-filter-id-put).
      * **[Permissions](#permissions) required:** *Share dashboards and filters* [global permission](https://confluence.atlassian.com/x/x4dKLg) and the user must own the filter.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the filter.</li>
+     *   <li>sharePermissionInputBean: </li>
+     * </ul>
      */
     public List<SharePermission> addSharePermission(Consumer<AddSharePermissionOperationSpec> spec) {
         AddSharePermissionOperationSpec r = new AddSharePermissionOperationSpec(spec);
@@ -1398,11 +1424,16 @@ public class JiraRESTV2ConsumerApi {
      * Adds a user to a group.
      * **[Permissions](#permissions) required:** Site administration (that is, member of the *site-admin* [group](https://confluence.atlassian.com/x/24xjL)).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>updateUserToGroupBean: The user to add to the group.</li>
+     *   <li>groupname: As a group's name can change, use of {@code groupId} is recommended to identify a group.   The name of the group. This parameter cannot be used with the {@code groupId} parameter.</li>
+     *   <li>groupId: The ID of the group. This parameter cannot be used with the {@code groupName} parameter.</li>
+     * </ul>
      */
     public Group addUserToGroup(Consumer<AddUserToGroupOperationSpec> spec) {
         AddUserToGroupOperationSpec r = new AddUserToGroupOperationSpec(spec);
-        return api.addUserToGroup(r.requestBody(), r.groupname(), r.groupId());
+        return api.addUserToGroup(r.updateUserToGroupBean(), r.groupname(), r.groupId());
     }
 
     /**
@@ -1416,7 +1447,10 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue.</li>
+     * </ul>
      */
     public Object addVote(Consumer<AddVoteOperationSpec> spec) {
         AddVoteOperationSpec r = new AddVoteOperationSpec(spec);
@@ -1426,7 +1460,7 @@ public class JiraRESTV2ConsumerApi {
     /**
      * Add watcher
      * <p>
-     * Adds a user as a watcher of an issue by passing the account ID of the user. For example, `"5b10ac8d82e05b22cc7d4ef5"`. If no user is specified the calling user is added.
+     * Adds a user as a watcher of an issue by passing the account ID of the user. For example, {@code "5b10ac8d82e05b22cc7d4ef5"}. If no user is specified the calling user is added.
      * This operation requires the **Allow users to watch issues** option to be *ON*. This option is set in General configuration for Jira. See [Configuring Jira application options](https://confluence.atlassian.com/x/uYXKM) for details.
      * **[Permissions](#permissions) required:**
      *  *
@@ -1436,7 +1470,11 @@ public class JiraRESTV2ConsumerApi {
      * *
      * To add users other than themselves to the watchlist, *Manage watcher list* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project that the issue is in.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue.</li>
+     *   <li>body: The account ID of the user. Note that username cannot be used due to privacy changes.</li>
+     * </ul>
      */
     public Object addWatcher(Consumer<AddWatcherOperationSpec> spec) {
         AddWatcherOperationSpec r = new AddWatcherOperationSpec(spec);
@@ -1455,19 +1493,33 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key the issue.</li>
+     *   <li>worklog: </li>
+     *   <li>notifyUsers: Whether users watching the issue are notified by email.</li>
+     *   <li>adjustEstimate: Defines how to update the issue's time estimate, the options are:   *  {@code new} Sets the estimate to a specific value, defined in {@code newEstimate}.  *  {@code leave} Leaves the estimate unchanged.  *  {@code manual} Reduces the estimate by amount specified in {@code reduceBy}.  *  {@code auto} Reduces the estimate by the value of {@code timeSpent} in the worklog.</li>
+     *   <li>newEstimate: The value to set as the issue's remaining time estimate, as days (\\#d), hours (\\#h), or minutes (\\#m or \\#). For example, *2d*. Required when {@code adjustEstimate} is {@code new}.</li>
+     *   <li>reduceBy: The amount to reduce the issue's remaining estimate by, as days (\\#d), hours (\\#h), or minutes (\\#m). For example, *2d*. Required when {@code adjustEstimate} is {@code manual}.</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information about work logs in the response. This parameter accepts {@code properties}, which returns worklog properties.</li>
+     *   <li>overrideEditableFlag: Whether the worklog entry should be added to the issue even if the issue is not editable, because jira.issue.editable set to false or missing. For example, the issue is closed. Connect and Forge app users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) can use this flag.</li>
+     * </ul>
      */
     public Worklog addWorklog(Consumer<AddWorklogOperationSpec> spec) {
         AddWorklogOperationSpec r = new AddWorklogOperationSpec(spec);
-        return api.addWorklog(r.issueIdOrKey(), r.requestBody(), r.notifyUsers(), r.adjustEstimate(), r.newEstimate(), r.reduceBy(), r.expand(), r.overrideEditableFlag());
+        return api.addWorklog(r.issueIdOrKey(), r.worklog(), r.notifyUsers(), r.adjustEstimate(), r.newEstimate(), r.reduceBy(), r.expand(), r.overrideEditableFlag());
     }
 
     /**
      * Delete app property
      * <p>
      * Deletes an app's property.
-     * **[Permissions](#permissions) required:** Only a Connect app whose key matches `addonKey` can make this request.
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * **[Permissions](#permissions) required:** Only a Connect app whose key matches {@code addonKey} can make this request.
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>addonKey: The key of the app, as defined in its descriptor.</li>
+     *   <li>propertyKey: The key of the property.</li>
+     * </ul>
      */
     public void addonPropertiesResourceDeleteAddonPropertyDelete(Consumer<AddonPropertiesResourceDeleteAddonPropertyDeleteOperationSpec> spec) {
         AddonPropertiesResourceDeleteAddonPropertyDeleteOperationSpec r = new AddonPropertiesResourceDeleteAddonPropertyDeleteOperationSpec(spec);
@@ -1479,7 +1531,10 @@ public class JiraRESTV2ConsumerApi {
      * <p>
      * Deletes a Forge app's property.
      * **[Permissions](#permissions) required:** Only Forge apps can make this request.
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>propertyKey: The key of the property.</li>
+     * </ul>
      */
     public void addonPropertiesResourceDeleteAppPropertyDelete(Consumer<AddonPropertiesResourceDeleteAppPropertyDeleteOperationSpec> spec) {
         AddonPropertiesResourceDeleteAppPropertyDeleteOperationSpec r = new AddonPropertiesResourceDeleteAppPropertyDeleteOperationSpec(spec);
@@ -1490,8 +1545,11 @@ public class JiraRESTV2ConsumerApi {
      * Get app properties
      * <p>
      * Gets all the properties of an app.
-     * **[Permissions](#permissions) required:** Only a Connect app whose key matches `addonKey` can make this request. Additionally, Forge apps published on the Marketplace can access properties of Connect apps they were [migrated from](https://developer.atlassian.com/platform/forge/build-a-connect-on-forge-app/).
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * **[Permissions](#permissions) required:** Only a Connect app whose key matches {@code addonKey} can make this request. Additionally, Forge apps published on the Marketplace can access properties of Connect apps they were [migrated from](https://developer.atlassian.com/platform/forge/build-a-connect-on-forge-app/).
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>addonKey: The key of the app, as defined in its descriptor.</li>
+     * </ul>
      */
     public PropertyKeys addonPropertiesResourceGetAddonPropertiesGet(Consumer<AddonPropertiesResourceGetAddonPropertiesGetOperationSpec> spec) {
         AddonPropertiesResourceGetAddonPropertiesGetOperationSpec r = new AddonPropertiesResourceGetAddonPropertiesGetOperationSpec(spec);
@@ -1502,8 +1560,12 @@ public class JiraRESTV2ConsumerApi {
      * Get app property
      * <p>
      * Returns the key and value of an app's property.
-     * **[Permissions](#permissions) required:** Only a Connect app whose key matches `addonKey` can make this request. Additionally, Forge apps published on the Marketplace can access properties of Connect apps they were [migrated from](https://developer.atlassian.com/platform/forge/build-a-connect-on-forge-app/).
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * **[Permissions](#permissions) required:** Only a Connect app whose key matches {@code addonKey} can make this request. Additionally, Forge apps published on the Marketplace can access properties of Connect apps they were [migrated from](https://developer.atlassian.com/platform/forge/build-a-connect-on-forge-app/).
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>addonKey: The key of the app, as defined in its descriptor.</li>
+     *   <li>propertyKey: The key of the property.</li>
+     * </ul>
      */
     public EntityProperty addonPropertiesResourceGetAddonPropertyGet(Consumer<AddonPropertiesResourceGetAddonPropertyGetOperationSpec> spec) {
         AddonPropertiesResourceGetAddonPropertyGetOperationSpec r = new AddonPropertiesResourceGetAddonPropertyGetOperationSpec(spec);
@@ -1515,8 +1577,13 @@ public class JiraRESTV2ConsumerApi {
      * <p>
      * Sets the value of an app's property. Use this resource to store custom data for your app.
      * The value of the request body must be a [valid](http://tools.ietf.org/html/rfc4627), non-empty JSON blob. The maximum length is 32768 characters.
-     * **[Permissions](#permissions) required:** Only a Connect app whose key matches `addonKey` can make this request.
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * **[Permissions](#permissions) required:** Only a Connect app whose key matches {@code addonKey} can make this request.
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>addonKey: The key of the app, as defined in its descriptor.</li>
+     *   <li>propertyKey: The key of the property.</li>
+     *   <li>body: </li>
+     * </ul>
      */
     public OperationMessage addonPropertiesResourcePutAddonPropertyPut(Consumer<AddonPropertiesResourcePutAddonPropertyPutOperationSpec> spec) {
         AddonPropertiesResourcePutAddonPropertyPutOperationSpec r = new AddonPropertiesResourcePutAddonPropertyPutOperationSpec(spec);
@@ -1526,11 +1593,15 @@ public class JiraRESTV2ConsumerApi {
     /**
      * Set app property (Forge)
      * <p>
-     * Sets the value of a Forge app's property. These values can be retrieved in [Jira expressions](https://developer.atlassian.com/cloud/jira/platform/jira-expressions/) through the `app` [context variable](https://developer.atlassian.com/cloud/jira/platform/jira-expressions/#context-variables).
+     * Sets the value of a Forge app's property. These values can be retrieved in [Jira expressions](https://developer.atlassian.com/cloud/jira/platform/jira-expressions/) through the {@code app} [context variable](https://developer.atlassian.com/cloud/jira/platform/jira-expressions/#context-variables).
      * For other use cases, use the [Storage API](https://developer.atlassian.com/platform/forge/runtime-reference/storage-api/).
      * The value of the request body must be a [valid](http://tools.ietf.org/html/rfc4627), non-empty JSON blob. The maximum length is 32768 characters.
      * **[Permissions](#permissions) required:** Only Forge apps can make this request.
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>propertyKey: The key of the property.</li>
+     *   <li>body: </li>
+     * </ul>
      */
     public OperationMessage addonPropertiesResourcePutAppPropertyPut(Consumer<AddonPropertiesResourcePutAppPropertyPutOperationSpec> spec) {
         AddonPropertiesResourcePutAppPropertyPutOperationSpec r = new AddonPropertiesResourcePutAppPropertyPutOperationSpec(spec);
@@ -1545,7 +1616,11 @@ public class JiraRESTV2ConsumerApi {
      * Learn more about Jira expressions in the [documentation](https://developer.atlassian.com/cloud/jira/platform/jira-expressions/).
      * **[Permissions](#permissions) required**: None.
      * Authentication - Required Scopes: [read:jira-work, read:jira-user]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>jiraExpressionForAnalysis: The Jira expressions to analyse.</li>
+     *   <li>check: The check to perform:   *  {@code syntax} Each expression's syntax is checked to ensure the expression can be parsed. Also, syntactic limits are validated. For example, the expression's length.  *  {@code type} EXPERIMENTAL. Each expression is type checked and the final type of the expression inferred. Any type errors that would result in the expression failure at runtime are reported. For example, accessing properties that don't exist or passing the wrong number of arguments to functions. Also performs the syntax check.  *  {@code complexity} EXPERIMENTAL. Determines the formulae for how many [expensive operations](https://developer.atlassian.com/cloud/jira/platform/jira-expressions/#expensive-operations) each expression may execute.</li>
+     * </ul>
      */
     public JiraExpressionsAnalysis analyseExpression(Consumer<AnalyseExpressionOperationSpec> spec) {
         AnalyseExpressionOperationSpec r = new AnalyseExpressionOperationSpec(spec);
@@ -1557,7 +1632,11 @@ public class JiraRESTV2ConsumerApi {
      * <p>
      * Updates the value of a custom field added by Connect apps on one or more issues. The values of up to 200 custom fields can be updated.
      * **[Permissions](#permissions) required:** Only Connect apps can make this request.
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>atlassianTransferId: The ID of the transfer.</li>
+     *   <li>connectCustomFieldValues: </li>
+     * </ul>
      */
     public Object appIssueFieldValueUpdateResourceUpdateIssueFieldsPut(Consumer<AppIssueFieldValueUpdateResourceUpdateIssueFieldsPutOperationSpec> spec) {
         AppIssueFieldValueUpdateResourceUpdateIssueFieldsPutOperationSpec r = new AppIssueFieldValueUpdateResourceUpdateIssueFieldsPutOperationSpec(spec);
@@ -1570,7 +1649,11 @@ public class JiraRESTV2ConsumerApi {
      * Appends issue type to screen scheme mappings to an issue type screen scheme.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueTypeScreenSchemeId: The ID of the issue type screen scheme.</li>
+     *   <li>issueTypeScreenSchemeMappingDetails: </li>
+     * </ul>
      */
     public Object appendMappingsForIssueTypeScreenScheme(Consumer<AppendMappingsForIssueTypeScreenSchemeOperationSpec> spec) {
         AppendMappingsForIssueTypeScreenSchemeOperationSpec r = new AppendMappingsForIssueTypeScreenSchemeOperationSpec(spec);
@@ -1583,7 +1666,10 @@ public class JiraRESTV2ConsumerApi {
      * Archives a project. You can't delete a project if it's archived. To delete an archived project, restore the project and then delete it. To restore a project, use the Jira UI.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectIdOrKey: The project ID or project key (case sensitive).</li>
+     * </ul>
      */
     public Object archiveProject(Consumer<ArchiveProjectOperationSpec> spec) {
         ArchiveProjectOperationSpec r = new ArchiveProjectOperationSpec(spec);
@@ -1593,11 +1679,14 @@ public class JiraRESTV2ConsumerApi {
     /**
      * Assign field configuration scheme to project
      * <p>
-     * Assigns a field configuration scheme to a project. If the field configuration scheme ID is `null`, the operation assigns the default field configuration scheme.
+     * Assigns a field configuration scheme to a project. If the field configuration scheme ID is {@code null}, the operation assigns the default field configuration scheme.
      * Field configuration schemes can only be assigned to classic projects.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldConfigurationSchemeProjectAssociation: </li>
+     * </ul>
      */
     public Object assignFieldConfigurationSchemeToProject(Consumer<AssignFieldConfigurationSchemeToProjectOperationSpec> spec) {
         AssignFieldConfigurationSchemeToProjectOperationSpec r = new AssignFieldConfigurationSchemeToProjectOperationSpec(spec);
@@ -1608,11 +1697,11 @@ public class JiraRESTV2ConsumerApi {
      * Assign issue
      * <p>
      * Assigns an issue to a user. Use this operation when the calling user does not have the *Edit Issues* permission but has the *Assign issue* permission for the project that the issue is in.
-     * If `name` or `accountId` is set to:
+     * If {@code name} or {@code accountId} is set to:
      *  *
-     * `"-1"`, the issue is assigned to the default assignee for the project.
+     * {@code "-1"}, the issue is assigned to the default assignee for the project.
      * *
-     * `null`, the issue is set to unassigned.
+     * {@code null}, the issue is set to unassigned.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:**
      *  *
@@ -1620,7 +1709,11 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue to be assigned.</li>
+     *   <li>user: The request object with the user that the issue is assigned to.</li>
+     * </ul>
      */
     public Object assignIssue(Consumer<AssignIssueOperationSpec> spec) {
         AssignIssueOperationSpec r = new AssignIssueOperationSpec(spec);
@@ -1635,7 +1728,10 @@ public class JiraRESTV2ConsumerApi {
      * Issue type schemes can only be assigned to classic projects.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueTypeSchemeProjectAssociation: </li>
+     * </ul>
      */
     public Object assignIssueTypeSchemeToProject(Consumer<AssignIssueTypeSchemeToProjectOperationSpec> spec) {
         AssignIssueTypeSchemeToProjectOperationSpec r = new AssignIssueTypeSchemeToProjectOperationSpec(spec);
@@ -1649,7 +1745,10 @@ public class JiraRESTV2ConsumerApi {
      * Issue type screen schemes can only be assigned to classic projects.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueTypeScreenSchemeProjectAssociation: </li>
+     * </ul>
      */
     public Object assignIssueTypeScreenSchemeToProject(Consumer<AssignIssueTypeScreenSchemeToProjectOperationSpec> spec) {
         AssignIssueTypeScreenSchemeToProjectOperationSpec r = new AssignIssueTypeScreenSchemeToProjectOperationSpec(spec);
@@ -1662,7 +1761,12 @@ public class JiraRESTV2ConsumerApi {
      * Assigns a permission scheme with a project. See [Managing project permissions](https://confluence.atlassian.com/x/yodKLg) for more information about permission schemes.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg)
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectKeyOrId: The project ID or project key (case sensitive).</li>
+     *   <li>idBean: </li>
+     *   <li>expand: Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Note that permissions are included when you specify any value. Expand options include:   *  {@code all} Returns all expandable information.  *  {@code field} Returns information about the custom field granted the permission.  *  {@code group} Returns information about the group that is granted the permission.  *  {@code permissions} Returns all permission grants for each permission scheme.  *  {@code projectRole} Returns information about the project role granted the permission.  *  {@code user} Returns information about the user who is granted the permission.</li>
+     * </ul>
      */
     public PermissionScheme assignPermissionScheme(Consumer<AssignPermissionSchemeOperationSpec> spec) {
         AssignPermissionSchemeOperationSpec r = new AssignPermissionSchemeOperationSpec(spec);
@@ -1676,7 +1780,12 @@ public class JiraRESTV2ConsumerApi {
      * If any project in the request is assigned to any context of the custom field, the operation fails.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldId: The ID of the custom field.</li>
+     *   <li>contextId: The ID of the context.</li>
+     *   <li>projectIds: </li>
+     * </ul>
      */
     public Object assignProjectsToCustomFieldContext(Consumer<AssignProjectsToCustomFieldContextOperationSpec> spec) {
         AssignProjectsToCustomFieldContextOperationSpec r = new AssignProjectsToCustomFieldContextOperationSpec(spec);
@@ -1690,7 +1799,10 @@ public class JiraRESTV2ConsumerApi {
      * Workflow schemes can only be assigned to classic projects.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>workflowSchemeProjectAssociation: </li>
+     * </ul>
      */
     public Object assignSchemeToProject(Consumer<AssignSchemeToProjectOperationSpec> spec) {
         AssignSchemeToProjectOperationSpec r = new AssignSchemeToProjectOperationSpec(spec);
@@ -1701,10 +1813,13 @@ public class JiraRESTV2ConsumerApi {
      * Associate security scheme to project
      * <p>
      * Associates an issue security scheme with a project and remaps security levels of issues to the new levels, if provided.
-     * This operation is [asynchronous](#async). Follow the `location` link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
+     * This operation is [asynchronous](#async). Follow the {@code location} link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>associateSecuritySchemeWithProjectDetails: </li>
+     * </ul>
      */
     public void associateSchemesToProjects(Consumer<AssociateSchemesToProjectsOperationSpec> spec) {
         AssociateSchemesToProjectsOperationSpec r = new AssociateSchemesToProjectsOperationSpec(spec);
@@ -1717,16 +1832,16 @@ public class JiraRESTV2ConsumerApi {
      * Deletes a property value from multiple issues. The issues to be updated can be specified by filter criteria.
      * The criteria the filter used to identify eligible issues are:
      *  *
-     * `entityIds` Only issues from this list are eligible.
+     * {@code entityIds} Only issues from this list are eligible.
      * *
-     * `currentValue` Only issues with the property set to this value are eligible.
+     * {@code currentValue} Only issues with the property set to this value are eligible.
      * If both criteria is specified, they are joined with the logical *AND*: only issues that satisfy both criteria are considered eligible.
      * If no filter criteria are specified, all the issues visible to the user and where the user has the EDIT\\_ISSUES permission for the issue are considered eligible.
      * This operation is:
      *  *
      * transactional, either the property is deleted from all eligible issues or, when errors occur, no properties are deleted.
      * *
-     * [asynchronous](#async). Follow the `location` link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
+     * [asynchronous](#async). Follow the {@code location} link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
      * **[Permissions](#permissions) required:**
      *  *
      * *Browse projects* [ project permission](https://confluence.atlassian.com/x/yodKLg) for each project containing issues.
@@ -1735,7 +1850,11 @@ public class JiraRESTV2ConsumerApi {
      * *
      * *Edit issues* [project permission](https://confluence.atlassian.com/x/yodKLg) for each issue.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>propertyKey: The key of the property.</li>
+     *   <li>issueFilterForBulkPropertyDelete: </li>
+     * </ul>
      */
     public void bulkDeleteIssueProperty(Consumer<BulkDeleteIssuePropertyOperationSpec> spec) {
         BulkDeleteIssuePropertyOperationSpec r = new BulkDeleteIssuePropertyOperationSpec(spec);
@@ -1748,7 +1867,15 @@ public class JiraRESTV2ConsumerApi {
      * Returns a [paginated](#pagination) list of groups.
      * **[Permissions](#permissions) required:** *Browse users and groups* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [read:jira-user]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>groupId: The ID of a group. To specify multiple IDs, pass multiple {@code groupId} parameters. For example, {@code groupId=5b10a2844c20165700ede21g&amp;groupId=5b10ac8d82e05b22cc7d4ef5}.</li>
+     *   <li>groupName: The name of a group. To specify multiple names, pass multiple {@code groupName} parameters. For example, {@code groupName=administrators&amp;groupName=jira-software-users}.</li>
+     *   <li>accessType: The access level of a group. Valid values: 'site-admin', 'admin', 'user'.</li>
+     *   <li>applicationKey: The application key of the product user groups to search for. Valid values: 'jira-servicedesk', 'jira-software', 'jira-product-discovery', 'jira-core'.</li>
+     * </ul>
      */
     public PageBeanGroupDetails bulkGetGroups(Consumer<BulkGetGroupsOperationSpec> spec) {
         BulkGetGroupsOperationSpec r = new BulkGetGroupsOperationSpec(spec);
@@ -1761,7 +1888,14 @@ public class JiraRESTV2ConsumerApi {
      * Returns a [paginated](#pagination) list of the users specified by one or more account IDs.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [read:jira-user]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>accountId: The account ID of a user. To specify multiple users, pass multiple {@code accountId} parameters. For example, {@code accountId=5b10a2844c20165700ede21g&amp;accountId=5b10ac8d82e05b22cc7d4ef5}.</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>username: This parameter is no longer available and will be removed from the documentation soon. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.</li>
+     *   <li>key: This parameter is no longer available and will be removed from the documentation soon. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.</li>
+     * </ul>
      */
     public PageBeanUser bulkGetUsers(Consumer<BulkGetUsersOperationSpec> spec) {
         BulkGetUsersOperationSpec r = new BulkGetUsersOperationSpec(spec);
@@ -1771,10 +1905,16 @@ public class JiraRESTV2ConsumerApi {
     /**
      * Get account IDs for users
      * <p>
-     * Returns the account IDs for the users specified in the `key` or `username` parameters. Note that multiple `key` or `username` parameters can be specified.
+     * Returns the account IDs for the users specified in the {@code key} or {@code username} parameters. Note that multiple {@code key} or {@code username} parameters can be specified.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [read:jira-user]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>username: Username of a user. To specify multiple users, pass multiple copies of this parameter. For example, {@code username=fred&amp;username=barney}. Required if {@code key} isn't provided. Cannot be provided if {@code key} is present.</li>
+     *   <li>key: Key of a user. To specify multiple users, pass multiple copies of this parameter. For example, {@code key=fred&amp;key=barney}. Required if {@code username} isn't provided. Cannot be provided if {@code username} is present.</li>
+     * </ul>
      */
     public List<UserMigrationBean> bulkGetUsersMigration(Consumer<BulkGetUsersMigrationOperationSpec> spec) {
         BulkGetUsersMigrationOperationSpec r = new BulkGetUsersMigrationOperationSpec(spec);
@@ -1788,7 +1928,7 @@ public class JiraRESTV2ConsumerApi {
      * The value of the request body must be a [valid](http://tools.ietf.org/html/rfc4627), non-empty JSON.
      * This operation is:
      *  *
-     * [asynchronous](#async). Follow the `location` link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
+     * [asynchronous](#async). Follow the {@code location} link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
      * *
      * non-transactional. Updating some entities may fail. Such information will available in the task result.
      * **[Permissions](#permissions) required:**
@@ -1797,7 +1937,10 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>multiIssueEntityProperties: Details of the issue properties to be set or updated. Note that if an issue is not found, it is ignored.</li>
+     * </ul>
      */
     public void bulkSetIssuePropertiesByIssue(Consumer<BulkSetIssuePropertiesByIssueOperationSpec> spec) {
         BulkSetIssuePropertiesByIssueOperationSpec r = new BulkSetIssuePropertiesByIssueOperationSpec(spec);
@@ -1812,11 +1955,11 @@ public class JiraRESTV2ConsumerApi {
      * The issues to be updated can be specified by a filter.
      * The filter identifies issues eligible for update using these criteria:
      *  *
-     * `entityIds` Only issues from this list are eligible.
+     * {@code entityIds} Only issues from this list are eligible.
      * *
-     * `currentValue` Only issues with the property set to this value are eligible.
+     * {@code currentValue} Only issues with the property set to this value are eligible.
      * *
-     * `hasProperty`:
+     * {@code hasProperty}:
      * 
      * 
      * 
@@ -1828,13 +1971,13 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If *false*, only issues without the property are eligible.
      * If more than one criteria is specified, they are joined with the logical *AND*: only issues that satisfy all criteria are eligible.
-     * If an invalid combination of criteria is provided, an error is returned. For example, specifying a `currentValue` and `hasProperty` as *false* would not match any issues (because without the property the property cannot have a value).
+     * If an invalid combination of criteria is provided, an error is returned. For example, specifying a {@code currentValue} and {@code hasProperty} as *false* would not match any issues (because without the property the property cannot have a value).
      * The filter is optional. Without the filter all the issues visible to the user and where the user has the EDIT\\_ISSUES permission for the issue are considered eligible.
      * This operation is:
      *  *
      * transactional, either all eligible issues are updated or, when errors occur, none are updated.
      * *
-     * [asynchronous](#async). Follow the `location` link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
+     * [asynchronous](#async). Follow the {@code location} link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
      * **[Permissions](#permissions) required:**
      *  *
      * *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for each project containing issues.
@@ -1843,7 +1986,11 @@ public class JiraRESTV2ConsumerApi {
      * *
      * *Edit issues* [project permission](https://confluence.atlassian.com/x/yodKLg) for each issue.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>propertyKey: The key of the property. The maximum length is 255 characters.</li>
+     *   <li>bulkIssuePropertyUpdateRequest: </li>
+     * </ul>
      */
     public void bulkSetIssueProperty(Consumer<BulkSetIssuePropertyOperationSpec> spec) {
         BulkSetIssuePropertyOperationSpec r = new BulkSetIssuePropertyOperationSpec(spec);
@@ -1859,14 +2006,17 @@ public class JiraRESTV2ConsumerApi {
      *  *
      * transactional, either all properties are updated in all eligible issues or, when errors occur, no properties are updated.
      * *
-     * [asynchronous](#async). Follow the `location` link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
+     * [asynchronous](#async). Follow the {@code location} link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
      * **[Permissions](#permissions) required:**
      *  *
      * *Browse projects* and *Edit issues* [project permissions](https://confluence.atlassian.com/x/yodKLg) for the project containing the issue.
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueEntityProperties: Issue properties to be set or updated with values.</li>
+     * </ul>
      */
     public void bulkSetIssuesPropertiesList(Consumer<BulkSetIssuesPropertiesListOperationSpec> spec) {
         BulkSetIssuesPropertiesListOperationSpec r = new BulkSetIssuesPropertiesListOperationSpec(spec);
@@ -1883,7 +2033,10 @@ public class JiraRESTV2ConsumerApi {
      * *
      * Creator of the task.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>taskId: The ID of the task.</li>
+     * </ul>
      */
     public Object cancelTask(Consumer<CancelTaskOperationSpec> spec) {
         CancelTaskOperationSpec r = new CancelTaskOperationSpec(spec);
@@ -1896,7 +2049,11 @@ public class JiraRESTV2ConsumerApi {
      * Changes the owner of the filter.
      * **[Permissions](#permissions) required:** Permission to access Jira. However, the user must own the filter or have the *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the filter to update.</li>
+     *   <li>changeFilterOwner: The account ID of the new owner of the filter.</li>
+     * </ul>
      */
     public Object changeFilterOwner(Consumer<ChangeFilterOwnerOperationSpec> spec) {
         ChangeFilterOwnerOperationSpec r = new ChangeFilterOwnerOperationSpec(spec);
@@ -1906,11 +2063,15 @@ public class JiraRESTV2ConsumerApi {
     /**
      * Copy dashboard
      * <p>
-     * Copies a dashboard. Any values provided in the `dashboard` parameter replace those in the copied dashboard.
+     * Copies a dashboard. Any values provided in the {@code dashboard} parameter replace those in the copied dashboard.
      * **[Permissions](#permissions) required:** None
      * The dashboard to be copied must be owned by or shared with the user.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: </li>
+     *   <li>dashboardDetails: Dashboard details.</li>
+     * </ul>
      */
     public Dashboard copyDashboard(Consumer<CopyDashboardOperationSpec> spec) {
         CopyDashboardOperationSpec r = new CopyDashboardOperationSpec(spec);
@@ -1924,7 +2085,10 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Administer projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project in which the component is created or *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectComponent: </li>
+     * </ul>
      */
     public ProjectComponent createComponent(Consumer<CreateComponentOperationSpec> spec) {
         CreateComponentOperationSpec r = new CreateComponentOperationSpec(spec);
@@ -1937,7 +2101,10 @@ public class JiraRESTV2ConsumerApi {
      * Creates a custom field.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>customFieldDefinitionJsonBean: Definition of the custom field to be created</li>
+     * </ul>
      */
     public FieldDetails createCustomField(Consumer<CreateCustomFieldOperationSpec> spec) {
         CreateCustomFieldOperationSpec r = new CreateCustomFieldOperationSpec(spec);
@@ -1948,10 +2115,14 @@ public class JiraRESTV2ConsumerApi {
      * Create custom field context
      * <p>
      * Creates a custom field context.
-     * If `projectIds` is empty, a global context is created. A global context is one that applies to all project. If `issueTypeIds` is empty, the context applies to all issue types.
+     * If {@code projectIds} is empty, a global context is created. A global context is one that applies to all project. If {@code issueTypeIds} is empty, the context applies to all issue types.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldId: The ID of the custom field.</li>
+     *   <li>createCustomFieldContext: </li>
+     * </ul>
      */
     public CreateCustomFieldContext createCustomFieldContext(Consumer<CreateCustomFieldContextOperationSpec> spec) {
         CreateCustomFieldContextOperationSpec r = new CreateCustomFieldContextOperationSpec(spec);
@@ -1966,7 +2137,12 @@ public class JiraRESTV2ConsumerApi {
      * This operation works for custom field options created in Jira or the operations from this resource. **To work with issue field select list options created for Connect apps use the [Issue custom field options (apps)](#api-group-issue-custom-field-options--apps-) operations.**
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldId: The ID of the custom field.</li>
+     *   <li>contextId: The ID of the context.</li>
+     *   <li>bulkCustomFieldOptionCreateRequest: </li>
+     * </ul>
      */
     public CustomFieldCreatedContextOptionsList createCustomFieldOption(Consumer<CreateCustomFieldOptionOperationSpec> spec) {
         CreateCustomFieldOptionOperationSpec r = new CreateCustomFieldOptionOperationSpec(spec);
@@ -1979,7 +2155,10 @@ public class JiraRESTV2ConsumerApi {
      * Creates a dashboard.
      * **[Permissions](#permissions) required:** None.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>dashboardDetails: Dashboard details.</li>
+     * </ul>
      */
     public Dashboard createDashboard(Consumer<CreateDashboardOperationSpec> spec) {
         CreateDashboardOperationSpec r = new CreateDashboardOperationSpec(spec);
@@ -1993,7 +2172,10 @@ public class JiraRESTV2ConsumerApi {
      * This operation can only create configurations for use in company-managed (classic) projects.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldConfigurationDetails: </li>
+     * </ul>
      */
     public FieldConfiguration createFieldConfiguration(Consumer<CreateFieldConfigurationOperationSpec> spec) {
         CreateFieldConfigurationOperationSpec r = new CreateFieldConfigurationOperationSpec(spec);
@@ -2007,7 +2189,10 @@ public class JiraRESTV2ConsumerApi {
      * This operation can only create field configuration schemes used in company-managed (classic) projects.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>updateFieldConfigurationSchemeDetails: The details of the field configuration scheme.</li>
+     * </ul>
      */
     public FieldConfigurationScheme createFieldConfigurationScheme(Consumer<CreateFieldConfigurationSchemeOperationSpec> spec) {
         CreateFieldConfigurationSchemeOperationSpec r = new CreateFieldConfigurationSchemeOperationSpec(spec);
@@ -2020,7 +2205,12 @@ public class JiraRESTV2ConsumerApi {
      * Creates a filter. The filter is shared according to the [default share scope](#api-rest-api-2-filter-post). The filter is not selected as a favorite.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>filter: The filter to create.</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information about filter in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code sharedUsers} Returns the users that the filter is shared with. This includes users that can browse projects that the filter is shared with. If you don't specify {@code sharedUsers}, then the {@code sharedUsers} object is returned but it doesn't list any users. The list of users returned is limited to 1000, to access additional users append {@code [start-index:end-index]} to the expand request. For example, to access the next 1000 users, use {@code ?expand=sharedUsers[1001:2000]}.  *  {@code subscriptions} Returns the users that are subscribed to the filter. If you don't specify {@code subscriptions}, the {@code subscriptions} object is returned but it doesn't list any subscriptions. The list of subscriptions returned is limited to 1000, to access additional subscriptions append {@code [start-index:end-index]} to the expand request. For example, to access the next 1000 subscriptions, use {@code ?expand=subscriptions[1001:2000]}.</li>
+     *   <li>overrideSharePermissions: EXPERIMENTAL: Whether share permissions are overridden to enable filters with any share permissions to be created. Available to users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).</li>
+     * </ul>
      */
     public Filter createFilter(Consumer<CreateFilterOperationSpec> spec) {
         CreateFilterOperationSpec r = new CreateFilterOperationSpec(spec);
@@ -2033,30 +2223,37 @@ public class JiraRESTV2ConsumerApi {
      * Creates a group.
      * **[Permissions](#permissions) required:** Site administration (that is, member of the *site-admin* [group](https://confluence.atlassian.com/x/24xjL)).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>addGroupBean: The name of the group.</li>
+     * </ul>
      */
     public Group createGroup(Consumer<CreateGroupOperationSpec> spec) {
         CreateGroupOperationSpec r = new CreateGroupOperationSpec(spec);
-        return api.createGroup(r.requestBody());
+        return api.createGroup(r.addGroupBean());
     }
 
     /**
      * Create issue
      * <p>
      * Creates an issue or, where the option to create subtasks is enabled in Jira, a subtask. A transition may be applied, to move the issue or subtask to a workflow step other than the default start step, and issue properties set.
-     * The content of the issue or subtask is defined using `update` and `fields`. The fields that can be set in the issue or subtask are determined using the [ Get create issue metadata](#api-rest-api-2-issue-createmeta-get). These are the same fields that appear on the issue's create screen.
+     * The content of the issue or subtask is defined using {@code update} and {@code fields}. The fields that can be set in the issue or subtask are determined using the [ Get create issue metadata](#api-rest-api-2-issue-createmeta-get). These are the same fields that appear on the issue's create screen.
      * Creating a subtask differs from creating an issue as follows:
      *  *
-     * `issueType` must be set to a subtask issue type (use [ Get create issue metadata](#api-rest-api-2-issue-createmeta-get) to find subtask issue types).
+     * {@code issueType} must be set to a subtask issue type (use [ Get create issue metadata](#api-rest-api-2-issue-createmeta-get) to find subtask issue types).
      * *
-     * `parent` must contain the ID or key of the parent issue.
+     * {@code parent} must contain the ID or key of the parent issue.
      * **[Permissions](#permissions) required:** *Browse projects* and *Create issues* [project permissions](https://confluence.atlassian.com/x/yodKLg) for the project in which the issue or subtask is created.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueUpdateDetails: </li>
+     *   <li>updateHistory: Whether the project in which the issue is created is added to the user's **Recently viewed** project list, as shown under **Projects** in Jira. When provided, the issue type and request type are added to the user's history for a project. These values are then used to provide defaults on the issue create screen.</li>
+     * </ul>
      */
     public CreatedIssue createIssue(Consumer<CreateIssueOperationSpec> spec) {
         CreateIssueOperationSpec r = new CreateIssueOperationSpec(spec);
-        return api.createIssue(r.requestBody(), r.updateHistory());
+        return api.createIssue(r.issueUpdateDetails(), r.updateHistory());
     }
 
     /**
@@ -2066,11 +2263,15 @@ public class JiraRESTV2ConsumerApi {
      * Note that this operation **only works for issue field select list options added by Connect apps**, it cannot be used with issue field select list options created in Jira or using operations from the [Issue custom field options](#api-group-Issue-custom-field-options) resource.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). Jira permissions are not required for the app providing the field.
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldKey: The field key is specified in the following format: **$(app-key)\\_\\_$(field-key)**. For example, *example-add-on\\_\\_example-issue-field*. To determine the {@code fieldKey} value, do one of the following:   *  open the app's plugin descriptor, then **app-key** is the key at the top and **field-key** is the key in the {@code jiraIssueFields} module. **app-key** can also be found in the app listing in the Atlassian Universal Plugin Manager.  *  run [Get fields](#api-rest-api-2-field-get) and in the field details the value is returned in {@code key}. For example, {@code "key": "teams-add-on__team-issue-field"}</li>
+     *   <li>issueFieldOptionCreateBean: </li>
+     * </ul>
      */
     public IssueFieldOption createIssueFieldOption(Consumer<CreateIssueFieldOptionOperationSpec> spec) {
         CreateIssueFieldOptionOperationSpec r = new CreateIssueFieldOptionOperationSpec(spec);
-        return api.createIssueFieldOption(r.fieldKey(), r.requestBody());
+        return api.createIssueFieldOption(r.fieldKey(), r.issueFieldOptionCreateBean());
     }
 
     /**
@@ -2080,7 +2281,10 @@ public class JiraRESTV2ConsumerApi {
      * To use this operation, the site must have [issue linking](https://confluence.atlassian.com/x/yoXKM) enabled.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueLinkType: </li>
+     * </ul>
      */
     public IssueLinkType createIssueLinkType(Consumer<CreateIssueLinkTypeOperationSpec> spec) {
         CreateIssueLinkTypeOperationSpec r = new CreateIssueLinkTypeOperationSpec(spec);
@@ -2093,11 +2297,14 @@ public class JiraRESTV2ConsumerApi {
      * Creates a security scheme with security scheme levels and levels' members. You can create up to 100 security scheme levels and security scheme levels' members per request.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>createIssueSecuritySchemeDetails: </li>
+     * </ul>
      */
     public SecuritySchemeId createIssueSecurityScheme(Consumer<CreateIssueSecuritySchemeOperationSpec> spec) {
         CreateIssueSecuritySchemeOperationSpec r = new CreateIssueSecuritySchemeOperationSpec(spec);
-        return api.createIssueSecurityScheme(r.requestBody());
+        return api.createIssueSecurityScheme(r.createIssueSecuritySchemeDetails());
     }
 
     /**
@@ -2106,7 +2313,10 @@ public class JiraRESTV2ConsumerApi {
      * Creates an issue type and adds it to the default issue type scheme.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueTypeCreateBean: </li>
+     * </ul>
      */
     public IssueTypeDetails createIssueType(Consumer<CreateIssueTypeOperationSpec> spec) {
         CreateIssueTypeOperationSpec r = new CreateIssueTypeOperationSpec(spec);
@@ -2119,17 +2329,24 @@ public class JiraRESTV2ConsumerApi {
      * Loads an avatar for the issue type.
      * Specify the avatar's local file location in the body of the request. Also, include the following headers:
      *  *
-     * `X-Atlassian-Token: no-check` To prevent XSRF protection blocking the request, for more information see [Special Headers](#special-request-headers).
+     * {@code X-Atlassian-Token: no-check} To prevent XSRF protection blocking the request, for more information see [Special Headers](#special-request-headers).
      * *
-     * `Content-Type: image/image type` Valid image types are JPEG, GIF, or PNG.
+     * {@code Content-Type: image/image type} Valid image types are JPEG, GIF, or PNG.
      * For example:
-     *  `curl --request POST \\ --user email@example.com:&amp;lt;api_token&amp;gt; \\ --header 'X-Atlassian-Token: no-check' \\ --header 'Content-Type: image/&amp;lt; image_type&amp;gt;' \\ --data-binary "&amp;lt;@/path/to/file/with/your/avatar&amp;gt;" \\ --url 'https://your-domain.atlassian.net/rest/api/2/issuetype/{issueTypeId}'This`
+     *  {@code curl --request POST \\ --user email@example.com:&amp;lt;api_token&amp;gt; \\ --header 'X-Atlassian-Token: no-check' \\ --header 'Content-Type: image/&amp;lt; image_type&amp;gt;' \\ --data-binary "&amp;lt;@/path/to/file/with/your/avatar&amp;gt;" \\ --url 'https://your-domain.atlassian.net/rest/api/2/issuetype/{issueTypeId}'This}
      * The avatar is cropped to a square. If no crop parameters are specified, the square originates at the top left of the image. The length of the square's sides is set to the smaller of the height or width of the image.
      * The cropped image is then used to create avatars of 16x16, 24x24, 32x32, and 48x48 in size.
      * After creating the avatar, use [ Update issue type](#api-rest-api-2-issuetype-id-put) to set it as the issue type's displayed avatar.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the issue type.</li>
+     *   <li>size: The length of each side of the crop region.</li>
+     *   <li>body: </li>
+     *   <li>x: The X coordinate of the top-left corner of the crop region.</li>
+     *   <li>y: The Y coordinate of the top-left corner of the crop region.</li>
+     * </ul>
      */
     public Avatar createIssueTypeAvatar(Consumer<CreateIssueTypeAvatarOperationSpec> spec) {
         CreateIssueTypeAvatarOperationSpec r = new CreateIssueTypeAvatarOperationSpec(spec);
@@ -2142,7 +2359,10 @@ public class JiraRESTV2ConsumerApi {
      * Creates an issue type scheme.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueTypeSchemeDetails: </li>
+     * </ul>
      */
     public IssueTypeSchemeID createIssueTypeScheme(Consumer<CreateIssueTypeSchemeOperationSpec> spec) {
         CreateIssueTypeSchemeOperationSpec r = new CreateIssueTypeSchemeOperationSpec(spec);
@@ -2155,7 +2375,10 @@ public class JiraRESTV2ConsumerApi {
      * Creates an issue type screen scheme.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueTypeScreenSchemeDetails: An issue type screen scheme bean.</li>
+     * </ul>
      */
     public IssueTypeScreenSchemeId createIssueTypeScreenScheme(Consumer<CreateIssueTypeScreenSchemeOperationSpec> spec) {
         CreateIssueTypeScreenSchemeOperationSpec r = new CreateIssueTypeScreenSchemeOperationSpec(spec);
@@ -2166,19 +2389,22 @@ public class JiraRESTV2ConsumerApi {
      * Bulk create issue
      * <p>
      * Creates upto **50** issues and, where the option to create subtasks is enabled in Jira, subtasks. Transitions may be applied, to move the issues or subtasks to a workflow step other than the default start step, and issue properties set.
-     * The content of each issue or subtask is defined using `update` and `fields`. The fields that can be set in the issue or subtask are determined using the [ Get create issue metadata](#api-rest-api-2-issue-createmeta-get). These are the same fields that appear on the issues' create screens.
+     * The content of each issue or subtask is defined using {@code update} and {@code fields}. The fields that can be set in the issue or subtask are determined using the [ Get create issue metadata](#api-rest-api-2-issue-createmeta-get). These are the same fields that appear on the issues' create screens.
      * Creating a subtask differs from creating an issue as follows:
      *  *
-     * `issueType` must be set to a subtask issue type (use [ Get create issue metadata](#api-rest-api-2-issue-createmeta-get) to find subtask issue types).
+     * {@code issueType} must be set to a subtask issue type (use [ Get create issue metadata](#api-rest-api-2-issue-createmeta-get) to find subtask issue types).
      * *
-     * `parent` the must contain the ID or key of the parent issue.
+     * {@code parent} the must contain the ID or key of the parent issue.
      * **[Permissions](#permissions) required:** *Browse projects* and *Create issues* [project permissions](https://confluence.atlassian.com/x/yodKLg) for the project in which each issue or subtask is created.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issuesUpdateBean: </li>
+     * </ul>
      */
     public CreatedIssues createIssues(Consumer<CreateIssuesOperationSpec> spec) {
         CreateIssuesOperationSpec r = new CreateIssuesOperationSpec(spec);
-        return api.createIssues(r.requestBody());
+        return api.createIssues(r.issuesUpdateBean());
     }
 
     /**
@@ -2187,18 +2413,21 @@ public class JiraRESTV2ConsumerApi {
      * Creates a notification scheme with notifications. You can create up to 1000 notifications per request.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>createNotificationSchemeDetails: </li>
+     * </ul>
      */
     public NotificationSchemeId createNotificationScheme(Consumer<CreateNotificationSchemeOperationSpec> spec) {
         CreateNotificationSchemeOperationSpec r = new CreateNotificationSchemeOperationSpec(spec);
-        return api.createNotificationScheme(r.requestBody());
+        return api.createNotificationScheme(r.createNotificationSchemeDetails());
     }
 
     /**
      * Create or update remote issue link
      * <p>
      * Creates or updates a remote issue link for an issue.
-     * If a `globalId` is provided and a remote issue link with that global ID is found it is updated. Any fields without values in the request are set to null. Otherwise, the remote issue link is created.
+     * If a {@code globalId} is provided and a remote issue link with that global ID is found it is updated. Any fields without values in the request are set to null. Otherwise, the remote issue link is created.
      * This operation requires [issue linking to be active](https://confluence.atlassian.com/x/yoXKM).
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:**
@@ -2207,11 +2436,15 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue.</li>
+     *   <li>remoteIssueLinkRequest: </li>
+     * </ul>
      */
     public RemoteIssueLinkIdentifies createOrUpdateRemoteIssueLink(Consumer<CreateOrUpdateRemoteIssueLinkOperationSpec> spec) {
         CreateOrUpdateRemoteIssueLinkOperationSpec r = new CreateOrUpdateRemoteIssueLinkOperationSpec(spec);
-        return api.createOrUpdateRemoteIssueLink(r.issueIdOrKey(), r.requestBody());
+        return api.createOrUpdateRemoteIssueLink(r.issueIdOrKey(), r.remoteIssueLinkRequest());
     }
 
     /**
@@ -2220,7 +2453,12 @@ public class JiraRESTV2ConsumerApi {
      * Creates a permission grant in a permission scheme.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>schemeId: The ID of the permission scheme in which to create a new permission grant.</li>
+     *   <li>permissionGrant: The permission grant to create.</li>
+     *   <li>expand: Use expand to include additional information in the response. This parameter accepts a comma-separated list. Note that permissions are always included when you specify any value. Expand options include:   *  {@code permissions} Returns all permission grants for each permission scheme.  *  {@code user} Returns information about the user who is granted the permission.  *  {@code group} Returns information about the group that is granted the permission.  *  {@code projectRole} Returns information about the project role granted the permission.  *  {@code field} Returns information about the custom field granted the permission.  *  {@code all} Returns all expandable information.</li>
+     * </ul>
      */
     public PermissionGrant createPermissionGrant(Consumer<CreatePermissionGrantOperationSpec> spec) {
         CreatePermissionGrantOperationSpec r = new CreatePermissionGrantOperationSpec(spec);
@@ -2233,11 +2471,15 @@ public class JiraRESTV2ConsumerApi {
      * Creates a new permission scheme. You can create a permission scheme with or without defining a set of permission grants.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>permissionScheme: The permission scheme to create.</li>
+     *   <li>expand: Use expand to include additional information in the response. This parameter accepts a comma-separated list. Note that permissions are always included when you specify any value. Expand options include:   *  {@code all} Returns all expandable information.  *  {@code field} Returns information about the custom field granted the permission.  *  {@code group} Returns information about the group that is granted the permission.  *  {@code permissions} Returns all permission grants for each permission scheme.  *  {@code projectRole} Returns information about the project role granted the permission.  *  {@code user} Returns information about the user who is granted the permission.</li>
+     * </ul>
      */
     public PermissionScheme createPermissionScheme(Consumer<CreatePermissionSchemeOperationSpec> spec) {
         CreatePermissionSchemeOperationSpec r = new CreatePermissionSchemeOperationSpec(spec);
-        return api.createPermissionScheme(r.requestBody(), r.expand());
+        return api.createPermissionScheme(r.permissionScheme(), r.expand());
     }
 
     /**
@@ -2246,11 +2488,14 @@ public class JiraRESTV2ConsumerApi {
      * Creates an issue priority.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>createPriorityDetails: </li>
+     * </ul>
      */
     public PriorityId createPriority(Consumer<CreatePriorityOperationSpec> spec) {
         CreatePriorityOperationSpec r = new CreatePriorityOperationSpec(spec);
-        return api.createPriority(r.requestBody());
+        return api.createPriority(r.createPriorityDetails());
     }
 
     /**
@@ -2259,20 +2504,23 @@ public class JiraRESTV2ConsumerApi {
      * Creates a project based on a project type template, as shown in the following table:
      * | Project Type Key | Project Template Key |
      *  |--|--|
-     *  | `business` | `com.atlassian.jira-core-project-templates:jira-core-simplified-content-management`, `com.atlassian.jira-core-project-templates:jira-core-simplified-document-approval`, `com.atlassian.jira-core-project-templates:jira-core-simplified-lead-tracking`, `com.atlassian.jira-core-project-templates:jira-core-simplified-process-control`, `com.atlassian.jira-core-project-templates:jira-core-simplified-procurement`, `com.atlassian.jira-core-project-templates:jira-core-simplified-project-management`, `com.atlassian.jira-core-project-templates:jira-core-simplified-recruitment`, `com.atlassian.jira-core-project-templates:jira-core-simplified-task-tracking` |
-     *  | `service_desk` | `com.atlassian.servicedesk:simplified-it-service-management`, `com.atlassian.servicedesk:simplified-general-service-desk-it`, `com.atlassian.servicedesk:simplified-general-service-desk-business`, `com.atlassian.servicedesk:simplified-external-service-desk`, `com.atlassian.servicedesk:simplified-hr-service-desk`, `com.atlassian.servicedesk:simplified-facilities-service-desk`, `com.atlassian.servicedesk:simplified-legal-service-desk`, `com.atlassian.servicedesk:simplified-analytics-service-desk`, `com.atlassian.servicedesk:simplified-marketing-service-desk`, `com.atlassian.servicedesk:simplified-design-service-desk`, `com.atlassian.servicedesk:simplified-sales-service-desk`, `com.atlassian.servicedesk:simplified-finance-service-desk` |
-     *  | `software` | `com.pyxis.greenhopper.jira:gh-simplified-agility-kanban`, `com.pyxis.greenhopper.jira:gh-simplified-agility-scrum`, `com.pyxis.greenhopper.jira:gh-simplified-basic`, `com.pyxis.greenhopper.jira:gh-simplified-kanban-classic`, `com.pyxis.greenhopper.jira:gh-simplified-scrum-classic` |
+     *  | {@code business} | {@code com.atlassian.jira-core-project-templates:jira-core-simplified-content-management}, {@code com.atlassian.jira-core-project-templates:jira-core-simplified-document-approval}, {@code com.atlassian.jira-core-project-templates:jira-core-simplified-lead-tracking}, {@code com.atlassian.jira-core-project-templates:jira-core-simplified-process-control}, {@code com.atlassian.jira-core-project-templates:jira-core-simplified-procurement}, {@code com.atlassian.jira-core-project-templates:jira-core-simplified-project-management}, {@code com.atlassian.jira-core-project-templates:jira-core-simplified-recruitment}, {@code com.atlassian.jira-core-project-templates:jira-core-simplified-task-tracking} |
+     *  | {@code service_desk} | {@code com.atlassian.servicedesk:simplified-it-service-management}, {@code com.atlassian.servicedesk:simplified-general-service-desk-it}, {@code com.atlassian.servicedesk:simplified-general-service-desk-business}, {@code com.atlassian.servicedesk:simplified-external-service-desk}, {@code com.atlassian.servicedesk:simplified-hr-service-desk}, {@code com.atlassian.servicedesk:simplified-facilities-service-desk}, {@code com.atlassian.servicedesk:simplified-legal-service-desk}, {@code com.atlassian.servicedesk:simplified-analytics-service-desk}, {@code com.atlassian.servicedesk:simplified-marketing-service-desk}, {@code com.atlassian.servicedesk:simplified-design-service-desk}, {@code com.atlassian.servicedesk:simplified-sales-service-desk}, {@code com.atlassian.servicedesk:simplified-finance-service-desk} |
+     *  | {@code software} | {@code com.pyxis.greenhopper.jira:gh-simplified-agility-kanban}, {@code com.pyxis.greenhopper.jira:gh-simplified-agility-scrum}, {@code com.pyxis.greenhopper.jira:gh-simplified-basic}, {@code com.pyxis.greenhopper.jira:gh-simplified-kanban-classic}, {@code com.pyxis.greenhopper.jira:gh-simplified-scrum-classic} |
      *  The project types are available according to the installed Jira features as follows:
      *  *
-     * Jira Core, the default, enables `business` projects.
+     * Jira Core, the default, enables {@code business} projects.
      * *
-     * Jira Service Management enables `service_desk` projects.
+     * Jira Service Management enables {@code service_desk} projects.
      * *
-     * Jira Software enables `software` projects.
+     * Jira Software enables {@code software} projects.
      * To determine which features are installed, go to **Jira settings** &amp;gt; **Apps** &amp;gt; **Manage apps** and review the System Apps list. To add Jira Software or Jira Service Management into a JIRA instance, use **Jira settings** &amp;gt; **Apps** &amp;gt; **Finding new apps**. For more information, see [ Managing add-ons](https://confluence.atlassian.com/x/S31NLg).
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>createProjectDetails: The JSON representation of the project being created.</li>
+     * </ul>
      */
     public ProjectIdentifiers createProject(Consumer<CreateProjectOperationSpec> spec) {
         CreateProjectOperationSpec r = new CreateProjectOperationSpec(spec);
@@ -2285,22 +2533,29 @@ public class JiraRESTV2ConsumerApi {
      * Loads an avatar for a project.
      * Specify the avatar's local file location in the body of the request. Also, include the following headers:
      *  *
-     * `X-Atlassian-Token: no-check` To prevent XSRF protection blocking the request, for more information see [Special Headers](#special-request-headers).
+     * {@code X-Atlassian-Token: no-check} To prevent XSRF protection blocking the request, for more information see [Special Headers](#special-request-headers).
      * *
-     * `Content-Type: image/image type` Valid image types are JPEG, GIF, or PNG.
+     * {@code Content-Type: image/image type} Valid image types are JPEG, GIF, or PNG.
      * For example:
-     *  `curl --request POST `
-     * `--user email@example.com:&amp;lt;api_token&amp;gt; `
-     * `--header 'X-Atlassian-Token: no-check' `
-     * `--header 'Content-Type: image/&amp;lt; image_type&amp;gt;' `
-     * `--data-binary "&amp;lt;@/path/to/file/with/your/avatar&amp;gt;" `
-     * `--url 'https://your-domain.atlassian.net/rest/api/2/project/{projectIdOrKey}/avatar2'`
+     *  {@code curl --request POST }
+     * {@code --user email@example.com:&amp;lt;api_token&amp;gt; }
+     * {@code --header 'X-Atlassian-Token: no-check' }
+     * {@code --header 'Content-Type: image/&amp;lt; image_type&amp;gt;' }
+     * {@code --data-binary "&amp;lt;@/path/to/file/with/your/avatar&amp;gt;" }
+     * {@code --url 'https://your-domain.atlassian.net/rest/api/2/project/{projectIdOrKey}/avatar2'}
      * The avatar is cropped to a square. If no crop parameters are specified, the square originates at the top left of the image. The length of the square's sides is set to the smaller of the height or width of the image.
      * The cropped image is then used to create avatars of 16x16, 24x24, 32x32, and 48x48 in size.
      * After creating the avatar use [Set project avatar](#api-rest-api-2-project-projectIdOrKey-avatar-put) to set it as the project's displayed avatar.
      * **[Permissions](#permissions) required:** *Administer projects* [project permission](https://confluence.atlassian.com/x/yodKLg).
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectIdOrKey: The ID or (case-sensitive) key of the project.</li>
+     *   <li>body: </li>
+     *   <li>x: The X coordinate of the top-left corner of the crop region.</li>
+     *   <li>y: The Y coordinate of the top-left corner of the crop region.</li>
+     *   <li>size: The length of each side of the crop region.</li>
+     * </ul>
      */
     public Avatar createProjectAvatar(Consumer<CreateProjectAvatarOperationSpec> spec) {
         CreateProjectAvatarOperationSpec r = new CreateProjectAvatarOperationSpec(spec);
@@ -2313,7 +2568,10 @@ public class JiraRESTV2ConsumerApi {
      * Creates a project category.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectCategory: </li>
+     * </ul>
      */
     public ProjectCategory createProjectCategory(Consumer<CreateProjectCategoryOperationSpec> spec) {
         CreateProjectCategoryOperationSpec r = new CreateProjectCategoryOperationSpec(spec);
@@ -2327,7 +2585,10 @@ public class JiraRESTV2ConsumerApi {
      * *Note that although a new project role is available to all projects upon creation, any default actors that are associated with the project role are not added to projects that existed prior to the role being created.*&amp;lt;
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>createUpdateRoleRequestBean: </li>
+     * </ul>
      */
     public ProjectRole createProjectRole(Consumer<CreateProjectRoleOperationSpec> spec) {
         CreateProjectRoleOperationSpec r = new CreateProjectRoleOperationSpec(spec);
@@ -2340,11 +2601,14 @@ public class JiraRESTV2ConsumerApi {
      * Creates an issue resolution.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>createResolutionDetails: </li>
+     * </ul>
      */
     public ResolutionId createResolution(Consumer<CreateResolutionOperationSpec> spec) {
         CreateResolutionOperationSpec r = new CreateResolutionOperationSpec(spec);
-        return api.createResolution(r.requestBody());
+        return api.createResolution(r.createResolutionDetails());
     }
 
     /**
@@ -2353,7 +2617,10 @@ public class JiraRESTV2ConsumerApi {
      * Creates a screen with a default field tab.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>screenDetails: </li>
+     * </ul>
      */
     public Screen createScreen(Consumer<CreateScreenOperationSpec> spec) {
         CreateScreenOperationSpec r = new CreateScreenOperationSpec(spec);
@@ -2366,7 +2633,10 @@ public class JiraRESTV2ConsumerApi {
      * Creates a screen scheme.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>screenSchemeDetails: </li>
+     * </ul>
      */
     public ScreenSchemeId createScreenScheme(Consumer<CreateScreenSchemeOperationSpec> spec) {
         CreateScreenSchemeOperationSpec r = new CreateScreenSchemeOperationSpec(spec);
@@ -2383,7 +2653,10 @@ public class JiraRESTV2ConsumerApi {
      * *
      * *Administer Jira* [project permission.](https://confluence.atlassian.com/x/yodKLg)
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>statusCreateRequest: Details of the statuses being created and their scope.</li>
+     * </ul>
      */
     public List<JiraStatus> createStatuses(Consumer<CreateStatusesOperationSpec> spec) {
         CreateStatusesOperationSpec r = new CreateStatusesOperationSpec(spec);
@@ -2401,7 +2674,10 @@ public class JiraRESTV2ConsumerApi {
      * *
      * *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for one or more projects, if the UI modification is created with contexts.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>createUiModificationDetails: Details of the UI modification.</li>
+     * </ul>
      */
     public UiModificationIdentifiers createUiModification(Consumer<CreateUiModificationOperationSpec> spec) {
         CreateUiModificationOperationSpec r = new CreateUiModificationOperationSpec(spec);
@@ -2414,11 +2690,14 @@ public class JiraRESTV2ConsumerApi {
      * Creates a user. This resource is retained for legacy compatibility. As soon as a more suitable alternative is available this resource will be deprecated.
      * If the user exists and has access to Jira, the operation returns a 201 status. If the user exists but does not have access to Jira, the operation returns a 400 status.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>newUserDetails: Details about the user to be created.</li>
+     * </ul>
      */
     public User createUser(Consumer<CreateUserOperationSpec> spec) {
         CreateUserOperationSpec r = new CreateUserOperationSpec(spec);
-        return api.createUser(r.requestBody());
+        return api.createUser(r.newUserDetails());
     }
 
     /**
@@ -2428,7 +2707,10 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) or *Administer Projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project the version is added to.
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>version: </li>
+     * </ul>
      */
     public Version createVersion(Consumer<CreateVersionOperationSpec> spec) {
         CreateVersionOperationSpec r = new CreateVersionOperationSpec(spec);
@@ -2501,21 +2783,21 @@ public class JiraRESTV2ConsumerApi {
      * 
      * }
      *  *
-     * `comparator` One of the supported comparator: `=`, `&amp;gt;`, and `&amp;lt;`.
+     * {@code comparator} One of the supported comparator: {@code =}, {@code &amp;gt;}, and {@code &amp;lt;}.
      * *
-     * `fieldId` The custom numeric field ID. Allowed field types:
+     * {@code fieldId} The custom numeric field ID. Allowed field types:
      * 
      * 
      * 
      * 
      *  *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:float`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:float}
      * 
      * 
      * *
-     * `com.pyxis.greenhopper.jira:jsw-story-points`
+     * {@code com.pyxis.greenhopper.jira:jsw-story-points}
      * *
-     * `fieldValue` The value for comparison.
+     * {@code fieldValue} The value for comparison.
      * ##### Hide from user condition #####
      * A condition that hides a transition from users. The transition can only be triggered from a workflow function or REST API operation.
      * 
@@ -2591,7 +2873,7 @@ public class JiraRESTV2ConsumerApi {
      * 
      * }
      *  *
-     * `permissionKey` The permission required to perform the transition. Allowed values: [built-in](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-permission-schemes/#built-in-permissions) or app defined permissions.
+     * {@code permissionKey} The permission required to perform the transition. Allowed values: [built-in](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-permission-schemes/#built-in-permissions) or app defined permissions.
      * ##### Previous status condition #####
      * A condition that allows a transition based on whether an issue has or has not transitioned through a status.
      * 
@@ -2648,15 +2930,15 @@ public class JiraRESTV2ConsumerApi {
      * 
      * 
      * }
-     * By default this condition allows the transition if the status, as defined by its ID in the `previousStatus` object, matches any previous issue status, unless:
+     * By default this condition allows the transition if the status, as defined by its ID in the {@code previousStatus} object, matches any previous issue status, unless:
      *  *
-     * `ignoreLoopTransitions` is `true`, then loop transitions (from and to the same status) are ignored.
+     * {@code ignoreLoopTransitions} is {@code true}, then loop transitions (from and to the same status) are ignored.
      * *
-     * `includeCurrentStatus` is `true`, then the current issue status is also checked.
+     * {@code includeCurrentStatus} is {@code true}, then the current issue status is also checked.
      * *
-     * `mostRecentStatusOnly` is `true`, then only the issue's preceding status (the one immediately before the current status) is checked.
+     * {@code mostRecentStatusOnly} is {@code true}, then only the issue's preceding status (the one immediately before the current status) is checked.
      * *
-     * `reverseCondition` is `true`, then the status must not be present.
+     * {@code reverseCondition} is {@code true}, then the status must not be present.
      * ##### Separation of duties condition #####
      * A condition that prevents a user to perform the transition, if the user has already performed a transition on the issue.
      * 
@@ -2710,9 +2992,9 @@ public class JiraRESTV2ConsumerApi {
      * 
      * }
      *  *
-     * `fromStatus` OPTIONAL. An object containing the ID of the source status of the transition that is blocked. If omitted any transition to `toStatus` is blocked.
+     * {@code fromStatus} OPTIONAL. An object containing the ID of the source status of the transition that is blocked. If omitted any transition to {@code toStatus} is blocked.
      * *
-     * `toStatus` An object containing the ID of the target status of the transition that is blocked.
+     * {@code toStatus} An object containing the ID of the target status of the transition that is blocked.
      * ##### Subtask blocking condition #####
      * A condition that blocks transition on a parent issue if any of its subtasks are in any of one or more statuses.
      * 
@@ -2782,7 +3064,7 @@ public class JiraRESTV2ConsumerApi {
      * 
      * }
      *  *
-     * `statuses` A list of objects containing status IDs.
+     * {@code statuses} A list of objects containing status IDs.
      * ##### User is in any group condition #####
      * A condition that allows users belonging to any group from a list of groups to execute a transition.
      * 
@@ -2826,7 +3108,7 @@ public class JiraRESTV2ConsumerApi {
      * 
      * }
      *  *
-     * `groups` A list of group names.
+     * {@code groups} A list of group names.
      * ##### User is in any project role condition #####
      * A condition that allows only users with at least one project roles from a list of project roles to execute a transition.
      * 
@@ -2934,7 +3216,7 @@ public class JiraRESTV2ConsumerApi {
      * 
      * }
      *  *
-     * `projectRoles` A list of objects containing project role IDs.
+     * {@code projectRoles} A list of objects containing project role IDs.
      * ##### User is in custom field condition #####
      * A condition that allows only users listed in a given custom field to execute the transition.
      * 
@@ -2966,9 +3248,9 @@ public class JiraRESTV2ConsumerApi {
      * 
      * }
      *  *
-     * `allowUserInField` If `true` only a user who is listed in `fieldId` can perform the transition, otherwise, only a user who is not listed in `fieldId` can perform the transition.
+     * {@code allowUserInField} If {@code true} only a user who is listed in {@code fieldId} can perform the transition, otherwise, only a user who is not listed in {@code fieldId} can perform the transition.
      * *
-     * `fieldId` The ID of the field containing the list of users.
+     * {@code fieldId} The ID of the field containing the list of users.
      * ##### User is in group condition #####
      * A condition that allows users belonging to a group to execute a transition.
      * 
@@ -2995,7 +3277,7 @@ public class JiraRESTV2ConsumerApi {
      * 
      * }
      *  *
-     * `group` The name of the group.
+     * {@code group} The name of the group.
      * ##### User is in group custom field condition #####
      * A condition that allows users belonging to a group specified in a custom field to execute a transition.
      * 
@@ -3022,37 +3304,37 @@ public class JiraRESTV2ConsumerApi {
      * 
      * }
      *  *
-     * `fieldId` The ID of the field. Allowed field types:
+     * {@code fieldId} The ID of the field. Allowed field types:
      * 
      * 
      * 
      * 
      *  *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:multigrouppicker`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:multigrouppicker}
      * 
      * 
      * *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:grouppicker`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:grouppicker}
      * 
      * 
      * *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:select`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:select}
      * 
      * 
      * *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:multiselect`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:multiselect}
      * 
      * 
      * *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons}
      * 
      * 
      * *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes}
      * 
      * 
      * *
-     * `com.pyxis.greenhopper.jira:gh-epic-status`
+     * {@code com.pyxis.greenhopper.jira:gh-epic-status}
      * ##### User is in project role condition #####
      * A condition that allows users with a project role to execute a transition.
      * 
@@ -3090,7 +3372,7 @@ public class JiraRESTV2ConsumerApi {
      * 
      * }
      *  *
-     * `projectRole` An object containing the ID of a project role.
+     * {@code projectRole} An object containing the ID of a project role.
      * ##### Value field condition #####
      * A conditions that allows a transition to execute if the value of a field is equal to a constant value or simply set.
      * 
@@ -3132,20 +3414,20 @@ public class JiraRESTV2ConsumerApi {
      * 
      * }
      *  *
-     * `fieldId` The ID of a field used in the comparison.
+     * {@code fieldId} The ID of a field used in the comparison.
      * *
-     * `fieldValue` The expected value of the field.
+     * {@code fieldValue} The expected value of the field.
      * *
-     * `comparisonType` The type of the comparison. Allowed values: `STRING`, `NUMBER`, `DATE`, `DATE_WITHOUT_TIME`, or `OPTIONID`.
+     * {@code comparisonType} The type of the comparison. Allowed values: {@code STRING}, {@code NUMBER}, {@code DATE}, {@code DATE_WITHOUT_TIME}, or {@code OPTIONID}.
      * *
-     * `comparator` One of the supported comparator: `&amp;gt;`, `&amp;gt;=`, `=`, `&amp;lt;=`, `&amp;lt;`, `!=`.
+     * {@code comparator} One of the supported comparator: {@code &amp;gt;}, {@code &amp;gt;=}, {@code =}, {@code &amp;lt;=}, {@code &amp;lt;}, {@code !=}.
      * **Notes:**
      *  *
-     * If you choose the comparison type `STRING`, only `=` and `!=` are valid options.
+     * If you choose the comparison type {@code STRING}, only {@code =} and {@code !=} are valid options.
      * *
-     * You may leave `fieldValue` empty when comparison type is `!=` to indicate that a value is required in the field.
+     * You may leave {@code fieldValue} empty when comparison type is {@code !=} to indicate that a value is required in the field.
      * *
-     * For date fields without time format values as `yyyy-MM-dd`, and for those with time as `yyyy-MM-dd HH:mm`. For example, for July 16 2021 use `2021-07-16`, for 8:05 AM use `2021-07-16 08:05`, and for 4 PM: `2021-07-16 16:00`.
+     * For date fields without time format values as {@code yyyy-MM-dd}, and for those with time as {@code yyyy-MM-dd HH:mm}. For example, for July 16 2021 use {@code 2021-07-16}, for 8:05 AM use {@code 2021-07-16 08:05}, and for 4 PM: {@code 2021-07-16 16:00}.
      * #### Validators ####
      * Validators check that any input made to the transition is valid before the transition is performed.
      * ##### Date field validator #####
@@ -3200,83 +3482,83 @@ public class JiraRESTV2ConsumerApi {
      * 
      * }
      *  *
-     * `comparator` One of the supported comparator: `&amp;gt;`, `&amp;gt;=`, `=`, `&amp;lt;=`, `&amp;lt;`, or `!=`.
+     * {@code comparator} One of the supported comparator: {@code &amp;gt;}, {@code &amp;gt;=}, {@code =}, {@code &amp;lt;=}, {@code &amp;lt;}, or {@code !=}.
      * *
-     * `date1` The date field to validate. Allowed field types:
+     * {@code date1} The date field to validate. Allowed field types:
      * 
      * 
      * 
      * 
      *  *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:datepicker`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:datepicker}
      * 
      * 
      * *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:datetime`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:datetime}
      * 
      * 
      * *
-     * `com.atlassian.jpo:jpo-custom-field-baseline-end`
+     * {@code com.atlassian.jpo:jpo-custom-field-baseline-end}
      * 
      * 
      * *
-     * `com.atlassian.jpo:jpo-custom-field-baseline-start`
+     * {@code com.atlassian.jpo:jpo-custom-field-baseline-start}
      * 
      * 
      * *
-     * `duedate`
+     * {@code duedate}
      * 
      * 
      * *
-     * `created`
+     * {@code created}
      * 
      * 
      * *
-     * `updated`
+     * {@code updated}
      * 
      * 
      * *
-     * `resolutiondate`
+     * {@code resolutiondate}
      * *
-     * `date2` The second date field. Required, if `expression` is not passed. Allowed field types:
+     * {@code date2} The second date field. Required, if {@code expression} is not passed. Allowed field types:
      * 
      * 
      * 
      * 
      *  *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:datepicker`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:datepicker}
      * 
      * 
      * *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:datetime`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:datetime}
      * 
      * 
      * *
-     * `com.atlassian.jpo:jpo-custom-field-baseline-end`
+     * {@code com.atlassian.jpo:jpo-custom-field-baseline-end}
      * 
      * 
      * *
-     * `com.atlassian.jpo:jpo-custom-field-baseline-start`
+     * {@code com.atlassian.jpo:jpo-custom-field-baseline-start}
      * 
      * 
      * *
-     * `duedate`
+     * {@code duedate}
      * 
      * 
      * *
-     * `created`
+     * {@code created}
      * 
      * 
      * *
-     * `updated`
+     * {@code updated}
      * 
      * 
      * *
-     * `resolutiondate`
+     * {@code resolutiondate}
      * *
-     * `expression` An expression specifying an offset. Required, if `date2` is not passed. Offsets are built with a number, with `-` as prefix for the past, and one of these time units: `d` for day, `w` for week, `m` for month, or `y` for year. For example, -2d means two days into the past and 1w means one week into the future. The `now` keyword enables a comparison with the current date.
+     * {@code expression} An expression specifying an offset. Required, if {@code date2} is not passed. Offsets are built with a number, with {@code -} as prefix for the past, and one of these time units: {@code d} for day, {@code w} for week, {@code m} for month, or {@code y} for year. For example, -2d means two days into the past and 1w means one week into the future. The {@code now} keyword enables a comparison with the current date.
      * *
-     * `includeTime` If `true`, then the time part of the data is included for the comparison. If the field doesn't have a time part, 00:00:00 is used.
+     * {@code includeTime} If {@code true}, then the time part of the data is included for the comparison. If the field doesn't have a time part, 00:00:00 is used.
      * ##### Windows date validator #####
      * A validator that checks that a date falls on or after a reference date and before or on the reference date plus a number of days.
      * 
@@ -3317,79 +3599,79 @@ public class JiraRESTV2ConsumerApi {
      * 
      * }
      *  *
-     * `date1` The date field to validate. Allowed field types:
+     * {@code date1} The date field to validate. Allowed field types:
      * 
      * 
      * 
      * 
      *  *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:datepicker`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:datepicker}
      * 
      * 
      * *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:datetime`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:datetime}
      * 
      * 
      * *
-     * `com.atlassian.jpo:jpo-custom-field-baseline-end`
+     * {@code com.atlassian.jpo:jpo-custom-field-baseline-end}
      * 
      * 
      * *
-     * `com.atlassian.jpo:jpo-custom-field-baseline-start`
+     * {@code com.atlassian.jpo:jpo-custom-field-baseline-start}
      * 
      * 
      * *
-     * `duedate`
+     * {@code duedate}
      * 
      * 
      * *
-     * `created`
+     * {@code created}
      * 
      * 
      * *
-     * `updated`
+     * {@code updated}
      * 
      * 
      * *
-     * `resolutiondate`
+     * {@code resolutiondate}
      * *
-     * `date2` The reference date. Allowed field types:
+     * {@code date2} The reference date. Allowed field types:
      * 
      * 
      * 
      * 
      *  *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:datepicker`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:datepicker}
      * 
      * 
      * *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:datetime`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:datetime}
      * 
      * 
      * *
-     * `com.atlassian.jpo:jpo-custom-field-baseline-end`
+     * {@code com.atlassian.jpo:jpo-custom-field-baseline-end}
      * 
      * 
      * *
-     * `com.atlassian.jpo:jpo-custom-field-baseline-start`
+     * {@code com.atlassian.jpo:jpo-custom-field-baseline-start}
      * 
      * 
      * *
-     * `duedate`
+     * {@code duedate}
      * 
      * 
      * *
-     * `created`
+     * {@code created}
      * 
      * 
      * *
-     * `updated`
+     * {@code updated}
      * 
      * 
      * *
-     * `resolutiondate`
+     * {@code resolutiondate}
      * *
-     * `windowsDays` A positive integer indicating a number of days.
+     * {@code windowsDays} A positive integer indicating a number of days.
      * ##### Field required validator #####
      * A validator that checks fields are not empty. By default, if a field is not included in the current context it's ignored and not validated.
      * 
@@ -3469,11 +3751,11 @@ public class JiraRESTV2ConsumerApi {
      * 
      * }
      *  *
-     * `ignoreContext` If `true`, then the context is ignored and all the fields are validated.
+     * {@code ignoreContext} If {@code true}, then the context is ignored and all the fields are validated.
      * *
-     * `errorMessage` OPTIONAL. The error message displayed when one or more fields are empty. A default error message is shown if an error message is not provided.
+     * {@code errorMessage} OPTIONAL. The error message displayed when one or more fields are empty. A default error message is shown if an error message is not provided.
      * *
-     * `fieldIds` The list of fields to validate.
+     * {@code fieldIds} The list of fields to validate.
      * ##### Field changed validator #####
      * A validator that checks that a field value is changed. However, this validation can be ignored for users from a list of groups.
      * 
@@ -3544,11 +3826,11 @@ public class JiraRESTV2ConsumerApi {
      * 
      * }
      *  *
-     * `fieldId` The ID of a field.
+     * {@code fieldId} The ID of a field.
      * *
-     * `errorMessage` OPTIONAL. The error message displayed if the field is not changed. A default error message is shown if the error message is not provided.
+     * {@code errorMessage} OPTIONAL. The error message displayed if the field is not changed. A default error message is shown if the error message is not provided.
      * *
-     * `exemptedGroups` OPTIONAL. The list of groups.
+     * {@code exemptedGroups} OPTIONAL. The list of groups.
      * ##### Field has single value validator #####
      * A validator that checks that a multi-select field has only one value. Optionally, the validation can ignore values copied from subtasks.
      * 
@@ -3587,9 +3869,9 @@ public class JiraRESTV2ConsumerApi {
      * 
      * }
      *  *
-     * `fieldId` The ID of a field.
+     * {@code fieldId} The ID of a field.
      * *
-     * `excludeSubtasks` If `true`, then values copied from subtasks are ignored.
+     * {@code excludeSubtasks} If {@code true}, then values copied from subtasks are ignored.
      * ##### Parent status validator #####
      * A validator that checks the status of the parent issue of a subtask. Ìf the issue is not a subtask, no validation is performed.
      * 
@@ -3684,7 +3966,7 @@ public class JiraRESTV2ConsumerApi {
      * 
      * }
      *  *
-     * `parentStatus` The list of required parent issue statuses.
+     * {@code parentStatus} The list of required parent issue statuses.
      * ##### Permission validator #####
      * A validator that checks the user has a permission.
      * 
@@ -3712,7 +3994,7 @@ public class JiraRESTV2ConsumerApi {
      * 
      * }
      *  *
-     * `permissionKey` The permission required to perform the transition. Allowed values: [built-in](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-permission-schemes/#built-in-permissions) or app defined permissions.
+     * {@code permissionKey} The permission required to perform the transition. Allowed values: [built-in](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-permission-schemes/#built-in-permissions) or app defined permissions.
      * ##### Previous status validator #####
      * A validator that checks if the issue has held a status.
      * 
@@ -3760,9 +4042,9 @@ public class JiraRESTV2ConsumerApi {
      * 
      * }
      *  *
-     * `mostRecentStatusOnly` If `true`, then only the issue's preceding status (the one immediately before the current status) is checked.
+     * {@code mostRecentStatusOnly} If {@code true}, then only the issue's preceding status (the one immediately before the current status) is checked.
      * *
-     * `previousStatus` An object containing the ID of an issue status.
+     * {@code previousStatus} An object containing the ID of an issue status.
      * ##### Regular expression validator #####
      * A validator that checks the content of a field against a regular expression.
      * 
@@ -3796,59 +4078,59 @@ public class JiraRESTV2ConsumerApi {
      * 
      * }
      *  *
-     * `regExp`A regular expression.
+     * {@code regExp}A regular expression.
      * *
-     * `fieldId` The ID of a field. Allowed field types:
+     * {@code fieldId} The ID of a field. Allowed field types:
      * 
      * 
      * 
      * 
      *  *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:select`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:select}
      * 
      * 
      * *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:multiselect`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:multiselect}
      * 
      * 
      * *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons}
      * 
      * 
      * *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes}
      * 
      * 
      * *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:textarea`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:textarea}
      * 
      * 
      * *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:textfield`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:textfield}
      * 
      * 
      * *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:url`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:url}
      * 
      * 
      * *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:float`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:float}
      * 
      * 
      * *
-     * `com.pyxis.greenhopper.jira:jsw-story-points`
+     * {@code com.pyxis.greenhopper.jira:jsw-story-points}
      * 
      * 
      * *
-     * `com.pyxis.greenhopper.jira:gh-epic-status`
+     * {@code com.pyxis.greenhopper.jira:gh-epic-status}
      * 
      * 
      * *
-     * `description`
+     * {@code description}
      * 
      * 
      * *
-     * `summary`
+     * {@code summary}
      * ##### User permission validator #####
      * A validator that checks if a user has a permission. Obsolete. You may encounter this validator when getting transition rules and can pass it when updating or creating rules, for example, when you want to duplicate the rules from a workflow on a new workflow.
      * 
@@ -3894,11 +4176,11 @@ public class JiraRESTV2ConsumerApi {
      * 
      * }
      *  *
-     * `permissionKey` The permission to be validated. Allowed values: [built-in](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-permission-schemes/#built-in-permissions) or app defined permissions.
+     * {@code permissionKey} The permission to be validated. Allowed values: [built-in](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-permission-schemes/#built-in-permissions) or app defined permissions.
      * *
-     * `nullAllowed` If `true`, allows the transition when `username` is empty.
+     * {@code nullAllowed} If {@code true}, allows the transition when {@code username} is empty.
      * *
-     * `username` The username to validate against the `permissionKey`.
+     * {@code username} The username to validate against the {@code permissionKey}.
      * #### Post functions ####
      * Post functions carry out any additional processing required after a Jira workflow transition is executed.
      * ##### Fire issue event function #####
@@ -3937,9 +4219,9 @@ public class JiraRESTV2ConsumerApi {
      * 
      * 
      * }
-     * **Note:** If provided, this post function overrides the default `FireIssueEventFunction`. Can be included once in a transition.
+     * **Note:** If provided, this post function overrides the default {@code FireIssueEventFunction}. Can be included once in a transition.
      *  *
-     * `event` An object containing the ID of the issue event.
+     * {@code event} An object containing the ID of the issue event.
      * ##### Update issue status #####
      * A post function that sets issue status to the linked status of the destination workflow status.
      * 
@@ -3980,7 +4262,7 @@ public class JiraRESTV2ConsumerApi {
      * }
      * **Note:** This post function can only be added to the initial transition and can only be added once.
      * ##### Assign to current user function #####
-     * A post function that assigns the issue to the current user if the current user has the `ASSIGNABLE_USER` permission.
+     * A post function that assigns the issue to the current user if the current user has the {@code ASSIGNABLE_USER} permission.
      * 
      * 
      * {
@@ -4047,7 +4329,7 @@ public class JiraRESTV2ConsumerApi {
      * 
      * }
      *  *
-     * `fieldId` The ID of the field.
+     * {@code fieldId} The ID of the field.
      * ##### Copy value from other field function #####
      * A post function that copies the value of one field to another, either within an issue or from parent to subtask.
      * 
@@ -4084,11 +4366,11 @@ public class JiraRESTV2ConsumerApi {
      * 
      * }
      *  *
-     * `sourceFieldId` The ID of the source field.
+     * {@code sourceFieldId} The ID of the source field.
      * *
-     * `destinationFieldId` The ID of the destination field.
+     * {@code destinationFieldId} The ID of the destination field.
      * *
-     * `copyType` Use `same` to copy the value from a field inside the issue, or `parent` to copy the value from the parent issue.
+     * {@code copyType} Use {@code same} to copy the value from a field inside the issue, or {@code parent} to copy the value from the parent issue.
      * ##### Create Crucible review workflow function #####
      * A post function that creates a Crucible review for all unreviewed code for the issue.
      * 
@@ -4158,9 +4440,9 @@ public class JiraRESTV2ConsumerApi {
      * 
      * }
      *  *
-     * `projectRole` An object containing the ID of the project role.
+     * {@code projectRole} An object containing the ID of the project role.
      * *
-     * `issueSecurityLevel` OPTIONAL. The object containing the ID of the security level. If not passed, then the security level is set to `none`.
+     * {@code issueSecurityLevel} OPTIONAL. The object containing the ID of the security level. If not passed, then the security level is set to {@code none}.
      * ##### Trigger a webhook function #####
      * A post function that triggers a webhook.
      * 
@@ -4198,7 +4480,7 @@ public class JiraRESTV2ConsumerApi {
      * 
      * }
      *  *
-     * `webhook` An object containing the ID of the webhook listener to trigger.
+     * {@code webhook} An object containing the ID of the webhook listener to trigger.
      * ##### Update issue custom field function #####
      * A post function that updates the content of an issue custom field.
      * 
@@ -4235,11 +4517,11 @@ public class JiraRESTV2ConsumerApi {
      * 
      * }
      *  *
-     * `mode` Use `replace` to override the field content with `fieldValue` or `append` to add `fieldValue` to the end of the field content.
+     * {@code mode} Use {@code replace} to override the field content with {@code fieldValue} or {@code append} to add {@code fieldValue} to the end of the field content.
      * *
-     * `fieldId` The ID of the field.
+     * {@code fieldId} The ID of the field.
      * *
-     * `fieldValue` The update content.
+     * {@code fieldValue} The update content.
      * ##### Update issue field function #####
      * A post function that updates a simple issue field.
      * 
@@ -4271,49 +4553,49 @@ public class JiraRESTV2ConsumerApi {
      * 
      * }
      *  *
-     * `fieldId` The ID of the field. Allowed field types:
+     * {@code fieldId} The ID of the field. Allowed field types:
      * 
      * 
      * 
      * 
      *  *
-     * `assignee`
+     * {@code assignee}
      * 
      * 
      * *
-     * `description`
+     * {@code description}
      * 
      * 
      * *
-     * `environment`
+     * {@code environment}
      * 
      * 
      * *
-     * `priority`
+     * {@code priority}
      * 
      * 
      * *
-     * `resolution`
+     * {@code resolution}
      * 
      * 
      * *
-     * `summary`
+     * {@code summary}
      * 
      * 
      * *
-     * `timeoriginalestimate`
+     * {@code timeoriginalestimate}
      * 
      * 
      * *
-     * `timeestimate`
+     * {@code timeestimate}
      * 
      * 
      * *
-     * `timespent`
+     * {@code timespent}
      * *
-     * `fieldValue` The update value.
+     * {@code fieldValue} The update value.
      * *
-     * If the `fieldId` is `assignee`, the `fieldValue` should be one of these values:
+     * If the {@code fieldId} is {@code assignee}, the {@code fieldValue} should be one of these values:
      * 
      * 
      * 
@@ -4323,11 +4605,11 @@ public class JiraRESTV2ConsumerApi {
      * 
      * 
      * *
-     * `automatic`.
+     * {@code automatic}.
      * 
      * 
      * *
-     * a blank string, which sets the value to `unassigned`.
+     * a blank string, which sets the value to {@code unassigned}.
      * #### Connect rules ####
      * Connect rules are conditions, validators, and post functions of a transition that are registered by Connect apps. To create a rule registered by the app, the app must be enabled and the rule's module must exist.
      * 
@@ -4354,14 +4636,17 @@ public class JiraRESTV2ConsumerApi {
      * 
      * }
      *  *
-     * `type` A Connect rule key in a form of `appKey__moduleKey`.
+     * {@code type} A Connect rule key in a form of {@code appKey__moduleKey}.
      * *
-     * `value` The stringified JSON configuration of a Connect rule.
+     * {@code value} The stringified JSON configuration of a Connect rule.
      * #### Forge rules ####
      * Forge transition rules are not yet supported.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>createWorkflowDetails: The workflow details.</li>
+     * </ul>
      */
     public WorkflowIDs createWorkflow(Consumer<CreateWorkflowOperationSpec> spec) {
         CreateWorkflowOperationSpec r = new CreateWorkflowOperationSpec(spec);
@@ -4374,7 +4659,10 @@ public class JiraRESTV2ConsumerApi {
      * Creates a workflow scheme.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>workflowScheme: </li>
+     * </ul>
      */
     public WorkflowScheme createWorkflowScheme(Consumer<CreateWorkflowSchemeOperationSpec> spec) {
         CreateWorkflowSchemeOperationSpec r = new CreateWorkflowSchemeOperationSpec(spec);
@@ -4387,7 +4675,10 @@ public class JiraRESTV2ConsumerApi {
      * Create a draft workflow scheme from an active workflow scheme, by copying the active workflow scheme. Note that an active workflow scheme can only have one draft workflow scheme.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the active workflow scheme that the draft is created from.</li>
+     * </ul>
      */
     public WorkflowScheme createWorkflowSchemeDraftFromParent(Consumer<CreateWorkflowSchemeDraftFromParentOperationSpec> spec) {
         CreateWorkflowSchemeDraftFromParentOperationSpec r = new CreateWorkflowSchemeDraftFromParentOperationSpec(spec);
@@ -4400,11 +4691,18 @@ public class JiraRESTV2ConsumerApi {
      * Adds a property to a workflow transition. Transition properties are used to change the behavior of a transition. For more information, see [Transition properties](https://confluence.atlassian.com/x/zIhKLg#Advancedworkflowconfiguration-transitionproperties) and [Workflow properties](https://confluence.atlassian.com/x/JYlKLg).
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>transitionId: The ID of the transition. To get the ID, view the workflow in text mode in the Jira admin settings. The ID is shown next to the transition.</li>
+     *   <li>key: The key of the property being added, also known as the name of the property. Set this to the same value as the {@code key} defined in the request body.</li>
+     *   <li>workflowName: The name of the workflow that the transition belongs to.</li>
+     *   <li>workflowTransitionProperty: </li>
+     *   <li>workflowMode: The workflow status. Set to *live* for inactive workflows or *draft* for draft workflows. Active workflows cannot be edited.</li>
+     * </ul>
      */
     public WorkflowTransitionProperty createWorkflowTransitionProperty(Consumer<CreateWorkflowTransitionPropertyOperationSpec> spec) {
         CreateWorkflowTransitionPropertyOperationSpec r = new CreateWorkflowTransitionPropertyOperationSpec(spec);
-        return api.createWorkflowTransitionProperty(r.transitionId(), r.key(), r.workflowName(), r.requestBody(), r.workflowMode());
+        return api.createWorkflowTransitionProperty(r.transitionId(), r.key(), r.workflowName(), r.workflowTransitionProperty(), r.workflowMode());
     }
 
     /**
@@ -4417,7 +4715,10 @@ public class JiraRESTV2ConsumerApi {
      * *
      * *Administer projects* project permissions to create project-scoped workflows
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>workflowCreateRequest: </li>
+     * </ul>
      */
     public WorkflowCreateResponse createWorkflows(Consumer<CreateWorkflowsOperationSpec> spec) {
         CreateWorkflowsOperationSpec r = new CreateWorkflowsOperationSpec(spec);
@@ -4432,7 +4733,14 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Administer Projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project or *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectIdOrKey: The project ID or project key (case sensitive).</li>
+     *   <li>id: The ID of the project role. Use [Get all project roles](#api-rest-api-2-role-get) to get a list of project role IDs.</li>
+     *   <li>user: The user account ID of the user to remove from the project role.</li>
+     *   <li>group: The name of the group to remove from the project role. This parameter cannot be used with the {@code groupId} parameter. As a group's name can change, use of {@code groupId} is recommended.</li>
+     *   <li>groupId: The ID of the group to remove from the project role. This parameter cannot be used with the {@code group} parameter.</li>
+     * </ul>
      */
     public void deleteActor(Consumer<DeleteActorOperationSpec> spec) {
         DeleteActorOperationSpec r = new DeleteActorOperationSpec(spec);
@@ -4443,11 +4751,15 @@ public class JiraRESTV2ConsumerApi {
      * Delete and replace version
      * <p>
      * Deletes a project version.
-     * Alternative versions can be provided to update issues that use the deleted version in `fixVersion`, `affectedVersion`, or any version picker custom fields. If alternatives are not provided, occurrences of `fixVersion`, `affectedVersion`, and any version picker custom field, that contain the deleted version, are cleared. Any replacement version must be in the same project as the version being deleted and cannot be the version being deleted.
+     * Alternative versions can be provided to update issues that use the deleted version in {@code fixVersion}, {@code affectedVersion}, or any version picker custom fields. If alternatives are not provided, occurrences of {@code fixVersion}, {@code affectedVersion}, and any version picker custom field, that contain the deleted version, are cleared. Any replacement version must be in the same project as the version being deleted and cannot be the version being deleted.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) or *Administer Projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project that contains the version.
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the version.</li>
+     *   <li>deleteAndReplaceVersionBean: </li>
+     * </ul>
      */
     public Object deleteAndReplaceVersion(Consumer<DeleteAndReplaceVersionOperationSpec> spec) {
         DeleteAndReplaceVersionOperationSpec r = new DeleteAndReplaceVersionOperationSpec(spec);
@@ -4460,7 +4772,12 @@ public class JiraRESTV2ConsumerApi {
      * Deletes an avatar from a project or issue type.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>type: The avatar type.</li>
+     *   <li>owningObjectId: The ID of the item the avatar is associated with.</li>
+     *   <li>id: The ID of the avatar.</li>
+     * </ul>
      */
     public void deleteAvatar(Consumer<DeleteAvatarOperationSpec> spec) {
         DeleteAvatarOperationSpec r = new DeleteAvatarOperationSpec(spec);
@@ -4481,7 +4798,11 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If the comment has visibility restrictions, the user belongs to the group or has the role visibility is restricted to.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue.</li>
+     *   <li>id: The ID of the comment.</li>
+     * </ul>
      */
     public void deleteComment(Consumer<DeleteCommentOperationSpec> spec) {
         DeleteCommentOperationSpec r = new DeleteCommentOperationSpec(spec);
@@ -4499,7 +4820,11 @@ public class JiraRESTV2ConsumerApi {
      * *Edit Own Comments* [project permission](https://confluence.atlassian.com/x/yodKLg) to delete a property from a comment created by the user.
      * Also, when the visibility of a comment is restricted to a role or group the user must be a member of that role or group.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>commentId: The ID of the comment.</li>
+     *   <li>propertyKey: The key of the property.</li>
+     * </ul>
      */
     public void deleteCommentProperty(Consumer<DeleteCommentPropertyOperationSpec> spec) {
         DeleteCommentPropertyOperationSpec r = new DeleteCommentPropertyOperationSpec(spec);
@@ -4513,7 +4838,11 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Administer projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project containing the component or *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the component.</li>
+     *   <li>moveIssuesTo: The ID of the component to replace the deleted component. If this value is null no replacement is made.</li>
+     * </ul>
      */
     public void deleteComponent(Consumer<DeleteComponentOperationSpec> spec) {
         DeleteComponentOperationSpec r = new DeleteComponentOperationSpec(spec);
@@ -4524,10 +4853,13 @@ public class JiraRESTV2ConsumerApi {
      * Delete custom field
      * <p>
      * Deletes a custom field. The custom field is deleted whether it is in the trash or not. See [Edit or delete a custom field](https://confluence.atlassian.com/x/Z44fOw) for more information on trashing and deleting custom fields.
-     * This operation is [asynchronous](#async). Follow the `location` link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
+     * This operation is [asynchronous](#async). Follow the {@code location} link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of a custom field.</li>
+     * </ul>
      */
     public void deleteCustomField(Consumer<DeleteCustomFieldOperationSpec> spec) {
         DeleteCustomFieldOperationSpec r = new DeleteCustomFieldOperationSpec(spec);
@@ -4540,7 +4872,11 @@ public class JiraRESTV2ConsumerApi {
      * Deletes a [ custom field context](https://confluence.atlassian.com/adminjiracloud/what-are-custom-field-contexts-991923859.html).
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldId: The ID of the custom field.</li>
+     *   <li>contextId: The ID of the context.</li>
+     * </ul>
      */
     public Object deleteCustomFieldContext(Consumer<DeleteCustomFieldContextOperationSpec> spec) {
         DeleteCustomFieldContextOperationSpec r = new DeleteCustomFieldContextOperationSpec(spec);
@@ -4555,7 +4891,12 @@ public class JiraRESTV2ConsumerApi {
      * This operation works for custom field options created in Jira or the operations from this resource. **To work with issue field select list options created for Connect apps use the [Issue custom field options (apps)](#api-group-issue-custom-field-options--apps-) operations.**
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldId: The ID of the custom field.</li>
+     *   <li>contextId: The ID of the context from which an option should be deleted.</li>
+     *   <li>optionId: The ID of the option to delete.</li>
+     * </ul>
      */
     public void deleteCustomFieldOption(Consumer<DeleteCustomFieldOptionOperationSpec> spec) {
         DeleteCustomFieldOptionOperationSpec r = new DeleteCustomFieldOptionOperationSpec(spec);
@@ -4569,7 +4910,10 @@ public class JiraRESTV2ConsumerApi {
      * **[Permissions](#permissions) required:** None
      * The dashboard to be deleted must be owned by the user.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the dashboard.</li>
+     * </ul>
      */
     public void deleteDashboard(Consumer<DeleteDashboardOperationSpec> spec) {
         DeleteDashboardOperationSpec r = new DeleteDashboardOperationSpec(spec);
@@ -4583,7 +4927,12 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** The user must be the owner of the dashboard. Note, users with the *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) are considered owners of the System dashboard.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>dashboardId: The ID of the dashboard.</li>
+     *   <li>itemId: The ID of the dashboard item.</li>
+     *   <li>propertyKey: The key of the dashboard item property.</li>
+     * </ul>
      */
     public void deleteDashboardItemProperty(Consumer<DeleteDashboardItemPropertyOperationSpec> spec) {
         DeleteDashboardItemPropertyOperationSpec r = new DeleteDashboardItemPropertyOperationSpec(spec);
@@ -4594,10 +4943,14 @@ public class JiraRESTV2ConsumerApi {
      * Delete default workflow
      * <p>
      * Resets the default workflow for a workflow scheme. That is, the default workflow is set to Jira's system workflow (the *jira* workflow).
-     * Note that active workflow schemes cannot be edited. If the workflow scheme is active, set `updateDraftIfNeeded` to `true` and a draft workflow scheme is created or updated with the default workflow reset. The draft workflow scheme can be published in Jira.
+     * Note that active workflow schemes cannot be edited. If the workflow scheme is active, set {@code updateDraftIfNeeded} to {@code true} and a draft workflow scheme is created or updated with the default workflow reset. The draft workflow scheme can be published in Jira.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the workflow scheme.</li>
+     *   <li>updateDraftIfNeeded: Set to true to create or update the draft of a workflow scheme and delete the mapping from the draft, when the workflow scheme cannot be edited. Defaults to {@code false}.</li>
+     * </ul>
      */
     public WorkflowScheme deleteDefaultWorkflow(Consumer<DeleteDefaultWorkflowOperationSpec> spec) {
         DeleteDefaultWorkflowOperationSpec r = new DeleteDefaultWorkflowOperationSpec(spec);
@@ -4610,7 +4963,10 @@ public class JiraRESTV2ConsumerApi {
      * Resets the default workflow for a workflow scheme's draft. That is, the default workflow is set to Jira's system workflow (the *jira* workflow).
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the workflow scheme that the draft belongs to.</li>
+     * </ul>
      */
     public WorkflowScheme deleteDraftDefaultWorkflow(Consumer<DeleteDraftDefaultWorkflowOperationSpec> spec) {
         DeleteDraftDefaultWorkflowOperationSpec r = new DeleteDraftDefaultWorkflowOperationSpec(spec);
@@ -4623,7 +4979,11 @@ public class JiraRESTV2ConsumerApi {
      * Deletes the workflow-issue type mapping for a workflow in a workflow scheme's draft.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the workflow scheme that the draft belongs to.</li>
+     *   <li>workflowName: The name of the workflow.</li>
+     * </ul>
      */
     public void deleteDraftWorkflowMapping(Consumer<DeleteDraftWorkflowMappingOperationSpec> spec) {
         DeleteDraftWorkflowMappingOperationSpec r = new DeleteDraftWorkflowMappingOperationSpec(spec);
@@ -4636,7 +4996,11 @@ public class JiraRESTV2ConsumerApi {
      * Removes a filter as a favorite for the user. Note that this operation only removes filters visible to the user from the user's favorites list. For example, if the user favorites a public filter that is subsequently made private (and is therefore no longer visible on their favorites list) they cannot remove it from their favorites list.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the filter.</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information about filter in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code sharedUsers} Returns the users that the filter is shared with. This includes users that can browse projects that the filter is shared with. If you don't specify {@code sharedUsers}, then the {@code sharedUsers} object is returned but it doesn't list any users. The list of users returned is limited to 1000, to access additional users append {@code [start-index:end-index]} to the expand request. For example, to access the next 1000 users, use {@code ?expand=sharedUsers[1001:2000]}.  *  {@code subscriptions} Returns the users that are subscribed to the filter. If you don't specify {@code subscriptions}, the {@code subscriptions} object is returned but it doesn't list any subscriptions. The list of subscriptions returned is limited to 1000, to access additional subscriptions append {@code [start-index:end-index]} to the expand request. For example, to access the next 1000 subscriptions, use {@code ?expand=subscriptions[1001:2000]}.</li>
+     * </ul>
      */
     public Filter deleteFavouriteForFilter(Consumer<DeleteFavouriteForFilterOperationSpec> spec) {
         DeleteFavouriteForFilterOperationSpec r = new DeleteFavouriteForFilterOperationSpec(spec);
@@ -4650,7 +5014,10 @@ public class JiraRESTV2ConsumerApi {
      * This operation can only delete configurations used in company-managed (classic) projects.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the field configuration.</li>
+     * </ul>
      */
     public Object deleteFieldConfiguration(Consumer<DeleteFieldConfigurationOperationSpec> spec) {
         DeleteFieldConfigurationOperationSpec r = new DeleteFieldConfigurationOperationSpec(spec);
@@ -4664,7 +5031,10 @@ public class JiraRESTV2ConsumerApi {
      * This operation can only delete field configuration schemes used in company-managed (classic) projects.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the field configuration scheme.</li>
+     * </ul>
      */
     public Object deleteFieldConfigurationScheme(Consumer<DeleteFieldConfigurationSchemeOperationSpec> spec) {
         DeleteFieldConfigurationSchemeOperationSpec r = new DeleteFieldConfigurationSchemeOperationSpec(spec);
@@ -4677,7 +5047,10 @@ public class JiraRESTV2ConsumerApi {
      * Delete a filter.
      * **[Permissions](#permissions) required:** Permission to access Jira, however filters can only be deleted by the creator of the filter or a user with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the filter to delete.</li>
+     * </ul>
      */
     public void deleteFilter(Consumer<DeleteFilterOperationSpec> spec) {
         DeleteFilterOperationSpec r = new DeleteFilterOperationSpec(spec);
@@ -4699,7 +5072,10 @@ public class JiraRESTV2ConsumerApi {
      * associated with any draft workflow scheme.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>entityId: The entity ID of the workflow.</li>
+     * </ul>
      */
     public void deleteInactiveWorkflow(Consumer<DeleteInactiveWorkflowOperationSpec> spec) {
         DeleteInactiveWorkflowOperationSpec r = new DeleteInactiveWorkflowOperationSpec(spec);
@@ -4710,7 +5086,7 @@ public class JiraRESTV2ConsumerApi {
      * Delete issue
      * <p>
      * Deletes an issue.
-     * An issue cannot be deleted if it has one or more subtasks. To delete an issue with subtasks, set `deleteSubtasks`. This causes the issue's subtasks to be deleted with the issue.
+     * An issue cannot be deleted if it has one or more subtasks. To delete an issue with subtasks, set {@code deleteSubtasks}. This causes the issue's subtasks to be deleted with the issue.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:**
      *  *
@@ -4718,7 +5094,11 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue.</li>
+     *   <li>deleteSubtasks: Whether the issue's subtasks are deleted when the issue is deleted.</li>
+     * </ul>
      */
     public void deleteIssue(Consumer<DeleteIssueOperationSpec> spec) {
         DeleteIssueOperationSpec r = new DeleteIssueOperationSpec(spec);
@@ -4732,7 +5112,11 @@ public class JiraRESTV2ConsumerApi {
      * Note that this operation **only works for issue field select list options added by Connect apps**, it cannot be used with issue field select list options created in Jira or using operations from the [Issue custom field options](#api-group-Issue-custom-field-options) resource.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). Jira permissions are not required for the app providing the field.
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldKey: The field key is specified in the following format: **$(app-key)\\_\\_$(field-key)**. For example, *example-add-on\\_\\_example-issue-field*. To determine the {@code fieldKey} value, do one of the following:   *  open the app's plugin descriptor, then **app-key** is the key at the top and **field-key** is the key in the {@code jiraIssueFields} module. **app-key** can also be found in the app listing in the Atlassian Universal Plugin Manager.  *  run [Get fields](#api-rest-api-2-field-get) and in the field details the value is returned in {@code key}. For example, {@code "key": "teams-add-on__team-issue-field"}</li>
+     *   <li>optionId: The ID of the option to be deleted.</li>
+     * </ul>
      */
     public Object deleteIssueFieldOption(Consumer<DeleteIssueFieldOptionOperationSpec> spec) {
         DeleteIssueFieldOptionOperationSpec r = new DeleteIssueFieldOptionOperationSpec(spec);
@@ -4752,7 +5136,10 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, permission to view both of the issues.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>linkId: The ID of the issue link.</li>
+     * </ul>
      */
     public void deleteIssueLink(Consumer<DeleteIssueLinkOperationSpec> spec) {
         DeleteIssueLinkOperationSpec r = new DeleteIssueLinkOperationSpec(spec);
@@ -4766,7 +5153,10 @@ public class JiraRESTV2ConsumerApi {
      * To use this operation, the site must have [issue linking](https://confluence.atlassian.com/x/yoXKM) enabled.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueLinkTypeId: The ID of the issue link type.</li>
+     * </ul>
      */
     public void deleteIssueLinkType(Consumer<DeleteIssueLinkTypeOperationSpec> spec) {
         DeleteIssueLinkTypeOperationSpec r = new DeleteIssueLinkTypeOperationSpec(spec);
@@ -4784,7 +5174,11 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The key or ID of the issue.</li>
+     *   <li>propertyKey: The key of the property.</li>
+     * </ul>
      */
     public void deleteIssueProperty(Consumer<DeleteIssuePropertyOperationSpec> spec) {
         DeleteIssuePropertyOperationSpec r = new DeleteIssuePropertyOperationSpec(spec);
@@ -4794,10 +5188,14 @@ public class JiraRESTV2ConsumerApi {
     /**
      * Delete issue type
      * <p>
-     * Deletes the issue type. If the issue type is in use, all uses are updated with the alternative issue type (`alternativeIssueTypeId`). A list of alternative issue types are obtained from the [Get alternative issue types](#api-rest-api-2-issuetype-id-alternatives-get) resource.
+     * Deletes the issue type. If the issue type is in use, all uses are updated with the alternative issue type ({@code alternativeIssueTypeId}). A list of alternative issue types are obtained from the [Get alternative issue types](#api-rest-api-2-issuetype-id-alternatives-get) resource.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the issue type.</li>
+     *   <li>alternativeIssueTypeId: The ID of the replacement issue type.</li>
+     * </ul>
      */
     public void deleteIssueType(Consumer<DeleteIssueTypeOperationSpec> spec) {
         DeleteIssueTypeOperationSpec r = new DeleteIssueTypeOperationSpec(spec);
@@ -4810,7 +5208,11 @@ public class JiraRESTV2ConsumerApi {
      * Deletes the [issue type property](https://developer.atlassian.com/cloud/jira/platform/storing-data-without-a-database/#a-id-jira-entity-properties-a-jira-entity-properties).
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueTypeId: The ID of the issue type.</li>
+     *   <li>propertyKey: The key of the property. Use [Get issue type property keys](#api-rest-api-2-issuetype-issueTypeId-properties-get) to get a list of all issue type property keys.</li>
+     * </ul>
      */
     public void deleteIssueTypeProperty(Consumer<DeleteIssueTypePropertyOperationSpec> spec) {
         DeleteIssueTypePropertyOperationSpec r = new DeleteIssueTypePropertyOperationSpec(spec);
@@ -4825,7 +5227,10 @@ public class JiraRESTV2ConsumerApi {
      * Any projects assigned to the scheme are reassigned to the default issue type scheme.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueTypeSchemeId: The ID of the issue type scheme.</li>
+     * </ul>
      */
     public Object deleteIssueTypeScheme(Consumer<DeleteIssueTypeSchemeOperationSpec> spec) {
         DeleteIssueTypeSchemeOperationSpec r = new DeleteIssueTypeSchemeOperationSpec(spec);
@@ -4838,7 +5243,10 @@ public class JiraRESTV2ConsumerApi {
      * Deletes an issue type screen scheme.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueTypeScreenSchemeId: The ID of the issue type screen scheme.</li>
+     * </ul>
      */
     public Object deleteIssueTypeScreenScheme(Consumer<DeleteIssueTypeScreenSchemeOperationSpec> spec) {
         DeleteIssueTypeScreenSchemeOperationSpec r = new DeleteIssueTypeScreenSchemeOperationSpec(spec);
@@ -4851,12 +5259,10 @@ public class JiraRESTV2ConsumerApi {
      * Deprecated, use [ Update a user profile](https://developer.atlassian.com/cloud/admin/user-management/rest/#api-users-account-id-manage-profile-patch) from the user management REST API instead.
      * Deletes the locale of the user, which restores the default setting.
      * **[Permissions](#permissions) required:** Permission to access Jira.
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
      * @deprecated
      */
     @Deprecated
-    public Object deleteLocale(Consumer<DeleteLocaleOperationSpec> spec) {
-        DeleteLocaleOperationSpec r = new DeleteLocaleOperationSpec(spec);
+    public Object deleteLocale() {
         return api.deleteLocale();
     }
 
@@ -4866,7 +5272,10 @@ public class JiraRESTV2ConsumerApi {
      * Deletes a notification scheme.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>notificationSchemeId: The ID of the notification scheme.</li>
+     * </ul>
      */
     public Object deleteNotificationScheme(Consumer<DeleteNotificationSchemeOperationSpec> spec) {
         DeleteNotificationSchemeOperationSpec r = new DeleteNotificationSchemeOperationSpec(spec);
@@ -4879,7 +5288,10 @@ public class JiraRESTV2ConsumerApi {
      * Deletes a permission scheme.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>schemeId: The ID of the permission scheme being deleted.</li>
+     * </ul>
      */
     public void deletePermissionScheme(Consumer<DeletePermissionSchemeOperationSpec> spec) {
         DeletePermissionSchemeOperationSpec r = new DeletePermissionSchemeOperationSpec(spec);
@@ -4892,7 +5304,11 @@ public class JiraRESTV2ConsumerApi {
      * Deletes a permission grant from a permission scheme. See [About permission schemes and grants](../api-group-permission-schemes/#about-permission-schemes-and-grants) for more details.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>schemeId: The ID of the permission scheme to delete the permission grant from.</li>
+     *   <li>permissionId: The ID of the permission grant to delete.</li>
+     * </ul>
      */
     public void deletePermissionSchemeEntity(Consumer<DeletePermissionSchemeEntityOperationSpec> spec) {
         DeletePermissionSchemeEntityOperationSpec r = new DeletePermissionSchemeEntityOperationSpec(spec);
@@ -4903,10 +5319,14 @@ public class JiraRESTV2ConsumerApi {
      * Delete priority
      * <p>
      * Deletes an issue priority.
-     * This operation is [asynchronous](#async). Follow the `location` link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
+     * This operation is [asynchronous](#async). Follow the {@code location} link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the issue priority.</li>
+     *   <li>replaceWith: The ID of the issue priority that will replace the currently selected resolution.</li>
+     * </ul>
      */
     public void deletePriority(Consumer<DeletePriorityOperationSpec> spec) {
         DeletePriorityOperationSpec r = new DeletePriorityOperationSpec(spec);
@@ -4920,7 +5340,11 @@ public class JiraRESTV2ConsumerApi {
      * You can't delete a project if it's archived. To delete an archived project, restore the project and then delete it. To restore a project, use the Jira UI.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectIdOrKey: The project ID or project key (case sensitive).</li>
+     *   <li>enableUndo: Whether this project is placed in the Jira recycle bin where it will be available for restoration.</li>
+     * </ul>
      */
     public void deleteProject(Consumer<DeleteProjectOperationSpec> spec) {
         DeleteProjectOperationSpec r = new DeleteProjectOperationSpec(spec);
@@ -4935,10 +5359,13 @@ public class JiraRESTV2ConsumerApi {
      *  *
      * transactional, that is, if part of the delete fails the project is not deleted.
      * *
-     * [asynchronous](#async). Follow the `location` link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
+     * [asynchronous](#async). Follow the {@code location} link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectIdOrKey: The project ID or project key (case sensitive).</li>
+     * </ul>
      */
     public void deleteProjectAsynchronously(Consumer<DeleteProjectAsynchronouslyOperationSpec> spec) {
         DeleteProjectAsynchronouslyOperationSpec r = new DeleteProjectAsynchronouslyOperationSpec(spec);
@@ -4951,7 +5378,11 @@ public class JiraRESTV2ConsumerApi {
      * Deletes a custom avatar from a project. Note that system avatars cannot be deleted.
      * **[Permissions](#permissions) required:** *Administer projects* [project permission](https://confluence.atlassian.com/x/yodKLg).
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectIdOrKey: The project ID or (case-sensitive) key.</li>
+     *   <li>id: The ID of the avatar.</li>
+     * </ul>
      */
     public void deleteProjectAvatar(Consumer<DeleteProjectAvatarOperationSpec> spec) {
         DeleteProjectAvatarOperationSpec r = new DeleteProjectAvatarOperationSpec(spec);
@@ -4965,7 +5396,11 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) or *Administer Projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project containing the property.
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectIdOrKey: The project ID or project key (case sensitive).</li>
+     *   <li>propertyKey: The project property key. Use [Get project property keys](#api-rest-api-2-project-projectIdOrKey-properties-get) to get a list of all project property keys.</li>
+     * </ul>
      */
     public void deleteProjectProperty(Consumer<DeleteProjectPropertyOperationSpec> spec) {
         DeleteProjectPropertyOperationSpec r = new DeleteProjectPropertyOperationSpec(spec);
@@ -4978,7 +5413,11 @@ public class JiraRESTV2ConsumerApi {
      * Deletes a project role. You must specify a replacement project role if you wish to delete a project role that is in use.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the project role to delete. Use [Get all project roles](#api-rest-api-2-role-get) to get a list of project role IDs.</li>
+     *   <li>swap: The ID of the project role that will replace the one being deleted.</li>
+     * </ul>
      */
     public void deleteProjectRole(Consumer<DeleteProjectRoleOperationSpec> spec) {
         DeleteProjectRoleOperationSpec r = new DeleteProjectRoleOperationSpec(spec);
@@ -4992,7 +5431,13 @@ public class JiraRESTV2ConsumerApi {
      * Changing a project role's default actors does not affect project role members for projects already created.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the project role. Use [Get all project roles](#api-rest-api-2-role-get) to get a list of project role IDs.</li>
+     *   <li>user: The user account ID of the user to remove as a default actor.</li>
+     *   <li>groupId: The group ID of the group to be removed as a default actor. This parameter cannot be used with the {@code group} parameter.</li>
+     *   <li>group: The group name of the group to be removed as a default actor.This parameter cannot be used with the {@code groupId} parameter. As a group's name can change, use of {@code groupId} is recommended.</li>
+     * </ul>
      */
     public ProjectRole deleteProjectRoleActorsFromRole(Consumer<DeleteProjectRoleActorsFromRoleOperationSpec> spec) {
         DeleteProjectRoleActorsFromRoleOperationSpec r = new DeleteProjectRoleActorsFromRoleOperationSpec(spec);
@@ -5002,7 +5447,7 @@ public class JiraRESTV2ConsumerApi {
     /**
      * Delete remote issue link by global ID
      * <p>
-     * Deletes the remote issue link from the issue using the link's global ID. Where the global ID includes reserved URL characters these must be escaped in the request. For example, pass `system=http://www.mycompany.com/support&amp;id=1` as `system%3Dhttp%3A%2F%2Fwww.mycompany.com%2Fsupport%26id%3D1`.
+     * Deletes the remote issue link from the issue using the link's global ID. Where the global ID includes reserved URL characters these must be escaped in the request. For example, pass {@code system=http://www.mycompany.com/support&amp;id=1} as {@code system%3Dhttp%3A%2F%2Fwww.mycompany.com%2Fsupport%26id%3D1}.
      * This operation requires [issue linking to be active](https://confluence.atlassian.com/x/yoXKM).
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:**
@@ -5011,7 +5456,11 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is implemented, issue-level security permission to view the issue.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue.</li>
+     *   <li>globalId: The global ID of a remote issue link.</li>
+     * </ul>
      */
     public void deleteRemoteIssueLinkByGlobalId(Consumer<DeleteRemoteIssueLinkByGlobalIdOperationSpec> spec) {
         DeleteRemoteIssueLinkByGlobalIdOperationSpec r = new DeleteRemoteIssueLinkByGlobalIdOperationSpec(spec);
@@ -5030,7 +5479,11 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue.</li>
+     *   <li>linkId: The ID of a remote issue link.</li>
+     * </ul>
      */
     public void deleteRemoteIssueLinkById(Consumer<DeleteRemoteIssueLinkByIdOperationSpec> spec) {
         DeleteRemoteIssueLinkByIdOperationSpec r = new DeleteRemoteIssueLinkByIdOperationSpec(spec);
@@ -5041,10 +5494,14 @@ public class JiraRESTV2ConsumerApi {
      * Delete resolution
      * <p>
      * Deletes an issue resolution.
-     * This operation is [asynchronous](#async). Follow the `location` link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
+     * This operation is [asynchronous](#async). Follow the {@code location} link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the issue resolution.</li>
+     *   <li>replaceWith: The ID of the issue resolution that will replace the currently selected resolution.</li>
+     * </ul>
      */
     public void deleteResolution(Consumer<DeleteResolutionOperationSpec> spec) {
         DeleteResolutionOperationSpec r = new DeleteResolutionOperationSpec(spec);
@@ -5057,7 +5514,10 @@ public class JiraRESTV2ConsumerApi {
      * Deletes a screen. A screen cannot be deleted if it is used in a screen scheme, workflow, or workflow draft.
      * Only screens used in classic projects can be deleted.
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>screenId: The ID of the screen.</li>
+     * </ul>
      */
     public void deleteScreen(Consumer<DeleteScreenOperationSpec> spec) {
         DeleteScreenOperationSpec r = new DeleteScreenOperationSpec(spec);
@@ -5071,7 +5531,10 @@ public class JiraRESTV2ConsumerApi {
      * Only screens schemes used in classic projects can be deleted.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>screenSchemeId: The ID of the screen scheme.</li>
+     * </ul>
      */
     public void deleteScreenScheme(Consumer<DeleteScreenSchemeOperationSpec> spec) {
         DeleteScreenSchemeOperationSpec r = new DeleteScreenSchemeOperationSpec(spec);
@@ -5084,7 +5547,11 @@ public class JiraRESTV2ConsumerApi {
      * Deletes a screen tab.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>screenId: The ID of the screen.</li>
+     *   <li>tabId: The ID of the screen tab.</li>
+     * </ul>
      */
     public void deleteScreenTab(Consumer<DeleteScreenTabOperationSpec> spec) {
         DeleteScreenTabOperationSpec r = new DeleteScreenTabOperationSpec(spec);
@@ -5097,7 +5564,10 @@ public class JiraRESTV2ConsumerApi {
      * Deletes an issue security scheme.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>schemeId: The ID of the issue security scheme.</li>
+     * </ul>
      */
     public Object deleteSecurityScheme(Consumer<DeleteSecuritySchemeOperationSpec> spec) {
         DeleteSecuritySchemeOperationSpec r = new DeleteSecuritySchemeOperationSpec(spec);
@@ -5110,7 +5580,11 @@ public class JiraRESTV2ConsumerApi {
      * Deletes a share permission from a filter.
      * **[Permissions](#permissions) required:** Permission to access Jira and the user must own the filter.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the filter.</li>
+     *   <li>permissionId: The ID of the share permission.</li>
+     * </ul>
      */
     public void deleteSharePermission(Consumer<DeleteSharePermissionOperationSpec> spec) {
         DeleteSharePermissionOperationSpec r = new DeleteSharePermissionOperationSpec(spec);
@@ -5127,7 +5601,10 @@ public class JiraRESTV2ConsumerApi {
      * *
      * *Administer Jira* [project permission.](https://confluence.atlassian.com/x/yodKLg)
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The list of status IDs. To include multiple IDs, provide an ampersand-separated list. For example, id=10000&amp;id=10001.  Min items {@code 1}, Max items {@code 50}</li>
+     * </ul>
      */
     public Object deleteStatusesById(Consumer<DeleteStatusesByIdOperationSpec> spec) {
         DeleteStatusesByIdOperationSpec r = new DeleteStatusesByIdOperationSpec(spec);
@@ -5139,7 +5616,10 @@ public class JiraRESTV2ConsumerApi {
      * <p>
      * Deletes a UI modification. All the contexts that belong to the UI modification are deleted too. UI modification can only be deleted by Forge apps.
      * **[Permissions](#permissions) required:** None.
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>uiModificationId: The ID of the UI modification.</li>
+     * </ul>
      */
     public Object deleteUiModification(Consumer<DeleteUiModificationOperationSpec> spec) {
         DeleteUiModificationOperationSpec r = new DeleteUiModificationOperationSpec(spec);
@@ -5157,7 +5637,13 @@ public class JiraRESTV2ConsumerApi {
      * *
      * Access to Jira, to delete a property from the calling user's record.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>propertyKey: The key of the user's property.</li>
+     *   <li>accountId: The account ID of the user, which uniquely identifies the user across all Atlassian products. For example, *5b10ac8d82e05b22cc7d4ef5*.</li>
+     *   <li>userKey: This parameter is no longer available and will be removed from the documentation soon. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.</li>
+     *   <li>username: This parameter is no longer available and will be removed from the documentation soon. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.</li>
+     * </ul>
      */
     public void deleteUserProperty(Consumer<DeleteUserPropertyOperationSpec> spec) {
         DeleteUserPropertyOperationSpec r = new DeleteUserPropertyOperationSpec(spec);
@@ -5168,12 +5654,17 @@ public class JiraRESTV2ConsumerApi {
      * Delete version
      * <p>
      * Deletes a project version.
-     * Deprecated, use [ Delete and replace version](#api-rest-api-2-version-id-removeAndSwap-post) that supports swapping version values in custom fields, in addition to the swapping for `fixVersion` and `affectedVersion` provided in this resource.
-     * Alternative versions can be provided to update issues that use the deleted version in `fixVersion` or `affectedVersion`. If alternatives are not provided, occurrences of `fixVersion` and `affectedVersion` that contain the deleted version are cleared.
+     * Deprecated, use [ Delete and replace version](#api-rest-api-2-version-id-removeAndSwap-post) that supports swapping version values in custom fields, in addition to the swapping for {@code fixVersion} and {@code affectedVersion} provided in this resource.
+     * Alternative versions can be provided to update issues that use the deleted version in {@code fixVersion} or {@code affectedVersion}. If alternatives are not provided, occurrences of {@code fixVersion} and {@code affectedVersion} that contain the deleted version are cleared.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) or *Administer Projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project that contains the version.
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the version.</li>
+     *   <li>moveFixIssuesTo: The ID of the version to update {@code fixVersion} to when the field contains the deleted version. The replacement version must be in the same project as the version being deleted and cannot be the version being deleted.</li>
+     *   <li>moveAffectedIssuesTo: The ID of the version to update {@code affectedVersion} to when the field contains the deleted version. The replacement version must be in the same project as the version being deleted and cannot be the version being deleted.</li>
+     * </ul>
      * @deprecated
      */
     @Deprecated
@@ -5188,7 +5679,10 @@ public class JiraRESTV2ConsumerApi {
      * Removes webhooks by ID. Only webhooks registered by the calling app are removed. If webhooks created by other apps are specified, they are ignored.
      * **[Permissions](#permissions) required:** Only [Connect](https://developer.atlassian.com/cloud/jira/platform/#connect-apps) and [OAuth 2.0](https://developer.atlassian.com/cloud/jira/platform/oauth-2-3lo-apps) apps can use this operation.
      * Authentication - Required Scopes: [read:jira-work, manage:jira-webhook]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>containerForWebhookIDs: </li>
+     * </ul>
      */
     public void deleteWebhookById(Consumer<DeleteWebhookByIdOperationSpec> spec) {
         DeleteWebhookByIdOperationSpec r = new DeleteWebhookByIdOperationSpec(spec);
@@ -5199,10 +5693,15 @@ public class JiraRESTV2ConsumerApi {
      * Delete issue types for workflow in workflow scheme
      * <p>
      * Deletes the workflow-issue type mapping for a workflow in a workflow scheme.
-     * Note that active workflow schemes cannot be edited. If the workflow scheme is active, set `updateDraftIfNeeded` to `true` and a draft workflow scheme is created or updated with the workflow-issue type mapping deleted. The draft workflow scheme can be published in Jira.
+     * Note that active workflow schemes cannot be edited. If the workflow scheme is active, set {@code updateDraftIfNeeded} to {@code true} and a draft workflow scheme is created or updated with the workflow-issue type mapping deleted. The draft workflow scheme can be published in Jira.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the workflow scheme.</li>
+     *   <li>workflowName: The name of the workflow.</li>
+     *   <li>updateDraftIfNeeded: Set to true to create or update the draft of a workflow scheme and delete the mapping from the draft, when the workflow scheme cannot be edited. Defaults to {@code false}.</li>
+     * </ul>
      */
     public void deleteWorkflowMapping(Consumer<DeleteWorkflowMappingOperationSpec> spec) {
         DeleteWorkflowMappingOperationSpec r = new DeleteWorkflowMappingOperationSpec(spec);
@@ -5215,7 +5714,10 @@ public class JiraRESTV2ConsumerApi {
      * Deletes a workflow scheme. Note that a workflow scheme cannot be deleted if it is active (that is, being used by at least one project).
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the workflow scheme. Find this ID by editing the desired workflow scheme in Jira. The ID is shown in the URL as {@code schemeId}. For example, *schemeId=10301*.</li>
+     * </ul>
      */
     public Object deleteWorkflowScheme(Consumer<DeleteWorkflowSchemeOperationSpec> spec) {
         DeleteWorkflowSchemeOperationSpec r = new DeleteWorkflowSchemeOperationSpec(spec);
@@ -5228,7 +5730,10 @@ public class JiraRESTV2ConsumerApi {
      * Deletes a draft workflow scheme.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the active workflow scheme that the draft was created from.</li>
+     * </ul>
      */
     public void deleteWorkflowSchemeDraft(Consumer<DeleteWorkflowSchemeDraftOperationSpec> spec) {
         DeleteWorkflowSchemeDraftOperationSpec r = new DeleteWorkflowSchemeDraftOperationSpec(spec);
@@ -5241,7 +5746,11 @@ public class JiraRESTV2ConsumerApi {
      * Deletes the issue type-workflow mapping for an issue type in a workflow scheme's draft.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the workflow scheme that the draft belongs to.</li>
+     *   <li>issueType: The ID of the issue type.</li>
+     * </ul>
      */
     public WorkflowScheme deleteWorkflowSchemeDraftIssueType(Consumer<DeleteWorkflowSchemeDraftIssueTypeOperationSpec> spec) {
         DeleteWorkflowSchemeDraftIssueTypeOperationSpec r = new DeleteWorkflowSchemeDraftIssueTypeOperationSpec(spec);
@@ -5252,10 +5761,15 @@ public class JiraRESTV2ConsumerApi {
      * Delete workflow for issue type in workflow scheme
      * <p>
      * Deletes the issue type-workflow mapping for an issue type in a workflow scheme.
-     * Note that active workflow schemes cannot be edited. If the workflow scheme is active, set `updateDraftIfNeeded` to `true` and a draft workflow scheme is created or updated with the issue type-workflow mapping deleted. The draft workflow scheme can be published in Jira.
+     * Note that active workflow schemes cannot be edited. If the workflow scheme is active, set {@code updateDraftIfNeeded} to {@code true} and a draft workflow scheme is created or updated with the issue type-workflow mapping deleted. The draft workflow scheme can be published in Jira.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the workflow scheme.</li>
+     *   <li>issueType: The ID of the issue type.</li>
+     *   <li>updateDraftIfNeeded: Set to true to create or update the draft of a workflow scheme and update the mapping in the draft, when the workflow scheme cannot be edited. Defaults to {@code false}.</li>
+     * </ul>
      */
     public WorkflowScheme deleteWorkflowSchemeIssueType(Consumer<DeleteWorkflowSchemeIssueTypeOperationSpec> spec) {
         DeleteWorkflowSchemeIssueTypeOperationSpec r = new DeleteWorkflowSchemeIssueTypeOperationSpec(spec);
@@ -5268,7 +5782,13 @@ public class JiraRESTV2ConsumerApi {
      * Deletes a property from a workflow transition. Transition properties are used to change the behavior of a transition. For more information, see [Transition properties](https://confluence.atlassian.com/x/zIhKLg#Advancedworkflowconfiguration-transitionproperties) and [Workflow properties](https://confluence.atlassian.com/x/JYlKLg).
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>transitionId: The ID of the transition. To get the ID, view the workflow in text mode in the Jira admin settings. The ID is shown next to the transition.</li>
+     *   <li>key: The name of the transition property to delete, also known as the name of the property.</li>
+     *   <li>workflowName: The name of the workflow that the transition belongs to.</li>
+     *   <li>workflowMode: The workflow status. Set to {@code live} for inactive workflows or {@code draft} for draft workflows. Active workflows cannot be edited.</li>
+     * </ul>
      */
     public void deleteWorkflowTransitionProperty(Consumer<DeleteWorkflowTransitionPropertyOperationSpec> spec) {
         DeleteWorkflowTransitionPropertyOperationSpec r = new DeleteWorkflowTransitionPropertyOperationSpec(spec);
@@ -5287,7 +5807,10 @@ public class JiraRESTV2ConsumerApi {
      * [validators](https://developer.atlassian.com/cloud/jira/platform/modules/workflow-validator/)
      * Only rules created by the calling Connect app can be deleted.
      * **[Permissions](#permissions) required:** Only Connect apps can use this operation.
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>workflowsWithTransitionRulesDetails: </li>
+     * </ul>
      */
     public WorkflowTransitionRulesUpdateErrors deleteWorkflowTransitionRuleConfigurations(Consumer<DeleteWorkflowTransitionRuleConfigurationsOperationSpec> spec) {
         DeleteWorkflowTransitionRuleConfigurationsOperationSpec r = new DeleteWorkflowTransitionRuleConfigurationsOperationSpec(spec);
@@ -5310,7 +5833,16 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If the worklog has visibility restrictions, belongs to the group or has the role visibility is restricted to.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue.</li>
+     *   <li>id: The ID of the worklog.</li>
+     *   <li>notifyUsers: Whether users watching the issue are notified by email.</li>
+     *   <li>adjustEstimate: Defines how to update the issue's time estimate, the options are:   *  {@code new} Sets the estimate to a specific value, defined in {@code newEstimate}.  *  {@code leave} Leaves the estimate unchanged.  *  {@code manual} Increases the estimate by amount specified in {@code increaseBy}.  *  {@code auto} Reduces the estimate by the value of {@code timeSpent} in the worklog.</li>
+     *   <li>newEstimate: The value to set as the issue's remaining time estimate, as days (\\#d), hours (\\#h), or minutes (\\#m or \\#). For example, *2d*. Required when {@code adjustEstimate} is {@code new}.</li>
+     *   <li>increaseBy: The amount to increase the issue's remaining estimate by, as days (\\#d), hours (\\#h), or minutes (\\#m or \\#). For example, *2d*. Required when {@code adjustEstimate} is {@code manual}.</li>
+     *   <li>overrideEditableFlag: Whether the work log entry should be added to the issue even if the issue is not editable, because jira.issue.editable set to false or missing. For example, the issue is closed. Connect and Forge app users with admin permission can use this flag.</li>
+     * </ul>
      */
     public void deleteWorklog(Consumer<DeleteWorklogOperationSpec> spec) {
         DeleteWorklogOperationSpec r = new DeleteWorklogOperationSpec(spec);
@@ -5330,7 +5862,12 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If the worklog has visibility restrictions, belongs to the group or has the role visibility is restricted to.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue.</li>
+     *   <li>worklogId: The ID of the worklog.</li>
+     *   <li>propertyKey: The key of the property.</li>
+     * </ul>
      */
     public void deleteWorklogProperty(Consumer<DeleteWorklogPropertyOperationSpec> spec) {
         DeleteWorklogPropertyOperationSpec r = new DeleteWorklogPropertyOperationSpec(spec);
@@ -5341,7 +5878,7 @@ public class JiraRESTV2ConsumerApi {
      * Transition issue
      * <p>
      * Performs an issue transition and, if the transition has a screen, updates the fields from the transition screen.
-     * sortByCategory To update the fields on the transition screen, specify the fields in the `fields` or `update` parameters in the request body. Get details about the fields using [ Get transitions](#api-rest-api-2-issue-issueIdOrKey-transitions-get) with the `transitions.fields` expand.
+     * sortByCategory To update the fields on the transition screen, specify the fields in the {@code fields} or {@code update} parameters in the request body. Get details about the fields using [ Get transitions](#api-rest-api-2-issue-issueIdOrKey-transitions-get) with the {@code transitions.fields} expand.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:**
      *  *
@@ -5349,11 +5886,15 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue.</li>
+     *   <li>issueUpdateDetails: </li>
+     * </ul>
      */
     public Object doTransition(Consumer<DoTransitionOperationSpec> spec) {
         DoTransitionOperationSpec r = new DoTransitionOperationSpec(spec);
-        return api.doTransition(r.issueIdOrKey(), r.requestBody());
+        return api.doTransition(r.issueIdOrKey(), r.issueUpdateDetails());
     }
 
     /**
@@ -5361,10 +5902,8 @@ public class JiraRESTV2ConsumerApi {
      * <p>
      * Returns all modules registered dynamically by the calling app.
      * **[Permissions](#permissions) required:** Only Connect apps can make this request.
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
      */
-    public ConnectModules dynamicModulesResourceGetModulesGet(Consumer<DynamicModulesResourceGetModulesGetOperationSpec> spec) {
-        DynamicModulesResourceGetModulesGetOperationSpec r = new DynamicModulesResourceGetModulesGetOperationSpec(spec);
+    public ConnectModules dynamicModulesResourceGetModulesGet() {
         return api.dynamicModulesResourceGetModulesGet();
     }
 
@@ -5373,7 +5912,10 @@ public class JiraRESTV2ConsumerApi {
      * <p>
      * Registers a list of modules.
      * **[Permissions](#permissions) required:** Only Connect apps can make this request.
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>connectModules: </li>
+     * </ul>
      */
     public void dynamicModulesResourceRegisterModulesPost(Consumer<DynamicModulesResourceRegisterModulesPostOperationSpec> spec) {
         DynamicModulesResourceRegisterModulesPostOperationSpec r = new DynamicModulesResourceRegisterModulesPostOperationSpec(spec);
@@ -5385,7 +5927,10 @@ public class JiraRESTV2ConsumerApi {
      * <p>
      * Remove all or a list of modules registered by the calling app.
      * **[Permissions](#permissions) required:** Only Connect apps can make this request.
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>moduleKey: The key of the module to remove. To include multiple module keys, provide multiple copies of this parameter. For example, {@code moduleKey=dynamic-attachment-entity-property&amp;moduleKey=dynamic-select-field}. Nonexistent keys are ignored.</li>
+     * </ul>
      */
     public void dynamicModulesResourceRemoveModulesDelete(Consumer<DynamicModulesResourceRemoveModulesDeleteOperationSpec> spec) {
         DynamicModulesResourceRemoveModulesDeleteOperationSpec r = new DynamicModulesResourceRemoveModulesDeleteOperationSpec(spec);
@@ -5396,9 +5941,9 @@ public class JiraRESTV2ConsumerApi {
      * Edit issue
      * <p>
      * Edits an issue. A transition may be applied and issue properties updated as part of the edit.
-     * The edits to the issue's fields are defined using `update` and `fields`. The fields that can be edited are determined using [ Get edit issue metadata](#api-rest-api-2-issue-issueIdOrKey-editmeta-get).
-     * The parent field may be set by key or ID. For standard issue types, the parent may be removed by setting `update.parent.set.none` to *true*.
-     * Connect apps having an app user with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg), and Forge apps acting on behalf of users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg), can override the screen security configuration using `overrideScreenSecurity` and `overrideEditableFlag`.
+     * The edits to the issue's fields are defined using {@code update} and {@code fields}. The fields that can be edited are determined using [ Get edit issue metadata](#api-rest-api-2-issue-issueIdOrKey-editmeta-get).
+     * The parent field may be set by key or ID. For standard issue types, the parent may be removed by setting {@code update.parent.set.none} to *true*.
+     * Connect apps having an app user with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg), and Forge apps acting on behalf of users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg), can override the screen security configuration using {@code overrideScreenSecurity} and {@code overrideEditableFlag}.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:**
      *  *
@@ -5406,11 +5951,18 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue.</li>
+     *   <li>issueUpdateDetails: </li>
+     *   <li>notifyUsers: Whether a notification email about the issue update is sent to all watchers. To disable the notification, administer Jira or administer project permissions are required. If the user doesn't have the necessary permission the request is ignored.</li>
+     *   <li>overrideScreenSecurity: Whether screen security is overridden to enable hidden fields to be edited. Available to Connect app users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) and Forge apps acting on behalf of users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).</li>
+     *   <li>overrideEditableFlag: Whether screen security is overridden to enable uneditable fields to be edited. Available to Connect app users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) and Forge apps acting on behalf of users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).</li>
+     * </ul>
      */
     public Object editIssue(Consumer<EditIssueOperationSpec> spec) {
         EditIssueOperationSpec r = new EditIssueOperationSpec(spec);
-        return api.editIssue(r.issueIdOrKey(), r.requestBody(), r.notifyUsers(), r.overrideScreenSecurity(), r.overrideEditableFlag());
+        return api.editIssue(r.issueIdOrKey(), r.issueUpdateDetails(), r.notifyUsers(), r.overrideScreenSecurity(), r.overrideEditableFlag());
     }
 
     /**
@@ -5421,37 +5973,41 @@ public class JiraRESTV2ConsumerApi {
      * #### Context variables ####
      * The following context variables are available to Jira expressions evaluated by this resource. Their presence depends on various factors; usually you need to manually request them in the context object sent in the payload, but some of them are added automatically under certain conditions.
      *  *
-     * `user` ([User](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#user)): The current user. Always available and equal to `null` if the request is anonymous.
+     * {@code user} ([User](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#user)): The current user. Always available and equal to {@code null} if the request is anonymous.
      * *
-     * `app` ([App](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#app)): The [Connect app](https://developer.atlassian.com/cloud/jira/platform/index/#connect-apps) that made the request. Available only for authenticated requests made by Connect Apps (read more here: [Authentication for Connect apps](https://developer.atlassian.com/cloud/jira/platform/security-for-connect-apps/)).
+     * {@code app} ([App](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#app)): The [Connect app](https://developer.atlassian.com/cloud/jira/platform/index/#connect-apps) that made the request. Available only for authenticated requests made by Connect Apps (read more here: [Authentication for Connect apps](https://developer.atlassian.com/cloud/jira/platform/security-for-connect-apps/)).
      * *
-     * `issue` ([Issue](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#issue)): The current issue. Available only when the issue is provided in the request context object.
+     * {@code issue} ([Issue](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#issue)): The current issue. Available only when the issue is provided in the request context object.
      * *
-     * `issues` ([List](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#list) of [Issues](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#issue)): A collection of issues matching a JQL query. Available only when JQL is provided in the request context object.
+     * {@code issues} ([List](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#list) of [Issues](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#issue)): A collection of issues matching a JQL query. Available only when JQL is provided in the request context object.
      * *
-     * `project` ([Project](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#project)): The current project. Available only when the project is provided in the request context object.
+     * {@code project} ([Project](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#project)): The current project. Available only when the project is provided in the request context object.
      * *
-     * `sprint` ([Sprint](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#sprint)): The current sprint. Available only when the sprint is provided in the request context object.
+     * {@code sprint} ([Sprint](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#sprint)): The current sprint. Available only when the sprint is provided in the request context object.
      * *
-     * `board` ([Board](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#board)): The current board. Available only when the board is provided in the request context object.
+     * {@code board} ([Board](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#board)): The current board. Available only when the board is provided in the request context object.
      * *
-     * `serviceDesk` ([ServiceDesk](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#servicedesk)): The current service desk. Available only when the service desk is provided in the request context object.
+     * {@code serviceDesk} ([ServiceDesk](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#servicedesk)): The current service desk. Available only when the service desk is provided in the request context object.
      * *
-     * `customerRequest` ([CustomerRequest](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#customerrequest)): The current customer request. Available only when the customer request is provided in the request context object.
+     * {@code customerRequest} ([CustomerRequest](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#customerrequest)): The current customer request. Available only when the customer request is provided in the request context object.
      * Also, custom context variables can be passed in the request with their types. Those variables can be accessed by key in the Jira expression. These variable types are available for use in a custom context:
      *  *
-     * `user`: A [user](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#user) specified as an Atlassian account ID.
+     * {@code user}: A [user](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#user) specified as an Atlassian account ID.
      * *
-     * `issue`: An [issue](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#issue) specified by ID or key. All the fields of the issue object are available in the Jira expression.
+     * {@code issue}: An [issue](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#issue) specified by ID or key. All the fields of the issue object are available in the Jira expression.
      * *
-     * `json`: A JSON object containing custom content.
+     * {@code json}: A JSON object containing custom content.
      * *
-     * `list`: A JSON list of `user`, `issue`, or `json` variable types.
+     * {@code list}: A JSON list of {@code user}, {@code issue}, or {@code json} variable types.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required**: None. However, an expression may return different results for different users depending on their permissions. For example, different users may see different comments on the same issue.
-     *  Permission to access Jira Software is required to access Jira Software context variables (`board` and `sprint`) or fields (for example, `issue.sprint`).
+     *  Permission to access Jira Software is required to access Jira Software context variables ({@code board} and {@code sprint}) or fields (for example, {@code issue.sprint}).
      * Authentication - Required Scopes: [read:jira-work, read:jira-user]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>jiraExpressionEvalRequestBean: The Jira expression and the evaluation context.</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information in the response. This parameter accepts {@code meta.complexity} that returns information about the expression complexity. For example, the number of expensive operations used by the expression and how close the expression is to reaching the [complexity limit](https://developer.atlassian.com/cloud/jira/platform/jira-expressions/#restrictions). Useful when designing and debugging your expressions.</li>
+     * </ul>
      */
     public JiraExpressionResult evaluateJiraExpression(Consumer<EvaluateJiraExpressionOperationSpec> spec) {
         EvaluateJiraExpressionOperationSpec r = new EvaluateJiraExpressionOperationSpec(spec);
@@ -5470,7 +6026,10 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the attachment.</li>
+     * </ul>
      */
     public AttachmentArchiveMetadataReadable expandAttachmentForHumans(Consumer<ExpandAttachmentForHumansOperationSpec> spec) {
         ExpandAttachmentForHumansOperationSpec r = new ExpandAttachmentForHumansOperationSpec(spec);
@@ -5489,7 +6048,10 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the attachment.</li>
+     * </ul>
      */
     public AttachmentArchiveImpl expandAttachmentForMachines(Consumer<ExpandAttachmentForMachinesOperationSpec> spec) {
         ExpandAttachmentForMachinesOperationSpec r = new ExpandAttachmentForMachinesOperationSpec(spec);
@@ -5501,17 +6063,29 @@ public class JiraRESTV2ConsumerApi {
      * <p>
      * Returns a list of users that can be assigned to an issue. Use this operation to find the list of users who can be assigned to:
      *  *
-     * a new issue, by providing the `projectKeyOrId`.
+     * a new issue, by providing the {@code projectKeyOrId}.
      * *
-     * an updated issue, by providing the `issueKey`.
+     * an updated issue, by providing the {@code issueKey}.
      * *
-     * to an issue during a transition (workflow action), by providing the `issueKey` and the transition id in `actionDescriptorId`. You can obtain the IDs of an issue's valid transitions using the `transitions` option in the `expand` parameter of [ Get issue](#api-rest-api-2-issue-issueIdOrKey-get).
+     * to an issue during a transition (workflow action), by providing the {@code issueKey} and the transition id in {@code actionDescriptorId}. You can obtain the IDs of an issue's valid transitions using the {@code transitions} option in the {@code expand} parameter of [ Get issue](#api-rest-api-2-issue-issueIdOrKey-get).
      * In all these cases, you can pass an account ID to determine if a user can be assigned to an issue. The user is returned in the response if they can be assigned to the issue or issue transition.
-     * This operation takes the users in the range defined by `startAt` and `maxResults`, up to the thousandth user, and then returns only the users from that range that can be assigned the issue. This means the operation usually returns fewer users than specified in `maxResults`. To get all the users who can be assigned the issue, use [Get all users](#api-rest-api-2-users-search-get) and filter the records in your code.
+     * This operation takes the users in the range defined by {@code startAt} and {@code maxResults}, up to the thousandth user, and then returns only the users from that range that can be assigned the issue. This means the operation usually returns fewer users than specified in {@code maxResults}. To get all the users who can be assigned the issue, use [Get all users](#api-rest-api-2-users-search-get) and filter the records in your code.
      * Privacy controls are applied to the response based on the users' preferences. This could mean, for example, that the user's email address is hidden. See the [Profile visibility overview](https://developer.atlassian.com/cloud/jira/platform/profile-visibility/) for more details.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [read:jira-user]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>query: A query string that is matched against user attributes, such as {@code displayName}, and {@code emailAddress}, to find relevant users. The string can match the prefix of the attribute's value. For example, *query=john* matches a user with a {@code displayName} of *John Smith* and a user with an {@code emailAddress} of *johnson@example.com*. Required, unless {@code username} or {@code accountId} is specified.</li>
+     *   <li>sessionId: The sessionId of this request. SessionId is the same until the assignee is set.</li>
+     *   <li>username: This parameter is no longer available. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.</li>
+     *   <li>accountId: A query string that is matched exactly against user {@code accountId}. Required, unless {@code query} is specified.</li>
+     *   <li>project: The project ID or project key (case sensitive). Required, unless {@code issueKey} is specified.</li>
+     *   <li>issueKey: The key of the issue. Required, unless {@code project} is specified.</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return. This operation may return less than the maximum number of items even if more are available. The operation fetches users up to the maximum and then, from the fetched users, returns only the users that can be assigned to the issue.</li>
+     *   <li>actionDescriptorId: The ID of the transition.</li>
+     *   <li>recommend: </li>
+     * </ul>
      */
     public List<User> findAssignableUsers(Consumer<FindAssignableUsersOperationSpec> spec) {
         FindAssignableUsersOperationSpec r = new FindAssignableUsersOperationSpec(spec);
@@ -5522,12 +6096,20 @@ public class JiraRESTV2ConsumerApi {
      * Find users assignable to projects
      * <p>
      * Returns a list of users who can be assigned issues in one or more projects. The list may be restricted to users whose attributes match a string.
-     * This operation takes the users in the range defined by `startAt` and `maxResults`, up to the thousandth user, and then returns only the users from that range that can be assigned issues in the projects. This means the operation usually returns fewer users than specified in `maxResults`. To get all the users who can be assigned issues in the projects, use [Get all users](#api-rest-api-2-users-search-get) and filter the records in your code.
+     * This operation takes the users in the range defined by {@code startAt} and {@code maxResults}, up to the thousandth user, and then returns only the users from that range that can be assigned issues in the projects. This means the operation usually returns fewer users than specified in {@code maxResults}. To get all the users who can be assigned issues in the projects, use [Get all users](#api-rest-api-2-users-search-get) and filter the records in your code.
      * Privacy controls are applied to the response based on the users' preferences. This could mean, for example, that the user's email address is hidden. See the [Profile visibility overview](https://developer.atlassian.com/cloud/jira/platform/profile-visibility/) for more details.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** None.
      * Authentication - Required Scopes: [read:jira-user]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectKeys: A list of project keys (case sensitive). This parameter accepts a comma-separated list.</li>
+     *   <li>query: A query string that is matched against user attributes, such as {@code displayName} and {@code emailAddress}, to find relevant users. The string can match the prefix of the attribute's value. For example, *query=john* matches a user with a {@code displayName} of *John Smith* and a user with an {@code emailAddress} of *johnson@example.com*. Required, unless {@code accountId} is specified.</li>
+     *   <li>username: This parameter is no longer available. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.</li>
+     *   <li>accountId: A query string that is matched exactly against user {@code accountId}. Required, unless {@code query} is specified.</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     * </ul>
      */
     public List<User> findBulkAssignableUsers(Consumer<FindBulkAssignableUsersOperationSpec> spec) {
         FindBulkAssignableUsersOperationSpec r = new FindBulkAssignableUsersOperationSpec(spec);
@@ -5538,13 +6120,22 @@ public class JiraRESTV2ConsumerApi {
      * Find groups
      * <p>
      * Returns a list of groups whose names contain a query string. A list of group names can be provided to exclude groups from the results.
-     * The primary use case for this resource is to populate a group picker suggestions list. To this end, the returned object includes the `html` field where the matched query term is highlighted in the group name with the HTML strong tag. Also, the groups list is wrapped in a response object that contains a header for use in the picker, specifically *Showing X of Y matching groups*.
+     * The primary use case for this resource is to populate a group picker suggestions list. To this end, the returned object includes the {@code html} field where the matched query term is highlighted in the group name with the HTML strong tag. Also, the groups list is wrapped in a response object that contains a header for use in the picker, specifically *Showing X of Y matching groups*.
      * The list returns with the groups sorted. If no groups match the list criteria, an empty list is returned.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg). Anonymous calls and calls by users without the required permission return an empty list.
      * *Browse users and groups* [global permission](https://confluence.atlassian.com/x/x4dKLg). Without this permission, calls where query is not an exact match to an existing group will return an empty list.
      * Authentication - Required Scopes: [read:jira-user]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>accountId: This parameter is deprecated, setting it does not affect the results. To find groups containing a particular user, use [Get user groups](#api-rest-api-2-user-groups-get).</li>
+     *   <li>query: The string to find in group names.</li>
+     *   <li>exclude: As a group's name can change, use of {@code excludeGroupIds} is recommended to identify a group.   A group to exclude from the result. To exclude multiple groups, provide an ampersand-separated list. For example, {@code exclude=group1&amp;exclude=group2}. This parameter cannot be used with the {@code excludeGroupIds} parameter.</li>
+     *   <li>excludeId: A group ID to exclude from the result. To exclude multiple groups, provide an ampersand-separated list. For example, {@code excludeId=group1-id&amp;excludeId=group2-id}. This parameter cannot be used with the {@code excludeGroups} parameter.</li>
+     *   <li>maxResults: The maximum number of groups to return. The maximum number of groups that can be returned is limited by the system property {@code jira.ajax.autocomplete.limit}.</li>
+     *   <li>caseInsensitive: Whether the search for groups should be case insensitive.</li>
+     *   <li>userName: This parameter is no longer available. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.</li>
+     * </ul>
      */
     public FoundGroups findGroups(Consumer<FindGroupsOperationSpec> spec) {
         FindGroupsOperationSpec r = new FindGroupsOperationSpec(spec);
@@ -5555,29 +6146,34 @@ public class JiraRESTV2ConsumerApi {
      * Find user keys by query
      * <p>
      * Finds users with a structured query and returns a [paginated](#pagination) list of user keys.
-     * This operation takes the users in the range defined by `startAt` and `maxResults`, up to the thousandth user, and then returns only the users from that range that match the structured query. This means the operation usually returns fewer users than specified in `maxResults`. To get all the users who match the structured query, use [Get all users](#api-rest-api-2-users-search-get) and filter the records in your code.
+     * This operation takes the users in the range defined by {@code startAt} and {@code maxResults}, up to the thousandth user, and then returns only the users from that range that match the structured query. This means the operation usually returns fewer users than specified in {@code maxResults}. To get all the users who match the structured query, use [Get all users](#api-rest-api-2-users-search-get) and filter the records in your code.
      * **[Permissions](#permissions) required:** *Browse users and groups* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * The query statements are:
      *  *
-     * `is assignee of PROJ` Returns the users that are assignees of at least one issue in project *PROJ*.
+     * {@code is assignee of PROJ} Returns the users that are assignees of at least one issue in project *PROJ*.
      * *
-     * `is assignee of (PROJ-1, PROJ-2)` Returns users that are assignees on the issues *PROJ-1* or *PROJ-2*.
+     * {@code is assignee of (PROJ-1, PROJ-2)} Returns users that are assignees on the issues *PROJ-1* or *PROJ-2*.
      * *
-     * `is reporter of (PROJ-1, PROJ-2)` Returns users that are reporters on the issues *PROJ-1* or *PROJ-2*.
+     * {@code is reporter of (PROJ-1, PROJ-2)} Returns users that are reporters on the issues *PROJ-1* or *PROJ-2*.
      * *
-     * `is watcher of (PROJ-1, PROJ-2)` Returns users that are watchers on the issues *PROJ-1* or *PROJ-2*.
+     * {@code is watcher of (PROJ-1, PROJ-2)} Returns users that are watchers on the issues *PROJ-1* or *PROJ-2*.
      * *
-     * `is voter of (PROJ-1, PROJ-2)` Returns users that are voters on the issues *PROJ-1* or *PROJ-2*.
+     * {@code is voter of (PROJ-1, PROJ-2)} Returns users that are voters on the issues *PROJ-1* or *PROJ-2*.
      * *
-     * `is commenter of (PROJ-1, PROJ-2)` Returns users that have posted a comment on the issues *PROJ-1* or *PROJ-2*.
+     * {@code is commenter of (PROJ-1, PROJ-2)} Returns users that have posted a comment on the issues *PROJ-1* or *PROJ-2*.
      * *
-     * `is transitioner of (PROJ-1, PROJ-2)` Returns users that have performed a transition on issues *PROJ-1* or *PROJ-2*.
+     * {@code is transitioner of (PROJ-1, PROJ-2)} Returns users that have performed a transition on issues *PROJ-1* or *PROJ-2*.
      * *
-     * `[propertyKey].entity.property.path is "property value"` Returns users with the entity property value.
-     * The list of issues can be extended as needed, as in *(PROJ-1, PROJ-2, ... PROJ-n)*. Statements can be combined using the `AND` and `OR` operators to form more complex queries. For example:
-     * `is assignee of PROJ AND [propertyKey].entity.property.path is "property value"`
+     * {@code [propertyKey].entity.property.path is "property value"} Returns users with the entity property value.
+     * The list of issues can be extended as needed, as in *(PROJ-1, PROJ-2, ... PROJ-n)*. Statements can be combined using the {@code AND} and {@code OR} operators to form more complex queries. For example:
+     * {@code is assignee of PROJ AND [propertyKey].entity.property.path is "property value"}
      * Authentication - Required Scopes: [read:jira-user]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>query: The search query.</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     * </ul>
      */
     public PageBeanUserKey findUserKeysByQuery(Consumer<FindUserKeysByQueryOperationSpec> spec) {
         FindUserKeysByQueryOperationSpec r = new FindUserKeysByQueryOperationSpec(spec);
@@ -5588,12 +6184,20 @@ public class JiraRESTV2ConsumerApi {
      * Find users
      * <p>
      * Returns a list of users that match the search string and property.
-     * This operation first applies a filter to match the search string and property, and then takes the filtered users in the range defined by `startAt` and `maxResults`, up to the thousandth user. To get all the users who match the search string and property, use [Get all users](#api-rest-api-2-users-search-get) and filter the records in your code.
+     * This operation first applies a filter to match the search string and property, and then takes the filtered users in the range defined by {@code startAt} and {@code maxResults}, up to the thousandth user. To get all the users who match the search string and property, use [Get all users](#api-rest-api-2-users-search-get) and filter the records in your code.
      * This operation can be accessed anonymously.
      * Privacy controls are applied to the response based on the users' preferences. This could mean, for example, that the user's email address is hidden. See the [Profile visibility overview](https://developer.atlassian.com/cloud/jira/platform/profile-visibility/) for more details.
      * **[Permissions](#permissions) required:** *Browse users and groups* [global permission](https://confluence.atlassian.com/x/x4dKLg). Anonymous calls or calls by users without the required permission return empty search results.
      * Authentication - Required Scopes: [read:jira-user]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>query: A query string that is matched against user attributes ( {@code displayName}, and {@code emailAddress}) to find relevant users. The string can match the prefix of the attribute's value. For example, *query=john* matches a user with a {@code displayName} of *John Smith* and a user with an {@code emailAddress} of *johnson@example.com*. Required, unless {@code accountId} or {@code property} is specified.</li>
+     *   <li>username: </li>
+     *   <li>accountId: A query string that is matched exactly against a user {@code accountId}. Required, unless {@code query} or {@code property} is specified.</li>
+     *   <li>startAt: The index of the first item to return in a page of filtered results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>property: A query string used to search properties. Property keys are specified by path, so property keys containing dot (.) or equals (=) characters cannot be used. The query string cannot be specified using a JSON object. Example: To search for the value of {@code nested} from {@code {"something":{"nested":1,"other":2}}} use {@code thepropertykey.something.nested=1}. Required, unless {@code accountId} or {@code query} is specified.</li>
+     * </ul>
      */
     public List<User> findUsers(Consumer<FindUsersOperationSpec> spec) {
         FindUsersOperationSpec r = new FindUsersOperationSpec(spec);
@@ -5631,11 +6235,22 @@ public class JiraRESTV2ConsumerApi {
      * not return Connect app users and groups.
      * *
      * return groups that have a case-insensitive match with the query.
-     * The primary use case for this resource is to populate a picker field suggestion list with users or groups. To this end, the returned object includes an `html` field for each list. This field highlights the matched query term in the item name with the HTML strong tag. Also, each list is wrapped in a response object that contains a header for use in a picker, specifically *Showing X of Y matching groups*.
+     * The primary use case for this resource is to populate a picker field suggestion list with users or groups. To this end, the returned object includes an {@code html} field for each list. This field highlights the matched query term in the item name with the HTML strong tag. Also, each list is wrapped in a response object that contains a header for use in a picker, specifically *Showing X of Y matching groups*.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Browse users and groups* [global permission](https://confluence.atlassian.com/x/yodKLg).
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>query: The search string.</li>
+     *   <li>maxResults: The maximum number of items to return in each list.</li>
+     *   <li>showAvatar: Whether the user avatar should be returned. If an invalid value is provided, the default value is used.</li>
+     *   <li>fieldId: The custom field ID of the field this request is for.</li>
+     *   <li>projectId: The ID of a project that returned users and groups must have permission to view. To include multiple projects, provide an ampersand-separated list. For example, {@code projectId=10000&amp;projectId=10001}. This parameter is only used when {@code fieldId} is present.</li>
+     *   <li>issueTypeId: The ID of an issue type that returned users and groups must have permission to view. To include multiple issue types, provide an ampersand-separated list. For example, {@code issueTypeId=10000&amp;issueTypeId=10001}. Special values, such as {@code -1} (all standard issue types) and {@code -2} (all subtask issue types), are supported. This parameter is only used when {@code fieldId} is present.</li>
+     *   <li>avatarSize: The size of the avatar to return. If an invalid value is provided, the default value is used.</li>
+     *   <li>caseInsensitive: Whether the search for groups should be case insensitive.</li>
+     *   <li>excludeConnectAddons: Whether Connect app users and groups should be excluded from the search results. If an invalid value is provided, the default value is used.</li>
+     * </ul>
      */
     public FoundUsersAndGroups findUsersAndGroups(Consumer<FindUsersAndGroupsOperationSpec> spec) {
         FindUsersAndGroupsOperationSpec r = new FindUsersAndGroupsOperationSpec(spec);
@@ -5646,29 +6261,34 @@ public class JiraRESTV2ConsumerApi {
      * Find users by query
      * <p>
      * Finds users with a structured query and returns a [paginated](#pagination) list of user details.
-     * This operation takes the users in the range defined by `startAt` and `maxResults`, up to the thousandth user, and then returns only the users from that range that match the structured query. This means the operation usually returns fewer users than specified in `maxResults`. To get all the users who match the structured query, use [Get all users](#api-rest-api-2-users-search-get) and filter the records in your code.
+     * This operation takes the users in the range defined by {@code startAt} and {@code maxResults}, up to the thousandth user, and then returns only the users from that range that match the structured query. This means the operation usually returns fewer users than specified in {@code maxResults}. To get all the users who match the structured query, use [Get all users](#api-rest-api-2-users-search-get) and filter the records in your code.
      * **[Permissions](#permissions) required:** *Browse users and groups* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * The query statements are:
      *  *
-     * `is assignee of PROJ` Returns the users that are assignees of at least one issue in project *PROJ*.
+     * {@code is assignee of PROJ} Returns the users that are assignees of at least one issue in project *PROJ*.
      * *
-     * `is assignee of (PROJ-1, PROJ-2)` Returns users that are assignees on the issues *PROJ-1* or *PROJ-2*.
+     * {@code is assignee of (PROJ-1, PROJ-2)} Returns users that are assignees on the issues *PROJ-1* or *PROJ-2*.
      * *
-     * `is reporter of (PROJ-1, PROJ-2)` Returns users that are reporters on the issues *PROJ-1* or *PROJ-2*.
+     * {@code is reporter of (PROJ-1, PROJ-2)} Returns users that are reporters on the issues *PROJ-1* or *PROJ-2*.
      * *
-     * `is watcher of (PROJ-1, PROJ-2)` Returns users that are watchers on the issues *PROJ-1* or *PROJ-2*.
+     * {@code is watcher of (PROJ-1, PROJ-2)} Returns users that are watchers on the issues *PROJ-1* or *PROJ-2*.
      * *
-     * `is voter of (PROJ-1, PROJ-2)` Returns users that are voters on the issues *PROJ-1* or *PROJ-2*.
+     * {@code is voter of (PROJ-1, PROJ-2)} Returns users that are voters on the issues *PROJ-1* or *PROJ-2*.
      * *
-     * `is commenter of (PROJ-1, PROJ-2)` Returns users that have posted a comment on the issues *PROJ-1* or *PROJ-2*.
+     * {@code is commenter of (PROJ-1, PROJ-2)} Returns users that have posted a comment on the issues *PROJ-1* or *PROJ-2*.
      * *
-     * `is transitioner of (PROJ-1, PROJ-2)` Returns users that have performed a transition on issues *PROJ-1* or *PROJ-2*.
+     * {@code is transitioner of (PROJ-1, PROJ-2)} Returns users that have performed a transition on issues *PROJ-1* or *PROJ-2*.
      * *
-     * `[propertyKey].entity.property.path is "property value"` Returns users with the entity property value.
-     * The list of issues can be extended as needed, as in *(PROJ-1, PROJ-2, ... PROJ-n)*. Statements can be combined using the `AND` and `OR` operators to form more complex queries. For example:
-     * `is assignee of PROJ AND [propertyKey].entity.property.path is "property value"`
+     * {@code [propertyKey].entity.property.path is "property value"} Returns users with the entity property value.
+     * The list of issues can be extended as needed, as in *(PROJ-1, PROJ-2, ... PROJ-n)*. Statements can be combined using the {@code AND} and {@code OR} operators to form more complex queries. For example:
+     * {@code is assignee of PROJ AND [propertyKey].entity.property.path is "property value"}
      * Authentication - Required Scopes: [read:jira-user]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>query: The search query.</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     * </ul>
      */
     public PageBeanUser findUsersByQuery(Consumer<FindUsersByQueryOperationSpec> spec) {
         FindUsersByQueryOperationSpec r = new FindUsersByQueryOperationSpec(spec);
@@ -5678,13 +6298,22 @@ public class JiraRESTV2ConsumerApi {
     /**
      * Find users for picker
      * <p>
-     * Returns a list of users whose attributes match the query term. The returned object includes the `html` field where the matched query term is highlighted with the HTML strong tag. A list of account IDs can be provided to exclude users from the results.
-     * This operation takes the users in the range defined by `maxResults`, up to the thousandth user, and then returns only the users from that range that match the query term. This means the operation usually returns fewer users than specified in `maxResults`. To get all the users who match the query term, use [Get all users](#api-rest-api-2-users-search-get) and filter the records in your code.
+     * Returns a list of users whose attributes match the query term. The returned object includes the {@code html} field where the matched query term is highlighted with the HTML strong tag. A list of account IDs can be provided to exclude users from the results.
+     * This operation takes the users in the range defined by {@code maxResults}, up to the thousandth user, and then returns only the users from that range that match the query term. This means the operation usually returns fewer users than specified in {@code maxResults}. To get all the users who match the query term, use [Get all users](#api-rest-api-2-users-search-get) and filter the records in your code.
      * Privacy controls are applied to the response based on the users' preferences. This could mean, for example, that the user's email address is hidden. See the [Profile visibility overview](https://developer.atlassian.com/cloud/jira/platform/profile-visibility/) for more details.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Browse users and groups* [global permission](https://confluence.atlassian.com/x/x4dKLg). Anonymous calls and calls by users without the required permission return search results for an exact name match only.
      * Authentication - Required Scopes: [read:jira-user]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>query: A query string that is matched against user attributes, such as {@code displayName}, and {@code emailAddress}, to find relevant users. The string can match the prefix of the attribute's value. For example, *query=john* matches a user with a {@code displayName} of *John Smith* and a user with an {@code emailAddress} of *johnson@example.com*.</li>
+     *   <li>maxResults: The maximum number of items to return. The total number of matched users is returned in {@code total}.</li>
+     *   <li>showAvatar: Include the URI to the user's avatar.</li>
+     *   <li>exclude: This parameter is no longer available. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.</li>
+     *   <li>excludeAccountIds: A list of account IDs to exclude from the search results. This parameter accepts a comma-separated list. Multiple account IDs can also be provided using an ampersand-separated list. For example, {@code excludeAccountIds=5b10a2844c20165700ede21g,5b10a0effa615349cb016cd8&amp;excludeAccountIds=5b10ac8d82e05b22cc7d4ef5}. Cannot be provided with {@code exclude}.</li>
+     *   <li>avatarSize: </li>
+     *   <li>excludeConnectUsers: </li>
+     * </ul>
      */
     public FoundUsers findUsersForPicker(Consumer<FindUsersForPickerOperationSpec> spec) {
         FindUsersForPickerOperationSpec r = new FindUsersForPickerOperationSpec(spec);
@@ -5700,7 +6329,7 @@ public class JiraRESTV2ConsumerApi {
      * *
      * they have a set of permissions for a project or issue.
      * If no search string is provided, a list of all users with the permissions is returned.
-     * This operation takes the users in the range defined by `startAt` and `maxResults`, up to the thousandth user, and then returns only the users from that range that match the search string and have permission for the project or issue. This means the operation usually returns fewer users than specified in `maxResults`. To get all the users who match the search string and have permission for the project or issue, use [Get all users](#api-rest-api-2-users-search-get) and filter the records in your code.
+     * This operation takes the users in the range defined by {@code startAt} and {@code maxResults}, up to the thousandth user, and then returns only the users from that range that match the search string and have permission for the project or issue. This means the operation usually returns fewer users than specified in {@code maxResults}. To get all the users who match the search string and have permission for the project or issue, use [Get all users](#api-rest-api-2-users-search-get) and filter the records in your code.
      * Privacy controls are applied to the response based on the users' preferences. This could mean, for example, that the user's email address is hidden. See the [Profile visibility overview](https://developer.atlassian.com/cloud/jira/platform/profile-visibility/) for more details.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:**
@@ -5709,7 +6338,17 @@ public class JiraRESTV2ConsumerApi {
      * *
      * *Administer Projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for a project, to get users for that project.
      * Authentication - Required Scopes: [read:jira-user]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>permissions: A comma separated list of permissions. Permissions can be specified as any:   *  permission returned by [Get all permissions](#api-rest-api-2-permissions-get).  *  custom project permission added by Connect apps.  *  (deprecated) one of the following:           *  ASSIGNABLE\\_USER      *  ASSIGN\\_ISSUE      *  ATTACHMENT\\_DELETE\\_ALL      *  ATTACHMENT\\_DELETE\\_OWN      *  BROWSE      *  CLOSE\\_ISSUE      *  COMMENT\\_DELETE\\_ALL      *  COMMENT\\_DELETE\\_OWN      *  COMMENT\\_EDIT\\_ALL      *  COMMENT\\_EDIT\\_OWN      *  COMMENT\\_ISSUE      *  CREATE\\_ATTACHMENT      *  CREATE\\_ISSUE      *  DELETE\\_ISSUE      *  EDIT\\_ISSUE      *  LINK\\_ISSUE      *  MANAGE\\_WATCHER\\_LIST      *  MODIFY\\_REPORTER      *  MOVE\\_ISSUE      *  PROJECT\\_ADMIN      *  RESOLVE\\_ISSUE      *  SCHEDULE\\_ISSUE      *  SET\\_ISSUE\\_SECURITY      *  TRANSITION\\_ISSUE      *  VIEW\\_VERSION\\_CONTROL      *  VIEW\\_VOTERS\\_AND\\_WATCHERS      *  VIEW\\_WORKFLOW\\_READONLY      *  WORKLOG\\_DELETE\\_ALL      *  WORKLOG\\_DELETE\\_OWN      *  WORKLOG\\_EDIT\\_ALL      *  WORKLOG\\_EDIT\\_OWN      *  WORK\\_ISSUE</li>
+     *   <li>query: A query string that is matched against user attributes, such as {@code displayName} and {@code emailAddress}, to find relevant users. The string can match the prefix of the attribute's value. For example, *query=john* matches a user with a {@code displayName} of *John Smith* and a user with an {@code emailAddress} of *johnson@example.com*. Required, unless {@code accountId} is specified.</li>
+     *   <li>username: This parameter is no longer available. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.</li>
+     *   <li>accountId: A query string that is matched exactly against user {@code accountId}. Required, unless {@code query} is specified.</li>
+     *   <li>issueKey: The issue key for the issue.</li>
+     *   <li>projectKey: The project key for the project (case sensitive).</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     * </ul>
      */
     public List<User> findUsersWithAllPermissions(Consumer<FindUsersWithAllPermissionsOperationSpec> spec) {
         FindUsersWithAllPermissionsOperationSpec r = new FindUsersWithAllPermissionsOperationSpec(spec);
@@ -5726,15 +6365,24 @@ public class JiraRESTV2ConsumerApi {
      * they have permission to browse issues.
      * Use this resource to find users who can browse:
      *  *
-     * an issue, by providing the `issueKey`.
+     * an issue, by providing the {@code issueKey}.
      * *
-     * any issue in a project, by providing the `projectKey`.
-     * This operation takes the users in the range defined by `startAt` and `maxResults`, up to the thousandth user, and then returns only the users from that range that match the search string and have permission to browse issues. This means the operation usually returns fewer users than specified in `maxResults`. To get all the users who match the search string and have permission to browse issues, use [Get all users](#api-rest-api-2-users-search-get) and filter the records in your code.
+     * any issue in a project, by providing the {@code projectKey}.
+     * This operation takes the users in the range defined by {@code startAt} and {@code maxResults}, up to the thousandth user, and then returns only the users from that range that match the search string and have permission to browse issues. This means the operation usually returns fewer users than specified in {@code maxResults}. To get all the users who match the search string and have permission to browse issues, use [Get all users](#api-rest-api-2-users-search-get) and filter the records in your code.
      * Privacy controls are applied to the response based on the users' preferences. This could mean, for example, that the user's email address is hidden. See the [Profile visibility overview](https://developer.atlassian.com/cloud/jira/platform/profile-visibility/) for more details.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Browse users and groups* [global permission](https://confluence.atlassian.com/x/x4dKLg). Anonymous calls and calls by users without the required permission return empty search results.
      * Authentication - Required Scopes: [read:jira-user]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>query: A query string that is matched against user attributes, such as {@code displayName} and {@code emailAddress}, to find relevant users. The string can match the prefix of the attribute's value. For example, *query=john* matches a user with a {@code displayName} of *John Smith* and a user with an {@code emailAddress} of *johnson@example.com*. Required, unless {@code accountId} is specified.</li>
+     *   <li>username: This parameter is no longer available. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.</li>
+     *   <li>accountId: A query string that is matched exactly against user {@code accountId}. Required, unless {@code query} is specified.</li>
+     *   <li>issueKey: The issue key for the issue. Required, unless {@code projectKey} is specified.</li>
+     *   <li>projectKey: The project key for the project (case sensitive). Required, unless {@code issueKey} is specified.</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     * </ul>
      */
     public List<User> findUsersWithBrowsePermission(Consumer<FindUsersWithBrowsePermissionOperationSpec> spec) {
         FindUsersWithBrowsePermissionOperationSpec r = new FindUsersWithBrowsePermissionOperationSpec(spec);
@@ -5747,7 +6395,11 @@ public class JiraRESTV2ConsumerApi {
      * Updates the project role's name and description. You must include both a name and a description in the request.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the project role. Use [Get all project roles](#api-rest-api-2-role-get) to get a list of project role IDs.</li>
+     *   <li>createUpdateRoleRequestBean: </li>
+     * </ul>
      */
     public ProjectRole fullyUpdateProjectRole(Consumer<FullyUpdateProjectRoleOperationSpec> spec) {
         FullyUpdateProjectRoleOperationSpec r = new FullyUpdateProjectRoleOperationSpec(spec);
@@ -5760,7 +6412,10 @@ public class JiraRESTV2ConsumerApi {
      * Returns a [project type](https://confluence.atlassian.com/x/Var1Nw) if it is accessible to the user.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectTypeKey: The key of the project type.</li>
+     * </ul>
      */
     public ProjectType getAccessibleProjectTypeByKey(Consumer<GetAccessibleProjectTypeByKeyOperationSpec> spec) {
         GetAccessibleProjectTypeByKeyOperationSpec r = new GetAccessibleProjectTypeByKeyOperationSpec(spec);
@@ -5773,10 +6428,8 @@ public class JiraRESTV2ConsumerApi {
      * Returns the application properties that are accessible on the *Advanced Settings* page. To navigate to the *Advanced Settings* page in Jira, choose the Jira icon &amp;gt; **Jira settings** &amp;gt; **System**, **General Configuration** and then click **Advanced Settings** (in the upper right).
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
      */
-    public List<ApplicationProperty> getAdvancedSettings(Consumer<GetAdvancedSettingsOperationSpec> spec) {
-        GetAdvancedSettingsOperationSpec r = new GetAdvancedSettingsOperationSpec(spec);
+    public List<ApplicationProperty> getAdvancedSettings() {
         return api.getAdvancedSettings();
     }
 
@@ -5785,10 +6438,8 @@ public class JiraRESTV2ConsumerApi {
      * <p>
      * Returns all [project types](https://confluence.atlassian.com/x/Var1Nw) with a valid license.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
      */
-    public List<ProjectType> getAllAccessibleProjectTypes(Consumer<GetAllAccessibleProjectTypesOperationSpec> spec) {
-        GetAllAccessibleProjectTypesOperationSpec r = new GetAllAccessibleProjectTypesOperationSpec(spec);
+    public List<ProjectType> getAllAccessibleProjectTypes() {
         return api.getAllAccessibleProjectTypes();
     }
 
@@ -5797,10 +6448,8 @@ public class JiraRESTV2ConsumerApi {
      * <p>
      * Returns all application roles. In Jira, application roles are managed using the [Application access configuration](https://confluence.atlassian.com/x/3YxjL) page.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
      */
-    public List<ApplicationRole> getAllApplicationRoles(Consumer<GetAllApplicationRolesOperationSpec> spec) {
-        GetAllApplicationRolesOperationSpec r = new GetAllApplicationRolesOperationSpec(spec);
+    public List<ApplicationRole> getAllApplicationRoles() {
         return api.getAllApplicationRoles();
     }
 
@@ -5810,10 +6459,8 @@ public class JiraRESTV2ConsumerApi {
      * Gets a list of all available gadgets that can be added to all dashboards.
      * **[Permissions](#permissions) required:** None.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
      */
-    public AvailableDashboardGadgetsResponse getAllAvailableDashboardGadgets(Consumer<GetAllAvailableDashboardGadgetsOperationSpec> spec) {
-        GetAllAvailableDashboardGadgetsOperationSpec r = new GetAllAvailableDashboardGadgetsOperationSpec(spec);
+    public AvailableDashboardGadgetsResponse getAllAvailableDashboardGadgets() {
         return api.getAllAvailableDashboardGadgets();
     }
 
@@ -5824,7 +6471,12 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** None.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>filter: The filter applied to the list of dashboards. Valid values are:   *  {@code favourite} Returns dashboards the user has marked as favorite.  *  {@code my} Returns dashboards owned by the user.</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     * </ul>
      */
     public PageOfDashboards getAllDashboards(Consumer<GetAllDashboardsOperationSpec> spec) {
         GetAllDashboardsOperationSpec r = new GetAllDashboardsOperationSpec(spec);
@@ -5838,7 +6490,12 @@ public class JiraRESTV2ConsumerApi {
      * Only field configuration schemes used in classic projects are returned.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>id: The list of field configuration scheme IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code id=10000&amp;id=10001}.</li>
+     * </ul>
      */
     public PageBeanFieldConfigurationScheme getAllFieldConfigurationSchemes(Consumer<GetAllFieldConfigurationSchemesOperationSpec> spec) {
         GetAllFieldConfigurationSchemesOperationSpec r = new GetAllFieldConfigurationSchemesOperationSpec(spec);
@@ -5858,7 +6515,14 @@ public class JiraRESTV2ConsumerApi {
      * Only field configurations used in company-managed (classic) projects are returned.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>id: The list of field configuration IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code id=10000&amp;id=10001}.</li>
+     *   <li>isDefault: If *true* returns default field configurations only.</li>
+     *   <li>query: The query string used to match against field configuration names and descriptions.</li>
+     * </ul>
      */
     public PageBeanFieldConfigurationDetails getAllFieldConfigurations(Consumer<GetAllFieldConfigurationsOperationSpec> spec) {
         GetAllFieldConfigurationsOperationSpec r = new GetAllFieldConfigurationsOperationSpec(spec);
@@ -5871,17 +6535,23 @@ public class JiraRESTV2ConsumerApi {
      * Returns a list of dashboard gadgets on a dashboard.
      * This operation returns:
      *  *
-     * Gadgets from a list of IDs, when `id` is set.
+     * Gadgets from a list of IDs, when {@code id} is set.
      * *
-     * Gadgets with a module key, when `moduleKey` is set.
+     * Gadgets with a module key, when {@code moduleKey} is set.
      * *
-     * Gadgets from a list of URIs, when `uri` is set.
+     * Gadgets from a list of URIs, when {@code uri} is set.
      * *
      * All gadgets, when no other parameters are set.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** None.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>dashboardId: The ID of the dashboard.</li>
+     *   <li>moduleKey: The list of gadgets module keys. To include multiple module keys, separate module keys with ampersand: {@code moduleKey=key:one&amp;moduleKey=key:two}.</li>
+     *   <li>uri: The list of gadgets URIs. To include multiple URIs, separate URIs with ampersand: {@code uri=/rest/example/uri/1&amp;uri=/rest/example/uri/2}.</li>
+     *   <li>gadgetId: The list of gadgets IDs. To include multiple IDs, separate IDs with ampersand: {@code gadgetId=10000&amp;gadgetId=10001}.</li>
+     * </ul>
      */
     public DashboardGadgetResponse getAllGadgets(Consumer<GetAllGadgetsOperationSpec> spec) {
         GetAllGadgetsOperationSpec r = new GetAllGadgetsOperationSpec(spec);
@@ -5895,7 +6565,12 @@ public class JiraRESTV2ConsumerApi {
      * Note that this operation **only works for issue field select list options added by Connect apps**, it cannot be used with issue field select list options created in Jira or using operations from the [Issue custom field options](#api-group-Issue-custom-field-options) resource.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). Jira permissions are not required for the app providing the field.
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldKey: The field key is specified in the following format: **$(app-key)\\_\\_$(field-key)**. For example, *example-add-on\\_\\_example-issue-field*. To determine the {@code fieldKey} value, do one of the following:   *  open the app's plugin descriptor, then **app-key** is the key at the top and **field-key** is the key in the {@code jiraIssueFields} module. **app-key** can also be found in the app listing in the Atlassian Universal Plugin Manager.  *  run [Get fields](#api-rest-api-2-field-get) and in the field details the value is returned in {@code key}. For example, {@code "key": "teams-add-on__team-issue-field"}</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     * </ul>
      */
     public PageBeanIssueFieldOption getAllIssueFieldOptions(Consumer<GetAllIssueFieldOptionsOperationSpec> spec) {
         GetAllIssueFieldOptionsOperationSpec r = new GetAllIssueFieldOptionsOperationSpec(spec);
@@ -5909,7 +6584,15 @@ public class JiraRESTV2ConsumerApi {
      * Only issue type schemes used in classic projects are returned.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>id: The list of issue type schemes IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code id=10000&amp;id=10001}.</li>
+     *   <li>orderBy: [Order](#ordering) the results by a field:   *  {@code name} Sorts by issue type scheme name.  *  {@code id} Sorts by issue type scheme ID.</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code projects} For each issue type schemes, returns information about the projects the issue type scheme is assigned to.  *  {@code issueTypes} For each issue type schemes, returns information about the issueTypes the issue type scheme have.</li>
+     *   <li>queryString: String used to perform a case-insensitive partial match with issue type scheme name.</li>
+     * </ul>
      */
     public PageBeanIssueTypeScheme getAllIssueTypeSchemes(Consumer<GetAllIssueTypeSchemesOperationSpec> spec) {
         GetAllIssueTypeSchemesOperationSpec r = new GetAllIssueTypeSchemesOperationSpec(spec);
@@ -5921,7 +6604,11 @@ public class JiraRESTV2ConsumerApi {
      * <p>
      * Returns a [paginated](#pagination) list of labels.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     * </ul>
      */
     public PageBeanString getAllLabels(Consumer<GetAllLabelsOperationSpec> spec) {
         GetAllLabelsOperationSpec r = new GetAllLabelsOperationSpec(spec);
@@ -5933,117 +6620,120 @@ public class JiraRESTV2ConsumerApi {
      * <p>
      * Returns all permission schemes.
      * ### About permission schemes and grants ###
-     * A permission scheme is a collection of permission grants. A permission grant consists of a `holder` and a `permission`.
+     * A permission scheme is a collection of permission grants. A permission grant consists of a {@code holder} and a {@code permission}.
      * #### Holder object ####
-     * The `holder` object contains information about the user or group being granted the permission. For example, the *Administer projects* permission is granted to a group named *Teams in space administrators*. In this case, the type is `"type": "group"`, and the parameter is the group name, `"parameter": "Teams in space administrators"` and the value is group ID, `"value": "ca85fac0-d974-40ca-a615-7af99c48d24f"`. The `holder` object is defined by the following properties:
+     * The {@code holder} object contains information about the user or group being granted the permission. For example, the *Administer projects* permission is granted to a group named *Teams in space administrators*. In this case, the type is {@code "type": "group"}, and the parameter is the group name, {@code "parameter": "Teams in space administrators"} and the value is group ID, {@code "value": "ca85fac0-d974-40ca-a615-7af99c48d24f"}. The {@code holder} object is defined by the following properties:
      *  *
-     * `type` Identifies the user or group (see the list of types below).
+     * {@code type} Identifies the user or group (see the list of types below).
      * *
-     * `parameter` As a group's name can change, use of `value` is recommended. The value of this property depends on the `type`. For example, if the `type` is a group, then you need to specify the group name.
+     * {@code parameter} As a group's name can change, use of {@code value} is recommended. The value of this property depends on the {@code type}. For example, if the {@code type} is a group, then you need to specify the group name.
      * *
-     * `value` The value of this property depends on the `type`. If the `type` is a group, then you need to specify the group ID. For other `type` it has the same value as `parameter`
-     * The following `types` are available. The expected values for `parameter` and `value` are given in parentheses (some types may not have a `parameter` or `value`):
+     * {@code value} The value of this property depends on the {@code type}. If the {@code type} is a group, then you need to specify the group ID. For other {@code type} it has the same value as {@code parameter}
+     * The following {@code types} are available. The expected values for {@code parameter} and {@code value} are given in parentheses (some types may not have a {@code parameter} or {@code value}):
      *  *
-     * `anyone` Grant for anonymous users.
+     * {@code anyone} Grant for anonymous users.
      * *
-     * `applicationRole` Grant for users with access to the specified application (application name, application name). See [Update product access settings](https://confluence.atlassian.com/x/3YxjL) for more information.
+     * {@code applicationRole} Grant for users with access to the specified application (application name, application name). See [Update product access settings](https://confluence.atlassian.com/x/3YxjL) for more information.
      * *
-     * `assignee` Grant for the user currently assigned to an issue.
+     * {@code assignee} Grant for the user currently assigned to an issue.
      * *
-     * `group` Grant for the specified group (`parameter` : group name, `value` : group ID).
+     * {@code group} Grant for the specified group ({@code parameter} : group name, {@code value} : group ID).
      * *
-     * `groupCustomField` Grant for a user in the group selected in the specified custom field (`parameter` : custom field ID, `value` : custom field ID).
+     * {@code groupCustomField} Grant for a user in the group selected in the specified custom field ({@code parameter} : custom field ID, {@code value} : custom field ID).
      * *
-     * `projectLead` Grant for a project lead.
+     * {@code projectLead} Grant for a project lead.
      * *
-     * `projectRole` Grant for the specified project role (`parameter` :project role ID, `value` : project role ID).
+     * {@code projectRole} Grant for the specified project role ({@code parameter} :project role ID, {@code value} : project role ID).
      * *
-     * `reporter` Grant for the user who reported the issue.
+     * {@code reporter} Grant for the user who reported the issue.
      * *
-     * `sd.customer.portal.only` Jira Service Desk only. Grants customers permission to access the customer portal but not Jira. See [Customizing Jira Service Desk permissions](https://confluence.atlassian.com/x/24dKLg) for more information.
+     * {@code sd.customer.portal.only} Jira Service Desk only. Grants customers permission to access the customer portal but not Jira. See [Customizing Jira Service Desk permissions](https://confluence.atlassian.com/x/24dKLg) for more information.
      * *
-     * `user` Grant for the specified user (`parameter` : user ID - historically this was the userkey but that is deprecated and the account ID should be used, `value` : user ID).
+     * {@code user} Grant for the specified user ({@code parameter} : user ID - historically this was the userkey but that is deprecated and the account ID should be used, {@code value} : user ID).
      * *
-     * `userCustomField` Grant for a user selected in the specified custom field (`parameter` : custom field ID, `value` : custom field ID).
+     * {@code userCustomField} Grant for a user selected in the specified custom field ({@code parameter} : custom field ID, {@code value} : custom field ID).
      * #### Built-in permissions ####
      * The [built-in Jira permissions](https://confluence.atlassian.com/x/yodKLg) are listed below. Apps can also define custom permissions. See the [project permission](https://developer.atlassian.com/cloud/jira/platform/modules/project-permission/) and [global permission](https://developer.atlassian.com/cloud/jira/platform/modules/global-permission/) module documentation for more information.
      * **Project permissions**
      *  *
-     * `ADMINISTER_PROJECTS`
+     * {@code ADMINISTER_PROJECTS}
      * *
-     * `BROWSE_PROJECTS`
+     * {@code BROWSE_PROJECTS}
      * *
-     * `MANAGE_SPRINTS_PERMISSION` (Jira Software only)
+     * {@code MANAGE_SPRINTS_PERMISSION} (Jira Software only)
      * *
-     * `SERVICEDESK_AGENT` (Jira Service Desk only)
+     * {@code SERVICEDESK_AGENT} (Jira Service Desk only)
      * *
-     * `VIEW_DEV_TOOLS` (Jira Software only)
+     * {@code VIEW_DEV_TOOLS} (Jira Software only)
      * *
-     * `VIEW_READONLY_WORKFLOW`
+     * {@code VIEW_READONLY_WORKFLOW}
      * **Issue permissions**
      *  *
-     * `ASSIGNABLE_USER`
+     * {@code ASSIGNABLE_USER}
      * *
-     * `ASSIGN_ISSUES`
+     * {@code ASSIGN_ISSUES}
      * *
-     * `CLOSE_ISSUES`
+     * {@code CLOSE_ISSUES}
      * *
-     * `CREATE_ISSUES`
+     * {@code CREATE_ISSUES}
      * *
-     * `DELETE_ISSUES`
+     * {@code DELETE_ISSUES}
      * *
-     * `EDIT_ISSUES`
+     * {@code EDIT_ISSUES}
      * *
-     * `LINK_ISSUES`
+     * {@code LINK_ISSUES}
      * *
-     * `MODIFY_REPORTER`
+     * {@code MODIFY_REPORTER}
      * *
-     * `MOVE_ISSUES`
+     * {@code MOVE_ISSUES}
      * *
-     * `RESOLVE_ISSUES`
+     * {@code RESOLVE_ISSUES}
      * *
-     * `SCHEDULE_ISSUES`
+     * {@code SCHEDULE_ISSUES}
      * *
-     * `SET_ISSUE_SECURITY`
+     * {@code SET_ISSUE_SECURITY}
      * *
-     * `TRANSITION_ISSUES`
+     * {@code TRANSITION_ISSUES}
      * **Voters and watchers permissions**
      *  *
-     * `MANAGE_WATCHERS`
+     * {@code MANAGE_WATCHERS}
      * *
-     * `VIEW_VOTERS_AND_WATCHERS`
+     * {@code VIEW_VOTERS_AND_WATCHERS}
      * **Comments permissions**
      *  *
-     * `ADD_COMMENTS`
+     * {@code ADD_COMMENTS}
      * *
-     * `DELETE_ALL_COMMENTS`
+     * {@code DELETE_ALL_COMMENTS}
      * *
-     * `DELETE_OWN_COMMENTS`
+     * {@code DELETE_OWN_COMMENTS}
      * *
-     * `EDIT_ALL_COMMENTS`
+     * {@code EDIT_ALL_COMMENTS}
      * *
-     * `EDIT_OWN_COMMENTS`
+     * {@code EDIT_OWN_COMMENTS}
      * **Attachments permissions**
      *  *
-     * `CREATE_ATTACHMENTS`
+     * {@code CREATE_ATTACHMENTS}
      * *
-     * `DELETE_ALL_ATTACHMENTS`
+     * {@code DELETE_ALL_ATTACHMENTS}
      * *
-     * `DELETE_OWN_ATTACHMENTS`
+     * {@code DELETE_OWN_ATTACHMENTS}
      * **Time tracking permissions**
      *  *
-     * `DELETE_ALL_WORKLOGS`
+     * {@code DELETE_ALL_WORKLOGS}
      * *
-     * `DELETE_OWN_WORKLOGS`
+     * {@code DELETE_OWN_WORKLOGS}
      * *
-     * `EDIT_ALL_WORKLOGS`
+     * {@code EDIT_ALL_WORKLOGS}
      * *
-     * `EDIT_OWN_WORKLOGS`
+     * {@code EDIT_OWN_WORKLOGS}
      * *
-     * `WORK_ON_ISSUES`
+     * {@code WORK_ON_ISSUES}
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>expand: Use expand to include additional information in the response. This parameter accepts a comma-separated list. Note that permissions are included when you specify any value. Expand options include:   *  {@code all} Returns all expandable information.  *  {@code field} Returns information about the custom field granted the permission.  *  {@code group} Returns information about the group that is granted the permission.  *  {@code permissions} Returns all permission grants for each permission scheme.  *  {@code projectRole} Returns information about the project role granted the permission.  *  {@code user} Returns information about the user who is granted the permission.</li>
+     * </ul>
      */
     public PermissionSchemes getAllPermissionSchemes(Consumer<GetAllPermissionSchemesOperationSpec> spec) {
         GetAllPermissionSchemesOperationSpec r = new GetAllPermissionSchemesOperationSpec(spec);
@@ -6062,10 +6752,8 @@ public class JiraRESTV2ConsumerApi {
      * global permissions added by plugins.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
      */
-    public Permissions getAllPermissions(Consumer<GetAllPermissionsOperationSpec> spec) {
-        GetAllPermissionsOperationSpec r = new GetAllPermissionsOperationSpec(spec);
+    public Permissions getAllPermissions() {
         return api.getAllPermissions();
     }
 
@@ -6076,7 +6764,10 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectIdOrKey: The ID or (case-sensitive) key of the project.</li>
+     * </ul>
      */
     public ProjectAvatars getAllProjectAvatars(Consumer<GetAllProjectAvatarsOperationSpec> spec) {
         GetAllProjectAvatarsOperationSpec r = new GetAllProjectAvatarsOperationSpec(spec);
@@ -6089,10 +6780,8 @@ public class JiraRESTV2ConsumerApi {
      * Returns all project categories.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
      */
-    public List<ProjectCategory> getAllProjectCategories(Consumer<GetAllProjectCategoriesOperationSpec> spec) {
-        GetAllProjectCategoriesOperationSpec r = new GetAllProjectCategoriesOperationSpec(spec);
+    public List<ProjectCategory> getAllProjectCategories() {
         return api.getAllProjectCategories();
     }
 
@@ -6112,10 +6801,8 @@ public class JiraRESTV2ConsumerApi {
      * Actors: Users and groups that are associated with a project role for a project, which may differ from the default actors. This enables you to assign a user to different roles in different projects.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
      */
-    public List<ProjectRole> getAllProjectRoles(Consumer<GetAllProjectRolesOperationSpec> spec) {
-        GetAllProjectRolesOperationSpec r = new GetAllProjectRolesOperationSpec(spec);
+    public List<ProjectRole> getAllProjectRoles() {
         return api.getAllProjectRoles();
     }
 
@@ -6126,10 +6813,8 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** None.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
      */
-    public List<ProjectType> getAllProjectTypes(Consumer<GetAllProjectTypesOperationSpec> spec) {
-        GetAllProjectTypesOperationSpec r = new GetAllProjectTypesOperationSpec(spec);
+    public List<ProjectType> getAllProjectTypes() {
         return api.getAllProjectTypes();
     }
 
@@ -6140,7 +6825,12 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** Projects are returned only where the user has *Browse Projects* or *Administer projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>expand: Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expanded options include:   *  {@code description} Returns the project description.  *  {@code issueTypes} Returns all issue types associated with the project.  *  {@code lead} Returns information about the project lead.  *  {@code projectKeys} Returns all project keys associated with the project.</li>
+     *   <li>recent: Returns the user's most recently accessed projects. You may specify the number of results to return up to a maximum of 20. If access is anonymous, then the recently accessed projects are based on the current HTTP session.</li>
+     *   <li>properties: A list of project properties to return for the project. This parameter accepts a comma-separated list.</li>
+     * </ul>
      * @deprecated
      */
     @Deprecated
@@ -6159,7 +6849,12 @@ public class JiraRESTV2ConsumerApi {
      * *
      * *Administer projects* [project permission](https://confluence.atlassian.com/x/yodKLg) when the project key is specified, providing that the screen is associated with the project through a Screen Scheme and Issue Type Screen Scheme.
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>screenId: The ID of the screen.</li>
+     *   <li>tabId: The ID of the screen tab.</li>
+     *   <li>projectKey: The key of the project.</li>
+     * </ul>
      */
     public List<ScreenableField> getAllScreenTabFields(Consumer<GetAllScreenTabFieldsOperationSpec> spec) {
         GetAllScreenTabFieldsOperationSpec r = new GetAllScreenTabFieldsOperationSpec(spec);
@@ -6176,7 +6871,11 @@ public class JiraRESTV2ConsumerApi {
      * *
      * *Administer projects* [project permission](https://confluence.atlassian.com/x/yodKLg) when the project key is specified, providing that the screen is associated with the project through a Screen Scheme and Issue Type Screen Scheme.
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>screenId: The ID of the screen.</li>
+     *   <li>projectKey: The key of the project.</li>
+     * </ul>
      */
     public List<ScreenableTab> getAllScreenTabs(Consumer<GetAllScreenTabsOperationSpec> spec) {
         GetAllScreenTabsOperationSpec r = new GetAllScreenTabsOperationSpec(spec);
@@ -6190,7 +6889,10 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Browse Projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectIdOrKey: The project ID or project key (case sensitive).</li>
+     * </ul>
      */
     public List<IssueTypeWithStatus> getAllStatuses(Consumer<GetAllStatusesOperationSpec> spec) {
         GetAllStatusesOperationSpec r = new GetAllStatusesOperationSpec(spec);
@@ -6204,7 +6906,10 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** None.
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>type: The avatar type.</li>
+     * </ul>
      */
     public SystemAvatars getAllSystemAvatars(Consumer<GetAllSystemAvatarsOperationSpec> spec) {
         GetAllSystemAvatarsOperationSpec r = new GetAllSystemAvatarsOperationSpec(spec);
@@ -6218,7 +6923,11 @@ public class JiraRESTV2ConsumerApi {
      * Privacy controls are applied to the response based on the users' preferences. This could mean, for example, that the user's email address is hidden. See the [Profile visibility overview](https://developer.atlassian.com/cloud/jira/platform/profile-visibility/) for more details.
      * **[Permissions](#permissions) required:** *Browse users and groups* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [read:jira-user]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>startAt: The index of the first item to return.</li>
+     *   <li>maxResults: The maximum number of items to return.</li>
+     * </ul>
      */
     public List<User> getAllUsers(Consumer<GetAllUsersOperationSpec> spec) {
         GetAllUsersOperationSpec r = new GetAllUsersOperationSpec(spec);
@@ -6232,7 +6941,11 @@ public class JiraRESTV2ConsumerApi {
      * Privacy controls are applied to the response based on the users' preferences. This could mean, for example, that the user's email address is hidden. See the [Profile visibility overview](https://developer.atlassian.com/cloud/jira/platform/profile-visibility/) for more details.
      * **[Permissions](#permissions) required:** *Browse users and groups* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [read:jira-user]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>startAt: The index of the first item to return.</li>
+     *   <li>maxResults: The maximum number of items to return.</li>
+     * </ul>
      */
     public List<User> getAllUsersDefault(Consumer<GetAllUsersDefaultOperationSpec> spec) {
         GetAllUsersDefaultOperationSpec r = new GetAllUsersDefaultOperationSpec(spec);
@@ -6245,7 +6958,11 @@ public class JiraRESTV2ConsumerApi {
      * Returns a [paginated](#pagination) list of all workflow schemes, not including draft workflow schemes.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     * </ul>
      */
     public PageBeanWorkflowScheme getAllWorkflowSchemes(Consumer<GetAllWorkflowSchemesOperationSpec> spec) {
         GetAllWorkflowSchemesOperationSpec r = new GetAllWorkflowSchemesOperationSpec(spec);
@@ -6256,10 +6973,13 @@ public class JiraRESTV2ConsumerApi {
      * Get all workflows
      * <p>
      * Returns all workflows in Jira or a workflow. Deprecated, use [Get workflows paginated](#api-rest-api-2-workflow-search-get).
-     * If the `workflowName` parameter is specified, the workflow is returned as an object (not in an array). Otherwise, an array of workflow objects is returned.
+     * If the {@code workflowName} parameter is specified, the workflow is returned as an object (not in an array). Otherwise, an array of workflow objects is returned.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>workflowName: The name of the workflow to be returned. Only one workflow can be specified.</li>
+     * </ul>
      * @deprecated
      */
     @Deprecated
@@ -6275,7 +6995,10 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** None.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the issue type.</li>
+     * </ul>
      */
     public List<IssueTypeDetails> getAlternativeIssueTypes(Consumer<GetAlternativeIssueTypesOperationSpec> spec) {
         GetAlternativeIssueTypesOperationSpec r = new GetAlternativeIssueTypesOperationSpec(spec);
@@ -6286,10 +7009,15 @@ public class JiraRESTV2ConsumerApi {
      * Get application property
      * <p>
      * Returns all application properties or an application property.
-     * If you specify a value for the `key` parameter, then an application property is returned as an object (not in an array). Otherwise, an array of all editable application properties is returned. See [Set application property](#api-rest-api-2-application-properties-id-put) for descriptions of editable properties.
+     * If you specify a value for the {@code key} parameter, then an application property is returned as an object (not in an array). Otherwise, an array of all editable application properties is returned. See [Set application property](#api-rest-api-2-application-properties-id-put) for descriptions of editable properties.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>key: The key of the application property.</li>
+     *   <li>permissionLevel: The permission level of all items being returned in the list.</li>
+     *   <li>keyFilter: When a {@code key} isn't provided, this filters the list of results by the application property {@code key} using a regular expression. For example, using {@code jira.lf.*} will return all application properties with keys that start with *jira.lf.*.</li>
+     * </ul>
      */
     public List<ApplicationProperty> getApplicationProperty(Consumer<GetApplicationPropertyOperationSpec> spec) {
         GetApplicationPropertyOperationSpec r = new GetApplicationPropertyOperationSpec(spec);
@@ -6301,7 +7029,10 @@ public class JiraRESTV2ConsumerApi {
      * <p>
      * Returns an application role.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>key: The key of the application role. Use the [Get all application roles](#api-rest-api-2-applicationrole-get) operation to get the key for each application role.</li>
+     * </ul>
      */
     public ApplicationRole getApplicationRole(Consumer<GetApplicationRoleOperationSpec> spec) {
         GetApplicationRoleOperationSpec r = new GetApplicationRoleOperationSpec(spec);
@@ -6314,7 +7045,10 @@ public class JiraRESTV2ConsumerApi {
      * Returns the total approximate number of user accounts for a single Jira license. Note that this information is cached with a 7-day lifecycle and could be stale at the time of call.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>applicationKey: The ID of the application, represents a specific version of Jira.</li>
+     * </ul>
      */
     public LicenseMetric getApproximateApplicationLicenseCount(Consumer<GetApproximateApplicationLicenseCountOperationSpec> spec) {
         GetApproximateApplicationLicenseCountOperationSpec r = new GetApproximateApplicationLicenseCountOperationSpec(spec);
@@ -6327,10 +7061,8 @@ public class JiraRESTV2ConsumerApi {
      * Returns the approximate number of user accounts across all Jira licenses. Note that this information is cached with a 7-day lifecycle and could be stale at the time of call.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
      */
-    public LicenseMetric getApproximateLicenseCount(Consumer<GetApproximateLicenseCountOperationSpec> spec) {
-        GetApproximateLicenseCountOperationSpec r = new GetApproximateLicenseCountOperationSpec(spec);
+    public LicenseMetric getApproximateLicenseCount() {
         return api.getApproximateLicenseCount();
     }
 
@@ -6340,7 +7072,11 @@ public class JiraRESTV2ConsumerApi {
      * Gets the [permission scheme](https://confluence.atlassian.com/x/yodKLg) associated with the project.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) or *Administer projects* [project permission](https://confluence.atlassian.com/x/yodKLg).
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectKeyOrId: The project ID or project key (case sensitive).</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Note that permissions are included when you specify any value. Expand options include:   *  {@code all} Returns all expandable information.  *  {@code field} Returns information about the custom field granted the permission.  *  {@code group} Returns information about the group that is granted the permission.  *  {@code permissions} Returns all permission grants for each permission scheme.  *  {@code projectRole} Returns information about the project role granted the permission.  *  {@code user} Returns information about the user who is granted the permission.</li>
+     * </ul>
      */
     public PermissionScheme getAssignedPermissionScheme(Consumer<GetAssignedPermissionSchemeOperationSpec> spec) {
         GetAssignedPermissionSchemeOperationSpec r = new GetAssignedPermissionSchemeOperationSpec(spec);
@@ -6358,7 +7094,10 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the attachment.</li>
+     * </ul>
      */
     public AttachmentMetadata getAttachment(Consumer<GetAttachmentOperationSpec> spec) {
         GetAttachmentOperationSpec r = new GetAttachmentOperationSpec(spec);
@@ -6368,7 +7107,7 @@ public class JiraRESTV2ConsumerApi {
     /**
      * Get attachment content
      * <p>
-     * Returns the contents of an attachment. A `Range` header can be set to define a range of bytes within the attachment to download. See the [HTTP Range header standard](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range) for details.
+     * Returns the contents of an attachment. A {@code Range} header can be set to define a range of bytes within the attachment to download. See the [HTTP Range header standard](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range) for details.
      * To return a thumbnail of the attachment, use [Get attachment thumbnail](#api-rest-api-2-attachment-thumbnail-id-get).
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** For the issue containing the attachment:
@@ -6377,7 +7116,11 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the attachment.</li>
+     *   <li>redirect: Whether a redirect is provided for the attachment download. Clients that do not automatically follow redirects can set this to {@code false} to avoid making multiple requests to download the attachment.</li>
+     * </ul>
      */
     public Object getAttachmentContent(Consumer<GetAttachmentContentOperationSpec> spec) {
         GetAttachmentContentOperationSpec r = new GetAttachmentContentOperationSpec(spec);
@@ -6392,10 +7135,8 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** None.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
      */
-    public AttachmentSettings getAttachmentMeta(Consumer<GetAttachmentMetaOperationSpec> spec) {
-        GetAttachmentMetaOperationSpec r = new GetAttachmentMetaOperationSpec(spec);
+    public AttachmentSettings getAttachmentMeta() {
         return api.getAttachmentMeta();
     }
 
@@ -6411,7 +7152,14 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the attachment.</li>
+     *   <li>redirect: Whether a redirect is provided for the attachment download. Clients that do not automatically follow redirects can set this to {@code false} to avoid making multiple requests to download the attachment.</li>
+     *   <li>fallbackToDefault: Whether a default thumbnail is returned when the requested thumbnail is not found.</li>
+     *   <li>width: The maximum width to scale the thumbnail to.</li>
+     *   <li>height: The maximum height to scale the thumbnail to.</li>
+     * </ul>
      */
     public Object getAttachmentThumbnail(Consumer<GetAttachmentThumbnailOperationSpec> spec) {
         GetAttachmentThumbnailOperationSpec r = new GetAttachmentThumbnailOperationSpec(spec);
@@ -6423,57 +7171,64 @@ public class JiraRESTV2ConsumerApi {
      * <p>
      * Returns a list of audit records. The list can be filtered to include items:
      *  *
-     * where each item in `filter` has at least one match in any of these fields:
+     * where each item in {@code filter} has at least one match in any of these fields:
      * 
      * 
      * 
      * 
      *  *
-     * `summary`
+     * {@code summary}
      * 
      * 
      * *
-     * `category`
+     * {@code category}
      * 
      * 
      * *
-     * `eventSource`
+     * {@code eventSource}
      * 
      * 
      * *
-     * `objectItem.name` If the object is a user, account ID is available to filter.
+     * {@code objectItem.name} If the object is a user, account ID is available to filter.
      * 
      * 
      * *
-     * `objectItem.parentName`
+     * {@code objectItem.parentName}
      * 
      * 
      * *
-     * `objectItem.typeName`
+     * {@code objectItem.typeName}
      * 
      * 
      * *
-     * `changedValues.changedFrom`
+     * {@code changedValues.changedFrom}
      * 
      * 
      * *
-     * `changedValues.changedTo`
+     * {@code changedValues.changedTo}
      * 
      * 
      * *
-     * `remoteAddress`
+     * {@code remoteAddress}
      * 
      * 
      * 
      * 
-     * For example, if `filter` contains *man ed*, an audit record containing `summary": "User added to group"` and `"category": "group management"` is returned.
+     * For example, if {@code filter} contains *man ed*, an audit record containing {@code summary": "User added to group"} and {@code "category": "group management"} is returned.
      * *
      * created on or after a date and time.
      * *
      * created or or before a date and time.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>offset: The number of records to skip before returning the first result.</li>
+     *   <li>limit: The maximum number of results to return.</li>
+     *   <li>filter: The strings to match with audit field content, space separated.</li>
+     *   <li>from: The date and time on or after which returned audit records must have been created. If {@code to} is provided {@code from} must be before {@code to} or no audit records are returned.</li>
+     *   <li>to: The date and time on or before which returned audit results must have been created. If {@code from} is provided {@code to} must be after {@code from} or no audit records are returned.</li>
+     * </ul>
      */
     public AuditRecords getAuditRecords(Consumer<GetAuditRecordsOperationSpec> spec) {
         GetAuditRecordsOperationSpec r = new GetAuditRecordsOperationSpec(spec);
@@ -6488,10 +7243,8 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** None.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
      */
-    public JQLReferenceData getAutoComplete(Consumer<GetAutoCompleteOperationSpec> spec) {
-        GetAutoCompleteOperationSpec r = new GetAutoCompleteOperationSpec(spec);
+    public JQLReferenceData getAutoComplete() {
         return api.getAutoComplete();
     }
 
@@ -6499,11 +7252,14 @@ public class JiraRESTV2ConsumerApi {
      * Get field reference data (POST)
      * <p>
      * Returns reference data for JQL searches. This is a downloadable version of the documentation provided in [Advanced searching - fields reference](https://confluence.atlassian.com/x/gwORLQ) and [Advanced searching - functions reference](https://confluence.atlassian.com/x/hgORLQ), along with a list of JQL-reserved words. Use this information to assist with the programmatic creation of JQL queries or the validation of queries built in a custom query builder.
-     * This operation can filter the custom fields returned by project. Invalid project IDs in `projectIds` are ignored. System fields are always returned.
-     * It can also return the collapsed field for custom fields. Collapsed fields enable searches to be performed across all fields with the same name and of the same field type. For example, the collapsed field `Component - Component[Dropdown]` enables dropdown fields `Component - cf[10061]` and `Component - cf[10062]` to be searched simultaneously.
+     * This operation can filter the custom fields returned by project. Invalid project IDs in {@code projectIds} are ignored. System fields are always returned.
+     * It can also return the collapsed field for custom fields. Collapsed fields enable searches to be performed across all fields with the same name and of the same field type. For example, the collapsed field {@code Component - Component[Dropdown]} enables dropdown fields {@code Component - cf[10061]} and {@code Component - cf[10062]} to be searched simultaneously.
      * **[Permissions](#permissions) required:** None.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>searchAutoCompleteFilter: </li>
+     * </ul>
      */
     public JQLReferenceData getAutoCompletePost(Consumer<GetAutoCompletePostOperationSpec> spec) {
         GetAutoCompletePostOperationSpec r = new GetAutoCompletePostOperationSpec(spec);
@@ -6516,7 +7272,10 @@ public class JiraRESTV2ConsumerApi {
      * Returns the fields that can be added to a tab on a screen.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>screenId: The ID of the screen.</li>
+     * </ul>
      */
     public List<ScreenableField> getAvailableScreenFields(Consumer<GetAvailableScreenFieldsOperationSpec> spec) {
         GetAvailableScreenFieldsOperationSpec r = new GetAvailableScreenFieldsOperationSpec(spec);
@@ -6529,10 +7288,8 @@ public class JiraRESTV2ConsumerApi {
      * Returns all time tracking providers. By default, Jira only has one time tracking provider: *JIRA provided time tracking*. However, you can install other time tracking providers via apps from the Atlassian Marketplace. For more information on time tracking providers, see the documentation for the [ Time Tracking Provider](https://developer.atlassian.com/cloud/jira/platform/modules/time-tracking-provider/) module.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
      */
-    public List<TimeTrackingProvider> getAvailableTimeTrackingImplementations(Consumer<GetAvailableTimeTrackingImplementationsOperationSpec> spec) {
-        GetAvailableTimeTrackingImplementationsOperationSpec r = new GetAvailableTimeTrackingImplementationsOperationSpec(spec);
+    public List<TimeTrackingProvider> getAvailableTimeTrackingImplementations() {
         return api.getAvailableTimeTrackingImplementations();
     }
 
@@ -6549,7 +7306,13 @@ public class JiraRESTV2ConsumerApi {
      * *
      * For custom issue type avatars, *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for at least one project the issue type is used in.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>type: The icon type of the avatar.</li>
+     *   <li>id: The ID of the avatar.</li>
+     *   <li>size: The size of the avatar image. If not provided the default size is returned.</li>
+     *   <li>format: The format to return the avatar image in. If not provided the original content format is returned.</li>
+     * </ul>
      */
     public void getAvatarImageByID(Consumer<GetAvatarImageByIDOperationSpec> spec) {
         GetAvatarImageByIDOperationSpec r = new GetAvatarImageByIDOperationSpec(spec);
@@ -6569,7 +7332,13 @@ public class JiraRESTV2ConsumerApi {
      * *
      * For custom issue type avatars, *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for at least one project the issue type is used in.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>type: The icon type of the avatar.</li>
+     *   <li>entityId: The ID of the project or issue type the avatar belongs to.</li>
+     *   <li>size: The size of the avatar image. If not provided the default size is returned.</li>
+     *   <li>format: The format to return the avatar image in. If not provided the original content format is returned.</li>
+     * </ul>
      */
     public void getAvatarImageByOwner(Consumer<GetAvatarImageByOwnerOperationSpec> spec) {
         GetAvatarImageByOwnerOperationSpec r = new GetAvatarImageByOwnerOperationSpec(spec);
@@ -6583,7 +7352,12 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** None.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>type: The icon type of the avatar.</li>
+     *   <li>size: The size of the avatar image. If not provided the default size is returned.</li>
+     *   <li>format: The format to return the avatar image in. If not provided the original content format is returned.</li>
+     * </ul>
      */
     public void getAvatarImageByType(Consumer<GetAvatarImageByTypeOperationSpec> spec) {
         GetAvatarImageByTypeOperationSpec r = new GetAvatarImageByTypeOperationSpec(spec);
@@ -6603,7 +7377,11 @@ public class JiraRESTV2ConsumerApi {
      * *
      * for system avatars, none.
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>type: The avatar type.</li>
+     *   <li>entityId: The ID of the item the avatar is associated with.</li>
+     * </ul>
      */
     public Avatars getAvatars(Consumer<GetAvatarsOperationSpec> spec) {
         GetAvatarsOperationSpec r = new GetAvatarsOperationSpec(spec);
@@ -6616,10 +7394,8 @@ public class JiraRESTV2ConsumerApi {
      * Returns the current announcement banner configuration.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
      */
-    public AnnouncementBannerConfiguration getBanner(Consumer<GetBannerOperationSpec> spec) {
-        GetBannerOperationSpec r = new GetBannerOperationSpec(spec);
+    public AnnouncementBannerConfiguration getBanner() {
         return api.getBanner();
     }
 
@@ -6638,12 +7414,15 @@ public class JiraRESTV2ConsumerApi {
      * *
      * A maximum of 1000 projects and 1000 issues can be checked.
      * *
-     * Null values in `globalPermissions`, `projectPermissions`, `projectPermissions.projects`, and `projectPermissions.issues` are ignored.
+     * Null values in {@code globalPermissions}, {@code projectPermissions}, {@code projectPermissions.projects}, and {@code projectPermissions.issues} are ignored.
      * *
-     * Empty strings in `projectPermissions.permissions` are ignored.
+     * Empty strings in {@code projectPermissions.permissions} are ignored.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) to check the permissions for other users, otherwise none. However, Connect apps can make a call from the app server to the product to obtain permission details for any user, without admin permission. This Connect app ability doesn't apply to calls made using AP.request() in a browser.
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>bulkPermissionsRequestBean: Details of the permissions to check.</li>
+     * </ul>
      */
     public BulkPermissionGrants getBulkPermissions(Consumer<GetBulkPermissionsOperationSpec> spec) {
         GetBulkPermissionsOperationSpec r = new GetBulkPermissionsOperationSpec(spec);
@@ -6661,7 +7440,12 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue.</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     * </ul>
      */
     public PageBeanChangelog getChangeLogs(Consumer<GetChangeLogsOperationSpec> spec) {
         GetChangeLogsOperationSpec r = new GetChangeLogsOperationSpec(spec);
@@ -6679,7 +7463,11 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue.</li>
+     *   <li>issueChangelogIds: </li>
+     * </ul>
      */
     public PageOfChangelogs getChangeLogsByIds(Consumer<GetChangeLogsByIdsOperationSpec> spec) {
         GetChangeLogsByIdsOperationSpec r = new GetChangeLogsByIdsOperationSpec(spec);
@@ -6703,7 +7491,10 @@ public class JiraRESTV2ConsumerApi {
      * *
      * filters shared with the public.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the filter.</li>
+     * </ul>
      */
     public List<ColumnItem> getColumns(Consumer<GetColumnsOperationSpec> spec) {
         GetColumnsOperationSpec r = new GetColumnsOperationSpec(spec);
@@ -6723,7 +7514,12 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If the comment has visibility restrictions, the user belongs to the group or has the role visibility is restricted to.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue.</li>
+     *   <li>id: The ID of the comment.</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information about comments in the response. This parameter accepts {@code renderedBody}, which returns the comment body rendered in HTML.</li>
+     * </ul>
      */
     public Comment getComment(Consumer<GetCommentOperationSpec> spec) {
         GetCommentOperationSpec r = new GetCommentOperationSpec(spec);
@@ -6743,7 +7539,11 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If the comment has visibility restrictions, belongs to the group or has the role visibility is restricted to.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>commentId: The ID of the comment.</li>
+     *   <li>propertyKey: The key of the property.</li>
+     * </ul>
      */
     public EntityProperty getCommentProperty(Consumer<GetCommentPropertyOperationSpec> spec) {
         GetCommentPropertyOperationSpec r = new GetCommentPropertyOperationSpec(spec);
@@ -6763,7 +7563,10 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If the comment has visibility restrictions, belongs to the group or has the role visibility is restricted to.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>commentId: The ID of the comment.</li>
+     * </ul>
      */
     public PropertyKeys getCommentPropertyKeys(Consumer<GetCommentPropertyKeysOperationSpec> spec) {
         GetCommentPropertyKeysOperationSpec r = new GetCommentPropertyKeysOperationSpec(spec);
@@ -6783,7 +7586,14 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If the comment has visibility restrictions, belongs to the group or has the role visibility is role visibility is restricted to.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue.</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>orderBy: [Order](#ordering) the results by a field. Accepts *created* to sort comments by their created date.</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information about comments in the response. This parameter accepts {@code renderedBody}, which returns the comment body rendered in HTML.</li>
+     * </ul>
      */
     public PageOfComments getComments(Consumer<GetCommentsOperationSpec> spec) {
         GetCommentsOperationSpec r = new GetCommentsOperationSpec(spec);
@@ -6803,7 +7613,11 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If the comment has visibility restrictions, belongs to the group or has the role visibility is restricted to.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueCommentListRequestBean: The list of comment IDs.</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information about comments in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code renderedBody} Returns the comment body rendered in HTML.  *  {@code properties} Returns the comment's properties.</li>
+     * </ul>
      */
     public PageBeanComment getCommentsByIds(Consumer<GetCommentsByIdsOperationSpec> spec) {
         GetCommentsByIdsOperationSpec r = new GetCommentsByIdsOperationSpec(spec);
@@ -6817,7 +7631,10 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for project containing the component.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the component.</li>
+     * </ul>
      */
     public ProjectComponent getComponent(Consumer<GetComponentOperationSpec> spec) {
         GetComponentOperationSpec r = new GetComponentOperationSpec(spec);
@@ -6831,7 +7648,10 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** None.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the component.</li>
+     * </ul>
      */
     public ComponentIssuesCount getComponentRelatedIssues(Consumer<GetComponentRelatedIssuesOperationSpec> spec) {
         GetComponentRelatedIssuesOperationSpec r = new GetComponentRelatedIssuesOperationSpec(spec);
@@ -6844,10 +7664,8 @@ public class JiraRESTV2ConsumerApi {
      * Returns the [global settings](https://confluence.atlassian.com/x/qYXKM) in Jira. These settings determine whether optional features (for example, subtasks, time tracking, and others) are enabled. If time tracking is enabled, this operation also returns the time tracking configuration.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [read:jira-user]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
      */
-    public ModelConfiguration getConfiguration(Consumer<GetConfigurationOperationSpec> spec) {
-        GetConfigurationOperationSpec r = new GetConfigurationOperationSpec(spec);
+    public Configuration getConfiguration() {
         return api.getConfiguration();
     }
 
@@ -6858,14 +7676,22 @@ public class JiraRESTV2ConsumerApi {
      *  *
      * With no other parameters set, all contexts.
      * *
-     * By defining `id` only, all contexts from the list of IDs.
+     * By defining {@code id} only, all contexts from the list of IDs.
      * *
-     * By defining `isAnyIssueType`, limit the list of contexts returned to either those that apply to all issue types (true) or those that apply to only a subset of issue types (false)
+     * By defining {@code isAnyIssueType}, limit the list of contexts returned to either those that apply to all issue types (true) or those that apply to only a subset of issue types (false)
      * *
-     * By defining `isGlobalContext`, limit the list of contexts return to either those that apply to all projects (global contexts) (true) or those that apply to only a subset of projects (false).
+     * By defining {@code isGlobalContext}, limit the list of contexts return to either those that apply to all projects (global contexts) (true) or those that apply to only a subset of projects (false).
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldId: The ID of the custom field.</li>
+     *   <li>isAnyIssueType: Whether to return contexts that apply to all issue types.</li>
+     *   <li>isGlobalContext: Whether to return contexts that apply to all projects.</li>
+     *   <li>contextId: The list of context IDs. To include multiple contexts, separate IDs with ampersand: {@code contextId=10000&amp;contextId=10001}.</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     * </ul>
      */
     public PageBeanCustomFieldContext getContextsForField(Consumer<GetContextsForFieldOperationSpec> spec) {
         GetContextsForFieldOperationSpec r = new GetContextsForFieldOperationSpec(spec);
@@ -6878,7 +7704,12 @@ public class JiraRESTV2ConsumerApi {
      * Returns a [paginated](#pagination) list of the contexts a field is used in. Deprecated, use [ Get custom field contexts](#api-rest-api-2-field-fieldId-context-get).
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldId: The ID of the field to return contexts for.</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     * </ul>
      * @deprecated
      */
     @Deprecated
@@ -6895,7 +7726,14 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Create issues* [project permission](https://confluence.atlassian.com/x/yodKLg) in the requested projects.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectIds: List of project IDs. This parameter accepts a comma-separated list. Multiple project IDs can also be provided using an ampersand-separated list. For example, {@code projectIds=10000,10001&amp;projectIds=10020,10021}. This parameter may be provided with {@code projectKeys}.</li>
+     *   <li>projectKeys: List of project keys. This parameter accepts a comma-separated list. Multiple project keys can also be provided using an ampersand-separated list. For example, {@code projectKeys=proj1,proj2&amp;projectKeys=proj3}. This parameter may be provided with {@code projectIds}.</li>
+     *   <li>issuetypeIds: List of issue type IDs. This parameter accepts a comma-separated list. Multiple issue type IDs can also be provided using an ampersand-separated list. For example, {@code issuetypeIds=10000,10001&amp;issuetypeIds=10020,10021}. This parameter may be provided with {@code issuetypeNames}.</li>
+     *   <li>issuetypeNames: List of issue type names. This parameter accepts a comma-separated list. Multiple issue type names can also be provided using an ampersand-separated list. For example, {@code issuetypeNames=name1,name2&amp;issuetypeNames=name3}. This parameter may be provided with {@code issuetypeIds}.</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information about issue metadata in the response. This parameter accepts {@code projects.issuetypes.fields}, which returns information about the fields in the issue creation screen for each issue type. Fields hidden from the screen are not returned. Use the information to populate the {@code fields} and {@code update} fields in [Create issue](#api-rest-api-2-issue-post) and [Create issues](#api-rest-api-2-issue-bulk-post).</li>
+     * </ul>
      */
     public IssueCreateMetadata getCreateIssueMeta(Consumer<GetCreateIssueMetaOperationSpec> spec) {
         GetCreateIssueMetaOperationSpec r = new GetCreateIssueMetaOperationSpec(spec);
@@ -6908,7 +7746,10 @@ public class JiraRESTV2ConsumerApi {
      * Returns details for the current user.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [read:jira-user]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>expand: Use [expand](#expansion) to include additional information about user in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code groups} Returns all groups, including nested groups, the user belongs to.  *  {@code applicationRoles} Returns the application roles the user is assigned to.</li>
+     * </ul>
      */
     public User getCurrentUser(Consumer<GetCurrentUserOperationSpec> spec) {
         GetCurrentUserOperationSpec r = new GetCurrentUserOperationSpec(spec);
@@ -6921,17 +7762,27 @@ public class JiraRESTV2ConsumerApi {
      * Returns a [paginated](#pagination) list of configurations for a custom field created by a [Forge app](https://developer.atlassian.com/platform/forge/).
      * The result can be filtered by one of these criteria:
      *  *
-     * `id`.
+     * {@code id}.
      * *
-     * `fieldContextId`.
+     * {@code fieldContextId}.
      * *
-     * `issueId`.
+     * {@code issueId}.
      * *
-     * `projectKeyOrId` and `issueTypeId`.
+     * {@code projectKeyOrId} and {@code issueTypeId}.
      * Otherwise, all configurations are returned.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). Jira permissions are not required for the Forge app that created the custom field.
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldIdOrKey: The ID or key of the custom field, for example {@code customfield_10000}.</li>
+     *   <li>id: The list of configuration IDs. To include multiple configurations, separate IDs with an ampersand: {@code id=10000&amp;id=10001}. Can't be provided with {@code fieldContextId}, {@code issueId}, {@code projectKeyOrId}, or {@code issueTypeId}.</li>
+     *   <li>fieldContextId: The list of field context IDs. To include multiple field contexts, separate IDs with an ampersand: {@code fieldContextId=10000&amp;fieldContextId=10001}. Can't be provided with {@code id}, {@code issueId}, {@code projectKeyOrId}, or {@code issueTypeId}.</li>
+     *   <li>issueId: The ID of the issue to filter results by. If the issue doesn't exist, an empty list is returned. Can't be provided with {@code projectKeyOrId}, or {@code issueTypeId}.</li>
+     *   <li>projectKeyOrId: The ID or key of the project to filter results by. Must be provided with {@code issueTypeId}. Can't be provided with {@code issueId}.</li>
+     *   <li>issueTypeId: The ID of the issue type to filter results by. Must be provided with {@code projectKeyOrId}. Can't be provided with {@code issueId}.</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     * </ul>
      */
     public PageBeanContextualConfiguration getCustomFieldConfiguration(Consumer<GetCustomFieldConfigurationOperationSpec> spec) {
         GetCustomFieldConfigurationOperationSpec r = new GetCustomFieldConfigurationOperationSpec(spec);
@@ -6942,12 +7793,18 @@ public class JiraRESTV2ConsumerApi {
      * Get custom field contexts for projects and issue types
      * <p>
      * Returns a [paginated](#pagination) list of project and issue type mappings and, for each mapping, the ID of a [custom field context](https://confluence.atlassian.com/x/k44fOw) that applies to the project and issue type.
-     * If there is no custom field context assigned to the project then, if present, the custom field context that applies to all projects is returned if it also applies to the issue type or all issue types. If a custom field context is not found, the returned custom field context ID is `null`.
+     * If there is no custom field context assigned to the project then, if present, the custom field context that applies to all projects is returned if it also applies to the issue type or all issue types. If a custom field context is not found, the returned custom field context ID is {@code null}.
      * Duplicate project and issue type mappings cannot be provided in the request.
      * The order of the returned values is the same as provided in the request.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldId: The ID of the custom field.</li>
+     *   <li>projectIssueTypeMappings: The list of project and issue type mappings.</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     * </ul>
      */
     public PageBeanContextForProjectAndIssueType getCustomFieldContextsForProjectsAndIssueTypes(Consumer<GetCustomFieldContextsForProjectsAndIssueTypesOperationSpec> spec) {
         GetCustomFieldContextsForProjectsAndIssueTypesOperationSpec r = new GetCustomFieldContextsForProjectsAndIssueTypesOperationSpec(spec);
@@ -6966,7 +7823,10 @@ public class JiraRESTV2ConsumerApi {
      * *
      * if the user has the *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for at least one project the custom field is used in, and the field is visible in at least one layout the user has permission to view.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the custom field option.</li>
+     * </ul>
      */
     public CustomFieldOption getCustomFieldOption(Consumer<GetCustomFieldOptionOperationSpec> spec) {
         GetCustomFieldOptionOperationSpec r = new GetCustomFieldOptionOperationSpec(spec);
@@ -6981,7 +7841,10 @@ public class JiraRESTV2ConsumerApi {
      * **[Permissions](#permissions) required:** None.
      * However, to get a dashboard, the dashboard must be shared with the user or the user must own it. Note, users with the *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) are considered owners of the System dashboard. The System dashboard is considered to be shared with all other users.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the dashboard.</li>
+     * </ul>
      */
     public Dashboard getDashboard(Consumer<GetDashboardOperationSpec> spec) {
         GetDashboardOperationSpec r = new GetDashboardOperationSpec(spec);
@@ -6998,7 +7861,12 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** The user must be the owner of the dashboard or have the dashboard shared with them. Note, users with the *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) are considered owners of the System dashboard. The System dashboard is considered to be shared with all other users, and is accessible to anonymous users when Jira’s anonymous access is permitted.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>dashboardId: The ID of the dashboard.</li>
+     *   <li>itemId: The ID of the dashboard item.</li>
+     *   <li>propertyKey: The key of the dashboard item property.</li>
+     * </ul>
      */
     public EntityProperty getDashboardItemProperty(Consumer<GetDashboardItemPropertyOperationSpec> spec) {
         GetDashboardItemPropertyOperationSpec r = new GetDashboardItemPropertyOperationSpec(spec);
@@ -7012,7 +7880,11 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** The user must be the owner of the dashboard or have the dashboard shared with them. Note, users with the *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) are considered owners of the System dashboard. The System dashboard is considered to be shared with all other users, and is accessible to anonymous users when Jira’s anonymous access is permitted.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>dashboardId: The ID of the dashboard.</li>
+     *   <li>itemId: The ID of the dashboard item.</li>
+     * </ul>
      */
     public PropertyKeys getDashboardItemPropertyKeys(Consumer<GetDashboardItemPropertyKeysOperationSpec> spec) {
         GetDashboardItemPropertyKeysOperationSpec r = new GetDashboardItemPropertyKeysOperationSpec(spec);
@@ -7036,7 +7908,20 @@ public class JiraRESTV2ConsumerApi {
      * *
      * Dashboards shared with the public.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>dashboardName: String used to perform a case-insensitive partial match with {@code name}.</li>
+     *   <li>accountId: User account ID used to return dashboards with the matching {@code owner.accountId}. This parameter cannot be used with the {@code owner} parameter.</li>
+     *   <li>owner: This parameter is deprecated because of privacy changes. Use {@code accountId} instead. See the [migration guide](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details. User name used to return dashboards with the matching {@code owner.name}. This parameter cannot be used with the {@code accountId} parameter.</li>
+     *   <li>groupname: As a group's name can change, use of {@code groupId} is recommended. Group name used to return dashboards that are shared with a group that matches {@code sharePermissions.group.name}. This parameter cannot be used with the {@code groupId} parameter.</li>
+     *   <li>groupId: Group ID used to return dashboards that are shared with a group that matches {@code sharePermissions.group.groupId}. This parameter cannot be used with the {@code groupname} parameter.</li>
+     *   <li>projectId: Project ID used to returns dashboards that are shared with a project that matches {@code sharePermissions.project.id}.</li>
+     *   <li>orderBy: [Order](#ordering) the results by a field:   *  {@code description} Sorts by dashboard description. Note that this sort works independently of whether the expand to display the description field is in use.  *  {@code favourite_count} Sorts by dashboard popularity.  *  {@code id} Sorts by dashboard ID.  *  {@code is_favourite} Sorts by whether the dashboard is marked as a favorite.  *  {@code name} Sorts by dashboard name.  *  {@code owner} Sorts by dashboard owner name.</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>status: The status to filter by. It may be active, archived or deleted.</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information about dashboard in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code description} Returns the description of the dashboard.  *  {@code owner} Returns the owner of the dashboard.  *  {@code viewUrl} Returns the URL that is used to view the dashboard.  *  {@code favourite} Returns {@code isFavourite}, an indicator of whether the user has set the dashboard as a favorite.  *  {@code favouritedCount} Returns {@code popularity}, a count of how many users have set this dashboard as a favorite.  *  {@code sharePermissions} Returns details of the share permissions defined for the dashboard.  *  {@code editPermissions} Returns details of the edit permissions defined for the dashboard.  *  {@code isWritable} Returns whether the current user has permission to edit the dashboard.</li>
+     * </ul>
      */
     public PageBeanDashboard getDashboardsPaginated(Consumer<GetDashboardsPaginatedOperationSpec> spec) {
         GetDashboardsPaginatedOperationSpec r = new GetDashboardsPaginatedOperationSpec(spec);
@@ -7049,76 +7934,80 @@ public class JiraRESTV2ConsumerApi {
      * Returns the default sharing settings for new filters and dashboards for a user.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
      */
-    public DefaultShareScope getDefaultShareScope(Consumer<GetDefaultShareScopeOperationSpec> spec) {
-        GetDefaultShareScopeOperationSpec r = new GetDefaultShareScopeOperationSpec(spec);
+    public DefaultShareScope getDefaultShareScope() {
         return api.getDefaultShareScope();
     }
 
     /**
      * Get custom field contexts default values
      * <p>
-     * Returns a [paginated](#pagination) list of defaults for a custom field. The results can be filtered by `contextId`, otherwise all values are returned. If no defaults are set for a context, nothing is returned.
+     * Returns a [paginated](#pagination) list of defaults for a custom field. The results can be filtered by {@code contextId}, otherwise all values are returned. If no defaults are set for a context, nothing is returned.
      *  The returned object depends on type of the custom field:
      *  *
-     * `CustomFieldContextDefaultValueDate` (type `datepicker`) for date fields.
+     * {@code CustomFieldContextDefaultValueDate} (type {@code datepicker}) for date fields.
      * *
-     * `CustomFieldContextDefaultValueDateTime` (type `datetimepicker`) for date-time fields.
+     * {@code CustomFieldContextDefaultValueDateTime} (type {@code datetimepicker}) for date-time fields.
      * *
-     * `CustomFieldContextDefaultValueSingleOption` (type `option.single`) for single choice select lists and radio buttons.
+     * {@code CustomFieldContextDefaultValueSingleOption} (type {@code option.single}) for single choice select lists and radio buttons.
      * *
-     * `CustomFieldContextDefaultValueMultipleOption` (type `option.multiple`) for multiple choice select lists and checkboxes.
+     * {@code CustomFieldContextDefaultValueMultipleOption} (type {@code option.multiple}) for multiple choice select lists and checkboxes.
      * *
-     * `CustomFieldContextDefaultValueCascadingOption` (type `option.cascading`) for cascading select lists.
+     * {@code CustomFieldContextDefaultValueCascadingOption} (type {@code option.cascading}) for cascading select lists.
      * *
-     * `CustomFieldContextSingleUserPickerDefaults` (type `single.user.select`) for single users.
+     * {@code CustomFieldContextSingleUserPickerDefaults} (type {@code single.user.select}) for single users.
      * *
-     * `CustomFieldContextDefaultValueMultiUserPicker` (type `multi.user.select`) for user lists.
+     * {@code CustomFieldContextDefaultValueMultiUserPicker} (type {@code multi.user.select}) for user lists.
      * *
-     * `CustomFieldContextDefaultValueSingleGroupPicker` (type `grouppicker.single`) for single choice group pickers.
+     * {@code CustomFieldContextDefaultValueSingleGroupPicker} (type {@code grouppicker.single}) for single choice group pickers.
      * *
-     * `CustomFieldContextDefaultValueMultipleGroupPicker` (type `grouppicker.multiple`) for multiple choice group pickers.
+     * {@code CustomFieldContextDefaultValueMultipleGroupPicker} (type {@code grouppicker.multiple}) for multiple choice group pickers.
      * *
-     * `CustomFieldContextDefaultValueURL` (type `url`) for URLs.
+     * {@code CustomFieldContextDefaultValueURL} (type {@code url}) for URLs.
      * *
-     * `CustomFieldContextDefaultValueProject` (type `project`) for project pickers.
+     * {@code CustomFieldContextDefaultValueProject} (type {@code project}) for project pickers.
      * *
-     * `CustomFieldContextDefaultValueFloat` (type `float`) for floats (floating-point numbers).
+     * {@code CustomFieldContextDefaultValueFloat} (type {@code float}) for floats (floating-point numbers).
      * *
-     * `CustomFieldContextDefaultValueLabels` (type `labels`) for labels.
+     * {@code CustomFieldContextDefaultValueLabels} (type {@code labels}) for labels.
      * *
-     * `CustomFieldContextDefaultValueTextField` (type `textfield`) for text fields.
+     * {@code CustomFieldContextDefaultValueTextField} (type {@code textfield}) for text fields.
      * *
-     * `CustomFieldContextDefaultValueTextArea` (type `textarea`) for text area fields.
+     * {@code CustomFieldContextDefaultValueTextArea} (type {@code textarea}) for text area fields.
      * *
-     * `CustomFieldContextDefaultValueReadOnly` (type `readonly`) for read only (text) fields.
+     * {@code CustomFieldContextDefaultValueReadOnly} (type {@code readonly}) for read only (text) fields.
      * *
-     * `CustomFieldContextDefaultValueMultipleVersion` (type `version.multiple`) for single choice version pickers.
+     * {@code CustomFieldContextDefaultValueMultipleVersion} (type {@code version.multiple}) for single choice version pickers.
      * *
-     * `CustomFieldContextDefaultValueSingleVersion` (type `version.single`) for multiple choice version pickers.
+     * {@code CustomFieldContextDefaultValueSingleVersion} (type {@code version.single}) for multiple choice version pickers.
      * Forge custom fields [types](https://developer.atlassian.com/platform/forge/manifest-reference/modules/jira-custom-field-type/#data-types) are also supported, returning:
      *  *
-     * `CustomFieldContextDefaultValueForgeStringFieldBean` (type `forge.string`) for Forge string fields.
+     * {@code CustomFieldContextDefaultValueForgeStringFieldBean} (type {@code forge.string}) for Forge string fields.
      * *
-     * `CustomFieldContextDefaultValueForgeMultiStringFieldBean` (type `forge.string.list`) for Forge string collection fields.
+     * {@code CustomFieldContextDefaultValueForgeMultiStringFieldBean} (type {@code forge.string.list}) for Forge string collection fields.
      * *
-     * `CustomFieldContextDefaultValueForgeObjectFieldBean` (type `forge.object`) for Forge object fields.
+     * {@code CustomFieldContextDefaultValueForgeObjectFieldBean} (type {@code forge.object}) for Forge object fields.
      * *
-     * `CustomFieldContextDefaultValueForgeDateTimeFieldBean` (type `forge.datetime`) for Forge date-time fields.
+     * {@code CustomFieldContextDefaultValueForgeDateTimeFieldBean} (type {@code forge.datetime}) for Forge date-time fields.
      * *
-     * `CustomFieldContextDefaultValueForgeGroupFieldBean` (type `forge.group`) for Forge group fields.
+     * {@code CustomFieldContextDefaultValueForgeGroupFieldBean} (type {@code forge.group}) for Forge group fields.
      * *
-     * `CustomFieldContextDefaultValueForgeMultiGroupFieldBean` (type `forge.group.list`) for Forge group collection fields.
+     * {@code CustomFieldContextDefaultValueForgeMultiGroupFieldBean} (type {@code forge.group.list}) for Forge group collection fields.
      * *
-     * `CustomFieldContextDefaultValueForgeNumberFieldBean` (type `forge.number`) for Forge number fields.
+     * {@code CustomFieldContextDefaultValueForgeNumberFieldBean} (type {@code forge.number}) for Forge number fields.
      * *
-     * `CustomFieldContextDefaultValueForgeUserFieldBean` (type `forge.user`) for Forge user fields.
+     * {@code CustomFieldContextDefaultValueForgeUserFieldBean} (type {@code forge.user}) for Forge user fields.
      * *
-     * `CustomFieldContextDefaultValueForgeMultiUserFieldBean` (type `forge.user.list`) for Forge user collection fields.
+     * {@code CustomFieldContextDefaultValueForgeMultiUserFieldBean} (type {@code forge.user.list}) for Forge user collection fields.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldId: The ID of the custom field, for example {@code customfield\\_10000}.</li>
+     *   <li>contextId: The IDs of the contexts.</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     * </ul>
      */
     public PageBeanCustomFieldContextDefaultValue getDefaultValues(Consumer<GetDefaultValuesOperationSpec> spec) {
         GetDefaultValuesOperationSpec r = new GetDefaultValuesOperationSpec(spec);
@@ -7131,7 +8020,11 @@ public class JiraRESTV2ConsumerApi {
      * Returns the default workflow for a workflow scheme. The default workflow is the workflow that is assigned any issue types that have not been mapped to any other workflow. The default workflow has *All Unassigned Issue Types* listed in its issue types for the workflow scheme in Jira.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the workflow scheme.</li>
+     *   <li>returnDraftIfExists: Set to {@code true} to return the default workflow for the workflow scheme's draft rather than scheme itself. If the workflow scheme does not have a draft, then the default workflow for the workflow scheme is returned.</li>
+     * </ul>
      */
     public DefaultWorkflow getDefaultWorkflow(Consumer<GetDefaultWorkflowOperationSpec> spec) {
         GetDefaultWorkflowOperationSpec r = new GetDefaultWorkflowOperationSpec(spec);
@@ -7144,7 +8037,10 @@ public class JiraRESTV2ConsumerApi {
      * Returns the default workflow for a workflow scheme's draft. The default workflow is the workflow that is assigned any issue types that have not been mapped to any other workflow. The default workflow has *All Unassigned Issue Types* listed in its issue types for the workflow scheme in Jira.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the workflow scheme that the draft belongs to.</li>
+     * </ul>
      */
     public DefaultWorkflow getDraftDefaultWorkflow(Consumer<GetDraftDefaultWorkflowOperationSpec> spec) {
         GetDraftDefaultWorkflowOperationSpec r = new GetDraftDefaultWorkflowOperationSpec(spec);
@@ -7157,7 +8053,11 @@ public class JiraRESTV2ConsumerApi {
      * Returns the workflow-issue type mappings for a workflow scheme's draft.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the workflow scheme that the draft belongs to.</li>
+     *   <li>workflowName: The name of a workflow in the scheme. Limits the results to the workflow-issue type mapping for the specified workflow.</li>
+     * </ul>
      */
     public IssueTypesWorkflowMapping getDraftWorkflow(Consumer<GetDraftWorkflowOperationSpec> spec) {
         GetDraftWorkflowOperationSpec r = new GetDraftWorkflowOperationSpec(spec);
@@ -7170,7 +8070,11 @@ public class JiraRESTV2ConsumerApi {
      * Returns a [paginated](#pagination) list of the webhooks registered by the calling app.
      * **[Permissions](#permissions) required:** Only [Connect](https://developer.atlassian.com/cloud/jira/platform/#connect-apps) and [OAuth 2.0](https://developer.atlassian.com/cloud/jira/platform/oauth-2-3lo-apps) apps can use this operation.
      * Authentication - Required Scopes: [read:jira-work, manage:jira-webhook]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     * </ul>
      */
     public PageBeanWebhook getDynamicWebhooksForApp(Consumer<GetDynamicWebhooksForAppOperationSpec> spec) {
         GetDynamicWebhooksForAppOperationSpec r = new GetDynamicWebhooksForAppOperationSpec(spec);
@@ -7183,21 +8087,21 @@ public class JiraRESTV2ConsumerApi {
      * Returns the edit screen fields for an issue that are visible to and editable by the user. Use the information to populate the requests in [Edit issue](#api-rest-api-2-issue-issueIdOrKey-put).
      * This endpoint will check for these conditions:
      * 1.
-     * Field is available on a field screen - through screen, screen scheme, issue type screen scheme, and issue type scheme configuration. `overrideScreenSecurity=true` skips this condition. 2.
-     * Field is visible in the [field configuration](https://support.atlassian.com/jira-cloud-administration/docs/change-a-field-configuration/). `overrideScreenSecurity=true` skips this condition. 3.
+     * Field is available on a field screen - through screen, screen scheme, issue type screen scheme, and issue type scheme configuration. {@code overrideScreenSecurity=true} skips this condition. 2.
+     * Field is visible in the [field configuration](https://support.atlassian.com/jira-cloud-administration/docs/change-a-field-configuration/). {@code overrideScreenSecurity=true} skips this condition. 3.
      * Field is shown on the issue: each field has different conditions here. For example: Attachment field only shows if attachments are enabled. Assignee only shows if user has permissions to assign the issue. 4.
      * If a field is custom then it must have valid custom field context, applicable for its project and issue type. All system fields are assumed to have context in all projects and all issue types. 5.
      * Issue has a project, issue type, and status defined. 6.
-     * Issue is assigned to a valid workflow, and the current status has assigned a workflow step. `overrideEditableFlag=true` skips this condition. 7.
-     * The current workflow step is editable. This is true by default, but [can be disabled by setting](https://support.atlassian.com/jira-cloud-administration/docs/use-workflow-properties/) the `jira.issue.editable` property to `false`. `overrideEditableFlag=true` skips this condition. 8.
+     * Issue is assigned to a valid workflow, and the current status has assigned a workflow step. {@code overrideEditableFlag=true} skips this condition. 7.
+     * The current workflow step is editable. This is true by default, but [can be disabled by setting](https://support.atlassian.com/jira-cloud-administration/docs/use-workflow-properties/) the {@code jira.issue.editable} property to {@code false}. {@code overrideEditableFlag=true} skips this condition. 8.
      * User has [Edit issues permission](https://support.atlassian.com/jira-cloud-administration/docs/permissions-for-company-managed-projects/). 9.
-     * Workflow permissions allow editing a field. This is true by default but [can be modified](https://support.atlassian.com/jira-cloud-administration/docs/use-workflow-properties/) using `jira.permission.*` workflow properties.
+     * Workflow permissions allow editing a field. This is true by default but [can be modified](https://support.atlassian.com/jira-cloud-administration/docs/use-workflow-properties/) using {@code jira.permission.*} workflow properties.
      * Fields hidden using [Issue layout settings page](https://support.atlassian.com/jira-software-cloud/docs/configure-field-layout-in-the-issue-view/) remain editable.
      * Connect apps having an app user with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg), and Forge apps acting on behalf of users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg), can return additional details using:
      *  *
-     * `overrideScreenSecurity` When this flag is `true`, then this endpoint skips checking if fields are available through screens, and field configuration (conditions 1. and 2. from the list above).
+     * {@code overrideScreenSecurity} When this flag is {@code true}, then this endpoint skips checking if fields are available through screens, and field configuration (conditions 1. and 2. from the list above).
      * *
-     * `overrideEditableFlag` When this flag is `true`, then this endpoint skips checking if workflow is present and if the current step is editable (conditions 6. and 7. from the list above).
+     * {@code overrideEditableFlag} When this flag is {@code true}, then this endpoint skips checking if workflow is present and if the current step is editable (conditions 6. and 7. from the list above).
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:**
      *  *
@@ -7206,7 +8110,12 @@ public class JiraRESTV2ConsumerApi {
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * Note: For any fields to be editable the user must have the *Edit issues* [project permission](https://confluence.atlassian.com/x/yodKLg) for the issue.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue.</li>
+     *   <li>overrideScreenSecurity: Whether hidden fields are returned. Available to Connect app users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) and Forge apps acting on behalf of users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).</li>
+     *   <li>overrideEditableFlag: Whether non-editable fields are returned. Available to Connect app users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) and Forge apps acting on behalf of users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).</li>
+     * </ul>
      */
     public IssueUpdateMetadata getEditIssueMeta(Consumer<GetEditIssueMetaOperationSpec> spec) {
         GetEditIssueMetaOperationSpec r = new GetEditIssueMetaOperationSpec(spec);
@@ -7219,10 +8128,8 @@ public class JiraRESTV2ConsumerApi {
      * Returns all issue events.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
      */
-    public List<IssueEvent> getEvents(Consumer<GetEventsOperationSpec> spec) {
-        GetEventsOperationSpec r = new GetEventsOperationSpec(spec);
+    public List<IssueEvent> getEvents() {
         return api.getEvents();
     }
 
@@ -7232,10 +8139,14 @@ public class JiraRESTV2ConsumerApi {
      * Returns webhooks that have recently failed to be delivered to the requesting app after the maximum number of retries.
      * After 72 hours the failure may no longer be returned by this operation.
      * The oldest failure is returned first.
-     * This method uses a cursor-based pagination. To request the next page use the failure time of the last webhook on the list as the `failedAfter` value or use the URL provided in `next`.
+     * This method uses a cursor-based pagination. To request the next page use the failure time of the last webhook on the list as the {@code failedAfter} value or use the URL provided in {@code next}.
      * **[Permissions](#permissions) required:** Only [Connect apps](https://developer.atlassian.com/cloud/jira/platform/index/#connect-apps) can use this operation.
      * Authentication - Required Scopes: [read:jira-work, manage:jira-webhook]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>maxResults: The maximum number of webhooks to return per page. If obeying the maxResults directive would result in records with the same failure time being split across pages, the directive is ignored and all records with the same failure time included on the page.</li>
+     *   <li>after: The time after which any webhook failure must have occurred for the record to be returned, expressed as milliseconds since the UNIX epoch.</li>
+     * </ul>
      */
     public FailedWebhooks getFailedWebhooks(Consumer<GetFailedWebhooksOperationSpec> spec) {
         GetFailedWebhooksOperationSpec r = new GetFailedWebhooksOperationSpec(spec);
@@ -7260,7 +8171,10 @@ public class JiraRESTV2ConsumerApi {
      * shared with the public.
      * For example, if the user favorites a public filter that is subsequently made private that filter is not returned by this operation.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>expand: Use [expand](#expansion) to include additional information about filter in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code sharedUsers} Returns the users that the filter is shared with. This includes users that can browse projects that the filter is shared with. If you don't specify {@code sharedUsers}, then the {@code sharedUsers} object is returned but it doesn't list any users. The list of users returned is limited to 1000, to access additional users append {@code [start-index:end-index]} to the expand request. For example, to access the next 1000 users, use {@code ?expand=sharedUsers[1001:2000]}.  *  {@code subscriptions} Returns the users that are subscribed to the filter. If you don't specify {@code subscriptions}, the {@code subscriptions} object is returned but it doesn't list any subscriptions. The list of subscriptions returned is limited to 1000, to access additional subscriptions append {@code [start-index:end-index]} to the expand request. For example, to access the next 1000 subscriptions, use {@code ?expand=subscriptions[1001:2000]}.</li>
+     * </ul>
      */
     public List<Filter> getFavouriteFilters(Consumer<GetFavouriteFiltersOperationSpec> spec) {
         GetFavouriteFiltersOperationSpec r = new GetFavouriteFiltersOperationSpec(spec);
@@ -7272,7 +8186,10 @@ public class JiraRESTV2ConsumerApi {
      * <p>
      * Returns the list of features for a project.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectIdOrKey: The ID or (case-sensitive) key of the project.</li>
+     * </ul>
      */
     public ContainerForProjectFeatures getFeaturesForProject(Consumer<GetFeaturesForProjectOperationSpec> spec) {
         GetFeaturesForProjectOperationSpec r = new GetFeaturesForProjectOperationSpec(spec);
@@ -7285,17 +8202,23 @@ public class JiraRESTV2ConsumerApi {
      * Returns the JQL search auto complete suggestions for a field.
      * Suggestions can be obtained by providing:
      *  *
-     * `fieldName` to get a list of all values for the field.
+     * {@code fieldName} to get a list of all values for the field.
      * *
-     * `fieldName` and `fieldValue` to get a list of values containing the text in `fieldValue`.
+     * {@code fieldName} and {@code fieldValue} to get a list of values containing the text in {@code fieldValue}.
      * *
-     * `fieldName` and `predicateName` to get a list of all predicate values for the field.
+     * {@code fieldName} and {@code predicateName} to get a list of all predicate values for the field.
      * *
-     * `fieldName`, `predicateName`, and `predicateValue` to get a list of predicate values containing the text in `predicateValue`.
+     * {@code fieldName}, {@code predicateName}, and {@code predicateValue} to get a list of predicate values containing the text in {@code predicateValue}.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** None.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldName: The name of the field.</li>
+     *   <li>fieldValue: The partial field item name entered by the user.</li>
+     *   <li>predicateName: The name of the [ CHANGED operator predicate](https://confluence.atlassian.com/x/hQORLQ#Advancedsearching-operatorsreference-CHANGEDCHANGED) for which the suggestions are generated. The valid predicate operators are *by*, *from*, and *to*.</li>
+     *   <li>predicateValue: The partial predicate item name entered by the user.</li>
+     * </ul>
      */
     public AutoCompleteSuggestions getFieldAutoCompleteForQueryString(Consumer<GetFieldAutoCompleteForQueryStringOperationSpec> spec) {
         GetFieldAutoCompleteForQueryStringOperationSpec r = new GetFieldAutoCompleteForQueryStringOperationSpec(spec);
@@ -7309,7 +8232,12 @@ public class JiraRESTV2ConsumerApi {
      * Only the fields from configurations used in company-managed (classic) projects are returned.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the field configuration.</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     * </ul>
      */
     public PageBeanFieldConfigurationItem getFieldConfigurationItems(Consumer<GetFieldConfigurationItemsOperationSpec> spec) {
         GetFieldConfigurationItemsOperationSpec r = new GetFieldConfigurationItemsOperationSpec(spec);
@@ -7323,7 +8251,12 @@ public class JiraRESTV2ConsumerApi {
      * Only items used in classic projects are returned.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>fieldConfigurationSchemeId: The list of field configuration scheme IDs. To include multiple field configuration schemes separate IDs with ampersand: {@code fieldConfigurationSchemeId=10000&amp;fieldConfigurationSchemeId=10001}.</li>
+     * </ul>
      */
     public PageBeanFieldConfigurationIssueTypeItem getFieldConfigurationSchemeMappings(Consumer<GetFieldConfigurationSchemeMappingsOperationSpec> spec) {
         GetFieldConfigurationSchemeMappingsOperationSpec r = new GetFieldConfigurationSchemeMappingsOperationSpec(spec);
@@ -7338,7 +8271,12 @@ public class JiraRESTV2ConsumerApi {
      * Only field configuration schemes used in classic projects are returned.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectId: The list of project IDs. To include multiple projects, separate IDs with ampersand: {@code projectId=10000&amp;projectId=10001}.</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     * </ul>
      */
     public PageBeanFieldConfigurationSchemeProjects getFieldConfigurationSchemeProjectMapping(Consumer<GetFieldConfigurationSchemeProjectMappingOperationSpec> spec) {
         GetFieldConfigurationSchemeProjectMappingOperationSpec r = new GetFieldConfigurationSchemeProjectMappingOperationSpec(spec);
@@ -7360,10 +8298,8 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** None.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
      */
-    public List<FieldDetails> getFields(Consumer<GetFieldsOperationSpec> spec) {
-        GetFieldsOperationSpec r = new GetFieldsOperationSpec(spec);
+    public List<FieldDetails> getFields() {
         return api.getFields();
     }
 
@@ -7374,15 +8310,24 @@ public class JiraRESTV2ConsumerApi {
      *  *
      * all fields
      * *
-     * specific fields, by defining `id`
+     * specific fields, by defining {@code id}
      * *
-     * fields that contain a string in the field name or description, by defining `query`
+     * fields that contain a string in the field name or description, by defining {@code query}
      * *
-     * specific fields that contain a string in the field name or description, by defining `id` and `query`
-     * Only custom fields can be queried, `type` must be set to `custom`.
+     * specific fields that contain a string in the field name or description, by defining {@code id} and {@code query}
+     * Only custom fields can be queried, {@code type} must be set to {@code custom}.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>type: The type of fields to search.</li>
+     *   <li>id: The IDs of the custom fields to return or, where {@code query} is specified, filter.</li>
+     *   <li>query: String used to perform a case-insensitive partial match with field names or descriptions.</li>
+     *   <li>orderBy: [Order](#ordering) the results by a field:   *  {@code contextsCount} sorts by the number of contexts related to a field  *  {@code lastUsed} sorts by the date when the value of the field last changed  *  {@code name} sorts by the field name  *  {@code screensCount} sorts by the number of screens related to a field</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code key} returns the key for each field  *  {@code lastUsed} returns the date when the value of the field last changed  *  {@code screensCount} returns the number of screens related to a field  *  {@code contextsCount} returns the number of contexts related to a field  *  {@code isLocked} returns information about whether the field is [locked](https://confluence.atlassian.com/x/ZSN7Og)  *  {@code searcherKey} returns the searcher key for each custom field</li>
+     * </ul>
      */
     public PageBeanField getFieldsPaginated(Consumer<GetFieldsPaginatedOperationSpec> spec) {
         GetFieldsPaginatedOperationSpec r = new GetFieldsPaginatedOperationSpec(spec);
@@ -7406,7 +8351,12 @@ public class JiraRESTV2ConsumerApi {
      * *
      * shared with the public.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the filter to return.</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information about filter in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code sharedUsers} Returns the users that the filter is shared with. This includes users that can browse projects that the filter is shared with. If you don't specify {@code sharedUsers}, then the {@code sharedUsers} object is returned but it doesn't list any users. The list of users returned is limited to 1000, to access additional users append {@code [start-index:end-index]} to the expand request. For example, to access the next 1000 users, use {@code ?expand=sharedUsers[1001:2000]}.  *  {@code subscriptions} Returns the users that are subscribed to the filter. If you don't specify {@code subscriptions}, the {@code subscriptions} object is returned but it doesn't list any subscriptions. The list of subscriptions returned is limited to 1000, to access additional subscriptions append {@code [start-index:end-index]} to the expand request. For example, to access the next 1000 subscriptions, use {@code ?expand=subscriptions[1001:2000]}.</li>
+     *   <li>overrideSharePermissions: EXPERIMENTAL: Whether share permissions are overridden to enable filters with any share permissions to be returned. Available to users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).</li>
+     * </ul>
      */
     public Filter getFilter(Consumer<GetFilterOperationSpec> spec) {
         GetFilterOperationSpec r = new GetFilterOperationSpec(spec);
@@ -7418,7 +8368,7 @@ public class JiraRESTV2ConsumerApi {
      * <p>
      * Returns a [paginated](#pagination) list of filters. Use this operation to get:
      *  *
-     * specific filters, by defining `id` only.
+     * specific filters, by defining {@code id} only.
      * *
      * filters that match all of the specified attributes. For example, all filters for a user with a particular word in their name. When multiple attributes are specified only filters matching all attributes are returned.
      * This operation can be accessed anonymously.
@@ -7434,7 +8384,21 @@ public class JiraRESTV2ConsumerApi {
      * *
      * filters shared with the public.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>filterName: String used to perform a case-insensitive partial match with {@code name}.</li>
+     *   <li>accountId: User account ID used to return filters with the matching {@code owner.accountId}. This parameter cannot be used with {@code owner}.</li>
+     *   <li>owner: This parameter is deprecated because of privacy changes. Use {@code accountId} instead. See the [migration guide](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details. User name used to return filters with the matching {@code owner.name}. This parameter cannot be used with {@code accountId}.</li>
+     *   <li>groupname: As a group's name can change, use of {@code groupId} is recommended to identify a group. Group name used to returns filters that are shared with a group that matches {@code sharePermissions.group.groupname}. This parameter cannot be used with the {@code groupId} parameter.</li>
+     *   <li>groupId: Group ID used to returns filters that are shared with a group that matches {@code sharePermissions.group.groupId}. This parameter cannot be used with the {@code groupname} parameter.</li>
+     *   <li>projectId: Project ID used to returns filters that are shared with a project that matches {@code sharePermissions.project.id}.</li>
+     *   <li>id: The list of filter IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code id=10000&amp;id=10001}. Do not exceed 200 filter IDs.</li>
+     *   <li>orderBy: [Order](#ordering) the results by a field:   *  {@code description} Sorts by filter description. Note that this sorting works independently of whether the expand to display the description field is in use.  *  {@code favourite_count} Sorts by the count of how many users have this filter as a favorite.  *  {@code is_favourite} Sorts by whether the filter is marked as a favorite.  *  {@code id} Sorts by filter ID.  *  {@code name} Sorts by filter name.  *  {@code owner} Sorts by the ID of the filter owner.  *  {@code is_shared} Sorts by whether the filter is shared.</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information about filter in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code description} Returns the description of the filter.  *  {@code favourite} Returns an indicator of whether the user has set the filter as a favorite.  *  {@code favouritedCount} Returns a count of how many users have set this filter as a favorite.  *  {@code jql} Returns the JQL query that the filter uses.  *  {@code owner} Returns the owner of the filter.  *  {@code searchUrl} Returns a URL to perform the filter's JQL query.  *  {@code sharePermissions} Returns the share permissions defined for the filter.  *  {@code editPermissions} Returns the edit permissions defined for the filter.  *  {@code isWritable} Returns whether the current user has permission to edit the filter.  *  {@code subscriptions} Returns the users that are subscribed to the filter.  *  {@code viewUrl} Returns a URL to view the filter.</li>
+     *   <li>overrideSharePermissions: EXPERIMENTAL: Whether share permissions are overridden to enable filters with any share permissions to be returned. Available to users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).</li>
+     * </ul>
      */
     public PageBeanFilterDetails getFiltersPaginated(Consumer<GetFiltersPaginatedOperationSpec> spec) {
         GetFiltersPaginatedOperationSpec r = new GetFiltersPaginatedOperationSpec(spec);
@@ -7444,11 +8408,16 @@ public class JiraRESTV2ConsumerApi {
     /**
      * Get group
      * <p>
-     * This operation is deprecated, use [`group/member`](#api-rest-api-2-group-member-get).
+     * This operation is deprecated, use [{@code group/member}](#api-rest-api-2-group-member-get).
      * Returns all users in a group.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [read:jira-user]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>groupname: As a group's name can change, use of {@code groupId} is recommended to identify a group.   The name of the group. This parameter cannot be used with the {@code groupId} parameter.</li>
+     *   <li>groupId: The ID of the group. This parameter cannot be used with the {@code groupName} parameter.</li>
+     *   <li>expand: List of fields to expand.</li>
+     * </ul>
      * @deprecated
      */
     @Deprecated
@@ -7470,7 +8439,10 @@ public class JiraRESTV2ConsumerApi {
      * *Subtask* at level -1 (optional). This issue type enables level 0 issue types to be broken down into components. Issues based on a level -1 issue type must have a parent issue.
      * **[Permissions](#permissions) required:** *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectId: The ID of the project.</li>
+     * </ul>
      * @deprecated
      */
     @Deprecated
@@ -7483,11 +8455,14 @@ public class JiraRESTV2ConsumerApi {
      * Get IDs of deleted worklogs
      * <p>
      * Returns a list of IDs and delete timestamps for worklogs deleted after a date and time.
-     * This resource is paginated, with a limit of 1000 worklogs per page. Each page lists worklogs from oldest to youngest. If the number of items in the date range exceeds 1000, `until` indicates the timestamp of the youngest item on the page. Also, `nextPage` provides the URL for the next page of worklogs. The `lastPage` parameter is set to true on the last page of worklogs.
+     * This resource is paginated, with a limit of 1000 worklogs per page. Each page lists worklogs from oldest to youngest. If the number of items in the date range exceeds 1000, {@code until} indicates the timestamp of the youngest item on the page. Also, {@code nextPage} provides the URL for the next page of worklogs. The {@code lastPage} parameter is set to true on the last page of worklogs.
      * This resource does not return worklogs deleted during the minute preceding the request.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>since: The date and time, as a UNIX timestamp in milliseconds, after which deleted worklogs are returned.</li>
+     * </ul>
      */
     public ChangedWorklogs getIdsOfWorklogsDeletedSince(Consumer<GetIdsOfWorklogsDeletedSinceOperationSpec> spec) {
         GetIdsOfWorklogsDeletedSinceOperationSpec r = new GetIdsOfWorklogsDeletedSinceOperationSpec(spec);
@@ -7498,7 +8473,7 @@ public class JiraRESTV2ConsumerApi {
      * Get IDs of updated worklogs
      * <p>
      * Returns a list of IDs and update timestamps for worklogs updated after a date and time.
-     * This resource is paginated, with a limit of 1000 worklogs per page. Each page lists worklogs from oldest to youngest. If the number of items in the date range exceeds 1000, `until` indicates the timestamp of the youngest item on the page. Also, `nextPage` provides the URL for the next page of worklogs. The `lastPage` parameter is set to true on the last page of worklogs.
+     * This resource is paginated, with a limit of 1000 worklogs per page. Each page lists worklogs from oldest to youngest. If the number of items in the date range exceeds 1000, {@code until} indicates the timestamp of the youngest item on the page. Also, {@code nextPage} provides the URL for the next page of worklogs. The {@code lastPage} parameter is set to true on the last page of worklogs.
      * This resource does not return worklogs updated during the minute preceding the request.
      * **[Permissions](#permissions) required:** Permission to access Jira, however, worklogs are only returned where either of the following is true:
      *  *
@@ -7506,7 +8481,11 @@ public class JiraRESTV2ConsumerApi {
      * *
      * the user is a member of a project role or group with permission to view the worklog.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>since: The date and time, as a UNIX timestamp in milliseconds, after which updated worklogs are returned.</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information about worklogs in the response. This parameter accepts {@code properties} that returns the properties of each worklog.</li>
+     * </ul>
      */
     public ChangedWorklogs getIdsOfWorklogsModifiedSince(Consumer<GetIdsOfWorklogsModifiedSinceOperationSpec> spec) {
         GetIdsOfWorklogsModifiedSinceOperationSpec r = new GetIdsOfWorklogsModifiedSinceOperationSpec(spec);
@@ -7516,7 +8495,7 @@ public class JiraRESTV2ConsumerApi {
     /**
      * Get is watching issue bulk
      * <p>
-     * Returns, for the user, details of the watched status of issues from a list. If an issue ID is invalid, the returned watched status is `false`.
+     * Returns, for the user, details of the watched status of issues from a list. If an issue ID is invalid, the returned watched status is {@code false}.
      * This operation requires the **Allow users to watch issues** option to be *ON*. This option is set in General configuration for Jira. See [Configuring Jira application options](https://confluence.atlassian.com/x/uYXKM) for details.
      * **[Permissions](#permissions) required:**
      *  *
@@ -7524,7 +8503,10 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueList: A list of issue IDs.</li>
+     * </ul>
      */
     public BulkIssueIsWatching getIsWatchingIssueBulk(Consumer<GetIsWatchingIssueBulkOperationSpec> spec) {
         GetIsWatchingIssueBulkOperationSpec r = new GetIsWatchingIssueBulkOperationSpec(spec);
@@ -7543,7 +8525,15 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue.</li>
+     *   <li>fields: A list of fields to return for the issue. This parameter accepts a comma-separated list. Use it to retrieve a subset of fields. Allowed values:   *  {@code *all} Returns all fields.  *  {@code *navigable} Returns navigable fields.  *  Any issue field, prefixed with a minus to exclude.  Examples:   *  {@code summary,comment} Returns only the summary and comments fields.  *  {@code -description} Returns all (default) fields except description.  *  {@code *navigable,-comment} Returns all navigable fields except comment.  This parameter may be specified multiple times. For example, {@code fields=field1,field2&amp; fields=field3}.  Note: All fields are returned by default. This differs from [Search for issues using JQL (GET)](#api-rest-api-2-search-get) and [Search for issues using JQL (POST)](#api-rest-api-2-search-post) where the default is all navigable fields.</li>
+     *   <li>fieldsByKeys: Whether fields in {@code fields} are referenced by keys rather than IDs. This parameter is useful where fields have been added by a connect app and a field's key may differ from its ID.</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information about the issues in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code renderedFields} Returns field values rendered in HTML format.  *  {@code names} Returns the display name of each field.  *  {@code schema} Returns the schema describing a field type.  *  {@code transitions} Returns all possible transitions for the issue.  *  {@code editmeta} Returns information about how each field can be edited.  *  {@code changelog} Returns a list of recent updates to an issue, sorted by date, starting from the most recent.  *  {@code versionedRepresentations} Returns a JSON array for each version of a field's value, with the highest number representing the most recent version. Note: When included in the request, the {@code fields} parameter is ignored.</li>
+     *   <li>properties: A list of issue properties to return for the issue. This parameter accepts a comma-separated list. Allowed values:   *  {@code *all} Returns all issue properties.  *  Any issue property key, prefixed with a minus to exclude.  Examples:   *  {@code *all} Returns all properties.  *  {@code *all,-prop1} Returns all properties except {@code prop1}.  *  {@code prop1,prop2} Returns {@code prop1} and {@code prop2} properties.  This parameter may be specified multiple times. For example, {@code properties=prop1,prop2&amp; properties=prop3}.</li>
+     *   <li>updateHistory: Whether the project in which the issue is created is added to the user's **Recently viewed** project list, as shown under **Projects** in Jira. This also populates the [JQL issues search](#api-rest-api-2-search-get) {@code lastViewed} field.</li>
+     * </ul>
      */
     public IssueBean getIssue(Consumer<GetIssueOperationSpec> spec) {
         GetIssueOperationSpec r = new GetIssueOperationSpec(spec);
@@ -7561,10 +8551,8 @@ public class JiraRESTV2ConsumerApi {
      * *
      * if the user has the *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for one or more projects, the issue types associated with the projects the user has permission to browse are returned.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
      */
-    public List<IssueTypeDetails> getIssueAllTypes(Consumer<GetIssueAllTypesOperationSpec> spec) {
-        GetIssueAllTypesOperationSpec r = new GetIssueAllTypesOperationSpec(spec);
+    public List<IssueTypeDetails> getIssueAllTypes() {
         return api.getIssueAllTypes();
     }
 
@@ -7575,7 +8563,11 @@ public class JiraRESTV2ConsumerApi {
      * Note that this operation **only works for issue field select list options added by Connect apps**, it cannot be used with issue field select list options created in Jira or using operations from the [Issue custom field options](#api-group-Issue-custom-field-options) resource.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). Jira permissions are not required for the app providing the field.
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldKey: The field key is specified in the following format: **$(app-key)\\_\\_$(field-key)**. For example, *example-add-on\\_\\_example-issue-field*. To determine the {@code fieldKey} value, do one of the following:   *  open the app's plugin descriptor, then **app-key** is the key at the top and **field-key** is the key in the {@code jiraIssueFields} module. **app-key** can also be found in the app listing in the Atlassian Universal Plugin Manager.  *  run [Get fields](#api-rest-api-2-field-get) and in the field details the value is returned in {@code key}. For example, {@code "key": "teams-add-on__team-issue-field"}</li>
+     *   <li>optionId: The ID of the option to be returned.</li>
+     * </ul>
      */
     public IssueFieldOption getIssueFieldOption(Consumer<GetIssueFieldOptionOperationSpec> spec) {
         GetIssueFieldOptionOperationSpec r = new GetIssueFieldOptionOperationSpec(spec);
@@ -7593,7 +8585,10 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, permission to view both of the issues.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>linkId: The ID of the issue link.</li>
+     * </ul>
      */
     public IssueLink getIssueLink(Consumer<GetIssueLinkOperationSpec> spec) {
         GetIssueLinkOperationSpec r = new GetIssueLinkOperationSpec(spec);
@@ -7608,7 +8603,10 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for a project in the site.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueLinkTypeId: The ID of the issue link type.</li>
+     * </ul>
      */
     public IssueLinkType getIssueLinkType(Consumer<GetIssueLinkTypeOperationSpec> spec) {
         GetIssueLinkTypeOperationSpec r = new GetIssueLinkTypeOperationSpec(spec);
@@ -7623,10 +8621,8 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for a project in the site.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
      */
-    public IssueLinkTypes getIssueLinkTypes(Consumer<GetIssueLinkTypesOperationSpec> spec) {
-        GetIssueLinkTypesOperationSpec r = new GetIssueLinkTypesOperationSpec(spec);
+    public IssueLinkTypes getIssueLinkTypes() {
         return api.getIssueLinkTypes();
     }
 
@@ -7635,10 +8631,8 @@ public class JiraRESTV2ConsumerApi {
      * <p>
      * Returns the default issue navigator columns.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
      */
-    public List<ColumnItem> getIssueNavigatorDefaultColumns(Consumer<GetIssueNavigatorDefaultColumnsOperationSpec> spec) {
-        GetIssueNavigatorDefaultColumnsOperationSpec r = new GetIssueNavigatorDefaultColumnsOperationSpec(spec);
+    public List<ColumnItem> getIssueNavigatorDefaultColumns() {
         return api.getIssueNavigatorDefaultColumns();
     }
 
@@ -7648,13 +8642,21 @@ public class JiraRESTV2ConsumerApi {
      * Returns lists of issues matching a query string. Use this resource to provide auto-completion suggestions when the user is looking for an issue using a word or string.
      * This operation returns two lists:
      *  *
-     * `History Search` which includes issues from the user's history of created, edited, or viewed issues that contain the string in the `query` parameter.
+     * {@code History Search} which includes issues from the user's history of created, edited, or viewed issues that contain the string in the {@code query} parameter.
      * *
-     * `Current Search` which includes issues that match the JQL expression in `currentJQL` and contain the string in the `query` parameter.
+     * {@code Current Search} which includes issues that match the JQL expression in {@code currentJQL} and contain the string in the {@code query} parameter.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** None.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>query: A string to match against text fields in the issue such as title, description, or comments.</li>
+     *   <li>currentJQL: A JQL query defining a list of issues to search for the query term. Note that {@code username} and {@code userkey} cannot be used as search terms for this parameter, due to privacy reasons. Use {@code accountId} instead.</li>
+     *   <li>currentIssueKey: The key of an issue to exclude from search results. For example, the issue the user is viewing when they perform this query.</li>
+     *   <li>currentProjectId: The ID of a project that suggested issues must belong to.</li>
+     *   <li>showSubTasks: Indicate whether to include subtasks in the suggestions list.</li>
+     *   <li>showSubTaskParent: When {@code currentIssueKey} is a subtask, whether to include the parent issue in the suggestions if it matches the query.</li>
+     * </ul>
      */
     public IssuePickerSuggestions getIssuePickerResource(Consumer<GetIssuePickerResourceOperationSpec> spec) {
         GetIssuePickerResourceOperationSpec r = new GetIssuePickerResourceOperationSpec(spec);
@@ -7672,7 +8674,11 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The key or ID of the issue.</li>
+     *   <li>propertyKey: The key of the property.</li>
+     * </ul>
      */
     public EntityProperty getIssueProperty(Consumer<GetIssuePropertyOperationSpec> spec) {
         GetIssuePropertyOperationSpec r = new GetIssuePropertyOperationSpec(spec);
@@ -7690,7 +8696,10 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The key or ID of the issue.</li>
+     * </ul>
      */
     public PropertyKeys getIssuePropertyKeys(Consumer<GetIssuePropertyKeysOperationSpec> spec) {
         GetIssuePropertyKeysOperationSpec r = new GetIssuePropertyKeysOperationSpec(spec);
@@ -7705,7 +8714,10 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** None.
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the issue security level.</li>
+     * </ul>
      */
     public SecurityLevel getIssueSecurityLevel(Consumer<GetIssueSecurityLevelOperationSpec> spec) {
         GetIssueSecurityLevelOperationSpec r = new GetIssueSecurityLevelOperationSpec(spec);
@@ -7719,7 +8731,14 @@ public class JiraRESTV2ConsumerApi {
      * Only issue security level members in context of classic projects are returned.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueSecuritySchemeId: The ID of the issue security scheme. Use the [Get issue security schemes](#api-rest-api-2-issuesecurityschemes-get) operation to get a list of issue security scheme IDs.</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>issueSecurityLevelId: The list of issue security level IDs. To include multiple issue security levels separate IDs with ampersand: {@code issueSecurityLevelId=10000&amp;issueSecurityLevelId=10001}.</li>
+     *   <li>expand: Use expand to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code all} Returns all expandable information.  *  {@code field} Returns information about the custom field granted the permission.  *  {@code group} Returns information about the group that is granted the permission.  *  {@code projectRole} Returns information about the project role granted the permission.  *  {@code user} Returns information about the user who is granted the permission.</li>
+     * </ul>
      */
     public PageBeanIssueSecurityLevelMember getIssueSecurityLevelMembers(Consumer<GetIssueSecurityLevelMembersOperationSpec> spec) {
         GetIssueSecurityLevelMembersOperationSpec r = new GetIssueSecurityLevelMembersOperationSpec(spec);
@@ -7736,7 +8755,10 @@ public class JiraRESTV2ConsumerApi {
      * *
      * *Administer Projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for a project that uses the requested issue security scheme.
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the issue security scheme. Use the [Get issue security schemes](#api-rest-api-2-issuesecurityschemes-get) operation to get a list of issue security scheme IDs.</li>
+     * </ul>
      */
     public SecurityScheme getIssueSecurityScheme(Consumer<GetIssueSecuritySchemeOperationSpec> spec) {
         GetIssueSecuritySchemeOperationSpec r = new GetIssueSecuritySchemeOperationSpec(spec);
@@ -7749,10 +8771,8 @@ public class JiraRESTV2ConsumerApi {
      * Returns all [issue security schemes](https://confluence.atlassian.com/x/J4lKLg).
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
      */
-    public SecuritySchemes getIssueSecuritySchemes(Consumer<GetIssueSecuritySchemesOperationSpec> spec) {
-        GetIssueSecuritySchemesOperationSpec r = new GetIssueSecuritySchemesOperationSpec(spec);
+    public SecuritySchemes getIssueSecuritySchemes() {
         return api.getIssueSecuritySchemes();
     }
 
@@ -7763,7 +8783,10 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) in a project the issue type is associated with or *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the issue type.</li>
+     * </ul>
      */
     public IssueTypeDetails getIssueType(Consumer<GetIssueTypeOperationSpec> spec) {
         GetIssueTypeOperationSpec r = new GetIssueTypeOperationSpec(spec);
@@ -7776,7 +8799,13 @@ public class JiraRESTV2ConsumerApi {
      * Returns a [paginated](#pagination) list of context to issue type mappings for a custom field. Mappings are returned for all contexts or a list of contexts. Mappings are ordered first by context ID and then by issue type ID.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldId: The ID of the custom field.</li>
+     *   <li>contextId: The ID of the context. To include multiple contexts, provide an ampersand-separated list. For example, {@code contextId=10001&amp;contextId=10002}.</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     * </ul>
      */
     public PageBeanIssueTypeToContextMapping getIssueTypeMappingsForContexts(Consumer<GetIssueTypeMappingsForContextsOperationSpec> spec) {
         GetIssueTypeMappingsForContextsOperationSpec r = new GetIssueTypeMappingsForContextsOperationSpec(spec);
@@ -7794,7 +8823,11 @@ public class JiraRESTV2ConsumerApi {
      * *
      * *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) to get the details of any issue types associated with the projects the user has permission to browse.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueTypeId: The ID of the issue type.</li>
+     *   <li>propertyKey: The key of the property. Use [Get issue type property keys](#api-rest-api-2-issuetype-issueTypeId-properties-get) to get a list of all issue type property keys.</li>
+     * </ul>
      */
     public EntityProperty getIssueTypeProperty(Consumer<GetIssueTypePropertyOperationSpec> spec) {
         GetIssueTypePropertyOperationSpec r = new GetIssueTypePropertyOperationSpec(spec);
@@ -7812,7 +8845,10 @@ public class JiraRESTV2ConsumerApi {
      * *
      * *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) to get the property keys of any issue types associated with the projects the user has permission to browse.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueTypeId: The ID of the issue type.</li>
+     * </ul>
      */
     public PropertyKeys getIssueTypePropertyKeys(Consumer<GetIssueTypePropertyKeysOperationSpec> spec) {
         GetIssueTypePropertyKeysOperationSpec r = new GetIssueTypePropertyKeysOperationSpec(spec);
@@ -7826,7 +8862,12 @@ public class JiraRESTV2ConsumerApi {
      * Only issue type schemes used in classic projects are returned.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectId: The list of project IDs. To include multiple project IDs, provide an ampersand-separated list. For example, {@code projectId=10000&amp;projectId=10001}.</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     * </ul>
      */
     public PageBeanIssueTypeSchemeProjects getIssueTypeSchemeForProjects(Consumer<GetIssueTypeSchemeForProjectsOperationSpec> spec) {
         GetIssueTypeSchemeForProjectsOperationSpec r = new GetIssueTypeSchemeForProjectsOperationSpec(spec);
@@ -7840,7 +8881,12 @@ public class JiraRESTV2ConsumerApi {
      * Only issue type scheme items used in classic projects are returned.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>issueTypeSchemeId: The list of issue type scheme IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code issueTypeSchemeId=10000&amp;issueTypeSchemeId=10001}.</li>
+     * </ul>
      */
     public PageBeanIssueTypeSchemeMapping getIssueTypeSchemesMapping(Consumer<GetIssueTypeSchemesMappingOperationSpec> spec) {
         GetIssueTypeSchemesMappingOperationSpec r = new GetIssueTypeSchemesMappingOperationSpec(spec);
@@ -7854,7 +8900,12 @@ public class JiraRESTV2ConsumerApi {
      * Only issue type screen schemes used in classic projects are returned.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>issueTypeScreenSchemeId: The list of issue type screen scheme IDs. To include multiple issue type screen schemes, separate IDs with ampersand: {@code issueTypeScreenSchemeId=10000&amp;issueTypeScreenSchemeId=10001}.</li>
+     * </ul>
      */
     public PageBeanIssueTypeScreenSchemeItem getIssueTypeScreenSchemeMappings(Consumer<GetIssueTypeScreenSchemeMappingsOperationSpec> spec) {
         GetIssueTypeScreenSchemeMappingsOperationSpec r = new GetIssueTypeScreenSchemeMappingsOperationSpec(spec);
@@ -7868,7 +8919,12 @@ public class JiraRESTV2ConsumerApi {
      * Only issue type screen schemes used in classic projects are returned.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectId: The list of project IDs. To include multiple projects, separate IDs with ampersand: {@code projectId=10000&amp;projectId=10001}.</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     * </ul>
      */
     public PageBeanIssueTypeScreenSchemesProjects getIssueTypeScreenSchemeProjectAssociations(Consumer<GetIssueTypeScreenSchemeProjectAssociationsOperationSpec> spec) {
         GetIssueTypeScreenSchemeProjectAssociationsOperationSpec r = new GetIssueTypeScreenSchemeProjectAssociationsOperationSpec(spec);
@@ -7882,7 +8938,15 @@ public class JiraRESTV2ConsumerApi {
      * Only issue type screen schemes used in classic projects are returned.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>id: The list of issue type screen scheme IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code id=10000&amp;id=10001}.</li>
+     *   <li>queryString: String used to perform a case-insensitive partial match with issue type screen scheme name.</li>
+     *   <li>orderBy: [Order](#ordering) the results by a field:   *  {@code name} Sorts by issue type screen scheme name.  *  {@code id} Sorts by issue type screen scheme ID.</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information in the response. This parameter accepts {@code projects} that, for each issue type screen schemes, returns information about the projects the issue type screen scheme is assigned to.</li>
+     * </ul>
      */
     public PageBeanIssueTypeScreenScheme getIssueTypeScreenSchemes(Consumer<GetIssueTypeScreenSchemesOperationSpec> spec) {
         GetIssueTypeScreenSchemesOperationSpec r = new GetIssueTypeScreenSchemesOperationSpec(spec);
@@ -7896,7 +8960,11 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) in the relevant project or *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectId: The ID of the project.</li>
+     *   <li>level: The level of the issue type to filter by. Use:   *  {@code -1} for Subtask.  *  {@code 0} for Base.  *  {@code 1} for Epic.</li>
+     * </ul>
      */
     public List<IssueTypeDetails> getIssueTypesForProject(Consumer<GetIssueTypesForProjectOperationSpec> spec) {
         GetIssueTypesForProjectOperationSpec r = new GetIssueTypesForProjectOperationSpec(spec);
@@ -7917,7 +8985,10 @@ public class JiraRESTV2ConsumerApi {
      * *
      * To see details of users on the watchlist other than themselves, *View voters and watchers* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project that the issue is in.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue.</li>
+     * </ul>
      */
     public Watchers getIssueWatchers(Consumer<GetIssueWatchersOperationSpec> spec) {
         GetIssueWatchersOperationSpec r = new GetIssueWatchersOperationSpec(spec);
@@ -7938,7 +9009,15 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If the worklog has visibility restrictions, belongs to the group or has the role visibility is restricted to.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue.</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>startedAfter: The worklog start date and time, as a UNIX timestamp in milliseconds, after which worklogs are returned.</li>
+     *   <li>startedBefore: The worklog start date and time, as a UNIX timestamp in milliseconds, before which worklogs are returned.</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information about worklogs in the response. This parameter accepts{@code properties}, which returns worklog properties.</li>
+     * </ul>
      */
     public PageOfWorklogs getIssueWorklog(Consumer<GetIssueWorklogOperationSpec> spec) {
         GetIssueWorklogOperationSpec r = new GetIssueWorklogOperationSpec(spec);
@@ -7951,10 +9030,8 @@ public class JiraRESTV2ConsumerApi {
      * Returns licensing information about the Jira instance.
      * **[Permissions](#permissions) required:** None.
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
      */
-    public License getLicense(Consumer<GetLicenseOperationSpec> spec) {
-        GetLicenseOperationSpec r = new GetLicenseOperationSpec(spec);
+    public License getLicense() {
         return api.getLicense();
     }
 
@@ -7966,17 +9043,15 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** None.
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
      */
-    public Locale getLocale(Consumer<GetLocaleOperationSpec> spec) {
-        GetLocaleOperationSpec r = new GetLocaleOperationSpec(spec);
+    public Locale getLocale() {
         return api.getLocale();
     }
 
     /**
      * Get my filters
      * <p>
-     * Returns the filters owned by the user. If `includeFavourites` is `true`, the user's visible favorite filters are also returned.
+     * Returns the filters owned by the user. If {@code includeFavourites} is {@code true}, the user's visible favorite filters are also returned.
      * **[Permissions](#permissions) required:** Permission to access Jira, however, a favorite filters is only visible to the user where the filter is:
      *  *
      * owned by the user.
@@ -7990,7 +9065,11 @@ public class JiraRESTV2ConsumerApi {
      * shared with the public.
      * For example, if the user favorites a public filter that is subsequently made private that filter is not returned by this operation.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>expand: Use [expand](#expansion) to include additional information about filter in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code sharedUsers} Returns the users that the filter is shared with. This includes users that can browse projects that the filter is shared with. If you don't specify {@code sharedUsers}, then the {@code sharedUsers} object is returned but it doesn't list any users. The list of users returned is limited to 1000, to access additional users append {@code [start-index:end-index]} to the expand request. For example, to access the next 1000 users, use {@code ?expand=sharedUsers[1001:2000]}.  *  {@code subscriptions} Returns the users that are subscribed to the filter. If you don't specify {@code subscriptions}, the {@code subscriptions} object is returned but it doesn't list any subscriptions. The list of subscriptions returned is limited to 1000, to access additional subscriptions append {@code [start-index:end-index]} to the expand request. For example, to access the next 1000 subscriptions, use {@code ?expand=subscriptions[1001:2000]}.</li>
+     *   <li>includeFavourites: Include the user's favorite filters in the response.</li>
+     * </ul>
      */
     public List<Filter> getMyFilters(Consumer<GetMyFiltersOperationSpec> spec) {
         GetMyFiltersOperationSpec r = new GetMyFiltersOperationSpec(spec);
@@ -8009,12 +9088,22 @@ public class JiraRESTV2ConsumerApi {
      * *
      * for an issue, where a project permission is determined using issue data, if the user has the permission in the issue. Otherwise, if the user has the project permission in the project containing the issue.
      * *
-     * for a comment, where the user has both the permission to browse the comment and the project permission for the comment's parent issue. Only the BROWSE\\_PROJECTS permission is supported. If a `commentId` is provided whose `permissions` does not equal BROWSE\\_PROJECTS, a 400 error will be returned.
+     * for a comment, where the user has both the permission to browse the comment and the project permission for the comment's parent issue. Only the BROWSE\\_PROJECTS permission is supported. If a {@code commentId} is provided whose {@code permissions} does not equal BROWSE\\_PROJECTS, a 400 error will be returned.
      * This means that users may be shown as having an issue permission (such as EDIT\\_ISSUES) in the global context or a project context but may not have the permission for any or all issues. For example, if Reporters have the EDIT\\_ISSUES permission a user would be shown as having this permission in the global context or the context of a project, because any user can be a reporter. However, if they are not the user who reported the issue queried they would not have EDIT\\_ISSUES permission for that issue.
      * Global permissions are unaffected by context.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** None.
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectKey: The key of project. Ignored if {@code projectId} is provided.</li>
+     *   <li>projectId: The ID of project.</li>
+     *   <li>issueKey: The key of the issue. Ignored if {@code issueId} is provided.</li>
+     *   <li>issueId: The ID of the issue.</li>
+     *   <li>permissions: A list of permission keys. (Required) This parameter accepts a comma-separated list. To get the list of available permissions, use [Get all permissions](#api-rest-api-2-permissions-get).</li>
+     *   <li>projectUuid: </li>
+     *   <li>projectConfigurationUuid: </li>
+     *   <li>commentId: The ID of the comment.</li>
+     * </ul>
      */
     public Permissions getMyPermissions(Consumer<GetMyPermissionsOperationSpec> spec) {
         GetMyPermissionsOperationSpec r = new GetMyPermissionsOperationSpec(spec);
@@ -8027,7 +9116,11 @@ public class JiraRESTV2ConsumerApi {
      * Returns a [notification scheme](https://confluence.atlassian.com/x/8YdKLg), including the list of events and the recipients who will receive notifications for those events.
      * **[Permissions](#permissions) required:** Permission to access Jira, however, the user must have permission to administer at least one project associated with the notification scheme.
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the notification scheme. Use [Get notification schemes paginated](#api-rest-api-2-notificationscheme-get) to get a list of notification scheme IDs.</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code all} Returns all expandable information  *  {@code field} Returns information about any custom fields assigned to receive an event  *  {@code group} Returns information about any groups assigned to receive an event  *  {@code notificationSchemeEvents} Returns a list of event associations. This list is returned for all expandable information  *  {@code projectRole} Returns information about any project roles assigned to receive an event  *  {@code user} Returns information about any users assigned to receive an event</li>
+     * </ul>
      */
     public NotificationScheme getNotificationScheme(Consumer<GetNotificationSchemeOperationSpec> spec) {
         GetNotificationSchemeOperationSpec r = new GetNotificationSchemeOperationSpec(spec);
@@ -8040,7 +9133,11 @@ public class JiraRESTV2ConsumerApi {
      * Gets a [notification scheme](https://confluence.atlassian.com/x/8YdKLg) associated with the project.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) or *Administer Projects* [project permission](https://confluence.atlassian.com/x/yodKLg).
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectKeyOrId: The project ID or project key (case sensitive).</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code all} Returns all expandable information  *  {@code field} Returns information about any custom fields assigned to receive an event  *  {@code group} Returns information about any groups assigned to receive an event  *  {@code notificationSchemeEvents} Returns a list of event associations. This list is returned for all expandable information  *  {@code projectRole} Returns information about any project roles assigned to receive an event  *  {@code user} Returns information about any users assigned to receive an event</li>
+     * </ul>
      */
     public NotificationScheme getNotificationSchemeForProject(Consumer<GetNotificationSchemeForProjectOperationSpec> spec) {
         GetNotificationSchemeForProjectOperationSpec r = new GetNotificationSchemeForProjectOperationSpec(spec);
@@ -8053,7 +9150,13 @@ public class JiraRESTV2ConsumerApi {
      * Returns a [paginated](#pagination) mapping of project that have notification scheme assigned. You can provide either one or multiple notification scheme IDs or project IDs to filter by. If you don't provide any, this will return a list of all mappings. Note that only company-managed (classic) projects are supported. This is because team-managed projects don't have a concept of a default notification scheme. The mappings are ordered by projectId.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>notificationSchemeId: The list of notifications scheme IDs to be filtered out</li>
+     *   <li>projectId: The list of project IDs to be filtered out</li>
+     * </ul>
      */
     public PageBeanNotificationSchemeAndProjectMappingJsonBean getNotificationSchemeToProjectMappings(Consumer<GetNotificationSchemeToProjectMappingsOperationSpec> spec) {
         GetNotificationSchemeToProjectMappingsOperationSpec r = new GetNotificationSchemeToProjectMappingsOperationSpec(spec);
@@ -8067,7 +9170,15 @@ public class JiraRESTV2ConsumerApi {
      * *Note that you should allow for events without recipients to appear in responses.*
      * **[Permissions](#permissions) required:** Permission to access Jira, however, the user must have permission to administer at least one project associated with a notification scheme for it to be returned.
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>id: The list of notification schemes IDs to be filtered by</li>
+     *   <li>projectId: The list of projects IDs to be filtered by</li>
+     *   <li>onlyDefault: When set to true, returns only the default notification scheme. If you provide project IDs not associated with the default, returns an empty page. The default value is false.</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code all} Returns all expandable information  *  {@code field} Returns information about any custom fields assigned to receive an event  *  {@code group} Returns information about any groups assigned to receive an event  *  {@code notificationSchemeEvents} Returns a list of event associations. This list is returned for all expandable information  *  {@code projectRole} Returns information about any project roles assigned to receive an event  *  {@code user} Returns information about any users assigned to receive an event</li>
+     * </ul>
      */
     public PageBeanNotificationScheme getNotificationSchemes(Consumer<GetNotificationSchemesOperationSpec> spec) {
         GetNotificationSchemesOperationSpec r = new GetNotificationSchemesOperationSpec(spec);
@@ -8081,7 +9192,15 @@ public class JiraRESTV2ConsumerApi {
      * This operation works for custom field options created in Jira or the operations from this resource. **To work with issue field select list options created for Connect apps use the [Issue custom field options (apps)](#api-group-issue-custom-field-options--apps-) operations.**
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldId: The ID of the custom field.</li>
+     *   <li>contextId: The ID of the context.</li>
+     *   <li>optionId: The ID of the option.</li>
+     *   <li>onlyOptions: Whether only options are returned.</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     * </ul>
      */
     public PageBeanCustomFieldContextOption getOptionsForContext(Consumer<GetOptionsForContextOperationSpec> spec) {
         GetOptionsForContextOperationSpec r = new GetOptionsForContextOperationSpec(spec);
@@ -8094,7 +9213,11 @@ public class JiraRESTV2ConsumerApi {
      * Returns a permission scheme.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>schemeId: The ID of the permission scheme to return.</li>
+     *   <li>expand: Use expand to include additional information in the response. This parameter accepts a comma-separated list. Note that permissions are included when you specify any value. Expand options include:   *  {@code all} Returns all expandable information.  *  {@code field} Returns information about the custom field granted the permission.  *  {@code group} Returns information about the group that is granted the permission.  *  {@code permissions} Returns all permission grants for each permission scheme.  *  {@code projectRole} Returns information about the project role granted the permission.  *  {@code user} Returns information about the user who is granted the permission.</li>
+     * </ul>
      */
     public PermissionScheme getPermissionScheme(Consumer<GetPermissionSchemeOperationSpec> spec) {
         GetPermissionSchemeOperationSpec r = new GetPermissionSchemeOperationSpec(spec);
@@ -8107,7 +9230,12 @@ public class JiraRESTV2ConsumerApi {
      * Returns a permission grant.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>schemeId: The ID of the permission scheme.</li>
+     *   <li>permissionId: The ID of the permission grant.</li>
+     *   <li>expand: Use expand to include additional information in the response. This parameter accepts a comma-separated list. Note that permissions are always included when you specify any value. Expand options include:   *  {@code all} Returns all expandable information.  *  {@code field} Returns information about the custom field granted the permission.  *  {@code group} Returns information about the group that is granted the permission.  *  {@code permissions} Returns all permission grants for each permission scheme.  *  {@code projectRole} Returns information about the project role granted the permission.  *  {@code user} Returns information about the user who is granted the permission.</li>
+     * </ul>
      */
     public PermissionGrant getPermissionSchemeGrant(Consumer<GetPermissionSchemeGrantOperationSpec> spec) {
         GetPermissionSchemeGrantOperationSpec r = new GetPermissionSchemeGrantOperationSpec(spec);
@@ -8120,7 +9248,11 @@ public class JiraRESTV2ConsumerApi {
      * Returns all permission grants for a permission scheme.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>schemeId: The ID of the permission scheme.</li>
+     *   <li>expand: Use expand to include additional information in the response. This parameter accepts a comma-separated list. Note that permissions are always included when you specify any value. Expand options include:   *  {@code permissions} Returns all permission grants for each permission scheme.  *  {@code user} Returns information about the user who is granted the permission.  *  {@code group} Returns information about the group that is granted the permission.  *  {@code projectRole} Returns information about the project role granted the permission.  *  {@code field} Returns information about the custom field granted the permission.  *  {@code all} Returns all expandable information.</li>
+     * </ul>
      */
     public PermissionGrants getPermissionSchemeGrants(Consumer<GetPermissionSchemeGrantsOperationSpec> spec) {
         GetPermissionSchemeGrantsOperationSpec r = new GetPermissionSchemeGrantsOperationSpec(spec);
@@ -8133,7 +9265,10 @@ public class JiraRESTV2ConsumerApi {
      * Returns all the projects where the user is granted a list of project permissions.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** None.
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>permissionsKeysBean: </li>
+     * </ul>
      */
     public PermittedProjects getPermittedProjects(Consumer<GetPermittedProjectsOperationSpec> spec) {
         GetPermittedProjectsOperationSpec r = new GetPermittedProjectsOperationSpec(spec);
@@ -8143,9 +9278,16 @@ public class JiraRESTV2ConsumerApi {
     /**
      * Get precomputations (apps)
      * <p>
-     * Returns the list of a function's precomputations along with information about when they were created, updated, and last used. Each precomputation has a `value` \\- the JQL fragment to replace the custom function clause with.
+     * Returns the list of a function's precomputations along with information about when they were created, updated, and last used. Each precomputation has a {@code value} \\- the JQL fragment to replace the custom function clause with.
      * **[Permissions](#permissions) required:** This API is only accessible to apps and apps can only inspect their own functions.
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>functionKey: The function key in format:   *  Forge: {@code ari:cloud:ecosystem::extension/[App ID]/[Environment ID]/static/[Function key from manifest]}.  *  Connect: {@code [App key]__[Module key]}.</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>orderBy: Not supported yet.</li>
+     *   <li>filter: Not supported yet.</li>
+     * </ul>
      */
     public PageBeanJqlFunctionPrecomputationBean getPrecomputations(Consumer<GetPrecomputationsOperationSpec> spec) {
         GetPrecomputationsOperationSpec r = new GetPrecomputationsOperationSpec(spec);
@@ -8164,7 +9306,10 @@ public class JiraRESTV2ConsumerApi {
      * Use [ Update a user profile](https://developer.atlassian.com/cloud/admin/user-management/rest/#api-users-account-id-manage-profile-patch) from the user management REST API to manage timezone and locale instead.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>key: The key of the preference.</li>
+     * </ul>
      */
     public String getPreference(Consumer<GetPreferenceOperationSpec> spec) {
         GetPreferenceOperationSpec r = new GetPreferenceOperationSpec(spec);
@@ -8177,12 +9322,10 @@ public class JiraRESTV2ConsumerApi {
      * Returns the list of all issue priorities.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
      * @deprecated
      */
     @Deprecated
-    public List<Priority> getPriorities(Consumer<GetPrioritiesOperationSpec> spec) {
-        GetPrioritiesOperationSpec r = new GetPrioritiesOperationSpec(spec);
+    public List<Priority> getPriorities() {
         return api.getPriorities();
     }
 
@@ -8192,7 +9335,10 @@ public class JiraRESTV2ConsumerApi {
      * Returns an issue priority.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the issue priority.</li>
+     * </ul>
      */
     public Priority getPriority(Consumer<GetPriorityOperationSpec> spec) {
         GetPriorityOperationSpec r = new GetPriorityOperationSpec(spec);
@@ -8206,7 +9352,12 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectIdOrKey: The project ID or project key (case sensitive).</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Note that the project description, issue types, and project lead are included in all responses by default. Expand options include:   *  {@code description} The project description.  *  {@code issueTypes} The issue types associated with the project.  *  {@code lead} The project lead.  *  {@code projectKeys} All project keys associated with the project.  *  {@code issueTypeHierarchy} The project issue type hierarchy.</li>
+     *   <li>properties: A list of project properties to return for the project. This parameter accepts a comma-separated list.</li>
+     * </ul>
      */
     public Project getProject(Consumer<GetProjectOperationSpec> spec) {
         GetProjectOperationSpec r = new GetProjectOperationSpec(spec);
@@ -8219,7 +9370,10 @@ public class JiraRESTV2ConsumerApi {
      * Returns a project category.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the project category.</li>
+     * </ul>
      */
     public ProjectCategory getProjectCategoryById(Consumer<GetProjectCategoryByIdOperationSpec> spec) {
         GetProjectCategoryByIdOperationSpec r = new GetProjectCategoryByIdOperationSpec(spec);
@@ -8233,7 +9387,10 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Browse Projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectIdOrKey: The project ID or project key (case sensitive).</li>
+     * </ul>
      */
     public List<ProjectComponent> getProjectComponents(Consumer<GetProjectComponentsOperationSpec> spec) {
         GetProjectComponentsOperationSpec r = new GetProjectComponentsOperationSpec(spec);
@@ -8247,7 +9404,14 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Browse Projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectIdOrKey: The project ID or project key (case sensitive).</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>orderBy: [Order](#ordering) the results by a field:   *  {@code description} Sorts by the component description.  *  {@code issueCount} Sorts by the count of issues associated with the component.  *  {@code lead} Sorts by the user key of the component's project lead.  *  {@code name} Sorts by component name.</li>
+     *   <li>query: Filter the results using a literal string. Components with a matching {@code name} or {@code description} are returned (case insensitive).</li>
+     * </ul>
      */
     public PageBeanComponentWithIssueCount getProjectComponentsPaginated(Consumer<GetProjectComponentsPaginatedOperationSpec> spec) {
         GetProjectComponentsPaginatedOperationSpec r = new GetProjectComponentsPaginatedOperationSpec(spec);
@@ -8257,10 +9421,16 @@ public class JiraRESTV2ConsumerApi {
     /**
      * Get project mappings for custom field context
      * <p>
-     * Returns a [paginated](#pagination) list of context to project mappings for a custom field. The result can be filtered by `contextId`. Otherwise, all mappings are returned. Invalid IDs are ignored.
+     * Returns a [paginated](#pagination) list of context to project mappings for a custom field. The result can be filtered by {@code contextId}. Otherwise, all mappings are returned. Invalid IDs are ignored.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldId: The ID of the custom field, for example {@code customfield\\_10000}.</li>
+     *   <li>contextId: The list of context IDs. To include multiple context, separate IDs with ampersand: {@code contextId=10000&amp;contextId=10001}.</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     * </ul>
      */
     public PageBeanCustomFieldContextProjectMapping getProjectContextMapping(Consumer<GetProjectContextMappingOperationSpec> spec) {
         GetProjectContextMappingOperationSpec r = new GetProjectContextMappingOperationSpec(spec);
@@ -8273,7 +9443,10 @@ public class JiraRESTV2ConsumerApi {
      * Returns the [project's sender email address](https://confluence.atlassian.com/x/dolKLg).
      * **[Permissions](#permissions) required:** *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectId: The project ID.</li>
+     * </ul>
      */
     public ProjectEmailAddress getProjectEmail(Consumer<GetProjectEmailOperationSpec> spec) {
         GetProjectEmailOperationSpec r = new GetProjectEmailOperationSpec(spec);
@@ -8286,7 +9459,10 @@ public class JiraRESTV2ConsumerApi {
      * Returns the [issue security scheme](https://confluence.atlassian.com/x/J4lKLg) associated with the project.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) or the *Administer Projects* [project permission](https://confluence.atlassian.com/x/yodKLg).
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectKeyOrId: The project ID or project key (case sensitive).</li>
+     * </ul>
      */
     public SecurityScheme getProjectIssueSecurityScheme(Consumer<GetProjectIssueSecuritySchemeOperationSpec> spec) {
         GetProjectIssueSecuritySchemeOperationSpec r = new GetProjectIssueSecuritySchemeOperationSpec(spec);
@@ -8300,7 +9476,11 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Browse Projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project containing the property.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectIdOrKey: The project ID or project key (case sensitive).</li>
+     *   <li>propertyKey: The project property key. Use [Get project property keys](#api-rest-api-2-project-projectIdOrKey-properties-get) to get a list of all project property keys.</li>
+     * </ul>
      */
     public EntityProperty getProjectProperty(Consumer<GetProjectPropertyOperationSpec> spec) {
         GetProjectPropertyOperationSpec r = new GetProjectPropertyOperationSpec(spec);
@@ -8314,7 +9494,10 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Browse Projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectIdOrKey: The project ID or project key (case sensitive).</li>
+     * </ul>
      */
     public PropertyKeys getProjectPropertyKeys(Consumer<GetProjectPropertyKeysOperationSpec> spec) {
         GetProjectPropertyKeysOperationSpec r = new GetProjectPropertyKeysOperationSpec(spec);
@@ -8325,11 +9508,16 @@ public class JiraRESTV2ConsumerApi {
      * Get project role for project
      * <p>
      * Returns a project role's details and actors associated with the project. The list of actors is sorted by display name.
-     * To check whether a user belongs to a role based on their group memberships, use [Get user](#api-rest-api-2-user-get) with the `groups` expand parameter selected. Then check whether the user keys and groups match with the actors returned for the project.
+     * To check whether a user belongs to a role based on their group memberships, use [Get user](#api-rest-api-2-user-get) with the {@code groups} expand parameter selected. Then check whether the user keys and groups match with the actors returned for the project.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Administer Projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project or *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectIdOrKey: The project ID or project key (case sensitive).</li>
+     *   <li>id: The ID of the project role. Use [Get all project roles](#api-rest-api-2-role-get) to get a list of project role IDs.</li>
+     *   <li>excludeInactiveUsers: Exclude inactive users.</li>
+     * </ul>
      */
     public ProjectRole getProjectRole(Consumer<GetProjectRoleOperationSpec> spec) {
         GetProjectRoleOperationSpec r = new GetProjectRoleOperationSpec(spec);
@@ -8342,7 +9530,10 @@ public class JiraRESTV2ConsumerApi {
      * Returns the [default actors](#api-rest-api-2-resolution-get) for the project role.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the project role. Use [Get all project roles](#api-rest-api-2-role-get) to get a list of project role IDs.</li>
+     * </ul>
      */
     public ProjectRole getProjectRoleActorsForRole(Consumer<GetProjectRoleActorsForRoleOperationSpec> spec) {
         GetProjectRoleActorsForRoleOperationSpec r = new GetProjectRoleActorsForRoleOperationSpec(spec);
@@ -8355,7 +9546,10 @@ public class JiraRESTV2ConsumerApi {
      * Gets the project role details and the default actors associated with the role. The list of default actors is sorted by display name.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the project role. Use [Get all project roles](#api-rest-api-2-role-get) to get a list of project role IDs.</li>
+     * </ul>
      */
     public ProjectRole getProjectRoleById(Consumer<GetProjectRoleByIdOperationSpec> spec) {
         GetProjectRoleByIdOperationSpec r = new GetProjectRoleByIdOperationSpec(spec);
@@ -8369,7 +9563,12 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) or *Administer projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectIdOrKey: The project ID or project key (case sensitive).</li>
+     *   <li>currentMember: Whether the roles should be filtered to include only those the user is assigned to.</li>
+     *   <li>excludeConnectAddons: </li>
+     * </ul>
      */
     public List<ProjectRoleDetails> getProjectRoleDetails(Consumer<GetProjectRoleDetailsOperationSpec> spec) {
         GetProjectRoleDetailsOperationSpec r = new GetProjectRoleDetailsOperationSpec(spec);
@@ -8384,7 +9583,10 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Administer Projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for any project on the site or *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectIdOrKey: The project ID or project key (case sensitive).</li>
+     * </ul>
      */
     public Map<String, URI> getProjectRoles(Consumer<GetProjectRolesOperationSpec> spec) {
         GetProjectRolesOperationSpec r = new GetProjectRolesOperationSpec(spec);
@@ -8398,7 +9600,10 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** None.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectTypeKey: The key of the project type.</li>
+     * </ul>
      */
     public ProjectType getProjectTypeByKey(Consumer<GetProjectTypeByKeyOperationSpec> spec) {
         GetProjectTypeByKeyOperationSpec r = new GetProjectTypeByKeyOperationSpec(spec);
@@ -8412,7 +9617,11 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Browse Projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectIdOrKey: The project ID or project key (case sensitive).</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information in the response. This parameter accepts {@code operations}, which returns actions that can be performed on the version.</li>
+     * </ul>
      */
     public List<Version> getProjectVersions(Consumer<GetProjectVersionsOperationSpec> spec) {
         GetProjectVersionsOperationSpec r = new GetProjectVersionsOperationSpec(spec);
@@ -8426,7 +9635,16 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Browse Projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectIdOrKey: The project ID or project key (case sensitive).</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>orderBy: [Order](#ordering) the results by a field:   *  {@code description} Sorts by version description.  *  {@code name} Sorts by version name.  *  {@code releaseDate} Sorts by release date, starting with the oldest date. Versions with no release date are listed last.  *  {@code sequence} Sorts by the order of appearance in the user interface.  *  {@code startDate} Sorts by start date, starting with the oldest date. Versions with no start date are listed last.</li>
+     *   <li>query: Filter the results using a literal string. Versions with matching {@code name} or {@code description} are returned (case insensitive).</li>
+     *   <li>status: A list of status values used to filter the results by version status. This parameter accepts a comma-separated list. The status values are {@code released}, {@code unreleased}, and {@code archived}.</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code issuesstatus} Returns the number of issues in each status category for each version.  *  {@code operations} Returns actions that can be performed on the specified version.</li>
+     * </ul>
      */
     public PageBeanVersion getProjectVersionsPaginated(Consumer<GetProjectVersionsPaginatedOperationSpec> spec) {
         GetProjectVersionsPaginatedOperationSpec r = new GetProjectVersionsPaginatedOperationSpec(spec);
@@ -8440,7 +9658,13 @@ public class JiraRESTV2ConsumerApi {
      * Only company-managed projects associated with an issue type screen scheme are returned.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueTypeScreenSchemeId: The ID of the issue type screen scheme.</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>query: </li>
+     * </ul>
      */
     public PageBeanProjectDetails getProjectsForIssueTypeScreenScheme(Consumer<GetProjectsForIssueTypeScreenSchemeOperationSpec> spec) {
         GetProjectsForIssueTypeScreenSchemeOperationSpec r = new GetProjectsForIssueTypeScreenSchemeOperationSpec(spec);
@@ -8460,7 +9684,11 @@ public class JiraRESTV2ConsumerApi {
      * *
      * *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>expand: Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expanded options include:   *  {@code description} Returns the project description.  *  {@code projectKeys} Returns all project keys associated with a project.  *  {@code lead} Returns information about the project lead.  *  {@code issueTypes} Returns all issue types associated with the project.  *  {@code url} Returns the URL associated with the project.  *  {@code permissions} Returns the permissions associated with the project.  *  {@code insight} EXPERIMENTAL. Returns the insight details of total issue count and last issue update time for the project.  *  {@code *} Returns the project with all available expand options.</li>
+     *   <li>properties: EXPERIMENTAL. A list of project properties to return for the project. This parameter accepts a comma-separated list. Invalid property names are ignored.</li>
+     * </ul>
      */
     public List<Project> getRecent(Consumer<GetRecentOperationSpec> spec) {
         GetRecentOperationSpec r = new GetRecentOperationSpec(spec);
@@ -8479,7 +9707,11 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue.</li>
+     *   <li>linkId: The ID of the remote issue link.</li>
+     * </ul>
      */
     public RemoteIssueLink getRemoteIssueLinkById(Consumer<GetRemoteIssueLinkByIdOperationSpec> spec) {
         GetRemoteIssueLinkByIdOperationSpec r = new GetRemoteIssueLinkByIdOperationSpec(spec);
@@ -8489,7 +9721,7 @@ public class JiraRESTV2ConsumerApi {
     /**
      * Get remote issue links
      * <p>
-     * Returns the remote issue links for an issue. When a remote issue link global ID is provided the record with that global ID is returned, otherwise all remote issue links are returned. Where a global ID includes reserved URL characters these must be escaped in the request. For example, pass `system=http://www.mycompany.com/support&amp;id=1` as `system%3Dhttp%3A%2F%2Fwww.mycompany.com%2Fsupport%26id%3D1`.
+     * Returns the remote issue links for an issue. When a remote issue link global ID is provided the record with that global ID is returned, otherwise all remote issue links are returned. Where a global ID includes reserved URL characters these must be escaped in the request. For example, pass {@code system=http://www.mycompany.com/support&amp;id=1} as {@code system%3Dhttp%3A%2F%2Fwww.mycompany.com%2Fsupport%26id%3D1}.
      * This operation requires [issue linking to be active](https://confluence.atlassian.com/x/yoXKM).
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:**
@@ -8498,7 +9730,11 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue.</li>
+     *   <li>globalId: The global ID of the remote issue link.</li>
+     * </ul>
      */
     public RemoteIssueLink getRemoteIssueLinks(Consumer<GetRemoteIssueLinksOperationSpec> spec) {
         GetRemoteIssueLinksOperationSpec r = new GetRemoteIssueLinksOperationSpec(spec);
@@ -8511,7 +9747,10 @@ public class JiraRESTV2ConsumerApi {
      * Returns an issue resolution value.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the issue resolution value.</li>
+     * </ul>
      */
     public Resolution getResolution(Consumer<GetResolutionOperationSpec> spec) {
         GetResolutionOperationSpec r = new GetResolutionOperationSpec(spec);
@@ -8524,12 +9763,10 @@ public class JiraRESTV2ConsumerApi {
      * Returns a list of all issue resolution values.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
      * @deprecated
      */
     @Deprecated
-    public List<Resolution> getResolutions(Consumer<GetResolutionsOperationSpec> spec) {
-        GetResolutionsOperationSpec r = new GetResolutionsOperationSpec(spec);
+    public List<Resolution> getResolutions() {
         return api.getResolutions();
     }
 
@@ -8540,7 +9777,15 @@ public class JiraRESTV2ConsumerApi {
      * Only screen schemes used in classic projects are returned.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>id: The list of screen scheme IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code id=10000&amp;id=10001}.</li>
+     *   <li>expand: Use [expand](#expansion) include additional information in the response. This parameter accepts {@code issueTypeScreenSchemes} that, for each screen schemes, returns information about the issue type screen scheme the screen scheme is assigned to.</li>
+     *   <li>queryString: String used to perform a case-insensitive partial match with screen scheme name.</li>
+     *   <li>orderBy: [Order](#ordering) the results by a field:   *  {@code id} Sorts by screen scheme ID.  *  {@code name} Sorts by screen scheme name.</li>
+     * </ul>
      */
     public PageBeanScreenScheme getScreenSchemes(Consumer<GetScreenSchemesOperationSpec> spec) {
         GetScreenSchemesOperationSpec r = new GetScreenSchemesOperationSpec(spec);
@@ -8553,7 +9798,15 @@ public class JiraRESTV2ConsumerApi {
      * Returns a [paginated](#pagination) list of all screens or those specified by one or more screen IDs.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>id: The list of screen IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code id=10000&amp;id=10001}.</li>
+     *   <li>queryString: String used to perform a case-insensitive partial match with screen name.</li>
+     *   <li>scope: The scope filter string. To filter by multiple scope, provide an ampersand-separated list. For example, {@code scope=GLOBAL&amp;scope=PROJECT}.</li>
+     *   <li>orderBy: [Order](#ordering) the results by a field:   *  {@code id} Sorts by screen ID.  *  {@code name} Sorts by screen name.</li>
+     * </ul>
      */
     public PageBeanScreen getScreens(Consumer<GetScreensOperationSpec> spec) {
         GetScreensOperationSpec r = new GetScreensOperationSpec(spec);
@@ -8566,7 +9819,13 @@ public class JiraRESTV2ConsumerApi {
      * Returns a [paginated](#pagination) list of the screens a field is used in.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldId: The ID of the field to return screens for.</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information about screens in the response. This parameter accepts {@code tab} which returns details about the screen tabs the field is used in.</li>
+     * </ul>
      */
     public PageBeanScreenWithTab getScreensForField(Consumer<GetScreensForFieldOperationSpec> spec) {
         GetScreensForFieldOperationSpec r = new GetScreensForFieldOperationSpec(spec);
@@ -8581,7 +9840,15 @@ public class JiraRESTV2ConsumerApi {
      * Filtering using parameters is inclusive: if you specify both security scheme IDs and level IDs, the result will include all issue security level members from the specified schemes and levels.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>id: The list of issue security level member IDs. To include multiple issue security level members separate IDs with an ampersand: {@code id=10000&amp;id=10001}.</li>
+     *   <li>schemeId: The list of issue security scheme IDs. To include multiple issue security schemes separate IDs with an ampersand: {@code schemeId=10000&amp;schemeId=10001}.</li>
+     *   <li>levelId: The list of issue security level IDs. To include multiple issue security levels separate IDs with an ampersand: {@code levelId=10000&amp;levelId=10001}.</li>
+     *   <li>expand: Use expand to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code all} Returns all expandable information  *  {@code field} Returns information about the custom field granted the permission  *  {@code group} Returns information about the group that is granted the permission  *  {@code projectRole} Returns information about the project role granted the permission  *  {@code user} Returns information about the user who is granted the permission</li>
+     * </ul>
      */
     public PageBeanSecurityLevelMember getSecurityLevelMembers(Consumer<GetSecurityLevelMembersOperationSpec> spec) {
         GetSecurityLevelMembersOperationSpec r = new GetSecurityLevelMembersOperationSpec(spec);
@@ -8596,7 +9863,14 @@ public class JiraRESTV2ConsumerApi {
      * Filtering using IDs is inclusive: if you specify both security scheme IDs and level IDs, the result will include both specified issue security levels and all issue security levels from the specified schemes.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>id: The list of issue security scheme level IDs. To include multiple issue security levels, separate IDs with an ampersand: {@code id=10000&amp;id=10001}.</li>
+     *   <li>schemeId: The list of issue security scheme IDs. To include multiple issue security schemes, separate IDs with an ampersand: {@code schemeId=10000&amp;schemeId=10001}.</li>
+     *   <li>onlyDefault: When set to true, returns multiple default levels for each security scheme containing a default. If you provide scheme and level IDs not associated with the default, returns an empty page. The default value is false.</li>
+     * </ul>
      */
     public PageBeanSecurityLevel getSecurityLevels(Consumer<GetSecurityLevelsOperationSpec> spec) {
         GetSecurityLevelsOperationSpec r = new GetSecurityLevelsOperationSpec(spec);
@@ -8610,7 +9884,10 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Browse projects* [global permission](https://confluence.atlassian.com/x/x4dKLg) for the project, however, issue security levels are only returned for authenticated user with *Set Issue Security* [global permission](https://confluence.atlassian.com/x/x4dKLg) for the project.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectKeyOrId: The project ID or project key (case sensitive).</li>
+     * </ul>
      */
     public ProjectIssueSecurityLevels getSecurityLevelsForProject(Consumer<GetSecurityLevelsForProjectOperationSpec> spec) {
         GetSecurityLevelsForProjectOperationSpec r = new GetSecurityLevelsForProjectOperationSpec(spec);
@@ -8624,7 +9901,13 @@ public class JiraRESTV2ConsumerApi {
      * Note that this operation **only works for issue field select list options added by Connect apps**, it cannot be used with issue field select list options created in Jira or using operations from the [Issue custom field options](#api-group-Issue-custom-field-options) resource.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldKey: The field key is specified in the following format: **$(app-key)\\_\\_$(field-key)**. For example, *example-add-on\\_\\_example-issue-field*. To determine the {@code fieldKey} value, do one of the following:   *  open the app's plugin descriptor, then **app-key** is the key at the top and **field-key** is the key in the {@code jiraIssueFields} module. **app-key** can also be found in the app listing in the Atlassian Universal Plugin Manager.  *  run [Get fields](#api-rest-api-2-field-get) and in the field details the value is returned in {@code key}. For example, {@code "key": "teams-add-on__team-issue-field"}</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>projectId: Filters the results to options that are only available in the specified project.</li>
+     * </ul>
      */
     public PageBeanIssueFieldOption getSelectableIssueFieldOptions(Consumer<GetSelectableIssueFieldOptionsOperationSpec> spec) {
         GetSelectableIssueFieldOptionsOperationSpec r = new GetSelectableIssueFieldOptionsOperationSpec(spec);
@@ -8637,10 +9920,8 @@ public class JiraRESTV2ConsumerApi {
      * Returns the time tracking provider that is currently selected. Note that if time tracking is disabled, then a successful but empty response is returned.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
      */
-    public TimeTrackingProvider getSelectedTimeTrackingImplementation(Consumer<GetSelectedTimeTrackingImplementationOperationSpec> spec) {
-        GetSelectedTimeTrackingImplementationOperationSpec r = new GetSelectedTimeTrackingImplementationOperationSpec(spec);
+    public TimeTrackingProvider getSelectedTimeTrackingImplementation() {
         return api.getSelectedTimeTrackingImplementation();
     }
 
@@ -8650,10 +9931,8 @@ public class JiraRESTV2ConsumerApi {
      * Returns information about the Jira instance.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** None.
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
      */
-    public ServerInformation getServerInfo(Consumer<GetServerInfoOperationSpec> spec) {
-        GetServerInfoOperationSpec r = new GetServerInfoOperationSpec(spec);
+    public ServerInformation getServerInfo() {
         return api.getServerInfo();
     }
 
@@ -8674,7 +9953,11 @@ public class JiraRESTV2ConsumerApi {
      * *
      * filters shared with the public.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the filter.</li>
+     *   <li>permissionId: The ID of the share permission.</li>
+     * </ul>
      */
     public SharePermission getSharePermission(Consumer<GetSharePermissionOperationSpec> spec) {
         GetSharePermissionOperationSpec r = new GetSharePermissionOperationSpec(spec);
@@ -8698,7 +9981,10 @@ public class JiraRESTV2ConsumerApi {
      * *
      * filters shared with the public.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the filter.</li>
+     * </ul>
      */
     public List<SharePermission> getSharePermissions(Consumer<GetSharePermissionsOperationSpec> spec) {
         GetSharePermissionsOperationSpec r = new GetSharePermissionsOperationSpec(spec);
@@ -8711,10 +9997,8 @@ public class JiraRESTV2ConsumerApi {
      * Returns the time tracking settings. This includes settings such as the time format, default time unit, and others. For more information, see [Configuring time tracking](https://confluence.atlassian.com/x/qoXKM).
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
      */
-    public TimeTrackingConfiguration getSharedTimeTrackingConfiguration(Consumer<GetSharedTimeTrackingConfigurationOperationSpec> spec) {
-        GetSharedTimeTrackingConfigurationOperationSpec r = new GetSharedTimeTrackingConfigurationOperationSpec(spec);
+    public TimeTrackingConfiguration getSharedTimeTrackingConfiguration() {
         return api.getSharedTimeTrackingConfiguration();
     }
 
@@ -8726,7 +10010,10 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * [Permissions](#permissions) required: None.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>idOrName: The ID or name of the status.</li>
+     * </ul>
      */
     public StatusDetails getStatus(Consumer<GetStatusOperationSpec> spec) {
         GetStatusOperationSpec r = new GetStatusOperationSpec(spec);
@@ -8739,10 +10026,8 @@ public class JiraRESTV2ConsumerApi {
      * Returns a list of all status categories.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
      */
-    public List<StatusCategory> getStatusCategories(Consumer<GetStatusCategoriesOperationSpec> spec) {
-        GetStatusCategoriesOperationSpec r = new GetStatusCategoriesOperationSpec(spec);
+    public List<StatusCategory> getStatusCategories() {
         return api.getStatusCategories();
     }
 
@@ -8752,7 +10037,10 @@ public class JiraRESTV2ConsumerApi {
      * Returns a status category. Status categories provided a mechanism for categorizing [statuses](#api-rest-api-2-status-idOrName-get).
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>idOrKey: The ID or key of the status category.</li>
+     * </ul>
      */
     public StatusCategory getStatusCategory(Consumer<GetStatusCategoryOperationSpec> spec) {
         GetStatusCategoryOperationSpec r = new GetStatusCategoryOperationSpec(spec);
@@ -8766,10 +10054,8 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** None.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
      */
-    public List<StatusDetails> getStatuses(Consumer<GetStatusesOperationSpec> spec) {
-        GetStatusesOperationSpec r = new GetStatusesOperationSpec(spec);
+    public List<StatusDetails> getStatuses() {
         return api.getStatuses();
     }
 
@@ -8783,7 +10069,11 @@ public class JiraRESTV2ConsumerApi {
      * *
      * *Administer Jira* [project permission.](https://confluence.atlassian.com/x/yodKLg)
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>expand: Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code usages} Returns the project and issue types that use the status in their workflow.  *  {@code workflowUsages} Returns the workflows that use the status.</li>
+     *   <li>id: The list of status IDs. To include multiple IDs, provide an ampersand-separated list. For example, id=10000&amp;id=10001.  Min items {@code 1}, Max items {@code 50}</li>
+     * </ul>
      */
     public List<JiraStatus> getStatusesById(Consumer<GetStatusesByIdOperationSpec> spec) {
         GetStatusesByIdOperationSpec r = new GetStatusesByIdOperationSpec(spec);
@@ -8800,7 +10090,10 @@ public class JiraRESTV2ConsumerApi {
      * *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * *
      * Creator of the task.
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>taskId: The ID of the task.</li>
+     * </ul>
      */
     public TaskProgressBeanObject getTask(Consumer<GetTaskOperationSpec> spec) {
         GetTaskOperationSpec r = new GetTaskOperationSpec(spec);
@@ -8820,7 +10113,15 @@ public class JiraRESTV2ConsumerApi {
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * However, if the user does not have the *Transition issues* [ project permission](https://confluence.atlassian.com/x/yodKLg) the response will not list any transitions.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue.</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information about transitions in the response. This parameter accepts {@code transitions.fields}, which returns information about the fields in the transition screen for each transition. Fields hidden from the screen are not returned. Use this information to populate the {@code fields} and {@code update} fields in [Transition issue](#api-rest-api-2-issue-issueIdOrKey-transitions-post).</li>
+     *   <li>transitionId: The ID of the transition.</li>
+     *   <li>skipRemoteOnlyCondition: Whether transitions with the condition *Hide From User Condition* are included in the response.</li>
+     *   <li>includeUnavailableTransitions: Whether details of transitions that fail a condition are included in the response</li>
+     *   <li>sortByOpsBarAndStatus: Whether the transitions are sorted by ops-bar sequence value first then category order (Todo, In Progress, Done) or only by ops-bar sequence value.</li>
+     * </ul>
      */
     public Transitions getTransitions(Consumer<GetTransitionsOperationSpec> spec) {
         GetTransitionsOperationSpec r = new GetTransitionsOperationSpec(spec);
@@ -8831,10 +10132,18 @@ public class JiraRESTV2ConsumerApi {
      * Get fields in trash paginated
      * <p>
      * Returns a [paginated](#pagination) list of fields in the trash. The list may be restricted to fields whose field name or description partially match a string.
-     * Only custom fields can be queried, `type` must be set to `custom`.
+     * Only custom fields can be queried, {@code type} must be set to {@code custom}.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>id: </li>
+     *   <li>query: String used to perform a case-insensitive partial match with field names or descriptions.</li>
+     *   <li>expand: </li>
+     *   <li>orderBy: [Order](#ordering) the results by a field:   *  {@code name} sorts by the field name  *  {@code trashDate} sorts by the date the field was moved to the trash  *  {@code plannedDeletionDate} sorts by the planned deletion date</li>
+     * </ul>
      */
     public PageBeanField getTrashedFieldsPaginated(Consumer<GetTrashedFieldsPaginatedOperationSpec> spec) {
         GetTrashedFieldsPaginatedOperationSpec r = new GetTrashedFieldsPaginatedOperationSpec(spec);
@@ -8847,7 +10156,12 @@ public class JiraRESTV2ConsumerApi {
      * Gets UI modifications. UI modifications can only be retrieved by Forge apps.
      * **[Permissions](#permissions) required:** None.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>expand: Use expand to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code data} Returns UI modification data.  *  {@code contexts} Returns UI modification contexts.</li>
+     * </ul>
      */
     public PageBeanUiModificationDetails getUiModifications(Consumer<GetUiModificationsOperationSpec> spec) {
         GetUiModificationsOperationSpec r = new GetUiModificationsOperationSpec(spec);
@@ -8861,7 +10175,13 @@ public class JiraRESTV2ConsumerApi {
      * Privacy controls are applied to the response based on the user's preferences. This could mean, for example, that the user's email address is hidden. See the [Profile visibility overview](https://developer.atlassian.com/cloud/jira/platform/profile-visibility/) for more details.
      * **[Permissions](#permissions) required:** *Browse users and groups* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [read:jira-user]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>accountId: The account ID of the user, which uniquely identifies the user across all Atlassian products. For example, *5b10ac8d82e05b22cc7d4ef5*. Required.</li>
+     *   <li>username: This parameter is no longer available. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide) for details.</li>
+     *   <li>key: This parameter is no longer available. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide) for details.</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information about users in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code groups} includes all groups and nested groups to which the user belongs.  *  {@code applicationRoles} includes details of all the applications to which the user has access.</li>
+     * </ul>
      */
     public User getUser(Consumer<GetUserOperationSpec> spec) {
         GetUserOperationSpec r = new GetUserOperationSpec(spec);
@@ -8871,14 +10191,18 @@ public class JiraRESTV2ConsumerApi {
     /**
      * Get user default columns
      * <p>
-     * Returns the default [issue table columns](https://confluence.atlassian.com/x/XYdKLg) for the user. If `accountId` is not passed in the request, the calling user's details are returned.
+     * Returns the default [issue table columns](https://confluence.atlassian.com/x/XYdKLg) for the user. If {@code accountId} is not passed in the request, the calling user's details are returned.
      * **[Permissions](#permissions) required:**
      *  *
      * *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLgl), to get the column details for any user.
      * *
      * Permission to access Jira, to get the calling user's column details.
      * Authentication - Required Scopes: [read:jira-user]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>accountId: The account ID of the user, which uniquely identifies the user across all Atlassian products. For example, *5b10ac8d82e05b22cc7d4ef5*.</li>
+     *   <li>username: This parameter is no longer available See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.</li>
+     * </ul>
      */
     public List<ColumnItem> getUserDefaultColumns(Consumer<GetUserDefaultColumnsOperationSpec> spec) {
         GetUserDefaultColumnsOperationSpec r = new GetUserDefaultColumnsOperationSpec(spec);
@@ -8889,7 +10213,10 @@ public class JiraRESTV2ConsumerApi {
      * Get user email
      * <p>
      * Returns a user's email address. This API is only available to apps approved by Atlassian, according to these [guidelines](https://community.developer.atlassian.com/t/guidelines-for-requesting-access-to-email-address/27603).
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>accountId: The account ID of the user, which uniquely identifies the user across all Atlassian products. For example, {@code 5b10ac8d82e05b22cc7d4ef5}.</li>
+     * </ul>
      */
     public UnrestrictedUserEmail getUserEmail(Consumer<GetUserEmailOperationSpec> spec) {
         GetUserEmailOperationSpec r = new GetUserEmailOperationSpec(spec);
@@ -8900,7 +10227,10 @@ public class JiraRESTV2ConsumerApi {
      * Get user email bulk
      * <p>
      * Returns a user's email address. This API is only available to apps approved by Atlassian, according to these [guidelines](https://community.developer.atlassian.com/t/guidelines-for-requesting-access-to-email-address/27603).
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>accountId: The account IDs of the users for which emails are required. An {@code accountId} is an identifier that uniquely identifies the user across all Atlassian products. For example, {@code 5b10ac8d82e05b22cc7d4ef5}. Note, this should be treated as an opaque identifier (that is, do not assume any structure in the value).</li>
+     * </ul>
      */
     public UnrestrictedUserEmail getUserEmailBulk(Consumer<GetUserEmailBulkOperationSpec> spec) {
         GetUserEmailBulkOperationSpec r = new GetUserEmailBulkOperationSpec(spec);
@@ -8913,7 +10243,12 @@ public class JiraRESTV2ConsumerApi {
      * Returns the groups to which a user belongs.
      * **[Permissions](#permissions) required:** *Browse users and groups* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [read:jira-user]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>accountId: The account ID of the user, which uniquely identifies the user across all Atlassian products. For example, *5b10ac8d82e05b22cc7d4ef5*.</li>
+     *   <li>username: This parameter is no longer available. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.</li>
+     *   <li>key: This parameter is no longer available. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.</li>
+     * </ul>
      */
     public List<GroupName> getUserGroups(Consumer<GetUserGroupsOperationSpec> spec) {
         GetUserGroupsOperationSpec r = new GetUserGroupsOperationSpec(spec);
@@ -8931,7 +10266,13 @@ public class JiraRESTV2ConsumerApi {
      * *
      * Access to Jira, to get a property from the calling user's record.
      * Authentication - Required Scopes: [read:jira-user]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>propertyKey: The key of the user's property.</li>
+     *   <li>accountId: The account ID of the user, which uniquely identifies the user across all Atlassian products. For example, *5b10ac8d82e05b22cc7d4ef5*.</li>
+     *   <li>userKey: This parameter is no longer available and will be removed from the documentation soon. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.</li>
+     *   <li>username: This parameter is no longer available and will be removed from the documentation soon. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.</li>
+     * </ul>
      */
     public EntityProperty getUserProperty(Consumer<GetUserPropertyOperationSpec> spec) {
         GetUserPropertyOperationSpec r = new GetUserPropertyOperationSpec(spec);
@@ -8949,7 +10290,12 @@ public class JiraRESTV2ConsumerApi {
      * *
      * Access to Jira, to access the calling user's property keys.
      * Authentication - Required Scopes: [read:jira-user]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>accountId: The account ID of the user, which uniquely identifies the user across all Atlassian products. For example, *5b10ac8d82e05b22cc7d4ef5*.</li>
+     *   <li>userKey: This parameter is no longer available and will be removed from the documentation soon. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.</li>
+     *   <li>username: This parameter is no longer available and will be removed from the documentation soon. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.</li>
+     * </ul>
      */
     public PropertyKeys getUserPropertyKeys(Consumer<GetUserPropertyKeysOperationSpec> spec) {
         GetUserPropertyKeysOperationSpec r = new GetUserPropertyKeysOperationSpec(spec);
@@ -8963,7 +10309,14 @@ public class JiraRESTV2ConsumerApi {
      * Note that users are ordered by username, however the username is not returned in the results due to privacy reasons.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>groupname: As a group's name can change, use of {@code groupId} is recommended to identify a group.   The name of the group. This parameter cannot be used with the {@code groupId} parameter.</li>
+     *   <li>groupId: The ID of the group. This parameter cannot be used with the {@code groupName} parameter.</li>
+     *   <li>includeInactiveUsers: Include inactive users.</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     * </ul>
      */
     public PageBeanUserDetails getUsersFromGroup(Consumer<GetUsersFromGroupOperationSpec> spec) {
         GetUsersFromGroupOperationSpec r = new GetUsersFromGroupOperationSpec(spec);
@@ -8975,7 +10328,10 @@ public class JiraRESTV2ConsumerApi {
      * <p>
      * Validates a project key and, if the key is invalid or in use, generates a valid random string for the project key.
      * **[Permissions](#permissions) required:** None.
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>key: The project key.</li>
+     * </ul>
      */
     public String getValidProjectKey(Consumer<GetValidProjectKeyOperationSpec> spec) {
         GetValidProjectKeyOperationSpec r = new GetValidProjectKeyOperationSpec(spec);
@@ -8987,7 +10343,10 @@ public class JiraRESTV2ConsumerApi {
      * <p>
      * Checks that a project name isn't in use. If the name isn't in use, the passed string is returned. If the name is in use, this operation attempts to generate a valid project name based on the one supplied, usually by adding a sequence number. If a valid project name cannot be generated, a 404 response is returned.
      * **[Permissions](#permissions) required:** None.
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>name: The project name.</li>
+     * </ul>
      */
     public String getValidProjectName(Consumer<GetValidProjectNameOperationSpec> spec) {
         GetValidProjectNameOperationSpec r = new GetValidProjectNameOperationSpec(spec);
@@ -9001,7 +10360,11 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project containing the version.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the version.</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information about version in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code operations} Returns the list of operations available for this version.  *  {@code issuesstatus} Returns the count of issues in this version for each of the status categories *to do*, *in progress*, *done*, and *unmapped*. The *unmapped* property represents the number of issues with a status other than *to do*, *in progress*, and *done*.</li>
+     * </ul>
      */
     public Version getVersion(Consumer<GetVersionOperationSpec> spec) {
         GetVersionOperationSpec r = new GetVersionOperationSpec(spec);
@@ -9013,15 +10376,18 @@ public class JiraRESTV2ConsumerApi {
      * <p>
      * Returns the following counts for a version:
      *  *
-     * Number of issues where the `fixVersion` is set to the version.
+     * Number of issues where the {@code fixVersion} is set to the version.
      * *
-     * Number of issues where the `affectedVersion` is set to the version.
+     * Number of issues where the {@code affectedVersion} is set to the version.
      * *
      * Number of issues where a version custom field is set to the version.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Browse projects* project permission for the project that contains the version.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the version.</li>
+     * </ul>
      */
     public VersionIssueCounts getVersionRelatedIssues(Consumer<GetVersionRelatedIssuesOperationSpec> spec) {
         GetVersionRelatedIssuesOperationSpec r = new GetVersionRelatedIssuesOperationSpec(spec);
@@ -9035,7 +10401,10 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Browse projects* project permission for the project that contains the version.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the version.</li>
+     * </ul>
      */
     public VersionUnresolvedIssuesCount getVersionUnresolvedIssues(Consumer<GetVersionUnresolvedIssuesOperationSpec> spec) {
         GetVersionUnresolvedIssuesOperationSpec r = new GetVersionUnresolvedIssuesOperationSpec(spec);
@@ -9049,7 +10418,13 @@ public class JiraRESTV2ConsumerApi {
      * Note that this operation **only works for issue field select list options added by Connect apps**, it cannot be used with issue field select list options created in Jira or using operations from the [Issue custom field options](#api-group-Issue-custom-field-options) resource.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldKey: The field key is specified in the following format: **$(app-key)\\_\\_$(field-key)**. For example, *example-add-on\\_\\_example-issue-field*. To determine the {@code fieldKey} value, do one of the following:   *  open the app's plugin descriptor, then **app-key** is the key at the top and **field-key** is the key in the {@code jiraIssueFields} module. **app-key** can also be found in the app listing in the Atlassian Universal Plugin Manager.  *  run [Get fields](#api-rest-api-2-field-get) and in the field details the value is returned in {@code key}. For example, {@code "key": "teams-add-on__team-issue-field"}</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>projectId: Filters the results to options that are only available in the specified project.</li>
+     * </ul>
      */
     public PageBeanIssueFieldOption getVisibleIssueFieldOptions(Consumer<GetVisibleIssueFieldOptionsOperationSpec> spec) {
         GetVisibleIssueFieldOptionsOperationSpec r = new GetVisibleIssueFieldOptionsOperationSpec(spec);
@@ -9067,9 +10442,12 @@ public class JiraRESTV2ConsumerApi {
      * *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project that the issue is ini
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
-     * Note that users with the necessary permissions for this operation but without the *View voters and watchers* project permissions are not returned details in the `voters` field.
+     * Note that users with the necessary permissions for this operation but without the *View voters and watchers* project permissions are not returned details in the {@code voters} field.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue.</li>
+     * </ul>
      */
     public Votes getVotes(Consumer<GetVotesOperationSpec> spec) {
         GetVotesOperationSpec r = new GetVotesOperationSpec(spec);
@@ -9082,7 +10460,12 @@ public class JiraRESTV2ConsumerApi {
      * Returns the workflow-issue type mappings for a workflow scheme.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the workflow scheme.</li>
+     *   <li>workflowName: The name of a workflow in the scheme. Limits the results to the workflow-issue type mapping for the specified workflow.</li>
+     *   <li>returnDraftIfExists: Returns the mapping from the workflow scheme's draft rather than the workflow scheme, if set to true. If no draft exists, the mapping from the workflow scheme is returned.</li>
+     * </ul>
      */
     public IssueTypesWorkflowMapping getWorkflow(Consumer<GetWorkflowOperationSpec> spec) {
         GetWorkflowOperationSpec r = new GetWorkflowOperationSpec(spec);
@@ -9095,7 +10478,11 @@ public class JiraRESTV2ConsumerApi {
      * Returns a workflow scheme.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the workflow scheme. Find this ID by editing the desired workflow scheme in Jira. The ID is shown in the URL as {@code schemeId}. For example, *schemeId=10301*.</li>
+     *   <li>returnDraftIfExists: Returns the workflow scheme's draft rather than scheme itself, if set to true. If the workflow scheme does not have a draft, then the workflow scheme is returned.</li>
+     * </ul>
      */
     public WorkflowScheme getWorkflowScheme(Consumer<GetWorkflowSchemeOperationSpec> spec) {
         GetWorkflowSchemeOperationSpec r = new GetWorkflowSchemeOperationSpec(spec);
@@ -9113,7 +10500,10 @@ public class JiraRESTV2ConsumerApi {
      * An active workflow scheme can only have one draft workflow scheme.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the active workflow scheme that the draft was created from.</li>
+     * </ul>
      */
     public WorkflowScheme getWorkflowSchemeDraft(Consumer<GetWorkflowSchemeDraftOperationSpec> spec) {
         GetWorkflowSchemeDraftOperationSpec r = new GetWorkflowSchemeDraftOperationSpec(spec);
@@ -9126,7 +10516,11 @@ public class JiraRESTV2ConsumerApi {
      * Returns the issue type-workflow mapping for an issue type in a workflow scheme's draft.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the workflow scheme that the draft belongs to.</li>
+     *   <li>issueType: The ID of the issue type.</li>
+     * </ul>
      */
     public IssueTypeWorkflowMapping getWorkflowSchemeDraftIssueType(Consumer<GetWorkflowSchemeDraftIssueTypeOperationSpec> spec) {
         GetWorkflowSchemeDraftIssueTypeOperationSpec r = new GetWorkflowSchemeDraftIssueTypeOperationSpec(spec);
@@ -9139,7 +10533,12 @@ public class JiraRESTV2ConsumerApi {
      * Returns the issue type-workflow mapping for an issue type in a workflow scheme.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the workflow scheme.</li>
+     *   <li>issueType: The ID of the issue type.</li>
+     *   <li>returnDraftIfExists: Returns the mapping from the workflow scheme's draft rather than the workflow scheme, if set to true. If no draft exists, the mapping from the workflow scheme is returned.</li>
+     * </ul>
      */
     public IssueTypeWorkflowMapping getWorkflowSchemeIssueType(Consumer<GetWorkflowSchemeIssueTypeOperationSpec> spec) {
         GetWorkflowSchemeIssueTypeOperationSpec r = new GetWorkflowSchemeIssueTypeOperationSpec(spec);
@@ -9150,10 +10549,13 @@ public class JiraRESTV2ConsumerApi {
      * Get workflow scheme project associations
      * <p>
      * Returns a list of the workflow schemes associated with a list of projects. Each returned workflow scheme includes a list of the requested projects associated with it. Any team-managed or non-existent projects in the request are ignored and no errors are returned.
-     * If the project is associated with the `Default Workflow Scheme` no ID is returned. This is because the way the `Default Workflow Scheme` is stored means it has no ID.
+     * If the project is associated with the {@code Default Workflow Scheme} no ID is returned. This is because the way the {@code Default Workflow Scheme} is stored means it has no ID.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectId: The ID of a project to return the workflow schemes for. To include multiple projects, provide an ampersand-Jim: oneseparated list. For example, {@code projectId=10000&amp;projectId=10001}.</li>
+     * </ul>
      */
     public ContainerOfWorkflowSchemeAssociations getWorkflowSchemeProjectAssociations(Consumer<GetWorkflowSchemeProjectAssociationsOperationSpec> spec) {
         GetWorkflowSchemeProjectAssociationsOperationSpec r = new GetWorkflowSchemeProjectAssociationsOperationSpec(spec);
@@ -9166,7 +10568,14 @@ public class JiraRESTV2ConsumerApi {
      * Returns the properties on a workflow transition. Transition properties are used to change the behavior of a transition. For more information, see [Transition properties](https://confluence.atlassian.com/x/zIhKLg#Advancedworkflowconfiguration-transitionproperties) and [Workflow properties](https://confluence.atlassian.com/x/JYlKLg).
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>transitionId: The ID of the transition. To get the ID, view the workflow in text mode in the Jira administration console. The ID is shown next to the transition.</li>
+     *   <li>workflowName: The name of the workflow that the transition belongs to.</li>
+     *   <li>includeReservedKeys: Some properties with keys that have the *jira.* prefix are reserved, which means they are not editable. To include these properties in the results, set this parameter to *true*.</li>
+     *   <li>key: The key of the property being returned, also known as the name of the property. If this parameter is not specified, all properties on the transition are returned.</li>
+     *   <li>workflowMode: The workflow status. Set to *live* for active and inactive workflows, or *draft* for draft workflows.</li>
+     * </ul>
      */
     public WorkflowTransitionProperty getWorkflowTransitionProperties(Consumer<GetWorkflowTransitionPropertiesOperationSpec> spec) {
         GetWorkflowTransitionPropertiesOperationSpec r = new GetWorkflowTransitionPropertiesOperationSpec(spec);
@@ -9185,7 +10594,17 @@ public class JiraRESTV2ConsumerApi {
      * Due to server-side optimizations, workflows with an empty list of rules may be returned; these workflows can be ignored.
      * **[Permissions](#permissions) required:** Only [Connect](https://developer.atlassian.com/cloud/jira/platform/index/#connect-apps) or [Forge](https://developer.atlassian.com/cloud/jira/platform/index/#forge-apps) apps can use this operation.
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>types: The types of the transition rules to return.</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>keys: The transition rule class keys, as defined in the Connect or the Forge app descriptor, of the transition rules to return.</li>
+     *   <li>workflowNames: EXPERIMENTAL: The list of workflow names to filter by.</li>
+     *   <li>withTags: EXPERIMENTAL: The list of {@code tags} to filter by.</li>
+     *   <li>draft: EXPERIMENTAL: Whether draft or published workflows are returned. If not provided, both workflow types are returned.</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information in the response. This parameter accepts {@code transition}, which, for each rule, returns information about the transition the rule is assigned to.</li>
+     * </ul>
      */
     public PageBeanWorkflowTransitionRules getWorkflowTransitionRuleConfigurations(Consumer<GetWorkflowTransitionRuleConfigurationsOperationSpec> spec) {
         GetWorkflowTransitionRuleConfigurationsOperationSpec r = new GetWorkflowTransitionRuleConfigurationsOperationSpec(spec);
@@ -9199,7 +10618,16 @@ public class JiraRESTV2ConsumerApi {
      * This operation does not return next-gen workflows.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>workflowName: The name of a workflow to return. To include multiple workflows, provide an ampersand-separated list. For example, {@code workflowName=name1&amp;workflowName=name2}.</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code transitions} For each workflow, returns information about the transitions inside the workflow.  *  {@code transitions.rules} For each workflow transition, returns information about its rules. Transitions are included automatically if this expand is requested.  *  {@code transitions.properties} For each workflow transition, returns information about its properties. Transitions are included automatically if this expand is requested.  *  {@code statuses} For each workflow, returns information about the statuses inside the workflow.  *  {@code statuses.properties} For each workflow status, returns information about its properties. Statuses are included automatically if this expand is requested.  *  {@code default} For each workflow, returns information about whether this is the default workflow.  *  {@code schemes} For each workflow, returns information about the workflow schemes the workflow is assigned to.  *  {@code projects} For each workflow, returns information about the projects the workflow is assigned to, through workflow schemes.  *  {@code hasDraftWorkflow} For each workflow, returns information about whether the workflow has a draft version.  *  {@code operations} For each workflow, returns information about the actions that can be undertaken on the workflow.</li>
+     *   <li>queryString: String used to perform a case-insensitive partial match with workflow name.</li>
+     *   <li>orderBy: [Order](#ordering) the results by a field:   *  {@code name} Sorts by workflow name.  *  {@code created} Sorts by create time.  *  {@code updated} Sorts by update time.</li>
+     *   <li>isActive: Filters active and inactive workflows.</li>
+     * </ul>
      */
     public PageBeanWorkflow getWorkflowsPaginated(Consumer<GetWorkflowsPaginatedOperationSpec> spec) {
         GetWorkflowsPaginatedOperationSpec r = new GetWorkflowsPaginatedOperationSpec(spec);
@@ -9220,7 +10648,12 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If the worklog has visibility restrictions, belongs to the group or has the role visibility is restricted to.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue.</li>
+     *   <li>id: The ID of the worklog.</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information about work logs in the response. This parameter accepts  {@code properties}, which returns worklog properties.</li>
+     * </ul>
      */
     public Worklog getWorklog(Consumer<GetWorklogOperationSpec> spec) {
         GetWorklogOperationSpec r = new GetWorklogOperationSpec(spec);
@@ -9240,7 +10673,12 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If the worklog has visibility restrictions, belongs to the group or has the role visibility is restricted to.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue.</li>
+     *   <li>worklogId: The ID of the worklog.</li>
+     *   <li>propertyKey: The key of the property.</li>
+     * </ul>
      */
     public EntityProperty getWorklogProperty(Consumer<GetWorklogPropertyOperationSpec> spec) {
         GetWorklogPropertyOperationSpec r = new GetWorklogPropertyOperationSpec(spec);
@@ -9260,7 +10698,11 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If the worklog has visibility restrictions, belongs to the group or has the role visibility is restricted to.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue.</li>
+     *   <li>worklogId: The ID of the worklog.</li>
+     * </ul>
      */
     public PropertyKeys getWorklogPropertyKeys(Consumer<GetWorklogPropertyKeysOperationSpec> spec) {
         GetWorklogPropertyKeysOperationSpec r = new GetWorklogPropertyKeysOperationSpec(spec);
@@ -9278,7 +10720,11 @@ public class JiraRESTV2ConsumerApi {
      * *
      * the user is a member of a project role or group with permission to view the worklog.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>worklogIdsRequestBean: A JSON object containing a list of worklog IDs.</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information about worklogs in the response. This parameter accepts {@code properties} that returns the properties of each worklog.</li>
+     * </ul>
      */
     public List<Worklog> getWorklogsForIds(Consumer<GetWorklogsForIdsOperationSpec> spec) {
         GetWorklogsForIdsOperationSpec r = new GetWorklogsForIdsOperationSpec(spec);
@@ -9289,7 +10735,7 @@ public class JiraRESTV2ConsumerApi {
      * Create issue link
      * <p>
      * Creates a link between two issues. Use this operation to indicate a relationship between two issues and optionally add a comment to the from (outward) issue. To use this resource the site must have [Issue Linking](https://confluence.atlassian.com/x/yoXKM) enabled.
-     * This resource returns nothing on the creation of an issue link. To obtain the ID of the issue link, use `https://your-domain.atlassian.net/rest/api/2/issue/[linked issue key]?fields=issuelinks`.
+     * This resource returns nothing on the creation of an issue link. To obtain the ID of the issue link, use {@code https://your-domain.atlassian.net/rest/api/2/issue/[linked issue key]?fields=issuelinks}.
      * If the link request duplicates a link, the response indicates that the issue link was created. If the request included a comment, the comment is added.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:**
@@ -9302,7 +10748,10 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If the comment has visibility restrictions, belongs to the group or has the role visibility is restricted to.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>linkIssueRequestJsonBean: The issue link request.</li>
+     * </ul>
      */
     public Object linkIssues(Consumer<LinkIssuesOperationSpec> spec) {
         LinkIssuesOperationSpec r = new LinkIssuesOperationSpec(spec);
@@ -9319,7 +10768,10 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issuesAndJQLQueries: </li>
+     * </ul>
      */
     public IssueMatches matchIssues(Consumer<MatchIssuesOperationSpec> spec) {
         MatchIssuesOperationSpec r = new MatchIssuesOperationSpec(spec);
@@ -9329,12 +10781,16 @@ public class JiraRESTV2ConsumerApi {
     /**
      * Merge versions
      * <p>
-     * Merges two project versions. The merge is completed by deleting the version specified in `id` and replacing any occurrences of its ID in `fixVersion` with the version ID specified in `moveIssuesTo`.
-     * Consider using [ Delete and replace version](#api-rest-api-2-version-id-removeAndSwap-post) instead. This resource supports swapping version values in `fixVersion`, `affectedVersion`, and custom fields.
+     * Merges two project versions. The merge is completed by deleting the version specified in {@code id} and replacing any occurrences of its ID in {@code fixVersion} with the version ID specified in {@code moveIssuesTo}.
+     * Consider using [ Delete and replace version](#api-rest-api-2-version-id-removeAndSwap-post) instead. This resource supports swapping version values in {@code fixVersion}, {@code affectedVersion}, and custom fields.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) or *Administer Projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project that contains the version.
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the version to delete.</li>
+     *   <li>moveIssuesTo: The ID of the version to merge into.</li>
+     * </ul>
      */
     public Object mergeVersions(Consumer<MergeVersionsOperationSpec> spec) {
         MergeVersionsOperationSpec r = new MergeVersionsOperationSpec(spec);
@@ -9348,7 +10804,10 @@ public class JiraRESTV2ConsumerApi {
      * You may wish to use this operation if your system stores JQL queries and you want to make them GDPR-compliant. For more information about GDPR-related changes, see the [migration guide](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/).
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [read:jira-user]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>jqLPersonalDataMigrationRequest: </li>
+     * </ul>
      */
     public ConvertedJQLQueries migrateQueries(Consumer<MigrateQueriesOperationSpec> spec) {
         MigrateQueriesOperationSpec r = new MigrateQueriesOperationSpec(spec);
@@ -9359,7 +10818,12 @@ public class JiraRESTV2ConsumerApi {
      * Bulk update entity properties
      * <p>
      * Updates the values of multiple entity properties for an object, up to 50 updates per request. This operation is for use by Connect apps during app migration.
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>atlassianTransferId: The app migration transfer ID.</li>
+     *   <li>entityType: The type indicating the object that contains the entity properties.</li>
+     *   <li>entityPropertyDetails: </li>
+     * </ul>
      */
     public void migrationResourceUpdateEntityPropertiesValuePut(Consumer<MigrationResourceUpdateEntityPropertiesValuePutOperationSpec> spec) {
         MigrationResourceUpdateEntityPropertiesValuePutOperationSpec r = new MigrationResourceUpdateEntityPropertiesValuePutOperationSpec(spec);
@@ -9370,7 +10834,11 @@ public class JiraRESTV2ConsumerApi {
      * Get workflow transition rule configurations
      * <p>
      * Returns configurations for workflow transition rules migrated from server to cloud and owned by the calling Connect app.
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>atlassianTransferId: The app migration transfer ID.</li>
+     *   <li>workflowRulesSearch: </li>
+     * </ul>
      */
     public WorkflowRulesSearchDetails migrationResourceWorkflowRuleSearchPost(Consumer<MigrationResourceWorkflowRuleSearchPostOperationSpec> spec) {
         MigrationResourceWorkflowRuleSearchPostOperationSpec r = new MigrationResourceWorkflowRuleSearchPostOperationSpec(spec);
@@ -9383,7 +10851,10 @@ public class JiraRESTV2ConsumerApi {
      * Changes the order of issue priorities.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>reorderIssuePriorities: </li>
+     * </ul>
      */
     public Object movePriorities(Consumer<MovePrioritiesOperationSpec> spec) {
         MovePrioritiesOperationSpec r = new MovePrioritiesOperationSpec(spec);
@@ -9396,7 +10867,10 @@ public class JiraRESTV2ConsumerApi {
      * Changes the order of issue resolutions.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>reorderIssueResolutionsRequest: </li>
+     * </ul>
      */
     public Object moveResolutions(Consumer<MoveResolutionsOperationSpec> spec) {
         MoveResolutionsOperationSpec r = new MoveResolutionsOperationSpec(spec);
@@ -9409,7 +10883,12 @@ public class JiraRESTV2ConsumerApi {
      * Moves a screen tab.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>screenId: The ID of the screen.</li>
+     *   <li>tabId: The ID of the screen tab.</li>
+     *   <li>pos: The position of tab. The base index is 0.</li>
+     * </ul>
      */
     public Object moveScreenTab(Consumer<MoveScreenTabOperationSpec> spec) {
         MoveScreenTabOperationSpec r = new MoveScreenTabOperationSpec(spec);
@@ -9420,10 +10899,16 @@ public class JiraRESTV2ConsumerApi {
      * Move screen tab field
      * <p>
      * Moves a screen tab field.
-     * If `after` and `position` are provided in the request, `position` is ignored.
+     * If {@code after} and {@code position} are provided in the request, {@code position} is ignored.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>screenId: The ID of the screen.</li>
+     *   <li>tabId: The ID of the screen tab.</li>
+     *   <li>id: The ID of the field.</li>
+     *   <li>moveFieldBean: </li>
+     * </ul>
      */
     public Object moveScreenTabField(Consumer<MoveScreenTabFieldOperationSpec> spec) {
         MoveScreenTabFieldOperationSpec r = new MoveScreenTabFieldOperationSpec(spec);
@@ -9437,7 +10922,11 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Browse projects* project permission for the project that contains the version.
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the version to be moved.</li>
+     *   <li>versionMoveBean: </li>
+     * </ul>
      */
     public Version moveVersion(Consumer<MoveVersionOperationSpec> spec) {
         MoveVersionOperationSpec r = new MoveVersionOperationSpec(spec);
@@ -9454,11 +10943,15 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: ID or key of the issue that the notification is sent for.</li>
+     *   <li>notification: The request object for the notification and recipients.</li>
+     * </ul>
      */
     public Object notify(Consumer<NotifyOperationSpec> spec) {
         NotifyOperationSpec r = new NotifyOperationSpec(spec);
-        return api.notify(r.issueIdOrKey(), r.requestBody());
+        return api.notify(r.issueIdOrKey(), r.notification());
     }
 
     /**
@@ -9469,7 +10962,11 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** None.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>jqlQueriesToParse: </li>
+     *   <li>validation: How to validate the JQL query and treat the validation results. Validation options include:   *  {@code strict} Returns all errors. If validation fails, the query structure is not returned.  *  {@code warn} Returns all errors. If validation fails but the JQL query is correctly formed, the query structure is returned.  *  {@code none} No validation is performed. If JQL query is correctly formed, the query structure is returned.</li>
+     * </ul>
      */
     public ParsedJqlQueries parseJqlQueries(Consumer<ParseJqlQueriesOperationSpec> spec) {
         ParseJqlQueriesOperationSpec r = new ParseJqlQueriesOperationSpec(spec);
@@ -9483,7 +10980,11 @@ public class JiraRESTV2ConsumerApi {
      * You cannot update both the name and description at the same time using this operation. If you send a request with a name and a description only the name is updated.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the project role. Use [Get all project roles](#api-rest-api-2-role-get) to get a list of project role IDs.</li>
+     *   <li>createUpdateRoleRequestBean: </li>
+     * </ul>
      */
     public ProjectRole partialUpdateProjectRole(Consumer<PartialUpdateProjectRoleOperationSpec> spec) {
         PartialUpdateProjectRoleOperationSpec r = new PartialUpdateProjectRoleOperationSpec(spec);
@@ -9495,10 +10996,15 @@ public class JiraRESTV2ConsumerApi {
      * <p>
      * Publishes a draft workflow scheme.
      * Where the draft workflow includes new workflow statuses for an issue type, mappings are provided to update issues with the original workflow status to the new workflow status.
-     * This operation is [asynchronous](#async). Follow the `location` link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain updates.
+     * This operation is [asynchronous](#async). Follow the {@code location} link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain updates.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the workflow scheme that the draft belongs to.</li>
+     *   <li>publishDraftWorkflowScheme: Details of the status mappings.</li>
+     *   <li>validateOnly: Whether the request only performs a validation.</li>
+     * </ul>
      */
     public void publishDraftWorkflowScheme(Consumer<PublishDraftWorkflowSchemeOperationSpec> spec) {
         PublishDraftWorkflowSchemeOperationSpec r = new PublishDraftWorkflowSchemeOperationSpec(spec);
@@ -9515,7 +11021,11 @@ public class JiraRESTV2ConsumerApi {
      * *
      * At least one of the *Administer projects* and *View (read-only) workflow* project permissions to access project-scoped workflows
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>workflowReadRequest: </li>
+     *   <li>expand: Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code workflows.usages} Returns the project and issue types that each workflow is associated with.  *  {@code statuses.usages} Returns the project and issue types that each status is associated with.</li>
+     * </ul>
      */
     public WorkflowReadResponse readWorkflows(Consumer<ReadWorkflowsOperationSpec> spec) {
         ReadWorkflowsOperationSpec r = new ReadWorkflowsOperationSpec(spec);
@@ -9529,7 +11039,10 @@ public class JiraRESTV2ConsumerApi {
      * Unrecognized webhook IDs (those that are not found or belong to other apps) are ignored.
      * **[Permissions](#permissions) required:** Only [Connect](https://developer.atlassian.com/cloud/jira/platform/#connect-apps) and [OAuth 2.0](https://developer.atlassian.com/cloud/jira/platform/oauth-2-3lo-apps) apps can use this operation.
      * Authentication - Required Scopes: [read:jira-work, manage:jira-webhook]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>containerForWebhookIDs: </li>
+     * </ul>
      */
     public WebhooksExpirationDate refreshWebhooks(Consumer<RefreshWebhooksOperationSpec> spec) {
         RefreshWebhooksOperationSpec r = new RefreshWebhooksOperationSpec(spec);
@@ -9543,7 +11056,10 @@ public class JiraRESTV2ConsumerApi {
      * **NOTE:** for non-public OAuth apps, webhooks are delivered only if there is a match between the app owner and the user who registered a dynamic webhook.
      * **[Permissions](#permissions) required:** Only [Connect](https://developer.atlassian.com/cloud/jira/platform/#connect-apps) and [OAuth 2.0](https://developer.atlassian.com/cloud/jira/platform/oauth-2-3lo-apps) apps can use this operation.
      * Authentication - Required Scopes: [read:jira-work, manage:jira-webhook]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>webhookRegistrationDetails: </li>
+     * </ul>
      */
     public ContainerForRegisteredWebhooks registerDynamicWebhooks(Consumer<RegisterDynamicWebhooksOperationSpec> spec) {
         RegisterDynamicWebhooksOperationSpec r = new RegisterDynamicWebhooksOperationSpec(spec);
@@ -9561,7 +11077,10 @@ public class JiraRESTV2ConsumerApi {
      * *
      * *Delete all attachments* [project permission](https://confluence.atlassian.com/x/yodKLg) to delete an attachment created by any user.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the attachment.</li>
+     * </ul>
      */
     public void removeAttachment(Consumer<RemoveAttachmentOperationSpec> spec) {
         RemoveAttachmentOperationSpec r = new RemoveAttachmentOperationSpec(spec);
@@ -9576,7 +11095,12 @@ public class JiraRESTV2ConsumerApi {
      * If any project in the request is not assigned to the context, or the operation would result in two global contexts for the field, the operation fails.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldId: The ID of the custom field.</li>
+     *   <li>contextId: The ID of the context.</li>
+     *   <li>projectIds: </li>
+     * </ul>
      */
     public Object removeCustomFieldContextFromProjects(Consumer<RemoveCustomFieldContextFromProjectsOperationSpec> spec) {
         RemoveCustomFieldContextFromProjectsOperationSpec r = new RemoveCustomFieldContextFromProjectsOperationSpec(spec);
@@ -9590,7 +11114,11 @@ public class JiraRESTV2ConsumerApi {
      * When a gadget is removed from a dashboard, other gadgets in the same column are moved up to fill the emptied position.
      * **[Permissions](#permissions) required:** None.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>dashboardId: The ID of the dashboard.</li>
+     *   <li>gadgetId: The ID of the gadget.</li>
+     * </ul>
      */
     public Object removeGadget(Consumer<RemoveGadgetOperationSpec> spec) {
         RemoveGadgetOperationSpec r = new RemoveGadgetOperationSpec(spec);
@@ -9603,7 +11131,13 @@ public class JiraRESTV2ConsumerApi {
      * Deletes a group.
      * **[Permissions](#permissions) required:** Site administration (that is, member of the *site-admin* strategic [group](https://confluence.atlassian.com/x/24xjL)).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>groupname: </li>
+     *   <li>groupId: The ID of the group. This parameter cannot be used with the {@code groupname} parameter.</li>
+     *   <li>swapGroup: As a group's name can change, use of {@code swapGroupId} is recommended to identify a group.   The group to transfer restrictions to. Only comments and worklogs are transferred. If restrictions are not transferred, comments and worklogs are inaccessible after the deletion. This parameter cannot be used with the {@code swapGroupId} parameter.</li>
+     *   <li>swapGroupId: The ID of the group to transfer restrictions to. Only comments and worklogs are transferred. If restrictions are not transferred, comments and worklogs are inaccessible after the deletion. This parameter cannot be used with the {@code swapGroup} parameter.</li>
+     * </ul>
      */
     public void removeGroup(Consumer<RemoveGroupOperationSpec> spec) {
         RemoveGroupOperationSpec r = new RemoveGroupOperationSpec(spec);
@@ -9623,7 +11157,11 @@ public class JiraRESTV2ConsumerApi {
      * the last standard issue type from an issue type scheme.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueTypeSchemeId: The ID of the issue type scheme.</li>
+     *   <li>issueTypeId: The ID of the issue type.</li>
+     * </ul>
      */
     public Object removeIssueTypeFromIssueTypeScheme(Consumer<RemoveIssueTypeFromIssueTypeSchemeOperationSpec> spec) {
         RemoveIssueTypeFromIssueTypeSchemeOperationSpec r = new RemoveIssueTypeFromIssueTypeSchemeOperationSpec(spec);
@@ -9637,7 +11175,12 @@ public class JiraRESTV2ConsumerApi {
      * A custom field context without any issue types applies to all issue types.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldId: The ID of the custom field.</li>
+     *   <li>contextId: The ID of the context.</li>
+     *   <li>issueTypeIds: </li>
+     * </ul>
      */
     public Object removeIssueTypesFromContext(Consumer<RemoveIssueTypesFromContextOperationSpec> spec) {
         RemoveIssueTypesFromContextOperationSpec r = new RemoveIssueTypesFromContextOperationSpec(spec);
@@ -9651,7 +11194,11 @@ public class JiraRESTV2ConsumerApi {
      * This operation can only modify field configuration schemes used in company-managed (classic) projects.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the field configuration scheme.</li>
+     *   <li>issueTypeIdsToRemove: The issue type IDs to remove.</li>
+     * </ul>
      */
     public Object removeIssueTypesFromGlobalFieldConfigurationScheme(Consumer<RemoveIssueTypesFromGlobalFieldConfigurationSchemeOperationSpec> spec) {
         RemoveIssueTypesFromGlobalFieldConfigurationSchemeOperationSpec r = new RemoveIssueTypesFromGlobalFieldConfigurationSchemeOperationSpec(spec);
@@ -9662,10 +11209,15 @@ public class JiraRESTV2ConsumerApi {
      * Remove issue security level
      * <p>
      * Deletes an issue security level.
-     * This operation is [asynchronous](#async). Follow the `location` link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
+     * This operation is [asynchronous](#async). Follow the {@code location} link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>schemeId: The ID of the issue security scheme.</li>
+     *   <li>levelId: The ID of the issue security level to remove.</li>
+     *   <li>replaceWith: The ID of the issue security level that will replace the currently selected level.</li>
+     * </ul>
      */
     public void removeLevel(Consumer<RemoveLevelOperationSpec> spec) {
         RemoveLevelOperationSpec r = new RemoveLevelOperationSpec(spec);
@@ -9678,7 +11230,11 @@ public class JiraRESTV2ConsumerApi {
      * Removes issue type to screen scheme mappings from an issue type screen scheme.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueTypeScreenSchemeId: The ID of the issue type screen scheme.</li>
+     *   <li>issueTypeIds: </li>
+     * </ul>
      */
     public Object removeMappingsFromIssueTypeScreenScheme(Consumer<RemoveMappingsFromIssueTypeScreenSchemeOperationSpec> spec) {
         RemoveMappingsFromIssueTypeScreenSchemeOperationSpec r = new RemoveMappingsFromIssueTypeScreenSchemeOperationSpec(spec);
@@ -9691,7 +11247,12 @@ public class JiraRESTV2ConsumerApi {
      * Removes an issue security level member from an issue security scheme.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>schemeId: The ID of the issue security scheme.</li>
+     *   <li>levelId: The ID of the issue security level.</li>
+     *   <li>memberId: The ID of the issue security level member to be removed.</li>
+     * </ul>
      */
     public Object removeMemberFromSecurityLevel(Consumer<RemoveMemberFromSecurityLevelOperationSpec> spec) {
         RemoveMemberFromSecurityLevelOperationSpec r = new RemoveMemberFromSecurityLevelOperationSpec(spec);
@@ -9704,7 +11265,11 @@ public class JiraRESTV2ConsumerApi {
      * Removes a notification from a notification scheme.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>notificationSchemeId: The ID of the notification scheme.</li>
+     *   <li>notificationId: The ID of the notification.</li>
+     * </ul>
      */
     public Object removeNotificationFromNotificationScheme(Consumer<RemoveNotificationFromNotificationSchemeOperationSpec> spec) {
         RemoveNotificationFromNotificationSchemeOperationSpec r = new RemoveNotificationFromNotificationSchemeOperationSpec(spec);
@@ -9723,7 +11288,10 @@ public class JiraRESTV2ConsumerApi {
      * Use [ Update a user profile](https://developer.atlassian.com/cloud/admin/user-management/rest/#api-users-account-id-manage-profile-patch) from the user management REST API to manage timezone and locale instead.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>key: The key of the preference.</li>
+     * </ul>
      */
     public void removePreference(Consumer<RemovePreferenceOperationSpec> spec) {
         RemovePreferenceOperationSpec r = new RemovePreferenceOperationSpec(spec);
@@ -9736,7 +11304,10 @@ public class JiraRESTV2ConsumerApi {
      * Deletes a project category.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: ID of the project category to delete.</li>
+     * </ul>
      */
     public void removeProjectCategory(Consumer<RemoveProjectCategoryOperationSpec> spec) {
         RemoveProjectCategoryOperationSpec r = new RemoveProjectCategoryOperationSpec(spec);
@@ -9749,7 +11320,12 @@ public class JiraRESTV2ConsumerApi {
      * Removes a field from a screen tab.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>screenId: The ID of the screen.</li>
+     *   <li>tabId: The ID of the screen tab.</li>
+     *   <li>id: The ID of the field.</li>
+     * </ul>
      */
     public void removeScreenTabField(Consumer<RemoveScreenTabFieldOperationSpec> spec) {
         RemoveScreenTabFieldOperationSpec r = new RemoveScreenTabFieldOperationSpec(spec);
@@ -9761,7 +11337,12 @@ public class JiraRESTV2ConsumerApi {
      * <p>
      * Deletes a user. If the operation completes successfully then the user is removed from Jira's user base. This operation does not delete the user's Atlassian account.
      * **[Permissions](#permissions) required:** Site administration (that is, membership of the *site-admin* [group](https://confluence.atlassian.com/x/24xjL)).
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>accountId: The account ID of the user, which uniquely identifies the user across all Atlassian products. For example, *5b10ac8d82e05b22cc7d4ef5*.</li>
+     *   <li>username: This parameter is no longer available. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.</li>
+     *   <li>key: This parameter is no longer available. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.</li>
+     * </ul>
      */
     public void removeUser(Consumer<RemoveUserOperationSpec> spec) {
         RemoveUserOperationSpec r = new RemoveUserOperationSpec(spec);
@@ -9774,7 +11355,13 @@ public class JiraRESTV2ConsumerApi {
      * Removes a user from a group.
      * **[Permissions](#permissions) required:** Site administration (that is, member of the *site-admin* [group](https://confluence.atlassian.com/x/24xjL)).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>accountId: The account ID of the user, which uniquely identifies the user across all Atlassian products. For example, *5b10ac8d82e05b22cc7d4ef5*.</li>
+     *   <li>groupname: As a group's name can change, use of {@code groupId} is recommended to identify a group.   The name of the group. This parameter cannot be used with the {@code groupId} parameter.</li>
+     *   <li>groupId: The ID of the group. This parameter cannot be used with the {@code groupName} parameter.</li>
+     *   <li>username: This parameter is no longer available. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.</li>
+     * </ul>
      */
     public void removeUserFromGroup(Consumer<RemoveUserFromGroupOperationSpec> spec) {
         RemoveUserFromGroupOperationSpec r = new RemoveUserFromGroupOperationSpec(spec);
@@ -9792,7 +11379,10 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue.</li>
+     * </ul>
      */
     public void removeVote(Consumer<RemoveVoteOperationSpec> spec) {
         RemoveVoteOperationSpec r = new RemoveVoteOperationSpec(spec);
@@ -9812,7 +11402,12 @@ public class JiraRESTV2ConsumerApi {
      * *
      * To remove users other than themselves from the watchlist, *Manage watcher list* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project that the issue is in.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue.</li>
+     *   <li>username: This parameter is no longer available. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.</li>
+     *   <li>accountId: The account ID of the user, which uniquely identifies the user across all Atlassian products. For example, *5b10ac8d82e05b22cc7d4ef5*. Required.</li>
+     * </ul>
      */
     public void removeWatcher(Consumer<RemoveWatcherOperationSpec> spec) {
         RemoveWatcherOperationSpec r = new RemoveWatcherOperationSpec(spec);
@@ -9825,7 +11420,12 @@ public class JiraRESTV2ConsumerApi {
      * Updates the name of a screen tab.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>screenId: The ID of the screen.</li>
+     *   <li>tabId: The ID of the screen tab.</li>
+     *   <li>screenableTab: </li>
+     * </ul>
      */
     public ScreenableTab renameScreenTab(Consumer<RenameScreenTabOperationSpec> spec) {
         RenameScreenTabOperationSpec r = new RenameScreenTabOperationSpec(spec);
@@ -9839,7 +11439,12 @@ public class JiraRESTV2ConsumerApi {
      * This operation works for custom field options created in Jira or the operations from this resource. **To work with issue field select list options created for Connect apps use the [Issue custom field options (apps)](#api-group-issue-custom-field-options--apps-) operations.**
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldId: The ID of the custom field.</li>
+     *   <li>contextId: The ID of the context.</li>
+     *   <li>orderOfCustomFieldOptions: </li>
+     * </ul>
      */
     public Object reorderCustomFieldOptions(Consumer<ReorderCustomFieldOptionsOperationSpec> spec) {
         ReorderCustomFieldOptionsOperationSpec r = new ReorderCustomFieldOptionsOperationSpec(spec);
@@ -9854,12 +11459,16 @@ public class JiraRESTV2ConsumerApi {
      *  *
      * all of the issue types must belong to the issue type scheme.
      * *
-     * either `after` or `position` must be provided.
+     * either {@code after} or {@code position} must be provided.
      * *
-     * the issue type in `after` must not be in the issue type list.
+     * the issue type in {@code after} must not be in the issue type list.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueTypeSchemeId: The ID of the issue type scheme.</li>
+     *   <li>orderOfIssueTypes: </li>
+     * </ul>
      */
     public Object reorderIssueTypesInIssueTypeScheme(Consumer<ReorderIssueTypesInIssueTypeSchemeOperationSpec> spec) {
         ReorderIssueTypesInIssueTypeSchemeOperationSpec r = new ReorderIssueTypesInIssueTypeSchemeOperationSpec(spec);
@@ -9870,12 +11479,20 @@ public class JiraRESTV2ConsumerApi {
      * Replace issue field option
      * <p>
      * Deselects an issue-field select-list option from all issues where it is selected. A different option can be selected to replace the deselected option. The update can also be limited to a smaller set of issues by using a JQL query.
-     * Connect and Forge app users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) can override the screen security configuration using `overrideScreenSecurity` and `overrideEditableFlag`.
+     * Connect and Forge app users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) can override the screen security configuration using {@code overrideScreenSecurity} and {@code overrideEditableFlag}.
      * This is an [asynchronous operation](#async). The response object contains a link to the long-running task.
      * Note that this operation **only works for issue field select list options added by Connect apps**, it cannot be used with issue field select list options created in Jira or using operations from the [Issue custom field options](#api-group-Issue-custom-field-options) resource.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). Jira permissions are not required for the app providing the field.
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldKey: The field key is specified in the following format: **$(app-key)\\_\\_$(field-key)**. For example, *example-add-on\\_\\_example-issue-field*. To determine the {@code fieldKey} value, do one of the following:   *  open the app's plugin descriptor, then **app-key** is the key at the top and **field-key** is the key in the {@code jiraIssueFields} module. **app-key** can also be found in the app listing in the Atlassian Universal Plugin Manager.  *  run [Get fields](#api-rest-api-2-field-get) and in the field details the value is returned in {@code key}. For example, {@code "key": "teams-add-on__team-issue-field"}</li>
+     *   <li>optionId: The ID of the option to be deselected.</li>
+     *   <li>replaceWith: The ID of the option that will replace the currently selected option.</li>
+     *   <li>jql: A JQL query that specifies the issues to be updated. For example, *project=10000*.</li>
+     *   <li>overrideScreenSecurity: Whether screen security is overridden to enable hidden fields to be edited. Available to Connect and Forge app users with admin permission.</li>
+     *   <li>overrideEditableFlag: Whether screen security is overridden to enable uneditable fields to be edited. Available to Connect and Forge app users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).</li>
+     * </ul>
      */
     public void replaceIssueFieldOption(Consumer<ReplaceIssueFieldOptionOperationSpec> spec) {
         ReplaceIssueFieldOptionOperationSpec r = new ReplaceIssueFieldOptionOperationSpec(spec);
@@ -9898,7 +11515,10 @@ public class JiraRESTV2ConsumerApi {
      * *
      * filters shared with the public.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the filter.</li>
+     * </ul>
      */
     public void resetColumns(Consumer<ResetColumnsOperationSpec> spec) {
         ResetColumnsOperationSpec r = new ResetColumnsOperationSpec(spec);
@@ -9908,13 +11528,17 @@ public class JiraRESTV2ConsumerApi {
     /**
      * Reset user default columns
      * <p>
-     * Resets the default [ issue table columns](https://confluence.atlassian.com/x/XYdKLg) for the user to the system default. If `accountId` is not passed, the calling user's default columns are reset.
+     * Resets the default [ issue table columns](https://confluence.atlassian.com/x/XYdKLg) for the user to the system default. If {@code accountId} is not passed, the calling user's default columns are reset.
      * **[Permissions](#permissions) required:**
      *  *
      * *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg), to set the columns on any user.
      * *
      * Permission to access Jira, to set the calling user's columns.
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>accountId: The account ID of the user, which uniquely identifies the user across all Atlassian products. For example, *5b10ac8d82e05b22cc7d4ef5*.</li>
+     *   <li>username: This parameter is no longer available. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.</li>
+     * </ul>
      */
     public void resetUserColumns(Consumer<ResetUserColumnsOperationSpec> spec) {
         ResetUserColumnsOperationSpec r = new ResetUserColumnsOperationSpec(spec);
@@ -9931,7 +11555,10 @@ public class JiraRESTV2ConsumerApi {
      * *
      * *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) or *Administer projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project for Team managed projects.
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectIdOrKey: The project ID or project key (case sensitive).</li>
+     * </ul>
      */
     public Project restore(Consumer<RestoreOperationSpec> spec) {
         RestoreOperationSpec r = new RestoreOperationSpec(spec);
@@ -9944,7 +11571,10 @@ public class JiraRESTV2ConsumerApi {
      * Restores a custom field from trash. See [Edit or delete a custom field](https://confluence.atlassian.com/x/Z44fOw) for more information on trashing and deleting custom fields.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of a custom field.</li>
+     * </ul>
      */
     public Object restoreCustomField(Consumer<RestoreCustomFieldOperationSpec> spec) {
         RestoreCustomFieldOperationSpec r = new RestoreCustomFieldOperationSpec(spec);
@@ -9960,7 +11590,10 @@ public class JiraRESTV2ConsumerApi {
      * Before sanitization each JQL query is parsed. The queries are returned in the same order that they were passed.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>jqlQueriesToSanitize: </li>
+     * </ul>
      */
     public SanitizedJqlQueries sanitiseJqlQueries(Consumer<SanitiseJqlQueriesOperationSpec> spec) {
         SanitiseJqlQueriesOperationSpec r = new SanitiseJqlQueriesOperationSpec(spec);
@@ -9977,7 +11610,15 @@ public class JiraRESTV2ConsumerApi {
      * *
      * *Administer Jira* [project permission.](https://confluence.atlassian.com/x/yodKLg)
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>expand: Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code usages} Returns the project and issue types that use the status in their workflow.  *  {@code workflowUsages} Returns the workflows that use the status.</li>
+     *   <li>projectId: The project the status is part of or null for global statuses.</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>searchString: Term to match status names against or null to search for all statuses in the search scope.</li>
+     *   <li>statusCategory: Category of the status to filter by. The supported values are: {@code TODO}, {@code IN_PROGRESS}, and {@code DONE}.</li>
+     * </ul>
      */
     public PageOfStatuses search(Consumer<SearchOperationSpec> spec) {
         SearchOperationSpec r = new SearchOperationSpec(spec);
@@ -9996,7 +11637,17 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>jql: The [JQL](https://confluence.atlassian.com/x/egORLQ) that defines the search. Note:   *  If no JQL expression is provided, all issues are returned.  *  {@code username} and {@code userkey} cannot be used as search terms due to privacy reasons. Use {@code accountId} instead.  *  If a user has hidden their email address in their user profile, partial matches of the email address will not find the user. An exact match is required.</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page. To manage page size, Jira may return fewer items per page where a large number of fields are requested. The greatest number of items returned per page is achieved when requesting {@code id} or {@code key} only.</li>
+     *   <li>validateQuery: Determines how to validate the JQL query and treat the validation results. Supported values are:   *  {@code strict} Returns a 400 response code if any errors are found, along with a list of all errors (and warnings).  *  {@code warn} Returns all errors as warnings.  *  {@code none} No validation is performed.  *  {@code true} *Deprecated* A legacy synonym for {@code strict}.  *  {@code false} *Deprecated* A legacy synonym for {@code warn}.  Note: If the JQL is not correctly formed a 400 response code is returned, regardless of the {@code validateQuery} value.</li>
+     *   <li>fields: A list of fields to return for each issue, use it to retrieve a subset of fields. This parameter accepts a comma-separated list. Expand options include:   *  {@code *all} Returns all fields.  *  {@code *navigable} Returns navigable fields.  *  Any issue field, prefixed with a minus to exclude.  Examples:   *  {@code summary,comment} Returns only the summary and comments fields.  *  {@code -description} Returns all navigable (default) fields except description.  *  {@code *all,-comment} Returns all fields except comments.  This parameter may be specified multiple times. For example, {@code fields=field1,field2&amp;fields=field3}.  Note: All navigable fields are returned by default. This differs from [GET issue](#api-rest-api-2-issue-issueIdOrKey-get) where the default is all fields.</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information about issues in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code renderedFields} Returns field values rendered in HTML format.  *  {@code names} Returns the display name of each field.  *  {@code schema} Returns the schema describing a field type.  *  {@code transitions} Returns all possible transitions for the issue.  *  {@code operations} Returns all possible operations for the issue.  *  {@code editmeta} Returns information about how each field can be edited.  *  {@code changelog} Returns a list of recent updates to an issue, sorted by date, starting from the most recent.  *  {@code versionedRepresentations} Instead of {@code fields}, returns {@code versionedRepresentations} a JSON array containing each version of a field's value, with the highest numbered item representing the most recent version.</li>
+     *   <li>properties: A list of issue property keys for issue properties to include in the results. This parameter accepts a comma-separated list. Multiple properties can also be provided using an ampersand separated list. For example, {@code properties=prop1,prop2&amp;properties=prop3}. A maximum of 5 issue property keys can be specified.</li>
+     *   <li>fieldsByKeys: Reference fields by their key (rather than ID).</li>
+     * </ul>
      */
     public SearchResults searchForIssuesUsingJql(Consumer<SearchForIssuesUsingJqlOperationSpec> spec) {
         SearchForIssuesUsingJqlOperationSpec r = new SearchForIssuesUsingJqlOperationSpec(spec);
@@ -10015,7 +11666,10 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>searchRequestBean: A JSON object containing the search request.</li>
+     * </ul>
      */
     public SearchResults searchForIssuesUsingJqlPost(Consumer<SearchForIssuesUsingJqlPostOperationSpec> spec) {
         SearchForIssuesUsingJqlPostOperationSpec r = new SearchForIssuesUsingJqlPostOperationSpec(spec);
@@ -10032,7 +11686,13 @@ public class JiraRESTV2ConsumerApi {
      * whether the field configuration is a default. This returns priorities from company-managed (classic) projects only, as there is no concept of default priorities in team-managed projects.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>id: The list of priority IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code id=2&amp;id=3}.</li>
+     *   <li>onlyDefault: Whether only the default priority is returned.</li>
+     * </ul>
      */
     public PageBeanPriority searchPriorities(Consumer<SearchPrioritiesOperationSpec> spec) {
         SearchPrioritiesOperationSpec r = new SearchPrioritiesOperationSpec(spec);
@@ -10052,7 +11712,22 @@ public class JiraRESTV2ConsumerApi {
      * *
      * *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>orderBy: [Order](#ordering) the results by a field.   *  {@code category} Sorts by project category. A complete list of category IDs is found using [Get all project categories](#api-rest-api-2-projectCategory-get).  *  {@code issueCount} Sorts by the total number of issues in each project.  *  {@code key} Sorts by project key.  *  {@code lastIssueUpdatedTime} Sorts by the last issue update time.  *  {@code name} Sorts by project name.  *  {@code owner} Sorts by project lead.  *  {@code archivedDate} EXPERIMENTAL. Sorts by project archived date.  *  {@code deletedDate} EXPERIMENTAL. Sorts by project deleted date.</li>
+     *   <li>id: The project IDs to filter the results by. To include multiple IDs, provide an ampersand-separated list. For example, {@code id=10000&amp;id=10001}. Up to 50 project IDs can be provided.</li>
+     *   <li>keys: The project keys to filter the results by. To include multiple keys, provide an ampersand-separated list. For example, {@code keys=PA&amp;keys=PB}. Up to 50 project keys can be provided.</li>
+     *   <li>query: Filter the results using a literal string. Projects with a matching {@code key} or {@code name} are returned (case insensitive).</li>
+     *   <li>typeKey: Orders results by the [project type](https://confluence.atlassian.com/x/GwiiLQ#Jiraapplicationsoverview-Productfeaturesandprojecttypes). This parameter accepts a comma-separated list. Valid values are {@code business}, {@code service_desk}, and {@code software}.</li>
+     *   <li>categoryId: The ID of the project's category. A complete list of category IDs is found using the [Get all project categories](#api-rest-api-2-projectCategory-get) operation.</li>
+     *   <li>action: Filter results by projects for which the user can:   *  {@code view} the project, meaning that they have one of the following permissions:           *  *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.      *  *Administer projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.      *  *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).  *  {@code browse} the project, meaning that they have the *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.  *  {@code edit} the project, meaning that they have one of the following permissions:           *  *Administer projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.      *  *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expanded options include:   *  {@code description} Returns the project description.  *  {@code projectKeys} Returns all project keys associated with a project.  *  {@code lead} Returns information about the project lead.  *  {@code issueTypes} Returns all issue types associated with the project.  *  {@code url} Returns the URL associated with the project.  *  {@code insight} EXPERIMENTAL. Returns the insight details of total issue count and last issue update time for the project.</li>
+     *   <li>status: EXPERIMENTAL. Filter results by project status:   *  {@code live} Search live projects.  *  {@code archived} Search archived projects.  *  {@code deleted} Search deleted projects, those in the recycle bin.</li>
+     *   <li>properties: EXPERIMENTAL. A list of project properties to return for the project. This parameter accepts a comma-separated list.</li>
+     *   <li>propertyQuery: EXPERIMENTAL. A query string used to search properties. The query string cannot be specified using a JSON object. For example, to search for the value of {@code nested} from {@code {"something":{"nested":1,"other":2}}} use {@code [thepropertykey].something.nested=1}. Note that the propertyQuery key is enclosed in square brackets to enable searching where the propertyQuery key includes dot (.) or equals (=) characters. Note that {@code thepropertykey} is only returned when included in {@code properties}.</li>
+     * </ul>
      */
     public PageBeanProject searchProjects(Consumer<SearchProjectsOperationSpec> spec) {
         SearchProjectsOperationSpec r = new SearchProjectsOperationSpec(spec);
@@ -10064,7 +11739,13 @@ public class JiraRESTV2ConsumerApi {
      * <p>
      * Returns a [paginated](#pagination) mapping of projects that are using security schemes. You can provide either one or multiple security scheme IDs or project IDs to filter by. If you don't provide any, this will return a list of all mappings. Only issue security schemes in the context of classic projects are supported. **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>issueSecuritySchemeId: The list of security scheme IDs to be filtered out.</li>
+     *   <li>projectId: The list of project IDs to be filtered out.</li>
+     * </ul>
      */
     public PageBeanIssueSecuritySchemeToProjectMapping searchProjectsUsingSecuritySchemes(Consumer<SearchProjectsUsingSecuritySchemesOperationSpec> spec) {
         SearchProjectsUsingSecuritySchemesOperationSpec r = new SearchProjectsUsingSecuritySchemesOperationSpec(spec);
@@ -10081,7 +11762,13 @@ public class JiraRESTV2ConsumerApi {
      * whether the field configuration is a default. This returns resolutions from company-managed (classic) projects only, as there is no concept of default resolutions in team-managed projects.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>id: The list of resolutions IDs to be filtered out</li>
+     *   <li>onlyDefault: When set to true, return default only, when IDs provided, if none of them is default, return empty page. Default value is false</li>
+     * </ul>
      */
     public PageBeanResolutionJsonBean searchResolutions(Consumer<SearchResolutionsOperationSpec> spec) {
         SearchResolutionsOperationSpec r = new SearchResolutionsOperationSpec(spec);
@@ -10093,7 +11780,13 @@ public class JiraRESTV2ConsumerApi {
      * <p>
      * Returns a paginated list of issue security schemes.
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>id: The list of issue security scheme IDs. To include multiple issue security scheme IDs, separate IDs with an ampersand: {@code id=10000&amp;id=10001}.</li>
+     *   <li>projectId: The list of project IDs. To include multiple project IDs, separate IDs with an ampersand: {@code projectId=10000&amp;projectId=10001}.</li>
+     * </ul>
      */
     public PageBeanSecuritySchemeWithProjects searchSecuritySchemes(Consumer<SearchSecuritySchemesOperationSpec> spec) {
         SearchSecuritySchemesOperationSpec r = new SearchSecuritySchemesOperationSpec(spec);
@@ -10106,7 +11799,10 @@ public class JiraRESTV2ConsumerApi {
      * Selects a time tracking provider.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>timeTrackingProvider: </li>
+     * </ul>
      */
     public Object selectTimeTrackingImplementation(Consumer<SelectTimeTrackingImplementationOperationSpec> spec) {
         SelectTimeTrackingImplementationOperationSpec r = new SelectTimeTrackingImplementationOperationSpec(spec);
@@ -10120,7 +11816,12 @@ public class JiraRESTV2ConsumerApi {
      * To add actors to the project without overwriting the existing list, use [Add actors to project role](#api-rest-api-2-project-projectIdOrKey-role-id-post).
      * **[Permissions](#permissions) required:** *Administer Projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project or *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectIdOrKey: The project ID or project key (case sensitive).</li>
+     *   <li>id: The ID of the project role. Use [Get all project roles](#api-rest-api-2-role-get) to get a list of project role IDs.</li>
+     *   <li>projectRoleActorsUpdateBean: The groups or users to associate with the project role for this project. Provide the user account ID, group name, or group ID. As a group's name can change, use of group ID is recommended.</li>
+     * </ul>
      */
     public ProjectRole setActors(Consumer<SetActorsOperationSpec> spec) {
         SetActorsOperationSpec r = new SetActorsOperationSpec(spec);
@@ -10130,51 +11831,55 @@ public class JiraRESTV2ConsumerApi {
     /**
      * Set application property
      * <p>
-     * Changes the value of an application property. For example, you can change the value of the `jira.clone.prefix` from its default value of *CLONE -* to *Clone -* if you prefer sentence case capitalization. Editable properties are described below along with their default values.
+     * Changes the value of an application property. For example, you can change the value of the {@code jira.clone.prefix} from its default value of *CLONE -* to *Clone -* if you prefer sentence case capitalization. Editable properties are described below along with their default values.
      * #### Advanced settings ####
      * The advanced settings below are also accessible in [Jira](https://confluence.atlassian.com/x/vYXKM).
      * | Key | Description | Default value |
      *  | -- | -- | -- |
-     *  | `jira.clone.prefix` | The string of text prefixed to the title of a cloned issue. | `CLONE -` |
-     *  | `jira.date.picker.java.format` | The date format for the Java (server-side) generated dates. This must be the same as the `jira.date.picker.javascript.format` format setting. | `d/MMM/yy` |
-     *  | `jira.date.picker.javascript.format` | The date format for the JavaScript (client-side) generated dates. This must be the same as the `jira.date.picker.java.format` format setting. | `%e/%b/%y` |
-     *  | `jira.date.time.picker.java.format` | The date format for the Java (server-side) generated date times. This must be the same as the `jira.date.time.picker.javascript.format` format setting. | `dd/MMM/yy h:mm a` |
-     *  | `jira.date.time.picker.javascript.format` | The date format for the JavaScript (client-side) generated date times. This must be the same as the `jira.date.time.picker.java.format` format setting. | `%e/%b/%y %I:%M %p` |
-     *  | `jira.issue.actions.order` | The default order of actions (such as *Comments* or *Change history*) displayed on the issue view. | `asc` |
-     *  | `jira.table.cols.subtasks` | The columns to show while viewing subtask issues in a table. For example, a list of subtasks on an issue. | `issuetype, status, assignee, progress` |
-     *  | `jira.view.issue.links.sort.order` | The sort order of the list of issue links on the issue view. | `type, status, priority` |
-     *  | `jira.comment.collapsing.minimum.hidden` | The minimum number of comments required for comment collapsing to occur. A value of `0` disables comment collapsing. | `4` |
-     *  | `jira.newsletter.tip.delay.days` | The number of days before a prompt to sign up to the Jira Insiders newsletter is shown. A value of `-1` disables this feature. | `7` |
+     *  | {@code jira.clone.prefix} | The string of text prefixed to the title of a cloned issue. | {@code CLONE -} |
+     *  | {@code jira.date.picker.java.format} | The date format for the Java (server-side) generated dates. This must be the same as the {@code jira.date.picker.javascript.format} format setting. | {@code d/MMM/yy} |
+     *  | {@code jira.date.picker.javascript.format} | The date format for the JavaScript (client-side) generated dates. This must be the same as the {@code jira.date.picker.java.format} format setting. | {@code %e/%b/%y} |
+     *  | {@code jira.date.time.picker.java.format} | The date format for the Java (server-side) generated date times. This must be the same as the {@code jira.date.time.picker.javascript.format} format setting. | {@code dd/MMM/yy h:mm a} |
+     *  | {@code jira.date.time.picker.javascript.format} | The date format for the JavaScript (client-side) generated date times. This must be the same as the {@code jira.date.time.picker.java.format} format setting. | {@code %e/%b/%y %I:%M %p} |
+     *  | {@code jira.issue.actions.order} | The default order of actions (such as *Comments* or *Change history*) displayed on the issue view. | {@code asc} |
+     *  | {@code jira.table.cols.subtasks} | The columns to show while viewing subtask issues in a table. For example, a list of subtasks on an issue. | {@code issuetype, status, assignee, progress} |
+     *  | {@code jira.view.issue.links.sort.order} | The sort order of the list of issue links on the issue view. | {@code type, status, priority} |
+     *  | {@code jira.comment.collapsing.minimum.hidden} | The minimum number of comments required for comment collapsing to occur. A value of {@code 0} disables comment collapsing. | {@code 4} |
+     *  | {@code jira.newsletter.tip.delay.days} | The number of days before a prompt to sign up to the Jira Insiders newsletter is shown. A value of {@code -1} disables this feature. | {@code 7} |
      * 
      *  #### Look and feel ####
      * The settings listed below adjust the [look and feel](https://confluence.atlassian.com/x/VwCLLg).
      * | Key | Description | Default value |
      *  | -- | -- | -- |
-     *  | `jira.lf.date.time` | The [ time format](https://docs.oracle.com/javase/6/docs/api/index.html?java/text/SimpleDateFormat.html). | `h:mm a` |
-     *  | `jira.lf.date.day` | The [ day format](https://docs.oracle.com/javase/6/docs/api/index.html?java/text/SimpleDateFormat.html). | `EEEE h:mm a` |
-     *  | `jira.lf.date.complete` | The [ date and time format](https://docs.oracle.com/javase/6/docs/api/index.html?java/text/SimpleDateFormat.html). | `dd/MMM/yy h:mm a` |
-     *  | `jira.lf.date.dmy` | The [ date format](https://docs.oracle.com/javase/6/docs/api/index.html?java/text/SimpleDateFormat.html). | `dd/MMM/yy` |
-     *  | `jira.date.time.picker.use.iso8061` | When enabled, sets Monday as the first day of the week in the date picker, as specified by the ISO8601 standard. | `false` |
-     *  | `jira.lf.logo.url` | The URL of the logo image file. | `/images/icon-jira-logo.png` |
-     *  | `jira.lf.logo.show.application.title` | Controls the visibility of the application title on the sidebar. | `false` |
-     *  | `jira.lf.favicon.url` | The URL of the favicon. | `/favicon.ico` |
-     *  | `jira.lf.favicon.hires.url` | The URL of the high-resolution favicon. | `/images/64jira.png` |
-     *  | `jira.lf.navigation.bgcolour` | The background color of the sidebar. | `#0747A6` |
-     *  | `jira.lf.navigation.highlightcolour` | The color of the text and logo of the sidebar. | `#DEEBFF` |
-     *  | `jira.lf.hero.button.base.bg.colour` | The background color of the hero button. | `#3b7fc4` |
-     *  | `jira.title` | The text for the application title. The application title can also be set in *General settings*. | `Jira` |
-     *  | `jira.option.globalsharing` | Whether filters and dashboards can be shared with anyone signed into Jira. | `true` |
-     *  | `xflow.product.suggestions.enabled` | Whether to expose product suggestions for other Atlassian products within Jira. | `true` |
+     *  | {@code jira.lf.date.time} | The [ time format](https://docs.oracle.com/javase/6/docs/api/index.html?java/text/SimpleDateFormat.html). | {@code h:mm a} |
+     *  | {@code jira.lf.date.day} | The [ day format](https://docs.oracle.com/javase/6/docs/api/index.html?java/text/SimpleDateFormat.html). | {@code EEEE h:mm a} |
+     *  | {@code jira.lf.date.complete} | The [ date and time format](https://docs.oracle.com/javase/6/docs/api/index.html?java/text/SimpleDateFormat.html). | {@code dd/MMM/yy h:mm a} |
+     *  | {@code jira.lf.date.dmy} | The [ date format](https://docs.oracle.com/javase/6/docs/api/index.html?java/text/SimpleDateFormat.html). | {@code dd/MMM/yy} |
+     *  | {@code jira.date.time.picker.use.iso8061} | When enabled, sets Monday as the first day of the week in the date picker, as specified by the ISO8601 standard. | {@code false} |
+     *  | {@code jira.lf.logo.url} | The URL of the logo image file. | {@code /images/icon-jira-logo.png} |
+     *  | {@code jira.lf.logo.show.application.title} | Controls the visibility of the application title on the sidebar. | {@code false} |
+     *  | {@code jira.lf.favicon.url} | The URL of the favicon. | {@code /favicon.ico} |
+     *  | {@code jira.lf.favicon.hires.url} | The URL of the high-resolution favicon. | {@code /images/64jira.png} |
+     *  | {@code jira.lf.navigation.bgcolour} | The background color of the sidebar. | {@code #0747A6} |
+     *  | {@code jira.lf.navigation.highlightcolour} | The color of the text and logo of the sidebar. | {@code #DEEBFF} |
+     *  | {@code jira.lf.hero.button.base.bg.colour} | The background color of the hero button. | {@code #3b7fc4} |
+     *  | {@code jira.title} | The text for the application title. The application title can also be set in *General settings*. | {@code Jira} |
+     *  | {@code jira.option.globalsharing} | Whether filters and dashboards can be shared with anyone signed into Jira. | {@code true} |
+     *  | {@code xflow.product.suggestions.enabled} | Whether to expose product suggestions for other Atlassian products within Jira. | {@code true} |
      * 
      *  #### Other settings ####
      * | Key | Description | Default value |
      *  | -- | -- | -- |
-     *  | `jira.issuenav.criteria.autoupdate` | Whether instant updates to search criteria is active. | `true` |
+     *  | {@code jira.issuenav.criteria.autoupdate} | Whether instant updates to search criteria is active. | {@code true} |
      * 
      *  *Note: Be careful when changing [application properties and advanced settings](https://confluence.atlassian.com/x/vYXKM).*
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The key of the application property to update.</li>
+     *   <li>simpleApplicationPropertyBean: </li>
+     * </ul>
      */
     public ApplicationProperty setApplicationProperty(Consumer<SetApplicationPropertyOperationSpec> spec) {
         SetApplicationPropertyOperationSpec r = new SetApplicationPropertyOperationSpec(spec);
@@ -10187,7 +11892,10 @@ public class JiraRESTV2ConsumerApi {
      * Updates the announcement banner configuration.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>announcementBannerConfigurationUpdate: </li>
+     * </ul>
      */
     public Object setBanner(Consumer<SetBannerOperationSpec> spec) {
         SetBannerOperationSpec r = new SetBannerOperationSpec(spec);
@@ -10197,9 +11905,9 @@ public class JiraRESTV2ConsumerApi {
     /**
      * Set columns
      * <p>
-     * Sets the columns for a filter. Only navigable fields can be set as columns. Use [Get fields](#api-rest-api-2-field-get) to get the list fields in Jira. A navigable field has `navigable` set to `true`.
+     * Sets the columns for a filter. Only navigable fields can be set as columns. Use [Get fields](#api-rest-api-2-field-get) to get the list fields in Jira. A navigable field has {@code navigable} set to {@code true}.
      * The parameters for this resource are expressed as HTML form data. For example, in curl:
-     * `curl -X PUT -d columns=summary -d columns=description https://your-domain.atlassian.net/rest/api/2/filter/10000/columns`
+     * {@code curl -X PUT -d columns=summary -d columns=description https://your-domain.atlassian.net/rest/api/2/filter/10000/columns}
      * **[Permissions](#permissions) required:** Permission to access Jira, however, columns are only set for:
      *  *
      * filters owned by the user.
@@ -10212,7 +11920,11 @@ public class JiraRESTV2ConsumerApi {
      * *
      * filters shared with the public.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the filter.</li>
+     *   <li>requestBody: The IDs of the fields to set as columns. In the form data, specify each field as {@code columns=id}, where {@code id} is the *id* of a field (as seen in the response for [Get fields](#api-rest-api-&amp;lt;ver&amp;gt;-field-get)). For example, {@code columns=summary}.</li>
+     * </ul>
      */
     public Object setColumns(Consumer<SetColumnsOperationSpec> spec) {
         SetColumnsOperationSpec r = new SetColumnsOperationSpec(spec);
@@ -10231,7 +11943,12 @@ public class JiraRESTV2ConsumerApi {
      * *Edit Own Comments* [project permission](https://confluence.atlassian.com/x/yodKLg) to create or update the value of a property on a comment created by the user.
      * Also, when the visibility of a comment is restricted to a role or group the user must be a member of that role or group.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>commentId: The ID of the comment.</li>
+     *   <li>propertyKey: The key of the property. The maximum length is 255 characters.</li>
+     *   <li>body: </li>
+     * </ul>
      */
     public Object setCommentProperty(Consumer<SetCommentPropertyOperationSpec> spec) {
         SetCommentPropertyOperationSpec r = new SetCommentPropertyOperationSpec(spec);
@@ -10249,7 +11966,13 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** The user must be the owner of the dashboard. Note, users with the *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) are considered owners of the System dashboard.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>dashboardId: The ID of the dashboard.</li>
+     *   <li>itemId: The ID of the dashboard item.</li>
+     *   <li>propertyKey: The key of the dashboard item property. The maximum length is 255 characters. For dashboard items with a spec URI and no complete module key, if the provided propertyKey is equal to "config", the request body's JSON must be an object with all keys and values as strings.</li>
+     *   <li>body: </li>
+     * </ul>
      */
     public Object setDashboardItemProperty(Consumer<SetDashboardItemPropertyOperationSpec> spec) {
         SetDashboardItemPropertyOperationSpec r = new SetDashboardItemPropertyOperationSpec(spec);
@@ -10262,11 +11985,14 @@ public class JiraRESTV2ConsumerApi {
      * Sets default issue security levels for schemes.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>setDefaultLevelsRequest: </li>
+     * </ul>
      */
     public Object setDefaultLevels(Consumer<SetDefaultLevelsOperationSpec> spec) {
         SetDefaultLevelsOperationSpec r = new SetDefaultLevelsOperationSpec(spec);
-        return api.setDefaultLevels(r.requestBody());
+        return api.setDefaultLevels(r.setDefaultLevelsRequest());
     }
 
     /**
@@ -10275,7 +12001,10 @@ public class JiraRESTV2ConsumerApi {
      * Sets default issue priority.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>setDefaultPriorityRequest: </li>
+     * </ul>
      */
     public Object setDefaultPriority(Consumer<SetDefaultPriorityOperationSpec> spec) {
         SetDefaultPriorityOperationSpec r = new SetDefaultPriorityOperationSpec(spec);
@@ -10288,7 +12017,10 @@ public class JiraRESTV2ConsumerApi {
      * Sets default issue resolution.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>setDefaultResolutionRequest: </li>
+     * </ul>
      */
     public Object setDefaultResolution(Consumer<SetDefaultResolutionOperationSpec> spec) {
         SetDefaultResolutionOperationSpec r = new SetDefaultResolutionOperationSpec(spec);
@@ -10301,7 +12033,10 @@ public class JiraRESTV2ConsumerApi {
      * Sets the default sharing for new filters and dashboards for a user.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>defaultShareScope: </li>
+     * </ul>
      */
     public DefaultShareScope setDefaultShareScope(Consumer<SetDefaultShareScopeOperationSpec> spec) {
         SetDefaultShareScopeOperationSpec r = new SetDefaultShareScopeOperationSpec(spec);
@@ -10313,64 +12048,68 @@ public class JiraRESTV2ConsumerApi {
      * <p>
      * Sets default for contexts of a custom field. Default are defined using these objects:
      *  *
-     * `CustomFieldContextDefaultValueDate` (type `datepicker`) for date fields.
+     * {@code CustomFieldContextDefaultValueDate} (type {@code datepicker}) for date fields.
      * *
-     * `CustomFieldContextDefaultValueDateTime` (type `datetimepicker`) for date-time fields.
+     * {@code CustomFieldContextDefaultValueDateTime} (type {@code datetimepicker}) for date-time fields.
      * *
-     * `CustomFieldContextDefaultValueSingleOption` (type `option.single`) for single choice select lists and radio buttons.
+     * {@code CustomFieldContextDefaultValueSingleOption} (type {@code option.single}) for single choice select lists and radio buttons.
      * *
-     * `CustomFieldContextDefaultValueMultipleOption` (type `option.multiple`) for multiple choice select lists and checkboxes.
+     * {@code CustomFieldContextDefaultValueMultipleOption} (type {@code option.multiple}) for multiple choice select lists and checkboxes.
      * *
-     * `CustomFieldContextDefaultValueCascadingOption` (type `option.cascading`) for cascading select lists.
+     * {@code CustomFieldContextDefaultValueCascadingOption} (type {@code option.cascading}) for cascading select lists.
      * *
-     * `CustomFieldContextSingleUserPickerDefaults` (type `single.user.select`) for single users.
+     * {@code CustomFieldContextSingleUserPickerDefaults} (type {@code single.user.select}) for single users.
      * *
-     * `CustomFieldContextDefaultValueMultiUserPicker` (type `multi.user.select`) for user lists.
+     * {@code CustomFieldContextDefaultValueMultiUserPicker} (type {@code multi.user.select}) for user lists.
      * *
-     * `CustomFieldContextDefaultValueSingleGroupPicker` (type `grouppicker.single`) for single choice group pickers.
+     * {@code CustomFieldContextDefaultValueSingleGroupPicker} (type {@code grouppicker.single}) for single choice group pickers.
      * *
-     * `CustomFieldContextDefaultValueMultipleGroupPicker` (type `grouppicker.multiple`) for multiple choice group pickers.
+     * {@code CustomFieldContextDefaultValueMultipleGroupPicker} (type {@code grouppicker.multiple}) for multiple choice group pickers.
      * *
-     * `CustomFieldContextDefaultValueURL` (type `url`) for URLs.
+     * {@code CustomFieldContextDefaultValueURL} (type {@code url}) for URLs.
      * *
-     * `CustomFieldContextDefaultValueProject` (type `project`) for project pickers.
+     * {@code CustomFieldContextDefaultValueProject} (type {@code project}) for project pickers.
      * *
-     * `CustomFieldContextDefaultValueFloat` (type `float`) for floats (floating-point numbers).
+     * {@code CustomFieldContextDefaultValueFloat} (type {@code float}) for floats (floating-point numbers).
      * *
-     * `CustomFieldContextDefaultValueLabels` (type `labels`) for labels.
+     * {@code CustomFieldContextDefaultValueLabels} (type {@code labels}) for labels.
      * *
-     * `CustomFieldContextDefaultValueTextField` (type `textfield`) for text fields.
+     * {@code CustomFieldContextDefaultValueTextField} (type {@code textfield}) for text fields.
      * *
-     * `CustomFieldContextDefaultValueTextArea` (type `textarea`) for text area fields.
+     * {@code CustomFieldContextDefaultValueTextArea} (type {@code textarea}) for text area fields.
      * *
-     * `CustomFieldContextDefaultValueReadOnly` (type `readonly`) for read only (text) fields.
+     * {@code CustomFieldContextDefaultValueReadOnly} (type {@code readonly}) for read only (text) fields.
      * *
-     * `CustomFieldContextDefaultValueMultipleVersion` (type `version.multiple`) for single choice version pickers.
+     * {@code CustomFieldContextDefaultValueMultipleVersion} (type {@code version.multiple}) for single choice version pickers.
      * *
-     * `CustomFieldContextDefaultValueSingleVersion` (type `version.single`) for multiple choice version pickers.
+     * {@code CustomFieldContextDefaultValueSingleVersion} (type {@code version.single}) for multiple choice version pickers.
      * Forge custom fields [types](https://developer.atlassian.com/platform/forge/manifest-reference/modules/jira-custom-field-type/#data-types) are also supported, returning:
      *  *
-     * `CustomFieldContextDefaultValueForgeStringFieldBean` (type `forge.string`) for Forge string fields.
+     * {@code CustomFieldContextDefaultValueForgeStringFieldBean} (type {@code forge.string}) for Forge string fields.
      * *
-     * `CustomFieldContextDefaultValueForgeMultiStringFieldBean` (type `forge.string.list`) for Forge string collection fields.
+     * {@code CustomFieldContextDefaultValueForgeMultiStringFieldBean} (type {@code forge.string.list}) for Forge string collection fields.
      * *
-     * `CustomFieldContextDefaultValueForgeObjectFieldBean` (type `forge.object`) for Forge object fields.
+     * {@code CustomFieldContextDefaultValueForgeObjectFieldBean} (type {@code forge.object}) for Forge object fields.
      * *
-     * `CustomFieldContextDefaultValueForgeDateTimeFieldBean` (type `forge.datetime`) for Forge date-time fields.
+     * {@code CustomFieldContextDefaultValueForgeDateTimeFieldBean} (type {@code forge.datetime}) for Forge date-time fields.
      * *
-     * `CustomFieldContextDefaultValueForgeGroupFieldBean` (type `forge.group`) for Forge group fields.
+     * {@code CustomFieldContextDefaultValueForgeGroupFieldBean} (type {@code forge.group}) for Forge group fields.
      * *
-     * `CustomFieldContextDefaultValueForgeMultiGroupFieldBean` (type `forge.group.list`) for Forge group collection fields.
+     * {@code CustomFieldContextDefaultValueForgeMultiGroupFieldBean} (type {@code forge.group.list}) for Forge group collection fields.
      * *
-     * `CustomFieldContextDefaultValueForgeNumberFieldBean` (type `forge.number`) for Forge number fields.
+     * {@code CustomFieldContextDefaultValueForgeNumberFieldBean} (type {@code forge.number}) for Forge number fields.
      * *
-     * `CustomFieldContextDefaultValueForgeUserFieldBean` (type `forge.user`) for Forge user fields.
+     * {@code CustomFieldContextDefaultValueForgeUserFieldBean} (type {@code forge.user}) for Forge user fields.
      * *
-     * `CustomFieldContextDefaultValueForgeMultiUserFieldBean` (type `forge.user.list`) for Forge user collection fields.
-     * Only one type of default object can be included in a request. To remove a default for a context, set the default parameter to `null`.
+     * {@code CustomFieldContextDefaultValueForgeMultiUserFieldBean} (type {@code forge.user.list}) for Forge user collection fields.
+     * Only one type of default object can be included in a request. To remove a default for a context, set the default parameter to {@code null}.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldId: The ID of the custom field.</li>
+     *   <li>customFieldContextDefaultValueUpdate: </li>
+     * </ul>
      */
     public Object setDefaultValues(Consumer<SetDefaultValuesOperationSpec> spec) {
         SetDefaultValuesOperationSpec r = new SetDefaultValuesOperationSpec(spec);
@@ -10393,7 +12132,11 @@ public class JiraRESTV2ConsumerApi {
      * *
      * filters shared with the public.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the filter.</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information about filter in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code sharedUsers} Returns the users that the filter is shared with. This includes users that can browse projects that the filter is shared with. If you don't specify {@code sharedUsers}, then the {@code sharedUsers} object is returned but it doesn't list any users. The list of users returned is limited to 1000, to access additional users append {@code [start-index:end-index]} to the expand request. For example, to access the next 1000 users, use {@code ?expand=sharedUsers[1001:2000]}.  *  {@code subscriptions} Returns the users that are subscribed to the filter. If you don't specify {@code subscriptions}, the {@code subscriptions} object is returned but it doesn't list any subscriptions. The list of subscriptions returned is limited to 1000, to access additional subscriptions append {@code [start-index:end-index]} to the expand request. For example, to access the next 1000 subscriptions, use {@code ?expand=subscriptions[1001:2000]}.</li>
+     * </ul>
      */
     public Filter setFavouriteForFilter(Consumer<SetFavouriteForFilterOperationSpec> spec) {
         SetFavouriteForFilterOperationSpec r = new SetFavouriteForFilterOperationSpec(spec);
@@ -10407,7 +12150,11 @@ public class JiraRESTV2ConsumerApi {
      * This operation can only modify field configuration schemes used in company-managed (classic) projects.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the field configuration scheme.</li>
+     *   <li>associateFieldConfigurationsWithIssueTypesRequest: </li>
+     * </ul>
      */
     public Object setFieldConfigurationSchemeMapping(Consumer<SetFieldConfigurationSchemeMappingOperationSpec> spec) {
         SetFieldConfigurationSchemeMappingOperationSpec r = new SetFieldConfigurationSchemeMappingOperationSpec(spec);
@@ -10418,12 +12165,15 @@ public class JiraRESTV2ConsumerApi {
      * Set issue navigator default columns
      * <p>
      * Sets the default issue navigator columns.
-     * The `columns` parameter accepts a navigable field value and is expressed as HTML form data. To specify multiple columns, pass multiple `columns` parameters. For example, in curl:
-     * `curl -X PUT -d columns=summary -d columns=description https://your-domain.atlassian.net/rest/api/2/settings/columns`
+     * The {@code columns} parameter accepts a navigable field value and is expressed as HTML form data. To specify multiple columns, pass multiple {@code columns} parameters. For example, in curl:
+     * {@code curl -X PUT -d columns=summary -d columns=description https://your-domain.atlassian.net/rest/api/2/settings/columns}
      * If no column details are sent, then all default columns are removed.
      * A navigable field is one that can be used as a column on the issue navigator. Find details of navigable issue columns using [Get fields](#api-rest-api-2-field-get).
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>requestBody: A navigable field value.</li>
+     * </ul>
      */
     public Object setIssueNavigatorDefaultColumns(Consumer<SetIssueNavigatorDefaultColumnsOperationSpec> spec) {
         SetIssueNavigatorDefaultColumnsOperationSpec r = new SetIssueNavigatorDefaultColumnsOperationSpec(spec);
@@ -10442,7 +12192,12 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue.</li>
+     *   <li>propertyKey: The key of the issue property. The maximum length is 255 characters.</li>
+     *   <li>body: </li>
+     * </ul>
      */
     public Object setIssueProperty(Consumer<SetIssuePropertyOperationSpec> spec) {
         SetIssuePropertyOperationSpec r = new SetIssuePropertyOperationSpec(spec);
@@ -10456,7 +12211,12 @@ public class JiraRESTV2ConsumerApi {
      * The value of the request body must be a [valid](http://tools.ietf.org/html/rfc4627), non-empty JSON blob. The maximum length is 32768 characters.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueTypeId: The ID of the issue type.</li>
+     *   <li>propertyKey: The key of the issue type property. The maximum length is 255 characters.</li>
+     *   <li>body: </li>
+     * </ul>
      */
     public Object setIssueTypeProperty(Consumer<SetIssueTypePropertyOperationSpec> spec) {
         SetIssueTypePropertyOperationSpec r = new SetIssueTypePropertyOperationSpec(spec);
@@ -10469,7 +12229,10 @@ public class JiraRESTV2ConsumerApi {
      * Deprecated, use [ Update a user profile](https://developer.atlassian.com/cloud/admin/user-management/rest/#api-users-account-id-manage-profile-patch) from the user management REST API instead.
      * Sets the locale of the user. The locale must be one supported by the instance of Jira.
      * **[Permissions](#permissions) required:** Permission to access Jira.
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>locale: The locale defined in a LocaleBean.</li>
+     * </ul>
      * @deprecated
      */
     @Deprecated
@@ -10481,15 +12244,15 @@ public class JiraRESTV2ConsumerApi {
     /**
      * Set preference
      * <p>
-     * Creates a preference for the user or updates a preference's value by sending a plain text string. For example, `false`. An arbitrary preference can be created with the value containing up to 255 characters. In addition, the following keys define system preferences that can be set or created:
+     * Creates a preference for the user or updates a preference's value by sending a plain text string. For example, {@code false}. An arbitrary preference can be created with the value containing up to 255 characters. In addition, the following keys define system preferences that can be set or created:
      *  *
-     * *user.notifications.mimetype* The mime type used in notifications sent to the user. Defaults to `html`.
+     * *user.notifications.mimetype* The mime type used in notifications sent to the user. Defaults to {@code html}.
      * *
-     * *user.notify.own.changes* Whether the user gets notified of their own changes. Defaults to `false`.
+     * *user.notify.own.changes* Whether the user gets notified of their own changes. Defaults to {@code false}.
      * *
-     * *user.default.share.private* Whether new [ filters](https://confluence.atlassian.com/x/eQiiLQ) are set to private. Defaults to `true`.
+     * *user.default.share.private* Whether new [ filters](https://confluence.atlassian.com/x/eQiiLQ) are set to private. Defaults to {@code true}.
      * *
-     * *user.keyboard.shortcuts.disabled* Whether keyboard shortcuts are disabled. Defaults to `false`.
+     * *user.keyboard.shortcuts.disabled* Whether keyboard shortcuts are disabled. Defaults to {@code false}.
      * *
      * *user.autowatch.disabled* Whether the user automatically watches issues they create or add a comment to. By default, not set: the user takes the instance autowatch setting.
      * Note that these keys are deprecated:
@@ -10500,7 +12263,11 @@ public class JiraRESTV2ConsumerApi {
      * Use [ Update a user profile](https://developer.atlassian.com/cloud/admin/user-management/rest/#api-users-account-id-manage-profile-patch) from the user management REST API to manage timezone and locale instead.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>key: The key of the preference. The maximum length is 255 characters.</li>
+     *   <li>body: The value of the preference as a plain text string. The maximum length is 255 characters.</li>
+     * </ul>
      */
     public Object setPreference(Consumer<SetPreferenceOperationSpec> spec) {
         SetPreferenceOperationSpec r = new SetPreferenceOperationSpec(spec);
@@ -10515,7 +12282,12 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) or *Administer Projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project in which the property is created.
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectIdOrKey: The project ID or project key (case sensitive).</li>
+     *   <li>propertyKey: The key of the project property. The maximum length is 255 characters.</li>
+     *   <li>body: </li>
+     * </ul>
      */
     public Object setProjectProperty(Consumer<SetProjectPropertyOperationSpec> spec) {
         SetProjectPropertyOperationSpec r = new SetProjectPropertyOperationSpec(spec);
@@ -10528,7 +12300,10 @@ public class JiraRESTV2ConsumerApi {
      * Sets the time tracking settings.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>timeTrackingConfiguration: </li>
+     * </ul>
      */
     public TimeTrackingConfiguration setSharedTimeTrackingConfiguration(Consumer<SetSharedTimeTrackingConfigurationOperationSpec> spec) {
         SetSharedTimeTrackingConfigurationOperationSpec r = new SetSharedTimeTrackingConfigurationOperationSpec(spec);
@@ -10540,13 +12315,17 @@ public class JiraRESTV2ConsumerApi {
      * <p>
      * Sets the default [ issue table columns](https://confluence.atlassian.com/x/XYdKLg) for the user. If an account ID is not passed, the calling user's default columns are set. If no column details are sent, then all default columns are removed.
      * The parameters for this resource are expressed as HTML form data. For example, in curl:
-     * `curl -X PUT -d columns=summary -d columns=description https://your-domain.atlassian.net/rest/api/2/user/columns?accountId=5b10ac8d82e05b22cc7d4ef5'`
+     * {@code curl -X PUT -d columns=summary -d columns=description https://your-domain.atlassian.net/rest/api/2/user/columns?accountId=5b10ac8d82e05b22cc7d4ef5'}
      * **[Permissions](#permissions) required:**
      *  *
      * *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg), to set the columns on any user.
      * *
      * Permission to access Jira, to set the calling user's columns.
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>accountId: The account ID of the user, which uniquely identifies the user across all Atlassian products. For example, *5b10ac8d82e05b22cc7d4ef5*.</li>
+     *   <li>requestBody: The ID of a column to set. To set multiple columns, send multiple {@code columns} parameters.</li>
+     * </ul>
      */
     public Object setUserColumns(Consumer<SetUserColumnsOperationSpec> spec) {
         SetUserColumnsOperationSpec r = new SetUserColumnsOperationSpec(spec);
@@ -10564,7 +12343,14 @@ public class JiraRESTV2ConsumerApi {
      * *
      * Access to Jira, to set a property on the calling user's record.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>propertyKey: The key of the user's property. The maximum length is 255 characters.</li>
+     *   <li>body: </li>
+     *   <li>accountId: The account ID of the user, which uniquely identifies the user across all Atlassian products. For example, *5b10ac8d82e05b22cc7d4ef5*.</li>
+     *   <li>userKey: This parameter is no longer available and will be removed from the documentation soon. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.</li>
+     *   <li>username: This parameter is no longer available and will be removed from the documentation soon. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.</li>
+     * </ul>
      */
     public Object setUserProperty(Consumer<SetUserPropertyOperationSpec> spec) {
         SetUserPropertyOperationSpec r = new SetUserPropertyOperationSpec(spec);
@@ -10577,7 +12363,12 @@ public class JiraRESTV2ConsumerApi {
      * Sets the workflow for an issue type in a workflow scheme's draft.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the workflow scheme that the draft belongs to.</li>
+     *   <li>issueType: The ID of the issue type.</li>
+     *   <li>issueTypeWorkflowMapping: The issue type-project mapping.</li>
+     * </ul>
      */
     public WorkflowScheme setWorkflowSchemeDraftIssueType(Consumer<SetWorkflowSchemeDraftIssueTypeOperationSpec> spec) {
         SetWorkflowSchemeDraftIssueTypeOperationSpec r = new SetWorkflowSchemeDraftIssueTypeOperationSpec(spec);
@@ -10588,10 +12379,15 @@ public class JiraRESTV2ConsumerApi {
      * Set workflow for issue type in workflow scheme
      * <p>
      * Sets the workflow for an issue type in a workflow scheme.
-     * Note that active workflow schemes cannot be edited. If the workflow scheme is active, set `updateDraftIfNeeded` to `true` in the request body and a draft workflow scheme is created or updated with the new issue type-workflow mapping. The draft workflow scheme can be published in Jira.
+     * Note that active workflow schemes cannot be edited. If the workflow scheme is active, set {@code updateDraftIfNeeded} to {@code true} in the request body and a draft workflow scheme is created or updated with the new issue type-workflow mapping. The draft workflow scheme can be published in Jira.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the workflow scheme.</li>
+     *   <li>issueType: The ID of the issue type.</li>
+     *   <li>issueTypeWorkflowMapping: The issue type-project mapping.</li>
+     * </ul>
      */
     public WorkflowScheme setWorkflowSchemeIssueType(Consumer<SetWorkflowSchemeIssueTypeOperationSpec> spec) {
         SetWorkflowSchemeIssueTypeOperationSpec r = new SetWorkflowSchemeIssueTypeOperationSpec(spec);
@@ -10614,7 +12410,13 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If the worklog has visibility restrictions, belongs to the group or has the role visibility is restricted to.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue.</li>
+     *   <li>worklogId: The ID of the worklog.</li>
+     *   <li>propertyKey: The key of the issue property. The maximum length is 255 characters.</li>
+     *   <li>body: </li>
+     * </ul>
      */
     public Object setWorklogProperty(Consumer<SetWorklogPropertyOperationSpec> spec) {
         SetWorklogPropertyOperationSpec r = new SetWorklogPropertyOperationSpec(spec);
@@ -10627,16 +12429,16 @@ public class JiraRESTV2ConsumerApi {
      * Loads a custom avatar for a project or issue type.
      * Specify the avatar's local file location in the body of the request. Also, include the following headers:
      *  *
-     * `X-Atlassian-Token: no-check` To prevent XSRF protection blocking the request, for more information see [Special Headers](#special-request-headers).
+     * {@code X-Atlassian-Token: no-check} To prevent XSRF protection blocking the request, for more information see [Special Headers](#special-request-headers).
      * *
-     * `Content-Type: image/image type` Valid image types are JPEG, GIF, or PNG.
+     * {@code Content-Type: image/image type} Valid image types are JPEG, GIF, or PNG.
      * For example:
-     *  `curl --request POST `
-     * `--user email@example.com:&amp;lt;api_token&amp;gt; `
-     * `--header 'X-Atlassian-Token: no-check' `
-     * `--header 'Content-Type: image/&amp;lt; image_type&amp;gt;' `
-     * `--data-binary "&amp;lt;@/path/to/file/with/your/avatar&amp;gt;" `
-     * `--url 'https://your-domain.atlassian.net/rest/api/2/universal_avatar/type/{type}/owner/{entityId}'`
+     *  {@code curl --request POST }
+     * {@code --user email@example.com:&amp;lt;api_token&amp;gt; }
+     * {@code --header 'X-Atlassian-Token: no-check' }
+     * {@code --header 'Content-Type: image/&amp;lt; image_type&amp;gt;' }
+     * {@code --data-binary "&amp;lt;@/path/to/file/with/your/avatar&amp;gt;" }
+     * {@code --url 'https://your-domain.atlassian.net/rest/api/2/universal_avatar/type/{type}/owner/{entityId}'}
      * The avatar is cropped to a square. If no crop parameters are specified, the square originates at the top left of the image. The length of the square's sides is set to the smaller of the height or width of the image.
      * The cropped image is then used to create avatars of 16x16, 24x24, 32x32, and 48x48 in size.
      * After creating the avatar use:
@@ -10646,7 +12448,15 @@ public class JiraRESTV2ConsumerApi {
      * [Set project avatar](#api-rest-api-2-project-projectIdOrKey-avatar-put) to set it as the project's displayed avatar.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>type: The avatar type.</li>
+     *   <li>entityId: The ID of the item the avatar is associated with.</li>
+     *   <li>size: The length of each side of the crop region.</li>
+     *   <li>body: </li>
+     *   <li>x: The X coordinate of the top-left corner of the crop region.</li>
+     *   <li>y: The Y coordinate of the top-left corner of the crop region.</li>
+     * </ul>
      */
     public Avatar storeAvatar(Consumer<StoreAvatarOperationSpec> spec) {
         StoreAvatarOperationSpec r = new StoreAvatarOperationSpec(spec);
@@ -10658,7 +12468,12 @@ public class JiraRESTV2ConsumerApi {
      * <p>
      * Sets the state of a project feature.
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectIdOrKey: The ID or (case-sensitive) key of the project.</li>
+     *   <li>featureKey: The key of the feature.</li>
+     *   <li>projectFeatureState: Details of the feature state change.</li>
+     * </ul>
      */
     public ContainerForProjectFeatures toggleFeatureForProject(Consumer<ToggleFeatureForProjectOperationSpec> spec) {
         ToggleFeatureForProjectOperationSpec r = new ToggleFeatureForProjectOperationSpec(spec);
@@ -10671,7 +12486,10 @@ public class JiraRESTV2ConsumerApi {
      * Moves a custom field to trash. See [Edit or delete a custom field](https://confluence.atlassian.com/x/Z44fOw) for more information on trashing and deleting custom fields.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of a custom field.</li>
+     * </ul>
      */
     public Object trashCustomField(Consumer<TrashCustomFieldOperationSpec> spec) {
         TrashCustomFieldOperationSpec r = new TrashCustomFieldOperationSpec(spec);
@@ -10693,21 +12511,33 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If the comment has visibility restrictions, the user belongs to the group or has the role visibility is restricted to.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue.</li>
+     *   <li>id: The ID of the comment.</li>
+     *   <li>comment: </li>
+     *   <li>notifyUsers: Whether users are notified when a comment is updated.</li>
+     *   <li>overrideEditableFlag: Whether screen security is overridden to enable uneditable fields to be edited. Available to Connect app users with the *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) and Forge apps acting on behalf of users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information about comments in the response. This parameter accepts {@code renderedBody}, which returns the comment body rendered in HTML.</li>
+     * </ul>
      */
     public Comment updateComment(Consumer<UpdateCommentOperationSpec> spec) {
         UpdateCommentOperationSpec r = new UpdateCommentOperationSpec(spec);
-        return api.updateComment(r.issueIdOrKey(), r.id(), r.requestBody(), r.notifyUsers(), r.overrideEditableFlag(), r.expand());
+        return api.updateComment(r.issueIdOrKey(), r.id(), r.comment(), r.notifyUsers(), r.overrideEditableFlag(), r.expand());
     }
 
     /**
      * Update component
      * <p>
-     * Updates a component. Any fields included in the request are overwritten. If `leadAccountId` is an empty string ("") the component lead is removed.
+     * Updates a component. Any fields included in the request are overwritten. If {@code leadAccountId} is an empty string ("") the component lead is removed.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Administer projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project containing the component or *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the component.</li>
+     *   <li>projectComponent: </li>
+     * </ul>
      */
     public ProjectComponent updateComponent(Consumer<UpdateComponentOperationSpec> spec) {
         UpdateComponentOperationSpec r = new UpdateComponentOperationSpec(spec);
@@ -10720,7 +12550,11 @@ public class JiraRESTV2ConsumerApi {
      * Updates a custom field.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldId: The ID of the custom field.</li>
+     *   <li>updateCustomFieldDetails: The custom field update details.</li>
+     * </ul>
      */
     public Object updateCustomField(Consumer<UpdateCustomFieldOperationSpec> spec) {
         UpdateCustomFieldOperationSpec r = new UpdateCustomFieldOperationSpec(spec);
@@ -10733,7 +12567,11 @@ public class JiraRESTV2ConsumerApi {
      * Update the configuration for contexts of a custom field created by a [Forge app](https://developer.atlassian.com/platform/forge/).
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). Jira permissions are not required for the Forge app that created the custom field.
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldIdOrKey: The ID or key of the custom field, for example {@code customfield_10000}.</li>
+     *   <li>customFieldConfigurations: </li>
+     * </ul>
      */
     public Object updateCustomFieldConfiguration(Consumer<UpdateCustomFieldConfigurationOperationSpec> spec) {
         UpdateCustomFieldConfigurationOperationSpec r = new UpdateCustomFieldConfigurationOperationSpec(spec);
@@ -10746,7 +12584,12 @@ public class JiraRESTV2ConsumerApi {
      * Updates a [ custom field context](https://confluence.atlassian.com/adminjiracloud/what-are-custom-field-contexts-991923859.html).
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldId: The ID of the custom field.</li>
+     *   <li>contextId: The ID of the context.</li>
+     *   <li>customFieldContextUpdateDetails: </li>
+     * </ul>
      */
     public Object updateCustomFieldContext(Consumer<UpdateCustomFieldContextOperationSpec> spec) {
         UpdateCustomFieldContextOperationSpec r = new UpdateCustomFieldContextOperationSpec(spec);
@@ -10761,7 +12604,12 @@ public class JiraRESTV2ConsumerApi {
      * Note that this operation **only works for issue field select list options created in Jira or using operations from the [Issue custom field options](#api-group-Issue-custom-field-options) resource**, it cannot be used with issue field select list options created by Connect apps.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldId: The ID of the custom field.</li>
+     *   <li>contextId: The ID of the context.</li>
+     *   <li>bulkCustomFieldOptionUpdateRequest: </li>
+     * </ul>
      */
     public CustomFieldUpdatedContextOptionsList updateCustomFieldOption(Consumer<UpdateCustomFieldOptionOperationSpec> spec) {
         UpdateCustomFieldOptionOperationSpec r = new UpdateCustomFieldOptionOperationSpec(spec);
@@ -10773,7 +12621,12 @@ public class JiraRESTV2ConsumerApi {
      * <p>
      * Updates the value of a custom field on one or more issues. Custom fields can only be updated by the Forge app that created them.
      * **[Permissions](#permissions) required:** Only the app that created the custom field can update its values with this operation.
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldIdOrKey: The ID or key of the custom field. For example, {@code customfield_10010}.</li>
+     *   <li>customFieldValueUpdateDetails: </li>
+     *   <li>generateChangelog: Whether to generate a changelog for this update.</li>
+     * </ul>
      */
     public Object updateCustomFieldValue(Consumer<UpdateCustomFieldValueOperationSpec> spec) {
         UpdateCustomFieldValueOperationSpec r = new UpdateCustomFieldValueOperationSpec(spec);
@@ -10787,7 +12640,11 @@ public class JiraRESTV2ConsumerApi {
      * **[Permissions](#permissions) required:** None
      * The dashboard to be updated must be owned by the user.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the dashboard to update.</li>
+     *   <li>dashboardDetails: Replacement dashboard details.</li>
+     * </ul>
      */
     public Dashboard updateDashboard(Consumer<UpdateDashboardOperationSpec> spec) {
         UpdateDashboardOperationSpec r = new UpdateDashboardOperationSpec(spec);
@@ -10800,7 +12657,11 @@ public class JiraRESTV2ConsumerApi {
      * Updates the default screen scheme of an issue type screen scheme. The default screen scheme is used for all unmapped issue types.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueTypeScreenSchemeId: The ID of the issue type screen scheme.</li>
+     *   <li>updateDefaultScreenScheme: </li>
+     * </ul>
      */
     public Object updateDefaultScreenScheme(Consumer<UpdateDefaultScreenSchemeOperationSpec> spec) {
         UpdateDefaultScreenSchemeOperationSpec r = new UpdateDefaultScreenSchemeOperationSpec(spec);
@@ -10811,10 +12672,14 @@ public class JiraRESTV2ConsumerApi {
      * Update default workflow
      * <p>
      * Sets the default workflow for a workflow scheme.
-     * Note that active workflow schemes cannot be edited. If the workflow scheme is active, set `updateDraftIfNeeded` to `true` in the request object and a draft workflow scheme is created or updated with the new default workflow. The draft workflow scheme can be published in Jira.
+     * Note that active workflow schemes cannot be edited. If the workflow scheme is active, set {@code updateDraftIfNeeded} to {@code true} in the request object and a draft workflow scheme is created or updated with the new default workflow. The draft workflow scheme can be published in Jira.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the workflow scheme.</li>
+     *   <li>defaultWorkflow: The new default workflow.</li>
+     * </ul>
      */
     public WorkflowScheme updateDefaultWorkflow(Consumer<UpdateDefaultWorkflowOperationSpec> spec) {
         UpdateDefaultWorkflowOperationSpec r = new UpdateDefaultWorkflowOperationSpec(spec);
@@ -10827,7 +12692,11 @@ public class JiraRESTV2ConsumerApi {
      * Sets the default workflow for a workflow scheme's draft.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the workflow scheme that the draft belongs to.</li>
+     *   <li>defaultWorkflow: The object for the new default workflow.</li>
+     * </ul>
      */
     public WorkflowScheme updateDraftDefaultWorkflow(Consumer<UpdateDraftDefaultWorkflowOperationSpec> spec) {
         UpdateDraftDefaultWorkflowOperationSpec r = new UpdateDraftDefaultWorkflowOperationSpec(spec);
@@ -10840,7 +12709,12 @@ public class JiraRESTV2ConsumerApi {
      * Sets the issue types for a workflow in a workflow scheme's draft. The workflow can also be set as the default workflow for the draft workflow scheme. Unmapped issues types are mapped to the default workflow.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the workflow scheme that the draft belongs to.</li>
+     *   <li>workflowName: The name of the workflow.</li>
+     *   <li>issueTypesWorkflowMapping: </li>
+     * </ul>
      */
     public WorkflowScheme updateDraftWorkflowMapping(Consumer<UpdateDraftWorkflowMappingOperationSpec> spec) {
         UpdateDraftWorkflowMappingOperationSpec r = new UpdateDraftWorkflowMappingOperationSpec(spec);
@@ -10854,7 +12728,11 @@ public class JiraRESTV2ConsumerApi {
      * This operation can only update configurations used in company-managed (classic) projects.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the field configuration.</li>
+     *   <li>fieldConfigurationDetails: </li>
+     * </ul>
      */
     public Object updateFieldConfiguration(Consumer<UpdateFieldConfigurationOperationSpec> spec) {
         UpdateFieldConfigurationOperationSpec r = new UpdateFieldConfigurationOperationSpec(spec);
@@ -10866,10 +12744,14 @@ public class JiraRESTV2ConsumerApi {
      * <p>
      * Updates fields in a field configuration. The properties of the field configuration fields provided override the existing values.
      * This operation can only update field configurations used in company-managed (classic) projects.
-     * The operation can set the renderer for text fields to the default text renderer (`text-renderer`) or wiki style renderer (`wiki-renderer`). However, the renderer cannot be updated for fields using the autocomplete renderer (`autocomplete-renderer`).
+     * The operation can set the renderer for text fields to the default text renderer ({@code text-renderer}) or wiki style renderer ({@code wiki-renderer}). However, the renderer cannot be updated for fields using the autocomplete renderer ({@code autocomplete-renderer}).
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the field configuration.</li>
+     *   <li>fieldConfigurationItemsDetails: </li>
+     * </ul>
      */
     public Object updateFieldConfigurationItems(Consumer<UpdateFieldConfigurationItemsOperationSpec> spec) {
         UpdateFieldConfigurationItemsOperationSpec r = new UpdateFieldConfigurationItemsOperationSpec(spec);
@@ -10883,7 +12765,11 @@ public class JiraRESTV2ConsumerApi {
      * This operation can only update field configuration schemes used in company-managed (classic) projects.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the field configuration scheme.</li>
+     *   <li>updateFieldConfigurationSchemeDetails: The details of the field configuration scheme.</li>
+     * </ul>
      */
     public Object updateFieldConfigurationScheme(Consumer<UpdateFieldConfigurationSchemeOperationSpec> spec) {
         UpdateFieldConfigurationSchemeOperationSpec r = new UpdateFieldConfigurationSchemeOperationSpec(spec);
@@ -10896,7 +12782,13 @@ public class JiraRESTV2ConsumerApi {
      * Updates a filter. Use this operation to update a filter's name, description, JQL, or sharing.
      * **[Permissions](#permissions) required:** Permission to access Jira, however the user must own the filter.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the filter to update.</li>
+     *   <li>filter: The filter to update.</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information about filter in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code sharedUsers} Returns the users that the filter is shared with. This includes users that can browse projects that the filter is shared with. If you don't specify {@code sharedUsers}, then the {@code sharedUsers} object is returned but it doesn't list any users. The list of users returned is limited to 1000, to access additional users append {@code [start-index:end-index]} to the expand request. For example, to access the next 1000 users, use {@code ?expand=sharedUsers[1001:2000]}.  *  {@code subscriptions} Returns the users that are subscribed to the filter. If you don't specify {@code subscriptions}, the {@code subscriptions} object is returned but it doesn't list any subscriptions. The list of subscriptions returned is limited to 1000, to access additional subscriptions append {@code [start-index:end-index]} to the expand request. For example, to access the next 1000 subscriptions, use {@code ?expand=subscriptions[1001:2000]}.</li>
+     *   <li>overrideSharePermissions: EXPERIMENTAL: Whether share permissions are overridden to enable the addition of any share permissions to filters. Available to users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).</li>
+     * </ul>
      */
     public Filter updateFilter(Consumer<UpdateFilterOperationSpec> spec) {
         UpdateFilterOperationSpec r = new UpdateFilterOperationSpec(spec);
@@ -10909,7 +12801,12 @@ public class JiraRESTV2ConsumerApi {
      * Changes the title, position, and color of the gadget on a dashboard.
      * **[Permissions](#permissions) required:** None.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>dashboardId: The ID of the dashboard.</li>
+     *   <li>gadgetId: The ID of the gadget.</li>
+     *   <li>dashboardGadgetUpdateRequest: </li>
+     * </ul>
      */
     public Object updateGadget(Consumer<UpdateGadgetOperationSpec> spec) {
         UpdateGadgetOperationSpec r = new UpdateGadgetOperationSpec(spec);
@@ -10923,7 +12820,12 @@ public class JiraRESTV2ConsumerApi {
      * Note that this operation **only works for issue field select list options added by Connect apps**, it cannot be used with issue field select list options created in Jira or using operations from the [Issue custom field options](#api-group-Issue-custom-field-options) resource.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). Jira permissions are not required for the app providing the field.
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>fieldKey: The field key is specified in the following format: **$(app-key)\\_\\_$(field-key)**. For example, *example-add-on\\_\\_example-issue-field*. To determine the {@code fieldKey} value, do one of the following:   *  open the app's plugin descriptor, then **app-key** is the key at the top and **field-key** is the key in the {@code jiraIssueFields} module. **app-key** can also be found in the app listing in the Atlassian Universal Plugin Manager.  *  run [Get fields](#api-rest-api-2-field-get) and in the field details the value is returned in {@code key}. For example, {@code "key": "teams-add-on__team-issue-field"}</li>
+     *   <li>optionId: The ID of the option to be updated.</li>
+     *   <li>issueFieldOption: </li>
+     * </ul>
      */
     public IssueFieldOption updateIssueFieldOption(Consumer<UpdateIssueFieldOptionOperationSpec> spec) {
         UpdateIssueFieldOptionOperationSpec r = new UpdateIssueFieldOptionOperationSpec(spec);
@@ -10937,7 +12839,11 @@ public class JiraRESTV2ConsumerApi {
      * To use this operation, the site must have [issue linking](https://confluence.atlassian.com/x/yoXKM) enabled.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueLinkTypeId: The ID of the issue link type.</li>
+     *   <li>issueLinkType: </li>
+     * </ul>
      */
     public IssueLinkType updateIssueLinkType(Consumer<UpdateIssueLinkTypeOperationSpec> spec) {
         UpdateIssueLinkTypeOperationSpec r = new UpdateIssueLinkTypeOperationSpec(spec);
@@ -10950,7 +12856,11 @@ public class JiraRESTV2ConsumerApi {
      * Updates the issue security scheme.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the issue security scheme.</li>
+     *   <li>updateIssueSecuritySchemeRequestBean: </li>
+     * </ul>
      */
     public Object updateIssueSecurityScheme(Consumer<UpdateIssueSecuritySchemeOperationSpec> spec) {
         UpdateIssueSecuritySchemeOperationSpec r = new UpdateIssueSecuritySchemeOperationSpec(spec);
@@ -10963,7 +12873,11 @@ public class JiraRESTV2ConsumerApi {
      * Updates the issue type.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the issue type.</li>
+     *   <li>issueTypeUpdateBean: </li>
+     * </ul>
      */
     public IssueTypeDetails updateIssueType(Consumer<UpdateIssueTypeOperationSpec> spec) {
         UpdateIssueTypeOperationSpec r = new UpdateIssueTypeOperationSpec(spec);
@@ -10976,7 +12890,11 @@ public class JiraRESTV2ConsumerApi {
      * Updates an issue type scheme.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueTypeSchemeId: The ID of the issue type scheme.</li>
+     *   <li>issueTypeSchemeUpdateDetails: </li>
+     * </ul>
      */
     public Object updateIssueTypeScheme(Consumer<UpdateIssueTypeSchemeOperationSpec> spec) {
         UpdateIssueTypeSchemeOperationSpec r = new UpdateIssueTypeSchemeOperationSpec(spec);
@@ -10989,7 +12907,11 @@ public class JiraRESTV2ConsumerApi {
      * Updates an issue type screen scheme.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueTypeScreenSchemeId: The ID of the issue type screen scheme.</li>
+     *   <li>issueTypeScreenSchemeUpdateDetails: The issue type screen scheme update details.</li>
+     * </ul>
      */
     public Object updateIssueTypeScreenScheme(Consumer<UpdateIssueTypeScreenSchemeOperationSpec> spec) {
         UpdateIssueTypeScreenSchemeOperationSpec r = new UpdateIssueTypeScreenSchemeOperationSpec(spec);
@@ -11001,7 +12923,11 @@ public class JiraRESTV2ConsumerApi {
      * <p>
      * Updates the value of one or more custom fields on one or more issues. Combinations of custom field and issue should be unique within the request. Custom fields can only be updated by the Forge app that created them.
      * **[Permissions](#permissions) required:** Only the app that created the custom field can update its values with this operation.
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>multipleCustomFieldValuesUpdateDetails: </li>
+     *   <li>generateChangelog: Whether to generate a changelog for this update.</li>
+     * </ul>
      */
     public Object updateMultipleCustomFieldValues(Consumer<UpdateMultipleCustomFieldValuesOperationSpec> spec) {
         UpdateMultipleCustomFieldValuesOperationSpec r = new UpdateMultipleCustomFieldValuesOperationSpec(spec);
@@ -11014,11 +12940,15 @@ public class JiraRESTV2ConsumerApi {
      * Updates a notification scheme.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the notification scheme.</li>
+     *   <li>updateNotificationSchemeDetails: </li>
+     * </ul>
      */
     public Object updateNotificationScheme(Consumer<UpdateNotificationSchemeOperationSpec> spec) {
         UpdateNotificationSchemeOperationSpec r = new UpdateNotificationSchemeOperationSpec(spec);
-        return api.updateNotificationScheme(r.id(), r.requestBody());
+        return api.updateNotificationScheme(r.id(), r.updateNotificationSchemeDetails());
     }
 
     /**
@@ -11035,11 +12965,16 @@ public class JiraRESTV2ConsumerApi {
      * See [About permission schemes and grants](../api-group-permission-schemes/#about-permission-schemes-and-grants) for more details.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>schemeId: The ID of the permission scheme to update.</li>
+     *   <li>permissionScheme: </li>
+     *   <li>expand: Use expand to include additional information in the response. This parameter accepts a comma-separated list. Note that permissions are always included when you specify any value. Expand options include:   *  {@code all} Returns all expandable information.  *  {@code field} Returns information about the custom field granted the permission.  *  {@code group} Returns information about the group that is granted the permission.  *  {@code permissions} Returns all permission grants for each permission scheme.  *  {@code projectRole} Returns information about the project role granted the permission.  *  {@code user} Returns information about the user who is granted the permission.</li>
+     * </ul>
      */
     public PermissionScheme updatePermissionScheme(Consumer<UpdatePermissionSchemeOperationSpec> spec) {
         UpdatePermissionSchemeOperationSpec r = new UpdatePermissionSchemeOperationSpec(spec);
-        return api.updatePermissionScheme(r.schemeId(), r.requestBody(), r.expand());
+        return api.updatePermissionScheme(r.schemeId(), r.permissionScheme(), r.expand());
     }
 
     /**
@@ -11047,7 +12982,10 @@ public class JiraRESTV2ConsumerApi {
      * <p>
      * Update the precomputation value of a function created by a Forge/Connect app.
      * **[Permissions](#permissions) required:** An API for apps to update their own precomputations.
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>jqlFunctionPrecomputationUpdateRequestBean: </li>
+     * </ul>
      */
     public Object updatePrecomputations(Consumer<UpdatePrecomputationsOperationSpec> spec) {
         UpdatePrecomputationsOperationSpec r = new UpdatePrecomputationsOperationSpec(spec);
@@ -11060,11 +12998,15 @@ public class JiraRESTV2ConsumerApi {
      * Updates an issue priority.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the issue priority.</li>
+     *   <li>updatePriorityDetails: </li>
+     * </ul>
      */
     public Object updatePriority(Consumer<UpdatePriorityOperationSpec> spec) {
         UpdatePriorityOperationSpec r = new UpdatePriorityOperationSpec(spec);
-        return api.updatePriority(r.id(), r.requestBody());
+        return api.updatePriority(r.id(), r.updatePriorityDetails());
     }
 
     /**
@@ -11074,7 +13016,12 @@ public class JiraRESTV2ConsumerApi {
      * All parameters are optional in the body of the request.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectIdOrKey: The project ID or project key (case sensitive).</li>
+     *   <li>updateProjectDetails: The project details to be updated.</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Note that the project description, issue types, and project lead are included in all responses by default. Expand options include:   *  {@code description} The project description.  *  {@code issueTypes} The issue types associated with the project.  *  {@code lead} The project lead.  *  {@code projectKeys} All project keys associated with the project.</li>
+     * </ul>
      */
     public Project updateProject(Consumer<UpdateProjectOperationSpec> spec) {
         UpdateProjectOperationSpec r = new UpdateProjectOperationSpec(spec);
@@ -11088,11 +13035,15 @@ public class JiraRESTV2ConsumerApi {
      * Use [Load project avatar](#api-rest-api-2-project-projectIdOrKey-avatar2-post) to store avatars against the project, before using this operation to set the displayed avatar.
      * **[Permissions](#permissions) required:** *Administer projects* [project permission](https://confluence.atlassian.com/x/yodKLg).
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectIdOrKey: The ID or (case-sensitive) key of the project.</li>
+     *   <li>avatar: </li>
+     * </ul>
      */
     public Object updateProjectAvatar(Consumer<UpdateProjectAvatarOperationSpec> spec) {
         UpdateProjectAvatarOperationSpec r = new UpdateProjectAvatarOperationSpec(spec);
-        return api.updateProjectAvatar(r.projectIdOrKey(), r.requestBody());
+        return api.updateProjectAvatar(r.projectIdOrKey(), r.avatar());
     }
 
     /**
@@ -11101,7 +13052,11 @@ public class JiraRESTV2ConsumerApi {
      * Updates a project category.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: </li>
+     *   <li>projectCategory: </li>
+     * </ul>
      */
     public UpdatedProjectCategory updateProjectCategory(Consumer<UpdateProjectCategoryOperationSpec> spec) {
         UpdateProjectCategoryOperationSpec r = new UpdateProjectCategoryOperationSpec(spec);
@@ -11112,10 +13067,14 @@ public class JiraRESTV2ConsumerApi {
      * Set project's sender email
      * <p>
      * Sets the [project's sender email address](https://confluence.atlassian.com/x/dolKLg).
-     * If `emailAddress` is an empty string, the default email address is restored.
+     * If {@code emailAddress} is an empty string, the default email address is restored.
      * **[Permissions](#permissions) required:** *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectId: The project ID.</li>
+     *   <li>projectEmailAddress: The project's sender email address to be set.</li>
+     * </ul>
      */
     public Object updateProjectEmail(Consumer<UpdateProjectEmailOperationSpec> spec) {
         UpdateProjectEmailOperationSpec r = new UpdateProjectEmailOperationSpec(spec);
@@ -11135,11 +13094,16 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key of the issue.</li>
+     *   <li>linkId: The ID of the remote issue link.</li>
+     *   <li>remoteIssueLinkRequest: </li>
+     * </ul>
      */
     public Object updateRemoteIssueLink(Consumer<UpdateRemoteIssueLinkOperationSpec> spec) {
         UpdateRemoteIssueLinkOperationSpec r = new UpdateRemoteIssueLinkOperationSpec(spec);
-        return api.updateRemoteIssueLink(r.issueIdOrKey(), r.linkId(), r.requestBody());
+        return api.updateRemoteIssueLink(r.issueIdOrKey(), r.linkId(), r.remoteIssueLinkRequest());
     }
 
     /**
@@ -11148,11 +13112,15 @@ public class JiraRESTV2ConsumerApi {
      * Updates an issue resolution.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the issue resolution.</li>
+     *   <li>updateResolutionDetails: </li>
+     * </ul>
      */
     public Object updateResolution(Consumer<UpdateResolutionOperationSpec> spec) {
         UpdateResolutionOperationSpec r = new UpdateResolutionOperationSpec(spec);
-        return api.updateResolution(r.id(), r.requestBody());
+        return api.updateResolution(r.id(), r.updateResolutionDetails());
     }
 
     /**
@@ -11161,7 +13129,11 @@ public class JiraRESTV2ConsumerApi {
      * Updates a screen. Only screens used in classic projects can be updated.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>screenId: The ID of the screen.</li>
+     *   <li>updateScreenDetails: </li>
+     * </ul>
      */
     public Screen updateScreen(Consumer<UpdateScreenOperationSpec> spec) {
         UpdateScreenOperationSpec r = new UpdateScreenOperationSpec(spec);
@@ -11174,7 +13146,11 @@ public class JiraRESTV2ConsumerApi {
      * Updates a screen scheme. Only screen schemes used in classic projects can be updated.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>screenSchemeId: The ID of the screen scheme.</li>
+     *   <li>updateScreenSchemeDetails: The screen scheme update details.</li>
+     * </ul>
      */
     public Object updateScreenScheme(Consumer<UpdateScreenSchemeOperationSpec> spec) {
         UpdateScreenSchemeOperationSpec r = new UpdateScreenSchemeOperationSpec(spec);
@@ -11187,11 +13163,16 @@ public class JiraRESTV2ConsumerApi {
      * Updates the issue security level.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>schemeId: The ID of the issue security scheme level belongs to.</li>
+     *   <li>levelId: The ID of the issue security level to update.</li>
+     *   <li>updateIssueSecurityLevelDetails: </li>
+     * </ul>
      */
     public Object updateSecurityLevel(Consumer<UpdateSecurityLevelOperationSpec> spec) {
         UpdateSecurityLevelOperationSpec r = new UpdateSecurityLevelOperationSpec(spec);
-        return api.updateSecurityLevel(r.schemeId(), r.levelId(), r.requestBody());
+        return api.updateSecurityLevel(r.schemeId(), r.levelId(), r.updateIssueSecurityLevelDetails());
     }
 
     /**
@@ -11204,7 +13185,10 @@ public class JiraRESTV2ConsumerApi {
      * *
      * *Administer Jira* [project permission.](https://confluence.atlassian.com/x/yodKLg)
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>statusUpdateRequest: The list of statuses that will be updated.</li>
+     * </ul>
      */
     public Object updateStatuses(Consumer<UpdateStatusesOperationSpec> spec) {
         UpdateStatusesOperationSpec r = new UpdateStatusesOperationSpec(spec);
@@ -11222,7 +13206,11 @@ public class JiraRESTV2ConsumerApi {
      * *
      * *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for one or more projects, if the UI modification is created with contexts.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>uiModificationId: The ID of the UI modification.</li>
+     *   <li>updateUiModificationDetails: Details of the UI modification.</li>
+     * </ul>
      */
     public Object updateUiModification(Consumer<UpdateUiModificationOperationSpec> spec) {
         UpdateUiModificationOperationSpec r = new UpdateUiModificationOperationSpec(spec);
@@ -11236,7 +13224,11 @@ public class JiraRESTV2ConsumerApi {
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) or *Administer Projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project that contains the version.
      * Authentication - Required Scopes: [manage:jira-project]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the version.</li>
+     *   <li>version: </li>
+     * </ul>
      */
     public Version updateVersion(Consumer<UpdateVersionOperationSpec> spec) {
         UpdateVersionOperationSpec r = new UpdateVersionOperationSpec(spec);
@@ -11247,10 +13239,15 @@ public class JiraRESTV2ConsumerApi {
      * Set issue types for workflow in workflow scheme
      * <p>
      * Sets the issue types for a workflow in a workflow scheme. The workflow can also be set as the default workflow for the workflow scheme. Unmapped issues types are mapped to the default workflow.
-     * Note that active workflow schemes cannot be edited. If the workflow scheme is active, set `updateDraftIfNeeded` to `true` in the request body and a draft workflow scheme is created or updated with the new workflow-issue types mappings. The draft workflow scheme can be published in Jira.
+     * Note that active workflow schemes cannot be edited. If the workflow scheme is active, set {@code updateDraftIfNeeded} to {@code true} in the request body and a draft workflow scheme is created or updated with the new workflow-issue types mappings. The draft workflow scheme can be published in Jira.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the workflow scheme.</li>
+     *   <li>workflowName: The name of the workflow.</li>
+     *   <li>issueTypesWorkflowMapping: </li>
+     * </ul>
      */
     public WorkflowScheme updateWorkflowMapping(Consumer<UpdateWorkflowMappingOperationSpec> spec) {
         UpdateWorkflowMappingOperationSpec r = new UpdateWorkflowMappingOperationSpec(spec);
@@ -11260,10 +13257,14 @@ public class JiraRESTV2ConsumerApi {
     /**
      * Update workflow scheme
      * <p>
-     * Updates a workflow scheme, including the name, default workflow, issue type to project mappings, and more. If the workflow scheme is active (that is, being used by at least one project), then a draft workflow scheme is created or updated instead, provided that `updateDraftIfNeeded` is set to `true`.
+     * Updates a workflow scheme, including the name, default workflow, issue type to project mappings, and more. If the workflow scheme is active (that is, being used by at least one project), then a draft workflow scheme is created or updated instead, provided that {@code updateDraftIfNeeded} is set to {@code true}.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the workflow scheme. Find this ID by editing the desired workflow scheme in Jira. The ID is shown in the URL as {@code schemeId}. For example, *schemeId=10301*.</li>
+     *   <li>workflowScheme: </li>
+     * </ul>
      */
     public WorkflowScheme updateWorkflowScheme(Consumer<UpdateWorkflowSchemeOperationSpec> spec) {
         UpdateWorkflowSchemeOperationSpec r = new UpdateWorkflowSchemeOperationSpec(spec);
@@ -11276,7 +13277,11 @@ public class JiraRESTV2ConsumerApi {
      * Updates a draft workflow scheme. If a draft workflow scheme does not exist for the active workflow scheme, then a draft is created. Note that an active workflow scheme can only have one draft workflow scheme.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>id: The ID of the active workflow scheme that the draft was created from.</li>
+     *   <li>workflowScheme: </li>
+     * </ul>
      */
     public WorkflowScheme updateWorkflowSchemeDraft(Consumer<UpdateWorkflowSchemeDraftOperationSpec> spec) {
         UpdateWorkflowSchemeDraftOperationSpec r = new UpdateWorkflowSchemeDraftOperationSpec(spec);
@@ -11289,11 +13294,18 @@ public class JiraRESTV2ConsumerApi {
      * Updates a workflow transition by changing the property value. Trying to update a property that does not exist results in a new property being added to the transition. Transition properties are used to change the behavior of a transition. For more information, see [Transition properties](https://confluence.atlassian.com/x/zIhKLg#Advancedworkflowconfiguration-transitionproperties) and [Workflow properties](https://confluence.atlassian.com/x/JYlKLg).
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>transitionId: The ID of the transition. To get the ID, view the workflow in text mode in the Jira admin settings. The ID is shown next to the transition.</li>
+     *   <li>key: The key of the property being updated, also known as the name of the property. Set this to the same value as the {@code key} defined in the request body.</li>
+     *   <li>workflowName: The name of the workflow that the transition belongs to.</li>
+     *   <li>workflowTransitionProperty: </li>
+     *   <li>workflowMode: The workflow status. Set to {@code live} for inactive workflows or {@code draft} for draft workflows. Active workflows cannot be edited.</li>
+     * </ul>
      */
     public WorkflowTransitionProperty updateWorkflowTransitionProperty(Consumer<UpdateWorkflowTransitionPropertyOperationSpec> spec) {
         UpdateWorkflowTransitionPropertyOperationSpec r = new UpdateWorkflowTransitionPropertyOperationSpec(spec);
-        return api.updateWorkflowTransitionProperty(r.transitionId(), r.key(), r.workflowName(), r.requestBody(), r.workflowMode());
+        return api.updateWorkflowTransitionProperty(r.transitionId(), r.key(), r.workflowName(), r.workflowTransitionProperty(), r.workflowMode());
     }
 
     /**
@@ -11311,11 +13323,14 @@ public class JiraRESTV2ConsumerApi {
      *  *
      * Disable a rule.
      * *
-     * Add a `tag`. Use this to filter rules in the [Get workflow transition rule configurations](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-workflow-transition-rules/#api-rest-api-3-workflow-rule-config-get).
-     * Rules are enabled if the `disabled` parameter is not provided.
+     * Add a {@code tag}. Use this to filter rules in the [Get workflow transition rule configurations](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-workflow-transition-rules/#api-rest-api-3-workflow-rule-config-get).
+     * Rules are enabled if the {@code disabled} parameter is not provided.
      * **[Permissions](#permissions) required:** Only Connect apps can use this operation.
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>workflowTransitionRulesUpdate: </li>
+     * </ul>
      */
     public WorkflowTransitionRulesUpdateErrors updateWorkflowTransitionRuleConfigurations(Consumer<UpdateWorkflowTransitionRuleConfigurationsOperationSpec> spec) {
         UpdateWorkflowTransitionRuleConfigurationsOperationSpec r = new UpdateWorkflowTransitionRuleConfigurationsOperationSpec(spec);
@@ -11332,7 +13347,11 @@ public class JiraRESTV2ConsumerApi {
      * *
      * *Administer projects* project permissions to create project-scoped workflows
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>workflowUpdateRequest: </li>
+     *   <li>expand: Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code workflows.usages} Returns the project and issue types that each workflow is associated with.  *  {@code statuses.usages} Returns the project and issue types that each status is associated with.</li>
+     * </ul>
      */
     public WorkflowUpdateResponse updateWorkflows(Consumer<UpdateWorkflowsOperationSpec> spec) {
         UpdateWorkflowsOperationSpec r = new UpdateWorkflowsOperationSpec(spec);
@@ -11355,11 +13374,21 @@ public class JiraRESTV2ConsumerApi {
      * *
      * If the worklog has visibility restrictions, belongs to the group or has the role visibility is restricted to.
      * Authentication - Required Scopes: [write:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueIdOrKey: The ID or key the issue.</li>
+     *   <li>id: The ID of the worklog.</li>
+     *   <li>worklog: </li>
+     *   <li>notifyUsers: Whether users watching the issue are notified by email.</li>
+     *   <li>adjustEstimate: Defines how to update the issue's time estimate, the options are:   *  {@code new} Sets the estimate to a specific value, defined in {@code newEstimate}.  *  {@code leave} Leaves the estimate unchanged.  *  {@code auto} Updates the estimate by the difference between the original and updated value of {@code timeSpent} or {@code timeSpentSeconds}.</li>
+     *   <li>newEstimate: The value to set as the issue's remaining time estimate, as days (\\#d), hours (\\#h), or minutes (\\#m or \\#). For example, *2d*. Required when {@code adjustEstimate} is {@code new}.</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information about worklogs in the response. This parameter accepts {@code properties}, which returns worklog properties.</li>
+     *   <li>overrideEditableFlag: Whether the worklog should be added to the issue even if the issue is not editable. For example, because the issue is closed. Connect and Forge app users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) can use this flag.</li>
+     * </ul>
      */
     public Worklog updateWorklog(Consumer<UpdateWorklogOperationSpec> spec) {
         UpdateWorklogOperationSpec r = new UpdateWorklogOperationSpec(spec);
-        return api.updateWorklog(r.issueIdOrKey(), r.id(), r.requestBody(), r.notifyUsers(), r.adjustEstimate(), r.newEstimate(), r.expand(), r.overrideEditableFlag());
+        return api.updateWorklog(r.issueIdOrKey(), r.id(), r.worklog(), r.notifyUsers(), r.adjustEstimate(), r.newEstimate(), r.expand(), r.overrideEditableFlag());
     }
 
     /**
@@ -11372,7 +13401,10 @@ public class JiraRESTV2ConsumerApi {
      * *
      * *Administer projects* project permissions to create project-scoped workflows
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>workflowCreateValidateRequest: </li>
+     * </ul>
      */
     public WorkflowValidationErrorList validateCreateWorkflows(Consumer<ValidateCreateWorkflowsOperationSpec> spec) {
         ValidateCreateWorkflowsOperationSpec r = new ValidateCreateWorkflowsOperationSpec(spec);
@@ -11385,7 +13417,10 @@ public class JiraRESTV2ConsumerApi {
      * Validates a project key by confirming the key is a valid string and not in use.
      * **[Permissions](#permissions) required:** None.
      * Authentication - Required Scopes: [read:jira-work]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>key: The project key.</li>
+     * </ul>
      */
     public ErrorCollection validateProjectKey(Consumer<ValidateProjectKeyOperationSpec> spec) {
         ValidateProjectKeyOperationSpec r = new ValidateProjectKeyOperationSpec(spec);
@@ -11402,7 +13437,10 @@ public class JiraRESTV2ConsumerApi {
      * *
      * *Administer projects* project permissions to create project-scoped workflows
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>workflowUpdateValidateRequestBean: </li>
+     * </ul>
      */
     public WorkflowValidationErrorList validateUpdateWorkflows(Consumer<ValidateUpdateWorkflowsOperationSpec> spec) {
         ValidateUpdateWorkflowsOperationSpec r = new ValidateUpdateWorkflowsOperationSpec(spec);
@@ -11448,7 +13486,7 @@ public class JiraRESTV2ConsumerApi {
      * }
      * Parameters:
      *  *
-     * `permissionKey` The permission required to perform the transition. Allowed values: [built-in Jira permissions](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-permission-schemes/#built-in-permissions).
+     * {@code permissionKey} The permission required to perform the transition. Allowed values: [built-in Jira permissions](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-permission-schemes/#built-in-permissions).
      * ##### Parent or child blocking validator #####
      * A validator to block the child issue’s transition depending on the parent issue’s status.
      * 
@@ -11481,9 +13519,9 @@ public class JiraRESTV2ConsumerApi {
      * }
      * Parameters:
      *  *
-     * `blocker` currently only supports `PARENT`.
+     * {@code blocker} currently only supports {@code PARENT}.
      * *
-     * `statusIds` a comma-separated list of status IDs.
+     * {@code statusIds} a comma-separated list of status IDs.
      * ##### Previous status validator #####
      * A validator that checks if an issue has transitioned through specified previous status(es) before allowing the current transition to occur.
      * 
@@ -11516,9 +13554,9 @@ public class JiraRESTV2ConsumerApi {
      * }
      * Parameters:
      *  *
-     * `previousStatusIds` a comma-separated list of status IDs, currently only support one ID.
+     * {@code previousStatusIds} a comma-separated list of status IDs, currently only support one ID.
      * *
-     * `mostRecentStatusOnly` when `true` only considers the most recent status for the condition evaluation. Allowed values: `true`, `false`.
+     * {@code mostRecentStatusOnly} when {@code true} only considers the most recent status for the condition evaluation. Allowed values: {@code true}, {@code false}.
      * ##### Validate a field value #####
      * A validation that ensures a specific field's value meets the defined criteria before allowing an issue to transition in the workflow.
      * Depending on the rule type, the result will vary:
@@ -11563,11 +13601,11 @@ public class JiraRESTV2ConsumerApi {
      * }
      * Parameters:
      *  *
-     * `fieldsRequired` the ID of the field that is required. For a custom field, it would look like `customfield_123`.
+     * {@code fieldsRequired} the ID of the field that is required. For a custom field, it would look like {@code customfield_123}.
      * *
-     * `ignoreContext` controls the impact of context settings on field validation. When set to `true`, the validator doesn't check a required field if its context isn't configured for the current issue. When set to `false`, the validator requires a field even if its context is invalid. Allowed values: `true`, `false`.
+     * {@code ignoreContext} controls the impact of context settings on field validation. When set to {@code true}, the validator doesn't check a required field if its context isn't configured for the current issue. When set to {@code false}, the validator requires a field even if its context is invalid. Allowed values: {@code true}, {@code false}.
      * *
-     * `errorMessage` is the error message to display if the user does not provide a value during the transition. A default error message will be shown if you don't provide one (Optional).
+     * {@code errorMessage} is the error message to display if the user does not provide a value during the transition. A default error message will be shown if you don't provide one (Optional).
      * ###### Field changed ######
      * 
      * 
@@ -11609,11 +13647,11 @@ public class JiraRESTV2ConsumerApi {
      * }
      * Parameters:
      *  *
-     * `groupsExemptFromValidation` a comma-separated list of group IDs to be exempt from the validation.
+     * {@code groupsExemptFromValidation} a comma-separated list of group IDs to be exempt from the validation.
      * *
-     * `fieldKey` the ID of the field that has changed. For a custom field, it would look like `customfield_123`.
+     * {@code fieldKey} the ID of the field that has changed. For a custom field, it would look like {@code customfield_123}.
      * *
-     * `errorMessage` the error message to display if the user does not provide a value during the transition. A default error message will be shown if you don't provide one (Optional).
+     * {@code errorMessage} the error message to display if the user does not provide a value during the transition. A default error message will be shown if you don't provide one (Optional).
      * ###### Field has a single value ######
      * 
      * 
@@ -11650,9 +13688,9 @@ public class JiraRESTV2ConsumerApi {
      * }
      * Parameters:
      *  *
-     * `fieldKey` the ID of the field to validate. For a custom field, it would look like `customfield_123`.
+     * {@code fieldKey} the ID of the field to validate. For a custom field, it would look like {@code customfield_123}.
      * *
-     * `excludeSubtasks` Option to exclude values copied from sub-tasks. Allowed values: `true`, `false`.
+     * {@code excludeSubtasks} Option to exclude values copied from sub-tasks. Allowed values: {@code true}, {@code false}.
      * ###### Field matches regular expression ######
      * 
      * 
@@ -11689,9 +13727,9 @@ public class JiraRESTV2ConsumerApi {
      * }
      * Parameters:
      *  *
-     * `regexp` the regular expression used to validate the field’s content.
+     * {@code regexp} the regular expression used to validate the field’s content.
      * *
-     * `fieldKey` the ID of the field to validate. For a custom field, it would look like `customfield_123`.
+     * {@code fieldKey} the ID of the field to validate. For a custom field, it would look like {@code customfield_123}.
      * ###### Date field comparison ######
      * 
      * 
@@ -11738,13 +13776,13 @@ public class JiraRESTV2ConsumerApi {
      * }
      * Parameters:
      *  *
-     * `date1FieldKey` the ID of the first field to compare. For a custom field, it would look like `customfield_123`.
+     * {@code date1FieldKey} the ID of the first field to compare. For a custom field, it would look like {@code customfield_123}.
      * *
-     * `date2FieldKey` the ID of the second field to compare. For a custom field, it would look like `customfield_123`.
+     * {@code date2FieldKey} the ID of the second field to compare. For a custom field, it would look like {@code customfield_123}.
      * *
-     * `includeTime` if `true`, compares both date and time. Allowed values: `true`, `false`.
+     * {@code includeTime} if {@code true}, compares both date and time. Allowed values: {@code true}, {@code false}.
      * *
-     * `conditionSelected` the condition to compare with. Allowed values: `&amp;gt;`, `&amp;gt;=`, `=`, `&amp;lt;=`, `&amp;lt;`, `!=`.
+     * {@code conditionSelected} the condition to compare with. Allowed values: {@code &amp;gt;}, {@code &amp;gt;=}, {@code =}, {@code &amp;lt;=}, {@code &amp;lt;}, {@code !=}.
      * ###### Date range comparison ######
      * 
      * 
@@ -11786,11 +13824,11 @@ public class JiraRESTV2ConsumerApi {
      * }
      * Parameters:
      *  *
-     * `date1FieldKey` the ID of the first field to compare. For a custom field, it would look like `customfield_123`.
+     * {@code date1FieldKey} the ID of the first field to compare. For a custom field, it would look like {@code customfield_123}.
      * *
-     * `date2FieldKey` the ID of the second field to compare. For a custom field, it would look like `customfield_123`.
+     * {@code date2FieldKey} the ID of the second field to compare. For a custom field, it would look like {@code customfield_123}.
      * *
-     * `numberOfDays` maximum number of days past the reference date (`date2FieldKey`) to pass validation.
+     * {@code numberOfDays} maximum number of days past the reference date ({@code date2FieldKey}) to pass validation.
      * This rule is composed by aggregating the following legacy rules:
      *  *
      * FieldRequiredValidator
@@ -11880,15 +13918,15 @@ public class JiraRESTV2ConsumerApi {
      * }
      * Parameters:
      *  *
-     * `fieldId` The ID of the field to check the value of. For non-system fields, it will look like `customfield_123`. Note: `fieldId` is used interchangeably with the idea of `fieldKey` here, they refer to the same field.
+     * {@code fieldId} The ID of the field to check the value of. For non-system fields, it will look like {@code customfield_123}. Note: {@code fieldId} is used interchangeably with the idea of {@code fieldKey} here, they refer to the same field.
      * *
-     * `fieldValue` the list of values to check against the field’s value.
+     * {@code fieldValue} the list of values to check against the field’s value.
      * *
-     * `comparator` The comparison logic. Allowed values: `&amp;gt;`, `&amp;gt;=`, `=`, `&amp;lt;=`, `&amp;lt;`, `!=`.
+     * {@code comparator} The comparison logic. Allowed values: {@code &amp;gt;}, {@code &amp;gt;=}, {@code =}, {@code &amp;lt;=}, {@code &amp;lt;}, {@code !=}.
      * *
-     * `comparisonType` The type of data being compared. Allowed values: `STRING`, `NUMBER`, `DATE`, `DATE_WITHOUT_TIME`, `OPTIONID`.
+     * {@code comparisonType} The type of data being compared. Allowed values: {@code STRING}, {@code NUMBER}, {@code DATE}, {@code DATE_WITHOUT_TIME}, {@code OPTIONID}.
      * ##### Restrict issue transition #####
-     * This rule ensures that issue transitions are restricted based on user accounts, roles, group memberships, and permissions, maintaining control over who can transition an issue. This condition evaluates as `true` if any of the following criteria is met.
+     * This rule ensures that issue transitions are restricted based on user accounts, roles, group memberships, and permissions, maintaining control over who can transition an issue. This condition evaluates as {@code true} if any of the following criteria is met.
      * 
      * 
      * {
@@ -11944,19 +13982,19 @@ public class JiraRESTV2ConsumerApi {
      * }
      * Parameters:
      *  *
-     * `accountIds` a comma-separated list of the user account IDs. It also allows generic values like: `allow-assignee`, `allow-reporter`, and `accountIds` Note: This is only supported in team-managed projects
+     * {@code accountIds} a comma-separated list of the user account IDs. It also allows generic values like: {@code allow-assignee}, {@code allow-reporter}, and {@code accountIds} Note: This is only supported in team-managed projects
      * *
-     * `roleIds` a comma-separated list of role IDs.
+     * {@code roleIds} a comma-separated list of role IDs.
      * *
-     * `groupIds` a comma-separated list of group IDs.
+     * {@code groupIds} a comma-separated list of group IDs.
      * *
-     * `permissionKeys` a comma-separated list of permission keys. Allowed values: [built-in Jira permissions](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-permission-schemes/#built-in-permissions).
+     * {@code permissionKeys} a comma-separated list of permission keys. Allowed values: [built-in Jira permissions](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-permission-schemes/#built-in-permissions).
      * *
-     * `groupCustomFields` a comma-separated list of group custom field IDs.
+     * {@code groupCustomFields} a comma-separated list of group custom field IDs.
      * *
-     * `allowUserCustomFields` a comma-separated list of user custom field IDs to allow for issue transition.
+     * {@code allowUserCustomFields} a comma-separated list of user custom field IDs to allow for issue transition.
      * *
-     * `denyUserCustomFields` a comma-separated list of user custom field IDs to deny for issue transition.
+     * {@code denyUserCustomFields} a comma-separated list of user custom field IDs to deny for issue transition.
      * This rule is composed by aggregating the following legacy rules:
      *  *
      * AllowOnlyAssignee
@@ -12023,15 +14061,15 @@ public class JiraRESTV2ConsumerApi {
      * }
      * Parameters:
      *  *
-     * `previousStatusIds` a comma-separated list of status IDs, current only support one ID.
+     * {@code previousStatusIds} a comma-separated list of status IDs, current only support one ID.
      * *
-     * `not` indicates if the condition should be reversed. When `true` it checks that the issue has not been in the selected statuses. Allowed values: `true`, `false`.
+     * {@code not} indicates if the condition should be reversed. When {@code true} it checks that the issue has not been in the selected statuses. Allowed values: {@code true}, {@code false}.
      * *
-     * `mostRecentStatusOnly` when true only considers the most recent status for the condition evaluation. Allowed values: `true`, `false`.
+     * {@code mostRecentStatusOnly} when true only considers the most recent status for the condition evaluation. Allowed values: {@code true}, {@code false}.
      * *
-     * `includeCurrentStatus` includes the current status when evaluating if the issue has been through the selected statuses. Allowed values: `true`, `false`.
+     * {@code includeCurrentStatus} includes the current status when evaluating if the issue has been through the selected statuses. Allowed values: {@code true}, {@code false}.
      * *
-     * `ignoreLoopTransitions` ignore loop transitions. Allowed values: `true`, `false`.
+     * {@code ignoreLoopTransitions} ignore loop transitions. Allowed values: {@code true}, {@code false}.
      * ##### Parent or child blocking condition #####
      * A condition to block the parent’s issue transition depending on the child’s issue status.
      * 
@@ -12064,9 +14102,9 @@ public class JiraRESTV2ConsumerApi {
      * }
      * Parameters:
      *  *
-     * `blocker` currently only supports `CHILD`.
+     * {@code blocker} currently only supports {@code CHILD}.
      * *
-     * `statusIds` a comma-separated list of status IDs.
+     * {@code statusIds} a comma-separated list of status IDs.
      * ##### Separation of duties #####
      * A condition preventing the user from performing, if the user has already performed a transition on the issue.
      * 
@@ -12099,9 +14137,9 @@ public class JiraRESTV2ConsumerApi {
      * }
      * Parameters:
      *  *
-     * `fromStatusId` represents the status ID from which the issue is transitioning. It ensures that the user performing the current transition has not performed any actions when the issue was in the specified status.
+     * {@code fromStatusId} represents the status ID from which the issue is transitioning. It ensures that the user performing the current transition has not performed any actions when the issue was in the specified status.
      * *
-     * `toStatusId` represents the status ID to which the issue is transitioning. It ensures that the user performing the current transition is not the same user who has previously transitioned the issue.
+     * {@code toStatusId} represents the status ID to which the issue is transitioning. It ensures that the user performing the current transition is not the same user who has previously transitioned the issue.
      * ##### Restrict transitions #####
      * A condition preventing all users from transitioning the issue can also optionally include APIs as well.
      * 
@@ -12129,7 +14167,7 @@ public class JiraRESTV2ConsumerApi {
      * }
      * Parameters:
      *  *
-     * `restrictMode` restricts the issue transition including/excluding APIs. Allowed values: `"users"`, `"usersAndAPI"`.
+     * {@code restrictMode} restricts the issue transition including/excluding APIs. Allowed values: {@code "users"}, {@code "usersAndAPI"}.
      * ##### Jira Service Management block until approved #####
      * Block an issue transition until approval. Note: This is only supported in team-managed projects.
      * 
@@ -12157,7 +14195,7 @@ public class JiraRESTV2ConsumerApi {
      * }
      * Parameters:
      *  *
-     * `approvalConfigurationJson` a stringified JSON holding the Jira Service Management approval configuration.
+     * {@code approvalConfigurationJson} a stringified JSON holding the Jira Service Management approval configuration.
      * ##### Jira Service Management block until rejected #####
      * Block an issue transition until rejected. Note: This is only supported in team-managed projects.
      * 
@@ -12185,7 +14223,7 @@ public class JiraRESTV2ConsumerApi {
      * }
      * Parameters:
      *  *
-     * `approvalConfigurationJson` a stringified JSON holding the Jira Service Management approval configuration.
+     * {@code approvalConfigurationJson} a stringified JSON holding the Jira Service Management approval configuration.
      * ##### Block in progress approval #####
      * Condition to block issue transition if there is pending approval. Note: This is only supported in company-managed projects.
      * 
@@ -12236,9 +14274,9 @@ public class JiraRESTV2ConsumerApi {
      * }
      * Parameters:
      *  *
-     * `type` the parameter used to determine the new assignee. Allowed values: `to-selected-user`, `to-unassigned`, `to-current-user`, `to-current-user`, `to-default-user`, `to-default-user`
+     * {@code type} the parameter used to determine the new assignee. Allowed values: {@code to-selected-user}, {@code to-unassigned}, {@code to-current-user}, {@code to-current-user}, {@code to-default-user}, {@code to-default-user}
      * *
-     * `accountId` the account ID of the user to assign the issue to. This parameter is required only when the type is `"to-selected-user"`.
+     * {@code accountId} the account ID of the user to assign the issue to. This parameter is required only when the type is {@code "to-selected-user"}.
      * ##### Copy field value #####
      * A post function that automates the process of copying values between fields during a specific transition, ensuring data consistency and reducing manual effort.
      * 
@@ -12276,11 +14314,11 @@ public class JiraRESTV2ConsumerApi {
      * }
      * Parameters:
      *  *
-     * `sourceFieldKey` the field key to copy from. For a custom field, it would look like `customfield_123`
+     * {@code sourceFieldKey} the field key to copy from. For a custom field, it would look like {@code customfield_123}
      * *
-     * `targetFieldKey` the field key to copy to. For a custom field, it would look like `customfield_123`
+     * {@code targetFieldKey} the field key to copy to. For a custom field, it would look like {@code customfield_123}
      * *
-     * `issueSource` `SAME` or `PARENT`. Defaults to `SAME` if no value is provided.
+     * {@code issueSource} {@code SAME} or {@code PARENT}. Defaults to {@code SAME} if no value is provided.
      * ##### Update field #####
      * A post function that updates or appends a specific field with the given value.
      * 
@@ -12318,11 +14356,11 @@ public class JiraRESTV2ConsumerApi {
      * }
      * Parameters:
      *  *
-     * `field` the ID of the field to update. For a custom field, it would look like `customfield_123`
+     * {@code field} the ID of the field to update. For a custom field, it would look like {@code customfield_123}
      * *
-     * `value` the value to update the field with.
+     * {@code value} the value to update the field with.
      * *
-     * `mode` `append` or `replace`. Determines if a value will be appended to the current value, or if the current value will be replaced.
+     * {@code mode} {@code append} or {@code replace}. Determines if a value will be appended to the current value, or if the current value will be replaced.
      * ##### Trigger webhook #####
      * A post function that automatically triggers a predefined webhook when a transition occurs in the workflow.
      * 
@@ -12350,7 +14388,7 @@ public class JiraRESTV2ConsumerApi {
      * }
      * Parameters:
      *  *
-     * `webhookId` the ID of the webhook.
+     * {@code webhookId} the ID of the webhook.
      * #### Screen ####
      * ##### Remind people to update fields #####
      * A screen rule that prompts users to update a specific field when they interact with an issue screen during a transition. This rule is useful for ensuring that users provide or modify necessary information before moving an issue to the next step in the workflow.
@@ -12389,11 +14427,11 @@ public class JiraRESTV2ConsumerApi {
      * }
      * Parameters:
      *  *
-     * `remindingFieldIds` a comma-separated list of field IDs. Note: `fieldId` is used interchangeably with the idea of `fieldKey` here, they refer to the same field.
+     * {@code remindingFieldIds} a comma-separated list of field IDs. Note: {@code fieldId} is used interchangeably with the idea of {@code fieldKey} here, they refer to the same field.
      * *
-     * `remindingMessage` the message to display when prompting the users to update the fields.
+     * {@code remindingMessage} the message to display when prompting the users to update the fields.
      * *
-     * `remindingAlwaysAsk` always remind to update fields. Allowed values: `true`, `false`.
+     * {@code remindingAlwaysAsk} always remind to update fields. Allowed values: {@code true}, {@code false}.
      * ##### Shared transition screen #####
      * A common screen that is shared between transitions in a workflow.
      * 
@@ -12421,7 +14459,7 @@ public class JiraRESTV2ConsumerApi {
      * }
      * Parameters:
      *  *
-     * `screenId` the ID of the screen.
+     * {@code screenId} the ID of the screen.
      * #### Connect &amp; Forge ####
      * ##### Connect rules #####
      * Validator/Condition/Post function for Connect app.
@@ -12470,17 +14508,17 @@ public class JiraRESTV2ConsumerApi {
      * }
      * Parameters:
      *  *
-     * `ruleKey` Validator: `connect:expression-validator`, Condition: `connect:expression-condition`, and Post function: `connect:remote-workflow-function`
+     * {@code ruleKey} Validator: {@code connect:expression-validator}, Condition: {@code connect:expression-condition}, and Post function: {@code connect:remote-workflow-function}
      * *
-     * `appKey` the reference to the Connect app
+     * {@code appKey} the reference to the Connect app
      * *
-     * `config` a JSON payload string describing the configuration
+     * {@code config} a JSON payload string describing the configuration
      * *
-     * `id` the ID of the rule
+     * {@code id} the ID of the rule
      * *
-     * `disabled` determine if the Connect app is disabled. Allowed values: `true`, `false`.
+     * {@code disabled} determine if the Connect app is disabled. Allowed values: {@code true}, {@code false}.
      * *
-     * `tag` additional tags for the Connect app
+     * {@code tag} additional tags for the Connect app
      * ##### Forge rules #####
      * Validator/Condition/Post function for Forge app.
      * 
@@ -12518,15 +14556,20 @@ public class JiraRESTV2ConsumerApi {
      * }
      * Parameters:
      *  *
-     * `ruleKey` Validator: `forge:expression-validator`, Condition: `forge:expression-condition`, and Post function: `forge:workflow-post-function`
+     * {@code ruleKey} Validator: {@code forge:expression-validator}, Condition: {@code forge:expression-condition}, and Post function: {@code forge:workflow-post-function}
      * *
-     * `key` the identifier for the Forge app
+     * {@code key} the identifier for the Forge app
      * *
-     * `config` the persistent stringified JSON configuration for the Forge rule
+     * {@code config} the persistent stringified JSON configuration for the Forge rule
      * *
-     * `id` the ID of the Forge rule
+     * {@code id} the ID of the Forge rule
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param spec                 a consumer that takes a spec to prepare the request for execution
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>workflowId: </li>
+     *   <li>projectId: </li>
+     *   <li>issueTypeId: </li>
+     * </ul>
      */
     public WorkflowCapabilities workflowCapabilities(Consumer<WorkflowCapabilitiesOperationSpec> spec) {
         WorkflowCapabilitiesOperationSpec r = new WorkflowCapabilitiesOperationSpec(spec);

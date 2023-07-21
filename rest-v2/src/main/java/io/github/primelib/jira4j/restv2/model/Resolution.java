@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.net.URI;
@@ -18,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Resolution
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "description",
     "id",
@@ -31,16 +37,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("Resolution")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class Resolution {
-
-    /**
-     * Constructs a validated implementation of {@link Resolution}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public Resolution(Consumer<Resolution> spec) {
-        spec.accept(this);
-    }
 
     /**
      * The description of the issue resolution.
@@ -66,5 +62,30 @@ public class Resolution {
     @JsonProperty("self")
     protected URI self;
 
+    /**
+     * Constructs a validated instance of {@link Resolution}.
+     *
+     * @param spec the specification to process
+     */
+    public Resolution(Consumer<Resolution> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link Resolution}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #Resolution(Consumer)} instead.
+     * @param description The description of the issue resolution.
+     * @param id The ID of the issue resolution.
+     * @param name The name of the issue resolution.
+     * @param self The URL of the issue resolution.
+     */
+    @ApiStatus.Internal
+    public Resolution(String description, String id, String name, URI self) {
+        this.description = description;
+        this.id = id;
+        this.name = name;
+        this.self = self;
+    }
 
 }

@@ -9,7 +9,11 @@ import javax.annotation.processing.Generated;
 import io.github.primelib.jira4j.restv3.model.IssueEntityProperties;
 import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -21,9 +25,13 @@ import java.util.function.Consumer;
  * <p>
  * Bulk set issues properties by list
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class BulkSetIssuesPropertiesListOperationSpec {
     /**
@@ -39,13 +47,27 @@ public class BulkSetIssuesPropertiesListOperationSpec {
     private IssueEntityProperties issueEntityProperties;
 
     /**
-     * Constructs a validated implementation of {@link BulkSetIssuesPropertiesListOperationSpec}.
+     * Constructs a validated instance of {@link BulkSetIssuesPropertiesListOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public BulkSetIssuesPropertiesListOperationSpec(Consumer<BulkSetIssuesPropertiesListOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link BulkSetIssuesPropertiesListOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param issueEntityProperties Issue properties to be set or updated with values.
+     */
+    @ApiStatus.Internal
+    public BulkSetIssuesPropertiesListOperationSpec(IssueEntityProperties issueEntityProperties) {
+        this.issueEntityProperties = issueEntityProperties;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -58,5 +80,4 @@ public class BulkSetIssuesPropertiesListOperationSpec {
     public void validate() {
         Objects.requireNonNull(issueEntityProperties, "issueEntityProperties is a required parameter!");
     }
-
 }

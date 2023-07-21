@@ -6,8 +6,13 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.processing.Generated;
 
 import io.github.primelib.jira4j.restv3.model.DefaultWorkflow;
+import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -19,9 +24,13 @@ import java.util.function.Consumer;
  * <p>
  * Update draft default workflow
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class UpdateDraftDefaultWorkflowOperationSpec {
     /**
@@ -43,13 +52,29 @@ public class UpdateDraftDefaultWorkflowOperationSpec {
     private DefaultWorkflow defaultWorkflow;
 
     /**
-     * Constructs a validated implementation of {@link UpdateDraftDefaultWorkflowOperationSpec}.
+     * Constructs a validated instance of {@link UpdateDraftDefaultWorkflowOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public UpdateDraftDefaultWorkflowOperationSpec(Consumer<UpdateDraftDefaultWorkflowOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link UpdateDraftDefaultWorkflowOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param id                   The ID of the workflow scheme that the draft belongs to.
+     * @param defaultWorkflow      The object for the new default workflow.
+     */
+    @ApiStatus.Internal
+    public UpdateDraftDefaultWorkflowOperationSpec(Long id, DefaultWorkflow defaultWorkflow) {
+        this.id = id;
+        this.defaultWorkflow = defaultWorkflow;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -63,5 +88,4 @@ public class UpdateDraftDefaultWorkflowOperationSpec {
         Objects.requireNonNull(id, "id is a required parameter!");
         Objects.requireNonNull(defaultWorkflow, "defaultWorkflow is a required parameter!");
     }
-
 }

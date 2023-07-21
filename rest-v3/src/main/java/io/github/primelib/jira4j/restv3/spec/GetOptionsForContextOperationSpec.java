@@ -6,8 +6,13 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import javax.annotation.processing.Generated;
 
+import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -19,9 +24,13 @@ import java.util.function.Consumer;
  * <p>
  * Get custom field options (context)
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class GetOptionsForContextOperationSpec {
     /**
@@ -52,28 +61,52 @@ public class GetOptionsForContextOperationSpec {
      * Whether only options are returned.
      */
     @Nullable 
-    private Boolean onlyOptions = false;
+    private Boolean onlyOptions;
 
     /**
      * The index of the first item to return in a page of results (page offset).
      */
     @Nullable 
-    private Long startAt = 0L;
+    private Long startAt;
 
     /**
      * The maximum number of items to return per page.
      */
     @Nullable 
-    private Integer maxResults = 100;
+    private Integer maxResults;
 
     /**
-     * Constructs a validated implementation of {@link GetOptionsForContextOperationSpec}.
+     * Constructs a validated instance of {@link GetOptionsForContextOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public GetOptionsForContextOperationSpec(Consumer<GetOptionsForContextOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link GetOptionsForContextOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param fieldId              The ID of the custom field.
+     * @param contextId            The ID of the context.
+     * @param optionId             The ID of the option.
+     * @param onlyOptions          Whether only options are returned.
+     * @param startAt              The index of the first item to return in a page of results (page offset).
+     * @param maxResults           The maximum number of items to return per page.
+     */
+    @ApiStatus.Internal
+    public GetOptionsForContextOperationSpec(String fieldId, Long contextId, Long optionId, Boolean onlyOptions, Long startAt, Integer maxResults) {
+        this.fieldId = fieldId;
+        this.contextId = contextId;
+        this.optionId = optionId;
+        this.onlyOptions = onlyOptions;
+        this.startAt = startAt;
+        this.maxResults = maxResults;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -87,5 +120,4 @@ public class GetOptionsForContextOperationSpec {
         Objects.requireNonNull(fieldId, "fieldId is a required parameter!");
         Objects.requireNonNull(contextId, "contextId is a required parameter!");
     }
-
 }

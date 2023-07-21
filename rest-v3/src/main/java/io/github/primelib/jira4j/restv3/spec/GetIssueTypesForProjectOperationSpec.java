@@ -7,8 +7,13 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.processing.Generated;
 
 import io.github.primelib.jira4j.restv3.model.Project;
+import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -20,9 +25,13 @@ import java.util.function.Consumer;
  * <p>
  * Get issue types for project
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class GetIssueTypesForProjectOperationSpec {
     /**
@@ -40,23 +49,39 @@ public class GetIssueTypesForProjectOperationSpec {
     /**
      * The level of the issue type to filter by. Use:
      *  *
-     * `-1` for Subtask.
+     * {@code -1} for Subtask.
      * *
-     * `0` for Base.
+     * {@code 0} for Base.
      * *
-     * `1` for Epic.
+     * {@code 1} for Epic.
      */
     @Nullable 
     private Integer level;
 
     /**
-     * Constructs a validated implementation of {@link GetIssueTypesForProjectOperationSpec}.
+     * Constructs a validated instance of {@link GetIssueTypesForProjectOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public GetIssueTypesForProjectOperationSpec(Consumer<GetIssueTypesForProjectOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link GetIssueTypesForProjectOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param projectId            The ID of the project.
+     * @param level                The level of the issue type to filter by. Use:   *  {@code -1} for Subtask.  *  {@code 0} for Base.  *  {@code 1} for Epic.
+     */
+    @ApiStatus.Internal
+    public GetIssueTypesForProjectOperationSpec(Long projectId, Integer level) {
+        this.projectId = projectId;
+        this.level = level;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -69,5 +94,4 @@ public class GetIssueTypesForProjectOperationSpec {
     public void validate() {
         Objects.requireNonNull(projectId, "projectId is a required parameter!");
     }
-
 }

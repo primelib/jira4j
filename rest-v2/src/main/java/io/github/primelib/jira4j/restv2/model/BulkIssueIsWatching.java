@@ -3,13 +3,15 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.HashMap;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -19,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * BulkIssueIsWatching
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "issuesIsWatching"
 })
@@ -31,20 +36,29 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class BulkIssueIsWatching {
 
     /**
-     * Constructs a validated implementation of {@link BulkIssueIsWatching}.
+     * The map of issue ID to boolean watch status.
+     */
+    @JsonProperty("issuesIsWatching")
+    protected Map<String, Boolean> issuesIsWatching;
+
+    /**
+     * Constructs a validated instance of {@link BulkIssueIsWatching}.
      *
      * @param spec the specification to process
      */
-    @ApiStatus.Internal
     public BulkIssueIsWatching(Consumer<BulkIssueIsWatching> spec) {
         spec.accept(this);
     }
 
     /**
-     * The map of issue ID to boolean watch status.
+     * Constructs a validated instance of {@link BulkIssueIsWatching}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #BulkIssueIsWatching(Consumer)} instead.
+     * @param issuesIsWatching The map of issue ID to boolean watch status.
      */
-    @JsonProperty("issuesIsWatching")
-    protected Map<String, Boolean> issuesIsWatching = new HashMap<>();
-
+    @ApiStatus.Internal
+    public BulkIssueIsWatching(Map<String, Boolean> issuesIsWatching) {
+        this.issuesIsWatching = issuesIsWatching;
+    }
 
 }

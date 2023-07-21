@@ -3,14 +3,15 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.HashMap;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -20,11 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * IssueTransition
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
-@EqualsAndHashCode(callSuper = true)
+@Builder
 @JsonPropertyOrder({
     "expand",
     "fields",
@@ -40,17 +43,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 })
 @JsonTypeName("IssueTransition")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
-public class IssueTransition extends HashMap<String, Object> {
-
-    /**
-     * Constructs a validated implementation of {@link IssueTransition}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public IssueTransition(Consumer<IssueTransition> spec) {
-        spec.accept(this);
-    }
+public class IssueTransition {
 
     /**
      * Expand options that include additional transition details in the response.
@@ -59,10 +52,10 @@ public class IssueTransition extends HashMap<String, Object> {
     protected String expand;
 
     /**
-     * Details of the fields associated with the issue transition screen. Use this information to populate `fields` and `update` in a transition request.
+     * Details of the fields associated with the issue transition screen. Use this information to populate {@code fields} and {@code update} in a transition request.
      */
     @JsonProperty("fields")
-    protected Map<String, FieldMetadata> fields = new HashMap<>();
+    protected Map<String, FieldMetadata> fields;
 
     /**
      * Whether there is a screen associated with the issue transition.
@@ -112,5 +105,44 @@ public class IssueTransition extends HashMap<String, Object> {
     @JsonProperty("to")
     protected IssueTransitionTo to;
 
+    /**
+     * Constructs a validated instance of {@link IssueTransition}.
+     *
+     * @param spec the specification to process
+     */
+    public IssueTransition(Consumer<IssueTransition> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link IssueTransition}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #IssueTransition(Consumer)} instead.
+     * @param expand Expand options that include additional transition details in the response.
+     * @param fields Details of the fields associated with the issue transition screen. Use this information to populate {@code fields} and {@code update} in a transition request.
+     * @param hasScreen Whether there is a screen associated with the issue transition.
+     * @param id The ID of the issue transition. Required when specifying a transition to undertake.
+     * @param isAvailable Whether the transition is available to be performed.
+     * @param isConditional Whether the issue has to meet criteria before the issue transition is applied.
+     * @param isGlobal Whether the issue transition is global, that is, the transition is applied to issues regardless of their status.
+     * @param isInitial Whether this is the initial issue transition for the workflow.
+     * @param looped var.name
+     * @param name The name of the issue transition.
+     * @param to var.name
+     */
+    @ApiStatus.Internal
+    public IssueTransition(String expand, Map<String, FieldMetadata> fields, Boolean hasScreen, String id, Boolean isAvailable, Boolean isConditional, Boolean isGlobal, Boolean isInitial, Boolean looped, String name, IssueTransitionTo to) {
+        this.expand = expand;
+        this.fields = fields;
+        this.hasScreen = hasScreen;
+        this.id = id;
+        this.isAvailable = isAvailable;
+        this.isConditional = isConditional;
+        this.isGlobal = isGlobal;
+        this.isInitial = isInitial;
+        this.looped = looped;
+        this.name = name;
+        this.to = to;
+    }
 
 }

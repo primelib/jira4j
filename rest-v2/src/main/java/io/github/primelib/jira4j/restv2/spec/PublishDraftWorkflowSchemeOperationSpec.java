@@ -7,9 +7,14 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.processing.Generated;
 
 import io.github.primelib.jira4j.restv2.model.PublishDraftWorkflowScheme;
+import java.util.Set;
 import io.github.primelib.jira4j.restv2.model.WorkflowScheme;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -21,9 +26,13 @@ import java.util.function.Consumer;
  * <p>
  * Publish draft workflow scheme
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class PublishDraftWorkflowSchemeOperationSpec {
     /**
@@ -48,16 +57,34 @@ public class PublishDraftWorkflowSchemeOperationSpec {
      * Whether the request only performs a validation.
      */
     @Nullable 
-    private Boolean validateOnly = false;
+    private Boolean validateOnly;
 
     /**
-     * Constructs a validated implementation of {@link PublishDraftWorkflowSchemeOperationSpec}.
+     * Constructs a validated instance of {@link PublishDraftWorkflowSchemeOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public PublishDraftWorkflowSchemeOperationSpec(Consumer<PublishDraftWorkflowSchemeOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link PublishDraftWorkflowSchemeOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param id                   The ID of the workflow scheme that the draft belongs to.
+     * @param publishDraftWorkflowScheme Details of the status mappings.
+     * @param validateOnly         Whether the request only performs a validation.
+     */
+    @ApiStatus.Internal
+    public PublishDraftWorkflowSchemeOperationSpec(Long id, PublishDraftWorkflowScheme publishDraftWorkflowScheme, Boolean validateOnly) {
+        this.id = id;
+        this.publishDraftWorkflowScheme = publishDraftWorkflowScheme;
+        this.validateOnly = validateOnly;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -71,5 +98,4 @@ public class PublishDraftWorkflowSchemeOperationSpec {
         Objects.requireNonNull(id, "id is a required parameter!");
         Objects.requireNonNull(publishDraftWorkflowScheme, "publishDraftWorkflowScheme is a required parameter!");
     }
-
 }

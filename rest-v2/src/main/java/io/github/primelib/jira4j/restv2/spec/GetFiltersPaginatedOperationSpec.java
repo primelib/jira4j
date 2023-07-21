@@ -12,7 +12,11 @@ import java.util.Set;
 import io.github.primelib.jira4j.restv2.model.SharePermission;
 import io.github.primelib.jira4j.restv2.model.User;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -24,9 +28,13 @@ import java.util.function.Consumer;
  * <p>
  * Search for filters
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class GetFiltersPaginatedOperationSpec {
     /**
@@ -36,43 +44,43 @@ public class GetFiltersPaginatedOperationSpec {
     public static Boolean VALIDATION_ENABLED = true;
 
     /**
-     * String used to perform a case-insensitive partial match with `name`.
+     * String used to perform a case-insensitive partial match with {@code name}.
      */
     @Nullable 
     private String filterName;
 
     /**
-     * User account ID used to return filters with the matching `owner.accountId`. This parameter cannot be used with `owner`.
+     * User account ID used to return filters with the matching {@code owner.accountId}. This parameter cannot be used with {@code owner}.
      */
     @Nullable 
     private String accountId;
 
     /**
-     * This parameter is deprecated because of privacy changes. Use `accountId` instead. See the [migration guide](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details. User name used to return filters with the matching `owner.name`. This parameter cannot be used with `accountId`.
+     * This parameter is deprecated because of privacy changes. Use {@code accountId} instead. See the [migration guide](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details. User name used to return filters with the matching {@code owner.name}. This parameter cannot be used with {@code accountId}.
      */
     @Nullable 
     private String owner;
 
     /**
-     * As a group's name can change, use of `groupId` is recommended to identify a group. Group name used to returns filters that are shared with a group that matches `sharePermissions.group.groupname`. This parameter cannot be used with the `groupId` parameter.
+     * As a group's name can change, use of {@code groupId} is recommended to identify a group. Group name used to returns filters that are shared with a group that matches {@code sharePermissions.group.groupname}. This parameter cannot be used with the {@code groupId} parameter.
      */
     @Nullable 
     private String groupname;
 
     /**
-     * Group ID used to returns filters that are shared with a group that matches `sharePermissions.group.groupId`. This parameter cannot be used with the `groupname` parameter.
+     * Group ID used to returns filters that are shared with a group that matches {@code sharePermissions.group.groupId}. This parameter cannot be used with the {@code groupname} parameter.
      */
     @Nullable 
     private String groupId;
 
     /**
-     * Project ID used to returns filters that are shared with a project that matches `sharePermissions.project.id`.
+     * Project ID used to returns filters that are shared with a project that matches {@code sharePermissions.project.id}.
      */
     @Nullable 
     private Long projectId;
 
     /**
-     * The list of filter IDs. To include multiple IDs, provide an ampersand-separated list. For example, `id=10000&amp;id=10001`. Do not exceed 200 filter IDs.
+     * The list of filter IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code id=10000&amp;id=10001}. Do not exceed 200 filter IDs.
      */
     @Nullable 
     private Set<Long> id;
@@ -80,59 +88,59 @@ public class GetFiltersPaginatedOperationSpec {
     /**
      * [Order](#ordering) the results by a field:
      *  *
-     * `description` Sorts by filter description. Note that this sorting works independently of whether the expand to display the description field is in use.
+     * {@code description} Sorts by filter description. Note that this sorting works independently of whether the expand to display the description field is in use.
      * *
-     * `favourite_count` Sorts by the count of how many users have this filter as a favorite.
+     * {@code favourite_count} Sorts by the count of how many users have this filter as a favorite.
      * *
-     * `is_favourite` Sorts by whether the filter is marked as a favorite.
+     * {@code is_favourite} Sorts by whether the filter is marked as a favorite.
      * *
-     * `id` Sorts by filter ID.
+     * {@code id} Sorts by filter ID.
      * *
-     * `name` Sorts by filter name.
+     * {@code name} Sorts by filter name.
      * *
-     * `owner` Sorts by the ID of the filter owner.
+     * {@code owner} Sorts by the ID of the filter owner.
      * *
-     * `is_shared` Sorts by whether the filter is shared.
+     * {@code is_shared} Sorts by whether the filter is shared.
      */
     @Nullable 
-    private String orderBy = "name";
+    private String orderBy;
 
     /**
      * The index of the first item to return in a page of results (page offset).
      */
     @Nullable 
-    private Long startAt = 0L;
+    private Long startAt;
 
     /**
      * The maximum number of items to return per page.
      */
     @Nullable 
-    private Integer maxResults = 50;
+    private Integer maxResults;
 
     /**
      * Use [expand](#expansion) to include additional information about filter in the response. This parameter accepts a comma-separated list. Expand options include:
      *  *
-     * `description` Returns the description of the filter.
+     * {@code description} Returns the description of the filter.
      * *
-     * `favourite` Returns an indicator of whether the user has set the filter as a favorite.
+     * {@code favourite} Returns an indicator of whether the user has set the filter as a favorite.
      * *
-     * `favouritedCount` Returns a count of how many users have set this filter as a favorite.
+     * {@code favouritedCount} Returns a count of how many users have set this filter as a favorite.
      * *
-     * `jql` Returns the JQL query that the filter uses.
+     * {@code jql} Returns the JQL query that the filter uses.
      * *
-     * `owner` Returns the owner of the filter.
+     * {@code owner} Returns the owner of the filter.
      * *
-     * `searchUrl` Returns a URL to perform the filter's JQL query.
+     * {@code searchUrl} Returns a URL to perform the filter's JQL query.
      * *
-     * `sharePermissions` Returns the share permissions defined for the filter.
+     * {@code sharePermissions} Returns the share permissions defined for the filter.
      * *
-     * `editPermissions` Returns the edit permissions defined for the filter.
+     * {@code editPermissions} Returns the edit permissions defined for the filter.
      * *
-     * `isWritable` Returns whether the current user has permission to edit the filter.
+     * {@code isWritable} Returns whether the current user has permission to edit the filter.
      * *
-     * `subscriptions` Returns the users that are subscribed to the filter.
+     * {@code subscriptions} Returns the users that are subscribed to the filter.
      * *
-     * `viewUrl` Returns a URL to view the filter.
+     * {@code viewUrl} Returns a URL to view the filter.
      */
     @Nullable 
     private String expand;
@@ -141,10 +149,10 @@ public class GetFiltersPaginatedOperationSpec {
      * EXPERIMENTAL: Whether share permissions are overridden to enable filters with any share permissions to be returned. Available to users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      */
     @Nullable 
-    private Boolean overrideSharePermissions = false;
+    private Boolean overrideSharePermissions;
 
     /**
-     * Constructs a validated implementation of {@link GetFiltersPaginatedOperationSpec}.
+     * Constructs a validated instance of {@link GetFiltersPaginatedOperationSpec}.
      *
      * @param spec the specification to process
      */
@@ -156,11 +164,46 @@ public class GetFiltersPaginatedOperationSpec {
     }
 
     /**
+     * Constructs a validated instance of {@link GetFiltersPaginatedOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param filterName           String used to perform a case-insensitive partial match with {@code name}.
+     * @param accountId            User account ID used to return filters with the matching {@code owner.accountId}. This parameter cannot be used with {@code owner}.
+     * @param owner                This parameter is deprecated because of privacy changes. Use {@code accountId} instead. See the [migration guide](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details. User name used to return filters with the matching {@code owner.name}. This parameter cannot be used with {@code accountId}.
+     * @param groupname            As a group's name can change, use of {@code groupId} is recommended to identify a group. Group name used to returns filters that are shared with a group that matches {@code sharePermissions.group.groupname}. This parameter cannot be used with the {@code groupId} parameter.
+     * @param groupId              Group ID used to returns filters that are shared with a group that matches {@code sharePermissions.group.groupId}. This parameter cannot be used with the {@code groupname} parameter.
+     * @param projectId            Project ID used to returns filters that are shared with a project that matches {@code sharePermissions.project.id}.
+     * @param id                   The list of filter IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code id=10000&amp;id=10001}. Do not exceed 200 filter IDs.
+     * @param orderBy              [Order](#ordering) the results by a field:   *  {@code description} Sorts by filter description. Note that this sorting works independently of whether the expand to display the description field is in use.  *  {@code favourite_count} Sorts by the count of how many users have this filter as a favorite.  *  {@code is_favourite} Sorts by whether the filter is marked as a favorite.  *  {@code id} Sorts by filter ID.  *  {@code name} Sorts by filter name.  *  {@code owner} Sorts by the ID of the filter owner.  *  {@code is_shared} Sorts by whether the filter is shared.
+     * @param startAt              The index of the first item to return in a page of results (page offset).
+     * @param maxResults           The maximum number of items to return per page.
+     * @param expand               Use [expand](#expansion) to include additional information about filter in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code description} Returns the description of the filter.  *  {@code favourite} Returns an indicator of whether the user has set the filter as a favorite.  *  {@code favouritedCount} Returns a count of how many users have set this filter as a favorite.  *  {@code jql} Returns the JQL query that the filter uses.  *  {@code owner} Returns the owner of the filter.  *  {@code searchUrl} Returns a URL to perform the filter's JQL query.  *  {@code sharePermissions} Returns the share permissions defined for the filter.  *  {@code editPermissions} Returns the edit permissions defined for the filter.  *  {@code isWritable} Returns whether the current user has permission to edit the filter.  *  {@code subscriptions} Returns the users that are subscribed to the filter.  *  {@code viewUrl} Returns a URL to view the filter.
+     * @param overrideSharePermissions EXPERIMENTAL: Whether share permissions are overridden to enable filters with any share permissions to be returned. Available to users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
+     */
+    @ApiStatus.Internal
+    public GetFiltersPaginatedOperationSpec(String filterName, String accountId, String owner, String groupname, String groupId, Long projectId, Set<Long> id, String orderBy, Long startAt, Integer maxResults, String expand, Boolean overrideSharePermissions) {
+        this.filterName = filterName;
+        this.accountId = accountId;
+        this.owner = owner;
+        this.groupname = groupname;
+        this.groupId = groupId;
+        this.projectId = projectId;
+        this.id = id;
+        this.orderBy = orderBy;
+        this.startAt = startAt;
+        this.maxResults = maxResults;
+        this.expand = expand;
+        this.overrideSharePermissions = overrideSharePermissions;
+
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
      * Validates the Spec, will throw a exception if required parameters are missing
      *
      * @throws NullPointerException
      */
     public void validate() {
     }
-
 }

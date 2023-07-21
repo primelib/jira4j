@@ -6,10 +6,15 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import javax.annotation.processing.Generated;
 
+import java.util.Set;
 import io.github.primelib.jira4j.restv3.model.Worklog;
 import io.github.primelib.jira4j.restv3.model.WorklogIdsRequestBean;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -21,9 +26,13 @@ import java.util.function.Consumer;
  * <p>
  * Get worklogs
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class GetWorklogsForIdsOperationSpec {
     /**
@@ -39,19 +48,35 @@ public class GetWorklogsForIdsOperationSpec {
     private WorklogIdsRequestBean worklogIdsRequestBean;
 
     /**
-     * Use [expand](#expansion) to include additional information about worklogs in the response. This parameter accepts `properties` that returns the properties of each worklog.
+     * Use [expand](#expansion) to include additional information about worklogs in the response. This parameter accepts {@code properties} that returns the properties of each worklog.
      */
     @Nullable 
     private String expand;
 
     /**
-     * Constructs a validated implementation of {@link GetWorklogsForIdsOperationSpec}.
+     * Constructs a validated instance of {@link GetWorklogsForIdsOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public GetWorklogsForIdsOperationSpec(Consumer<GetWorklogsForIdsOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link GetWorklogsForIdsOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param worklogIdsRequestBean A JSON object containing a list of worklog IDs.
+     * @param expand               Use [expand](#expansion) to include additional information about worklogs in the response. This parameter accepts {@code properties} that returns the properties of each worklog.
+     */
+    @ApiStatus.Internal
+    public GetWorklogsForIdsOperationSpec(WorklogIdsRequestBean worklogIdsRequestBean, String expand) {
+        this.worklogIdsRequestBean = worklogIdsRequestBean;
+        this.expand = expand;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -64,5 +89,4 @@ public class GetWorklogsForIdsOperationSpec {
     public void validate() {
         Objects.requireNonNull(worklogIdsRequestBean, "worklogIdsRequestBean is a required parameter!");
     }
-
 }

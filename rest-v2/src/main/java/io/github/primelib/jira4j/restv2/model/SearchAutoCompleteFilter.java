@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.util.List;
@@ -18,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * SearchAutoCompleteFilter
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "includeCollapsedFields",
     "projectIds"
@@ -31,20 +37,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class SearchAutoCompleteFilter {
 
     /**
-     * Constructs a validated implementation of {@link SearchAutoCompleteFilter}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public SearchAutoCompleteFilter(Consumer<SearchAutoCompleteFilter> spec) {
-        spec.accept(this);
-    }
-
-    /**
      * Include collapsed fields for fields that have non-unique names.
      */
     @JsonProperty("includeCollapsedFields")
-    protected Boolean includeCollapsedFields = false;
+    protected Boolean includeCollapsedFields;
 
     /**
      * List of project IDs used to filter the visible field details returned.
@@ -52,5 +48,26 @@ public class SearchAutoCompleteFilter {
     @JsonProperty("projectIds")
     protected List<Long> projectIds;
 
+    /**
+     * Constructs a validated instance of {@link SearchAutoCompleteFilter}.
+     *
+     * @param spec the specification to process
+     */
+    public SearchAutoCompleteFilter(Consumer<SearchAutoCompleteFilter> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link SearchAutoCompleteFilter}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #SearchAutoCompleteFilter(Consumer)} instead.
+     * @param includeCollapsedFields Include collapsed fields for fields that have non-unique names.
+     * @param projectIds List of project IDs used to filter the visible field details returned.
+     */
+    @ApiStatus.Internal
+    public SearchAutoCompleteFilter(Boolean includeCollapsedFields, List<Long> projectIds) {
+        this.includeCollapsedFields = includeCollapsedFields;
+        this.projectIds = projectIds;
+    }
 
 }

@@ -7,8 +7,13 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.processing.Generated;
 
 import io.github.primelib.jira4j.restv3.model.Screen;
+import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -20,9 +25,13 @@ import java.util.function.Consumer;
  * <p>
  * Get edit issue metadata
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class GetEditIssueMetaOperationSpec {
     /**
@@ -41,22 +50,40 @@ public class GetEditIssueMetaOperationSpec {
      * Whether hidden fields are returned. Available to Connect app users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) and Forge apps acting on behalf of users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      */
     @Nullable 
-    private Boolean overrideScreenSecurity = false;
+    private Boolean overrideScreenSecurity;
 
     /**
      * Whether non-editable fields are returned. Available to Connect app users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) and Forge apps acting on behalf of users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      */
     @Nullable 
-    private Boolean overrideEditableFlag = false;
+    private Boolean overrideEditableFlag;
 
     /**
-     * Constructs a validated implementation of {@link GetEditIssueMetaOperationSpec}.
+     * Constructs a validated instance of {@link GetEditIssueMetaOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public GetEditIssueMetaOperationSpec(Consumer<GetEditIssueMetaOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link GetEditIssueMetaOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param issueIdOrKey         The ID or key of the issue.
+     * @param overrideScreenSecurity Whether hidden fields are returned. Available to Connect app users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) and Forge apps acting on behalf of users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
+     * @param overrideEditableFlag Whether non-editable fields are returned. Available to Connect app users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) and Forge apps acting on behalf of users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
+     */
+    @ApiStatus.Internal
+    public GetEditIssueMetaOperationSpec(String issueIdOrKey, Boolean overrideScreenSecurity, Boolean overrideEditableFlag) {
+        this.issueIdOrKey = issueIdOrKey;
+        this.overrideScreenSecurity = overrideScreenSecurity;
+        this.overrideEditableFlag = overrideEditableFlag;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -69,5 +96,4 @@ public class GetEditIssueMetaOperationSpec {
     public void validate() {
         Objects.requireNonNull(issueIdOrKey, "issueIdOrKey is a required parameter!");
     }
-
 }

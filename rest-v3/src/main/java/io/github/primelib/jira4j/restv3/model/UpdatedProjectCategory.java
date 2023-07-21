@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -17,10 +20,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * UpdatedProjectCategory
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "description",
     "id",
@@ -30,16 +36,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("UpdatedProjectCategory")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class UpdatedProjectCategory {
-
-    /**
-     * Constructs a validated implementation of {@link UpdatedProjectCategory}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public UpdatedProjectCategory(Consumer<UpdatedProjectCategory> spec) {
-        spec.accept(this);
-    }
 
     /**
      * The name of the project category.
@@ -65,5 +61,30 @@ public class UpdatedProjectCategory {
     @JsonProperty("self")
     protected String self;
 
+    /**
+     * Constructs a validated instance of {@link UpdatedProjectCategory}.
+     *
+     * @param spec the specification to process
+     */
+    public UpdatedProjectCategory(Consumer<UpdatedProjectCategory> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link UpdatedProjectCategory}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #UpdatedProjectCategory(Consumer)} instead.
+     * @param description The name of the project category.
+     * @param id The ID of the project category.
+     * @param name The description of the project category.
+     * @param self The URL of the project category.
+     */
+    @ApiStatus.Internal
+    public UpdatedProjectCategory(String description, String id, String name, String self) {
+        this.description = description;
+        this.id = id;
+        this.name = name;
+        this.self = self;
+    }
 
 }

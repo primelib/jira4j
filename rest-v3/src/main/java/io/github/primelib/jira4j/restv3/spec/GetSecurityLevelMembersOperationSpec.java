@@ -7,7 +7,11 @@ import javax.annotation.processing.Generated;
 import io.github.primelib.jira4j.restv3.model.SecurityLevel;
 import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -19,9 +23,13 @@ import java.util.function.Consumer;
  * <p>
  * Get issue security level members
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class GetSecurityLevelMembersOperationSpec {
     /**
@@ -34,28 +42,28 @@ public class GetSecurityLevelMembersOperationSpec {
      * The index of the first item to return in a page of results (page offset).
      */
     @Nullable 
-    private String startAt = "0";
+    private String startAt;
 
     /**
      * The maximum number of items to return per page.
      */
     @Nullable 
-    private String maxResults = "50";
+    private String maxResults;
 
     /**
-     * The list of issue security level member IDs. To include multiple issue security level members separate IDs with an ampersand: `id=10000&amp;id=10001`.
+     * The list of issue security level member IDs. To include multiple issue security level members separate IDs with an ampersand: {@code id=10000&amp;id=10001}.
      */
     @Nullable 
     private Set<String> id;
 
     /**
-     * The list of issue security scheme IDs. To include multiple issue security schemes separate IDs with an ampersand: `schemeId=10000&amp;schemeId=10001`.
+     * The list of issue security scheme IDs. To include multiple issue security schemes separate IDs with an ampersand: {@code schemeId=10000&amp;schemeId=10001}.
      */
     @Nullable 
     private Set<String> schemeId;
 
     /**
-     * The list of issue security level IDs. To include multiple issue security levels separate IDs with an ampersand: `levelId=10000&amp;levelId=10001`.
+     * The list of issue security level IDs. To include multiple issue security levels separate IDs with an ampersand: {@code levelId=10000&amp;levelId=10001}.
      */
     @Nullable 
     private Set<String> levelId;
@@ -63,21 +71,21 @@ public class GetSecurityLevelMembersOperationSpec {
     /**
      * Use expand to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:
      *  *
-     * `all` Returns all expandable information
+     * {@code all} Returns all expandable information
      * *
-     * `field` Returns information about the custom field granted the permission
+     * {@code field} Returns information about the custom field granted the permission
      * *
-     * `group` Returns information about the group that is granted the permission
+     * {@code group} Returns information about the group that is granted the permission
      * *
-     * `projectRole` Returns information about the project role granted the permission
+     * {@code projectRole} Returns information about the project role granted the permission
      * *
-     * `user` Returns information about the user who is granted the permission
+     * {@code user} Returns information about the user who is granted the permission
      */
     @Nullable 
     private String expand;
 
     /**
-     * Constructs a validated implementation of {@link GetSecurityLevelMembersOperationSpec}.
+     * Constructs a validated instance of {@link GetSecurityLevelMembersOperationSpec}.
      *
      * @param spec the specification to process
      */
@@ -89,11 +97,34 @@ public class GetSecurityLevelMembersOperationSpec {
     }
 
     /**
+     * Constructs a validated instance of {@link GetSecurityLevelMembersOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param startAt              The index of the first item to return in a page of results (page offset).
+     * @param maxResults           The maximum number of items to return per page.
+     * @param id                   The list of issue security level member IDs. To include multiple issue security level members separate IDs with an ampersand: {@code id=10000&amp;id=10001}.
+     * @param schemeId             The list of issue security scheme IDs. To include multiple issue security schemes separate IDs with an ampersand: {@code schemeId=10000&amp;schemeId=10001}.
+     * @param levelId              The list of issue security level IDs. To include multiple issue security levels separate IDs with an ampersand: {@code levelId=10000&amp;levelId=10001}.
+     * @param expand               Use expand to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code all} Returns all expandable information  *  {@code field} Returns information about the custom field granted the permission  *  {@code group} Returns information about the group that is granted the permission  *  {@code projectRole} Returns information about the project role granted the permission  *  {@code user} Returns information about the user who is granted the permission
+     */
+    @ApiStatus.Internal
+    public GetSecurityLevelMembersOperationSpec(String startAt, String maxResults, Set<String> id, Set<String> schemeId, Set<String> levelId, String expand) {
+        this.startAt = startAt;
+        this.maxResults = maxResults;
+        this.id = id;
+        this.schemeId = schemeId;
+        this.levelId = levelId;
+        this.expand = expand;
+
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
      * Validates the Spec, will throw a exception if required parameters are missing
      *
      * @throws NullPointerException
      */
     public void validate() {
     }
-
 }

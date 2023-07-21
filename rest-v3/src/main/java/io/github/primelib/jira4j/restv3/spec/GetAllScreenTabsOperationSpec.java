@@ -7,8 +7,13 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.processing.Generated;
 
 import io.github.primelib.jira4j.restv3.model.Screen;
+import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -20,9 +25,13 @@ import java.util.function.Consumer;
  * <p>
  * Get all screen tabs
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class GetAllScreenTabsOperationSpec {
     /**
@@ -44,13 +53,29 @@ public class GetAllScreenTabsOperationSpec {
     private String projectKey;
 
     /**
-     * Constructs a validated implementation of {@link GetAllScreenTabsOperationSpec}.
+     * Constructs a validated instance of {@link GetAllScreenTabsOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public GetAllScreenTabsOperationSpec(Consumer<GetAllScreenTabsOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link GetAllScreenTabsOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param screenId             The ID of the screen.
+     * @param projectKey           The key of the project.
+     */
+    @ApiStatus.Internal
+    public GetAllScreenTabsOperationSpec(Long screenId, String projectKey) {
+        this.screenId = screenId;
+        this.projectKey = projectKey;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -63,5 +88,4 @@ public class GetAllScreenTabsOperationSpec {
     public void validate() {
         Objects.requireNonNull(screenId, "screenId is a required parameter!");
     }
-
 }

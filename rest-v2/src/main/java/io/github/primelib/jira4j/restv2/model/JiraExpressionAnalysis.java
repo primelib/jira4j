@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.util.List;
@@ -18,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * JiraExpressionAnalysis
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "complexity",
     "errors",
@@ -32,16 +38,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("JiraExpressionAnalysis")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class JiraExpressionAnalysis {
-
-    /**
-     * Constructs a validated implementation of {@link JiraExpressionAnalysis}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public JiraExpressionAnalysis(Consumer<JiraExpressionAnalysis> spec) {
-        spec.accept(this);
-    }
 
     @JsonProperty("complexity")
     protected JiraExpressionComplexity complexity;
@@ -70,5 +66,32 @@ public class JiraExpressionAnalysis {
     @JsonProperty("valid")
     protected Boolean valid;
 
+    /**
+     * Constructs a validated instance of {@link JiraExpressionAnalysis}.
+     *
+     * @param spec the specification to process
+     */
+    public JiraExpressionAnalysis(Consumer<JiraExpressionAnalysis> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link JiraExpressionAnalysis}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #JiraExpressionAnalysis(Consumer)} instead.
+     * @param complexity var.name
+     * @param errors A list of validation errors. Not included if the expression is valid.
+     * @param expression The analysed expression.
+     * @param type EXPERIMENTAL. The inferred type of the expression.
+     * @param valid Whether the expression is valid and the interpreter will evaluate it. Note that the expression may fail at runtime (for example, if it executes too many expensive operations).
+     */
+    @ApiStatus.Internal
+    public JiraExpressionAnalysis(JiraExpressionComplexity complexity, List<JiraExpressionValidationError> errors, String expression, String type, Boolean valid) {
+        this.complexity = complexity;
+        this.errors = errors;
+        this.expression = expression;
+        this.type = type;
+        this.valid = valid;
+    }
 
 }

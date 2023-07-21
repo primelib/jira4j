@@ -7,8 +7,13 @@ import javax.annotation.processing.Generated;
 
 import io.github.primelib.jira4j.restv3.model.ReorderIssueResolutionsRequest;
 import io.github.primelib.jira4j.restv3.model.Resolution;
+import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -20,9 +25,13 @@ import java.util.function.Consumer;
  * <p>
  * Move resolutions
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class MoveResolutionsOperationSpec {
     /**
@@ -37,13 +46,27 @@ public class MoveResolutionsOperationSpec {
     private ReorderIssueResolutionsRequest reorderIssueResolutionsRequest;
 
     /**
-     * Constructs a validated implementation of {@link MoveResolutionsOperationSpec}.
+     * Constructs a validated instance of {@link MoveResolutionsOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public MoveResolutionsOperationSpec(Consumer<MoveResolutionsOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link MoveResolutionsOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param reorderIssueResolutionsRequest 
+     */
+    @ApiStatus.Internal
+    public MoveResolutionsOperationSpec(ReorderIssueResolutionsRequest reorderIssueResolutionsRequest) {
+        this.reorderIssueResolutionsRequest = reorderIssueResolutionsRequest;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -56,5 +79,4 @@ public class MoveResolutionsOperationSpec {
     public void validate() {
         Objects.requireNonNull(reorderIssueResolutionsRequest, "reorderIssueResolutionsRequest is a required parameter!");
     }
-
 }

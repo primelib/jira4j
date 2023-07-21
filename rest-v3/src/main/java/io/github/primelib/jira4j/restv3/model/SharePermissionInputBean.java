@@ -3,10 +3,14 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -17,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * SharePermissionInputBean
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "accountId",
     "groupId",
@@ -35,41 +42,31 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class SharePermissionInputBean {
 
     /**
-     * Constructs a validated implementation of {@link SharePermissionInputBean}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public SharePermissionInputBean(Consumer<SharePermissionInputBean> spec) {
-        spec.accept(this);
-    }
-
-    /**
-     * The user account ID that the filter is shared with. For a request, specify the `accountId` property for the user.
+     * The user account ID that the filter is shared with. For a request, specify the {@code accountId} property for the user.
      */
     @JsonProperty("accountId")
     protected String accountId;
 
     /**
-     * The ID of the group, which uniquely identifies the group across all Atlassian products.For example, *952d12c3-5b5b-4d04-bb32-44d383afc4b2*. Cannot be provided with `groupname`.
+     * The ID of the group, which uniquely identifies the group across all Atlassian products.For example, *952d12c3-5b5b-4d04-bb32-44d383afc4b2*. Cannot be provided with {@code groupname}.
      */
     @JsonProperty("groupId")
     protected String groupId;
 
     /**
-     * The name of the group to share the filter with. Set `type` to `group`. Please note that the name of a group is mutable, to reliably identify a group use `groupId`.
+     * The name of the group to share the filter with. Set {@code type} to {@code group}. Please note that the name of a group is mutable, to reliably identify a group use {@code groupId}.
      */
     @JsonProperty("groupname")
     protected String groupname;
 
     /**
-     * The ID of the project to share the filter with. Set `type` to `project`.
+     * The ID of the project to share the filter with. Set {@code type} to {@code project}.
      */
     @JsonProperty("projectId")
     protected String projectId;
 
     /**
-     * The ID of the project role to share the filter with. Set `type` to `projectRole` and the `projectId` for the project that the role is in.
+     * The ID of the project role to share the filter with. Set {@code type} to {@code projectRole} and the {@code projectId} for the project that the role is in.
      */
     @JsonProperty("projectRoleId")
     protected String projectRoleId;
@@ -83,36 +80,67 @@ public class SharePermissionInputBean {
     /**
      * The type of the share permission.Specify the type as follows:
      *  *
-     * `user` Share with a user.
+     * {@code user} Share with a user.
      * *
-     * `group` Share with a group. Specify `groupname` as well.
+     * {@code group} Share with a group. Specify {@code groupname} as well.
      * *
-     * `project` Share with a project. Specify `projectId` as well.
+     * {@code project} Share with a project. Specify {@code projectId} as well.
      * *
-     * `projectRole` Share with a project role in a project. Specify `projectId` and `projectRoleId` as well.
+     * {@code projectRole} Share with a project role in a project. Specify {@code projectId} and {@code projectRoleId} as well.
      * *
-     * `global` Share globally, including anonymous users. If set, this type overrides all existing share permissions and must be deleted before any non-global share permissions is set.
+     * {@code global} Share globally, including anonymous users. If set, this type overrides all existing share permissions and must be deleted before any non-global share permissions is set.
      * *
-     * `authenticated` Share with all logged-in users. This shows as `loggedin` in the response. If set, this type overrides all existing share permissions and must be deleted before any non-global share permissions is set.
+     * {@code authenticated} Share with all logged-in users. This shows as {@code loggedin} in the response. If set, this type overrides all existing share permissions and must be deleted before any non-global share permissions is set.
      */
     @JsonProperty("type")
     protected TypeEnum type;
 
+    /**
+     * Constructs a validated instance of {@link SharePermissionInputBean}.
+     *
+     * @param spec the specification to process
+     */
+    public SharePermissionInputBean(Consumer<SharePermissionInputBean> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link SharePermissionInputBean}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #SharePermissionInputBean(Consumer)} instead.
+     * @param accountId The user account ID that the filter is shared with. For a request, specify the {@code accountId} property for the user.
+     * @param groupId The ID of the group, which uniquely identifies the group across all Atlassian products.For example, *952d12c3-5b5b-4d04-bb32-44d383afc4b2*. Cannot be provided with {@code groupname}.
+     * @param groupname The name of the group to share the filter with. Set {@code type} to {@code group}. Please note that the name of a group is mutable, to reliably identify a group use {@code groupId}.
+     * @param projectId The ID of the project to share the filter with. Set {@code type} to {@code project}.
+     * @param projectRoleId The ID of the project role to share the filter with. Set {@code type} to {@code projectRole} and the {@code projectId} for the project that the role is in.
+     * @param rights The rights for the share permission.
+     * @param type The type of the share permission.Specify the type as follows:   *  {@code user} Share with a user.  *  {@code group} Share with a group. Specify {@code groupname} as well.  *  {@code project} Share with a project. Specify {@code projectId} as well.  *  {@code projectRole} Share with a project role in a project. Specify {@code projectId} and {@code projectRoleId} as well.  *  {@code global} Share globally, including anonymous users. If set, this type overrides all existing share permissions and must be deleted before any non-global share permissions is set.  *  {@code authenticated} Share with all logged-in users. This shows as {@code loggedin} in the response. If set, this type overrides all existing share permissions and must be deleted before any non-global share permissions is set.
+     */
+    @ApiStatus.Internal
+    public SharePermissionInputBean(String accountId, String groupId, String groupname, String projectId, String projectRoleId, Integer rights, TypeEnum type) {
+        this.accountId = accountId;
+        this.groupId = groupId;
+        this.groupname = groupname;
+        this.projectId = projectId;
+        this.projectRoleId = projectRoleId;
+        this.rights = rights;
+        this.type = type;
+    }
 
     /**
      * The type of the share permission.Specify the type as follows:
      *  *
-     * `user` Share with a user.
+     * {@code user} Share with a user.
      * *
-     * `group` Share with a group. Specify `groupname` as well.
+     * {@code group} Share with a group. Specify {@code groupname} as well.
      * *
-     * `project` Share with a project. Specify `projectId` as well.
+     * {@code project} Share with a project. Specify {@code projectId} as well.
      * *
-     * `projectRole` Share with a project role in a project. Specify `projectId` and `projectRoleId` as well.
+     * {@code projectRole} Share with a project role in a project. Specify {@code projectId} and {@code projectRoleId} as well.
      * *
-     * `global` Share globally, including anonymous users. If set, this type overrides all existing share permissions and must be deleted before any non-global share permissions is set.
+     * {@code global} Share globally, including anonymous users. If set, this type overrides all existing share permissions and must be deleted before any non-global share permissions is set.
      * *
-     * `authenticated` Share with all logged-in users. This shows as `loggedin` in the response. If set, this type overrides all existing share permissions and must be deleted before any non-global share permissions is set.
+     * {@code authenticated} Share with all logged-in users. This shows as {@code loggedin} in the response. If set, this type overrides all existing share permissions and must be deleted before any non-global share permissions is set.
      */
     @AllArgsConstructor
     public enum TypeEnum {

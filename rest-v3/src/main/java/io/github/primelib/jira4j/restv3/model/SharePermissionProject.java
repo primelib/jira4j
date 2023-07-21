@@ -3,15 +3,18 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.net.URI;
 import java.time.OffsetDateTime;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
@@ -23,10 +26,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * SharePermissionProject
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "archived",
     "archivedBy",
@@ -66,16 +72,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("SharePermission_project")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class SharePermissionProject {
-
-    /**
-     * Constructs a validated implementation of {@link SharePermissionProject}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public SharePermissionProject(Consumer<SharePermissionProject> spec) {
-        spec.accept(this);
-    }
 
     /**
      * Whether the project is archived.
@@ -204,7 +200,7 @@ public class SharePermissionProject {
      * Map of project properties
      */
     @JsonProperty("properties")
-    protected Map<String, Object> properties = new HashMap<>();
+    protected Map<String, Object> properties;
 
     /**
      * The date when the project is deleted permanently.
@@ -216,7 +212,7 @@ public class SharePermissionProject {
      * The name and self URL for each role defined in the project. For more information, see [Create project role](#api-rest-api-3-role-post).
      */
     @JsonProperty("roles")
-    protected Map<String, URI> roles = new HashMap<>();
+    protected Map<String, URI> roles;
 
     /**
      * The URL of the project details.
@@ -254,6 +250,91 @@ public class SharePermissionProject {
     @JsonProperty("versions")
     protected List<Version> versions;
 
+    /**
+     * Constructs a validated instance of {@link SharePermissionProject}.
+     *
+     * @param spec the specification to process
+     */
+    public SharePermissionProject(Consumer<SharePermissionProject> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link SharePermissionProject}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #SharePermissionProject(Consumer)} instead.
+     * @param archived Whether the project is archived.
+     * @param archivedBy var.name
+     * @param archivedDate The date when the project was archived.
+     * @param assigneeType The default assignee when creating issues for this project.
+     * @param avatarUrls var.name
+     * @param components List of the components contained in the project.
+     * @param deleted Whether the project is marked as deleted.
+     * @param deletedBy var.name
+     * @param deletedDate The date when the project was marked as deleted.
+     * @param description A brief description of the project.
+     * @param email An email address associated with the project.
+     * @param expand Expand options that include additional project details in the response.
+     * @param favourite Whether the project is selected as a favorite.
+     * @param id The ID of the project.
+     * @param insight var.name
+     * @param isPrivate Whether the project is private.
+     * @param issueTypeHierarchy var.name
+     * @param issueTypes List of the issue types available in the project.
+     * @param key The key of the project.
+     * @param landingPageInfo var.name
+     * @param lead var.name
+     * @param name The name of the project.
+     * @param permissions var.name
+     * @param projectCategory var.name
+     * @param projectTypeKey The [project type](https://confluence.atlassian.com/x/GwiiLQ#Jiraapplicationsoverview-Productfeaturesandprojecttypes) of the project.
+     * @param properties Map of project properties
+     * @param retentionTillDate The date when the project is deleted permanently.
+     * @param roles The name and self URL for each role defined in the project. For more information, see [Create project role](#api-rest-api-3-role-post).
+     * @param self The URL of the project details.
+     * @param simplified Whether the project is simplified.
+     * @param style The type of the project.
+     * @param url A link to information about this project, such as project documentation.
+     * @param uuid Unique ID for next-gen projects.
+     * @param versions The versions defined in the project. For more information, see [Create version](#api-rest-api-3-version-post).
+     */
+    @ApiStatus.Internal
+    public SharePermissionProject(Boolean archived, ProjectArchivedBy archivedBy, OffsetDateTime archivedDate, AssigneeTypeEnum assigneeType, ProjectAvatarUrls avatarUrls, List<ProjectComponent> components, Boolean deleted, ProjectDeletedBy deletedBy, OffsetDateTime deletedDate, String description, String email, String expand, Boolean favourite, String id, ProjectInsight insight, Boolean isPrivate, ProjectIssueTypeHierarchy issueTypeHierarchy, List<IssueTypeDetails> issueTypes, String key, ProjectLandingPageInfo landingPageInfo, ProjectLead lead, String name, ProjectPermissions permissions, ProjectProjectCategory projectCategory, ProjectTypeKeyEnum projectTypeKey, Map<String, Object> properties, OffsetDateTime retentionTillDate, Map<String, URI> roles, URI self, Boolean simplified, StyleEnum style, String url, UUID uuid, List<Version> versions) {
+        this.archived = archived;
+        this.archivedBy = archivedBy;
+        this.archivedDate = archivedDate;
+        this.assigneeType = assigneeType;
+        this.avatarUrls = avatarUrls;
+        this.components = components;
+        this.deleted = deleted;
+        this.deletedBy = deletedBy;
+        this.deletedDate = deletedDate;
+        this.description = description;
+        this.email = email;
+        this.expand = expand;
+        this.favourite = favourite;
+        this.id = id;
+        this.insight = insight;
+        this.isPrivate = isPrivate;
+        this.issueTypeHierarchy = issueTypeHierarchy;
+        this.issueTypes = issueTypes;
+        this.key = key;
+        this.landingPageInfo = landingPageInfo;
+        this.lead = lead;
+        this.name = name;
+        this.permissions = permissions;
+        this.projectCategory = projectCategory;
+        this.projectTypeKey = projectTypeKey;
+        this.properties = properties;
+        this.retentionTillDate = retentionTillDate;
+        this.roles = roles;
+        this.self = self;
+        this.simplified = simplified;
+        this.style = style;
+        this.url = url;
+        this.uuid = uuid;
+        this.versions = versions;
+    }
 
     /**
      * The default assignee when creating issues for this project.

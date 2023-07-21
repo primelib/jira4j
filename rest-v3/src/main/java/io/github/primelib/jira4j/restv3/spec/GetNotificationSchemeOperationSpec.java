@@ -8,8 +8,13 @@ import javax.annotation.processing.Generated;
 
 import io.github.primelib.jira4j.restv3.model.Notification;
 import io.github.primelib.jira4j.restv3.model.NotificationScheme;
+import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -21,9 +26,13 @@ import java.util.function.Consumer;
  * <p>
  * Get notification scheme
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class GetNotificationSchemeOperationSpec {
     /**
@@ -41,29 +50,45 @@ public class GetNotificationSchemeOperationSpec {
     /**
      * Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:
      *  *
-     * `all` Returns all expandable information
+     * {@code all} Returns all expandable information
      * *
-     * `field` Returns information about any custom fields assigned to receive an event
+     * {@code field} Returns information about any custom fields assigned to receive an event
      * *
-     * `group` Returns information about any groups assigned to receive an event
+     * {@code group} Returns information about any groups assigned to receive an event
      * *
-     * `notificationSchemeEvents` Returns a list of event associations. This list is returned for all expandable information
+     * {@code notificationSchemeEvents} Returns a list of event associations. This list is returned for all expandable information
      * *
-     * `projectRole` Returns information about any project roles assigned to receive an event
+     * {@code projectRole} Returns information about any project roles assigned to receive an event
      * *
-     * `user` Returns information about any users assigned to receive an event
+     * {@code user} Returns information about any users assigned to receive an event
      */
     @Nullable 
     private String expand;
 
     /**
-     * Constructs a validated implementation of {@link GetNotificationSchemeOperationSpec}.
+     * Constructs a validated instance of {@link GetNotificationSchemeOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public GetNotificationSchemeOperationSpec(Consumer<GetNotificationSchemeOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link GetNotificationSchemeOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param id                   The ID of the notification scheme. Use [Get notification schemes paginated](#api-rest-api-3-notificationscheme-get) to get a list of notification scheme IDs.
+     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code all} Returns all expandable information  *  {@code field} Returns information about any custom fields assigned to receive an event  *  {@code group} Returns information about any groups assigned to receive an event  *  {@code notificationSchemeEvents} Returns a list of event associations. This list is returned for all expandable information  *  {@code projectRole} Returns information about any project roles assigned to receive an event  *  {@code user} Returns information about any users assigned to receive an event
+     */
+    @ApiStatus.Internal
+    public GetNotificationSchemeOperationSpec(Long id, String expand) {
+        this.id = id;
+        this.expand = expand;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -76,5 +101,4 @@ public class GetNotificationSchemeOperationSpec {
     public void validate() {
         Objects.requireNonNull(id, "id is a required parameter!");
     }
-
 }

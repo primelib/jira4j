@@ -3,10 +3,14 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -17,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * JqlQueryClauseTimePredicate
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "operand",
     "operator"
@@ -28,16 +35,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("JqlQueryClauseTimePredicate")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class JqlQueryClauseTimePredicate {
-
-    /**
-     * Constructs a validated implementation of {@link JqlQueryClauseTimePredicate}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public JqlQueryClauseTimePredicate(Consumer<JqlQueryClauseTimePredicate> spec) {
-        spec.accept(this);
-    }
 
     @JsonProperty("operand")
     protected JqlQueryClauseOperand operand;
@@ -48,6 +45,27 @@ public class JqlQueryClauseTimePredicate {
     @JsonProperty("operator")
     protected OperatorEnum operator;
 
+    /**
+     * Constructs a validated instance of {@link JqlQueryClauseTimePredicate}.
+     *
+     * @param spec the specification to process
+     */
+    public JqlQueryClauseTimePredicate(Consumer<JqlQueryClauseTimePredicate> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link JqlQueryClauseTimePredicate}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #JqlQueryClauseTimePredicate(Consumer)} instead.
+     * @param operand var.name
+     * @param operator The operator between the field and the operand.
+     */
+    @ApiStatus.Internal
+    public JqlQueryClauseTimePredicate(JqlQueryClauseOperand operand, OperatorEnum operator) {
+        this.operand = operand;
+        this.operator = operator;
+    }
 
     /**
      * The operator between the field and the operand.

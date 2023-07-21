@@ -2,10 +2,12 @@ package io.github.primelib.jira4j.restv3;
 
 import java.util.Map;
 import javax.annotation.processing.Generated;
+import lombok.Builder;
 
 import io.github.primelib.jira4j.restv3.api.JiraRESTV3Api;
 import io.github.primelib.jira4j.restv3.auth.AuthInterceptor;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.module.blackbird.BlackbirdModule;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
@@ -13,6 +15,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.SerializationFeature;
 import com.fasterxml.jackson.databind.json.JsonMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 
 import feign.Feign;
 import feign.Logger;
@@ -53,6 +56,8 @@ public class JiraRESTV3Factory {
             .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
             .propertyNamingStrategy(PropertyNamingStrategies.LOWER_CAMEL_CASE)
             .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
+            .serializationInclusion(JsonInclude.Include.NON_NULL)
+            .addModule(new JavaTimeModule())
             .addModule(new BlackbirdModule())
             .build();
 

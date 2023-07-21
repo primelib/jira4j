@@ -9,8 +9,13 @@ import javax.annotation.processing.Generated;
 import io.github.primelib.jira4j.restv3.model.Filter;
 import io.github.primelib.jira4j.restv3.model.Project;
 import io.github.primelib.jira4j.restv3.model.ProjectComponent;
+import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -22,9 +27,13 @@ import java.util.function.Consumer;
  * <p>
  * Get project components paginated
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class GetProjectComponentsPaginatedOperationSpec {
     /**
@@ -43,42 +52,64 @@ public class GetProjectComponentsPaginatedOperationSpec {
      * The index of the first item to return in a page of results (page offset).
      */
     @Nullable 
-    private Long startAt = 0L;
+    private Long startAt;
 
     /**
      * The maximum number of items to return per page.
      */
     @Nullable 
-    private Integer maxResults = 50;
+    private Integer maxResults;
 
     /**
      * [Order](#ordering) the results by a field:
      *  *
-     * `description` Sorts by the component description.
+     * {@code description} Sorts by the component description.
      * *
-     * `issueCount` Sorts by the count of issues associated with the component.
+     * {@code issueCount} Sorts by the count of issues associated with the component.
      * *
-     * `lead` Sorts by the user key of the component's project lead.
+     * {@code lead} Sorts by the user key of the component's project lead.
      * *
-     * `name` Sorts by component name.
+     * {@code name} Sorts by component name.
      */
     @Nullable 
     private String orderBy;
 
     /**
-     * Filter the results using a literal string. Components with a matching `name` or `description` are returned (case insensitive).
+     * Filter the results using a literal string. Components with a matching {@code name} or {@code description} are returned (case insensitive).
      */
     @Nullable 
     private String query;
 
     /**
-     * Constructs a validated implementation of {@link GetProjectComponentsPaginatedOperationSpec}.
+     * Constructs a validated instance of {@link GetProjectComponentsPaginatedOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public GetProjectComponentsPaginatedOperationSpec(Consumer<GetProjectComponentsPaginatedOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link GetProjectComponentsPaginatedOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param projectIdOrKey       The project ID or project key (case sensitive).
+     * @param startAt              The index of the first item to return in a page of results (page offset).
+     * @param maxResults           The maximum number of items to return per page.
+     * @param orderBy              [Order](#ordering) the results by a field:   *  {@code description} Sorts by the component description.  *  {@code issueCount} Sorts by the count of issues associated with the component.  *  {@code lead} Sorts by the user key of the component's project lead.  *  {@code name} Sorts by component name.
+     * @param query                Filter the results using a literal string. Components with a matching {@code name} or {@code description} are returned (case insensitive).
+     */
+    @ApiStatus.Internal
+    public GetProjectComponentsPaginatedOperationSpec(String projectIdOrKey, Long startAt, Integer maxResults, String orderBy, String query) {
+        this.projectIdOrKey = projectIdOrKey;
+        this.startAt = startAt;
+        this.maxResults = maxResults;
+        this.orderBy = orderBy;
+        this.query = query;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -91,5 +122,4 @@ public class GetProjectComponentsPaginatedOperationSpec {
     public void validate() {
         Objects.requireNonNull(projectIdOrKey, "projectIdOrKey is a required parameter!");
     }
-
 }

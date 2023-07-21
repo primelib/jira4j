@@ -9,8 +9,13 @@ import javax.annotation.processing.Generated;
 import io.github.primelib.jira4j.restv3.model.Project;
 import io.github.primelib.jira4j.restv3.model.Screen;
 import io.github.primelib.jira4j.restv3.model.ScreenSchemeId;
+import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -22,9 +27,13 @@ import java.util.function.Consumer;
  * <p>
  * Get issue type screen scheme projects
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class GetProjectsForIssueTypeScreenSchemeOperationSpec {
     /**
@@ -43,13 +52,13 @@ public class GetProjectsForIssueTypeScreenSchemeOperationSpec {
      * The index of the first item to return in a page of results (page offset).
      */
     @Nullable 
-    private Long startAt = 0L;
+    private Long startAt;
 
     /**
      * The maximum number of items to return per page.
      */
     @Nullable 
-    private Integer maxResults = 50;
+    private Integer maxResults;
 
     /**
      */
@@ -57,13 +66,33 @@ public class GetProjectsForIssueTypeScreenSchemeOperationSpec {
     private String query;
 
     /**
-     * Constructs a validated implementation of {@link GetProjectsForIssueTypeScreenSchemeOperationSpec}.
+     * Constructs a validated instance of {@link GetProjectsForIssueTypeScreenSchemeOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public GetProjectsForIssueTypeScreenSchemeOperationSpec(Consumer<GetProjectsForIssueTypeScreenSchemeOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link GetProjectsForIssueTypeScreenSchemeOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param issueTypeScreenSchemeId The ID of the issue type screen scheme.
+     * @param startAt              The index of the first item to return in a page of results (page offset).
+     * @param maxResults           The maximum number of items to return per page.
+     * @param query                
+     */
+    @ApiStatus.Internal
+    public GetProjectsForIssueTypeScreenSchemeOperationSpec(Long issueTypeScreenSchemeId, Long startAt, Integer maxResults, String query) {
+        this.issueTypeScreenSchemeId = issueTypeScreenSchemeId;
+        this.startAt = startAt;
+        this.maxResults = maxResults;
+        this.query = query;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -76,5 +105,4 @@ public class GetProjectsForIssueTypeScreenSchemeOperationSpec {
     public void validate() {
         Objects.requireNonNull(issueTypeScreenSchemeId, "issueTypeScreenSchemeId is a required parameter!");
     }
-
 }

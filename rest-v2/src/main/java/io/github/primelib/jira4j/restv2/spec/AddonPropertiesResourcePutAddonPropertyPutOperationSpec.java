@@ -7,7 +7,11 @@ import javax.annotation.processing.Generated;
 
 import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -19,9 +23,13 @@ import java.util.function.Consumer;
  * <p>
  * Set app property
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class AddonPropertiesResourcePutAddonPropertyPutOperationSpec {
     /**
@@ -48,13 +56,31 @@ public class AddonPropertiesResourcePutAddonPropertyPutOperationSpec {
     private Object body;
 
     /**
-     * Constructs a validated implementation of {@link AddonPropertiesResourcePutAddonPropertyPutOperationSpec}.
+     * Constructs a validated instance of {@link AddonPropertiesResourcePutAddonPropertyPutOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public AddonPropertiesResourcePutAddonPropertyPutOperationSpec(Consumer<AddonPropertiesResourcePutAddonPropertyPutOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link AddonPropertiesResourcePutAddonPropertyPutOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param addonKey             The key of the app, as defined in its descriptor.
+     * @param propertyKey          The key of the property.
+     * @param body                 
+     */
+    @ApiStatus.Internal
+    public AddonPropertiesResourcePutAddonPropertyPutOperationSpec(String addonKey, String propertyKey, Object body) {
+        this.addonKey = addonKey;
+        this.propertyKey = propertyKey;
+        this.body = body;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -69,5 +95,4 @@ public class AddonPropertiesResourcePutAddonPropertyPutOperationSpec {
         Objects.requireNonNull(propertyKey, "propertyKey is a required parameter!");
         Objects.requireNonNull(body, "body is a required parameter!");
     }
-
 }

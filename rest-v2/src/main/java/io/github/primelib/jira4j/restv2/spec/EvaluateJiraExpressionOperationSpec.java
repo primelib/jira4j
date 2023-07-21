@@ -7,8 +7,13 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.processing.Generated;
 
 import io.github.primelib.jira4j.restv2.model.JiraExpressionEvalRequestBean;
+import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -20,9 +25,13 @@ import java.util.function.Consumer;
  * <p>
  * Evaluate Jira expression
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class EvaluateJiraExpressionOperationSpec {
     /**
@@ -38,19 +47,35 @@ public class EvaluateJiraExpressionOperationSpec {
     private JiraExpressionEvalRequestBean jiraExpressionEvalRequestBean;
 
     /**
-     * Use [expand](#expansion) to include additional information in the response. This parameter accepts `meta.complexity` that returns information about the expression complexity. For example, the number of expensive operations used by the expression and how close the expression is to reaching the [complexity limit](https://developer.atlassian.com/cloud/jira/platform/jira-expressions/#restrictions). Useful when designing and debugging your expressions.
+     * Use [expand](#expansion) to include additional information in the response. This parameter accepts {@code meta.complexity} that returns information about the expression complexity. For example, the number of expensive operations used by the expression and how close the expression is to reaching the [complexity limit](https://developer.atlassian.com/cloud/jira/platform/jira-expressions/#restrictions). Useful when designing and debugging your expressions.
      */
     @Nullable 
     private String expand;
 
     /**
-     * Constructs a validated implementation of {@link EvaluateJiraExpressionOperationSpec}.
+     * Constructs a validated instance of {@link EvaluateJiraExpressionOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public EvaluateJiraExpressionOperationSpec(Consumer<EvaluateJiraExpressionOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link EvaluateJiraExpressionOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param jiraExpressionEvalRequestBean The Jira expression and the evaluation context.
+     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts {@code meta.complexity} that returns information about the expression complexity. For example, the number of expensive operations used by the expression and how close the expression is to reaching the [complexity limit](https://developer.atlassian.com/cloud/jira/platform/jira-expressions/#restrictions). Useful when designing and debugging your expressions.
+     */
+    @ApiStatus.Internal
+    public EvaluateJiraExpressionOperationSpec(JiraExpressionEvalRequestBean jiraExpressionEvalRequestBean, String expand) {
+        this.jiraExpressionEvalRequestBean = jiraExpressionEvalRequestBean;
+        this.expand = expand;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -63,5 +88,4 @@ public class EvaluateJiraExpressionOperationSpec {
     public void validate() {
         Objects.requireNonNull(jiraExpressionEvalRequestBean, "jiraExpressionEvalRequestBean is a required parameter!");
     }
-
 }

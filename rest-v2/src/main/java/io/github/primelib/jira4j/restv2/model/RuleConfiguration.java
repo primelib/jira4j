@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -17,10 +20,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * RuleConfiguration
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "disabled",
     "tag",
@@ -31,20 +37,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class RuleConfiguration {
 
     /**
-     * Constructs a validated implementation of {@link RuleConfiguration}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public RuleConfiguration(Consumer<RuleConfiguration> spec) {
-        spec.accept(this);
-    }
-
-    /**
      * EXPERIMENTAL: Whether the rule is disabled.
      */
     @JsonProperty("disabled")
-    protected Boolean disabled = false;
+    protected Boolean disabled;
 
     /**
      * EXPERIMENTAL: A tag used to filter rules in [Get workflow transition rule configurations](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-workflow-transition-rules/#api-rest-api-3-workflow-rule-config-get).
@@ -58,5 +54,28 @@ public class RuleConfiguration {
     @JsonProperty("value")
     protected String value;
 
+    /**
+     * Constructs a validated instance of {@link RuleConfiguration}.
+     *
+     * @param spec the specification to process
+     */
+    public RuleConfiguration(Consumer<RuleConfiguration> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link RuleConfiguration}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #RuleConfiguration(Consumer)} instead.
+     * @param disabled EXPERIMENTAL: Whether the rule is disabled.
+     * @param tag EXPERIMENTAL: A tag used to filter rules in [Get workflow transition rule configurations](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-workflow-transition-rules/#api-rest-api-3-workflow-rule-config-get).
+     * @param value Configuration of the rule, as it is stored by the Connect or the Forge app on the rule configuration page.
+     */
+    @ApiStatus.Internal
+    public RuleConfiguration(Boolean disabled, String tag, String value) {
+        this.disabled = disabled;
+        this.tag = tag;
+        this.value = value;
+    }
 
 }

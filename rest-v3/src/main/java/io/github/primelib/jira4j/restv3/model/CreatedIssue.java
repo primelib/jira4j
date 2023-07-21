@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -17,10 +20,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * CreatedIssue
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "id",
     "key",
@@ -31,16 +37,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("CreatedIssue")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class CreatedIssue {
-
-    /**
-     * Constructs a validated implementation of {@link CreatedIssue}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public CreatedIssue(Consumer<CreatedIssue> spec) {
-        spec.accept(this);
-    }
 
     /**
      * The ID of the created issue or subtask.
@@ -66,5 +62,32 @@ public class CreatedIssue {
     @JsonProperty("watchers")
     protected CreatedIssueWatchers watchers;
 
+    /**
+     * Constructs a validated instance of {@link CreatedIssue}.
+     *
+     * @param spec the specification to process
+     */
+    public CreatedIssue(Consumer<CreatedIssue> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link CreatedIssue}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #CreatedIssue(Consumer)} instead.
+     * @param id The ID of the created issue or subtask.
+     * @param key The key of the created issue or subtask.
+     * @param self The URL of the created issue or subtask.
+     * @param transition var.name
+     * @param watchers var.name
+     */
+    @ApiStatus.Internal
+    public CreatedIssue(String id, String key, String self, CreatedIssueTransition transition, CreatedIssueWatchers watchers) {
+        this.id = id;
+        this.key = key;
+        this.self = self;
+        this.transition = transition;
+        this.watchers = watchers;
+    }
 
 }

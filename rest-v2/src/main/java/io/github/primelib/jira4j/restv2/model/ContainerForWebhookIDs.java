@@ -3,13 +3,15 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.ArrayList;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -19,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * ContainerForWebhookIDs
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "webhookIds"
 })
@@ -31,20 +36,29 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class ContainerForWebhookIDs {
 
     /**
-     * Constructs a validated implementation of {@link ContainerForWebhookIDs}.
+     * A list of webhook IDs.
+     */
+    @JsonProperty("webhookIds")
+    protected List<Long> webhookIds;
+
+    /**
+     * Constructs a validated instance of {@link ContainerForWebhookIDs}.
      *
      * @param spec the specification to process
      */
-    @ApiStatus.Internal
     public ContainerForWebhookIDs(Consumer<ContainerForWebhookIDs> spec) {
         spec.accept(this);
     }
 
     /**
-     * A list of webhook IDs.
+     * Constructs a validated instance of {@link ContainerForWebhookIDs}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #ContainerForWebhookIDs(Consumer)} instead.
+     * @param webhookIds A list of webhook IDs.
      */
-    @JsonProperty("webhookIds")
-    protected List<Long> webhookIds = new ArrayList<>();
-
+    @ApiStatus.Internal
+    public ContainerForWebhookIDs(List<Long> webhookIds) {
+        this.webhookIds = webhookIds;
+    }
 
 }

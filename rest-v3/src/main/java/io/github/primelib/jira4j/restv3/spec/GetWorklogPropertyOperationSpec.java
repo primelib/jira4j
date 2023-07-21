@@ -5,9 +5,14 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import javax.annotation.processing.Generated;
 
+import java.util.Set;
 import io.github.primelib.jira4j.restv3.model.Worklog;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -19,9 +24,13 @@ import java.util.function.Consumer;
  * <p>
  * Get worklog property
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class GetWorklogPropertyOperationSpec {
     /**
@@ -49,13 +58,31 @@ public class GetWorklogPropertyOperationSpec {
     private String propertyKey;
 
     /**
-     * Constructs a validated implementation of {@link GetWorklogPropertyOperationSpec}.
+     * Constructs a validated instance of {@link GetWorklogPropertyOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public GetWorklogPropertyOperationSpec(Consumer<GetWorklogPropertyOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link GetWorklogPropertyOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param issueIdOrKey         The ID or key of the issue.
+     * @param worklogId            The ID of the worklog.
+     * @param propertyKey          The key of the property.
+     */
+    @ApiStatus.Internal
+    public GetWorklogPropertyOperationSpec(String issueIdOrKey, String worklogId, String propertyKey) {
+        this.issueIdOrKey = issueIdOrKey;
+        this.worklogId = worklogId;
+        this.propertyKey = propertyKey;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -70,5 +97,4 @@ public class GetWorklogPropertyOperationSpec {
         Objects.requireNonNull(worklogId, "worklogId is a required parameter!");
         Objects.requireNonNull(propertyKey, "propertyKey is a required parameter!");
     }
-
 }

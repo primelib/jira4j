@@ -5,11 +5,17 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import javax.annotation.processing.Generated;
 
+import io.github.primelib.jira4j.restv2.model.Configuration;
 import io.github.primelib.jira4j.restv2.model.FieldConfiguration;
 import io.github.primelib.jira4j.restv2.model.FieldConfigurationScheme;
+import java.util.Set;
 import io.github.primelib.jira4j.restv2.model.UpdateFieldConfigurationSchemeDetails;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -21,9 +27,13 @@ import java.util.function.Consumer;
  * <p>
  * Update field configuration scheme
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class UpdateFieldConfigurationSchemeOperationSpec {
     /**
@@ -45,13 +55,29 @@ public class UpdateFieldConfigurationSchemeOperationSpec {
     private UpdateFieldConfigurationSchemeDetails updateFieldConfigurationSchemeDetails;
 
     /**
-     * Constructs a validated implementation of {@link UpdateFieldConfigurationSchemeOperationSpec}.
+     * Constructs a validated instance of {@link UpdateFieldConfigurationSchemeOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public UpdateFieldConfigurationSchemeOperationSpec(Consumer<UpdateFieldConfigurationSchemeOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link UpdateFieldConfigurationSchemeOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param id                   The ID of the field configuration scheme.
+     * @param updateFieldConfigurationSchemeDetails The details of the field configuration scheme.
+     */
+    @ApiStatus.Internal
+    public UpdateFieldConfigurationSchemeOperationSpec(Long id, UpdateFieldConfigurationSchemeDetails updateFieldConfigurationSchemeDetails) {
+        this.id = id;
+        this.updateFieldConfigurationSchemeDetails = updateFieldConfigurationSchemeDetails;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -65,5 +91,4 @@ public class UpdateFieldConfigurationSchemeOperationSpec {
         Objects.requireNonNull(id, "id is a required parameter!");
         Objects.requireNonNull(updateFieldConfigurationSchemeDetails, "updateFieldConfigurationSchemeDetails is a required parameter!");
     }
-
 }

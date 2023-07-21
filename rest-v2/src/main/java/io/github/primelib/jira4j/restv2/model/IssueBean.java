@@ -3,14 +3,16 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.net.URI;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -21,10 +23,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * IssueBean
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "changelog",
     "editmeta",
@@ -46,16 +51,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class IssueBean {
 
-    /**
-     * Constructs a validated implementation of {@link IssueBean}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public IssueBean(Consumer<IssueBean> spec) {
-        spec.accept(this);
-    }
-
     @JsonProperty("changelog")
     protected IssueBeanChangelog changelog;
 
@@ -69,7 +64,7 @@ public class IssueBean {
     protected String expand;
 
     @JsonProperty("fields")
-    protected Map<String, Object> fields = new HashMap<>();
+    protected Map<String, Object> fields;
 
     @JsonProperty("fieldsToInclude")
     protected IncludedFields fieldsToInclude;
@@ -90,7 +85,7 @@ public class IssueBean {
      * The ID and name of each field present on the issue.
      */
     @JsonProperty("names")
-    protected Map<String, String> names = new HashMap<>();
+    protected Map<String, String> names;
 
     @JsonProperty("operations")
     protected IssueBeanOperations operations;
@@ -99,19 +94,19 @@ public class IssueBean {
      * Details of the issue properties identified in the request.
      */
     @JsonProperty("properties")
-    protected Map<String, Object> properties = new HashMap<>();
+    protected Map<String, Object> properties;
 
     /**
      * The rendered value of each field present on the issue.
      */
     @JsonProperty("renderedFields")
-    protected Map<String, Object> renderedFields = new HashMap<>();
+    protected Map<String, Object> renderedFields;
 
     /**
      * The schema describing each field present on the issue.
      */
     @JsonProperty("schema")
-    protected Map<String, JsonTypeBean> schema = new HashMap<>();
+    protected Map<String, JsonTypeBean> schema;
 
     /**
      * The URL of the issue details.
@@ -129,7 +124,54 @@ public class IssueBean {
      * The versions of each field on the issue.
      */
     @JsonProperty("versionedRepresentations")
-    protected Map<String, Map<String, Object>> versionedRepresentations = new HashMap<>();
+    protected Map<String, Map<String, Object>> versionedRepresentations;
 
+    /**
+     * Constructs a validated instance of {@link IssueBean}.
+     *
+     * @param spec the specification to process
+     */
+    public IssueBean(Consumer<IssueBean> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link IssueBean}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #IssueBean(Consumer)} instead.
+     * @param changelog var.name
+     * @param editmeta var.name
+     * @param expand Expand options that include additional issue details in the response.
+     * @param fields var.name
+     * @param fieldsToInclude var.name
+     * @param id The ID of the issue.
+     * @param key The key of the issue.
+     * @param names The ID and name of each field present on the issue.
+     * @param operations var.name
+     * @param properties Details of the issue properties identified in the request.
+     * @param renderedFields The rendered value of each field present on the issue.
+     * @param schema The schema describing each field present on the issue.
+     * @param self The URL of the issue details.
+     * @param transitions The transitions that can be performed on the issue.
+     * @param versionedRepresentations The versions of each field on the issue.
+     */
+    @ApiStatus.Internal
+    public IssueBean(IssueBeanChangelog changelog, IssueBeanEditmeta editmeta, String expand, Map<String, Object> fields, IncludedFields fieldsToInclude, String id, String key, Map<String, String> names, IssueBeanOperations operations, Map<String, Object> properties, Map<String, Object> renderedFields, Map<String, JsonTypeBean> schema, URI self, List<IssueTransition> transitions, Map<String, Map<String, Object>> versionedRepresentations) {
+        this.changelog = changelog;
+        this.editmeta = editmeta;
+        this.expand = expand;
+        this.fields = fields;
+        this.fieldsToInclude = fieldsToInclude;
+        this.id = id;
+        this.key = key;
+        this.names = names;
+        this.operations = operations;
+        this.properties = properties;
+        this.renderedFields = renderedFields;
+        this.schema = schema;
+        this.self = self;
+        this.transitions = transitions;
+        this.versionedRepresentations = versionedRepresentations;
+    }
 
 }

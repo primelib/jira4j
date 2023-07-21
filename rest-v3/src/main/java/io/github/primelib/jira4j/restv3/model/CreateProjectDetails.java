@@ -3,10 +3,14 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -17,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * CreateProjectDetails
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "assigneeType",
     "avatarId",
@@ -44,16 +51,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("CreateProjectDetails")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class CreateProjectDetails {
-
-    /**
-     * Constructs a validated implementation of {@link CreateProjectDetails}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public CreateProjectDetails(Consumer<CreateProjectDetails> spec) {
-        spec.accept(this);
-    }
 
     /**
      * The default assignee when creating issues for this project.
@@ -110,13 +107,13 @@ public class CreateProjectDetails {
     protected String key;
 
     /**
-     * This parameter is deprecated because of privacy changes. Use `leadAccountId` instead. See the [migration guide](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details. The user name of the project lead. Either `lead` or `leadAccountId` must be set when creating a project. Cannot be provided with `leadAccountId`.
+     * This parameter is deprecated because of privacy changes. Use {@code leadAccountId} instead. See the [migration guide](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details. The user name of the project lead. Either {@code lead} or {@code leadAccountId} must be set when creating a project. Cannot be provided with {@code leadAccountId}.
      */
     @JsonProperty("lead")
     protected String lead;
 
     /**
-     * The account ID of the project lead. Either `lead` or `leadAccountId` must be set when creating a project. Cannot be provided with `lead`.
+     * The account ID of the project lead. Either {@code lead} or {@code leadAccountId} must be set when creating a project. Cannot be provided with {@code lead}.
      */
     @JsonProperty("leadAccountId")
     protected String leadAccountId;
@@ -140,7 +137,7 @@ public class CreateProjectDetails {
     protected Long permissionScheme;
 
     /**
-     * A predefined configuration for a project. The type of the `projectTemplateKey` must match with the type of the `projectTypeKey`.
+     * A predefined configuration for a project. The type of the {@code projectTemplateKey} must match with the type of the {@code projectTypeKey}.
      */
     @JsonProperty("projectTemplateKey")
     protected ProjectTemplateKeyEnum projectTemplateKey;
@@ -163,6 +160,59 @@ public class CreateProjectDetails {
     @JsonProperty("workflowScheme")
     protected Long workflowScheme;
 
+    /**
+     * Constructs a validated instance of {@link CreateProjectDetails}.
+     *
+     * @param spec the specification to process
+     */
+    public CreateProjectDetails(Consumer<CreateProjectDetails> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link CreateProjectDetails}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #CreateProjectDetails(Consumer)} instead.
+     * @param assigneeType The default assignee when creating issues for this project.
+     * @param avatarId An integer value for the project's avatar.
+     * @param categoryId The ID of the project's category. A complete list of category IDs is found using the [Get all project categories](#api-rest-api-3-projectCategory-get) operation.
+     * @param description A brief description of the project.
+     * @param fieldConfigurationScheme The ID of the field configuration scheme for the project. Use the [Get all field configuration schemes](#api-rest-api-3-fieldconfigurationscheme-get) operation to get a list of field configuration scheme IDs. If you specify the field configuration scheme you cannot specify the project template key.
+     * @param issueSecurityScheme The ID of the issue security scheme for the project, which enables you to control who can and cannot view issues. Use the [Get issue security schemes](#api-rest-api-3-issuesecurityschemes-get) resource to get all issue security scheme IDs.
+     * @param issueTypeScheme The ID of the issue type scheme for the project. Use the [Get all issue type schemes](#api-rest-api-3-issuetypescheme-get) operation to get a list of issue type scheme IDs. If you specify the issue type scheme you cannot specify the project template key.
+     * @param issueTypeScreenScheme The ID of the issue type screen scheme for the project. Use the [Get all issue type screen schemes](#api-rest-api-3-issuetypescreenscheme-get) operation to get a list of issue type screen scheme IDs. If you specify the issue type screen scheme you cannot specify the project template key.
+     * @param key Project keys must be unique and start with an uppercase letter followed by one or more uppercase alphanumeric characters. The maximum length is 10 characters.
+     * @param lead This parameter is deprecated because of privacy changes. Use {@code leadAccountId} instead. See the [migration guide](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details. The user name of the project lead. Either {@code lead} or {@code leadAccountId} must be set when creating a project. Cannot be provided with {@code leadAccountId}.
+     * @param leadAccountId The account ID of the project lead. Either {@code lead} or {@code leadAccountId} must be set when creating a project. Cannot be provided with {@code lead}.
+     * @param name The name of the project.
+     * @param notificationScheme The ID of the notification scheme for the project. Use the [Get notification schemes](#api-rest-api-3-notificationscheme-get) resource to get a list of notification scheme IDs.
+     * @param permissionScheme The ID of the permission scheme for the project. Use the [Get all permission schemes](#api-rest-api-3-permissionscheme-get) resource to see a list of all permission scheme IDs.
+     * @param projectTemplateKey A predefined configuration for a project. The type of the {@code projectTemplateKey} must match with the type of the {@code projectTypeKey}.
+     * @param projectTypeKey The [project type](https://confluence.atlassian.com/x/GwiiLQ#Jiraapplicationsoverview-Productfeaturesandprojecttypes), which defines the application-specific feature set. If you don't specify the project template you have to specify the project type.
+     * @param url A link to information about this project, such as project documentation
+     * @param workflowScheme The ID of the workflow scheme for the project. Use the [Get all workflow schemes](#api-rest-api-3-workflowscheme-get) operation to get a list of workflow scheme IDs. If you specify the workflow scheme you cannot specify the project template key.
+     */
+    @ApiStatus.Internal
+    public CreateProjectDetails(AssigneeTypeEnum assigneeType, Long avatarId, Long categoryId, String description, Long fieldConfigurationScheme, Long issueSecurityScheme, Long issueTypeScheme, Long issueTypeScreenScheme, String key, String lead, String leadAccountId, String name, Long notificationScheme, Long permissionScheme, ProjectTemplateKeyEnum projectTemplateKey, ProjectTypeKeyEnum projectTypeKey, String url, Long workflowScheme) {
+        this.assigneeType = assigneeType;
+        this.avatarId = avatarId;
+        this.categoryId = categoryId;
+        this.description = description;
+        this.fieldConfigurationScheme = fieldConfigurationScheme;
+        this.issueSecurityScheme = issueSecurityScheme;
+        this.issueTypeScheme = issueTypeScheme;
+        this.issueTypeScreenScheme = issueTypeScreenScheme;
+        this.key = key;
+        this.lead = lead;
+        this.leadAccountId = leadAccountId;
+        this.name = name;
+        this.notificationScheme = notificationScheme;
+        this.permissionScheme = permissionScheme;
+        this.projectTemplateKey = projectTemplateKey;
+        this.projectTypeKey = projectTypeKey;
+        this.url = url;
+        this.workflowScheme = workflowScheme;
+    }
 
     /**
      * The default assignee when creating issues for this project.
@@ -176,7 +226,7 @@ public class CreateProjectDetails {
     }
 
     /**
-     * A predefined configuration for a project. The type of the `projectTemplateKey` must match with the type of the `projectTypeKey`.
+     * A predefined configuration for a project. The type of the {@code projectTemplateKey} must match with the type of the {@code projectTypeKey}.
      */
     @AllArgsConstructor
     public enum ProjectTemplateKeyEnum {

@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -17,10 +20,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * AddFieldBean
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "fieldId"
 })
@@ -29,20 +35,29 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class AddFieldBean {
 
     /**
-     * Constructs a validated implementation of {@link AddFieldBean}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public AddFieldBean(Consumer<AddFieldBean> spec) {
-        spec.accept(this);
-    }
-
-    /**
      * The ID of the field to add.
      */
     @JsonProperty("fieldId")
     protected String fieldId;
 
+    /**
+     * Constructs a validated instance of {@link AddFieldBean}.
+     *
+     * @param spec the specification to process
+     */
+    public AddFieldBean(Consumer<AddFieldBean> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link AddFieldBean}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #AddFieldBean(Consumer)} instead.
+     * @param fieldId The ID of the field to add.
+     */
+    @ApiStatus.Internal
+    public AddFieldBean(String fieldId) {
+        this.fieldId = fieldId;
+    }
 
 }

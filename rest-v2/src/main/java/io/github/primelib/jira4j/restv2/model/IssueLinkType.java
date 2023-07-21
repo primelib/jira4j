@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.net.URI;
@@ -18,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * IssueLinkType
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "id",
     "inward",
@@ -34,19 +40,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class IssueLinkType {
 
     /**
-     * Constructs a validated implementation of {@link IssueLinkType}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public IssueLinkType(Consumer<IssueLinkType> spec) {
-        spec.accept(this);
-    }
-
-    /**
      * The ID of the issue link type and is used as follows:
      *  *
-     * In the [ issueLink](#api-rest-api-2-issueLink-post) resource it is the type of issue link. Required on create when `name` isn't provided. Otherwise, read only.
+     * In the [ issueLink](#api-rest-api-2-issueLink-post) resource it is the type of issue link. Required on create when {@code name} isn't provided. Otherwise, read only.
      * *
      * In the [ issueLinkType](#api-rest-api-2-issueLinkType-post) resource it is read only.
      */
@@ -66,7 +62,7 @@ public class IssueLinkType {
     /**
      * The name of the issue link type and is used as follows:
      *  *
-     * In the [ issueLink](#api-rest-api-2-issueLink-post) resource it is the type of issue link. Required on create when `id` isn't provided. Otherwise, read only.
+     * In the [ issueLink](#api-rest-api-2-issueLink-post) resource it is the type of issue link. Required on create when {@code id} isn't provided. Otherwise, read only.
      * *
      * In the [ issueLinkType](#api-rest-api-2-issueLinkType-post) resource it is required on create and optional on update. Otherwise, read only.
      */
@@ -89,5 +85,32 @@ public class IssueLinkType {
     @JsonProperty("self")
     protected URI self;
 
+    /**
+     * Constructs a validated instance of {@link IssueLinkType}.
+     *
+     * @param spec the specification to process
+     */
+    public IssueLinkType(Consumer<IssueLinkType> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link IssueLinkType}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #IssueLinkType(Consumer)} instead.
+     * @param id The ID of the issue link type and is used as follows:   *  In the [ issueLink](#api-rest-api-2-issueLink-post) resource it is the type of issue link. Required on create when {@code name} isn't provided. Otherwise, read only.  *  In the [ issueLinkType](#api-rest-api-2-issueLinkType-post) resource it is read only.
+     * @param inward The description of the issue link type inward link and is used as follows:   *  In the [ issueLink](#api-rest-api-2-issueLink-post) resource it is read only.  *  In the [ issueLinkType](#api-rest-api-2-issueLinkType-post) resource it is required on create and optional on update. Otherwise, read only.
+     * @param name The name of the issue link type and is used as follows:   *  In the [ issueLink](#api-rest-api-2-issueLink-post) resource it is the type of issue link. Required on create when {@code id} isn't provided. Otherwise, read only.  *  In the [ issueLinkType](#api-rest-api-2-issueLinkType-post) resource it is required on create and optional on update. Otherwise, read only.
+     * @param outward The description of the issue link type outward link and is used as follows:   *  In the [ issueLink](#api-rest-api-2-issueLink-post) resource it is read only.  *  In the [ issueLinkType](#api-rest-api-2-issueLinkType-post) resource it is required on create and optional on update. Otherwise, read only.
+     * @param self The URL of the issue link type. Read only.
+     */
+    @ApiStatus.Internal
+    public IssueLinkType(String id, String inward, String name, String outward, URI self) {
+        this.id = id;
+        this.inward = inward;
+        this.name = name;
+        this.outward = outward;
+        this.self = self;
+    }
 
 }

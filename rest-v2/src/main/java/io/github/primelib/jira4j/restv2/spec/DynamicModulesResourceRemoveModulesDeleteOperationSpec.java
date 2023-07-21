@@ -5,8 +5,13 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 import javax.annotation.processing.Generated;
 
+import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -18,9 +23,13 @@ import java.util.function.Consumer;
  * <p>
  * Remove modules
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class DynamicModulesResourceRemoveModulesDeleteOperationSpec {
     /**
@@ -30,13 +39,13 @@ public class DynamicModulesResourceRemoveModulesDeleteOperationSpec {
     public static Boolean VALIDATION_ENABLED = true;
 
     /**
-     * The key of the module to remove. To include multiple module keys, provide multiple copies of this parameter. For example, `moduleKey=dynamic-attachment-entity-property&amp;moduleKey=dynamic-select-field`. Nonexistent keys are ignored.
+     * The key of the module to remove. To include multiple module keys, provide multiple copies of this parameter. For example, {@code moduleKey=dynamic-attachment-entity-property&amp;moduleKey=dynamic-select-field}. Nonexistent keys are ignored.
      */
     @Nullable 
     private List<String> moduleKey;
 
     /**
-     * Constructs a validated implementation of {@link DynamicModulesResourceRemoveModulesDeleteOperationSpec}.
+     * Constructs a validated instance of {@link DynamicModulesResourceRemoveModulesDeleteOperationSpec}.
      *
      * @param spec the specification to process
      */
@@ -48,11 +57,24 @@ public class DynamicModulesResourceRemoveModulesDeleteOperationSpec {
     }
 
     /**
+     * Constructs a validated instance of {@link DynamicModulesResourceRemoveModulesDeleteOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param moduleKey            The key of the module to remove. To include multiple module keys, provide multiple copies of this parameter. For example, {@code moduleKey=dynamic-attachment-entity-property&amp;moduleKey=dynamic-select-field}. Nonexistent keys are ignored.
+     */
+    @ApiStatus.Internal
+    public DynamicModulesResourceRemoveModulesDeleteOperationSpec(List<String> moduleKey) {
+        this.moduleKey = moduleKey;
+
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
      * Validates the Spec, will throw a exception if required parameters are missing
      *
      * @throws NullPointerException
      */
     public void validate() {
     }
-
 }

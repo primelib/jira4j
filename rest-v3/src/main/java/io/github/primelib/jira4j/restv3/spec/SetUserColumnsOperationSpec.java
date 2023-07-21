@@ -8,7 +8,11 @@ import javax.annotation.processing.Generated;
 import java.util.Set;
 import io.github.primelib.jira4j.restv3.model.User;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -20,9 +24,13 @@ import java.util.function.Consumer;
  * <p>
  * Set user default columns
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class SetUserColumnsOperationSpec {
     /**
@@ -38,13 +46,13 @@ public class SetUserColumnsOperationSpec {
     private String accountId;
 
     /**
-     * The ID of a column to set. To set multiple columns, send multiple `columns` parameters.
+     * The ID of a column to set. To set multiple columns, send multiple {@code columns} parameters.
      */
     @Nullable 
     private List<String> requestBody;
 
     /**
-     * Constructs a validated implementation of {@link SetUserColumnsOperationSpec}.
+     * Constructs a validated instance of {@link SetUserColumnsOperationSpec}.
      *
      * @param spec the specification to process
      */
@@ -56,11 +64,26 @@ public class SetUserColumnsOperationSpec {
     }
 
     /**
+     * Constructs a validated instance of {@link SetUserColumnsOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param accountId            The account ID of the user, which uniquely identifies the user across all Atlassian products. For example, *5b10ac8d82e05b22cc7d4ef5*.
+     * @param requestBody          The ID of a column to set. To set multiple columns, send multiple {@code columns} parameters.
+     */
+    @ApiStatus.Internal
+    public SetUserColumnsOperationSpec(String accountId, List<String> requestBody) {
+        this.accountId = accountId;
+        this.requestBody = requestBody;
+
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
      * Validates the Spec, will throw a exception if required parameters are missing
      *
      * @throws NullPointerException
      */
     public void validate() {
     }
-
 }

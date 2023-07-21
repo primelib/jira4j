@@ -3,10 +3,14 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.net.URI;
@@ -18,10 +22,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * TaskProgressBeanObject
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "description",
     "elapsedRuntime",
@@ -40,16 +47,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("TaskProgressBeanObject")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class TaskProgressBeanObject {
-
-    /**
-     * Constructs a validated implementation of {@link TaskProgressBeanObject}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public TaskProgressBeanObject(Consumer<TaskProgressBeanObject> spec) {
-        spec.accept(this);
-    }
 
     /**
      * The description of the task.
@@ -97,7 +94,7 @@ public class TaskProgressBeanObject {
      * The result of the task execution.
      */
     @JsonProperty("result")
-    protected Object result = null;
+    protected Object result;
 
     /**
      * The URL of the task.
@@ -129,6 +126,49 @@ public class TaskProgressBeanObject {
     @JsonProperty("submittedBy")
     protected Long submittedBy;
 
+    /**
+     * Constructs a validated instance of {@link TaskProgressBeanObject}.
+     *
+     * @param spec the specification to process
+     */
+    public TaskProgressBeanObject(Consumer<TaskProgressBeanObject> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link TaskProgressBeanObject}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #TaskProgressBeanObject(Consumer)} instead.
+     * @param description The description of the task.
+     * @param elapsedRuntime The execution time of the task, in milliseconds.
+     * @param finished A timestamp recording when the task was finished.
+     * @param id The ID of the task.
+     * @param lastUpdate A timestamp recording when the task progress was last updated.
+     * @param message Information about the progress of the task.
+     * @param progress The progress of the task, as a percentage complete.
+     * @param result The result of the task execution.
+     * @param self The URL of the task.
+     * @param started A timestamp recording when the task was started.
+     * @param status The status of the task.
+     * @param submitted A timestamp recording when the task was submitted.
+     * @param submittedBy The ID of the user who submitted the task.
+     */
+    @ApiStatus.Internal
+    public TaskProgressBeanObject(String description, Long elapsedRuntime, Long finished, String id, Long lastUpdate, String message, Long progress, Object result, URI self, Long started, StatusEnum status, Long submitted, Long submittedBy) {
+        this.description = description;
+        this.elapsedRuntime = elapsedRuntime;
+        this.finished = finished;
+        this.id = id;
+        this.lastUpdate = lastUpdate;
+        this.message = message;
+        this.progress = progress;
+        this.result = result;
+        this.self = self;
+        this.started = started;
+        this.status = status;
+        this.submitted = submitted;
+        this.submittedBy = submittedBy;
+    }
 
     /**
      * The status of the task.

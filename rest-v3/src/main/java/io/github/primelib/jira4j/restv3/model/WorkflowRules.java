@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.util.List;
@@ -18,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * WorkflowRules
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "conditionsTree",
     "postFunctions",
@@ -30,16 +36,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("WorkflowRules")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class WorkflowRules {
-
-    /**
-     * Constructs a validated implementation of {@link WorkflowRules}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public WorkflowRules(Consumer<WorkflowRules> spec) {
-        spec.accept(this);
-    }
 
     @JsonProperty("conditionsTree")
     protected WorkflowCondition conditionsTree;
@@ -56,5 +52,28 @@ public class WorkflowRules {
     @JsonProperty("validators")
     protected List<WorkflowTransitionRule> validators;
 
+    /**
+     * Constructs a validated instance of {@link WorkflowRules}.
+     *
+     * @param spec the specification to process
+     */
+    public WorkflowRules(Consumer<WorkflowRules> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link WorkflowRules}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #WorkflowRules(Consumer)} instead.
+     * @param conditionsTree var.name
+     * @param postFunctions The workflow post functions.
+     * @param validators The workflow validators.
+     */
+    @ApiStatus.Internal
+    public WorkflowRules(WorkflowCondition conditionsTree, List<WorkflowTransitionRule> postFunctions, List<WorkflowTransitionRule> validators) {
+        this.conditionsTree = conditionsTree;
+        this.postFunctions = postFunctions;
+        this.validators = validators;
+    }
 
 }

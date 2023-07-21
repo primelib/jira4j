@@ -3,10 +3,14 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -17,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * UpdateCustomFieldDetails
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "description",
     "name",
@@ -29,16 +36,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("UpdateCustomFieldDetails")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class UpdateCustomFieldDetails {
-
-    /**
-     * Constructs a validated implementation of {@link UpdateCustomFieldDetails}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public UpdateCustomFieldDetails(Consumer<UpdateCustomFieldDetails> spec) {
-        spec.accept(this);
-    }
 
     /**
      * The description of the custom field. The maximum length is 40000 characters.
@@ -53,98 +50,121 @@ public class UpdateCustomFieldDetails {
     protected String name;
 
     /**
-     * The searcher that defines the way the field is searched in Jira. It can be set to `null`, otherwise you must specify the valid searcher for the field type, as listed below (abbreviated values shown):
+     * The searcher that defines the way the field is searched in Jira. It can be set to {@code null}, otherwise you must specify the valid searcher for the field type, as listed below (abbreviated values shown):
      *  *
-     * `cascadingselect`: `cascadingselectsearcher`
+     * {@code cascadingselect}: {@code cascadingselectsearcher}
      * *
-     * `datepicker`: `daterange`
+     * {@code datepicker}: {@code daterange}
      * *
-     * `datetime`: `datetimerange`
+     * {@code datetime}: {@code datetimerange}
      * *
-     * `float`: `exactnumber` or `numberrange`
+     * {@code float}: {@code exactnumber} or {@code numberrange}
      * *
-     * `grouppicker`: `grouppickersearcher`
+     * {@code grouppicker}: {@code grouppickersearcher}
      * *
-     * `importid`: `exactnumber` or `numberrange`
+     * {@code importid}: {@code exactnumber} or {@code numberrange}
      * *
-     * `labels`: `labelsearcher`
+     * {@code labels}: {@code labelsearcher}
      * *
-     * `multicheckboxes`: `multiselectsearcher`
+     * {@code multicheckboxes}: {@code multiselectsearcher}
      * *
-     * `multigrouppicker`: `multiselectsearcher`
+     * {@code multigrouppicker}: {@code multiselectsearcher}
      * *
-     * `multiselect`: `multiselectsearcher`
+     * {@code multiselect}: {@code multiselectsearcher}
      * *
-     * `multiuserpicker`: `userpickergroupsearcher`
+     * {@code multiuserpicker}: {@code userpickergroupsearcher}
      * *
-     * `multiversion`: `versionsearcher`
+     * {@code multiversion}: {@code versionsearcher}
      * *
-     * `project`: `projectsearcher`
+     * {@code project}: {@code projectsearcher}
      * *
-     * `radiobuttons`: `multiselectsearcher`
+     * {@code radiobuttons}: {@code multiselectsearcher}
      * *
-     * `readonlyfield`: `textsearcher`
+     * {@code readonlyfield}: {@code textsearcher}
      * *
-     * `select`: `multiselectsearcher`
+     * {@code select}: {@code multiselectsearcher}
      * *
-     * `textarea`: `textsearcher`
+     * {@code textarea}: {@code textsearcher}
      * *
-     * `textfield`: `textsearcher`
+     * {@code textfield}: {@code textsearcher}
      * *
-     * `url`: `exacttextsearcher`
+     * {@code url}: {@code exacttextsearcher}
      * *
-     * `userpicker`: `userpickergroupsearcher`
+     * {@code userpicker}: {@code userpickergroupsearcher}
      * *
-     * `version`: `versionsearcher`
+     * {@code version}: {@code versionsearcher}
      */
     @JsonProperty("searcherKey")
     protected SearcherKeyEnum searcherKey;
 
+    /**
+     * Constructs a validated instance of {@link UpdateCustomFieldDetails}.
+     *
+     * @param spec the specification to process
+     */
+    public UpdateCustomFieldDetails(Consumer<UpdateCustomFieldDetails> spec) {
+        spec.accept(this);
+    }
 
     /**
-     * The searcher that defines the way the field is searched in Jira. It can be set to `null`, otherwise you must specify the valid searcher for the field type, as listed below (abbreviated values shown):
+     * Constructs a validated instance of {@link UpdateCustomFieldDetails}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #UpdateCustomFieldDetails(Consumer)} instead.
+     * @param description The description of the custom field. The maximum length is 40000 characters.
+     * @param name The name of the custom field. It doesn't have to be unique. The maximum length is 255 characters.
+     * @param searcherKey The searcher that defines the way the field is searched in Jira. It can be set to {@code null}, otherwise you must specify the valid searcher for the field type, as listed below (abbreviated values shown):   *  {@code cascadingselect}: {@code cascadingselectsearcher}  *  {@code datepicker}: {@code daterange}  *  {@code datetime}: {@code datetimerange}  *  {@code float}: {@code exactnumber} or {@code numberrange}  *  {@code grouppicker}: {@code grouppickersearcher}  *  {@code importid}: {@code exactnumber} or {@code numberrange}  *  {@code labels}: {@code labelsearcher}  *  {@code multicheckboxes}: {@code multiselectsearcher}  *  {@code multigrouppicker}: {@code multiselectsearcher}  *  {@code multiselect}: {@code multiselectsearcher}  *  {@code multiuserpicker}: {@code userpickergroupsearcher}  *  {@code multiversion}: {@code versionsearcher}  *  {@code project}: {@code projectsearcher}  *  {@code radiobuttons}: {@code multiselectsearcher}  *  {@code readonlyfield}: {@code textsearcher}  *  {@code select}: {@code multiselectsearcher}  *  {@code textarea}: {@code textsearcher}  *  {@code textfield}: {@code textsearcher}  *  {@code url}: {@code exacttextsearcher}  *  {@code userpicker}: {@code userpickergroupsearcher}  *  {@code version}: {@code versionsearcher}
+     */
+    @ApiStatus.Internal
+    public UpdateCustomFieldDetails(String description, String name, SearcherKeyEnum searcherKey) {
+        this.description = description;
+        this.name = name;
+        this.searcherKey = searcherKey;
+    }
+
+    /**
+     * The searcher that defines the way the field is searched in Jira. It can be set to {@code null}, otherwise you must specify the valid searcher for the field type, as listed below (abbreviated values shown):
      *  *
-     * `cascadingselect`: `cascadingselectsearcher`
+     * {@code cascadingselect}: {@code cascadingselectsearcher}
      * *
-     * `datepicker`: `daterange`
+     * {@code datepicker}: {@code daterange}
      * *
-     * `datetime`: `datetimerange`
+     * {@code datetime}: {@code datetimerange}
      * *
-     * `float`: `exactnumber` or `numberrange`
+     * {@code float}: {@code exactnumber} or {@code numberrange}
      * *
-     * `grouppicker`: `grouppickersearcher`
+     * {@code grouppicker}: {@code grouppickersearcher}
      * *
-     * `importid`: `exactnumber` or `numberrange`
+     * {@code importid}: {@code exactnumber} or {@code numberrange}
      * *
-     * `labels`: `labelsearcher`
+     * {@code labels}: {@code labelsearcher}
      * *
-     * `multicheckboxes`: `multiselectsearcher`
+     * {@code multicheckboxes}: {@code multiselectsearcher}
      * *
-     * `multigrouppicker`: `multiselectsearcher`
+     * {@code multigrouppicker}: {@code multiselectsearcher}
      * *
-     * `multiselect`: `multiselectsearcher`
+     * {@code multiselect}: {@code multiselectsearcher}
      * *
-     * `multiuserpicker`: `userpickergroupsearcher`
+     * {@code multiuserpicker}: {@code userpickergroupsearcher}
      * *
-     * `multiversion`: `versionsearcher`
+     * {@code multiversion}: {@code versionsearcher}
      * *
-     * `project`: `projectsearcher`
+     * {@code project}: {@code projectsearcher}
      * *
-     * `radiobuttons`: `multiselectsearcher`
+     * {@code radiobuttons}: {@code multiselectsearcher}
      * *
-     * `readonlyfield`: `textsearcher`
+     * {@code readonlyfield}: {@code textsearcher}
      * *
-     * `select`: `multiselectsearcher`
+     * {@code select}: {@code multiselectsearcher}
      * *
-     * `textarea`: `textsearcher`
+     * {@code textarea}: {@code textsearcher}
      * *
-     * `textfield`: `textsearcher`
+     * {@code textfield}: {@code textsearcher}
      * *
-     * `url`: `exacttextsearcher`
+     * {@code url}: {@code exacttextsearcher}
      * *
-     * `userpicker`: `userpickergroupsearcher`
+     * {@code userpicker}: {@code userpickergroupsearcher}
      * *
-     * `version`: `versionsearcher`
+     * {@code version}: {@code versionsearcher}
      */
     @AllArgsConstructor
     public enum SearcherKeyEnum {

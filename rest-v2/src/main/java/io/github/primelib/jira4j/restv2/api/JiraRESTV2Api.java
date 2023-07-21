@@ -5,11 +5,12 @@ import java.util.Map;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import javax.annotation.processing.Generated;
-import lombok.Data;
 
 import io.github.primelib.jira4j.restv2.model.ActorInputBean;
 import io.github.primelib.jira4j.restv2.model.ActorsMap;
 import io.github.primelib.jira4j.restv2.model.AddFieldBean;
+import io.github.primelib.jira4j.restv2.model.AddGroupBean;
+import io.github.primelib.jira4j.restv2.model.AddNotificationsDetails;
 import io.github.primelib.jira4j.restv2.model.AddSecuritySchemeLevelsRequestBean;
 import io.github.primelib.jira4j.restv2.model.AnnouncementBannerConfiguration;
 import io.github.primelib.jira4j.restv2.model.AnnouncementBannerConfigurationUpdate;
@@ -38,6 +39,7 @@ import io.github.primelib.jira4j.restv2.model.ChangedWorklogs;
 import io.github.primelib.jira4j.restv2.model.ColumnItem;
 import io.github.primelib.jira4j.restv2.model.Comment;
 import io.github.primelib.jira4j.restv2.model.ComponentIssuesCount;
+import io.github.primelib.jira4j.restv2.model.Configuration;
 import io.github.primelib.jira4j.restv2.model.ConnectCustomFieldValues;
 import io.github.primelib.jira4j.restv2.model.ConnectModules;
 import io.github.primelib.jira4j.restv2.model.ContainerForProjectFeatures;
@@ -46,7 +48,11 @@ import io.github.primelib.jira4j.restv2.model.ContainerForWebhookIDs;
 import io.github.primelib.jira4j.restv2.model.ContainerOfWorkflowSchemeAssociations;
 import io.github.primelib.jira4j.restv2.model.ConvertedJQLQueries;
 import io.github.primelib.jira4j.restv2.model.CreateCustomFieldContext;
+import io.github.primelib.jira4j.restv2.model.CreateIssueSecuritySchemeDetails;
+import io.github.primelib.jira4j.restv2.model.CreateNotificationSchemeDetails;
+import io.github.primelib.jira4j.restv2.model.CreatePriorityDetails;
 import io.github.primelib.jira4j.restv2.model.CreateProjectDetails;
+import io.github.primelib.jira4j.restv2.model.CreateResolutionDetails;
 import io.github.primelib.jira4j.restv2.model.CreateUiModificationDetails;
 import io.github.primelib.jira4j.restv2.model.CreateUpdateRoleRequestBean;
 import io.github.primelib.jira4j.restv2.model.CreateWorkflowDetails;
@@ -94,6 +100,7 @@ import io.github.primelib.jira4j.restv2.model.IssueCreateMetadata;
 import io.github.primelib.jira4j.restv2.model.IssueEntityProperties;
 import io.github.primelib.jira4j.restv2.model.IssueEvent;
 import io.github.primelib.jira4j.restv2.model.IssueFieldOption;
+import io.github.primelib.jira4j.restv2.model.IssueFieldOptionCreateBean;
 import io.github.primelib.jira4j.restv2.model.IssueFilterForBulkPropertyDelete;
 import io.github.primelib.jira4j.restv2.model.IssueLink;
 import io.github.primelib.jira4j.restv2.model.IssueLinkType;
@@ -118,8 +125,10 @@ import io.github.primelib.jira4j.restv2.model.IssueTypeUpdateBean;
 import io.github.primelib.jira4j.restv2.model.IssueTypeWithStatus;
 import io.github.primelib.jira4j.restv2.model.IssueTypeWorkflowMapping;
 import io.github.primelib.jira4j.restv2.model.IssueTypesWorkflowMapping;
+import io.github.primelib.jira4j.restv2.model.IssueUpdateDetails;
 import io.github.primelib.jira4j.restv2.model.IssueUpdateMetadata;
 import io.github.primelib.jira4j.restv2.model.IssuesAndJQLQueries;
+import io.github.primelib.jira4j.restv2.model.IssuesUpdateBean;
 import io.github.primelib.jira4j.restv2.model.JQLPersonalDataMigrationRequest;
 import io.github.primelib.jira4j.restv2.model.JQLReferenceData;
 import io.github.primelib.jira4j.restv2.model.JiraExpressionEvalRequestBean;
@@ -134,10 +143,10 @@ import io.github.primelib.jira4j.restv2.model.License;
 import io.github.primelib.jira4j.restv2.model.LicenseMetric;
 import io.github.primelib.jira4j.restv2.model.LinkIssueRequestJsonBean;
 import io.github.primelib.jira4j.restv2.model.Locale;
-import io.github.primelib.jira4j.restv2.model.ModelConfiguration;
 import io.github.primelib.jira4j.restv2.model.MoveFieldBean;
 import io.github.primelib.jira4j.restv2.model.MultiIssueEntityProperties;
 import io.github.primelib.jira4j.restv2.model.MultipleCustomFieldValuesUpdateDetails;
+import io.github.primelib.jira4j.restv2.model.NewUserDetails;
 import io.github.primelib.jira4j.restv2.model.Notification;
 import io.github.primelib.jira4j.restv2.model.NotificationScheme;
 import io.github.primelib.jira4j.restv2.model.NotificationSchemeId;
@@ -231,6 +240,7 @@ import io.github.primelib.jira4j.restv2.model.PropertyKeys;
 import io.github.primelib.jira4j.restv2.model.PublishDraftWorkflowScheme;
 import io.github.primelib.jira4j.restv2.model.RemoteIssueLink;
 import io.github.primelib.jira4j.restv2.model.RemoteIssueLinkIdentifies;
+import io.github.primelib.jira4j.restv2.model.RemoteIssueLinkRequest;
 import io.github.primelib.jira4j.restv2.model.ReorderIssuePriorities;
 import io.github.primelib.jira4j.restv2.model.ReorderIssueResolutionsRequest;
 import io.github.primelib.jira4j.restv2.model.Resolution;
@@ -252,6 +262,7 @@ import io.github.primelib.jira4j.restv2.model.SecuritySchemeMembersRequest;
 import io.github.primelib.jira4j.restv2.model.SecuritySchemes;
 import io.github.primelib.jira4j.restv2.model.ServerInformation;
 import java.util.Set;
+import io.github.primelib.jira4j.restv2.model.SetDefaultLevelsRequest;
 import io.github.primelib.jira4j.restv2.model.SetDefaultPriorityRequest;
 import io.github.primelib.jira4j.restv2.model.SetDefaultResolutionRequest;
 import io.github.primelib.jira4j.restv2.model.SharePermission;
@@ -273,11 +284,16 @@ import io.github.primelib.jira4j.restv2.model.UnrestrictedUserEmail;
 import io.github.primelib.jira4j.restv2.model.UpdateCustomFieldDetails;
 import io.github.primelib.jira4j.restv2.model.UpdateDefaultScreenScheme;
 import io.github.primelib.jira4j.restv2.model.UpdateFieldConfigurationSchemeDetails;
+import io.github.primelib.jira4j.restv2.model.UpdateIssueSecurityLevelDetails;
 import io.github.primelib.jira4j.restv2.model.UpdateIssueSecuritySchemeRequestBean;
+import io.github.primelib.jira4j.restv2.model.UpdateNotificationSchemeDetails;
+import io.github.primelib.jira4j.restv2.model.UpdatePriorityDetails;
 import io.github.primelib.jira4j.restv2.model.UpdateProjectDetails;
+import io.github.primelib.jira4j.restv2.model.UpdateResolutionDetails;
 import io.github.primelib.jira4j.restv2.model.UpdateScreenDetails;
 import io.github.primelib.jira4j.restv2.model.UpdateScreenSchemeDetails;
 import io.github.primelib.jira4j.restv2.model.UpdateUiModificationDetails;
+import io.github.primelib.jira4j.restv2.model.UpdateUserToGroupBean;
 import io.github.primelib.jira4j.restv2.model.UpdatedProjectCategory;
 import io.github.primelib.jira4j.restv2.model.User;
 import io.github.primelib.jira4j.restv2.model.UserMigrationBean;
@@ -343,9 +359,9 @@ public interface JiraRESTV2Api {
      * Adds one or more attachments to an issue. Attachments are posted as multipart/form-data ([RFC 1867](https://www.ietf.org/rfc/rfc1867.txt)).
      * Note that:
      *  *
-     * The request must have a `X-Atlassian-Token: no-check` header, if not it is blocked. See [Special headers](#special-request-headers) for more information.
+     * The request must have a {@code X-Atlassian-Token: no-check} header, if not it is blocked. See [Special headers](#special-request-headers) for more information.
      * *
-     * The name of the multipart/form-data parameter that contains the attachments must be `file`.
+     * The name of the multipart/form-data parameter that contains the attachments must be {@code file}.
      * The following examples upload a file called *myfile.txt* to the issue *TEST-123*:
      * #### curl ####
      * 
@@ -486,7 +502,7 @@ public interface JiraRESTV2Api {
      * 
      * 
      * 
-     * `Response: ${response.status} ${response.statusText}`
+     * {@code Response: ${response.status} ${response.statusText}}
      * 
      * 
      * 
@@ -723,7 +739,7 @@ public interface JiraRESTV2Api {
      * #### Forge ####
      * 
      * 
-     * // This sample uses Atlassian Forge and the `form-data` library.
+     * // This sample uses Atlassian Forge and the {@code form-data} library.
      * 
      * 
      * // https://developer.atlassian.com/platform/forge/
@@ -790,7 +806,7 @@ public interface JiraRESTV2Api {
      * 
      * 
      * 
-     *  console.log(`Response: ${response.status} ${response.statusText}`);
+     *  console.log({@code Response: ${response.status} ${response.statusText}});
      * 
      * 
      * console.log(await response.json());
@@ -826,15 +842,15 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [write:jira-work]
      * @param issueIdOrKey         The ID or key of the issue. (required)
-     * @param requestBody           (required)
-     * @param expand               Use [expand](#expansion) to include additional information about comments in the response. This parameter accepts `renderedBody`, which returns the comment body rendered in HTML. (optional)
+     * @param comment               (required)
+     * @param expand               Use [expand](#expansion) to include additional information about comments in the response. This parameter accepts {@code renderedBody}, which returns the comment body rendered in HTML. (optional)
      */
     @RequestLine("POST /rest/api/2/issue/{issueIdOrKey}/comment?expand={expand}")
     @Headers({
         "Content-Type: application/json", 
         "Accept: application/json"
     })
-    Comment addComment(@Param("issueIdOrKey") @NotNull String issueIdOrKey, @NotNull Map<String, Object> requestBody, @Param("expand") @Nullable String expand);
+    Comment addComment(@Param("issueIdOrKey") @NotNull String issueIdOrKey, @NotNull Comment comment, @Param("expand") @Nullable String expand);
 
     /**
      * Add field to default screen
@@ -911,19 +927,19 @@ public interface JiraRESTV2Api {
      * Add notifications to notification scheme
      * <p>
      * Adds notifications to a notification scheme. You can add up to 1000 notifications per request.
-     * *Deprecated: The notification type `EmailAddress` is no longer supported in Cloud. Refer to the [changelog](https://developer.atlassian.com/cloud/jira/platform/changelog/#CHANGE-1031) for more details.*
+     * *Deprecated: The notification type {@code EmailAddress} is no longer supported in Cloud. Refer to the [changelog](https://developer.atlassian.com/cloud/jira/platform/changelog/#CHANGE-1031) for more details.*
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param id                   The ID of the notification scheme. (required)
-     * @param requestBody           (required)
+     * @param addNotificationsDetails  (required)
      */
     @RequestLine("PUT /rest/api/2/notificationscheme/{id}/notification")
     @Headers({
         "Content-Type: application/json", 
         "Accept: application/json"
     })
-    Object addNotifications(@Param("id") @NotNull String id, @NotNull Map<String, Object> requestBody);
+    Object addNotifications(@Param("id") @NotNull String id, @NotNull AddNotificationsDetails addNotificationsDetails);
 
     /**
      * Add default actors to project role
@@ -1038,16 +1054,16 @@ public interface JiraRESTV2Api {
      * **[Permissions](#permissions) required:** Site administration (that is, member of the *site-admin* [group](https://confluence.atlassian.com/x/24xjL)).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param requestBody          The user to add to the group. (required)
-     * @param groupname            As a group's name can change, use of `groupId` is recommended to identify a group.   The name of the group. This parameter cannot be used with the `groupId` parameter. (optional)
-     * @param groupId              The ID of the group. This parameter cannot be used with the `groupName` parameter. (optional)
+     * @param updateUserToGroupBean The user to add to the group. (required)
+     * @param groupname            As a group's name can change, use of {@code groupId} is recommended to identify a group.   The name of the group. This parameter cannot be used with the {@code groupId} parameter. (optional)
+     * @param groupId              The ID of the group. This parameter cannot be used with the {@code groupName} parameter. (optional)
      */
     @RequestLine("POST /rest/api/2/group/user?groupname={groupname}&groupId={groupId}")
     @Headers({
         "Content-Type: application/json", 
         "Accept: application/json"
     })
-    Group addUserToGroup(@NotNull Map<String, Object> requestBody, @Param("groupname") @Nullable String groupname, @Param("groupId") @Nullable String groupId);
+    Group addUserToGroup(@NotNull UpdateUserToGroupBean updateUserToGroupBean, @Param("groupname") @Nullable String groupname, @Param("groupId") @Nullable String groupId);
 
     /**
      * Add vote
@@ -1072,7 +1088,7 @@ public interface JiraRESTV2Api {
     /**
      * Add watcher
      * <p>
-     * Adds a user as a watcher of an issue by passing the account ID of the user. For example, `"5b10ac8d82e05b22cc7d4ef5"`. If no user is specified the calling user is added.
+     * Adds a user as a watcher of an issue by passing the account ID of the user. For example, {@code "5b10ac8d82e05b22cc7d4ef5"}. If no user is specified the calling user is added.
      * This operation requires the **Allow users to watch issues** option to be *ON*. This option is set in General configuration for Jira. See [Configuring Jira application options](https://confluence.atlassian.com/x/uYXKM) for details.
      * **[Permissions](#permissions) required:**
      *  *
@@ -1107,12 +1123,12 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [write:jira-work]
      * @param issueIdOrKey         The ID or key the issue. (required)
-     * @param requestBody           (required)
+     * @param worklog               (required)
      * @param notifyUsers          Whether users watching the issue are notified by email. (optional, defaults to true)
-     * @param adjustEstimate       Defines how to update the issue's time estimate, the options are:   *  `new` Sets the estimate to a specific value, defined in `newEstimate`.  *  `leave` Leaves the estimate unchanged.  *  `manual` Reduces the estimate by amount specified in `reduceBy`.  *  `auto` Reduces the estimate by the value of `timeSpent` in the worklog. (optional, defaults to auto)
-     * @param newEstimate          The value to set as the issue's remaining time estimate, as days (\\#d), hours (\\#h), or minutes (\\#m or \\#). For example, *2d*. Required when `adjustEstimate` is `new`. (optional)
-     * @param reduceBy             The amount to reduce the issue's remaining estimate by, as days (\\#d), hours (\\#h), or minutes (\\#m). For example, *2d*. Required when `adjustEstimate` is `manual`. (optional)
-     * @param expand               Use [expand](#expansion) to include additional information about work logs in the response. This parameter accepts `properties`, which returns worklog properties. (optional)
+     * @param adjustEstimate       Defines how to update the issue's time estimate, the options are:   *  {@code new} Sets the estimate to a specific value, defined in {@code newEstimate}.  *  {@code leave} Leaves the estimate unchanged.  *  {@code manual} Reduces the estimate by amount specified in {@code reduceBy}.  *  {@code auto} Reduces the estimate by the value of {@code timeSpent} in the worklog. (optional, defaults to auto)
+     * @param newEstimate          The value to set as the issue's remaining time estimate, as days (\\#d), hours (\\#h), or minutes (\\#m or \\#). For example, *2d*. Required when {@code adjustEstimate} is {@code new}. (optional)
+     * @param reduceBy             The amount to reduce the issue's remaining estimate by, as days (\\#d), hours (\\#h), or minutes (\\#m). For example, *2d*. Required when {@code adjustEstimate} is {@code manual}. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information about work logs in the response. This parameter accepts {@code properties}, which returns worklog properties. (optional)
      * @param overrideEditableFlag Whether the worklog entry should be added to the issue even if the issue is not editable, because jira.issue.editable set to false or missing. For example, the issue is closed. Connect and Forge app users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) can use this flag. (optional, defaults to false)
      */
     @RequestLine("POST /rest/api/2/issue/{issueIdOrKey}/worklog?notifyUsers={notifyUsers}&adjustEstimate={adjustEstimate}&newEstimate={newEstimate}&reduceBy={reduceBy}&expand={expand}&overrideEditableFlag={overrideEditableFlag}")
@@ -1120,13 +1136,13 @@ public interface JiraRESTV2Api {
         "Content-Type: application/json", 
         "Accept: application/json"
     })
-    Worklog addWorklog(@Param("issueIdOrKey") @NotNull String issueIdOrKey, @NotNull Map<String, Object> requestBody, @Param("notifyUsers") @Nullable Boolean notifyUsers, @Param("adjustEstimate") @Nullable String adjustEstimate, @Param("newEstimate") @Nullable String newEstimate, @Param("reduceBy") @Nullable String reduceBy, @Param("expand") @Nullable String expand, @Param("overrideEditableFlag") @Nullable Boolean overrideEditableFlag);
+    Worklog addWorklog(@Param("issueIdOrKey") @NotNull String issueIdOrKey, @NotNull Worklog worklog, @Param("notifyUsers") @Nullable Boolean notifyUsers, @Param("adjustEstimate") @Nullable String adjustEstimate, @Param("newEstimate") @Nullable String newEstimate, @Param("reduceBy") @Nullable String reduceBy, @Param("expand") @Nullable String expand, @Param("overrideEditableFlag") @Nullable Boolean overrideEditableFlag);
 
     /**
      * Delete app property
      * <p>
      * Deletes an app's property.
-     * **[Permissions](#permissions) required:** Only a Connect app whose key matches `addonKey` can make this request.
+     * **[Permissions](#permissions) required:** Only a Connect app whose key matches {@code addonKey} can make this request.
      *
      * @param addonKey             The key of the app, as defined in its descriptor. (required)
      * @param propertyKey          The key of the property. (required)
@@ -1155,7 +1171,7 @@ public interface JiraRESTV2Api {
      * Get app properties
      * <p>
      * Gets all the properties of an app.
-     * **[Permissions](#permissions) required:** Only a Connect app whose key matches `addonKey` can make this request. Additionally, Forge apps published on the Marketplace can access properties of Connect apps they were [migrated from](https://developer.atlassian.com/platform/forge/build-a-connect-on-forge-app/).
+     * **[Permissions](#permissions) required:** Only a Connect app whose key matches {@code addonKey} can make this request. Additionally, Forge apps published on the Marketplace can access properties of Connect apps they were [migrated from](https://developer.atlassian.com/platform/forge/build-a-connect-on-forge-app/).
      *
      * @param addonKey             The key of the app, as defined in its descriptor. (required)
      */
@@ -1169,7 +1185,7 @@ public interface JiraRESTV2Api {
      * Get app property
      * <p>
      * Returns the key and value of an app's property.
-     * **[Permissions](#permissions) required:** Only a Connect app whose key matches `addonKey` can make this request. Additionally, Forge apps published on the Marketplace can access properties of Connect apps they were [migrated from](https://developer.atlassian.com/platform/forge/build-a-connect-on-forge-app/).
+     * **[Permissions](#permissions) required:** Only a Connect app whose key matches {@code addonKey} can make this request. Additionally, Forge apps published on the Marketplace can access properties of Connect apps they were [migrated from](https://developer.atlassian.com/platform/forge/build-a-connect-on-forge-app/).
      *
      * @param addonKey             The key of the app, as defined in its descriptor. (required)
      * @param propertyKey          The key of the property. (required)
@@ -1185,7 +1201,7 @@ public interface JiraRESTV2Api {
      * <p>
      * Sets the value of an app's property. Use this resource to store custom data for your app.
      * The value of the request body must be a [valid](http://tools.ietf.org/html/rfc4627), non-empty JSON blob. The maximum length is 32768 characters.
-     * **[Permissions](#permissions) required:** Only a Connect app whose key matches `addonKey` can make this request.
+     * **[Permissions](#permissions) required:** Only a Connect app whose key matches {@code addonKey} can make this request.
      *
      * @param addonKey             The key of the app, as defined in its descriptor. (required)
      * @param propertyKey          The key of the property. (required)
@@ -1201,7 +1217,7 @@ public interface JiraRESTV2Api {
     /**
      * Set app property (Forge)
      * <p>
-     * Sets the value of a Forge app's property. These values can be retrieved in [Jira expressions](https://developer.atlassian.com/cloud/jira/platform/jira-expressions/) through the `app` [context variable](https://developer.atlassian.com/cloud/jira/platform/jira-expressions/#context-variables).
+     * Sets the value of a Forge app's property. These values can be retrieved in [Jira expressions](https://developer.atlassian.com/cloud/jira/platform/jira-expressions/) through the {@code app} [context variable](https://developer.atlassian.com/cloud/jira/platform/jira-expressions/#context-variables).
      * For other use cases, use the [Storage API](https://developer.atlassian.com/platform/forge/runtime-reference/storage-api/).
      * The value of the request body must be a [valid](http://tools.ietf.org/html/rfc4627), non-empty JSON blob. The maximum length is 32768 characters.
      * **[Permissions](#permissions) required:** Only Forge apps can make this request.
@@ -1226,7 +1242,7 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [read:jira-work, read:jira-user]
      * @param jiraExpressionForAnalysis The Jira expressions to analyse. (required)
-     * @param check                The check to perform:   *  `syntax` Each expression's syntax is checked to ensure the expression can be parsed. Also, syntactic limits are validated. For example, the expression's length.  *  `type` EXPERIMENTAL. Each expression is type checked and the final type of the expression inferred. Any type errors that would result in the expression failure at runtime are reported. For example, accessing properties that don't exist or passing the wrong number of arguments to functions. Also performs the syntax check.  *  `complexity` EXPERIMENTAL. Determines the formulae for how many [expensive operations](https://developer.atlassian.com/cloud/jira/platform/jira-expressions/#expensive-operations) each expression may execute. (optional, defaults to syntax)
+     * @param check                The check to perform:   *  {@code syntax} Each expression's syntax is checked to ensure the expression can be parsed. Also, syntactic limits are validated. For example, the expression's length.  *  {@code type} EXPERIMENTAL. Each expression is type checked and the final type of the expression inferred. Any type errors that would result in the expression failure at runtime are reported. For example, accessing properties that don't exist or passing the wrong number of arguments to functions. Also performs the syntax check.  *  {@code complexity} EXPERIMENTAL. Determines the formulae for how many [expensive operations](https://developer.atlassian.com/cloud/jira/platform/jira-expressions/#expensive-operations) each expression may execute. (optional, defaults to syntax)
      */
     @RequestLine("POST /rest/api/2/expression/analyse?check={check}")
     @Headers({
@@ -1287,7 +1303,7 @@ public interface JiraRESTV2Api {
     /**
      * Assign field configuration scheme to project
      * <p>
-     * Assigns a field configuration scheme to a project. If the field configuration scheme ID is `null`, the operation assigns the default field configuration scheme.
+     * Assigns a field configuration scheme to a project. If the field configuration scheme ID is {@code null}, the operation assigns the default field configuration scheme.
      * Field configuration schemes can only be assigned to classic projects.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
@@ -1305,11 +1321,11 @@ public interface JiraRESTV2Api {
      * Assign issue
      * <p>
      * Assigns an issue to a user. Use this operation when the calling user does not have the *Edit Issues* permission but has the *Assign issue* permission for the project that the issue is in.
-     * If `name` or `accountId` is set to:
+     * If {@code name} or {@code accountId} is set to:
      *  *
-     * `"-1"`, the issue is assigned to the default assignee for the project.
+     * {@code "-1"}, the issue is assigned to the default assignee for the project.
      * *
-     * `null`, the issue is set to unassigned.
+     * {@code null}, the issue is set to unassigned.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:**
      *  *
@@ -1372,7 +1388,7 @@ public interface JiraRESTV2Api {
      * Authentication - Required Scopes: [manage:jira-project]
      * @param projectKeyOrId       The project ID or project key (case sensitive). (required)
      * @param idBean                (required)
-     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Note that permissions are included when you specify any value. Expand options include:   *  `all` Returns all expandable information.  *  `field` Returns information about the custom field granted the permission.  *  `group` Returns information about the group that is granted the permission.  *  `permissions` Returns all permission grants for each permission scheme.  *  `projectRole` Returns information about the project role granted the permission.  *  `user` Returns information about the user who is granted the permission. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Note that permissions are included when you specify any value. Expand options include:   *  {@code all} Returns all expandable information.  *  {@code field} Returns information about the custom field granted the permission.  *  {@code group} Returns information about the group that is granted the permission.  *  {@code permissions} Returns all permission grants for each permission scheme.  *  {@code projectRole} Returns information about the project role granted the permission.  *  {@code user} Returns information about the user who is granted the permission. (optional)
      */
     @RequestLine("PUT /rest/api/2/project/{projectKeyOrId}/permissionscheme?expand={expand}")
     @Headers({
@@ -1421,7 +1437,7 @@ public interface JiraRESTV2Api {
      * Associate security scheme to project
      * <p>
      * Associates an issue security scheme with a project and remaps security levels of issues to the new levels, if provided.
-     * This operation is [asynchronous](#async). Follow the `location` link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
+     * This operation is [asynchronous](#async). Follow the {@code location} link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
@@ -1440,16 +1456,16 @@ public interface JiraRESTV2Api {
      * Deletes a property value from multiple issues. The issues to be updated can be specified by filter criteria.
      * The criteria the filter used to identify eligible issues are:
      *  *
-     * `entityIds` Only issues from this list are eligible.
+     * {@code entityIds} Only issues from this list are eligible.
      * *
-     * `currentValue` Only issues with the property set to this value are eligible.
+     * {@code currentValue} Only issues with the property set to this value are eligible.
      * If both criteria is specified, they are joined with the logical *AND*: only issues that satisfy both criteria are considered eligible.
      * If no filter criteria are specified, all the issues visible to the user and where the user has the EDIT\\_ISSUES permission for the issue are considered eligible.
      * This operation is:
      *  *
      * transactional, either the property is deleted from all eligible issues or, when errors occur, no properties are deleted.
      * *
-     * [asynchronous](#async). Follow the `location` link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
+     * [asynchronous](#async). Follow the {@code location} link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
      * **[Permissions](#permissions) required:**
      *  *
      * *Browse projects* [ project permission](https://confluence.atlassian.com/x/yodKLg) for each project containing issues.
@@ -1478,8 +1494,8 @@ public interface JiraRESTV2Api {
      * Authentication - Required Scopes: [read:jira-user]
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
-     * @param groupId              The ID of a group. To specify multiple IDs, pass multiple `groupId` parameters. For example, `groupId=5b10a2844c20165700ede21g&amp;groupId=5b10ac8d82e05b22cc7d4ef5`. (optional)
-     * @param groupName            The name of a group. To specify multiple names, pass multiple `groupName` parameters. For example, `groupName=administrators&amp;groupName=jira-software-users`. (optional)
+     * @param groupId              The ID of a group. To specify multiple IDs, pass multiple {@code groupId} parameters. For example, {@code groupId=5b10a2844c20165700ede21g&amp;groupId=5b10ac8d82e05b22cc7d4ef5}. (optional)
+     * @param groupName            The name of a group. To specify multiple names, pass multiple {@code groupName} parameters. For example, {@code groupName=administrators&amp;groupName=jira-software-users}. (optional)
      * @param accessType           The access level of a group. Valid values: 'site-admin', 'admin', 'user'. (optional)
      * @param applicationKey       The application key of the product user groups to search for. Valid values: 'jira-servicedesk', 'jira-software', 'jira-product-discovery', 'jira-core'. (optional)
      */
@@ -1496,7 +1512,7 @@ public interface JiraRESTV2Api {
      * **[Permissions](#permissions) required:** Permission to access Jira.
      *
      * Authentication - Required Scopes: [read:jira-user]
-     * @param accountId            The account ID of a user. To specify multiple users, pass multiple `accountId` parameters. For example, `accountId=5b10a2844c20165700ede21g&amp;accountId=5b10ac8d82e05b22cc7d4ef5`. (required)
+     * @param accountId            The account ID of a user. To specify multiple users, pass multiple {@code accountId} parameters. For example, {@code accountId=5b10a2844c20165700ede21g&amp;accountId=5b10ac8d82e05b22cc7d4ef5}. (required)
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 10)
      * @param username             This parameter is no longer available and will be removed from the documentation soon. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details. (optional)
@@ -1511,14 +1527,14 @@ public interface JiraRESTV2Api {
     /**
      * Get account IDs for users
      * <p>
-     * Returns the account IDs for the users specified in the `key` or `username` parameters. Note that multiple `key` or `username` parameters can be specified.
+     * Returns the account IDs for the users specified in the {@code key} or {@code username} parameters. Note that multiple {@code key} or {@code username} parameters can be specified.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      *
      * Authentication - Required Scopes: [read:jira-user]
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 10)
-     * @param username             Username of a user. To specify multiple users, pass multiple copies of this parameter. For example, `username=fred&amp;username=barney`. Required if `key` isn't provided. Cannot be provided if `key` is present. (optional)
-     * @param key                  Key of a user. To specify multiple users, pass multiple copies of this parameter. For example, `key=fred&amp;key=barney`. Required if `username` isn't provided. Cannot be provided if `username` is present. (optional)
+     * @param username             Username of a user. To specify multiple users, pass multiple copies of this parameter. For example, {@code username=fred&amp;username=barney}. Required if {@code key} isn't provided. Cannot be provided if {@code key} is present. (optional)
+     * @param key                  Key of a user. To specify multiple users, pass multiple copies of this parameter. For example, {@code key=fred&amp;key=barney}. Required if {@code username} isn't provided. Cannot be provided if {@code username} is present. (optional)
      */
     @RequestLine("GET /rest/api/2/user/bulk/migration?startAt={startAt}&maxResults={maxResults}&username={username}&key={key}")
     @Headers({
@@ -1533,7 +1549,7 @@ public interface JiraRESTV2Api {
      * The value of the request body must be a [valid](http://tools.ietf.org/html/rfc4627), non-empty JSON.
      * This operation is:
      *  *
-     * [asynchronous](#async). Follow the `location` link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
+     * [asynchronous](#async). Follow the {@code location} link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
      * *
      * non-transactional. Updating some entities may fail. Such information will available in the task result.
      * **[Permissions](#permissions) required:**
@@ -1560,11 +1576,11 @@ public interface JiraRESTV2Api {
      * The issues to be updated can be specified by a filter.
      * The filter identifies issues eligible for update using these criteria:
      *  *
-     * `entityIds` Only issues from this list are eligible.
+     * {@code entityIds} Only issues from this list are eligible.
      * *
-     * `currentValue` Only issues with the property set to this value are eligible.
+     * {@code currentValue} Only issues with the property set to this value are eligible.
      * *
-     * `hasProperty`:
+     * {@code hasProperty}:
      * 
      * 
      * 
@@ -1576,13 +1592,13 @@ public interface JiraRESTV2Api {
      * *
      * If *false*, only issues without the property are eligible.
      * If more than one criteria is specified, they are joined with the logical *AND*: only issues that satisfy all criteria are eligible.
-     * If an invalid combination of criteria is provided, an error is returned. For example, specifying a `currentValue` and `hasProperty` as *false* would not match any issues (because without the property the property cannot have a value).
+     * If an invalid combination of criteria is provided, an error is returned. For example, specifying a {@code currentValue} and {@code hasProperty} as *false* would not match any issues (because without the property the property cannot have a value).
      * The filter is optional. Without the filter all the issues visible to the user and where the user has the EDIT\\_ISSUES permission for the issue are considered eligible.
      * This operation is:
      *  *
      * transactional, either all eligible issues are updated or, when errors occur, none are updated.
      * *
-     * [asynchronous](#async). Follow the `location` link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
+     * [asynchronous](#async). Follow the {@code location} link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
      * **[Permissions](#permissions) required:**
      *  *
      * *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for each project containing issues.
@@ -1611,7 +1627,7 @@ public interface JiraRESTV2Api {
      *  *
      * transactional, either all properties are updated in all eligible issues or, when errors occur, no properties are updated.
      * *
-     * [asynchronous](#async). Follow the `location` link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
+     * [asynchronous](#async). Follow the {@code location} link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
      * **[Permissions](#permissions) required:**
      *  *
      * *Browse projects* and *Edit issues* [project permissions](https://confluence.atlassian.com/x/yodKLg) for the project containing the issue.
@@ -1667,7 +1683,7 @@ public interface JiraRESTV2Api {
     /**
      * Copy dashboard
      * <p>
-     * Copies a dashboard. Any values provided in the `dashboard` parameter replace those in the copied dashboard.
+     * Copies a dashboard. Any values provided in the {@code dashboard} parameter replace those in the copied dashboard.
      * **[Permissions](#permissions) required:** None
      * The dashboard to be copied must be owned by or shared with the user.
      *
@@ -1719,7 +1735,7 @@ public interface JiraRESTV2Api {
      * Create custom field context
      * <p>
      * Creates a custom field context.
-     * If `projectIds` is empty, a global context is created. A global context is one that applies to all project. If `issueTypeIds` is empty, the context applies to all issue types.
+     * If {@code projectIds} is empty, a global context is created. A global context is one that applies to all project. If {@code issueTypeIds} is empty, the context applies to all issue types.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
@@ -1811,7 +1827,7 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [write:jira-work]
      * @param filter               The filter to create. (required)
-     * @param expand               Use [expand](#expansion) to include additional information about filter in the response. This parameter accepts a comma-separated list. Expand options include:   *  `sharedUsers` Returns the users that the filter is shared with. This includes users that can browse projects that the filter is shared with. If you don't specify `sharedUsers`, then the `sharedUsers` object is returned but it doesn't list any users. The list of users returned is limited to 1000, to access additional users append `[start-index:end-index]` to the expand request. For example, to access the next 1000 users, use `?expand=sharedUsers[1001:2000]`.  *  `subscriptions` Returns the users that are subscribed to the filter. If you don't specify `subscriptions`, the `subscriptions` object is returned but it doesn't list any subscriptions. The list of subscriptions returned is limited to 1000, to access additional subscriptions append `[start-index:end-index]` to the expand request. For example, to access the next 1000 subscriptions, use `?expand=subscriptions[1001:2000]`. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information about filter in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code sharedUsers} Returns the users that the filter is shared with. This includes users that can browse projects that the filter is shared with. If you don't specify {@code sharedUsers}, then the {@code sharedUsers} object is returned but it doesn't list any users. The list of users returned is limited to 1000, to access additional users append {@code [start-index:end-index]} to the expand request. For example, to access the next 1000 users, use {@code ?expand=sharedUsers[1001:2000]}.  *  {@code subscriptions} Returns the users that are subscribed to the filter. If you don't specify {@code subscriptions}, the {@code subscriptions} object is returned but it doesn't list any subscriptions. The list of subscriptions returned is limited to 1000, to access additional subscriptions append {@code [start-index:end-index]} to the expand request. For example, to access the next 1000 subscriptions, use {@code ?expand=subscriptions[1001:2000]}. (optional)
      * @param overrideSharePermissions EXPERIMENTAL: Whether share permissions are overridden to enable filters with any share permissions to be created. Available to users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). (optional, defaults to false)
      */
     @RequestLine("POST /rest/api/2/filter?expand={expand}&overrideSharePermissions={overrideSharePermissions}")
@@ -1828,29 +1844,29 @@ public interface JiraRESTV2Api {
      * **[Permissions](#permissions) required:** Site administration (that is, member of the *site-admin* [group](https://confluence.atlassian.com/x/24xjL)).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param requestBody          The name of the group. (required)
+     * @param addGroupBean         The name of the group. (required)
      */
     @RequestLine("POST /rest/api/2/group")
     @Headers({
         "Content-Type: application/json", 
         "Accept: application/json"
     })
-    Group createGroup(@NotNull Map<String, Object> requestBody);
+    Group createGroup(@NotNull AddGroupBean addGroupBean);
 
     /**
      * Create issue
      * <p>
      * Creates an issue or, where the option to create subtasks is enabled in Jira, a subtask. A transition may be applied, to move the issue or subtask to a workflow step other than the default start step, and issue properties set.
-     * The content of the issue or subtask is defined using `update` and `fields`. The fields that can be set in the issue or subtask are determined using the [ Get create issue metadata](#api-rest-api-2-issue-createmeta-get). These are the same fields that appear on the issue's create screen.
+     * The content of the issue or subtask is defined using {@code update} and {@code fields}. The fields that can be set in the issue or subtask are determined using the [ Get create issue metadata](#api-rest-api-2-issue-createmeta-get). These are the same fields that appear on the issue's create screen.
      * Creating a subtask differs from creating an issue as follows:
      *  *
-     * `issueType` must be set to a subtask issue type (use [ Get create issue metadata](#api-rest-api-2-issue-createmeta-get) to find subtask issue types).
+     * {@code issueType} must be set to a subtask issue type (use [ Get create issue metadata](#api-rest-api-2-issue-createmeta-get) to find subtask issue types).
      * *
-     * `parent` must contain the ID or key of the parent issue.
+     * {@code parent} must contain the ID or key of the parent issue.
      * **[Permissions](#permissions) required:** *Browse projects* and *Create issues* [project permissions](https://confluence.atlassian.com/x/yodKLg) for the project in which the issue or subtask is created.
      *
      * Authentication - Required Scopes: [write:jira-work]
-     * @param requestBody           (required)
+     * @param issueUpdateDetails    (required)
      * @param updateHistory        Whether the project in which the issue is created is added to the user's **Recently viewed** project list, as shown under **Projects** in Jira. When provided, the issue type and request type are added to the user's history for a project. These values are then used to provide defaults on the issue create screen. (optional, defaults to false)
      */
     @RequestLine("POST /rest/api/2/issue?updateHistory={updateHistory}")
@@ -1858,7 +1874,7 @@ public interface JiraRESTV2Api {
         "Content-Type: application/json", 
         "Accept: application/json"
     })
-    CreatedIssue createIssue(@NotNull Map<String, Object> requestBody, @Param("updateHistory") @Nullable Boolean updateHistory);
+    CreatedIssue createIssue(@NotNull IssueUpdateDetails issueUpdateDetails, @Param("updateHistory") @Nullable Boolean updateHistory);
 
     /**
      * Create issue field option
@@ -1868,15 +1884,15 @@ public interface JiraRESTV2Api {
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). Jira permissions are not required for the app providing the field.
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param fieldKey             The field key is specified in the following format: **$(app-key)\\_\\_$(field-key)**. For example, *example-add-on\\_\\_example-issue-field*. To determine the `fieldKey` value, do one of the following:   *  open the app's plugin descriptor, then **app-key** is the key at the top and **field-key** is the key in the `jiraIssueFields` module. **app-key** can also be found in the app listing in the Atlassian Universal Plugin Manager.  *  run [Get fields](#api-rest-api-2-field-get) and in the field details the value is returned in `key`. For example, `"key": "teams-add-on__team-issue-field"` (required)
-     * @param requestBody           (required)
+     * @param fieldKey             The field key is specified in the following format: **$(app-key)\\_\\_$(field-key)**. For example, *example-add-on\\_\\_example-issue-field*. To determine the {@code fieldKey} value, do one of the following:   *  open the app's plugin descriptor, then **app-key** is the key at the top and **field-key** is the key in the {@code jiraIssueFields} module. **app-key** can also be found in the app listing in the Atlassian Universal Plugin Manager.  *  run [Get fields](#api-rest-api-2-field-get) and in the field details the value is returned in {@code key}. For example, {@code "key": "teams-add-on__team-issue-field"} (required)
+     * @param issueFieldOptionCreateBean  (required)
      */
     @RequestLine("POST /rest/api/2/field/{fieldKey}/option")
     @Headers({
         "Content-Type: application/json", 
         "Accept: application/json"
     })
-    IssueFieldOption createIssueFieldOption(@Param("fieldKey") @NotNull String fieldKey, @NotNull Map<String, Object> requestBody);
+    IssueFieldOption createIssueFieldOption(@Param("fieldKey") @NotNull String fieldKey, @NotNull IssueFieldOptionCreateBean issueFieldOptionCreateBean);
 
     /**
      * Create issue link type
@@ -1902,14 +1918,14 @@ public interface JiraRESTV2Api {
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param requestBody           (required)
+     * @param createIssueSecuritySchemeDetails  (required)
      */
     @RequestLine("POST /rest/api/2/issuesecurityschemes")
     @Headers({
         "Content-Type: application/json", 
         "Accept: application/json"
     })
-    SecuritySchemeId createIssueSecurityScheme(@NotNull Map<String, Object> requestBody);
+    SecuritySchemeId createIssueSecurityScheme(@NotNull CreateIssueSecuritySchemeDetails createIssueSecuritySchemeDetails);
 
     /**
      * Create issue type
@@ -1933,11 +1949,11 @@ public interface JiraRESTV2Api {
      * Loads an avatar for the issue type.
      * Specify the avatar's local file location in the body of the request. Also, include the following headers:
      *  *
-     * `X-Atlassian-Token: no-check` To prevent XSRF protection blocking the request, for more information see [Special Headers](#special-request-headers).
+     * {@code X-Atlassian-Token: no-check} To prevent XSRF protection blocking the request, for more information see [Special Headers](#special-request-headers).
      * *
-     * `Content-Type: image/image type` Valid image types are JPEG, GIF, or PNG.
+     * {@code Content-Type: image/image type} Valid image types are JPEG, GIF, or PNG.
      * For example:
-     *  `curl --request POST \\ --user email@example.com:&amp;lt;api_token&amp;gt; \\ --header 'X-Atlassian-Token: no-check' \\ --header 'Content-Type: image/&amp;lt; image_type&amp;gt;' \\ --data-binary "&amp;lt;@/path/to/file/with/your/avatar&amp;gt;" \\ --url 'https://your-domain.atlassian.net/rest/api/2/issuetype/{issueTypeId}'This`
+     *  {@code curl --request POST \\ --user email@example.com:&amp;lt;api_token&amp;gt; \\ --header 'X-Atlassian-Token: no-check' \\ --header 'Content-Type: image/&amp;lt; image_type&amp;gt;' \\ --data-binary "&amp;lt;@/path/to/file/with/your/avatar&amp;gt;" \\ --url 'https://your-domain.atlassian.net/rest/api/2/issuetype/{issueTypeId}'This}
      * The avatar is cropped to a square. If no crop parameters are specified, the square originates at the top left of the image. The length of the square's sides is set to the smaller of the height or width of the image.
      * The cropped image is then used to create avatars of 16x16, 24x24, 32x32, and 48x48 in size.
      * After creating the avatar, use [ Update issue type](#api-rest-api-2-issuetype-id-put) to set it as the issue type's displayed avatar.
@@ -1993,23 +2009,23 @@ public interface JiraRESTV2Api {
      * Bulk create issue
      * <p>
      * Creates upto **50** issues and, where the option to create subtasks is enabled in Jira, subtasks. Transitions may be applied, to move the issues or subtasks to a workflow step other than the default start step, and issue properties set.
-     * The content of each issue or subtask is defined using `update` and `fields`. The fields that can be set in the issue or subtask are determined using the [ Get create issue metadata](#api-rest-api-2-issue-createmeta-get). These are the same fields that appear on the issues' create screens.
+     * The content of each issue or subtask is defined using {@code update} and {@code fields}. The fields that can be set in the issue or subtask are determined using the [ Get create issue metadata](#api-rest-api-2-issue-createmeta-get). These are the same fields that appear on the issues' create screens.
      * Creating a subtask differs from creating an issue as follows:
      *  *
-     * `issueType` must be set to a subtask issue type (use [ Get create issue metadata](#api-rest-api-2-issue-createmeta-get) to find subtask issue types).
+     * {@code issueType} must be set to a subtask issue type (use [ Get create issue metadata](#api-rest-api-2-issue-createmeta-get) to find subtask issue types).
      * *
-     * `parent` the must contain the ID or key of the parent issue.
+     * {@code parent} the must contain the ID or key of the parent issue.
      * **[Permissions](#permissions) required:** *Browse projects* and *Create issues* [project permissions](https://confluence.atlassian.com/x/yodKLg) for the project in which each issue or subtask is created.
      *
      * Authentication - Required Scopes: [write:jira-work]
-     * @param requestBody           (required)
+     * @param issuesUpdateBean      (required)
      */
     @RequestLine("POST /rest/api/2/issue/bulk")
     @Headers({
         "Content-Type: application/json", 
         "Accept: application/json"
     })
-    CreatedIssues createIssues(@NotNull Map<String, Object> requestBody);
+    CreatedIssues createIssues(@NotNull IssuesUpdateBean issuesUpdateBean);
 
     /**
      * Create notification scheme
@@ -2018,20 +2034,20 @@ public interface JiraRESTV2Api {
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param requestBody           (required)
+     * @param createNotificationSchemeDetails  (required)
      */
     @RequestLine("POST /rest/api/2/notificationscheme")
     @Headers({
         "Content-Type: application/json", 
         "Accept: application/json"
     })
-    NotificationSchemeId createNotificationScheme(@NotNull Map<String, Object> requestBody);
+    NotificationSchemeId createNotificationScheme(@NotNull CreateNotificationSchemeDetails createNotificationSchemeDetails);
 
     /**
      * Create or update remote issue link
      * <p>
      * Creates or updates a remote issue link for an issue.
-     * If a `globalId` is provided and a remote issue link with that global ID is found it is updated. Any fields without values in the request are set to null. Otherwise, the remote issue link is created.
+     * If a {@code globalId} is provided and a remote issue link with that global ID is found it is updated. Any fields without values in the request are set to null. Otherwise, the remote issue link is created.
      * This operation requires [issue linking to be active](https://confluence.atlassian.com/x/yoXKM).
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:**
@@ -2042,14 +2058,14 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [write:jira-work]
      * @param issueIdOrKey         The ID or key of the issue. (required)
-     * @param requestBody           (required)
+     * @param remoteIssueLinkRequest  (required)
      */
     @RequestLine("POST /rest/api/2/issue/{issueIdOrKey}/remotelink")
     @Headers({
         "Content-Type: application/json", 
         "Accept: application/json"
     })
-    RemoteIssueLinkIdentifies createOrUpdateRemoteIssueLink(@Param("issueIdOrKey") @NotNull String issueIdOrKey, @NotNull Map<String, Object> requestBody);
+    RemoteIssueLinkIdentifies createOrUpdateRemoteIssueLink(@Param("issueIdOrKey") @NotNull String issueIdOrKey, @NotNull RemoteIssueLinkRequest remoteIssueLinkRequest);
 
     /**
      * Create permission grant
@@ -2060,7 +2076,7 @@ public interface JiraRESTV2Api {
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param schemeId             The ID of the permission scheme in which to create a new permission grant. (required)
      * @param permissionGrant      The permission grant to create. (required)
-     * @param expand               Use expand to include additional information in the response. This parameter accepts a comma-separated list. Note that permissions are always included when you specify any value. Expand options include:   *  `permissions` Returns all permission grants for each permission scheme.  *  `user` Returns information about the user who is granted the permission.  *  `group` Returns information about the group that is granted the permission.  *  `projectRole` Returns information about the project role granted the permission.  *  `field` Returns information about the custom field granted the permission.  *  `all` Returns all expandable information. (optional)
+     * @param expand               Use expand to include additional information in the response. This parameter accepts a comma-separated list. Note that permissions are always included when you specify any value. Expand options include:   *  {@code permissions} Returns all permission grants for each permission scheme.  *  {@code user} Returns information about the user who is granted the permission.  *  {@code group} Returns information about the group that is granted the permission.  *  {@code projectRole} Returns information about the project role granted the permission.  *  {@code field} Returns information about the custom field granted the permission.  *  {@code all} Returns all expandable information. (optional)
      */
     @RequestLine("POST /rest/api/2/permissionscheme/{schemeId}/permission?expand={expand}")
     @Headers({
@@ -2076,15 +2092,15 @@ public interface JiraRESTV2Api {
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param requestBody          The permission scheme to create. (required)
-     * @param expand               Use expand to include additional information in the response. This parameter accepts a comma-separated list. Note that permissions are always included when you specify any value. Expand options include:   *  `all` Returns all expandable information.  *  `field` Returns information about the custom field granted the permission.  *  `group` Returns information about the group that is granted the permission.  *  `permissions` Returns all permission grants for each permission scheme.  *  `projectRole` Returns information about the project role granted the permission.  *  `user` Returns information about the user who is granted the permission. (optional)
+     * @param permissionScheme     The permission scheme to create. (required)
+     * @param expand               Use expand to include additional information in the response. This parameter accepts a comma-separated list. Note that permissions are always included when you specify any value. Expand options include:   *  {@code all} Returns all expandable information.  *  {@code field} Returns information about the custom field granted the permission.  *  {@code group} Returns information about the group that is granted the permission.  *  {@code permissions} Returns all permission grants for each permission scheme.  *  {@code projectRole} Returns information about the project role granted the permission.  *  {@code user} Returns information about the user who is granted the permission. (optional)
      */
     @RequestLine("POST /rest/api/2/permissionscheme?expand={expand}")
     @Headers({
         "Content-Type: application/json", 
         "Accept: application/json"
     })
-    PermissionScheme createPermissionScheme(@NotNull Map<String, Object> requestBody, @Param("expand") @Nullable String expand);
+    PermissionScheme createPermissionScheme(@NotNull PermissionScheme permissionScheme, @Param("expand") @Nullable String expand);
 
     /**
      * Create priority
@@ -2093,14 +2109,14 @@ public interface JiraRESTV2Api {
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param requestBody           (required)
+     * @param createPriorityDetails  (required)
      */
     @RequestLine("POST /rest/api/2/priority")
     @Headers({
         "Content-Type: application/json", 
         "Accept: application/json"
     })
-    PriorityId createPriority(@NotNull Map<String, Object> requestBody);
+    PriorityId createPriority(@NotNull CreatePriorityDetails createPriorityDetails);
 
     /**
      * Create project
@@ -2108,16 +2124,16 @@ public interface JiraRESTV2Api {
      * Creates a project based on a project type template, as shown in the following table:
      * | Project Type Key | Project Template Key |
      *  |--|--|
-     *  | `business` | `com.atlassian.jira-core-project-templates:jira-core-simplified-content-management`, `com.atlassian.jira-core-project-templates:jira-core-simplified-document-approval`, `com.atlassian.jira-core-project-templates:jira-core-simplified-lead-tracking`, `com.atlassian.jira-core-project-templates:jira-core-simplified-process-control`, `com.atlassian.jira-core-project-templates:jira-core-simplified-procurement`, `com.atlassian.jira-core-project-templates:jira-core-simplified-project-management`, `com.atlassian.jira-core-project-templates:jira-core-simplified-recruitment`, `com.atlassian.jira-core-project-templates:jira-core-simplified-task-tracking` |
-     *  | `service_desk` | `com.atlassian.servicedesk:simplified-it-service-management`, `com.atlassian.servicedesk:simplified-general-service-desk-it`, `com.atlassian.servicedesk:simplified-general-service-desk-business`, `com.atlassian.servicedesk:simplified-external-service-desk`, `com.atlassian.servicedesk:simplified-hr-service-desk`, `com.atlassian.servicedesk:simplified-facilities-service-desk`, `com.atlassian.servicedesk:simplified-legal-service-desk`, `com.atlassian.servicedesk:simplified-analytics-service-desk`, `com.atlassian.servicedesk:simplified-marketing-service-desk`, `com.atlassian.servicedesk:simplified-design-service-desk`, `com.atlassian.servicedesk:simplified-sales-service-desk`, `com.atlassian.servicedesk:simplified-finance-service-desk` |
-     *  | `software` | `com.pyxis.greenhopper.jira:gh-simplified-agility-kanban`, `com.pyxis.greenhopper.jira:gh-simplified-agility-scrum`, `com.pyxis.greenhopper.jira:gh-simplified-basic`, `com.pyxis.greenhopper.jira:gh-simplified-kanban-classic`, `com.pyxis.greenhopper.jira:gh-simplified-scrum-classic` |
+     *  | {@code business} | {@code com.atlassian.jira-core-project-templates:jira-core-simplified-content-management}, {@code com.atlassian.jira-core-project-templates:jira-core-simplified-document-approval}, {@code com.atlassian.jira-core-project-templates:jira-core-simplified-lead-tracking}, {@code com.atlassian.jira-core-project-templates:jira-core-simplified-process-control}, {@code com.atlassian.jira-core-project-templates:jira-core-simplified-procurement}, {@code com.atlassian.jira-core-project-templates:jira-core-simplified-project-management}, {@code com.atlassian.jira-core-project-templates:jira-core-simplified-recruitment}, {@code com.atlassian.jira-core-project-templates:jira-core-simplified-task-tracking} |
+     *  | {@code service_desk} | {@code com.atlassian.servicedesk:simplified-it-service-management}, {@code com.atlassian.servicedesk:simplified-general-service-desk-it}, {@code com.atlassian.servicedesk:simplified-general-service-desk-business}, {@code com.atlassian.servicedesk:simplified-external-service-desk}, {@code com.atlassian.servicedesk:simplified-hr-service-desk}, {@code com.atlassian.servicedesk:simplified-facilities-service-desk}, {@code com.atlassian.servicedesk:simplified-legal-service-desk}, {@code com.atlassian.servicedesk:simplified-analytics-service-desk}, {@code com.atlassian.servicedesk:simplified-marketing-service-desk}, {@code com.atlassian.servicedesk:simplified-design-service-desk}, {@code com.atlassian.servicedesk:simplified-sales-service-desk}, {@code com.atlassian.servicedesk:simplified-finance-service-desk} |
+     *  | {@code software} | {@code com.pyxis.greenhopper.jira:gh-simplified-agility-kanban}, {@code com.pyxis.greenhopper.jira:gh-simplified-agility-scrum}, {@code com.pyxis.greenhopper.jira:gh-simplified-basic}, {@code com.pyxis.greenhopper.jira:gh-simplified-kanban-classic}, {@code com.pyxis.greenhopper.jira:gh-simplified-scrum-classic} |
      *  The project types are available according to the installed Jira features as follows:
      *  *
-     * Jira Core, the default, enables `business` projects.
+     * Jira Core, the default, enables {@code business} projects.
      * *
-     * Jira Service Management enables `service_desk` projects.
+     * Jira Service Management enables {@code service_desk} projects.
      * *
-     * Jira Software enables `software` projects.
+     * Jira Software enables {@code software} projects.
      * To determine which features are installed, go to **Jira settings** &amp;gt; **Apps** &amp;gt; **Manage apps** and review the System Apps list. To add Jira Software or Jira Service Management into a JIRA instance, use **Jira settings** &amp;gt; **Apps** &amp;gt; **Finding new apps**. For more information, see [ Managing add-ons](https://confluence.atlassian.com/x/S31NLg).
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
@@ -2137,16 +2153,16 @@ public interface JiraRESTV2Api {
      * Loads an avatar for a project.
      * Specify the avatar's local file location in the body of the request. Also, include the following headers:
      *  *
-     * `X-Atlassian-Token: no-check` To prevent XSRF protection blocking the request, for more information see [Special Headers](#special-request-headers).
+     * {@code X-Atlassian-Token: no-check} To prevent XSRF protection blocking the request, for more information see [Special Headers](#special-request-headers).
      * *
-     * `Content-Type: image/image type` Valid image types are JPEG, GIF, or PNG.
+     * {@code Content-Type: image/image type} Valid image types are JPEG, GIF, or PNG.
      * For example:
-     *  `curl --request POST `
-     * `--user email@example.com:&amp;lt;api_token&amp;gt; `
-     * `--header 'X-Atlassian-Token: no-check' `
-     * `--header 'Content-Type: image/&amp;lt; image_type&amp;gt;' `
-     * `--data-binary "&amp;lt;@/path/to/file/with/your/avatar&amp;gt;" `
-     * `--url 'https://your-domain.atlassian.net/rest/api/2/project/{projectIdOrKey}/avatar2'`
+     *  {@code curl --request POST }
+     * {@code --user email@example.com:&amp;lt;api_token&amp;gt; }
+     * {@code --header 'X-Atlassian-Token: no-check' }
+     * {@code --header 'Content-Type: image/&amp;lt; image_type&amp;gt;' }
+     * {@code --data-binary "&amp;lt;@/path/to/file/with/your/avatar&amp;gt;" }
+     * {@code --url 'https://your-domain.atlassian.net/rest/api/2/project/{projectIdOrKey}/avatar2'}
      * The avatar is cropped to a square. If no crop parameters are specified, the square originates at the top left of the image. The length of the square's sides is set to the smaller of the height or width of the image.
      * The cropped image is then used to create avatars of 16x16, 24x24, 32x32, and 48x48 in size.
      * After creating the avatar use [Set project avatar](#api-rest-api-2-project-projectIdOrKey-avatar-put) to set it as the project's displayed avatar.
@@ -2206,14 +2222,14 @@ public interface JiraRESTV2Api {
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param requestBody           (required)
+     * @param createResolutionDetails  (required)
      */
     @RequestLine("POST /rest/api/2/resolution")
     @Headers({
         "Content-Type: application/json", 
         "Accept: application/json"
     })
-    ResolutionId createResolution(@NotNull Map<String, Object> requestBody);
+    ResolutionId createResolution(@NotNull CreateResolutionDetails createResolutionDetails);
 
     /**
      * Create screen
@@ -2295,14 +2311,14 @@ public interface JiraRESTV2Api {
      * If the user exists and has access to Jira, the operation returns a 201 status. If the user exists but does not have access to Jira, the operation returns a 400 status.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
-     * @param requestBody          Details about the user to be created. (required)
+     * @param newUserDetails       Details about the user to be created. (required)
      */
     @RequestLine("POST /rest/api/2/user")
     @Headers({
         "Content-Type: application/json", 
         "Accept: application/json"
     })
-    User createUser(@NotNull Map<String, Object> requestBody);
+    User createUser(@NotNull NewUserDetails newUserDetails);
 
     /**
      * Create version
@@ -2387,21 +2403,21 @@ public interface JiraRESTV2Api {
      * 
      * }
      *  *
-     * `comparator` One of the supported comparator: `=`, `&amp;gt;`, and `&amp;lt;`.
+     * {@code comparator} One of the supported comparator: {@code =}, {@code &amp;gt;}, and {@code &amp;lt;}.
      * *
-     * `fieldId` The custom numeric field ID. Allowed field types:
+     * {@code fieldId} The custom numeric field ID. Allowed field types:
      * 
      * 
      * 
      * 
      *  *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:float`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:float}
      * 
      * 
      * *
-     * `com.pyxis.greenhopper.jira:jsw-story-points`
+     * {@code com.pyxis.greenhopper.jira:jsw-story-points}
      * *
-     * `fieldValue` The value for comparison.
+     * {@code fieldValue} The value for comparison.
      * ##### Hide from user condition #####
      * A condition that hides a transition from users. The transition can only be triggered from a workflow function or REST API operation.
      * 
@@ -2477,7 +2493,7 @@ public interface JiraRESTV2Api {
      * 
      * }
      *  *
-     * `permissionKey` The permission required to perform the transition. Allowed values: [built-in](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-permission-schemes/#built-in-permissions) or app defined permissions.
+     * {@code permissionKey} The permission required to perform the transition. Allowed values: [built-in](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-permission-schemes/#built-in-permissions) or app defined permissions.
      * ##### Previous status condition #####
      * A condition that allows a transition based on whether an issue has or has not transitioned through a status.
      * 
@@ -2534,15 +2550,15 @@ public interface JiraRESTV2Api {
      * 
      * 
      * }
-     * By default this condition allows the transition if the status, as defined by its ID in the `previousStatus` object, matches any previous issue status, unless:
+     * By default this condition allows the transition if the status, as defined by its ID in the {@code previousStatus} object, matches any previous issue status, unless:
      *  *
-     * `ignoreLoopTransitions` is `true`, then loop transitions (from and to the same status) are ignored.
+     * {@code ignoreLoopTransitions} is {@code true}, then loop transitions (from and to the same status) are ignored.
      * *
-     * `includeCurrentStatus` is `true`, then the current issue status is also checked.
+     * {@code includeCurrentStatus} is {@code true}, then the current issue status is also checked.
      * *
-     * `mostRecentStatusOnly` is `true`, then only the issue's preceding status (the one immediately before the current status) is checked.
+     * {@code mostRecentStatusOnly} is {@code true}, then only the issue's preceding status (the one immediately before the current status) is checked.
      * *
-     * `reverseCondition` is `true`, then the status must not be present.
+     * {@code reverseCondition} is {@code true}, then the status must not be present.
      * ##### Separation of duties condition #####
      * A condition that prevents a user to perform the transition, if the user has already performed a transition on the issue.
      * 
@@ -2596,9 +2612,9 @@ public interface JiraRESTV2Api {
      * 
      * }
      *  *
-     * `fromStatus` OPTIONAL. An object containing the ID of the source status of the transition that is blocked. If omitted any transition to `toStatus` is blocked.
+     * {@code fromStatus} OPTIONAL. An object containing the ID of the source status of the transition that is blocked. If omitted any transition to {@code toStatus} is blocked.
      * *
-     * `toStatus` An object containing the ID of the target status of the transition that is blocked.
+     * {@code toStatus} An object containing the ID of the target status of the transition that is blocked.
      * ##### Subtask blocking condition #####
      * A condition that blocks transition on a parent issue if any of its subtasks are in any of one or more statuses.
      * 
@@ -2668,7 +2684,7 @@ public interface JiraRESTV2Api {
      * 
      * }
      *  *
-     * `statuses` A list of objects containing status IDs.
+     * {@code statuses} A list of objects containing status IDs.
      * ##### User is in any group condition #####
      * A condition that allows users belonging to any group from a list of groups to execute a transition.
      * 
@@ -2712,7 +2728,7 @@ public interface JiraRESTV2Api {
      * 
      * }
      *  *
-     * `groups` A list of group names.
+     * {@code groups} A list of group names.
      * ##### User is in any project role condition #####
      * A condition that allows only users with at least one project roles from a list of project roles to execute a transition.
      * 
@@ -2820,7 +2836,7 @@ public interface JiraRESTV2Api {
      * 
      * }
      *  *
-     * `projectRoles` A list of objects containing project role IDs.
+     * {@code projectRoles} A list of objects containing project role IDs.
      * ##### User is in custom field condition #####
      * A condition that allows only users listed in a given custom field to execute the transition.
      * 
@@ -2852,9 +2868,9 @@ public interface JiraRESTV2Api {
      * 
      * }
      *  *
-     * `allowUserInField` If `true` only a user who is listed in `fieldId` can perform the transition, otherwise, only a user who is not listed in `fieldId` can perform the transition.
+     * {@code allowUserInField} If {@code true} only a user who is listed in {@code fieldId} can perform the transition, otherwise, only a user who is not listed in {@code fieldId} can perform the transition.
      * *
-     * `fieldId` The ID of the field containing the list of users.
+     * {@code fieldId} The ID of the field containing the list of users.
      * ##### User is in group condition #####
      * A condition that allows users belonging to a group to execute a transition.
      * 
@@ -2881,7 +2897,7 @@ public interface JiraRESTV2Api {
      * 
      * }
      *  *
-     * `group` The name of the group.
+     * {@code group} The name of the group.
      * ##### User is in group custom field condition #####
      * A condition that allows users belonging to a group specified in a custom field to execute a transition.
      * 
@@ -2908,37 +2924,37 @@ public interface JiraRESTV2Api {
      * 
      * }
      *  *
-     * `fieldId` The ID of the field. Allowed field types:
+     * {@code fieldId} The ID of the field. Allowed field types:
      * 
      * 
      * 
      * 
      *  *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:multigrouppicker`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:multigrouppicker}
      * 
      * 
      * *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:grouppicker`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:grouppicker}
      * 
      * 
      * *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:select`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:select}
      * 
      * 
      * *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:multiselect`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:multiselect}
      * 
      * 
      * *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons}
      * 
      * 
      * *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes}
      * 
      * 
      * *
-     * `com.pyxis.greenhopper.jira:gh-epic-status`
+     * {@code com.pyxis.greenhopper.jira:gh-epic-status}
      * ##### User is in project role condition #####
      * A condition that allows users with a project role to execute a transition.
      * 
@@ -2976,7 +2992,7 @@ public interface JiraRESTV2Api {
      * 
      * }
      *  *
-     * `projectRole` An object containing the ID of a project role.
+     * {@code projectRole} An object containing the ID of a project role.
      * ##### Value field condition #####
      * A conditions that allows a transition to execute if the value of a field is equal to a constant value or simply set.
      * 
@@ -3018,20 +3034,20 @@ public interface JiraRESTV2Api {
      * 
      * }
      *  *
-     * `fieldId` The ID of a field used in the comparison.
+     * {@code fieldId} The ID of a field used in the comparison.
      * *
-     * `fieldValue` The expected value of the field.
+     * {@code fieldValue} The expected value of the field.
      * *
-     * `comparisonType` The type of the comparison. Allowed values: `STRING`, `NUMBER`, `DATE`, `DATE_WITHOUT_TIME`, or `OPTIONID`.
+     * {@code comparisonType} The type of the comparison. Allowed values: {@code STRING}, {@code NUMBER}, {@code DATE}, {@code DATE_WITHOUT_TIME}, or {@code OPTIONID}.
      * *
-     * `comparator` One of the supported comparator: `&amp;gt;`, `&amp;gt;=`, `=`, `&amp;lt;=`, `&amp;lt;`, `!=`.
+     * {@code comparator} One of the supported comparator: {@code &amp;gt;}, {@code &amp;gt;=}, {@code =}, {@code &amp;lt;=}, {@code &amp;lt;}, {@code !=}.
      * **Notes:**
      *  *
-     * If you choose the comparison type `STRING`, only `=` and `!=` are valid options.
+     * If you choose the comparison type {@code STRING}, only {@code =} and {@code !=} are valid options.
      * *
-     * You may leave `fieldValue` empty when comparison type is `!=` to indicate that a value is required in the field.
+     * You may leave {@code fieldValue} empty when comparison type is {@code !=} to indicate that a value is required in the field.
      * *
-     * For date fields without time format values as `yyyy-MM-dd`, and for those with time as `yyyy-MM-dd HH:mm`. For example, for July 16 2021 use `2021-07-16`, for 8:05 AM use `2021-07-16 08:05`, and for 4 PM: `2021-07-16 16:00`.
+     * For date fields without time format values as {@code yyyy-MM-dd}, and for those with time as {@code yyyy-MM-dd HH:mm}. For example, for July 16 2021 use {@code 2021-07-16}, for 8:05 AM use {@code 2021-07-16 08:05}, and for 4 PM: {@code 2021-07-16 16:00}.
      * #### Validators ####
      * Validators check that any input made to the transition is valid before the transition is performed.
      * ##### Date field validator #####
@@ -3086,83 +3102,83 @@ public interface JiraRESTV2Api {
      * 
      * }
      *  *
-     * `comparator` One of the supported comparator: `&amp;gt;`, `&amp;gt;=`, `=`, `&amp;lt;=`, `&amp;lt;`, or `!=`.
+     * {@code comparator} One of the supported comparator: {@code &amp;gt;}, {@code &amp;gt;=}, {@code =}, {@code &amp;lt;=}, {@code &amp;lt;}, or {@code !=}.
      * *
-     * `date1` The date field to validate. Allowed field types:
+     * {@code date1} The date field to validate. Allowed field types:
      * 
      * 
      * 
      * 
      *  *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:datepicker`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:datepicker}
      * 
      * 
      * *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:datetime`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:datetime}
      * 
      * 
      * *
-     * `com.atlassian.jpo:jpo-custom-field-baseline-end`
+     * {@code com.atlassian.jpo:jpo-custom-field-baseline-end}
      * 
      * 
      * *
-     * `com.atlassian.jpo:jpo-custom-field-baseline-start`
+     * {@code com.atlassian.jpo:jpo-custom-field-baseline-start}
      * 
      * 
      * *
-     * `duedate`
+     * {@code duedate}
      * 
      * 
      * *
-     * `created`
+     * {@code created}
      * 
      * 
      * *
-     * `updated`
+     * {@code updated}
      * 
      * 
      * *
-     * `resolutiondate`
+     * {@code resolutiondate}
      * *
-     * `date2` The second date field. Required, if `expression` is not passed. Allowed field types:
+     * {@code date2} The second date field. Required, if {@code expression} is not passed. Allowed field types:
      * 
      * 
      * 
      * 
      *  *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:datepicker`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:datepicker}
      * 
      * 
      * *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:datetime`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:datetime}
      * 
      * 
      * *
-     * `com.atlassian.jpo:jpo-custom-field-baseline-end`
+     * {@code com.atlassian.jpo:jpo-custom-field-baseline-end}
      * 
      * 
      * *
-     * `com.atlassian.jpo:jpo-custom-field-baseline-start`
+     * {@code com.atlassian.jpo:jpo-custom-field-baseline-start}
      * 
      * 
      * *
-     * `duedate`
+     * {@code duedate}
      * 
      * 
      * *
-     * `created`
+     * {@code created}
      * 
      * 
      * *
-     * `updated`
+     * {@code updated}
      * 
      * 
      * *
-     * `resolutiondate`
+     * {@code resolutiondate}
      * *
-     * `expression` An expression specifying an offset. Required, if `date2` is not passed. Offsets are built with a number, with `-` as prefix for the past, and one of these time units: `d` for day, `w` for week, `m` for month, or `y` for year. For example, -2d means two days into the past and 1w means one week into the future. The `now` keyword enables a comparison with the current date.
+     * {@code expression} An expression specifying an offset. Required, if {@code date2} is not passed. Offsets are built with a number, with {@code -} as prefix for the past, and one of these time units: {@code d} for day, {@code w} for week, {@code m} for month, or {@code y} for year. For example, -2d means two days into the past and 1w means one week into the future. The {@code now} keyword enables a comparison with the current date.
      * *
-     * `includeTime` If `true`, then the time part of the data is included for the comparison. If the field doesn't have a time part, 00:00:00 is used.
+     * {@code includeTime} If {@code true}, then the time part of the data is included for the comparison. If the field doesn't have a time part, 00:00:00 is used.
      * ##### Windows date validator #####
      * A validator that checks that a date falls on or after a reference date and before or on the reference date plus a number of days.
      * 
@@ -3203,79 +3219,79 @@ public interface JiraRESTV2Api {
      * 
      * }
      *  *
-     * `date1` The date field to validate. Allowed field types:
+     * {@code date1} The date field to validate. Allowed field types:
      * 
      * 
      * 
      * 
      *  *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:datepicker`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:datepicker}
      * 
      * 
      * *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:datetime`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:datetime}
      * 
      * 
      * *
-     * `com.atlassian.jpo:jpo-custom-field-baseline-end`
+     * {@code com.atlassian.jpo:jpo-custom-field-baseline-end}
      * 
      * 
      * *
-     * `com.atlassian.jpo:jpo-custom-field-baseline-start`
+     * {@code com.atlassian.jpo:jpo-custom-field-baseline-start}
      * 
      * 
      * *
-     * `duedate`
+     * {@code duedate}
      * 
      * 
      * *
-     * `created`
+     * {@code created}
      * 
      * 
      * *
-     * `updated`
+     * {@code updated}
      * 
      * 
      * *
-     * `resolutiondate`
+     * {@code resolutiondate}
      * *
-     * `date2` The reference date. Allowed field types:
+     * {@code date2} The reference date. Allowed field types:
      * 
      * 
      * 
      * 
      *  *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:datepicker`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:datepicker}
      * 
      * 
      * *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:datetime`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:datetime}
      * 
      * 
      * *
-     * `com.atlassian.jpo:jpo-custom-field-baseline-end`
+     * {@code com.atlassian.jpo:jpo-custom-field-baseline-end}
      * 
      * 
      * *
-     * `com.atlassian.jpo:jpo-custom-field-baseline-start`
+     * {@code com.atlassian.jpo:jpo-custom-field-baseline-start}
      * 
      * 
      * *
-     * `duedate`
+     * {@code duedate}
      * 
      * 
      * *
-     * `created`
+     * {@code created}
      * 
      * 
      * *
-     * `updated`
+     * {@code updated}
      * 
      * 
      * *
-     * `resolutiondate`
+     * {@code resolutiondate}
      * *
-     * `windowsDays` A positive integer indicating a number of days.
+     * {@code windowsDays} A positive integer indicating a number of days.
      * ##### Field required validator #####
      * A validator that checks fields are not empty. By default, if a field is not included in the current context it's ignored and not validated.
      * 
@@ -3355,11 +3371,11 @@ public interface JiraRESTV2Api {
      * 
      * }
      *  *
-     * `ignoreContext` If `true`, then the context is ignored and all the fields are validated.
+     * {@code ignoreContext} If {@code true}, then the context is ignored and all the fields are validated.
      * *
-     * `errorMessage` OPTIONAL. The error message displayed when one or more fields are empty. A default error message is shown if an error message is not provided.
+     * {@code errorMessage} OPTIONAL. The error message displayed when one or more fields are empty. A default error message is shown if an error message is not provided.
      * *
-     * `fieldIds` The list of fields to validate.
+     * {@code fieldIds} The list of fields to validate.
      * ##### Field changed validator #####
      * A validator that checks that a field value is changed. However, this validation can be ignored for users from a list of groups.
      * 
@@ -3430,11 +3446,11 @@ public interface JiraRESTV2Api {
      * 
      * }
      *  *
-     * `fieldId` The ID of a field.
+     * {@code fieldId} The ID of a field.
      * *
-     * `errorMessage` OPTIONAL. The error message displayed if the field is not changed. A default error message is shown if the error message is not provided.
+     * {@code errorMessage} OPTIONAL. The error message displayed if the field is not changed. A default error message is shown if the error message is not provided.
      * *
-     * `exemptedGroups` OPTIONAL. The list of groups.
+     * {@code exemptedGroups} OPTIONAL. The list of groups.
      * ##### Field has single value validator #####
      * A validator that checks that a multi-select field has only one value. Optionally, the validation can ignore values copied from subtasks.
      * 
@@ -3473,9 +3489,9 @@ public interface JiraRESTV2Api {
      * 
      * }
      *  *
-     * `fieldId` The ID of a field.
+     * {@code fieldId} The ID of a field.
      * *
-     * `excludeSubtasks` If `true`, then values copied from subtasks are ignored.
+     * {@code excludeSubtasks} If {@code true}, then values copied from subtasks are ignored.
      * ##### Parent status validator #####
      * A validator that checks the status of the parent issue of a subtask. Ìf the issue is not a subtask, no validation is performed.
      * 
@@ -3570,7 +3586,7 @@ public interface JiraRESTV2Api {
      * 
      * }
      *  *
-     * `parentStatus` The list of required parent issue statuses.
+     * {@code parentStatus} The list of required parent issue statuses.
      * ##### Permission validator #####
      * A validator that checks the user has a permission.
      * 
@@ -3598,7 +3614,7 @@ public interface JiraRESTV2Api {
      * 
      * }
      *  *
-     * `permissionKey` The permission required to perform the transition. Allowed values: [built-in](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-permission-schemes/#built-in-permissions) or app defined permissions.
+     * {@code permissionKey} The permission required to perform the transition. Allowed values: [built-in](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-permission-schemes/#built-in-permissions) or app defined permissions.
      * ##### Previous status validator #####
      * A validator that checks if the issue has held a status.
      * 
@@ -3646,9 +3662,9 @@ public interface JiraRESTV2Api {
      * 
      * }
      *  *
-     * `mostRecentStatusOnly` If `true`, then only the issue's preceding status (the one immediately before the current status) is checked.
+     * {@code mostRecentStatusOnly} If {@code true}, then only the issue's preceding status (the one immediately before the current status) is checked.
      * *
-     * `previousStatus` An object containing the ID of an issue status.
+     * {@code previousStatus} An object containing the ID of an issue status.
      * ##### Regular expression validator #####
      * A validator that checks the content of a field against a regular expression.
      * 
@@ -3682,59 +3698,59 @@ public interface JiraRESTV2Api {
      * 
      * }
      *  *
-     * `regExp`A regular expression.
+     * {@code regExp}A regular expression.
      * *
-     * `fieldId` The ID of a field. Allowed field types:
+     * {@code fieldId} The ID of a field. Allowed field types:
      * 
      * 
      * 
      * 
      *  *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:select`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:select}
      * 
      * 
      * *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:multiselect`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:multiselect}
      * 
      * 
      * *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:radiobuttons}
      * 
      * 
      * *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:multicheckboxes}
      * 
      * 
      * *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:textarea`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:textarea}
      * 
      * 
      * *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:textfield`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:textfield}
      * 
      * 
      * *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:url`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:url}
      * 
      * 
      * *
-     * `com.atlassian.jira.plugin.system.customfieldtypes:float`
+     * {@code com.atlassian.jira.plugin.system.customfieldtypes:float}
      * 
      * 
      * *
-     * `com.pyxis.greenhopper.jira:jsw-story-points`
+     * {@code com.pyxis.greenhopper.jira:jsw-story-points}
      * 
      * 
      * *
-     * `com.pyxis.greenhopper.jira:gh-epic-status`
+     * {@code com.pyxis.greenhopper.jira:gh-epic-status}
      * 
      * 
      * *
-     * `description`
+     * {@code description}
      * 
      * 
      * *
-     * `summary`
+     * {@code summary}
      * ##### User permission validator #####
      * A validator that checks if a user has a permission. Obsolete. You may encounter this validator when getting transition rules and can pass it when updating or creating rules, for example, when you want to duplicate the rules from a workflow on a new workflow.
      * 
@@ -3780,11 +3796,11 @@ public interface JiraRESTV2Api {
      * 
      * }
      *  *
-     * `permissionKey` The permission to be validated. Allowed values: [built-in](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-permission-schemes/#built-in-permissions) or app defined permissions.
+     * {@code permissionKey} The permission to be validated. Allowed values: [built-in](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-permission-schemes/#built-in-permissions) or app defined permissions.
      * *
-     * `nullAllowed` If `true`, allows the transition when `username` is empty.
+     * {@code nullAllowed} If {@code true}, allows the transition when {@code username} is empty.
      * *
-     * `username` The username to validate against the `permissionKey`.
+     * {@code username} The username to validate against the {@code permissionKey}.
      * #### Post functions ####
      * Post functions carry out any additional processing required after a Jira workflow transition is executed.
      * ##### Fire issue event function #####
@@ -3823,9 +3839,9 @@ public interface JiraRESTV2Api {
      * 
      * 
      * }
-     * **Note:** If provided, this post function overrides the default `FireIssueEventFunction`. Can be included once in a transition.
+     * **Note:** If provided, this post function overrides the default {@code FireIssueEventFunction}. Can be included once in a transition.
      *  *
-     * `event` An object containing the ID of the issue event.
+     * {@code event} An object containing the ID of the issue event.
      * ##### Update issue status #####
      * A post function that sets issue status to the linked status of the destination workflow status.
      * 
@@ -3866,7 +3882,7 @@ public interface JiraRESTV2Api {
      * }
      * **Note:** This post function can only be added to the initial transition and can only be added once.
      * ##### Assign to current user function #####
-     * A post function that assigns the issue to the current user if the current user has the `ASSIGNABLE_USER` permission.
+     * A post function that assigns the issue to the current user if the current user has the {@code ASSIGNABLE_USER} permission.
      * 
      * 
      * {
@@ -3933,7 +3949,7 @@ public interface JiraRESTV2Api {
      * 
      * }
      *  *
-     * `fieldId` The ID of the field.
+     * {@code fieldId} The ID of the field.
      * ##### Copy value from other field function #####
      * A post function that copies the value of one field to another, either within an issue or from parent to subtask.
      * 
@@ -3970,11 +3986,11 @@ public interface JiraRESTV2Api {
      * 
      * }
      *  *
-     * `sourceFieldId` The ID of the source field.
+     * {@code sourceFieldId} The ID of the source field.
      * *
-     * `destinationFieldId` The ID of the destination field.
+     * {@code destinationFieldId} The ID of the destination field.
      * *
-     * `copyType` Use `same` to copy the value from a field inside the issue, or `parent` to copy the value from the parent issue.
+     * {@code copyType} Use {@code same} to copy the value from a field inside the issue, or {@code parent} to copy the value from the parent issue.
      * ##### Create Crucible review workflow function #####
      * A post function that creates a Crucible review for all unreviewed code for the issue.
      * 
@@ -4044,9 +4060,9 @@ public interface JiraRESTV2Api {
      * 
      * }
      *  *
-     * `projectRole` An object containing the ID of the project role.
+     * {@code projectRole} An object containing the ID of the project role.
      * *
-     * `issueSecurityLevel` OPTIONAL. The object containing the ID of the security level. If not passed, then the security level is set to `none`.
+     * {@code issueSecurityLevel} OPTIONAL. The object containing the ID of the security level. If not passed, then the security level is set to {@code none}.
      * ##### Trigger a webhook function #####
      * A post function that triggers a webhook.
      * 
@@ -4084,7 +4100,7 @@ public interface JiraRESTV2Api {
      * 
      * }
      *  *
-     * `webhook` An object containing the ID of the webhook listener to trigger.
+     * {@code webhook} An object containing the ID of the webhook listener to trigger.
      * ##### Update issue custom field function #####
      * A post function that updates the content of an issue custom field.
      * 
@@ -4121,11 +4137,11 @@ public interface JiraRESTV2Api {
      * 
      * }
      *  *
-     * `mode` Use `replace` to override the field content with `fieldValue` or `append` to add `fieldValue` to the end of the field content.
+     * {@code mode} Use {@code replace} to override the field content with {@code fieldValue} or {@code append} to add {@code fieldValue} to the end of the field content.
      * *
-     * `fieldId` The ID of the field.
+     * {@code fieldId} The ID of the field.
      * *
-     * `fieldValue` The update content.
+     * {@code fieldValue} The update content.
      * ##### Update issue field function #####
      * A post function that updates a simple issue field.
      * 
@@ -4157,49 +4173,49 @@ public interface JiraRESTV2Api {
      * 
      * }
      *  *
-     * `fieldId` The ID of the field. Allowed field types:
+     * {@code fieldId} The ID of the field. Allowed field types:
      * 
      * 
      * 
      * 
      *  *
-     * `assignee`
+     * {@code assignee}
      * 
      * 
      * *
-     * `description`
+     * {@code description}
      * 
      * 
      * *
-     * `environment`
+     * {@code environment}
      * 
      * 
      * *
-     * `priority`
+     * {@code priority}
      * 
      * 
      * *
-     * `resolution`
+     * {@code resolution}
      * 
      * 
      * *
-     * `summary`
+     * {@code summary}
      * 
      * 
      * *
-     * `timeoriginalestimate`
+     * {@code timeoriginalestimate}
      * 
      * 
      * *
-     * `timeestimate`
+     * {@code timeestimate}
      * 
      * 
      * *
-     * `timespent`
+     * {@code timespent}
      * *
-     * `fieldValue` The update value.
+     * {@code fieldValue} The update value.
      * *
-     * If the `fieldId` is `assignee`, the `fieldValue` should be one of these values:
+     * If the {@code fieldId} is {@code assignee}, the {@code fieldValue} should be one of these values:
      * 
      * 
      * 
@@ -4209,11 +4225,11 @@ public interface JiraRESTV2Api {
      * 
      * 
      * *
-     * `automatic`.
+     * {@code automatic}.
      * 
      * 
      * *
-     * a blank string, which sets the value to `unassigned`.
+     * a blank string, which sets the value to {@code unassigned}.
      * #### Connect rules ####
      * Connect rules are conditions, validators, and post functions of a transition that are registered by Connect apps. To create a rule registered by the app, the app must be enabled and the rule's module must exist.
      * 
@@ -4240,9 +4256,9 @@ public interface JiraRESTV2Api {
      * 
      * }
      *  *
-     * `type` A Connect rule key in a form of `appKey__moduleKey`.
+     * {@code type} A Connect rule key in a form of {@code appKey__moduleKey}.
      * *
-     * `value` The stringified JSON configuration of a Connect rule.
+     * {@code value} The stringified JSON configuration of a Connect rule.
      * #### Forge rules ####
      * Forge transition rules are not yet supported.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
@@ -4296,9 +4312,9 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param transitionId         The ID of the transition. To get the ID, view the workflow in text mode in the Jira admin settings. The ID is shown next to the transition. (required)
-     * @param key                  The key of the property being added, also known as the name of the property. Set this to the same value as the `key` defined in the request body. (required)
+     * @param key                  The key of the property being added, also known as the name of the property. Set this to the same value as the {@code key} defined in the request body. (required)
      * @param workflowName         The name of the workflow that the transition belongs to. (required)
-     * @param requestBody           (required)
+     * @param workflowTransitionProperty  (required)
      * @param workflowMode         The workflow status. Set to *live* for inactive workflows or *draft* for draft workflows. Active workflows cannot be edited. (optional, defaults to live)
      */
     @RequestLine("POST /rest/api/2/workflow/transitions/{transitionId}/properties?key={key}&workflowName={workflowName}&workflowMode={workflowMode}")
@@ -4306,7 +4322,7 @@ public interface JiraRESTV2Api {
         "Content-Type: application/json", 
         "Accept: application/json"
     })
-    WorkflowTransitionProperty createWorkflowTransitionProperty(@Param("transitionId") @NotNull Long transitionId, @Param("key") @NotNull String key, @Param("workflowName") @NotNull String workflowName, @NotNull Map<String, Object> requestBody, @Param("workflowMode") @Nullable String workflowMode);
+    WorkflowTransitionProperty createWorkflowTransitionProperty(@Param("transitionId") @NotNull Long transitionId, @Param("key") @NotNull String key, @Param("workflowName") @NotNull String workflowName, @NotNull WorkflowTransitionProperty workflowTransitionProperty, @Param("workflowMode") @Nullable String workflowMode);
 
     /**
      * Bulk create workflows
@@ -4340,8 +4356,8 @@ public interface JiraRESTV2Api {
      * @param projectIdOrKey       The project ID or project key (case sensitive). (required)
      * @param id                   The ID of the project role. Use [Get all project roles](#api-rest-api-2-role-get) to get a list of project role IDs. (required)
      * @param user                 The user account ID of the user to remove from the project role. (optional)
-     * @param group                The name of the group to remove from the project role. This parameter cannot be used with the `groupId` parameter. As a group's name can change, use of `groupId` is recommended. (optional)
-     * @param groupId              The ID of the group to remove from the project role. This parameter cannot be used with the `group` parameter. (optional)
+     * @param group                The name of the group to remove from the project role. This parameter cannot be used with the {@code groupId} parameter. As a group's name can change, use of {@code groupId} is recommended. (optional)
+     * @param groupId              The ID of the group to remove from the project role. This parameter cannot be used with the {@code group} parameter. (optional)
      */
     @RequestLine("DELETE /rest/api/2/project/{projectIdOrKey}/role/{id}?user={user}&group={group}&groupId={groupId}")
     @Headers({
@@ -4353,7 +4369,7 @@ public interface JiraRESTV2Api {
      * Delete and replace version
      * <p>
      * Deletes a project version.
-     * Alternative versions can be provided to update issues that use the deleted version in `fixVersion`, `affectedVersion`, or any version picker custom fields. If alternatives are not provided, occurrences of `fixVersion`, `affectedVersion`, and any version picker custom field, that contain the deleted version, are cleared. Any replacement version must be in the same project as the version being deleted and cannot be the version being deleted.
+     * Alternative versions can be provided to update issues that use the deleted version in {@code fixVersion}, {@code affectedVersion}, or any version picker custom fields. If alternatives are not provided, occurrences of {@code fixVersion}, {@code affectedVersion}, and any version picker custom field, that contain the deleted version, are cleared. Any replacement version must be in the same project as the version being deleted and cannot be the version being deleted.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) or *Administer Projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project that contains the version.
      *
@@ -4451,7 +4467,7 @@ public interface JiraRESTV2Api {
      * Delete custom field
      * <p>
      * Deletes a custom field. The custom field is deleted whether it is in the trash or not. See [Edit or delete a custom field](https://confluence.atlassian.com/x/Z44fOw) for more information on trashing and deleting custom fields.
-     * This operation is [asynchronous](#async). Follow the `location` link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
+     * This operation is [asynchronous](#async). Follow the {@code location} link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
@@ -4536,12 +4552,12 @@ public interface JiraRESTV2Api {
      * Delete default workflow
      * <p>
      * Resets the default workflow for a workflow scheme. That is, the default workflow is set to Jira's system workflow (the *jira* workflow).
-     * Note that active workflow schemes cannot be edited. If the workflow scheme is active, set `updateDraftIfNeeded` to `true` and a draft workflow scheme is created or updated with the default workflow reset. The draft workflow scheme can be published in Jira.
+     * Note that active workflow schemes cannot be edited. If the workflow scheme is active, set {@code updateDraftIfNeeded} to {@code true} and a draft workflow scheme is created or updated with the default workflow reset. The draft workflow scheme can be published in Jira.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param id                   The ID of the workflow scheme. (required)
-     * @param updateDraftIfNeeded  Set to true to create or update the draft of a workflow scheme and delete the mapping from the draft, when the workflow scheme cannot be edited. Defaults to `false`. (optional)
+     * @param updateDraftIfNeeded  Set to true to create or update the draft of a workflow scheme and delete the mapping from the draft, when the workflow scheme cannot be edited. Defaults to {@code false}. (optional)
      */
     @RequestLine("DELETE /rest/api/2/workflowscheme/{id}/default?updateDraftIfNeeded={updateDraftIfNeeded}")
     @Headers({
@@ -4588,7 +4604,7 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [write:jira-work]
      * @param id                   The ID of the filter. (required)
-     * @param expand               Use [expand](#expansion) to include additional information about filter in the response. This parameter accepts a comma-separated list. Expand options include:   *  `sharedUsers` Returns the users that the filter is shared with. This includes users that can browse projects that the filter is shared with. If you don't specify `sharedUsers`, then the `sharedUsers` object is returned but it doesn't list any users. The list of users returned is limited to 1000, to access additional users append `[start-index:end-index]` to the expand request. For example, to access the next 1000 users, use `?expand=sharedUsers[1001:2000]`.  *  `subscriptions` Returns the users that are subscribed to the filter. If you don't specify `subscriptions`, the `subscriptions` object is returned but it doesn't list any subscriptions. The list of subscriptions returned is limited to 1000, to access additional subscriptions append `[start-index:end-index]` to the expand request. For example, to access the next 1000 subscriptions, use `?expand=subscriptions[1001:2000]`. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information about filter in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code sharedUsers} Returns the users that the filter is shared with. This includes users that can browse projects that the filter is shared with. If you don't specify {@code sharedUsers}, then the {@code sharedUsers} object is returned but it doesn't list any users. The list of users returned is limited to 1000, to access additional users append {@code [start-index:end-index]} to the expand request. For example, to access the next 1000 users, use {@code ?expand=sharedUsers[1001:2000]}.  *  {@code subscriptions} Returns the users that are subscribed to the filter. If you don't specify {@code subscriptions}, the {@code subscriptions} object is returned but it doesn't list any subscriptions. The list of subscriptions returned is limited to 1000, to access additional subscriptions append {@code [start-index:end-index]} to the expand request. For example, to access the next 1000 subscriptions, use {@code ?expand=subscriptions[1001:2000]}. (optional)
      */
     @RequestLine("DELETE /rest/api/2/filter/{id}/favourite?expand={expand}")
     @Headers({
@@ -4671,7 +4687,7 @@ public interface JiraRESTV2Api {
      * Delete issue
      * <p>
      * Deletes an issue.
-     * An issue cannot be deleted if it has one or more subtasks. To delete an issue with subtasks, set `deleteSubtasks`. This causes the issue's subtasks to be deleted with the issue.
+     * An issue cannot be deleted if it has one or more subtasks. To delete an issue with subtasks, set {@code deleteSubtasks}. This causes the issue's subtasks to be deleted with the issue.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:**
      *  *
@@ -4697,7 +4713,7 @@ public interface JiraRESTV2Api {
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). Jira permissions are not required for the app providing the field.
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param fieldKey             The field key is specified in the following format: **$(app-key)\\_\\_$(field-key)**. For example, *example-add-on\\_\\_example-issue-field*. To determine the `fieldKey` value, do one of the following:   *  open the app's plugin descriptor, then **app-key** is the key at the top and **field-key** is the key in the `jiraIssueFields` module. **app-key** can also be found in the app listing in the Atlassian Universal Plugin Manager.  *  run [Get fields](#api-rest-api-2-field-get) and in the field details the value is returned in `key`. For example, `"key": "teams-add-on__team-issue-field"` (required)
+     * @param fieldKey             The field key is specified in the following format: **$(app-key)\\_\\_$(field-key)**. For example, *example-add-on\\_\\_example-issue-field*. To determine the {@code fieldKey} value, do one of the following:   *  open the app's plugin descriptor, then **app-key** is the key at the top and **field-key** is the key in the {@code jiraIssueFields} module. **app-key** can also be found in the app listing in the Atlassian Universal Plugin Manager.  *  run [Get fields](#api-rest-api-2-field-get) and in the field details the value is returned in {@code key}. For example, {@code "key": "teams-add-on__team-issue-field"} (required)
      * @param optionId             The ID of the option to be deleted. (required)
      */
     @RequestLine("DELETE /rest/api/2/field/{fieldKey}/option/{optionId}")
@@ -4768,7 +4784,7 @@ public interface JiraRESTV2Api {
     /**
      * Delete issue type
      * <p>
-     * Deletes the issue type. If the issue type is in use, all uses are updated with the alternative issue type (`alternativeIssueTypeId`). A list of alternative issue types are obtained from the [Get alternative issue types](#api-rest-api-2-issuetype-id-alternatives-get) resource.
+     * Deletes the issue type. If the issue type is in use, all uses are updated with the alternative issue type ({@code alternativeIssueTypeId}). A list of alternative issue types are obtained from the [Get alternative issue types](#api-rest-api-2-issuetype-id-alternatives-get) resource.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
@@ -4895,7 +4911,7 @@ public interface JiraRESTV2Api {
      * Delete priority
      * <p>
      * Deletes an issue priority.
-     * This operation is [asynchronous](#async). Follow the `location` link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
+     * This operation is [asynchronous](#async). Follow the {@code location} link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
@@ -4933,7 +4949,7 @@ public interface JiraRESTV2Api {
      *  *
      * transactional, that is, if part of the delete fails the project is not deleted.
      * *
-     * [asynchronous](#async). Follow the `location` link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
+     * [asynchronous](#async). Follow the {@code location} link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
@@ -5004,8 +5020,8 @@ public interface JiraRESTV2Api {
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param id                   The ID of the project role. Use [Get all project roles](#api-rest-api-2-role-get) to get a list of project role IDs. (required)
      * @param user                 The user account ID of the user to remove as a default actor. (optional)
-     * @param groupId              The group ID of the group to be removed as a default actor. This parameter cannot be used with the `group` parameter. (optional)
-     * @param group                The group name of the group to be removed as a default actor.This parameter cannot be used with the `groupId` parameter. As a group's name can change, use of `groupId` is recommended. (optional)
+     * @param groupId              The group ID of the group to be removed as a default actor. This parameter cannot be used with the {@code group} parameter. (optional)
+     * @param group                The group name of the group to be removed as a default actor.This parameter cannot be used with the {@code groupId} parameter. As a group's name can change, use of {@code groupId} is recommended. (optional)
      */
     @RequestLine("DELETE /rest/api/2/role/{id}/actors?user={user}&groupId={groupId}&group={group}")
     @Headers({
@@ -5016,7 +5032,7 @@ public interface JiraRESTV2Api {
     /**
      * Delete remote issue link by global ID
      * <p>
-     * Deletes the remote issue link from the issue using the link's global ID. Where the global ID includes reserved URL characters these must be escaped in the request. For example, pass `system=http://www.mycompany.com/support&amp;id=1` as `system%3Dhttp%3A%2F%2Fwww.mycompany.com%2Fsupport%26id%3D1`.
+     * Deletes the remote issue link from the issue using the link's global ID. Where the global ID includes reserved URL characters these must be escaped in the request. For example, pass {@code system=http://www.mycompany.com/support&amp;id=1} as {@code system%3Dhttp%3A%2F%2Fwww.mycompany.com%2Fsupport%26id%3D1}.
      * This operation requires [issue linking to be active](https://confluence.atlassian.com/x/yoXKM).
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:**
@@ -5061,7 +5077,7 @@ public interface JiraRESTV2Api {
      * Delete resolution
      * <p>
      * Deletes an issue resolution.
-     * This operation is [asynchronous](#async). Follow the `location` link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
+     * This operation is [asynchronous](#async). Follow the {@code location} link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
@@ -5163,7 +5179,7 @@ public interface JiraRESTV2Api {
      * *Administer Jira* [project permission.](https://confluence.atlassian.com/x/yodKLg)
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param id                   The list of status IDs. To include multiple IDs, provide an ampersand-separated list. For example, id=10000&amp;id=10001.  Min items `1`, Max items `50` (optional)
+     * @param id                   The list of status IDs. To include multiple IDs, provide an ampersand-separated list. For example, id=10000&amp;id=10001.  Min items {@code 1}, Max items {@code 50} (optional)
      */
     @RequestLine("DELETE /rest/api/2/statuses?id={id}")
     @Headers({
@@ -5212,15 +5228,15 @@ public interface JiraRESTV2Api {
      * Delete version
      * <p>
      * Deletes a project version.
-     * Deprecated, use [ Delete and replace version](#api-rest-api-2-version-id-removeAndSwap-post) that supports swapping version values in custom fields, in addition to the swapping for `fixVersion` and `affectedVersion` provided in this resource.
-     * Alternative versions can be provided to update issues that use the deleted version in `fixVersion` or `affectedVersion`. If alternatives are not provided, occurrences of `fixVersion` and `affectedVersion` that contain the deleted version are cleared.
+     * Deprecated, use [ Delete and replace version](#api-rest-api-2-version-id-removeAndSwap-post) that supports swapping version values in custom fields, in addition to the swapping for {@code fixVersion} and {@code affectedVersion} provided in this resource.
+     * Alternative versions can be provided to update issues that use the deleted version in {@code fixVersion} or {@code affectedVersion}. If alternatives are not provided, occurrences of {@code fixVersion} and {@code affectedVersion} that contain the deleted version are cleared.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) or *Administer Projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project that contains the version.
      *
      * Authentication - Required Scopes: [manage:jira-project]
      * @param id                   The ID of the version. (required)
-     * @param moveFixIssuesTo      The ID of the version to update `fixVersion` to when the field contains the deleted version. The replacement version must be in the same project as the version being deleted and cannot be the version being deleted. (optional)
-     * @param moveAffectedIssuesTo The ID of the version to update `affectedVersion` to when the field contains the deleted version. The replacement version must be in the same project as the version being deleted and cannot be the version being deleted. (optional)
+     * @param moveFixIssuesTo      The ID of the version to update {@code fixVersion} to when the field contains the deleted version. The replacement version must be in the same project as the version being deleted and cannot be the version being deleted. (optional)
+     * @param moveAffectedIssuesTo The ID of the version to update {@code affectedVersion} to when the field contains the deleted version. The replacement version must be in the same project as the version being deleted and cannot be the version being deleted. (optional)
      * @deprecated
      */
     @Deprecated
@@ -5250,13 +5266,13 @@ public interface JiraRESTV2Api {
      * Delete issue types for workflow in workflow scheme
      * <p>
      * Deletes the workflow-issue type mapping for a workflow in a workflow scheme.
-     * Note that active workflow schemes cannot be edited. If the workflow scheme is active, set `updateDraftIfNeeded` to `true` and a draft workflow scheme is created or updated with the workflow-issue type mapping deleted. The draft workflow scheme can be published in Jira.
+     * Note that active workflow schemes cannot be edited. If the workflow scheme is active, set {@code updateDraftIfNeeded} to {@code true} and a draft workflow scheme is created or updated with the workflow-issue type mapping deleted. The draft workflow scheme can be published in Jira.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param id                   The ID of the workflow scheme. (required)
      * @param workflowName         The name of the workflow. (required)
-     * @param updateDraftIfNeeded  Set to true to create or update the draft of a workflow scheme and delete the mapping from the draft, when the workflow scheme cannot be edited. Defaults to `false`. (optional)
+     * @param updateDraftIfNeeded  Set to true to create or update the draft of a workflow scheme and delete the mapping from the draft, when the workflow scheme cannot be edited. Defaults to {@code false}. (optional)
      */
     @RequestLine("DELETE /rest/api/2/workflowscheme/{id}/workflow?workflowName={workflowName}&updateDraftIfNeeded={updateDraftIfNeeded}")
     @Headers({
@@ -5271,7 +5287,7 @@ public interface JiraRESTV2Api {
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param id                   The ID of the workflow scheme. Find this ID by editing the desired workflow scheme in Jira. The ID is shown in the URL as `schemeId`. For example, *schemeId=10301*. (required)
+     * @param id                   The ID of the workflow scheme. Find this ID by editing the desired workflow scheme in Jira. The ID is shown in the URL as {@code schemeId}. For example, *schemeId=10301*. (required)
      */
     @RequestLine("DELETE /rest/api/2/workflowscheme/{id}")
     @Headers({
@@ -5314,13 +5330,13 @@ public interface JiraRESTV2Api {
      * Delete workflow for issue type in workflow scheme
      * <p>
      * Deletes the issue type-workflow mapping for an issue type in a workflow scheme.
-     * Note that active workflow schemes cannot be edited. If the workflow scheme is active, set `updateDraftIfNeeded` to `true` and a draft workflow scheme is created or updated with the issue type-workflow mapping deleted. The draft workflow scheme can be published in Jira.
+     * Note that active workflow schemes cannot be edited. If the workflow scheme is active, set {@code updateDraftIfNeeded} to {@code true} and a draft workflow scheme is created or updated with the issue type-workflow mapping deleted. The draft workflow scheme can be published in Jira.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param id                   The ID of the workflow scheme. (required)
      * @param issueType            The ID of the issue type. (required)
-     * @param updateDraftIfNeeded  Set to true to create or update the draft of a workflow scheme and update the mapping in the draft, when the workflow scheme cannot be edited. Defaults to `false`. (optional)
+     * @param updateDraftIfNeeded  Set to true to create or update the draft of a workflow scheme and update the mapping in the draft, when the workflow scheme cannot be edited. Defaults to {@code false}. (optional)
      */
     @RequestLine("DELETE /rest/api/2/workflowscheme/{id}/issuetype/{issueType}?updateDraftIfNeeded={updateDraftIfNeeded}")
     @Headers({
@@ -5338,7 +5354,7 @@ public interface JiraRESTV2Api {
      * @param transitionId         The ID of the transition. To get the ID, view the workflow in text mode in the Jira admin settings. The ID is shown next to the transition. (required)
      * @param key                  The name of the transition property to delete, also known as the name of the property. (required)
      * @param workflowName         The name of the workflow that the transition belongs to. (required)
-     * @param workflowMode         The workflow status. Set to `live` for inactive workflows or `draft` for draft workflows. Active workflows cannot be edited. (optional)
+     * @param workflowMode         The workflow status. Set to {@code live} for inactive workflows or {@code draft} for draft workflows. Active workflows cannot be edited. (optional)
      */
     @RequestLine("DELETE /rest/api/2/workflow/transitions/{transitionId}/properties?key={key}&workflowName={workflowName}&workflowMode={workflowMode}")
     @Headers({
@@ -5388,9 +5404,9 @@ public interface JiraRESTV2Api {
      * @param issueIdOrKey         The ID or key of the issue. (required)
      * @param id                   The ID of the worklog. (required)
      * @param notifyUsers          Whether users watching the issue are notified by email. (optional, defaults to true)
-     * @param adjustEstimate       Defines how to update the issue's time estimate, the options are:   *  `new` Sets the estimate to a specific value, defined in `newEstimate`.  *  `leave` Leaves the estimate unchanged.  *  `manual` Increases the estimate by amount specified in `increaseBy`.  *  `auto` Reduces the estimate by the value of `timeSpent` in the worklog. (optional, defaults to auto)
-     * @param newEstimate          The value to set as the issue's remaining time estimate, as days (\\#d), hours (\\#h), or minutes (\\#m or \\#). For example, *2d*. Required when `adjustEstimate` is `new`. (optional)
-     * @param increaseBy           The amount to increase the issue's remaining estimate by, as days (\\#d), hours (\\#h), or minutes (\\#m or \\#). For example, *2d*. Required when `adjustEstimate` is `manual`. (optional)
+     * @param adjustEstimate       Defines how to update the issue's time estimate, the options are:   *  {@code new} Sets the estimate to a specific value, defined in {@code newEstimate}.  *  {@code leave} Leaves the estimate unchanged.  *  {@code manual} Increases the estimate by amount specified in {@code increaseBy}.  *  {@code auto} Reduces the estimate by the value of {@code timeSpent} in the worklog. (optional, defaults to auto)
+     * @param newEstimate          The value to set as the issue's remaining time estimate, as days (\\#d), hours (\\#h), or minutes (\\#m or \\#). For example, *2d*. Required when {@code adjustEstimate} is {@code new}. (optional)
+     * @param increaseBy           The amount to increase the issue's remaining estimate by, as days (\\#d), hours (\\#h), or minutes (\\#m or \\#). For example, *2d*. Required when {@code adjustEstimate} is {@code manual}. (optional)
      * @param overrideEditableFlag Whether the work log entry should be added to the issue even if the issue is not editable, because jira.issue.editable set to false or missing. For example, the issue is closed. Connect and Forge app users with admin permission can use this flag. (optional, defaults to false)
      */
     @RequestLine("DELETE /rest/api/2/issue/{issueIdOrKey}/worklog/{id}?notifyUsers={notifyUsers}&adjustEstimate={adjustEstimate}&newEstimate={newEstimate}&increaseBy={increaseBy}&overrideEditableFlag={overrideEditableFlag}")
@@ -5427,7 +5443,7 @@ public interface JiraRESTV2Api {
      * Transition issue
      * <p>
      * Performs an issue transition and, if the transition has a screen, updates the fields from the transition screen.
-     * sortByCategory To update the fields on the transition screen, specify the fields in the `fields` or `update` parameters in the request body. Get details about the fields using [ Get transitions](#api-rest-api-2-issue-issueIdOrKey-transitions-get) with the `transitions.fields` expand.
+     * sortByCategory To update the fields on the transition screen, specify the fields in the {@code fields} or {@code update} parameters in the request body. Get details about the fields using [ Get transitions](#api-rest-api-2-issue-issueIdOrKey-transitions-get) with the {@code transitions.fields} expand.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:**
      *  *
@@ -5437,14 +5453,14 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [write:jira-work]
      * @param issueIdOrKey         The ID or key of the issue. (required)
-     * @param requestBody           (required)
+     * @param issueUpdateDetails    (required)
      */
     @RequestLine("POST /rest/api/2/issue/{issueIdOrKey}/transitions")
     @Headers({
         "Content-Type: application/json", 
         "Accept: application/json"
     })
-    Object doTransition(@Param("issueIdOrKey") @NotNull String issueIdOrKey, @NotNull Map<String, Object> requestBody);
+    Object doTransition(@Param("issueIdOrKey") @NotNull String issueIdOrKey, @NotNull IssueUpdateDetails issueUpdateDetails);
 
     /**
      * Get modules
@@ -5480,7 +5496,7 @@ public interface JiraRESTV2Api {
      * Remove all or a list of modules registered by the calling app.
      * **[Permissions](#permissions) required:** Only Connect apps can make this request.
      *
-     * @param moduleKey            The key of the module to remove. To include multiple module keys, provide multiple copies of this parameter. For example, `moduleKey=dynamic-attachment-entity-property&amp;moduleKey=dynamic-select-field`. Nonexistent keys are ignored. (optional)
+     * @param moduleKey            The key of the module to remove. To include multiple module keys, provide multiple copies of this parameter. For example, {@code moduleKey=dynamic-attachment-entity-property&amp;moduleKey=dynamic-select-field}. Nonexistent keys are ignored. (optional)
      */
     @RequestLine("DELETE /rest/atlassian-connect/1/app/module/dynamic?moduleKey={moduleKey}")
     @Headers({
@@ -5492,9 +5508,9 @@ public interface JiraRESTV2Api {
      * Edit issue
      * <p>
      * Edits an issue. A transition may be applied and issue properties updated as part of the edit.
-     * The edits to the issue's fields are defined using `update` and `fields`. The fields that can be edited are determined using [ Get edit issue metadata](#api-rest-api-2-issue-issueIdOrKey-editmeta-get).
-     * The parent field may be set by key or ID. For standard issue types, the parent may be removed by setting `update.parent.set.none` to *true*.
-     * Connect apps having an app user with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg), and Forge apps acting on behalf of users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg), can override the screen security configuration using `overrideScreenSecurity` and `overrideEditableFlag`.
+     * The edits to the issue's fields are defined using {@code update} and {@code fields}. The fields that can be edited are determined using [ Get edit issue metadata](#api-rest-api-2-issue-issueIdOrKey-editmeta-get).
+     * The parent field may be set by key or ID. For standard issue types, the parent may be removed by setting {@code update.parent.set.none} to *true*.
+     * Connect apps having an app user with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg), and Forge apps acting on behalf of users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg), can override the screen security configuration using {@code overrideScreenSecurity} and {@code overrideEditableFlag}.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:**
      *  *
@@ -5504,7 +5520,7 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [write:jira-work]
      * @param issueIdOrKey         The ID or key of the issue. (required)
-     * @param requestBody           (required)
+     * @param issueUpdateDetails    (required)
      * @param notifyUsers          Whether a notification email about the issue update is sent to all watchers. To disable the notification, administer Jira or administer project permissions are required. If the user doesn't have the necessary permission the request is ignored. (optional, defaults to true)
      * @param overrideScreenSecurity Whether screen security is overridden to enable hidden fields to be edited. Available to Connect app users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) and Forge apps acting on behalf of users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). (optional, defaults to false)
      * @param overrideEditableFlag Whether screen security is overridden to enable uneditable fields to be edited. Available to Connect app users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) and Forge apps acting on behalf of users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). (optional, defaults to false)
@@ -5514,7 +5530,7 @@ public interface JiraRESTV2Api {
         "Content-Type: application/json", 
         "Accept: application/json"
     })
-    Object editIssue(@Param("issueIdOrKey") @NotNull String issueIdOrKey, @NotNull Map<String, Object> requestBody, @Param("notifyUsers") @Nullable Boolean notifyUsers, @Param("overrideScreenSecurity") @Nullable Boolean overrideScreenSecurity, @Param("overrideEditableFlag") @Nullable Boolean overrideEditableFlag);
+    Object editIssue(@Param("issueIdOrKey") @NotNull String issueIdOrKey, @NotNull IssueUpdateDetails issueUpdateDetails, @Param("notifyUsers") @Nullable Boolean notifyUsers, @Param("overrideScreenSecurity") @Nullable Boolean overrideScreenSecurity, @Param("overrideEditableFlag") @Nullable Boolean overrideEditableFlag);
 
     /**
      * Evaluate Jira expression
@@ -5524,39 +5540,39 @@ public interface JiraRESTV2Api {
      * #### Context variables ####
      * The following context variables are available to Jira expressions evaluated by this resource. Their presence depends on various factors; usually you need to manually request them in the context object sent in the payload, but some of them are added automatically under certain conditions.
      *  *
-     * `user` ([User](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#user)): The current user. Always available and equal to `null` if the request is anonymous.
+     * {@code user} ([User](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#user)): The current user. Always available and equal to {@code null} if the request is anonymous.
      * *
-     * `app` ([App](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#app)): The [Connect app](https://developer.atlassian.com/cloud/jira/platform/index/#connect-apps) that made the request. Available only for authenticated requests made by Connect Apps (read more here: [Authentication for Connect apps](https://developer.atlassian.com/cloud/jira/platform/security-for-connect-apps/)).
+     * {@code app} ([App](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#app)): The [Connect app](https://developer.atlassian.com/cloud/jira/platform/index/#connect-apps) that made the request. Available only for authenticated requests made by Connect Apps (read more here: [Authentication for Connect apps](https://developer.atlassian.com/cloud/jira/platform/security-for-connect-apps/)).
      * *
-     * `issue` ([Issue](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#issue)): The current issue. Available only when the issue is provided in the request context object.
+     * {@code issue} ([Issue](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#issue)): The current issue. Available only when the issue is provided in the request context object.
      * *
-     * `issues` ([List](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#list) of [Issues](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#issue)): A collection of issues matching a JQL query. Available only when JQL is provided in the request context object.
+     * {@code issues} ([List](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#list) of [Issues](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#issue)): A collection of issues matching a JQL query. Available only when JQL is provided in the request context object.
      * *
-     * `project` ([Project](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#project)): The current project. Available only when the project is provided in the request context object.
+     * {@code project} ([Project](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#project)): The current project. Available only when the project is provided in the request context object.
      * *
-     * `sprint` ([Sprint](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#sprint)): The current sprint. Available only when the sprint is provided in the request context object.
+     * {@code sprint} ([Sprint](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#sprint)): The current sprint. Available only when the sprint is provided in the request context object.
      * *
-     * `board` ([Board](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#board)): The current board. Available only when the board is provided in the request context object.
+     * {@code board} ([Board](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#board)): The current board. Available only when the board is provided in the request context object.
      * *
-     * `serviceDesk` ([ServiceDesk](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#servicedesk)): The current service desk. Available only when the service desk is provided in the request context object.
+     * {@code serviceDesk} ([ServiceDesk](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#servicedesk)): The current service desk. Available only when the service desk is provided in the request context object.
      * *
-     * `customerRequest` ([CustomerRequest](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#customerrequest)): The current customer request. Available only when the customer request is provided in the request context object.
+     * {@code customerRequest} ([CustomerRequest](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#customerrequest)): The current customer request. Available only when the customer request is provided in the request context object.
      * Also, custom context variables can be passed in the request with their types. Those variables can be accessed by key in the Jira expression. These variable types are available for use in a custom context:
      *  *
-     * `user`: A [user](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#user) specified as an Atlassian account ID.
+     * {@code user}: A [user](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#user) specified as an Atlassian account ID.
      * *
-     * `issue`: An [issue](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#issue) specified by ID or key. All the fields of the issue object are available in the Jira expression.
+     * {@code issue}: An [issue](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#issue) specified by ID or key. All the fields of the issue object are available in the Jira expression.
      * *
-     * `json`: A JSON object containing custom content.
+     * {@code json}: A JSON object containing custom content.
      * *
-     * `list`: A JSON list of `user`, `issue`, or `json` variable types.
+     * {@code list}: A JSON list of {@code user}, {@code issue}, or {@code json} variable types.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required**: None. However, an expression may return different results for different users depending on their permissions. For example, different users may see different comments on the same issue.
-     *  Permission to access Jira Software is required to access Jira Software context variables (`board` and `sprint`) or fields (for example, `issue.sprint`).
+     *  Permission to access Jira Software is required to access Jira Software context variables ({@code board} and {@code sprint}) or fields (for example, {@code issue.sprint}).
      *
      * Authentication - Required Scopes: [read:jira-work, read:jira-user]
      * @param jiraExpressionEvalRequestBean The Jira expression and the evaluation context. (required)
-     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts `meta.complexity` that returns information about the expression complexity. For example, the number of expensive operations used by the expression and how close the expression is to reaching the [complexity limit](https://developer.atlassian.com/cloud/jira/platform/jira-expressions/#restrictions). Useful when designing and debugging your expressions. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts {@code meta.complexity} that returns information about the expression complexity. For example, the number of expensive operations used by the expression and how close the expression is to reaching the [complexity limit](https://developer.atlassian.com/cloud/jira/platform/jira-expressions/#restrictions). Useful when designing and debugging your expressions. (optional)
      */
     @RequestLine("POST /rest/api/2/expression/eval?expand={expand}")
     @Headers({
@@ -5612,23 +5628,23 @@ public interface JiraRESTV2Api {
      * <p>
      * Returns a list of users that can be assigned to an issue. Use this operation to find the list of users who can be assigned to:
      *  *
-     * a new issue, by providing the `projectKeyOrId`.
+     * a new issue, by providing the {@code projectKeyOrId}.
      * *
-     * an updated issue, by providing the `issueKey`.
+     * an updated issue, by providing the {@code issueKey}.
      * *
-     * to an issue during a transition (workflow action), by providing the `issueKey` and the transition id in `actionDescriptorId`. You can obtain the IDs of an issue's valid transitions using the `transitions` option in the `expand` parameter of [ Get issue](#api-rest-api-2-issue-issueIdOrKey-get).
+     * to an issue during a transition (workflow action), by providing the {@code issueKey} and the transition id in {@code actionDescriptorId}. You can obtain the IDs of an issue's valid transitions using the {@code transitions} option in the {@code expand} parameter of [ Get issue](#api-rest-api-2-issue-issueIdOrKey-get).
      * In all these cases, you can pass an account ID to determine if a user can be assigned to an issue. The user is returned in the response if they can be assigned to the issue or issue transition.
-     * This operation takes the users in the range defined by `startAt` and `maxResults`, up to the thousandth user, and then returns only the users from that range that can be assigned the issue. This means the operation usually returns fewer users than specified in `maxResults`. To get all the users who can be assigned the issue, use [Get all users](#api-rest-api-2-users-search-get) and filter the records in your code.
+     * This operation takes the users in the range defined by {@code startAt} and {@code maxResults}, up to the thousandth user, and then returns only the users from that range that can be assigned the issue. This means the operation usually returns fewer users than specified in {@code maxResults}. To get all the users who can be assigned the issue, use [Get all users](#api-rest-api-2-users-search-get) and filter the records in your code.
      * Privacy controls are applied to the response based on the users' preferences. This could mean, for example, that the user's email address is hidden. See the [Profile visibility overview](https://developer.atlassian.com/cloud/jira/platform/profile-visibility/) for more details.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      *
      * Authentication - Required Scopes: [read:jira-user]
-     * @param query                A query string that is matched against user attributes, such as `displayName`, and `emailAddress`, to find relevant users. The string can match the prefix of the attribute's value. For example, *query=john* matches a user with a `displayName` of *John Smith* and a user with an `emailAddress` of *johnson@example.com*. Required, unless `username` or `accountId` is specified. (optional)
+     * @param query                A query string that is matched against user attributes, such as {@code displayName}, and {@code emailAddress}, to find relevant users. The string can match the prefix of the attribute's value. For example, *query=john* matches a user with a {@code displayName} of *John Smith* and a user with an {@code emailAddress} of *johnson@example.com*. Required, unless {@code username} or {@code accountId} is specified. (optional)
      * @param sessionId            The sessionId of this request. SessionId is the same until the assignee is set. (optional)
      * @param username             This parameter is no longer available. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details. (optional)
-     * @param accountId            A query string that is matched exactly against user `accountId`. Required, unless `query` is specified. (optional)
-     * @param project              The project ID or project key (case sensitive). Required, unless `issueKey` is specified. (optional)
-     * @param issueKey             The key of the issue. Required, unless `project` is specified. (optional)
+     * @param accountId            A query string that is matched exactly against user {@code accountId}. Required, unless {@code query} is specified. (optional)
+     * @param project              The project ID or project key (case sensitive). Required, unless {@code issueKey} is specified. (optional)
+     * @param issueKey             The key of the issue. Required, unless {@code project} is specified. (optional)
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return. This operation may return less than the maximum number of items even if more are available. The operation fetches users up to the maximum and then, from the fetched users, returns only the users that can be assigned to the issue. (optional, defaults to 50)
      * @param actionDescriptorId   The ID of the transition. (optional)
@@ -5644,16 +5660,16 @@ public interface JiraRESTV2Api {
      * Find users assignable to projects
      * <p>
      * Returns a list of users who can be assigned issues in one or more projects. The list may be restricted to users whose attributes match a string.
-     * This operation takes the users in the range defined by `startAt` and `maxResults`, up to the thousandth user, and then returns only the users from that range that can be assigned issues in the projects. This means the operation usually returns fewer users than specified in `maxResults`. To get all the users who can be assigned issues in the projects, use [Get all users](#api-rest-api-2-users-search-get) and filter the records in your code.
+     * This operation takes the users in the range defined by {@code startAt} and {@code maxResults}, up to the thousandth user, and then returns only the users from that range that can be assigned issues in the projects. This means the operation usually returns fewer users than specified in {@code maxResults}. To get all the users who can be assigned issues in the projects, use [Get all users](#api-rest-api-2-users-search-get) and filter the records in your code.
      * Privacy controls are applied to the response based on the users' preferences. This could mean, for example, that the user's email address is hidden. See the [Profile visibility overview](https://developer.atlassian.com/cloud/jira/platform/profile-visibility/) for more details.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** None.
      *
      * Authentication - Required Scopes: [read:jira-user]
      * @param projectKeys          A list of project keys (case sensitive). This parameter accepts a comma-separated list. (required)
-     * @param query                A query string that is matched against user attributes, such as `displayName` and `emailAddress`, to find relevant users. The string can match the prefix of the attribute's value. For example, *query=john* matches a user with a `displayName` of *John Smith* and a user with an `emailAddress` of *johnson@example.com*. Required, unless `accountId` is specified. (optional)
+     * @param query                A query string that is matched against user attributes, such as {@code displayName} and {@code emailAddress}, to find relevant users. The string can match the prefix of the attribute's value. For example, *query=john* matches a user with a {@code displayName} of *John Smith* and a user with an {@code emailAddress} of *johnson@example.com*. Required, unless {@code accountId} is specified. (optional)
      * @param username             This parameter is no longer available. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details. (optional)
-     * @param accountId            A query string that is matched exactly against user `accountId`. Required, unless `query` is specified. (optional)
+     * @param accountId            A query string that is matched exactly against user {@code accountId}. Required, unless {@code query} is specified. (optional)
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
      */
@@ -5667,7 +5683,7 @@ public interface JiraRESTV2Api {
      * Find groups
      * <p>
      * Returns a list of groups whose names contain a query string. A list of group names can be provided to exclude groups from the results.
-     * The primary use case for this resource is to populate a group picker suggestions list. To this end, the returned object includes the `html` field where the matched query term is highlighted in the group name with the HTML strong tag. Also, the groups list is wrapped in a response object that contains a header for use in the picker, specifically *Showing X of Y matching groups*.
+     * The primary use case for this resource is to populate a group picker suggestions list. To this end, the returned object includes the {@code html} field where the matched query term is highlighted in the group name with the HTML strong tag. Also, the groups list is wrapped in a response object that contains a header for use in the picker, specifically *Showing X of Y matching groups*.
      * The list returns with the groups sorted. If no groups match the list criteria, an empty list is returned.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg). Anonymous calls and calls by users without the required permission return an empty list.
@@ -5676,9 +5692,9 @@ public interface JiraRESTV2Api {
      * Authentication - Required Scopes: [read:jira-user]
      * @param accountId            This parameter is deprecated, setting it does not affect the results. To find groups containing a particular user, use [Get user groups](#api-rest-api-2-user-groups-get). (optional)
      * @param query                The string to find in group names. (optional)
-     * @param exclude              As a group's name can change, use of `excludeGroupIds` is recommended to identify a group.   A group to exclude from the result. To exclude multiple groups, provide an ampersand-separated list. For example, `exclude=group1&amp;exclude=group2`. This parameter cannot be used with the `excludeGroupIds` parameter. (optional)
-     * @param excludeId            A group ID to exclude from the result. To exclude multiple groups, provide an ampersand-separated list. For example, `excludeId=group1-id&amp;excludeId=group2-id`. This parameter cannot be used with the `excludeGroups` parameter. (optional)
-     * @param maxResults           The maximum number of groups to return. The maximum number of groups that can be returned is limited by the system property `jira.ajax.autocomplete.limit`. (optional)
+     * @param exclude              As a group's name can change, use of {@code excludeGroupIds} is recommended to identify a group.   A group to exclude from the result. To exclude multiple groups, provide an ampersand-separated list. For example, {@code exclude=group1&amp;exclude=group2}. This parameter cannot be used with the {@code excludeGroupIds} parameter. (optional)
+     * @param excludeId            A group ID to exclude from the result. To exclude multiple groups, provide an ampersand-separated list. For example, {@code excludeId=group1-id&amp;excludeId=group2-id}. This parameter cannot be used with the {@code excludeGroups} parameter. (optional)
+     * @param maxResults           The maximum number of groups to return. The maximum number of groups that can be returned is limited by the system property {@code jira.ajax.autocomplete.limit}. (optional)
      * @param caseInsensitive      Whether the search for groups should be case insensitive. (optional, defaults to false)
      * @param userName             This parameter is no longer available. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details. (optional)
      */
@@ -5692,27 +5708,27 @@ public interface JiraRESTV2Api {
      * Find user keys by query
      * <p>
      * Finds users with a structured query and returns a [paginated](#pagination) list of user keys.
-     * This operation takes the users in the range defined by `startAt` and `maxResults`, up to the thousandth user, and then returns only the users from that range that match the structured query. This means the operation usually returns fewer users than specified in `maxResults`. To get all the users who match the structured query, use [Get all users](#api-rest-api-2-users-search-get) and filter the records in your code.
+     * This operation takes the users in the range defined by {@code startAt} and {@code maxResults}, up to the thousandth user, and then returns only the users from that range that match the structured query. This means the operation usually returns fewer users than specified in {@code maxResults}. To get all the users who match the structured query, use [Get all users](#api-rest-api-2-users-search-get) and filter the records in your code.
      * **[Permissions](#permissions) required:** *Browse users and groups* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * The query statements are:
      *  *
-     * `is assignee of PROJ` Returns the users that are assignees of at least one issue in project *PROJ*.
+     * {@code is assignee of PROJ} Returns the users that are assignees of at least one issue in project *PROJ*.
      * *
-     * `is assignee of (PROJ-1, PROJ-2)` Returns users that are assignees on the issues *PROJ-1* or *PROJ-2*.
+     * {@code is assignee of (PROJ-1, PROJ-2)} Returns users that are assignees on the issues *PROJ-1* or *PROJ-2*.
      * *
-     * `is reporter of (PROJ-1, PROJ-2)` Returns users that are reporters on the issues *PROJ-1* or *PROJ-2*.
+     * {@code is reporter of (PROJ-1, PROJ-2)} Returns users that are reporters on the issues *PROJ-1* or *PROJ-2*.
      * *
-     * `is watcher of (PROJ-1, PROJ-2)` Returns users that are watchers on the issues *PROJ-1* or *PROJ-2*.
+     * {@code is watcher of (PROJ-1, PROJ-2)} Returns users that are watchers on the issues *PROJ-1* or *PROJ-2*.
      * *
-     * `is voter of (PROJ-1, PROJ-2)` Returns users that are voters on the issues *PROJ-1* or *PROJ-2*.
+     * {@code is voter of (PROJ-1, PROJ-2)} Returns users that are voters on the issues *PROJ-1* or *PROJ-2*.
      * *
-     * `is commenter of (PROJ-1, PROJ-2)` Returns users that have posted a comment on the issues *PROJ-1* or *PROJ-2*.
+     * {@code is commenter of (PROJ-1, PROJ-2)} Returns users that have posted a comment on the issues *PROJ-1* or *PROJ-2*.
      * *
-     * `is transitioner of (PROJ-1, PROJ-2)` Returns users that have performed a transition on issues *PROJ-1* or *PROJ-2*.
+     * {@code is transitioner of (PROJ-1, PROJ-2)} Returns users that have performed a transition on issues *PROJ-1* or *PROJ-2*.
      * *
-     * `[propertyKey].entity.property.path is "property value"` Returns users with the entity property value.
-     * The list of issues can be extended as needed, as in *(PROJ-1, PROJ-2, ... PROJ-n)*. Statements can be combined using the `AND` and `OR` operators to form more complex queries. For example:
-     * `is assignee of PROJ AND [propertyKey].entity.property.path is "property value"`
+     * {@code [propertyKey].entity.property.path is "property value"} Returns users with the entity property value.
+     * The list of issues can be extended as needed, as in *(PROJ-1, PROJ-2, ... PROJ-n)*. Statements can be combined using the {@code AND} and {@code OR} operators to form more complex queries. For example:
+     * {@code is assignee of PROJ AND [propertyKey].entity.property.path is "property value"}
      *
      * Authentication - Required Scopes: [read:jira-user]
      * @param query                The search query. (required)
@@ -5729,18 +5745,18 @@ public interface JiraRESTV2Api {
      * Find users
      * <p>
      * Returns a list of users that match the search string and property.
-     * This operation first applies a filter to match the search string and property, and then takes the filtered users in the range defined by `startAt` and `maxResults`, up to the thousandth user. To get all the users who match the search string and property, use [Get all users](#api-rest-api-2-users-search-get) and filter the records in your code.
+     * This operation first applies a filter to match the search string and property, and then takes the filtered users in the range defined by {@code startAt} and {@code maxResults}, up to the thousandth user. To get all the users who match the search string and property, use [Get all users](#api-rest-api-2-users-search-get) and filter the records in your code.
      * This operation can be accessed anonymously.
      * Privacy controls are applied to the response based on the users' preferences. This could mean, for example, that the user's email address is hidden. See the [Profile visibility overview](https://developer.atlassian.com/cloud/jira/platform/profile-visibility/) for more details.
      * **[Permissions](#permissions) required:** *Browse users and groups* [global permission](https://confluence.atlassian.com/x/x4dKLg). Anonymous calls or calls by users without the required permission return empty search results.
      *
      * Authentication - Required Scopes: [read:jira-user]
-     * @param query                A query string that is matched against user attributes ( `displayName`, and `emailAddress`) to find relevant users. The string can match the prefix of the attribute's value. For example, *query=john* matches a user with a `displayName` of *John Smith* and a user with an `emailAddress` of *johnson@example.com*. Required, unless `accountId` or `property` is specified. (optional)
+     * @param query                A query string that is matched against user attributes ( {@code displayName}, and {@code emailAddress}) to find relevant users. The string can match the prefix of the attribute's value. For example, *query=john* matches a user with a {@code displayName} of *John Smith* and a user with an {@code emailAddress} of *johnson@example.com*. Required, unless {@code accountId} or {@code property} is specified. (optional)
      * @param username              (optional)
-     * @param accountId            A query string that is matched exactly against a user `accountId`. Required, unless `query` or `property` is specified. (optional)
+     * @param accountId            A query string that is matched exactly against a user {@code accountId}. Required, unless {@code query} or {@code property} is specified. (optional)
      * @param startAt              The index of the first item to return in a page of filtered results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
-     * @param property             A query string used to search properties. Property keys are specified by path, so property keys containing dot (.) or equals (=) characters cannot be used. The query string cannot be specified using a JSON object. Example: To search for the value of `nested` from `{"something":{"nested":1,"other":2}}` use `thepropertykey.something.nested=1`. Required, unless `accountId` or `query` is specified. (optional)
+     * @param property             A query string used to search properties. Property keys are specified by path, so property keys containing dot (.) or equals (=) characters cannot be used. The query string cannot be specified using a JSON object. Example: To search for the value of {@code nested} from {@code {"something":{"nested":1,"other":2}}} use {@code thepropertykey.something.nested=1}. Required, unless {@code accountId} or {@code query} is specified. (optional)
      */
     @RequestLine("GET /rest/api/2/user/search?query={query}&username={username}&accountId={accountId}&startAt={startAt}&maxResults={maxResults}&property={property}")
     @Headers({
@@ -5779,7 +5795,7 @@ public interface JiraRESTV2Api {
      * not return Connect app users and groups.
      * *
      * return groups that have a case-insensitive match with the query.
-     * The primary use case for this resource is to populate a picker field suggestion list with users or groups. To this end, the returned object includes an `html` field for each list. This field highlights the matched query term in the item name with the HTML strong tag. Also, each list is wrapped in a response object that contains a header for use in a picker, specifically *Showing X of Y matching groups*.
+     * The primary use case for this resource is to populate a picker field suggestion list with users or groups. To this end, the returned object includes an {@code html} field for each list. This field highlights the matched query term in the item name with the HTML strong tag. Also, each list is wrapped in a response object that contains a header for use in a picker, specifically *Showing X of Y matching groups*.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Browse users and groups* [global permission](https://confluence.atlassian.com/x/yodKLg).
      *
@@ -5788,8 +5804,8 @@ public interface JiraRESTV2Api {
      * @param maxResults           The maximum number of items to return in each list. (optional, defaults to 50)
      * @param showAvatar           Whether the user avatar should be returned. If an invalid value is provided, the default value is used. (optional, defaults to false)
      * @param fieldId              The custom field ID of the field this request is for. (optional)
-     * @param projectId            The ID of a project that returned users and groups must have permission to view. To include multiple projects, provide an ampersand-separated list. For example, `projectId=10000&amp;projectId=10001`. This parameter is only used when `fieldId` is present. (optional)
-     * @param issueTypeId          The ID of an issue type that returned users and groups must have permission to view. To include multiple issue types, provide an ampersand-separated list. For example, `issueTypeId=10000&amp;issueTypeId=10001`. Special values, such as `-1` (all standard issue types) and `-2` (all subtask issue types), are supported. This parameter is only used when `fieldId` is present. (optional)
+     * @param projectId            The ID of a project that returned users and groups must have permission to view. To include multiple projects, provide an ampersand-separated list. For example, {@code projectId=10000&amp;projectId=10001}. This parameter is only used when {@code fieldId} is present. (optional)
+     * @param issueTypeId          The ID of an issue type that returned users and groups must have permission to view. To include multiple issue types, provide an ampersand-separated list. For example, {@code issueTypeId=10000&amp;issueTypeId=10001}. Special values, such as {@code -1} (all standard issue types) and {@code -2} (all subtask issue types), are supported. This parameter is only used when {@code fieldId} is present. (optional)
      * @param avatarSize           The size of the avatar to return. If an invalid value is provided, the default value is used. (optional, defaults to xsmall)
      * @param caseInsensitive      Whether the search for groups should be case insensitive. (optional, defaults to false)
      * @param excludeConnectAddons Whether Connect app users and groups should be excluded from the search results. If an invalid value is provided, the default value is used. (optional, defaults to false)
@@ -5804,27 +5820,27 @@ public interface JiraRESTV2Api {
      * Find users by query
      * <p>
      * Finds users with a structured query and returns a [paginated](#pagination) list of user details.
-     * This operation takes the users in the range defined by `startAt` and `maxResults`, up to the thousandth user, and then returns only the users from that range that match the structured query. This means the operation usually returns fewer users than specified in `maxResults`. To get all the users who match the structured query, use [Get all users](#api-rest-api-2-users-search-get) and filter the records in your code.
+     * This operation takes the users in the range defined by {@code startAt} and {@code maxResults}, up to the thousandth user, and then returns only the users from that range that match the structured query. This means the operation usually returns fewer users than specified in {@code maxResults}. To get all the users who match the structured query, use [Get all users](#api-rest-api-2-users-search-get) and filter the records in your code.
      * **[Permissions](#permissions) required:** *Browse users and groups* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * The query statements are:
      *  *
-     * `is assignee of PROJ` Returns the users that are assignees of at least one issue in project *PROJ*.
+     * {@code is assignee of PROJ} Returns the users that are assignees of at least one issue in project *PROJ*.
      * *
-     * `is assignee of (PROJ-1, PROJ-2)` Returns users that are assignees on the issues *PROJ-1* or *PROJ-2*.
+     * {@code is assignee of (PROJ-1, PROJ-2)} Returns users that are assignees on the issues *PROJ-1* or *PROJ-2*.
      * *
-     * `is reporter of (PROJ-1, PROJ-2)` Returns users that are reporters on the issues *PROJ-1* or *PROJ-2*.
+     * {@code is reporter of (PROJ-1, PROJ-2)} Returns users that are reporters on the issues *PROJ-1* or *PROJ-2*.
      * *
-     * `is watcher of (PROJ-1, PROJ-2)` Returns users that are watchers on the issues *PROJ-1* or *PROJ-2*.
+     * {@code is watcher of (PROJ-1, PROJ-2)} Returns users that are watchers on the issues *PROJ-1* or *PROJ-2*.
      * *
-     * `is voter of (PROJ-1, PROJ-2)` Returns users that are voters on the issues *PROJ-1* or *PROJ-2*.
+     * {@code is voter of (PROJ-1, PROJ-2)} Returns users that are voters on the issues *PROJ-1* or *PROJ-2*.
      * *
-     * `is commenter of (PROJ-1, PROJ-2)` Returns users that have posted a comment on the issues *PROJ-1* or *PROJ-2*.
+     * {@code is commenter of (PROJ-1, PROJ-2)} Returns users that have posted a comment on the issues *PROJ-1* or *PROJ-2*.
      * *
-     * `is transitioner of (PROJ-1, PROJ-2)` Returns users that have performed a transition on issues *PROJ-1* or *PROJ-2*.
+     * {@code is transitioner of (PROJ-1, PROJ-2)} Returns users that have performed a transition on issues *PROJ-1* or *PROJ-2*.
      * *
-     * `[propertyKey].entity.property.path is "property value"` Returns users with the entity property value.
-     * The list of issues can be extended as needed, as in *(PROJ-1, PROJ-2, ... PROJ-n)*. Statements can be combined using the `AND` and `OR` operators to form more complex queries. For example:
-     * `is assignee of PROJ AND [propertyKey].entity.property.path is "property value"`
+     * {@code [propertyKey].entity.property.path is "property value"} Returns users with the entity property value.
+     * The list of issues can be extended as needed, as in *(PROJ-1, PROJ-2, ... PROJ-n)*. Statements can be combined using the {@code AND} and {@code OR} operators to form more complex queries. For example:
+     * {@code is assignee of PROJ AND [propertyKey].entity.property.path is "property value"}
      *
      * Authentication - Required Scopes: [read:jira-user]
      * @param query                The search query. (required)
@@ -5840,18 +5856,18 @@ public interface JiraRESTV2Api {
     /**
      * Find users for picker
      * <p>
-     * Returns a list of users whose attributes match the query term. The returned object includes the `html` field where the matched query term is highlighted with the HTML strong tag. A list of account IDs can be provided to exclude users from the results.
-     * This operation takes the users in the range defined by `maxResults`, up to the thousandth user, and then returns only the users from that range that match the query term. This means the operation usually returns fewer users than specified in `maxResults`. To get all the users who match the query term, use [Get all users](#api-rest-api-2-users-search-get) and filter the records in your code.
+     * Returns a list of users whose attributes match the query term. The returned object includes the {@code html} field where the matched query term is highlighted with the HTML strong tag. A list of account IDs can be provided to exclude users from the results.
+     * This operation takes the users in the range defined by {@code maxResults}, up to the thousandth user, and then returns only the users from that range that match the query term. This means the operation usually returns fewer users than specified in {@code maxResults}. To get all the users who match the query term, use [Get all users](#api-rest-api-2-users-search-get) and filter the records in your code.
      * Privacy controls are applied to the response based on the users' preferences. This could mean, for example, that the user's email address is hidden. See the [Profile visibility overview](https://developer.atlassian.com/cloud/jira/platform/profile-visibility/) for more details.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Browse users and groups* [global permission](https://confluence.atlassian.com/x/x4dKLg). Anonymous calls and calls by users without the required permission return search results for an exact name match only.
      *
      * Authentication - Required Scopes: [read:jira-user]
-     * @param query                A query string that is matched against user attributes, such as `displayName`, and `emailAddress`, to find relevant users. The string can match the prefix of the attribute's value. For example, *query=john* matches a user with a `displayName` of *John Smith* and a user with an `emailAddress` of *johnson@example.com*. (required)
-     * @param maxResults           The maximum number of items to return. The total number of matched users is returned in `total`. (optional, defaults to 50)
+     * @param query                A query string that is matched against user attributes, such as {@code displayName}, and {@code emailAddress}, to find relevant users. The string can match the prefix of the attribute's value. For example, *query=john* matches a user with a {@code displayName} of *John Smith* and a user with an {@code emailAddress} of *johnson@example.com*. (required)
+     * @param maxResults           The maximum number of items to return. The total number of matched users is returned in {@code total}. (optional, defaults to 50)
      * @param showAvatar           Include the URI to the user's avatar. (optional, defaults to false)
      * @param exclude              This parameter is no longer available. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details. (optional)
-     * @param excludeAccountIds    A list of account IDs to exclude from the search results. This parameter accepts a comma-separated list. Multiple account IDs can also be provided using an ampersand-separated list. For example, `excludeAccountIds=5b10a2844c20165700ede21g,5b10a0effa615349cb016cd8&amp;excludeAccountIds=5b10ac8d82e05b22cc7d4ef5`. Cannot be provided with `exclude`. (optional)
+     * @param excludeAccountIds    A list of account IDs to exclude from the search results. This parameter accepts a comma-separated list. Multiple account IDs can also be provided using an ampersand-separated list. For example, {@code excludeAccountIds=5b10a2844c20165700ede21g,5b10a0effa615349cb016cd8&amp;excludeAccountIds=5b10ac8d82e05b22cc7d4ef5}. Cannot be provided with {@code exclude}. (optional)
      * @param avatarSize            (optional)
      * @param excludeConnectUsers   (optional, defaults to false)
      */
@@ -5870,7 +5886,7 @@ public interface JiraRESTV2Api {
      * *
      * they have a set of permissions for a project or issue.
      * If no search string is provided, a list of all users with the permissions is returned.
-     * This operation takes the users in the range defined by `startAt` and `maxResults`, up to the thousandth user, and then returns only the users from that range that match the search string and have permission for the project or issue. This means the operation usually returns fewer users than specified in `maxResults`. To get all the users who match the search string and have permission for the project or issue, use [Get all users](#api-rest-api-2-users-search-get) and filter the records in your code.
+     * This operation takes the users in the range defined by {@code startAt} and {@code maxResults}, up to the thousandth user, and then returns only the users from that range that match the search string and have permission for the project or issue. This means the operation usually returns fewer users than specified in {@code maxResults}. To get all the users who match the search string and have permission for the project or issue, use [Get all users](#api-rest-api-2-users-search-get) and filter the records in your code.
      * Privacy controls are applied to the response based on the users' preferences. This could mean, for example, that the user's email address is hidden. See the [Profile visibility overview](https://developer.atlassian.com/cloud/jira/platform/profile-visibility/) for more details.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:**
@@ -5881,9 +5897,9 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [read:jira-user]
      * @param permissions          A comma separated list of permissions. Permissions can be specified as any:   *  permission returned by [Get all permissions](#api-rest-api-2-permissions-get).  *  custom project permission added by Connect apps.  *  (deprecated) one of the following:           *  ASSIGNABLE\\_USER      *  ASSIGN\\_ISSUE      *  ATTACHMENT\\_DELETE\\_ALL      *  ATTACHMENT\\_DELETE\\_OWN      *  BROWSE      *  CLOSE\\_ISSUE      *  COMMENT\\_DELETE\\_ALL      *  COMMENT\\_DELETE\\_OWN      *  COMMENT\\_EDIT\\_ALL      *  COMMENT\\_EDIT\\_OWN      *  COMMENT\\_ISSUE      *  CREATE\\_ATTACHMENT      *  CREATE\\_ISSUE      *  DELETE\\_ISSUE      *  EDIT\\_ISSUE      *  LINK\\_ISSUE      *  MANAGE\\_WATCHER\\_LIST      *  MODIFY\\_REPORTER      *  MOVE\\_ISSUE      *  PROJECT\\_ADMIN      *  RESOLVE\\_ISSUE      *  SCHEDULE\\_ISSUE      *  SET\\_ISSUE\\_SECURITY      *  TRANSITION\\_ISSUE      *  VIEW\\_VERSION\\_CONTROL      *  VIEW\\_VOTERS\\_AND\\_WATCHERS      *  VIEW\\_WORKFLOW\\_READONLY      *  WORKLOG\\_DELETE\\_ALL      *  WORKLOG\\_DELETE\\_OWN      *  WORKLOG\\_EDIT\\_ALL      *  WORKLOG\\_EDIT\\_OWN      *  WORK\\_ISSUE (required)
-     * @param query                A query string that is matched against user attributes, such as `displayName` and `emailAddress`, to find relevant users. The string can match the prefix of the attribute's value. For example, *query=john* matches a user with a `displayName` of *John Smith* and a user with an `emailAddress` of *johnson@example.com*. Required, unless `accountId` is specified. (optional)
+     * @param query                A query string that is matched against user attributes, such as {@code displayName} and {@code emailAddress}, to find relevant users. The string can match the prefix of the attribute's value. For example, *query=john* matches a user with a {@code displayName} of *John Smith* and a user with an {@code emailAddress} of *johnson@example.com*. Required, unless {@code accountId} is specified. (optional)
      * @param username             This parameter is no longer available. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details. (optional)
-     * @param accountId            A query string that is matched exactly against user `accountId`. Required, unless `query` is specified. (optional)
+     * @param accountId            A query string that is matched exactly against user {@code accountId}. Required, unless {@code query} is specified. (optional)
      * @param issueKey             The issue key for the issue. (optional)
      * @param projectKey           The project key for the project (case sensitive). (optional)
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
@@ -5905,20 +5921,20 @@ public interface JiraRESTV2Api {
      * they have permission to browse issues.
      * Use this resource to find users who can browse:
      *  *
-     * an issue, by providing the `issueKey`.
+     * an issue, by providing the {@code issueKey}.
      * *
-     * any issue in a project, by providing the `projectKey`.
-     * This operation takes the users in the range defined by `startAt` and `maxResults`, up to the thousandth user, and then returns only the users from that range that match the search string and have permission to browse issues. This means the operation usually returns fewer users than specified in `maxResults`. To get all the users who match the search string and have permission to browse issues, use [Get all users](#api-rest-api-2-users-search-get) and filter the records in your code.
+     * any issue in a project, by providing the {@code projectKey}.
+     * This operation takes the users in the range defined by {@code startAt} and {@code maxResults}, up to the thousandth user, and then returns only the users from that range that match the search string and have permission to browse issues. This means the operation usually returns fewer users than specified in {@code maxResults}. To get all the users who match the search string and have permission to browse issues, use [Get all users](#api-rest-api-2-users-search-get) and filter the records in your code.
      * Privacy controls are applied to the response based on the users' preferences. This could mean, for example, that the user's email address is hidden. See the [Profile visibility overview](https://developer.atlassian.com/cloud/jira/platform/profile-visibility/) for more details.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Browse users and groups* [global permission](https://confluence.atlassian.com/x/x4dKLg). Anonymous calls and calls by users without the required permission return empty search results.
      *
      * Authentication - Required Scopes: [read:jira-user]
-     * @param query                A query string that is matched against user attributes, such as `displayName` and `emailAddress`, to find relevant users. The string can match the prefix of the attribute's value. For example, *query=john* matches a user with a `displayName` of *John Smith* and a user with an `emailAddress` of *johnson@example.com*. Required, unless `accountId` is specified. (optional)
+     * @param query                A query string that is matched against user attributes, such as {@code displayName} and {@code emailAddress}, to find relevant users. The string can match the prefix of the attribute's value. For example, *query=john* matches a user with a {@code displayName} of *John Smith* and a user with an {@code emailAddress} of *johnson@example.com*. Required, unless {@code accountId} is specified. (optional)
      * @param username             This parameter is no longer available. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details. (optional)
-     * @param accountId            A query string that is matched exactly against user `accountId`. Required, unless `query` is specified. (optional)
-     * @param issueKey             The issue key for the issue. Required, unless `projectKey` is specified. (optional)
-     * @param projectKey           The project key for the project (case sensitive). Required, unless `issueKey` is specified. (optional)
+     * @param accountId            A query string that is matched exactly against user {@code accountId}. Required, unless {@code query} is specified. (optional)
+     * @param issueKey             The issue key for the issue. Required, unless {@code projectKey} is specified. (optional)
+     * @param projectKey           The project key for the project (case sensitive). Required, unless {@code issueKey} is specified. (optional)
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
      */
@@ -6022,7 +6038,7 @@ public interface JiraRESTV2Api {
      * **[Permissions](#permissions) required:** None.
      *
      * Authentication - Required Scopes: [read:jira-work]
-     * @param filter               The filter applied to the list of dashboards. Valid values are:   *  `favourite` Returns dashboards the user has marked as favorite.  *  `my` Returns dashboards owned by the user. (optional)
+     * @param filter               The filter applied to the list of dashboards. Valid values are:   *  {@code favourite} Returns dashboards the user has marked as favorite.  *  {@code my} Returns dashboards owned by the user. (optional)
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 20)
      */
@@ -6042,7 +6058,7 @@ public interface JiraRESTV2Api {
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
-     * @param id                   The list of field configuration scheme IDs. To include multiple IDs, provide an ampersand-separated list. For example, `id=10000&amp;id=10001`. (optional)
+     * @param id                   The list of field configuration scheme IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code id=10000&amp;id=10001}. (optional)
      */
     @RequestLine("GET /rest/api/2/fieldconfigurationscheme?startAt={startAt}&maxResults={maxResults}&id={id}")
     @Headers({
@@ -6066,7 +6082,7 @@ public interface JiraRESTV2Api {
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
-     * @param id                   The list of field configuration IDs. To include multiple IDs, provide an ampersand-separated list. For example, `id=10000&amp;id=10001`. (optional)
+     * @param id                   The list of field configuration IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code id=10000&amp;id=10001}. (optional)
      * @param isDefault            If *true* returns default field configurations only. (optional, defaults to false)
      * @param query                The query string used to match against field configuration names and descriptions. (optional)
      */
@@ -6082,11 +6098,11 @@ public interface JiraRESTV2Api {
      * Returns a list of dashboard gadgets on a dashboard.
      * This operation returns:
      *  *
-     * Gadgets from a list of IDs, when `id` is set.
+     * Gadgets from a list of IDs, when {@code id} is set.
      * *
-     * Gadgets with a module key, when `moduleKey` is set.
+     * Gadgets with a module key, when {@code moduleKey} is set.
      * *
-     * Gadgets from a list of URIs, when `uri` is set.
+     * Gadgets from a list of URIs, when {@code uri} is set.
      * *
      * All gadgets, when no other parameters are set.
      * This operation can be accessed anonymously.
@@ -6094,9 +6110,9 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [read:jira-work]
      * @param dashboardId          The ID of the dashboard. (required)
-     * @param moduleKey            The list of gadgets module keys. To include multiple module keys, separate module keys with ampersand: `moduleKey=key:one&amp;moduleKey=key:two`. (optional)
-     * @param uri                  The list of gadgets URIs. To include multiple URIs, separate URIs with ampersand: `uri=/rest/example/uri/1&amp;uri=/rest/example/uri/2`. (optional)
-     * @param gadgetId             The list of gadgets IDs. To include multiple IDs, separate IDs with ampersand: `gadgetId=10000&amp;gadgetId=10001`. (optional)
+     * @param moduleKey            The list of gadgets module keys. To include multiple module keys, separate module keys with ampersand: {@code moduleKey=key:one&amp;moduleKey=key:two}. (optional)
+     * @param uri                  The list of gadgets URIs. To include multiple URIs, separate URIs with ampersand: {@code uri=/rest/example/uri/1&amp;uri=/rest/example/uri/2}. (optional)
+     * @param gadgetId             The list of gadgets IDs. To include multiple IDs, separate IDs with ampersand: {@code gadgetId=10000&amp;gadgetId=10001}. (optional)
      */
     @RequestLine("GET /rest/api/2/dashboard/{dashboardId}/gadget?moduleKey={moduleKey}&uri={uri}&gadgetId={gadgetId}")
     @Headers({
@@ -6112,7 +6128,7 @@ public interface JiraRESTV2Api {
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). Jira permissions are not required for the app providing the field.
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param fieldKey             The field key is specified in the following format: **$(app-key)\\_\\_$(field-key)**. For example, *example-add-on\\_\\_example-issue-field*. To determine the `fieldKey` value, do one of the following:   *  open the app's plugin descriptor, then **app-key** is the key at the top and **field-key** is the key in the `jiraIssueFields` module. **app-key** can also be found in the app listing in the Atlassian Universal Plugin Manager.  *  run [Get fields](#api-rest-api-2-field-get) and in the field details the value is returned in `key`. For example, `"key": "teams-add-on__team-issue-field"` (required)
+     * @param fieldKey             The field key is specified in the following format: **$(app-key)\\_\\_$(field-key)**. For example, *example-add-on\\_\\_example-issue-field*. To determine the {@code fieldKey} value, do one of the following:   *  open the app's plugin descriptor, then **app-key** is the key at the top and **field-key** is the key in the {@code jiraIssueFields} module. **app-key** can also be found in the app listing in the Atlassian Universal Plugin Manager.  *  run [Get fields](#api-rest-api-2-field-get) and in the field details the value is returned in {@code key}. For example, {@code "key": "teams-add-on__team-issue-field"} (required)
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
      */
@@ -6132,9 +6148,9 @@ public interface JiraRESTV2Api {
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
-     * @param id                   The list of issue type schemes IDs. To include multiple IDs, provide an ampersand-separated list. For example, `id=10000&amp;id=10001`. (optional)
-     * @param orderBy              [Order](#ordering) the results by a field:   *  `name` Sorts by issue type scheme name.  *  `id` Sorts by issue type scheme ID. (optional, defaults to id)
-     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  `projects` For each issue type schemes, returns information about the projects the issue type scheme is assigned to.  *  `issueTypes` For each issue type schemes, returns information about the issueTypes the issue type scheme have. (optional)
+     * @param id                   The list of issue type schemes IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code id=10000&amp;id=10001}. (optional)
+     * @param orderBy              [Order](#ordering) the results by a field:   *  {@code name} Sorts by issue type scheme name.  *  {@code id} Sorts by issue type scheme ID. (optional, defaults to id)
+     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code projects} For each issue type schemes, returns information about the projects the issue type scheme is assigned to.  *  {@code issueTypes} For each issue type schemes, returns information about the issueTypes the issue type scheme have. (optional)
      * @param queryString          String used to perform a case-insensitive partial match with issue type scheme name. (optional)
      */
     @RequestLine("GET /rest/api/2/issuetypescheme?startAt={startAt}&maxResults={maxResults}&id={id}&orderBy={orderBy}&expand={expand}&queryString={queryString}")
@@ -6163,118 +6179,118 @@ public interface JiraRESTV2Api {
      * <p>
      * Returns all permission schemes.
      * ### About permission schemes and grants ###
-     * A permission scheme is a collection of permission grants. A permission grant consists of a `holder` and a `permission`.
+     * A permission scheme is a collection of permission grants. A permission grant consists of a {@code holder} and a {@code permission}.
      * #### Holder object ####
-     * The `holder` object contains information about the user or group being granted the permission. For example, the *Administer projects* permission is granted to a group named *Teams in space administrators*. In this case, the type is `"type": "group"`, and the parameter is the group name, `"parameter": "Teams in space administrators"` and the value is group ID, `"value": "ca85fac0-d974-40ca-a615-7af99c48d24f"`. The `holder` object is defined by the following properties:
+     * The {@code holder} object contains information about the user or group being granted the permission. For example, the *Administer projects* permission is granted to a group named *Teams in space administrators*. In this case, the type is {@code "type": "group"}, and the parameter is the group name, {@code "parameter": "Teams in space administrators"} and the value is group ID, {@code "value": "ca85fac0-d974-40ca-a615-7af99c48d24f"}. The {@code holder} object is defined by the following properties:
      *  *
-     * `type` Identifies the user or group (see the list of types below).
+     * {@code type} Identifies the user or group (see the list of types below).
      * *
-     * `parameter` As a group's name can change, use of `value` is recommended. The value of this property depends on the `type`. For example, if the `type` is a group, then you need to specify the group name.
+     * {@code parameter} As a group's name can change, use of {@code value} is recommended. The value of this property depends on the {@code type}. For example, if the {@code type} is a group, then you need to specify the group name.
      * *
-     * `value` The value of this property depends on the `type`. If the `type` is a group, then you need to specify the group ID. For other `type` it has the same value as `parameter`
-     * The following `types` are available. The expected values for `parameter` and `value` are given in parentheses (some types may not have a `parameter` or `value`):
+     * {@code value} The value of this property depends on the {@code type}. If the {@code type} is a group, then you need to specify the group ID. For other {@code type} it has the same value as {@code parameter}
+     * The following {@code types} are available. The expected values for {@code parameter} and {@code value} are given in parentheses (some types may not have a {@code parameter} or {@code value}):
      *  *
-     * `anyone` Grant for anonymous users.
+     * {@code anyone} Grant for anonymous users.
      * *
-     * `applicationRole` Grant for users with access to the specified application (application name, application name). See [Update product access settings](https://confluence.atlassian.com/x/3YxjL) for more information.
+     * {@code applicationRole} Grant for users with access to the specified application (application name, application name). See [Update product access settings](https://confluence.atlassian.com/x/3YxjL) for more information.
      * *
-     * `assignee` Grant for the user currently assigned to an issue.
+     * {@code assignee} Grant for the user currently assigned to an issue.
      * *
-     * `group` Grant for the specified group (`parameter` : group name, `value` : group ID).
+     * {@code group} Grant for the specified group ({@code parameter} : group name, {@code value} : group ID).
      * *
-     * `groupCustomField` Grant for a user in the group selected in the specified custom field (`parameter` : custom field ID, `value` : custom field ID).
+     * {@code groupCustomField} Grant for a user in the group selected in the specified custom field ({@code parameter} : custom field ID, {@code value} : custom field ID).
      * *
-     * `projectLead` Grant for a project lead.
+     * {@code projectLead} Grant for a project lead.
      * *
-     * `projectRole` Grant for the specified project role (`parameter` :project role ID, `value` : project role ID).
+     * {@code projectRole} Grant for the specified project role ({@code parameter} :project role ID, {@code value} : project role ID).
      * *
-     * `reporter` Grant for the user who reported the issue.
+     * {@code reporter} Grant for the user who reported the issue.
      * *
-     * `sd.customer.portal.only` Jira Service Desk only. Grants customers permission to access the customer portal but not Jira. See [Customizing Jira Service Desk permissions](https://confluence.atlassian.com/x/24dKLg) for more information.
+     * {@code sd.customer.portal.only} Jira Service Desk only. Grants customers permission to access the customer portal but not Jira. See [Customizing Jira Service Desk permissions](https://confluence.atlassian.com/x/24dKLg) for more information.
      * *
-     * `user` Grant for the specified user (`parameter` : user ID - historically this was the userkey but that is deprecated and the account ID should be used, `value` : user ID).
+     * {@code user} Grant for the specified user ({@code parameter} : user ID - historically this was the userkey but that is deprecated and the account ID should be used, {@code value} : user ID).
      * *
-     * `userCustomField` Grant for a user selected in the specified custom field (`parameter` : custom field ID, `value` : custom field ID).
+     * {@code userCustomField} Grant for a user selected in the specified custom field ({@code parameter} : custom field ID, {@code value} : custom field ID).
      * #### Built-in permissions ####
      * The [built-in Jira permissions](https://confluence.atlassian.com/x/yodKLg) are listed below. Apps can also define custom permissions. See the [project permission](https://developer.atlassian.com/cloud/jira/platform/modules/project-permission/) and [global permission](https://developer.atlassian.com/cloud/jira/platform/modules/global-permission/) module documentation for more information.
      * **Project permissions**
      *  *
-     * `ADMINISTER_PROJECTS`
+     * {@code ADMINISTER_PROJECTS}
      * *
-     * `BROWSE_PROJECTS`
+     * {@code BROWSE_PROJECTS}
      * *
-     * `MANAGE_SPRINTS_PERMISSION` (Jira Software only)
+     * {@code MANAGE_SPRINTS_PERMISSION} (Jira Software only)
      * *
-     * `SERVICEDESK_AGENT` (Jira Service Desk only)
+     * {@code SERVICEDESK_AGENT} (Jira Service Desk only)
      * *
-     * `VIEW_DEV_TOOLS` (Jira Software only)
+     * {@code VIEW_DEV_TOOLS} (Jira Software only)
      * *
-     * `VIEW_READONLY_WORKFLOW`
+     * {@code VIEW_READONLY_WORKFLOW}
      * **Issue permissions**
      *  *
-     * `ASSIGNABLE_USER`
+     * {@code ASSIGNABLE_USER}
      * *
-     * `ASSIGN_ISSUES`
+     * {@code ASSIGN_ISSUES}
      * *
-     * `CLOSE_ISSUES`
+     * {@code CLOSE_ISSUES}
      * *
-     * `CREATE_ISSUES`
+     * {@code CREATE_ISSUES}
      * *
-     * `DELETE_ISSUES`
+     * {@code DELETE_ISSUES}
      * *
-     * `EDIT_ISSUES`
+     * {@code EDIT_ISSUES}
      * *
-     * `LINK_ISSUES`
+     * {@code LINK_ISSUES}
      * *
-     * `MODIFY_REPORTER`
+     * {@code MODIFY_REPORTER}
      * *
-     * `MOVE_ISSUES`
+     * {@code MOVE_ISSUES}
      * *
-     * `RESOLVE_ISSUES`
+     * {@code RESOLVE_ISSUES}
      * *
-     * `SCHEDULE_ISSUES`
+     * {@code SCHEDULE_ISSUES}
      * *
-     * `SET_ISSUE_SECURITY`
+     * {@code SET_ISSUE_SECURITY}
      * *
-     * `TRANSITION_ISSUES`
+     * {@code TRANSITION_ISSUES}
      * **Voters and watchers permissions**
      *  *
-     * `MANAGE_WATCHERS`
+     * {@code MANAGE_WATCHERS}
      * *
-     * `VIEW_VOTERS_AND_WATCHERS`
+     * {@code VIEW_VOTERS_AND_WATCHERS}
      * **Comments permissions**
      *  *
-     * `ADD_COMMENTS`
+     * {@code ADD_COMMENTS}
      * *
-     * `DELETE_ALL_COMMENTS`
+     * {@code DELETE_ALL_COMMENTS}
      * *
-     * `DELETE_OWN_COMMENTS`
+     * {@code DELETE_OWN_COMMENTS}
      * *
-     * `EDIT_ALL_COMMENTS`
+     * {@code EDIT_ALL_COMMENTS}
      * *
-     * `EDIT_OWN_COMMENTS`
+     * {@code EDIT_OWN_COMMENTS}
      * **Attachments permissions**
      *  *
-     * `CREATE_ATTACHMENTS`
+     * {@code CREATE_ATTACHMENTS}
      * *
-     * `DELETE_ALL_ATTACHMENTS`
+     * {@code DELETE_ALL_ATTACHMENTS}
      * *
-     * `DELETE_OWN_ATTACHMENTS`
+     * {@code DELETE_OWN_ATTACHMENTS}
      * **Time tracking permissions**
      *  *
-     * `DELETE_ALL_WORKLOGS`
+     * {@code DELETE_ALL_WORKLOGS}
      * *
-     * `DELETE_OWN_WORKLOGS`
+     * {@code DELETE_OWN_WORKLOGS}
      * *
-     * `EDIT_ALL_WORKLOGS`
+     * {@code EDIT_ALL_WORKLOGS}
      * *
-     * `EDIT_OWN_WORKLOGS`
+     * {@code EDIT_OWN_WORKLOGS}
      * *
-     * `WORK_ON_ISSUES`
+     * {@code WORK_ON_ISSUES}
      * **[Permissions](#permissions) required:** Permission to access Jira.
      *
      * Authentication - Required Scopes: [read:jira-work]
-     * @param expand               Use expand to include additional information in the response. This parameter accepts a comma-separated list. Note that permissions are included when you specify any value. Expand options include:   *  `all` Returns all expandable information.  *  `field` Returns information about the custom field granted the permission.  *  `group` Returns information about the group that is granted the permission.  *  `permissions` Returns all permission grants for each permission scheme.  *  `projectRole` Returns information about the project role granted the permission.  *  `user` Returns information about the user who is granted the permission. (optional)
+     * @param expand               Use expand to include additional information in the response. This parameter accepts a comma-separated list. Note that permissions are included when you specify any value. Expand options include:   *  {@code all} Returns all expandable information.  *  {@code field} Returns information about the custom field granted the permission.  *  {@code group} Returns information about the group that is granted the permission.  *  {@code permissions} Returns all permission grants for each permission scheme.  *  {@code projectRole} Returns information about the project role granted the permission.  *  {@code user} Returns information about the user who is granted the permission. (optional)
      */
     @RequestLine("GET /rest/api/2/permissionscheme?expand={expand}")
     @Headers({
@@ -6379,7 +6395,7 @@ public interface JiraRESTV2Api {
      * **[Permissions](#permissions) required:** Projects are returned only where the user has *Browse Projects* or *Administer projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.
      *
      * Authentication - Required Scopes: [read:jira-work]
-     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expanded options include:   *  `description` Returns the project description.  *  `issueTypes` Returns all issue types associated with the project.  *  `lead` Returns information about the project lead.  *  `projectKeys` Returns all project keys associated with the project. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expanded options include:   *  {@code description} Returns the project description.  *  {@code issueTypes} Returns all issue types associated with the project.  *  {@code lead} Returns information about the project lead.  *  {@code projectKeys} Returns all project keys associated with the project. (optional)
      * @param recent               Returns the user's most recently accessed projects. You may specify the number of results to return up to a maximum of 20. If access is anonymous, then the recently accessed projects are based on the current HTTP session. (optional)
      * @param properties           A list of project properties to return for the project. This parameter accepts a comma-separated list. (optional)
      * @deprecated
@@ -6518,7 +6534,7 @@ public interface JiraRESTV2Api {
      * Get all workflows
      * <p>
      * Returns all workflows in Jira or a workflow. Deprecated, use [Get workflows paginated](#api-rest-api-2-workflow-search-get).
-     * If the `workflowName` parameter is specified, the workflow is returned as an object (not in an array). Otherwise, an array of workflow objects is returned.
+     * If the {@code workflowName} parameter is specified, the workflow is returned as an object (not in an array). Otherwise, an array of workflow objects is returned.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
@@ -6552,13 +6568,13 @@ public interface JiraRESTV2Api {
      * Get application property
      * <p>
      * Returns all application properties or an application property.
-     * If you specify a value for the `key` parameter, then an application property is returned as an object (not in an array). Otherwise, an array of all editable application properties is returned. See [Set application property](#api-rest-api-2-application-properties-id-put) for descriptions of editable properties.
+     * If you specify a value for the {@code key} parameter, then an application property is returned as an object (not in an array). Otherwise, an array of all editable application properties is returned. See [Set application property](#api-rest-api-2-application-properties-id-put) for descriptions of editable properties.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param key                  The key of the application property. (optional)
      * @param permissionLevel      The permission level of all items being returned in the list. (optional)
-     * @param keyFilter            When a `key` isn't provided, this filters the list of results by the application property `key` using a regular expression. For example, using `jira.lf.*` will return all application properties with keys that start with *jira.lf.*. (optional)
+     * @param keyFilter            When a {@code key} isn't provided, this filters the list of results by the application property {@code key} using a regular expression. For example, using {@code jira.lf.*} will return all application properties with keys that start with *jira.lf.*. (optional)
      */
     @RequestLine("GET /rest/api/2/application-properties?key={key}&permissionLevel={permissionLevel}&keyFilter={keyFilter}")
     @Headers({
@@ -6617,7 +6633,7 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [read:jira-work]
      * @param projectKeyOrId       The project ID or project key (case sensitive). (required)
-     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Note that permissions are included when you specify any value. Expand options include:   *  `all` Returns all expandable information.  *  `field` Returns information about the custom field granted the permission.  *  `group` Returns information about the group that is granted the permission.  *  `permissions` Returns all permission grants for each permission scheme.  *  `projectRole` Returns information about the project role granted the permission.  *  `user` Returns information about the user who is granted the permission. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Note that permissions are included when you specify any value. Expand options include:   *  {@code all} Returns all expandable information.  *  {@code field} Returns information about the custom field granted the permission.  *  {@code group} Returns information about the group that is granted the permission.  *  {@code permissions} Returns all permission grants for each permission scheme.  *  {@code projectRole} Returns information about the project role granted the permission.  *  {@code user} Returns information about the user who is granted the permission. (optional)
      */
     @RequestLine("GET /rest/api/2/project/{projectKeyOrId}/permissionscheme?expand={expand}")
     @Headers({
@@ -6648,7 +6664,7 @@ public interface JiraRESTV2Api {
     /**
      * Get attachment content
      * <p>
-     * Returns the contents of an attachment. A `Range` header can be set to define a range of bytes within the attachment to download. See the [HTTP Range header standard](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range) for details.
+     * Returns the contents of an attachment. A {@code Range} header can be set to define a range of bytes within the attachment to download. See the [HTTP Range header standard](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers/Range) for details.
      * To return a thumbnail of the attachment, use [Get attachment thumbnail](#api-rest-api-2-attachment-thumbnail-id-get).
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** For the issue containing the attachment:
@@ -6659,7 +6675,7 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [read:jira-work]
      * @param id                   The ID of the attachment. (required)
-     * @param redirect             Whether a redirect is provided for the attachment download. Clients that do not automatically follow redirects can set this to `false` to avoid making multiple requests to download the attachment. (optional, defaults to true)
+     * @param redirect             Whether a redirect is provided for the attachment download. Clients that do not automatically follow redirects can set this to {@code false} to avoid making multiple requests to download the attachment. (optional, defaults to true)
      */
     @RequestLine("GET /rest/api/2/attachment/content/{id}?redirect={redirect}")
     @Headers({
@@ -6697,7 +6713,7 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [read:jira-work]
      * @param id                   The ID of the attachment. (required)
-     * @param redirect             Whether a redirect is provided for the attachment download. Clients that do not automatically follow redirects can set this to `false` to avoid making multiple requests to download the attachment. (optional, defaults to true)
+     * @param redirect             Whether a redirect is provided for the attachment download. Clients that do not automatically follow redirects can set this to {@code false} to avoid making multiple requests to download the attachment. (optional, defaults to true)
      * @param fallbackToDefault    Whether a default thumbnail is returned when the requested thumbnail is not found. (optional, defaults to true)
      * @param width                The maximum width to scale the thumbnail to. (optional)
      * @param height               The maximum height to scale the thumbnail to. (optional)
@@ -6713,50 +6729,50 @@ public interface JiraRESTV2Api {
      * <p>
      * Returns a list of audit records. The list can be filtered to include items:
      *  *
-     * where each item in `filter` has at least one match in any of these fields:
+     * where each item in {@code filter} has at least one match in any of these fields:
      * 
      * 
      * 
      * 
      *  *
-     * `summary`
+     * {@code summary}
      * 
      * 
      * *
-     * `category`
+     * {@code category}
      * 
      * 
      * *
-     * `eventSource`
+     * {@code eventSource}
      * 
      * 
      * *
-     * `objectItem.name` If the object is a user, account ID is available to filter.
+     * {@code objectItem.name} If the object is a user, account ID is available to filter.
      * 
      * 
      * *
-     * `objectItem.parentName`
+     * {@code objectItem.parentName}
      * 
      * 
      * *
-     * `objectItem.typeName`
+     * {@code objectItem.typeName}
      * 
      * 
      * *
-     * `changedValues.changedFrom`
+     * {@code changedValues.changedFrom}
      * 
      * 
      * *
-     * `changedValues.changedTo`
+     * {@code changedValues.changedTo}
      * 
      * 
      * *
-     * `remoteAddress`
+     * {@code remoteAddress}
      * 
      * 
      * 
      * 
-     * For example, if `filter` contains *man ed*, an audit record containing `summary": "User added to group"` and `"category": "group management"` is returned.
+     * For example, if {@code filter} contains *man ed*, an audit record containing {@code summary": "User added to group"} and {@code "category": "group management"} is returned.
      * *
      * created on or after a date and time.
      * *
@@ -6767,8 +6783,8 @@ public interface JiraRESTV2Api {
      * @param offset               The number of records to skip before returning the first result. (optional, defaults to 0)
      * @param limit                The maximum number of results to return. (optional, defaults to 1000)
      * @param filter               The strings to match with audit field content, space separated. (optional)
-     * @param from                 The date and time on or after which returned audit records must have been created. If `to` is provided `from` must be before `to` or no audit records are returned. (optional)
-     * @param to                   The date and time on or before which returned audit results must have been created. If `from` is provided `to` must be after `from` or no audit records are returned. (optional)
+     * @param from                 The date and time on or after which returned audit records must have been created. If {@code to} is provided {@code from} must be before {@code to} or no audit records are returned. (optional)
+     * @param to                   The date and time on or before which returned audit results must have been created. If {@code from} is provided {@code to} must be after {@code from} or no audit records are returned. (optional)
      */
     @RequestLine("GET /rest/api/2/auditing/record?offset={offset}&limit={limit}&filter={filter}&from={from}&to={to}")
     @Headers({
@@ -6796,8 +6812,8 @@ public interface JiraRESTV2Api {
      * Get field reference data (POST)
      * <p>
      * Returns reference data for JQL searches. This is a downloadable version of the documentation provided in [Advanced searching - fields reference](https://confluence.atlassian.com/x/gwORLQ) and [Advanced searching - functions reference](https://confluence.atlassian.com/x/hgORLQ), along with a list of JQL-reserved words. Use this information to assist with the programmatic creation of JQL queries or the validation of queries built in a custom query builder.
-     * This operation can filter the custom fields returned by project. Invalid project IDs in `projectIds` are ignored. System fields are always returned.
-     * It can also return the collapsed field for custom fields. Collapsed fields enable searches to be performed across all fields with the same name and of the same field type. For example, the collapsed field `Component - Component[Dropdown]` enables dropdown fields `Component - cf[10061]` and `Component - cf[10062]` to be searched simultaneously.
+     * This operation can filter the custom fields returned by project. Invalid project IDs in {@code projectIds} are ignored. System fields are always returned.
+     * It can also return the collapsed field for custom fields. Collapsed fields enable searches to be performed across all fields with the same name and of the same field type. For example, the collapsed field {@code Component - Component[Dropdown]} enables dropdown fields {@code Component - cf[10061]} and {@code Component - cf[10062]} to be searched simultaneously.
      * **[Permissions](#permissions) required:** None.
      *
      * Authentication - Required Scopes: [read:jira-work]
@@ -6959,9 +6975,9 @@ public interface JiraRESTV2Api {
      * *
      * A maximum of 1000 projects and 1000 issues can be checked.
      * *
-     * Null values in `globalPermissions`, `projectPermissions`, `projectPermissions.projects`, and `projectPermissions.issues` are ignored.
+     * Null values in {@code globalPermissions}, {@code projectPermissions}, {@code projectPermissions.projects}, and {@code projectPermissions.issues} are ignored.
      * *
-     * Empty strings in `projectPermissions.permissions` are ignored.
+     * Empty strings in {@code projectPermissions.permissions} are ignored.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) to check the permissions for other users, otherwise none. However, Connect apps can make a call from the app server to the product to obtain permission details for any user, without admin permission. This Connect app ability doesn't apply to calls made using AP.request() in a browser.
      *
@@ -7060,7 +7076,7 @@ public interface JiraRESTV2Api {
      * Authentication - Required Scopes: [read:jira-work]
      * @param issueIdOrKey         The ID or key of the issue. (required)
      * @param id                   The ID of the comment. (required)
-     * @param expand               Use [expand](#expansion) to include additional information about comments in the response. This parameter accepts `renderedBody`, which returns the comment body rendered in HTML. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information about comments in the response. This parameter accepts {@code renderedBody}, which returns the comment body rendered in HTML. (optional)
      */
     @RequestLine("GET /rest/api/2/issue/{issueIdOrKey}/comment/{id}?expand={expand}")
     @Headers({
@@ -7131,7 +7147,7 @@ public interface JiraRESTV2Api {
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 5000)
      * @param orderBy              [Order](#ordering) the results by a field. Accepts *created* to sort comments by their created date. (optional)
-     * @param expand               Use [expand](#expansion) to include additional information about comments in the response. This parameter accepts `renderedBody`, which returns the comment body rendered in HTML. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information about comments in the response. This parameter accepts {@code renderedBody}, which returns the comment body rendered in HTML. (optional)
      */
     @RequestLine("GET /rest/api/2/issue/{issueIdOrKey}/comment?startAt={startAt}&maxResults={maxResults}&orderBy={orderBy}&expand={expand}")
     @Headers({
@@ -7154,7 +7170,7 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [read:jira-work]
      * @param issueCommentListRequestBean The list of comment IDs. (required)
-     * @param expand               Use [expand](#expansion) to include additional information about comments in the response. This parameter accepts a comma-separated list. Expand options include:   *  `renderedBody` Returns the comment body rendered in HTML.  *  `properties` Returns the comment's properties. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information about comments in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code renderedBody} Returns the comment body rendered in HTML.  *  {@code properties} Returns the comment's properties. (optional)
      */
     @RequestLine("POST /rest/api/2/comment/list?expand={expand}")
     @Headers({
@@ -7207,7 +7223,7 @@ public interface JiraRESTV2Api {
     @Headers({
         "Accept: application/json"
     })
-    ModelConfiguration getConfiguration();
+    Configuration getConfiguration();
 
     /**
      * Get custom field contexts
@@ -7216,18 +7232,18 @@ public interface JiraRESTV2Api {
      *  *
      * With no other parameters set, all contexts.
      * *
-     * By defining `id` only, all contexts from the list of IDs.
+     * By defining {@code id} only, all contexts from the list of IDs.
      * *
-     * By defining `isAnyIssueType`, limit the list of contexts returned to either those that apply to all issue types (true) or those that apply to only a subset of issue types (false)
+     * By defining {@code isAnyIssueType}, limit the list of contexts returned to either those that apply to all issue types (true) or those that apply to only a subset of issue types (false)
      * *
-     * By defining `isGlobalContext`, limit the list of contexts return to either those that apply to all projects (global contexts) (true) or those that apply to only a subset of projects (false).
+     * By defining {@code isGlobalContext}, limit the list of contexts return to either those that apply to all projects (global contexts) (true) or those that apply to only a subset of projects (false).
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param fieldId              The ID of the custom field. (required)
      * @param isAnyIssueType       Whether to return contexts that apply to all issue types. (optional)
      * @param isGlobalContext      Whether to return contexts that apply to all projects. (optional)
-     * @param contextId            The list of context IDs. To include multiple contexts, separate IDs with ampersand: `contextId=10000&amp;contextId=10001`. (optional)
+     * @param contextId            The list of context IDs. To include multiple contexts, separate IDs with ampersand: {@code contextId=10000&amp;contextId=10001}. (optional)
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
      */
@@ -7265,11 +7281,11 @@ public interface JiraRESTV2Api {
      * **[Permissions](#permissions) required:** *Create issues* [project permission](https://confluence.atlassian.com/x/yodKLg) in the requested projects.
      *
      * Authentication - Required Scopes: [read:jira-work]
-     * @param projectIds           List of project IDs. This parameter accepts a comma-separated list. Multiple project IDs can also be provided using an ampersand-separated list. For example, `projectIds=10000,10001&amp;projectIds=10020,10021`. This parameter may be provided with `projectKeys`. (optional)
-     * @param projectKeys          List of project keys. This parameter accepts a comma-separated list. Multiple project keys can also be provided using an ampersand-separated list. For example, `projectKeys=proj1,proj2&amp;projectKeys=proj3`. This parameter may be provided with `projectIds`. (optional)
-     * @param issuetypeIds         List of issue type IDs. This parameter accepts a comma-separated list. Multiple issue type IDs can also be provided using an ampersand-separated list. For example, `issuetypeIds=10000,10001&amp;issuetypeIds=10020,10021`. This parameter may be provided with `issuetypeNames`. (optional)
-     * @param issuetypeNames       List of issue type names. This parameter accepts a comma-separated list. Multiple issue type names can also be provided using an ampersand-separated list. For example, `issuetypeNames=name1,name2&amp;issuetypeNames=name3`. This parameter may be provided with `issuetypeIds`. (optional)
-     * @param expand               Use [expand](#expansion) to include additional information about issue metadata in the response. This parameter accepts `projects.issuetypes.fields`, which returns information about the fields in the issue creation screen for each issue type. Fields hidden from the screen are not returned. Use the information to populate the `fields` and `update` fields in [Create issue](#api-rest-api-2-issue-post) and [Create issues](#api-rest-api-2-issue-bulk-post). (optional)
+     * @param projectIds           List of project IDs. This parameter accepts a comma-separated list. Multiple project IDs can also be provided using an ampersand-separated list. For example, {@code projectIds=10000,10001&amp;projectIds=10020,10021}. This parameter may be provided with {@code projectKeys}. (optional)
+     * @param projectKeys          List of project keys. This parameter accepts a comma-separated list. Multiple project keys can also be provided using an ampersand-separated list. For example, {@code projectKeys=proj1,proj2&amp;projectKeys=proj3}. This parameter may be provided with {@code projectIds}. (optional)
+     * @param issuetypeIds         List of issue type IDs. This parameter accepts a comma-separated list. Multiple issue type IDs can also be provided using an ampersand-separated list. For example, {@code issuetypeIds=10000,10001&amp;issuetypeIds=10020,10021}. This parameter may be provided with {@code issuetypeNames}. (optional)
+     * @param issuetypeNames       List of issue type names. This parameter accepts a comma-separated list. Multiple issue type names can also be provided using an ampersand-separated list. For example, {@code issuetypeNames=name1,name2&amp;issuetypeNames=name3}. This parameter may be provided with {@code issuetypeIds}. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information about issue metadata in the response. This parameter accepts {@code projects.issuetypes.fields}, which returns information about the fields in the issue creation screen for each issue type. Fields hidden from the screen are not returned. Use the information to populate the {@code fields} and {@code update} fields in [Create issue](#api-rest-api-2-issue-post) and [Create issues](#api-rest-api-2-issue-bulk-post). (optional)
      */
     @RequestLine("GET /rest/api/2/issue/createmeta?projectIds={projectIds}&projectKeys={projectKeys}&issuetypeIds={issuetypeIds}&issuetypeNames={issuetypeNames}&expand={expand}")
     @Headers({
@@ -7284,7 +7300,7 @@ public interface JiraRESTV2Api {
      * **[Permissions](#permissions) required:** Permission to access Jira.
      *
      * Authentication - Required Scopes: [read:jira-user]
-     * @param expand               Use [expand](#expansion) to include additional information about user in the response. This parameter accepts a comma-separated list. Expand options include:   *  `groups` Returns all groups, including nested groups, the user belongs to.  *  `applicationRoles` Returns the application roles the user is assigned to. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information about user in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code groups} Returns all groups, including nested groups, the user belongs to.  *  {@code applicationRoles} Returns the application roles the user is assigned to. (optional)
      */
     @RequestLine("GET /rest/api/2/myself?expand={expand}")
     @Headers({
@@ -7298,23 +7314,23 @@ public interface JiraRESTV2Api {
      * Returns a [paginated](#pagination) list of configurations for a custom field created by a [Forge app](https://developer.atlassian.com/platform/forge/).
      * The result can be filtered by one of these criteria:
      *  *
-     * `id`.
+     * {@code id}.
      * *
-     * `fieldContextId`.
+     * {@code fieldContextId}.
      * *
-     * `issueId`.
+     * {@code issueId}.
      * *
-     * `projectKeyOrId` and `issueTypeId`.
+     * {@code projectKeyOrId} and {@code issueTypeId}.
      * Otherwise, all configurations are returned.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). Jira permissions are not required for the Forge app that created the custom field.
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param fieldIdOrKey         The ID or key of the custom field, for example `customfield_10000`. (required)
-     * @param id                   The list of configuration IDs. To include multiple configurations, separate IDs with an ampersand: `id=10000&amp;id=10001`. Can't be provided with `fieldContextId`, `issueId`, `projectKeyOrId`, or `issueTypeId`. (optional)
-     * @param fieldContextId       The list of field context IDs. To include multiple field contexts, separate IDs with an ampersand: `fieldContextId=10000&amp;fieldContextId=10001`. Can't be provided with `id`, `issueId`, `projectKeyOrId`, or `issueTypeId`. (optional)
-     * @param issueId              The ID of the issue to filter results by. If the issue doesn't exist, an empty list is returned. Can't be provided with `projectKeyOrId`, or `issueTypeId`. (optional)
-     * @param projectKeyOrId       The ID or key of the project to filter results by. Must be provided with `issueTypeId`. Can't be provided with `issueId`. (optional)
-     * @param issueTypeId          The ID of the issue type to filter results by. Must be provided with `projectKeyOrId`. Can't be provided with `issueId`. (optional)
+     * @param fieldIdOrKey         The ID or key of the custom field, for example {@code customfield_10000}. (required)
+     * @param id                   The list of configuration IDs. To include multiple configurations, separate IDs with an ampersand: {@code id=10000&amp;id=10001}. Can't be provided with {@code fieldContextId}, {@code issueId}, {@code projectKeyOrId}, or {@code issueTypeId}. (optional)
+     * @param fieldContextId       The list of field context IDs. To include multiple field contexts, separate IDs with an ampersand: {@code fieldContextId=10000&amp;fieldContextId=10001}. Can't be provided with {@code id}, {@code issueId}, {@code projectKeyOrId}, or {@code issueTypeId}. (optional)
+     * @param issueId              The ID of the issue to filter results by. If the issue doesn't exist, an empty list is returned. Can't be provided with {@code projectKeyOrId}, or {@code issueTypeId}. (optional)
+     * @param projectKeyOrId       The ID or key of the project to filter results by. Must be provided with {@code issueTypeId}. Can't be provided with {@code issueId}. (optional)
+     * @param issueTypeId          The ID of the issue type to filter results by. Must be provided with {@code projectKeyOrId}. Can't be provided with {@code issueId}. (optional)
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 100)
      */
@@ -7328,7 +7344,7 @@ public interface JiraRESTV2Api {
      * Get custom field contexts for projects and issue types
      * <p>
      * Returns a [paginated](#pagination) list of project and issue type mappings and, for each mapping, the ID of a [custom field context](https://confluence.atlassian.com/x/k44fOw) that applies to the project and issue type.
-     * If there is no custom field context assigned to the project then, if present, the custom field context that applies to all projects is returned if it also applies to the issue type or all issue types. If a custom field context is not found, the returned custom field context ID is `null`.
+     * If there is no custom field context assigned to the project then, if present, the custom field context that applies to all projects is returned if it also applies to the issue type or all issue types. If a custom field context is not found, the returned custom field context ID is {@code null}.
      * Duplicate project and issue type mappings cannot be provided in the request.
      * The order of the returned values is the same as provided in the request.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
@@ -7440,17 +7456,17 @@ public interface JiraRESTV2Api {
      * Dashboards shared with the public.
      *
      * Authentication - Required Scopes: [read:jira-work]
-     * @param dashboardName        String used to perform a case-insensitive partial match with `name`. (optional)
-     * @param accountId            User account ID used to return dashboards with the matching `owner.accountId`. This parameter cannot be used with the `owner` parameter. (optional)
-     * @param owner                This parameter is deprecated because of privacy changes. Use `accountId` instead. See the [migration guide](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details. User name used to return dashboards with the matching `owner.name`. This parameter cannot be used with the `accountId` parameter. (optional)
-     * @param groupname            As a group's name can change, use of `groupId` is recommended. Group name used to return dashboards that are shared with a group that matches `sharePermissions.group.name`. This parameter cannot be used with the `groupId` parameter. (optional)
-     * @param groupId              Group ID used to return dashboards that are shared with a group that matches `sharePermissions.group.groupId`. This parameter cannot be used with the `groupname` parameter. (optional)
-     * @param projectId            Project ID used to returns dashboards that are shared with a project that matches `sharePermissions.project.id`. (optional)
-     * @param orderBy              [Order](#ordering) the results by a field:   *  `description` Sorts by dashboard description. Note that this sort works independently of whether the expand to display the description field is in use.  *  `favourite_count` Sorts by dashboard popularity.  *  `id` Sorts by dashboard ID.  *  `is_favourite` Sorts by whether the dashboard is marked as a favorite.  *  `name` Sorts by dashboard name.  *  `owner` Sorts by dashboard owner name. (optional, defaults to name)
+     * @param dashboardName        String used to perform a case-insensitive partial match with {@code name}. (optional)
+     * @param accountId            User account ID used to return dashboards with the matching {@code owner.accountId}. This parameter cannot be used with the {@code owner} parameter. (optional)
+     * @param owner                This parameter is deprecated because of privacy changes. Use {@code accountId} instead. See the [migration guide](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details. User name used to return dashboards with the matching {@code owner.name}. This parameter cannot be used with the {@code accountId} parameter. (optional)
+     * @param groupname            As a group's name can change, use of {@code groupId} is recommended. Group name used to return dashboards that are shared with a group that matches {@code sharePermissions.group.name}. This parameter cannot be used with the {@code groupId} parameter. (optional)
+     * @param groupId              Group ID used to return dashboards that are shared with a group that matches {@code sharePermissions.group.groupId}. This parameter cannot be used with the {@code groupname} parameter. (optional)
+     * @param projectId            Project ID used to returns dashboards that are shared with a project that matches {@code sharePermissions.project.id}. (optional)
+     * @param orderBy              [Order](#ordering) the results by a field:   *  {@code description} Sorts by dashboard description. Note that this sort works independently of whether the expand to display the description field is in use.  *  {@code favourite_count} Sorts by dashboard popularity.  *  {@code id} Sorts by dashboard ID.  *  {@code is_favourite} Sorts by whether the dashboard is marked as a favorite.  *  {@code name} Sorts by dashboard name.  *  {@code owner} Sorts by dashboard owner name. (optional, defaults to name)
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
      * @param status               The status to filter by. It may be active, archived or deleted. (optional, defaults to active)
-     * @param expand               Use [expand](#expansion) to include additional information about dashboard in the response. This parameter accepts a comma-separated list. Expand options include:   *  `description` Returns the description of the dashboard.  *  `owner` Returns the owner of the dashboard.  *  `viewUrl` Returns the URL that is used to view the dashboard.  *  `favourite` Returns `isFavourite`, an indicator of whether the user has set the dashboard as a favorite.  *  `favouritedCount` Returns `popularity`, a count of how many users have set this dashboard as a favorite.  *  `sharePermissions` Returns details of the share permissions defined for the dashboard.  *  `editPermissions` Returns details of the edit permissions defined for the dashboard.  *  `isWritable` Returns whether the current user has permission to edit the dashboard. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information about dashboard in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code description} Returns the description of the dashboard.  *  {@code owner} Returns the owner of the dashboard.  *  {@code viewUrl} Returns the URL that is used to view the dashboard.  *  {@code favourite} Returns {@code isFavourite}, an indicator of whether the user has set the dashboard as a favorite.  *  {@code favouritedCount} Returns {@code popularity}, a count of how many users have set this dashboard as a favorite.  *  {@code sharePermissions} Returns details of the share permissions defined for the dashboard.  *  {@code editPermissions} Returns details of the edit permissions defined for the dashboard.  *  {@code isWritable} Returns whether the current user has permission to edit the dashboard. (optional)
      */
     @RequestLine("GET /rest/api/2/dashboard/search?dashboardName={dashboardName}&accountId={accountId}&owner={owner}&groupname={groupname}&groupId={groupId}&projectId={projectId}&orderBy={orderBy}&startAt={startAt}&maxResults={maxResults}&status={status}&expand={expand}")
     @Headers({
@@ -7475,67 +7491,67 @@ public interface JiraRESTV2Api {
     /**
      * Get custom field contexts default values
      * <p>
-     * Returns a [paginated](#pagination) list of defaults for a custom field. The results can be filtered by `contextId`, otherwise all values are returned. If no defaults are set for a context, nothing is returned.
+     * Returns a [paginated](#pagination) list of defaults for a custom field. The results can be filtered by {@code contextId}, otherwise all values are returned. If no defaults are set for a context, nothing is returned.
      *  The returned object depends on type of the custom field:
      *  *
-     * `CustomFieldContextDefaultValueDate` (type `datepicker`) for date fields.
+     * {@code CustomFieldContextDefaultValueDate} (type {@code datepicker}) for date fields.
      * *
-     * `CustomFieldContextDefaultValueDateTime` (type `datetimepicker`) for date-time fields.
+     * {@code CustomFieldContextDefaultValueDateTime} (type {@code datetimepicker}) for date-time fields.
      * *
-     * `CustomFieldContextDefaultValueSingleOption` (type `option.single`) for single choice select lists and radio buttons.
+     * {@code CustomFieldContextDefaultValueSingleOption} (type {@code option.single}) for single choice select lists and radio buttons.
      * *
-     * `CustomFieldContextDefaultValueMultipleOption` (type `option.multiple`) for multiple choice select lists and checkboxes.
+     * {@code CustomFieldContextDefaultValueMultipleOption} (type {@code option.multiple}) for multiple choice select lists and checkboxes.
      * *
-     * `CustomFieldContextDefaultValueCascadingOption` (type `option.cascading`) for cascading select lists.
+     * {@code CustomFieldContextDefaultValueCascadingOption} (type {@code option.cascading}) for cascading select lists.
      * *
-     * `CustomFieldContextSingleUserPickerDefaults` (type `single.user.select`) for single users.
+     * {@code CustomFieldContextSingleUserPickerDefaults} (type {@code single.user.select}) for single users.
      * *
-     * `CustomFieldContextDefaultValueMultiUserPicker` (type `multi.user.select`) for user lists.
+     * {@code CustomFieldContextDefaultValueMultiUserPicker} (type {@code multi.user.select}) for user lists.
      * *
-     * `CustomFieldContextDefaultValueSingleGroupPicker` (type `grouppicker.single`) for single choice group pickers.
+     * {@code CustomFieldContextDefaultValueSingleGroupPicker} (type {@code grouppicker.single}) for single choice group pickers.
      * *
-     * `CustomFieldContextDefaultValueMultipleGroupPicker` (type `grouppicker.multiple`) for multiple choice group pickers.
+     * {@code CustomFieldContextDefaultValueMultipleGroupPicker} (type {@code grouppicker.multiple}) for multiple choice group pickers.
      * *
-     * `CustomFieldContextDefaultValueURL` (type `url`) for URLs.
+     * {@code CustomFieldContextDefaultValueURL} (type {@code url}) for URLs.
      * *
-     * `CustomFieldContextDefaultValueProject` (type `project`) for project pickers.
+     * {@code CustomFieldContextDefaultValueProject} (type {@code project}) for project pickers.
      * *
-     * `CustomFieldContextDefaultValueFloat` (type `float`) for floats (floating-point numbers).
+     * {@code CustomFieldContextDefaultValueFloat} (type {@code float}) for floats (floating-point numbers).
      * *
-     * `CustomFieldContextDefaultValueLabels` (type `labels`) for labels.
+     * {@code CustomFieldContextDefaultValueLabels} (type {@code labels}) for labels.
      * *
-     * `CustomFieldContextDefaultValueTextField` (type `textfield`) for text fields.
+     * {@code CustomFieldContextDefaultValueTextField} (type {@code textfield}) for text fields.
      * *
-     * `CustomFieldContextDefaultValueTextArea` (type `textarea`) for text area fields.
+     * {@code CustomFieldContextDefaultValueTextArea} (type {@code textarea}) for text area fields.
      * *
-     * `CustomFieldContextDefaultValueReadOnly` (type `readonly`) for read only (text) fields.
+     * {@code CustomFieldContextDefaultValueReadOnly} (type {@code readonly}) for read only (text) fields.
      * *
-     * `CustomFieldContextDefaultValueMultipleVersion` (type `version.multiple`) for single choice version pickers.
+     * {@code CustomFieldContextDefaultValueMultipleVersion} (type {@code version.multiple}) for single choice version pickers.
      * *
-     * `CustomFieldContextDefaultValueSingleVersion` (type `version.single`) for multiple choice version pickers.
+     * {@code CustomFieldContextDefaultValueSingleVersion} (type {@code version.single}) for multiple choice version pickers.
      * Forge custom fields [types](https://developer.atlassian.com/platform/forge/manifest-reference/modules/jira-custom-field-type/#data-types) are also supported, returning:
      *  *
-     * `CustomFieldContextDefaultValueForgeStringFieldBean` (type `forge.string`) for Forge string fields.
+     * {@code CustomFieldContextDefaultValueForgeStringFieldBean} (type {@code forge.string}) for Forge string fields.
      * *
-     * `CustomFieldContextDefaultValueForgeMultiStringFieldBean` (type `forge.string.list`) for Forge string collection fields.
+     * {@code CustomFieldContextDefaultValueForgeMultiStringFieldBean} (type {@code forge.string.list}) for Forge string collection fields.
      * *
-     * `CustomFieldContextDefaultValueForgeObjectFieldBean` (type `forge.object`) for Forge object fields.
+     * {@code CustomFieldContextDefaultValueForgeObjectFieldBean} (type {@code forge.object}) for Forge object fields.
      * *
-     * `CustomFieldContextDefaultValueForgeDateTimeFieldBean` (type `forge.datetime`) for Forge date-time fields.
+     * {@code CustomFieldContextDefaultValueForgeDateTimeFieldBean} (type {@code forge.datetime}) for Forge date-time fields.
      * *
-     * `CustomFieldContextDefaultValueForgeGroupFieldBean` (type `forge.group`) for Forge group fields.
+     * {@code CustomFieldContextDefaultValueForgeGroupFieldBean} (type {@code forge.group}) for Forge group fields.
      * *
-     * `CustomFieldContextDefaultValueForgeMultiGroupFieldBean` (type `forge.group.list`) for Forge group collection fields.
+     * {@code CustomFieldContextDefaultValueForgeMultiGroupFieldBean} (type {@code forge.group.list}) for Forge group collection fields.
      * *
-     * `CustomFieldContextDefaultValueForgeNumberFieldBean` (type `forge.number`) for Forge number fields.
+     * {@code CustomFieldContextDefaultValueForgeNumberFieldBean} (type {@code forge.number}) for Forge number fields.
      * *
-     * `CustomFieldContextDefaultValueForgeUserFieldBean` (type `forge.user`) for Forge user fields.
+     * {@code CustomFieldContextDefaultValueForgeUserFieldBean} (type {@code forge.user}) for Forge user fields.
      * *
-     * `CustomFieldContextDefaultValueForgeMultiUserFieldBean` (type `forge.user.list`) for Forge user collection fields.
+     * {@code CustomFieldContextDefaultValueForgeMultiUserFieldBean} (type {@code forge.user.list}) for Forge user collection fields.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param fieldId              The ID of the custom field, for example `customfield\\_10000`. (required)
+     * @param fieldId              The ID of the custom field, for example {@code customfield\\_10000}. (required)
      * @param contextId            The IDs of the contexts. (optional)
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
@@ -7554,7 +7570,7 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param id                   The ID of the workflow scheme. (required)
-     * @param returnDraftIfExists  Set to `true` to return the default workflow for the workflow scheme's draft rather than scheme itself. If the workflow scheme does not have a draft, then the default workflow for the workflow scheme is returned. (optional, defaults to false)
+     * @param returnDraftIfExists  Set to {@code true} to return the default workflow for the workflow scheme's draft rather than scheme itself. If the workflow scheme does not have a draft, then the default workflow for the workflow scheme is returned. (optional, defaults to false)
      */
     @RequestLine("GET /rest/api/2/workflowscheme/{id}/default?returnDraftIfExists={returnDraftIfExists}")
     @Headers({
@@ -7615,21 +7631,21 @@ public interface JiraRESTV2Api {
      * Returns the edit screen fields for an issue that are visible to and editable by the user. Use the information to populate the requests in [Edit issue](#api-rest-api-2-issue-issueIdOrKey-put).
      * This endpoint will check for these conditions:
      * 1.
-     * Field is available on a field screen - through screen, screen scheme, issue type screen scheme, and issue type scheme configuration. `overrideScreenSecurity=true` skips this condition. 2.
-     * Field is visible in the [field configuration](https://support.atlassian.com/jira-cloud-administration/docs/change-a-field-configuration/). `overrideScreenSecurity=true` skips this condition. 3.
+     * Field is available on a field screen - through screen, screen scheme, issue type screen scheme, and issue type scheme configuration. {@code overrideScreenSecurity=true} skips this condition. 2.
+     * Field is visible in the [field configuration](https://support.atlassian.com/jira-cloud-administration/docs/change-a-field-configuration/). {@code overrideScreenSecurity=true} skips this condition. 3.
      * Field is shown on the issue: each field has different conditions here. For example: Attachment field only shows if attachments are enabled. Assignee only shows if user has permissions to assign the issue. 4.
      * If a field is custom then it must have valid custom field context, applicable for its project and issue type. All system fields are assumed to have context in all projects and all issue types. 5.
      * Issue has a project, issue type, and status defined. 6.
-     * Issue is assigned to a valid workflow, and the current status has assigned a workflow step. `overrideEditableFlag=true` skips this condition. 7.
-     * The current workflow step is editable. This is true by default, but [can be disabled by setting](https://support.atlassian.com/jira-cloud-administration/docs/use-workflow-properties/) the `jira.issue.editable` property to `false`. `overrideEditableFlag=true` skips this condition. 8.
+     * Issue is assigned to a valid workflow, and the current status has assigned a workflow step. {@code overrideEditableFlag=true} skips this condition. 7.
+     * The current workflow step is editable. This is true by default, but [can be disabled by setting](https://support.atlassian.com/jira-cloud-administration/docs/use-workflow-properties/) the {@code jira.issue.editable} property to {@code false}. {@code overrideEditableFlag=true} skips this condition. 8.
      * User has [Edit issues permission](https://support.atlassian.com/jira-cloud-administration/docs/permissions-for-company-managed-projects/). 9.
-     * Workflow permissions allow editing a field. This is true by default but [can be modified](https://support.atlassian.com/jira-cloud-administration/docs/use-workflow-properties/) using `jira.permission.*` workflow properties.
+     * Workflow permissions allow editing a field. This is true by default but [can be modified](https://support.atlassian.com/jira-cloud-administration/docs/use-workflow-properties/) using {@code jira.permission.*} workflow properties.
      * Fields hidden using [Issue layout settings page](https://support.atlassian.com/jira-software-cloud/docs/configure-field-layout-in-the-issue-view/) remain editable.
      * Connect apps having an app user with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg), and Forge apps acting on behalf of users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg), can return additional details using:
      *  *
-     * `overrideScreenSecurity` When this flag is `true`, then this endpoint skips checking if fields are available through screens, and field configuration (conditions 1. and 2. from the list above).
+     * {@code overrideScreenSecurity} When this flag is {@code true}, then this endpoint skips checking if fields are available through screens, and field configuration (conditions 1. and 2. from the list above).
      * *
-     * `overrideEditableFlag` When this flag is `true`, then this endpoint skips checking if workflow is present and if the current step is editable (conditions 6. and 7. from the list above).
+     * {@code overrideEditableFlag} When this flag is {@code true}, then this endpoint skips checking if workflow is present and if the current step is editable (conditions 6. and 7. from the list above).
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:**
      *  *
@@ -7669,7 +7685,7 @@ public interface JiraRESTV2Api {
      * Returns webhooks that have recently failed to be delivered to the requesting app after the maximum number of retries.
      * After 72 hours the failure may no longer be returned by this operation.
      * The oldest failure is returned first.
-     * This method uses a cursor-based pagination. To request the next page use the failure time of the last webhook on the list as the `failedAfter` value or use the URL provided in `next`.
+     * This method uses a cursor-based pagination. To request the next page use the failure time of the last webhook on the list as the {@code failedAfter} value or use the URL provided in {@code next}.
      * **[Permissions](#permissions) required:** Only [Connect apps](https://developer.atlassian.com/cloud/jira/platform/index/#connect-apps) can use this operation.
      *
      * Authentication - Required Scopes: [read:jira-work, manage:jira-webhook]
@@ -7701,7 +7717,7 @@ public interface JiraRESTV2Api {
      * For example, if the user favorites a public filter that is subsequently made private that filter is not returned by this operation.
      *
      * Authentication - Required Scopes: [read:jira-work]
-     * @param expand               Use [expand](#expansion) to include additional information about filter in the response. This parameter accepts a comma-separated list. Expand options include:   *  `sharedUsers` Returns the users that the filter is shared with. This includes users that can browse projects that the filter is shared with. If you don't specify `sharedUsers`, then the `sharedUsers` object is returned but it doesn't list any users. The list of users returned is limited to 1000, to access additional users append `[start-index:end-index]` to the expand request. For example, to access the next 1000 users, use `?expand=sharedUsers[1001:2000]`.  *  `subscriptions` Returns the users that are subscribed to the filter. If you don't specify `subscriptions`, the `subscriptions` object is returned but it doesn't list any subscriptions. The list of subscriptions returned is limited to 1000, to access additional subscriptions append `[start-index:end-index]` to the expand request. For example, to access the next 1000 subscriptions, use `?expand=subscriptions[1001:2000]`. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information about filter in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code sharedUsers} Returns the users that the filter is shared with. This includes users that can browse projects that the filter is shared with. If you don't specify {@code sharedUsers}, then the {@code sharedUsers} object is returned but it doesn't list any users. The list of users returned is limited to 1000, to access additional users append {@code [start-index:end-index]} to the expand request. For example, to access the next 1000 users, use {@code ?expand=sharedUsers[1001:2000]}.  *  {@code subscriptions} Returns the users that are subscribed to the filter. If you don't specify {@code subscriptions}, the {@code subscriptions} object is returned but it doesn't list any subscriptions. The list of subscriptions returned is limited to 1000, to access additional subscriptions append {@code [start-index:end-index]} to the expand request. For example, to access the next 1000 subscriptions, use {@code ?expand=subscriptions[1001:2000]}. (optional)
      */
     @RequestLine("GET /rest/api/2/filter/favourite?expand={expand}")
     @Headers({
@@ -7729,13 +7745,13 @@ public interface JiraRESTV2Api {
      * Returns the JQL search auto complete suggestions for a field.
      * Suggestions can be obtained by providing:
      *  *
-     * `fieldName` to get a list of all values for the field.
+     * {@code fieldName} to get a list of all values for the field.
      * *
-     * `fieldName` and `fieldValue` to get a list of values containing the text in `fieldValue`.
+     * {@code fieldName} and {@code fieldValue} to get a list of values containing the text in {@code fieldValue}.
      * *
-     * `fieldName` and `predicateName` to get a list of all predicate values for the field.
+     * {@code fieldName} and {@code predicateName} to get a list of all predicate values for the field.
      * *
-     * `fieldName`, `predicateName`, and `predicateValue` to get a list of predicate values containing the text in `predicateValue`.
+     * {@code fieldName}, {@code predicateName}, and {@code predicateValue} to get a list of predicate values containing the text in {@code predicateValue}.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** None.
      *
@@ -7779,7 +7795,7 @@ public interface JiraRESTV2Api {
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
-     * @param fieldConfigurationSchemeId The list of field configuration scheme IDs. To include multiple field configuration schemes separate IDs with ampersand: `fieldConfigurationSchemeId=10000&amp;fieldConfigurationSchemeId=10001`. (optional)
+     * @param fieldConfigurationSchemeId The list of field configuration scheme IDs. To include multiple field configuration schemes separate IDs with ampersand: {@code fieldConfigurationSchemeId=10000&amp;fieldConfigurationSchemeId=10001}. (optional)
      */
     @RequestLine("GET /rest/api/2/fieldconfigurationscheme/mapping?startAt={startAt}&maxResults={maxResults}&fieldConfigurationSchemeId={fieldConfigurationSchemeId}")
     @Headers({
@@ -7796,7 +7812,7 @@ public interface JiraRESTV2Api {
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param projectId            The list of project IDs. To include multiple projects, separate IDs with ampersand: `projectId=10000&amp;projectId=10001`. (required)
+     * @param projectId            The list of project IDs. To include multiple projects, separate IDs with ampersand: {@code projectId=10000&amp;projectId=10001}. (required)
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
      */
@@ -7836,22 +7852,22 @@ public interface JiraRESTV2Api {
      *  *
      * all fields
      * *
-     * specific fields, by defining `id`
+     * specific fields, by defining {@code id}
      * *
-     * fields that contain a string in the field name or description, by defining `query`
+     * fields that contain a string in the field name or description, by defining {@code query}
      * *
-     * specific fields that contain a string in the field name or description, by defining `id` and `query`
-     * Only custom fields can be queried, `type` must be set to `custom`.
+     * specific fields that contain a string in the field name or description, by defining {@code id} and {@code query}
+     * Only custom fields can be queried, {@code type} must be set to {@code custom}.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [read:jira-work]
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
      * @param type                 The type of fields to search. (optional)
-     * @param id                   The IDs of the custom fields to return or, where `query` is specified, filter. (optional)
+     * @param id                   The IDs of the custom fields to return or, where {@code query} is specified, filter. (optional)
      * @param query                String used to perform a case-insensitive partial match with field names or descriptions. (optional)
-     * @param orderBy              [Order](#ordering) the results by a field:   *  `contextsCount` sorts by the number of contexts related to a field  *  `lastUsed` sorts by the date when the value of the field last changed  *  `name` sorts by the field name  *  `screensCount` sorts by the number of screens related to a field (optional)
-     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  `key` returns the key for each field  *  `lastUsed` returns the date when the value of the field last changed  *  `screensCount` returns the number of screens related to a field  *  `contextsCount` returns the number of contexts related to a field  *  `isLocked` returns information about whether the field is [locked](https://confluence.atlassian.com/x/ZSN7Og)  *  `searcherKey` returns the searcher key for each custom field (optional)
+     * @param orderBy              [Order](#ordering) the results by a field:   *  {@code contextsCount} sorts by the number of contexts related to a field  *  {@code lastUsed} sorts by the date when the value of the field last changed  *  {@code name} sorts by the field name  *  {@code screensCount} sorts by the number of screens related to a field (optional)
+     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code key} returns the key for each field  *  {@code lastUsed} returns the date when the value of the field last changed  *  {@code screensCount} returns the number of screens related to a field  *  {@code contextsCount} returns the number of contexts related to a field  *  {@code isLocked} returns information about whether the field is [locked](https://confluence.atlassian.com/x/ZSN7Og)  *  {@code searcherKey} returns the searcher key for each custom field (optional)
      */
     @RequestLine("GET /rest/api/2/field/search?startAt={startAt}&maxResults={maxResults}&type={type}&id={id}&query={query}&orderBy={orderBy}&expand={expand}")
     @Headers({
@@ -7878,7 +7894,7 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [read:jira-work]
      * @param id                   The ID of the filter to return. (required)
-     * @param expand               Use [expand](#expansion) to include additional information about filter in the response. This parameter accepts a comma-separated list. Expand options include:   *  `sharedUsers` Returns the users that the filter is shared with. This includes users that can browse projects that the filter is shared with. If you don't specify `sharedUsers`, then the `sharedUsers` object is returned but it doesn't list any users. The list of users returned is limited to 1000, to access additional users append `[start-index:end-index]` to the expand request. For example, to access the next 1000 users, use `?expand=sharedUsers[1001:2000]`.  *  `subscriptions` Returns the users that are subscribed to the filter. If you don't specify `subscriptions`, the `subscriptions` object is returned but it doesn't list any subscriptions. The list of subscriptions returned is limited to 1000, to access additional subscriptions append `[start-index:end-index]` to the expand request. For example, to access the next 1000 subscriptions, use `?expand=subscriptions[1001:2000]`. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information about filter in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code sharedUsers} Returns the users that the filter is shared with. This includes users that can browse projects that the filter is shared with. If you don't specify {@code sharedUsers}, then the {@code sharedUsers} object is returned but it doesn't list any users. The list of users returned is limited to 1000, to access additional users append {@code [start-index:end-index]} to the expand request. For example, to access the next 1000 users, use {@code ?expand=sharedUsers[1001:2000]}.  *  {@code subscriptions} Returns the users that are subscribed to the filter. If you don't specify {@code subscriptions}, the {@code subscriptions} object is returned but it doesn't list any subscriptions. The list of subscriptions returned is limited to 1000, to access additional subscriptions append {@code [start-index:end-index]} to the expand request. For example, to access the next 1000 subscriptions, use {@code ?expand=subscriptions[1001:2000]}. (optional)
      * @param overrideSharePermissions EXPERIMENTAL: Whether share permissions are overridden to enable filters with any share permissions to be returned. Available to users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). (optional, defaults to false)
      */
     @RequestLine("GET /rest/api/2/filter/{id}?expand={expand}&overrideSharePermissions={overrideSharePermissions}")
@@ -7892,7 +7908,7 @@ public interface JiraRESTV2Api {
      * <p>
      * Returns a [paginated](#pagination) list of filters. Use this operation to get:
      *  *
-     * specific filters, by defining `id` only.
+     * specific filters, by defining {@code id} only.
      * *
      * filters that match all of the specified attributes. For example, all filters for a user with a particular word in their name. When multiple attributes are specified only filters matching all attributes are returned.
      * This operation can be accessed anonymously.
@@ -7909,17 +7925,17 @@ public interface JiraRESTV2Api {
      * filters shared with the public.
      *
      * Authentication - Required Scopes: [read:jira-work]
-     * @param filterName           String used to perform a case-insensitive partial match with `name`. (optional)
-     * @param accountId            User account ID used to return filters with the matching `owner.accountId`. This parameter cannot be used with `owner`. (optional)
-     * @param owner                This parameter is deprecated because of privacy changes. Use `accountId` instead. See the [migration guide](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details. User name used to return filters with the matching `owner.name`. This parameter cannot be used with `accountId`. (optional)
-     * @param groupname            As a group's name can change, use of `groupId` is recommended to identify a group. Group name used to returns filters that are shared with a group that matches `sharePermissions.group.groupname`. This parameter cannot be used with the `groupId` parameter. (optional)
-     * @param groupId              Group ID used to returns filters that are shared with a group that matches `sharePermissions.group.groupId`. This parameter cannot be used with the `groupname` parameter. (optional)
-     * @param projectId            Project ID used to returns filters that are shared with a project that matches `sharePermissions.project.id`. (optional)
-     * @param id                   The list of filter IDs. To include multiple IDs, provide an ampersand-separated list. For example, `id=10000&amp;id=10001`. Do not exceed 200 filter IDs. (optional)
-     * @param orderBy              [Order](#ordering) the results by a field:   *  `description` Sorts by filter description. Note that this sorting works independently of whether the expand to display the description field is in use.  *  `favourite_count` Sorts by the count of how many users have this filter as a favorite.  *  `is_favourite` Sorts by whether the filter is marked as a favorite.  *  `id` Sorts by filter ID.  *  `name` Sorts by filter name.  *  `owner` Sorts by the ID of the filter owner.  *  `is_shared` Sorts by whether the filter is shared. (optional, defaults to name)
+     * @param filterName           String used to perform a case-insensitive partial match with {@code name}. (optional)
+     * @param accountId            User account ID used to return filters with the matching {@code owner.accountId}. This parameter cannot be used with {@code owner}. (optional)
+     * @param owner                This parameter is deprecated because of privacy changes. Use {@code accountId} instead. See the [migration guide](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details. User name used to return filters with the matching {@code owner.name}. This parameter cannot be used with {@code accountId}. (optional)
+     * @param groupname            As a group's name can change, use of {@code groupId} is recommended to identify a group. Group name used to returns filters that are shared with a group that matches {@code sharePermissions.group.groupname}. This parameter cannot be used with the {@code groupId} parameter. (optional)
+     * @param groupId              Group ID used to returns filters that are shared with a group that matches {@code sharePermissions.group.groupId}. This parameter cannot be used with the {@code groupname} parameter. (optional)
+     * @param projectId            Project ID used to returns filters that are shared with a project that matches {@code sharePermissions.project.id}. (optional)
+     * @param id                   The list of filter IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code id=10000&amp;id=10001}. Do not exceed 200 filter IDs. (optional)
+     * @param orderBy              [Order](#ordering) the results by a field:   *  {@code description} Sorts by filter description. Note that this sorting works independently of whether the expand to display the description field is in use.  *  {@code favourite_count} Sorts by the count of how many users have this filter as a favorite.  *  {@code is_favourite} Sorts by whether the filter is marked as a favorite.  *  {@code id} Sorts by filter ID.  *  {@code name} Sorts by filter name.  *  {@code owner} Sorts by the ID of the filter owner.  *  {@code is_shared} Sorts by whether the filter is shared. (optional, defaults to name)
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
-     * @param expand               Use [expand](#expansion) to include additional information about filter in the response. This parameter accepts a comma-separated list. Expand options include:   *  `description` Returns the description of the filter.  *  `favourite` Returns an indicator of whether the user has set the filter as a favorite.  *  `favouritedCount` Returns a count of how many users have set this filter as a favorite.  *  `jql` Returns the JQL query that the filter uses.  *  `owner` Returns the owner of the filter.  *  `searchUrl` Returns a URL to perform the filter's JQL query.  *  `sharePermissions` Returns the share permissions defined for the filter.  *  `editPermissions` Returns the edit permissions defined for the filter.  *  `isWritable` Returns whether the current user has permission to edit the filter.  *  `subscriptions` Returns the users that are subscribed to the filter.  *  `viewUrl` Returns a URL to view the filter. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information about filter in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code description} Returns the description of the filter.  *  {@code favourite} Returns an indicator of whether the user has set the filter as a favorite.  *  {@code favouritedCount} Returns a count of how many users have set this filter as a favorite.  *  {@code jql} Returns the JQL query that the filter uses.  *  {@code owner} Returns the owner of the filter.  *  {@code searchUrl} Returns a URL to perform the filter's JQL query.  *  {@code sharePermissions} Returns the share permissions defined for the filter.  *  {@code editPermissions} Returns the edit permissions defined for the filter.  *  {@code isWritable} Returns whether the current user has permission to edit the filter.  *  {@code subscriptions} Returns the users that are subscribed to the filter.  *  {@code viewUrl} Returns a URL to view the filter. (optional)
      * @param overrideSharePermissions EXPERIMENTAL: Whether share permissions are overridden to enable filters with any share permissions to be returned. Available to users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). (optional, defaults to false)
      */
     @RequestLine("GET /rest/api/2/filter/search?filterName={filterName}&accountId={accountId}&owner={owner}&groupname={groupname}&groupId={groupId}&projectId={projectId}&id={id}&orderBy={orderBy}&startAt={startAt}&maxResults={maxResults}&expand={expand}&overrideSharePermissions={overrideSharePermissions}")
@@ -7931,13 +7947,13 @@ public interface JiraRESTV2Api {
     /**
      * Get group
      * <p>
-     * This operation is deprecated, use [`group/member`](#api-rest-api-2-group-member-get).
+     * This operation is deprecated, use [{@code group/member}](#api-rest-api-2-group-member-get).
      * Returns all users in a group.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [read:jira-user]
-     * @param groupname            As a group's name can change, use of `groupId` is recommended to identify a group.   The name of the group. This parameter cannot be used with the `groupId` parameter. (optional)
-     * @param groupId              The ID of the group. This parameter cannot be used with the `groupName` parameter. (optional)
+     * @param groupname            As a group's name can change, use of {@code groupId} is recommended to identify a group.   The name of the group. This parameter cannot be used with the {@code groupId} parameter. (optional)
+     * @param groupId              The ID of the group. This parameter cannot be used with the {@code groupName} parameter. (optional)
      * @param expand               List of fields to expand. (optional)
      * @deprecated
      */
@@ -7976,7 +7992,7 @@ public interface JiraRESTV2Api {
      * Get IDs of deleted worklogs
      * <p>
      * Returns a list of IDs and delete timestamps for worklogs deleted after a date and time.
-     * This resource is paginated, with a limit of 1000 worklogs per page. Each page lists worklogs from oldest to youngest. If the number of items in the date range exceeds 1000, `until` indicates the timestamp of the youngest item on the page. Also, `nextPage` provides the URL for the next page of worklogs. The `lastPage` parameter is set to true on the last page of worklogs.
+     * This resource is paginated, with a limit of 1000 worklogs per page. Each page lists worklogs from oldest to youngest. If the number of items in the date range exceeds 1000, {@code until} indicates the timestamp of the youngest item on the page. Also, {@code nextPage} provides the URL for the next page of worklogs. The {@code lastPage} parameter is set to true on the last page of worklogs.
      * This resource does not return worklogs deleted during the minute preceding the request.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      *
@@ -7993,7 +8009,7 @@ public interface JiraRESTV2Api {
      * Get IDs of updated worklogs
      * <p>
      * Returns a list of IDs and update timestamps for worklogs updated after a date and time.
-     * This resource is paginated, with a limit of 1000 worklogs per page. Each page lists worklogs from oldest to youngest. If the number of items in the date range exceeds 1000, `until` indicates the timestamp of the youngest item on the page. Also, `nextPage` provides the URL for the next page of worklogs. The `lastPage` parameter is set to true on the last page of worklogs.
+     * This resource is paginated, with a limit of 1000 worklogs per page. Each page lists worklogs from oldest to youngest. If the number of items in the date range exceeds 1000, {@code until} indicates the timestamp of the youngest item on the page. Also, {@code nextPage} provides the URL for the next page of worklogs. The {@code lastPage} parameter is set to true on the last page of worklogs.
      * This resource does not return worklogs updated during the minute preceding the request.
      * **[Permissions](#permissions) required:** Permission to access Jira, however, worklogs are only returned where either of the following is true:
      *  *
@@ -8003,7 +8019,7 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [read:jira-work]
      * @param since                The date and time, as a UNIX timestamp in milliseconds, after which updated worklogs are returned. (optional, defaults to 0)
-     * @param expand               Use [expand](#expansion) to include additional information about worklogs in the response. This parameter accepts `properties` that returns the properties of each worklog. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information about worklogs in the response. This parameter accepts {@code properties} that returns the properties of each worklog. (optional)
      */
     @RequestLine("GET /rest/api/2/worklog/updated?since={since}&expand={expand}")
     @Headers({
@@ -8014,7 +8030,7 @@ public interface JiraRESTV2Api {
     /**
      * Get is watching issue bulk
      * <p>
-     * Returns, for the user, details of the watched status of issues from a list. If an issue ID is invalid, the returned watched status is `false`.
+     * Returns, for the user, details of the watched status of issues from a list. If an issue ID is invalid, the returned watched status is {@code false}.
      * This operation requires the **Allow users to watch issues** option to be *ON*. This option is set in General configuration for Jira. See [Configuring Jira application options](https://confluence.atlassian.com/x/uYXKM) for details.
      * **[Permissions](#permissions) required:**
      *  *
@@ -8046,11 +8062,11 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [read:jira-work]
      * @param issueIdOrKey         The ID or key of the issue. (required)
-     * @param fields               A list of fields to return for the issue. This parameter accepts a comma-separated list. Use it to retrieve a subset of fields. Allowed values:   *  `*all` Returns all fields.  *  `*navigable` Returns navigable fields.  *  Any issue field, prefixed with a minus to exclude.  Examples:   *  `summary,comment` Returns only the summary and comments fields.  *  `-description` Returns all (default) fields except description.  *  `*navigable,-comment` Returns all navigable fields except comment.  This parameter may be specified multiple times. For example, `fields=field1,field2&amp; fields=field3`.  Note: All fields are returned by default. This differs from [Search for issues using JQL (GET)](#api-rest-api-2-search-get) and [Search for issues using JQL (POST)](#api-rest-api-2-search-post) where the default is all navigable fields. (optional)
-     * @param fieldsByKeys         Whether fields in `fields` are referenced by keys rather than IDs. This parameter is useful where fields have been added by a connect app and a field's key may differ from its ID. (optional, defaults to false)
-     * @param expand               Use [expand](#expansion) to include additional information about the issues in the response. This parameter accepts a comma-separated list. Expand options include:   *  `renderedFields` Returns field values rendered in HTML format.  *  `names` Returns the display name of each field.  *  `schema` Returns the schema describing a field type.  *  `transitions` Returns all possible transitions for the issue.  *  `editmeta` Returns information about how each field can be edited.  *  `changelog` Returns a list of recent updates to an issue, sorted by date, starting from the most recent.  *  `versionedRepresentations` Returns a JSON array for each version of a field's value, with the highest number representing the most recent version. Note: When included in the request, the `fields` parameter is ignored. (optional)
-     * @param properties           A list of issue properties to return for the issue. This parameter accepts a comma-separated list. Allowed values:   *  `*all` Returns all issue properties.  *  Any issue property key, prefixed with a minus to exclude.  Examples:   *  `*all` Returns all properties.  *  `*all,-prop1` Returns all properties except `prop1`.  *  `prop1,prop2` Returns `prop1` and `prop2` properties.  This parameter may be specified multiple times. For example, `properties=prop1,prop2&amp; properties=prop3`. (optional)
-     * @param updateHistory        Whether the project in which the issue is created is added to the user's **Recently viewed** project list, as shown under **Projects** in Jira. This also populates the [JQL issues search](#api-rest-api-2-search-get) `lastViewed` field. (optional, defaults to false)
+     * @param fields               A list of fields to return for the issue. This parameter accepts a comma-separated list. Use it to retrieve a subset of fields. Allowed values:   *  {@code *all} Returns all fields.  *  {@code *navigable} Returns navigable fields.  *  Any issue field, prefixed with a minus to exclude.  Examples:   *  {@code summary,comment} Returns only the summary and comments fields.  *  {@code -description} Returns all (default) fields except description.  *  {@code *navigable,-comment} Returns all navigable fields except comment.  This parameter may be specified multiple times. For example, {@code fields=field1,field2&amp; fields=field3}.  Note: All fields are returned by default. This differs from [Search for issues using JQL (GET)](#api-rest-api-2-search-get) and [Search for issues using JQL (POST)](#api-rest-api-2-search-post) where the default is all navigable fields. (optional)
+     * @param fieldsByKeys         Whether fields in {@code fields} are referenced by keys rather than IDs. This parameter is useful where fields have been added by a connect app and a field's key may differ from its ID. (optional, defaults to false)
+     * @param expand               Use [expand](#expansion) to include additional information about the issues in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code renderedFields} Returns field values rendered in HTML format.  *  {@code names} Returns the display name of each field.  *  {@code schema} Returns the schema describing a field type.  *  {@code transitions} Returns all possible transitions for the issue.  *  {@code editmeta} Returns information about how each field can be edited.  *  {@code changelog} Returns a list of recent updates to an issue, sorted by date, starting from the most recent.  *  {@code versionedRepresentations} Returns a JSON array for each version of a field's value, with the highest number representing the most recent version. Note: When included in the request, the {@code fields} parameter is ignored. (optional)
+     * @param properties           A list of issue properties to return for the issue. This parameter accepts a comma-separated list. Allowed values:   *  {@code *all} Returns all issue properties.  *  Any issue property key, prefixed with a minus to exclude.  Examples:   *  {@code *all} Returns all properties.  *  {@code *all,-prop1} Returns all properties except {@code prop1}.  *  {@code prop1,prop2} Returns {@code prop1} and {@code prop2} properties.  This parameter may be specified multiple times. For example, {@code properties=prop1,prop2&amp; properties=prop3}. (optional)
+     * @param updateHistory        Whether the project in which the issue is created is added to the user's **Recently viewed** project list, as shown under **Projects** in Jira. This also populates the [JQL issues search](#api-rest-api-2-search-get) {@code lastViewed} field. (optional, defaults to false)
      */
     @RequestLine("GET /rest/api/2/issue/{issueIdOrKey}?fields={fields}&fieldsByKeys={fieldsByKeys}&expand={expand}&properties={properties}&updateHistory={updateHistory}")
     @Headers({
@@ -8085,7 +8101,7 @@ public interface JiraRESTV2Api {
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). Jira permissions are not required for the app providing the field.
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param fieldKey             The field key is specified in the following format: **$(app-key)\\_\\_$(field-key)**. For example, *example-add-on\\_\\_example-issue-field*. To determine the `fieldKey` value, do one of the following:   *  open the app's plugin descriptor, then **app-key** is the key at the top and **field-key** is the key in the `jiraIssueFields` module. **app-key** can also be found in the app listing in the Atlassian Universal Plugin Manager.  *  run [Get fields](#api-rest-api-2-field-get) and in the field details the value is returned in `key`. For example, `"key": "teams-add-on__team-issue-field"` (required)
+     * @param fieldKey             The field key is specified in the following format: **$(app-key)\\_\\_$(field-key)**. For example, *example-add-on\\_\\_example-issue-field*. To determine the {@code fieldKey} value, do one of the following:   *  open the app's plugin descriptor, then **app-key** is the key at the top and **field-key** is the key in the {@code jiraIssueFields} module. **app-key** can also be found in the app listing in the Atlassian Universal Plugin Manager.  *  run [Get fields](#api-rest-api-2-field-get) and in the field details the value is returned in {@code key}. For example, {@code "key": "teams-add-on__team-issue-field"} (required)
      * @param optionId             The ID of the option to be returned. (required)
      */
     @RequestLine("GET /rest/api/2/field/{fieldKey}/option/{optionId}")
@@ -8166,19 +8182,19 @@ public interface JiraRESTV2Api {
      * Returns lists of issues matching a query string. Use this resource to provide auto-completion suggestions when the user is looking for an issue using a word or string.
      * This operation returns two lists:
      *  *
-     * `History Search` which includes issues from the user's history of created, edited, or viewed issues that contain the string in the `query` parameter.
+     * {@code History Search} which includes issues from the user's history of created, edited, or viewed issues that contain the string in the {@code query} parameter.
      * *
-     * `Current Search` which includes issues that match the JQL expression in `currentJQL` and contain the string in the `query` parameter.
+     * {@code Current Search} which includes issues that match the JQL expression in {@code currentJQL} and contain the string in the {@code query} parameter.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** None.
      *
      * Authentication - Required Scopes: [read:jira-work]
      * @param query                A string to match against text fields in the issue such as title, description, or comments. (optional)
-     * @param currentJQL           A JQL query defining a list of issues to search for the query term. Note that `username` and `userkey` cannot be used as search terms for this parameter, due to privacy reasons. Use `accountId` instead. (optional)
+     * @param currentJQL           A JQL query defining a list of issues to search for the query term. Note that {@code username} and {@code userkey} cannot be used as search terms for this parameter, due to privacy reasons. Use {@code accountId} instead. (optional)
      * @param currentIssueKey      The key of an issue to exclude from search results. For example, the issue the user is viewing when they perform this query. (optional)
      * @param currentProjectId     The ID of a project that suggested issues must belong to. (optional)
      * @param showSubTasks         Indicate whether to include subtasks in the suggestions list. (optional)
-     * @param showSubTaskParent    When `currentIssueKey` is a subtask, whether to include the parent issue in the suggestions if it matches the query. (optional)
+     * @param showSubTaskParent    When {@code currentIssueKey} is a subtask, whether to include the parent issue in the suggestions if it matches the query. (optional)
      */
     @RequestLine("GET /rest/api/2/issue/picker?query={query}&currentJQL={currentJQL}&currentIssueKey={currentIssueKey}&currentProjectId={currentProjectId}&showSubTasks={showSubTasks}&showSubTaskParent={showSubTaskParent}")
     @Headers({
@@ -8255,8 +8271,8 @@ public interface JiraRESTV2Api {
      * @param issueSecuritySchemeId The ID of the issue security scheme. Use the [Get issue security schemes](#api-rest-api-2-issuesecurityschemes-get) operation to get a list of issue security scheme IDs. (required)
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
-     * @param issueSecurityLevelId The list of issue security level IDs. To include multiple issue security levels separate IDs with ampersand: `issueSecurityLevelId=10000&amp;issueSecurityLevelId=10001`. (optional)
-     * @param expand               Use expand to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  `all` Returns all expandable information.  *  `field` Returns information about the custom field granted the permission.  *  `group` Returns information about the group that is granted the permission.  *  `projectRole` Returns information about the project role granted the permission.  *  `user` Returns information about the user who is granted the permission. (optional)
+     * @param issueSecurityLevelId The list of issue security level IDs. To include multiple issue security levels separate IDs with ampersand: {@code issueSecurityLevelId=10000&amp;issueSecurityLevelId=10001}. (optional)
+     * @param expand               Use expand to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code all} Returns all expandable information.  *  {@code field} Returns information about the custom field granted the permission.  *  {@code group} Returns information about the group that is granted the permission.  *  {@code projectRole} Returns information about the project role granted the permission.  *  {@code user} Returns information about the user who is granted the permission. (optional)
      */
     @RequestLine("GET /rest/api/2/issuesecurityschemes/{issueSecuritySchemeId}/members?startAt={startAt}&maxResults={maxResults}&issueSecurityLevelId={issueSecurityLevelId}&expand={expand}")
     @Headers({
@@ -8321,7 +8337,7 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param fieldId              The ID of the custom field. (required)
-     * @param contextId            The ID of the context. To include multiple contexts, provide an ampersand-separated list. For example, `contextId=10001&amp;contextId=10002`. (optional)
+     * @param contextId            The ID of the context. To include multiple contexts, provide an ampersand-separated list. For example, {@code contextId=10001&amp;contextId=10002}. (optional)
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
      */
@@ -8380,7 +8396,7 @@ public interface JiraRESTV2Api {
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param projectId            The list of project IDs. To include multiple project IDs, provide an ampersand-separated list. For example, `projectId=10000&amp;projectId=10001`. (required)
+     * @param projectId            The list of project IDs. To include multiple project IDs, provide an ampersand-separated list. For example, {@code projectId=10000&amp;projectId=10001}. (required)
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
      */
@@ -8400,7 +8416,7 @@ public interface JiraRESTV2Api {
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
-     * @param issueTypeSchemeId    The list of issue type scheme IDs. To include multiple IDs, provide an ampersand-separated list. For example, `issueTypeSchemeId=10000&amp;issueTypeSchemeId=10001`. (optional)
+     * @param issueTypeSchemeId    The list of issue type scheme IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code issueTypeSchemeId=10000&amp;issueTypeSchemeId=10001}. (optional)
      */
     @RequestLine("GET /rest/api/2/issuetypescheme/mapping?startAt={startAt}&maxResults={maxResults}&issueTypeSchemeId={issueTypeSchemeId}")
     @Headers({
@@ -8418,7 +8434,7 @@ public interface JiraRESTV2Api {
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
-     * @param issueTypeScreenSchemeId The list of issue type screen scheme IDs. To include multiple issue type screen schemes, separate IDs with ampersand: `issueTypeScreenSchemeId=10000&amp;issueTypeScreenSchemeId=10001`. (optional)
+     * @param issueTypeScreenSchemeId The list of issue type screen scheme IDs. To include multiple issue type screen schemes, separate IDs with ampersand: {@code issueTypeScreenSchemeId=10000&amp;issueTypeScreenSchemeId=10001}. (optional)
      */
     @RequestLine("GET /rest/api/2/issuetypescreenscheme/mapping?startAt={startAt}&maxResults={maxResults}&issueTypeScreenSchemeId={issueTypeScreenSchemeId}")
     @Headers({
@@ -8434,7 +8450,7 @@ public interface JiraRESTV2Api {
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param projectId            The list of project IDs. To include multiple projects, separate IDs with ampersand: `projectId=10000&amp;projectId=10001`. (required)
+     * @param projectId            The list of project IDs. To include multiple projects, separate IDs with ampersand: {@code projectId=10000&amp;projectId=10001}. (required)
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
      */
@@ -8454,10 +8470,10 @@ public interface JiraRESTV2Api {
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
-     * @param id                   The list of issue type screen scheme IDs. To include multiple IDs, provide an ampersand-separated list. For example, `id=10000&amp;id=10001`. (optional)
+     * @param id                   The list of issue type screen scheme IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code id=10000&amp;id=10001}. (optional)
      * @param queryString          String used to perform a case-insensitive partial match with issue type screen scheme name. (optional)
-     * @param orderBy              [Order](#ordering) the results by a field:   *  `name` Sorts by issue type screen scheme name.  *  `id` Sorts by issue type screen scheme ID. (optional, defaults to id)
-     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts `projects` that, for each issue type screen schemes, returns information about the projects the issue type screen scheme is assigned to. (optional)
+     * @param orderBy              [Order](#ordering) the results by a field:   *  {@code name} Sorts by issue type screen scheme name.  *  {@code id} Sorts by issue type screen scheme ID. (optional, defaults to id)
+     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts {@code projects} that, for each issue type screen schemes, returns information about the projects the issue type screen scheme is assigned to. (optional)
      */
     @RequestLine("GET /rest/api/2/issuetypescreenscheme?startAt={startAt}&maxResults={maxResults}&id={id}&queryString={queryString}&orderBy={orderBy}&expand={expand}")
     @Headers({
@@ -8474,7 +8490,7 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [read:jira-work]
      * @param projectId            The ID of the project. (required)
-     * @param level                The level of the issue type to filter by. Use:   *  `-1` for Subtask.  *  `0` for Base.  *  `1` for Epic. (optional)
+     * @param level                The level of the issue type to filter by. Use:   *  {@code -1} for Subtask.  *  {@code 0} for Base.  *  {@code 1} for Epic. (optional)
      */
     @RequestLine("GET /rest/api/2/issuetype/project?projectId={projectId}&level={level}")
     @Headers({
@@ -8525,7 +8541,7 @@ public interface JiraRESTV2Api {
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 5000)
      * @param startedAfter         The worklog start date and time, as a UNIX timestamp in milliseconds, after which worklogs are returned. (optional)
      * @param startedBefore        The worklog start date and time, as a UNIX timestamp in milliseconds, before which worklogs are returned. (optional)
-     * @param expand               Use [expand](#expansion) to include additional information about worklogs in the response. This parameter accepts`properties`, which returns worklog properties. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information about worklogs in the response. This parameter accepts{@code properties}, which returns worklog properties. (optional)
      */
     @RequestLine("GET /rest/api/2/issue/{issueIdOrKey}/worklog?startAt={startAt}&maxResults={maxResults}&startedAfter={startedAfter}&startedBefore={startedBefore}&expand={expand}")
     @Headers({
@@ -8566,7 +8582,7 @@ public interface JiraRESTV2Api {
     /**
      * Get my filters
      * <p>
-     * Returns the filters owned by the user. If `includeFavourites` is `true`, the user's visible favorite filters are also returned.
+     * Returns the filters owned by the user. If {@code includeFavourites} is {@code true}, the user's visible favorite filters are also returned.
      * **[Permissions](#permissions) required:** Permission to access Jira, however, a favorite filters is only visible to the user where the filter is:
      *  *
      * owned by the user.
@@ -8581,7 +8597,7 @@ public interface JiraRESTV2Api {
      * For example, if the user favorites a public filter that is subsequently made private that filter is not returned by this operation.
      *
      * Authentication - Required Scopes: [read:jira-work]
-     * @param expand               Use [expand](#expansion) to include additional information about filter in the response. This parameter accepts a comma-separated list. Expand options include:   *  `sharedUsers` Returns the users that the filter is shared with. This includes users that can browse projects that the filter is shared with. If you don't specify `sharedUsers`, then the `sharedUsers` object is returned but it doesn't list any users. The list of users returned is limited to 1000, to access additional users append `[start-index:end-index]` to the expand request. For example, to access the next 1000 users, use `?expand=sharedUsers[1001:2000]`.  *  `subscriptions` Returns the users that are subscribed to the filter. If you don't specify `subscriptions`, the `subscriptions` object is returned but it doesn't list any subscriptions. The list of subscriptions returned is limited to 1000, to access additional subscriptions append `[start-index:end-index]` to the expand request. For example, to access the next 1000 subscriptions, use `?expand=subscriptions[1001:2000]`. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information about filter in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code sharedUsers} Returns the users that the filter is shared with. This includes users that can browse projects that the filter is shared with. If you don't specify {@code sharedUsers}, then the {@code sharedUsers} object is returned but it doesn't list any users. The list of users returned is limited to 1000, to access additional users append {@code [start-index:end-index]} to the expand request. For example, to access the next 1000 users, use {@code ?expand=sharedUsers[1001:2000]}.  *  {@code subscriptions} Returns the users that are subscribed to the filter. If you don't specify {@code subscriptions}, the {@code subscriptions} object is returned but it doesn't list any subscriptions. The list of subscriptions returned is limited to 1000, to access additional subscriptions append {@code [start-index:end-index]} to the expand request. For example, to access the next 1000 subscriptions, use {@code ?expand=subscriptions[1001:2000]}. (optional)
      * @param includeFavourites    Include the user's favorite filters in the response. (optional, defaults to false)
      */
     @RequestLine("GET /rest/api/2/filter/my?expand={expand}&includeFavourites={includeFavourites}")
@@ -8602,15 +8618,15 @@ public interface JiraRESTV2Api {
      * *
      * for an issue, where a project permission is determined using issue data, if the user has the permission in the issue. Otherwise, if the user has the project permission in the project containing the issue.
      * *
-     * for a comment, where the user has both the permission to browse the comment and the project permission for the comment's parent issue. Only the BROWSE\\_PROJECTS permission is supported. If a `commentId` is provided whose `permissions` does not equal BROWSE\\_PROJECTS, a 400 error will be returned.
+     * for a comment, where the user has both the permission to browse the comment and the project permission for the comment's parent issue. Only the BROWSE\\_PROJECTS permission is supported. If a {@code commentId} is provided whose {@code permissions} does not equal BROWSE\\_PROJECTS, a 400 error will be returned.
      * This means that users may be shown as having an issue permission (such as EDIT\\_ISSUES) in the global context or a project context but may not have the permission for any or all issues. For example, if Reporters have the EDIT\\_ISSUES permission a user would be shown as having this permission in the global context or the context of a project, because any user can be a reporter. However, if they are not the user who reported the issue queried they would not have EDIT\\_ISSUES permission for that issue.
      * Global permissions are unaffected by context.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** None.
      *
-     * @param projectKey           The key of project. Ignored if `projectId` is provided. (optional)
+     * @param projectKey           The key of project. Ignored if {@code projectId} is provided. (optional)
      * @param projectId            The ID of project. (optional)
-     * @param issueKey             The key of the issue. Ignored if `issueId` is provided. (optional)
+     * @param issueKey             The key of the issue. Ignored if {@code issueId} is provided. (optional)
      * @param issueId              The ID of the issue. (optional)
      * @param permissions          A list of permission keys. (Required) This parameter accepts a comma-separated list. To get the list of available permissions, use [Get all permissions](#api-rest-api-2-permissions-get). (optional)
      * @param projectUuid           (optional)
@@ -8631,7 +8647,7 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param id                   The ID of the notification scheme. Use [Get notification schemes paginated](#api-rest-api-2-notificationscheme-get) to get a list of notification scheme IDs. (required)
-     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  `all` Returns all expandable information  *  `field` Returns information about any custom fields assigned to receive an event  *  `group` Returns information about any groups assigned to receive an event  *  `notificationSchemeEvents` Returns a list of event associations. This list is returned for all expandable information  *  `projectRole` Returns information about any project roles assigned to receive an event  *  `user` Returns information about any users assigned to receive an event (optional)
+     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code all} Returns all expandable information  *  {@code field} Returns information about any custom fields assigned to receive an event  *  {@code group} Returns information about any groups assigned to receive an event  *  {@code notificationSchemeEvents} Returns a list of event associations. This list is returned for all expandable information  *  {@code projectRole} Returns information about any project roles assigned to receive an event  *  {@code user} Returns information about any users assigned to receive an event (optional)
      */
     @RequestLine("GET /rest/api/2/notificationscheme/{id}?expand={expand}")
     @Headers({
@@ -8647,7 +8663,7 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [read:jira-work]
      * @param projectKeyOrId       The project ID or project key (case sensitive). (required)
-     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  `all` Returns all expandable information  *  `field` Returns information about any custom fields assigned to receive an event  *  `group` Returns information about any groups assigned to receive an event  *  `notificationSchemeEvents` Returns a list of event associations. This list is returned for all expandable information  *  `projectRole` Returns information about any project roles assigned to receive an event  *  `user` Returns information about any users assigned to receive an event (optional)
+     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code all} Returns all expandable information  *  {@code field} Returns information about any custom fields assigned to receive an event  *  {@code group} Returns information about any groups assigned to receive an event  *  {@code notificationSchemeEvents} Returns a list of event associations. This list is returned for all expandable information  *  {@code projectRole} Returns information about any project roles assigned to receive an event  *  {@code user} Returns information about any users assigned to receive an event (optional)
      */
     @RequestLine("GET /rest/api/2/project/{projectKeyOrId}/notificationscheme?expand={expand}")
     @Headers({
@@ -8686,7 +8702,7 @@ public interface JiraRESTV2Api {
      * @param id                   The list of notification schemes IDs to be filtered by (optional)
      * @param projectId            The list of projects IDs to be filtered by (optional)
      * @param onlyDefault          When set to true, returns only the default notification scheme. If you provide project IDs not associated with the default, returns an empty page. The default value is false. (optional, defaults to false)
-     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  `all` Returns all expandable information  *  `field` Returns information about any custom fields assigned to receive an event  *  `group` Returns information about any groups assigned to receive an event  *  `notificationSchemeEvents` Returns a list of event associations. This list is returned for all expandable information  *  `projectRole` Returns information about any project roles assigned to receive an event  *  `user` Returns information about any users assigned to receive an event (optional)
+     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code all} Returns all expandable information  *  {@code field} Returns information about any custom fields assigned to receive an event  *  {@code group} Returns information about any groups assigned to receive an event  *  {@code notificationSchemeEvents} Returns a list of event associations. This list is returned for all expandable information  *  {@code projectRole} Returns information about any project roles assigned to receive an event  *  {@code user} Returns information about any users assigned to receive an event (optional)
      */
     @RequestLine("GET /rest/api/2/notificationscheme?startAt={startAt}&maxResults={maxResults}&id={id}&projectId={projectId}&onlyDefault={onlyDefault}&expand={expand}")
     @Headers({
@@ -8723,7 +8739,7 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [read:jira-work]
      * @param schemeId             The ID of the permission scheme to return. (required)
-     * @param expand               Use expand to include additional information in the response. This parameter accepts a comma-separated list. Note that permissions are included when you specify any value. Expand options include:   *  `all` Returns all expandable information.  *  `field` Returns information about the custom field granted the permission.  *  `group` Returns information about the group that is granted the permission.  *  `permissions` Returns all permission grants for each permission scheme.  *  `projectRole` Returns information about the project role granted the permission.  *  `user` Returns information about the user who is granted the permission. (optional)
+     * @param expand               Use expand to include additional information in the response. This parameter accepts a comma-separated list. Note that permissions are included when you specify any value. Expand options include:   *  {@code all} Returns all expandable information.  *  {@code field} Returns information about the custom field granted the permission.  *  {@code group} Returns information about the group that is granted the permission.  *  {@code permissions} Returns all permission grants for each permission scheme.  *  {@code projectRole} Returns information about the project role granted the permission.  *  {@code user} Returns information about the user who is granted the permission. (optional)
      */
     @RequestLine("GET /rest/api/2/permissionscheme/{schemeId}?expand={expand}")
     @Headers({
@@ -8740,7 +8756,7 @@ public interface JiraRESTV2Api {
      * Authentication - Required Scopes: [read:jira-work]
      * @param schemeId             The ID of the permission scheme. (required)
      * @param permissionId         The ID of the permission grant. (required)
-     * @param expand               Use expand to include additional information in the response. This parameter accepts a comma-separated list. Note that permissions are always included when you specify any value. Expand options include:   *  `all` Returns all expandable information.  *  `field` Returns information about the custom field granted the permission.  *  `group` Returns information about the group that is granted the permission.  *  `permissions` Returns all permission grants for each permission scheme.  *  `projectRole` Returns information about the project role granted the permission.  *  `user` Returns information about the user who is granted the permission. (optional)
+     * @param expand               Use expand to include additional information in the response. This parameter accepts a comma-separated list. Note that permissions are always included when you specify any value. Expand options include:   *  {@code all} Returns all expandable information.  *  {@code field} Returns information about the custom field granted the permission.  *  {@code group} Returns information about the group that is granted the permission.  *  {@code permissions} Returns all permission grants for each permission scheme.  *  {@code projectRole} Returns information about the project role granted the permission.  *  {@code user} Returns information about the user who is granted the permission. (optional)
      */
     @RequestLine("GET /rest/api/2/permissionscheme/{schemeId}/permission/{permissionId}?expand={expand}")
     @Headers({
@@ -8756,7 +8772,7 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [read:jira-work]
      * @param schemeId             The ID of the permission scheme. (required)
-     * @param expand               Use expand to include additional information in the response. This parameter accepts a comma-separated list. Note that permissions are always included when you specify any value. Expand options include:   *  `permissions` Returns all permission grants for each permission scheme.  *  `user` Returns information about the user who is granted the permission.  *  `group` Returns information about the group that is granted the permission.  *  `projectRole` Returns information about the project role granted the permission.  *  `field` Returns information about the custom field granted the permission.  *  `all` Returns all expandable information. (optional)
+     * @param expand               Use expand to include additional information in the response. This parameter accepts a comma-separated list. Note that permissions are always included when you specify any value. Expand options include:   *  {@code permissions} Returns all permission grants for each permission scheme.  *  {@code user} Returns information about the user who is granted the permission.  *  {@code group} Returns information about the group that is granted the permission.  *  {@code projectRole} Returns information about the project role granted the permission.  *  {@code field} Returns information about the custom field granted the permission.  *  {@code all} Returns all expandable information. (optional)
      */
     @RequestLine("GET /rest/api/2/permissionscheme/{schemeId}/permission?expand={expand}")
     @Headers({
@@ -8783,10 +8799,10 @@ public interface JiraRESTV2Api {
     /**
      * Get precomputations (apps)
      * <p>
-     * Returns the list of a function's precomputations along with information about when they were created, updated, and last used. Each precomputation has a `value` \\- the JQL fragment to replace the custom function clause with.
+     * Returns the list of a function's precomputations along with information about when they were created, updated, and last used. Each precomputation has a {@code value} \\- the JQL fragment to replace the custom function clause with.
      * **[Permissions](#permissions) required:** This API is only accessible to apps and apps can only inspect their own functions.
      *
-     * @param functionKey          The function key in format:   *  Forge: `ari:cloud:ecosystem::extension/[App ID]/[Environment ID]/static/[Function key from manifest]`.  *  Connect: `[App key]__[Module key]`. (optional)
+     * @param functionKey          The function key in format:   *  Forge: {@code ari:cloud:ecosystem::extension/[App ID]/[Environment ID]/static/[Function key from manifest]}.  *  Connect: {@code [App key]__[Module key]}. (optional)
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 100)
      * @param orderBy              Not supported yet. (optional)
@@ -8859,7 +8875,7 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [read:jira-work]
      * @param projectIdOrKey       The project ID or project key (case sensitive). (required)
-     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Note that the project description, issue types, and project lead are included in all responses by default. Expand options include:   *  `description` The project description.  *  `issueTypes` The issue types associated with the project.  *  `lead` The project lead.  *  `projectKeys` All project keys associated with the project.  *  `issueTypeHierarchy` The project issue type hierarchy. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Note that the project description, issue types, and project lead are included in all responses by default. Expand options include:   *  {@code description} The project description.  *  {@code issueTypes} The issue types associated with the project.  *  {@code lead} The project lead.  *  {@code projectKeys} All project keys associated with the project.  *  {@code issueTypeHierarchy} The project issue type hierarchy. (optional)
      * @param properties           A list of project properties to return for the project. This parameter accepts a comma-separated list. (optional)
      */
     @RequestLine("GET /rest/api/2/project/{projectIdOrKey}?expand={expand}&properties={properties}")
@@ -8910,8 +8926,8 @@ public interface JiraRESTV2Api {
      * @param projectIdOrKey       The project ID or project key (case sensitive). (required)
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
-     * @param orderBy              [Order](#ordering) the results by a field:   *  `description` Sorts by the component description.  *  `issueCount` Sorts by the count of issues associated with the component.  *  `lead` Sorts by the user key of the component's project lead.  *  `name` Sorts by component name. (optional)
-     * @param query                Filter the results using a literal string. Components with a matching `name` or `description` are returned (case insensitive). (optional)
+     * @param orderBy              [Order](#ordering) the results by a field:   *  {@code description} Sorts by the component description.  *  {@code issueCount} Sorts by the count of issues associated with the component.  *  {@code lead} Sorts by the user key of the component's project lead.  *  {@code name} Sorts by component name. (optional)
+     * @param query                Filter the results using a literal string. Components with a matching {@code name} or {@code description} are returned (case insensitive). (optional)
      */
     @RequestLine("GET /rest/api/2/project/{projectIdOrKey}/component?startAt={startAt}&maxResults={maxResults}&orderBy={orderBy}&query={query}")
     @Headers({
@@ -8922,12 +8938,12 @@ public interface JiraRESTV2Api {
     /**
      * Get project mappings for custom field context
      * <p>
-     * Returns a [paginated](#pagination) list of context to project mappings for a custom field. The result can be filtered by `contextId`. Otherwise, all mappings are returned. Invalid IDs are ignored.
+     * Returns a [paginated](#pagination) list of context to project mappings for a custom field. The result can be filtered by {@code contextId}. Otherwise, all mappings are returned. Invalid IDs are ignored.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param fieldId              The ID of the custom field, for example `customfield\\_10000`. (required)
-     * @param contextId            The list of context IDs. To include multiple context, separate IDs with ampersand: `contextId=10000&amp;contextId=10001`. (optional)
+     * @param fieldId              The ID of the custom field, for example {@code customfield\\_10000}. (required)
+     * @param contextId            The list of context IDs. To include multiple context, separate IDs with ampersand: {@code contextId=10000&amp;contextId=10001}. (optional)
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
      */
@@ -9004,7 +9020,7 @@ public interface JiraRESTV2Api {
      * Get project role for project
      * <p>
      * Returns a project role's details and actors associated with the project. The list of actors is sorted by display name.
-     * To check whether a user belongs to a role based on their group memberships, use [Get user](#api-rest-api-2-user-get) with the `groups` expand parameter selected. Then check whether the user keys and groups match with the actors returned for the project.
+     * To check whether a user belongs to a role based on their group memberships, use [Get user](#api-rest-api-2-user-get) with the {@code groups} expand parameter selected. Then check whether the user keys and groups match with the actors returned for the project.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Administer Projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project or *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
@@ -9109,7 +9125,7 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [read:jira-work]
      * @param projectIdOrKey       The project ID or project key (case sensitive). (required)
-     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts `operations`, which returns actions that can be performed on the version. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts {@code operations}, which returns actions that can be performed on the version. (optional)
      */
     @RequestLine("GET /rest/api/2/project/{projectIdOrKey}/versions?expand={expand}")
     @Headers({
@@ -9128,10 +9144,10 @@ public interface JiraRESTV2Api {
      * @param projectIdOrKey       The project ID or project key (case sensitive). (required)
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
-     * @param orderBy              [Order](#ordering) the results by a field:   *  `description` Sorts by version description.  *  `name` Sorts by version name.  *  `releaseDate` Sorts by release date, starting with the oldest date. Versions with no release date are listed last.  *  `sequence` Sorts by the order of appearance in the user interface.  *  `startDate` Sorts by start date, starting with the oldest date. Versions with no start date are listed last. (optional)
-     * @param query                Filter the results using a literal string. Versions with matching `name` or `description` are returned (case insensitive). (optional)
-     * @param status               A list of status values used to filter the results by version status. This parameter accepts a comma-separated list. The status values are `released`, `unreleased`, and `archived`. (optional)
-     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  `issuesstatus` Returns the number of issues in each status category for each version.  *  `operations` Returns actions that can be performed on the specified version. (optional)
+     * @param orderBy              [Order](#ordering) the results by a field:   *  {@code description} Sorts by version description.  *  {@code name} Sorts by version name.  *  {@code releaseDate} Sorts by release date, starting with the oldest date. Versions with no release date are listed last.  *  {@code sequence} Sorts by the order of appearance in the user interface.  *  {@code startDate} Sorts by start date, starting with the oldest date. Versions with no start date are listed last. (optional)
+     * @param query                Filter the results using a literal string. Versions with matching {@code name} or {@code description} are returned (case insensitive). (optional)
+     * @param status               A list of status values used to filter the results by version status. This parameter accepts a comma-separated list. The status values are {@code released}, {@code unreleased}, and {@code archived}. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code issuesstatus} Returns the number of issues in each status category for each version.  *  {@code operations} Returns actions that can be performed on the specified version. (optional)
      */
     @RequestLine("GET /rest/api/2/project/{projectIdOrKey}/version?startAt={startAt}&maxResults={maxResults}&orderBy={orderBy}&query={query}&status={status}&expand={expand}")
     @Headers({
@@ -9172,7 +9188,7 @@ public interface JiraRESTV2Api {
      * *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [read:jira-work]
-     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expanded options include:   *  `description` Returns the project description.  *  `projectKeys` Returns all project keys associated with a project.  *  `lead` Returns information about the project lead.  *  `issueTypes` Returns all issue types associated with the project.  *  `url` Returns the URL associated with the project.  *  `permissions` Returns the permissions associated with the project.  *  `insight` EXPERIMENTAL. Returns the insight details of total issue count and last issue update time for the project.  *  `*` Returns the project with all available expand options. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expanded options include:   *  {@code description} Returns the project description.  *  {@code projectKeys} Returns all project keys associated with a project.  *  {@code lead} Returns information about the project lead.  *  {@code issueTypes} Returns all issue types associated with the project.  *  {@code url} Returns the URL associated with the project.  *  {@code permissions} Returns the permissions associated with the project.  *  {@code insight} EXPERIMENTAL. Returns the insight details of total issue count and last issue update time for the project.  *  {@code *} Returns the project with all available expand options. (optional)
      * @param properties           EXPERIMENTAL. A list of project properties to return for the project. This parameter accepts a comma-separated list. Invalid property names are ignored. (optional)
      */
     @RequestLine("GET /rest/api/2/project/recent?expand={expand}&properties={properties}")
@@ -9206,7 +9222,7 @@ public interface JiraRESTV2Api {
     /**
      * Get remote issue links
      * <p>
-     * Returns the remote issue links for an issue. When a remote issue link global ID is provided the record with that global ID is returned, otherwise all remote issue links are returned. Where a global ID includes reserved URL characters these must be escaped in the request. For example, pass `system=http://www.mycompany.com/support&amp;id=1` as `system%3Dhttp%3A%2F%2Fwww.mycompany.com%2Fsupport%26id%3D1`.
+     * Returns the remote issue links for an issue. When a remote issue link global ID is provided the record with that global ID is returned, otherwise all remote issue links are returned. Where a global ID includes reserved URL characters these must be escaped in the request. For example, pass {@code system=http://www.mycompany.com/support&amp;id=1} as {@code system%3Dhttp%3A%2F%2Fwww.mycompany.com%2Fsupport%26id%3D1}.
      * This operation requires [issue linking to be active](https://confluence.atlassian.com/x/yoXKM).
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:**
@@ -9266,10 +9282,10 @@ public interface JiraRESTV2Api {
      * Authentication - Required Scopes: [manage:jira-project]
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 25)
-     * @param id                   The list of screen scheme IDs. To include multiple IDs, provide an ampersand-separated list. For example, `id=10000&amp;id=10001`. (optional)
-     * @param expand               Use [expand](#expansion) include additional information in the response. This parameter accepts `issueTypeScreenSchemes` that, for each screen schemes, returns information about the issue type screen scheme the screen scheme is assigned to. (optional)
+     * @param id                   The list of screen scheme IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code id=10000&amp;id=10001}. (optional)
+     * @param expand               Use [expand](#expansion) include additional information in the response. This parameter accepts {@code issueTypeScreenSchemes} that, for each screen schemes, returns information about the issue type screen scheme the screen scheme is assigned to. (optional)
      * @param queryString          String used to perform a case-insensitive partial match with screen scheme name. (optional)
-     * @param orderBy              [Order](#ordering) the results by a field:   *  `id` Sorts by screen scheme ID.  *  `name` Sorts by screen scheme name. (optional)
+     * @param orderBy              [Order](#ordering) the results by a field:   *  {@code id} Sorts by screen scheme ID.  *  {@code name} Sorts by screen scheme name. (optional)
      */
     @RequestLine("GET /rest/api/2/screenscheme?startAt={startAt}&maxResults={maxResults}&id={id}&expand={expand}&queryString={queryString}&orderBy={orderBy}")
     @Headers({
@@ -9286,10 +9302,10 @@ public interface JiraRESTV2Api {
      * Authentication - Required Scopes: [manage:jira-project]
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 100)
-     * @param id                   The list of screen IDs. To include multiple IDs, provide an ampersand-separated list. For example, `id=10000&amp;id=10001`. (optional)
+     * @param id                   The list of screen IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code id=10000&amp;id=10001}. (optional)
      * @param queryString          String used to perform a case-insensitive partial match with screen name. (optional)
-     * @param scope                The scope filter string. To filter by multiple scope, provide an ampersand-separated list. For example, `scope=GLOBAL&amp;scope=PROJECT`. (optional)
-     * @param orderBy              [Order](#ordering) the results by a field:   *  `id` Sorts by screen ID.  *  `name` Sorts by screen name. (optional)
+     * @param scope                The scope filter string. To filter by multiple scope, provide an ampersand-separated list. For example, {@code scope=GLOBAL&amp;scope=PROJECT}. (optional)
+     * @param orderBy              [Order](#ordering) the results by a field:   *  {@code id} Sorts by screen ID.  *  {@code name} Sorts by screen name. (optional)
      */
     @RequestLine("GET /rest/api/2/screens?startAt={startAt}&maxResults={maxResults}&id={id}&queryString={queryString}&scope={scope}&orderBy={orderBy}")
     @Headers({
@@ -9307,7 +9323,7 @@ public interface JiraRESTV2Api {
      * @param fieldId              The ID of the field to return screens for. (required)
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 100)
-     * @param expand               Use [expand](#expansion) to include additional information about screens in the response. This parameter accepts `tab` which returns details about the screen tabs the field is used in. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information about screens in the response. This parameter accepts {@code tab} which returns details about the screen tabs the field is used in. (optional)
      */
     @RequestLine("GET /rest/api/2/field/{fieldId}/screens?startAt={startAt}&maxResults={maxResults}&expand={expand}")
     @Headers({
@@ -9326,10 +9342,10 @@ public interface JiraRESTV2Api {
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
-     * @param id                   The list of issue security level member IDs. To include multiple issue security level members separate IDs with an ampersand: `id=10000&amp;id=10001`. (optional)
-     * @param schemeId             The list of issue security scheme IDs. To include multiple issue security schemes separate IDs with an ampersand: `schemeId=10000&amp;schemeId=10001`. (optional)
-     * @param levelId              The list of issue security level IDs. To include multiple issue security levels separate IDs with an ampersand: `levelId=10000&amp;levelId=10001`. (optional)
-     * @param expand               Use expand to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  `all` Returns all expandable information  *  `field` Returns information about the custom field granted the permission  *  `group` Returns information about the group that is granted the permission  *  `projectRole` Returns information about the project role granted the permission  *  `user` Returns information about the user who is granted the permission (optional)
+     * @param id                   The list of issue security level member IDs. To include multiple issue security level members separate IDs with an ampersand: {@code id=10000&amp;id=10001}. (optional)
+     * @param schemeId             The list of issue security scheme IDs. To include multiple issue security schemes separate IDs with an ampersand: {@code schemeId=10000&amp;schemeId=10001}. (optional)
+     * @param levelId              The list of issue security level IDs. To include multiple issue security levels separate IDs with an ampersand: {@code levelId=10000&amp;levelId=10001}. (optional)
+     * @param expand               Use expand to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code all} Returns all expandable information  *  {@code field} Returns information about the custom field granted the permission  *  {@code group} Returns information about the group that is granted the permission  *  {@code projectRole} Returns information about the project role granted the permission  *  {@code user} Returns information about the user who is granted the permission (optional)
      */
     @RequestLine("GET /rest/api/2/issuesecurityschemes/level/member?startAt={startAt}&maxResults={maxResults}&id={id}&schemeId={schemeId}&levelId={levelId}&expand={expand}")
     @Headers({
@@ -9348,8 +9364,8 @@ public interface JiraRESTV2Api {
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
-     * @param id                   The list of issue security scheme level IDs. To include multiple issue security levels, separate IDs with an ampersand: `id=10000&amp;id=10001`. (optional)
-     * @param schemeId             The list of issue security scheme IDs. To include multiple issue security schemes, separate IDs with an ampersand: `schemeId=10000&amp;schemeId=10001`. (optional)
+     * @param id                   The list of issue security scheme level IDs. To include multiple issue security levels, separate IDs with an ampersand: {@code id=10000&amp;id=10001}. (optional)
+     * @param schemeId             The list of issue security scheme IDs. To include multiple issue security schemes, separate IDs with an ampersand: {@code schemeId=10000&amp;schemeId=10001}. (optional)
      * @param onlyDefault          When set to true, returns multiple default levels for each security scheme containing a default. If you provide scheme and level IDs not associated with the default, returns an empty page. The default value is false. (optional, defaults to false)
      */
     @RequestLine("GET /rest/api/2/issuesecurityschemes/level?startAt={startAt}&maxResults={maxResults}&id={id}&schemeId={schemeId}&onlyDefault={onlyDefault}")
@@ -9382,7 +9398,7 @@ public interface JiraRESTV2Api {
      * **[Permissions](#permissions) required:** Permission to access Jira.
      *
      * Authentication - Required Scopes: [read:jira-work]
-     * @param fieldKey             The field key is specified in the following format: **$(app-key)\\_\\_$(field-key)**. For example, *example-add-on\\_\\_example-issue-field*. To determine the `fieldKey` value, do one of the following:   *  open the app's plugin descriptor, then **app-key** is the key at the top and **field-key** is the key in the `jiraIssueFields` module. **app-key** can also be found in the app listing in the Atlassian Universal Plugin Manager.  *  run [Get fields](#api-rest-api-2-field-get) and in the field details the value is returned in `key`. For example, `"key": "teams-add-on__team-issue-field"` (required)
+     * @param fieldKey             The field key is specified in the following format: **$(app-key)\\_\\_$(field-key)**. For example, *example-add-on\\_\\_example-issue-field*. To determine the {@code fieldKey} value, do one of the following:   *  open the app's plugin descriptor, then **app-key** is the key at the top and **field-key** is the key in the {@code jiraIssueFields} module. **app-key** can also be found in the app listing in the Atlassian Universal Plugin Manager.  *  run [Get fields](#api-rest-api-2-field-get) and in the field details the value is returned in {@code key}. For example, {@code "key": "teams-add-on__team-issue-field"} (required)
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
      * @param projectId            Filters the results to options that are only available in the specified project. (optional)
@@ -9560,8 +9576,8 @@ public interface JiraRESTV2Api {
      * *Administer Jira* [project permission.](https://confluence.atlassian.com/x/yodKLg)
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  `usages` Returns the project and issue types that use the status in their workflow.  *  `workflowUsages` Returns the workflows that use the status. (optional)
-     * @param id                   The list of status IDs. To include multiple IDs, provide an ampersand-separated list. For example, id=10000&amp;id=10001.  Min items `1`, Max items `50` (optional)
+     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code usages} Returns the project and issue types that use the status in their workflow.  *  {@code workflowUsages} Returns the workflows that use the status. (optional)
+     * @param id                   The list of status IDs. To include multiple IDs, provide an ampersand-separated list. For example, id=10000&amp;id=10001.  Min items {@code 1}, Max items {@code 50} (optional)
      */
     @RequestLine("GET /rest/api/2/statuses?expand={expand}&id={id}")
     @Headers({
@@ -9603,7 +9619,7 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [read:jira-work]
      * @param issueIdOrKey         The ID or key of the issue. (required)
-     * @param expand               Use [expand](#expansion) to include additional information about transitions in the response. This parameter accepts `transitions.fields`, which returns information about the fields in the transition screen for each transition. Fields hidden from the screen are not returned. Use this information to populate the `fields` and `update` fields in [Transition issue](#api-rest-api-2-issue-issueIdOrKey-transitions-post). (optional)
+     * @param expand               Use [expand](#expansion) to include additional information about transitions in the response. This parameter accepts {@code transitions.fields}, which returns information about the fields in the transition screen for each transition. Fields hidden from the screen are not returned. Use this information to populate the {@code fields} and {@code update} fields in [Transition issue](#api-rest-api-2-issue-issueIdOrKey-transitions-post). (optional)
      * @param transitionId         The ID of the transition. (optional)
      * @param skipRemoteOnlyCondition Whether transitions with the condition *Hide From User Condition* are included in the response. (optional, defaults to false)
      * @param includeUnavailableTransitions Whether details of transitions that fail a condition are included in the response (optional, defaults to false)
@@ -9619,7 +9635,7 @@ public interface JiraRESTV2Api {
      * Get fields in trash paginated
      * <p>
      * Returns a [paginated](#pagination) list of fields in the trash. The list may be restricted to fields whose field name or description partially match a string.
-     * Only custom fields can be queried, `type` must be set to `custom`.
+     * Only custom fields can be queried, {@code type} must be set to {@code custom}.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [read:jira-work]
@@ -9628,7 +9644,7 @@ public interface JiraRESTV2Api {
      * @param id                    (optional)
      * @param query                String used to perform a case-insensitive partial match with field names or descriptions. (optional)
      * @param expand                (optional)
-     * @param orderBy              [Order](#ordering) the results by a field:   *  `name` sorts by the field name  *  `trashDate` sorts by the date the field was moved to the trash  *  `plannedDeletionDate` sorts by the planned deletion date (optional)
+     * @param orderBy              [Order](#ordering) the results by a field:   *  {@code name} sorts by the field name  *  {@code trashDate} sorts by the date the field was moved to the trash  *  {@code plannedDeletionDate} sorts by the planned deletion date (optional)
      */
     @RequestLine("GET /rest/api/2/field/search/trashed?startAt={startAt}&maxResults={maxResults}&id={id}&query={query}&expand={expand}&orderBy={orderBy}")
     @Headers({
@@ -9645,7 +9661,7 @@ public interface JiraRESTV2Api {
      * Authentication - Required Scopes: [read:jira-work]
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
-     * @param expand               Use expand to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  `data` Returns UI modification data.  *  `contexts` Returns UI modification contexts. (optional)
+     * @param expand               Use expand to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code data} Returns UI modification data.  *  {@code contexts} Returns UI modification contexts. (optional)
      */
     @RequestLine("GET /rest/api/2/uiModifications?startAt={startAt}&maxResults={maxResults}&expand={expand}")
     @Headers({
@@ -9664,7 +9680,7 @@ public interface JiraRESTV2Api {
      * @param accountId            The account ID of the user, which uniquely identifies the user across all Atlassian products. For example, *5b10ac8d82e05b22cc7d4ef5*. Required. (optional)
      * @param username             This parameter is no longer available. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide) for details. (optional)
      * @param key                  This parameter is no longer available. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide) for details. (optional)
-     * @param expand               Use [expand](#expansion) to include additional information about users in the response. This parameter accepts a comma-separated list. Expand options include:   *  `groups` includes all groups and nested groups to which the user belongs.  *  `applicationRoles` includes details of all the applications to which the user has access. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information about users in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code groups} includes all groups and nested groups to which the user belongs.  *  {@code applicationRoles} includes details of all the applications to which the user has access. (optional)
      */
     @RequestLine("GET /rest/api/2/user?accountId={accountId}&username={username}&key={key}&expand={expand}")
     @Headers({
@@ -9675,7 +9691,7 @@ public interface JiraRESTV2Api {
     /**
      * Get user default columns
      * <p>
-     * Returns the default [issue table columns](https://confluence.atlassian.com/x/XYdKLg) for the user. If `accountId` is not passed in the request, the calling user's details are returned.
+     * Returns the default [issue table columns](https://confluence.atlassian.com/x/XYdKLg) for the user. If {@code accountId} is not passed in the request, the calling user's details are returned.
      * **[Permissions](#permissions) required:**
      *  *
      * *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLgl), to get the column details for any user.
@@ -9697,7 +9713,7 @@ public interface JiraRESTV2Api {
      * <p>
      * Returns a user's email address. This API is only available to apps approved by Atlassian, according to these [guidelines](https://community.developer.atlassian.com/t/guidelines-for-requesting-access-to-email-address/27603).
      *
-     * @param accountId            The account ID of the user, which uniquely identifies the user across all Atlassian products. For example, `5b10ac8d82e05b22cc7d4ef5`. (required)
+     * @param accountId            The account ID of the user, which uniquely identifies the user across all Atlassian products. For example, {@code 5b10ac8d82e05b22cc7d4ef5}. (required)
      */
     @RequestLine("GET /rest/api/2/user/email?accountId={accountId}")
     @Headers({
@@ -9710,7 +9726,7 @@ public interface JiraRESTV2Api {
      * <p>
      * Returns a user's email address. This API is only available to apps approved by Atlassian, according to these [guidelines](https://community.developer.atlassian.com/t/guidelines-for-requesting-access-to-email-address/27603).
      *
-     * @param accountId            The account IDs of the users for which emails are required. An `accountId` is an identifier that uniquely identifies the user across all Atlassian products. For example, `5b10ac8d82e05b22cc7d4ef5`. Note, this should be treated as an opaque identifier (that is, do not assume any structure in the value). (required)
+     * @param accountId            The account IDs of the users for which emails are required. An {@code accountId} is an identifier that uniquely identifies the user across all Atlassian products. For example, {@code 5b10ac8d82e05b22cc7d4ef5}. Note, this should be treated as an opaque identifier (that is, do not assume any structure in the value). (required)
      */
     @RequestLine("GET /rest/api/2/user/email/bulk?accountId={accountId}")
     @Headers({
@@ -9788,8 +9804,8 @@ public interface JiraRESTV2Api {
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param groupname            As a group's name can change, use of `groupId` is recommended to identify a group.   The name of the group. This parameter cannot be used with the `groupId` parameter. (optional)
-     * @param groupId              The ID of the group. This parameter cannot be used with the `groupName` parameter. (optional)
+     * @param groupname            As a group's name can change, use of {@code groupId} is recommended to identify a group.   The name of the group. This parameter cannot be used with the {@code groupId} parameter. (optional)
+     * @param groupId              The ID of the group. This parameter cannot be used with the {@code groupName} parameter. (optional)
      * @param includeInactiveUsers Include inactive users. (optional, defaults to false)
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
@@ -9837,7 +9853,7 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [read:jira-work]
      * @param id                   The ID of the version. (required)
-     * @param expand               Use [expand](#expansion) to include additional information about version in the response. This parameter accepts a comma-separated list. Expand options include:   *  `operations` Returns the list of operations available for this version.  *  `issuesstatus` Returns the count of issues in this version for each of the status categories *to do*, *in progress*, *done*, and *unmapped*. The *unmapped* property represents the number of issues with a status other than *to do*, *in progress*, and *done*. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information about version in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code operations} Returns the list of operations available for this version.  *  {@code issuesstatus} Returns the count of issues in this version for each of the status categories *to do*, *in progress*, *done*, and *unmapped*. The *unmapped* property represents the number of issues with a status other than *to do*, *in progress*, and *done*. (optional)
      */
     @RequestLine("GET /rest/api/2/version/{id}?expand={expand}")
     @Headers({
@@ -9850,9 +9866,9 @@ public interface JiraRESTV2Api {
      * <p>
      * Returns the following counts for a version:
      *  *
-     * Number of issues where the `fixVersion` is set to the version.
+     * Number of issues where the {@code fixVersion} is set to the version.
      * *
-     * Number of issues where the `affectedVersion` is set to the version.
+     * Number of issues where the {@code affectedVersion} is set to the version.
      * *
      * Number of issues where a version custom field is set to the version.
      * This operation can be accessed anonymously.
@@ -9891,7 +9907,7 @@ public interface JiraRESTV2Api {
      * **[Permissions](#permissions) required:** Permission to access Jira.
      *
      * Authentication - Required Scopes: [read:jira-work]
-     * @param fieldKey             The field key is specified in the following format: **$(app-key)\\_\\_$(field-key)**. For example, *example-add-on\\_\\_example-issue-field*. To determine the `fieldKey` value, do one of the following:   *  open the app's plugin descriptor, then **app-key** is the key at the top and **field-key** is the key in the `jiraIssueFields` module. **app-key** can also be found in the app listing in the Atlassian Universal Plugin Manager.  *  run [Get fields](#api-rest-api-2-field-get) and in the field details the value is returned in `key`. For example, `"key": "teams-add-on__team-issue-field"` (required)
+     * @param fieldKey             The field key is specified in the following format: **$(app-key)\\_\\_$(field-key)**. For example, *example-add-on\\_\\_example-issue-field*. To determine the {@code fieldKey} value, do one of the following:   *  open the app's plugin descriptor, then **app-key** is the key at the top and **field-key** is the key in the {@code jiraIssueFields} module. **app-key** can also be found in the app listing in the Atlassian Universal Plugin Manager.  *  run [Get fields](#api-rest-api-2-field-get) and in the field details the value is returned in {@code key}. For example, {@code "key": "teams-add-on__team-issue-field"} (required)
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional)
      * @param projectId            Filters the results to options that are only available in the specified project. (optional)
@@ -9913,7 +9929,7 @@ public interface JiraRESTV2Api {
      * *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project that the issue is ini
      * *
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
-     * Note that users with the necessary permissions for this operation but without the *View voters and watchers* project permissions are not returned details in the `voters` field.
+     * Note that users with the necessary permissions for this operation but without the *View voters and watchers* project permissions are not returned details in the {@code voters} field.
      *
      * Authentication - Required Scopes: [read:jira-work]
      * @param issueIdOrKey         The ID or key of the issue. (required)
@@ -9948,7 +9964,7 @@ public interface JiraRESTV2Api {
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param id                   The ID of the workflow scheme. Find this ID by editing the desired workflow scheme in Jira. The ID is shown in the URL as `schemeId`. For example, *schemeId=10301*. (required)
+     * @param id                   The ID of the workflow scheme. Find this ID by editing the desired workflow scheme in Jira. The ID is shown in the URL as {@code schemeId}. For example, *schemeId=10301*. (required)
      * @param returnDraftIfExists  Returns the workflow scheme's draft rather than scheme itself, if set to true. If the workflow scheme does not have a draft, then the workflow scheme is returned. (optional, defaults to false)
      */
     @RequestLine("GET /rest/api/2/workflowscheme/{id}?returnDraftIfExists={returnDraftIfExists}")
@@ -10014,11 +10030,11 @@ public interface JiraRESTV2Api {
      * Get workflow scheme project associations
      * <p>
      * Returns a list of the workflow schemes associated with a list of projects. Each returned workflow scheme includes a list of the requested projects associated with it. Any team-managed or non-existent projects in the request are ignored and no errors are returned.
-     * If the project is associated with the `Default Workflow Scheme` no ID is returned. This is because the way the `Default Workflow Scheme` is stored means it has no ID.
+     * If the project is associated with the {@code Default Workflow Scheme} no ID is returned. This is because the way the {@code Default Workflow Scheme} is stored means it has no ID.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param projectId            The ID of a project to return the workflow schemes for. To include multiple projects, provide an ampersand-Jim: oneseparated list. For example, `projectId=10000&amp;projectId=10001`. (required)
+     * @param projectId            The ID of a project to return the workflow schemes for. To include multiple projects, provide an ampersand-Jim: oneseparated list. For example, {@code projectId=10000&amp;projectId=10001}. (required)
      */
     @RequestLine("GET /rest/api/2/workflowscheme/project?projectId={projectId}")
     @Headers({
@@ -10063,9 +10079,9 @@ public interface JiraRESTV2Api {
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 10)
      * @param keys                 The transition rule class keys, as defined in the Connect or the Forge app descriptor, of the transition rules to return. (optional)
      * @param workflowNames        EXPERIMENTAL: The list of workflow names to filter by. (optional)
-     * @param withTags             EXPERIMENTAL: The list of `tags` to filter by. (optional)
+     * @param withTags             EXPERIMENTAL: The list of {@code tags} to filter by. (optional)
      * @param draft                EXPERIMENTAL: Whether draft or published workflows are returned. If not provided, both workflow types are returned. (optional)
-     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts `transition`, which, for each rule, returns information about the transition the rule is assigned to. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts {@code transition}, which, for each rule, returns information about the transition the rule is assigned to. (optional)
      */
     @RequestLine("GET /rest/api/2/workflow/rule/config?startAt={startAt}&maxResults={maxResults}&types={types}&keys={keys}&workflowNames={workflowNames}&withTags={withTags}&draft={draft}&expand={expand}")
     @Headers({
@@ -10083,10 +10099,10 @@ public interface JiraRESTV2Api {
      * Authentication - Required Scopes: [manage:jira-project]
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
-     * @param workflowName         The name of a workflow to return. To include multiple workflows, provide an ampersand-separated list. For example, `workflowName=name1&amp;workflowName=name2`. (optional)
-     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  `transitions` For each workflow, returns information about the transitions inside the workflow.  *  `transitions.rules` For each workflow transition, returns information about its rules. Transitions are included automatically if this expand is requested.  *  `transitions.properties` For each workflow transition, returns information about its properties. Transitions are included automatically if this expand is requested.  *  `statuses` For each workflow, returns information about the statuses inside the workflow.  *  `statuses.properties` For each workflow status, returns information about its properties. Statuses are included automatically if this expand is requested.  *  `default` For each workflow, returns information about whether this is the default workflow.  *  `schemes` For each workflow, returns information about the workflow schemes the workflow is assigned to.  *  `projects` For each workflow, returns information about the projects the workflow is assigned to, through workflow schemes.  *  `hasDraftWorkflow` For each workflow, returns information about whether the workflow has a draft version.  *  `operations` For each workflow, returns information about the actions that can be undertaken on the workflow. (optional)
+     * @param workflowName         The name of a workflow to return. To include multiple workflows, provide an ampersand-separated list. For example, {@code workflowName=name1&amp;workflowName=name2}. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code transitions} For each workflow, returns information about the transitions inside the workflow.  *  {@code transitions.rules} For each workflow transition, returns information about its rules. Transitions are included automatically if this expand is requested.  *  {@code transitions.properties} For each workflow transition, returns information about its properties. Transitions are included automatically if this expand is requested.  *  {@code statuses} For each workflow, returns information about the statuses inside the workflow.  *  {@code statuses.properties} For each workflow status, returns information about its properties. Statuses are included automatically if this expand is requested.  *  {@code default} For each workflow, returns information about whether this is the default workflow.  *  {@code schemes} For each workflow, returns information about the workflow schemes the workflow is assigned to.  *  {@code projects} For each workflow, returns information about the projects the workflow is assigned to, through workflow schemes.  *  {@code hasDraftWorkflow} For each workflow, returns information about whether the workflow has a draft version.  *  {@code operations} For each workflow, returns information about the actions that can be undertaken on the workflow. (optional)
      * @param queryString          String used to perform a case-insensitive partial match with workflow name. (optional)
-     * @param orderBy              [Order](#ordering) the results by a field:   *  `name` Sorts by workflow name.  *  `created` Sorts by create time.  *  `updated` Sorts by update time. (optional)
+     * @param orderBy              [Order](#ordering) the results by a field:   *  {@code name} Sorts by workflow name.  *  {@code created} Sorts by create time.  *  {@code updated} Sorts by update time. (optional)
      * @param isActive             Filters active and inactive workflows. (optional)
      */
     @RequestLine("GET /rest/api/2/workflow/search?startAt={startAt}&maxResults={maxResults}&workflowName={workflowName}&expand={expand}&queryString={queryString}&orderBy={orderBy}&isActive={isActive}")
@@ -10112,7 +10128,7 @@ public interface JiraRESTV2Api {
      * Authentication - Required Scopes: [read:jira-work]
      * @param issueIdOrKey         The ID or key of the issue. (required)
      * @param id                   The ID of the worklog. (required)
-     * @param expand               Use [expand](#expansion) to include additional information about work logs in the response. This parameter accepts  `properties`, which returns worklog properties. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information about work logs in the response. This parameter accepts  {@code properties}, which returns worklog properties. (optional)
      */
     @RequestLine("GET /rest/api/2/issue/{issueIdOrKey}/worklog/{id}?expand={expand}")
     @Headers({
@@ -10180,7 +10196,7 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [read:jira-work]
      * @param worklogIdsRequestBean A JSON object containing a list of worklog IDs. (required)
-     * @param expand               Use [expand](#expansion) to include additional information about worklogs in the response. This parameter accepts `properties` that returns the properties of each worklog. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information about worklogs in the response. This parameter accepts {@code properties} that returns the properties of each worklog. (optional)
      */
     @RequestLine("POST /rest/api/2/worklog/list?expand={expand}")
     @Headers({
@@ -10193,7 +10209,7 @@ public interface JiraRESTV2Api {
      * Create issue link
      * <p>
      * Creates a link between two issues. Use this operation to indicate a relationship between two issues and optionally add a comment to the from (outward) issue. To use this resource the site must have [Issue Linking](https://confluence.atlassian.com/x/yoXKM) enabled.
-     * This resource returns nothing on the creation of an issue link. To obtain the ID of the issue link, use `https://your-domain.atlassian.net/rest/api/2/issue/[linked issue key]?fields=issuelinks`.
+     * This resource returns nothing on the creation of an issue link. To obtain the ID of the issue link, use {@code https://your-domain.atlassian.net/rest/api/2/issue/[linked issue key]?fields=issuelinks}.
      * If the link request duplicates a link, the response indicates that the issue link was created. If the request included a comment, the comment is added.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:**
@@ -10239,8 +10255,8 @@ public interface JiraRESTV2Api {
     /**
      * Merge versions
      * <p>
-     * Merges two project versions. The merge is completed by deleting the version specified in `id` and replacing any occurrences of its ID in `fixVersion` with the version ID specified in `moveIssuesTo`.
-     * Consider using [ Delete and replace version](#api-rest-api-2-version-id-removeAndSwap-post) instead. This resource supports swapping version values in `fixVersion`, `affectedVersion`, and custom fields.
+     * Merges two project versions. The merge is completed by deleting the version specified in {@code id} and replacing any occurrences of its ID in {@code fixVersion} with the version ID specified in {@code moveIssuesTo}.
+     * Consider using [ Delete and replace version](#api-rest-api-2-version-id-removeAndSwap-post) instead. This resource supports swapping version values in {@code fixVersion}, {@code affectedVersion}, and custom fields.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) or *Administer Projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project that contains the version.
      *
@@ -10357,7 +10373,7 @@ public interface JiraRESTV2Api {
      * Move screen tab field
      * <p>
      * Moves a screen tab field.
-     * If `after` and `position` are provided in the request, `position` is ignored.
+     * If {@code after} and {@code position} are provided in the request, {@code position} is ignored.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-project]
@@ -10403,14 +10419,14 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [write:jira-work]
      * @param issueIdOrKey         ID or key of the issue that the notification is sent for. (required)
-     * @param requestBody          The request object for the notification and recipients. (required)
+     * @param notification         The request object for the notification and recipients. (required)
      */
     @RequestLine("POST /rest/api/2/issue/{issueIdOrKey}/notify")
     @Headers({
         "Content-Type: application/json", 
         "Accept: application/json"
     })
-    Object notify(@Param("issueIdOrKey") @NotNull String issueIdOrKey, @NotNull Map<String, Object> requestBody);
+    Object notify(@Param("issueIdOrKey") @NotNull String issueIdOrKey, @NotNull Notification notification);
 
     /**
      * Parse JQL query
@@ -10422,7 +10438,7 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [read:jira-work]
      * @param jqlQueriesToParse     (required)
-     * @param validation           How to validate the JQL query and treat the validation results. Validation options include:   *  `strict` Returns all errors. If validation fails, the query structure is not returned.  *  `warn` Returns all errors. If validation fails but the JQL query is correctly formed, the query structure is returned.  *  `none` No validation is performed. If JQL query is correctly formed, the query structure is returned. (optional, defaults to strict)
+     * @param validation           How to validate the JQL query and treat the validation results. Validation options include:   *  {@code strict} Returns all errors. If validation fails, the query structure is not returned.  *  {@code warn} Returns all errors. If validation fails but the JQL query is correctly formed, the query structure is returned.  *  {@code none} No validation is performed. If JQL query is correctly formed, the query structure is returned. (optional, defaults to strict)
      */
     @RequestLine("POST /rest/api/2/jql/parse?validation={validation}")
     @Headers({
@@ -10454,7 +10470,7 @@ public interface JiraRESTV2Api {
      * <p>
      * Publishes a draft workflow scheme.
      * Where the draft workflow includes new workflow statuses for an issue type, mappings are provided to update issues with the original workflow status to the new workflow status.
-     * This operation is [asynchronous](#async). Follow the `location` link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain updates.
+     * This operation is [asynchronous](#async). Follow the {@code location} link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain updates.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
@@ -10481,7 +10497,7 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param workflowReadRequest   (required)
-     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  `workflows.usages` Returns the project and issue types that each workflow is associated with.  *  `statuses.usages` Returns the project and issue types that each status is associated with. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code workflows.usages} Returns the project and issue types that each workflow is associated with.  *  {@code statuses.usages} Returns the project and issue types that each status is associated with. (optional)
      */
     @RequestLine("POST /rest/api/2/workflows?expand={expand}")
     @Headers({
@@ -10589,9 +10605,9 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param groupname             (optional)
-     * @param groupId              The ID of the group. This parameter cannot be used with the `groupname` parameter. (optional)
-     * @param swapGroup            As a group's name can change, use of `swapGroupId` is recommended to identify a group.   The group to transfer restrictions to. Only comments and worklogs are transferred. If restrictions are not transferred, comments and worklogs are inaccessible after the deletion. This parameter cannot be used with the `swapGroupId` parameter. (optional)
-     * @param swapGroupId          The ID of the group to transfer restrictions to. Only comments and worklogs are transferred. If restrictions are not transferred, comments and worklogs are inaccessible after the deletion. This parameter cannot be used with the `swapGroup` parameter. (optional)
+     * @param groupId              The ID of the group. This parameter cannot be used with the {@code groupname} parameter. (optional)
+     * @param swapGroup            As a group's name can change, use of {@code swapGroupId} is recommended to identify a group.   The group to transfer restrictions to. Only comments and worklogs are transferred. If restrictions are not transferred, comments and worklogs are inaccessible after the deletion. This parameter cannot be used with the {@code swapGroupId} parameter. (optional)
+     * @param swapGroupId          The ID of the group to transfer restrictions to. Only comments and worklogs are transferred. If restrictions are not transferred, comments and worklogs are inaccessible after the deletion. This parameter cannot be used with the {@code swapGroup} parameter. (optional)
      */
     @RequestLine("DELETE /rest/api/2/group?groupname={groupname}&groupId={groupId}&swapGroup={swapGroup}&swapGroupId={swapGroupId}")
     @Headers({
@@ -10663,7 +10679,7 @@ public interface JiraRESTV2Api {
      * Remove issue security level
      * <p>
      * Deletes an issue security level.
-     * This operation is [asynchronous](#async). Follow the `location` link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
+     * This operation is [asynchronous](#async). Follow the {@code location} link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
@@ -10804,8 +10820,8 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param accountId            The account ID of the user, which uniquely identifies the user across all Atlassian products. For example, *5b10ac8d82e05b22cc7d4ef5*. (required)
-     * @param groupname            As a group's name can change, use of `groupId` is recommended to identify a group.   The name of the group. This parameter cannot be used with the `groupId` parameter. (optional)
-     * @param groupId              The ID of the group. This parameter cannot be used with the `groupName` parameter. (optional)
+     * @param groupname            As a group's name can change, use of {@code groupId} is recommended to identify a group.   The name of the group. This parameter cannot be used with the {@code groupId} parameter. (optional)
+     * @param groupId              The ID of the group. This parameter cannot be used with the {@code groupName} parameter. (optional)
      * @param username             This parameter is no longer available. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details. (optional)
      */
     @RequestLine("DELETE /rest/api/2/group/user?groupname={groupname}&groupId={groupId}&username={username}&accountId={accountId}")
@@ -10903,9 +10919,9 @@ public interface JiraRESTV2Api {
      *  *
      * all of the issue types must belong to the issue type scheme.
      * *
-     * either `after` or `position` must be provided.
+     * either {@code after} or {@code position} must be provided.
      * *
-     * the issue type in `after` must not be in the issue type list.
+     * the issue type in {@code after} must not be in the issue type list.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
@@ -10923,13 +10939,13 @@ public interface JiraRESTV2Api {
      * Replace issue field option
      * <p>
      * Deselects an issue-field select-list option from all issues where it is selected. A different option can be selected to replace the deselected option. The update can also be limited to a smaller set of issues by using a JQL query.
-     * Connect and Forge app users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) can override the screen security configuration using `overrideScreenSecurity` and `overrideEditableFlag`.
+     * Connect and Forge app users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) can override the screen security configuration using {@code overrideScreenSecurity} and {@code overrideEditableFlag}.
      * This is an [asynchronous operation](#async). The response object contains a link to the long-running task.
      * Note that this operation **only works for issue field select list options added by Connect apps**, it cannot be used with issue field select list options created in Jira or using operations from the [Issue custom field options](#api-group-Issue-custom-field-options) resource.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). Jira permissions are not required for the app providing the field.
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param fieldKey             The field key is specified in the following format: **$(app-key)\\_\\_$(field-key)**. For example, *example-add-on\\_\\_example-issue-field*. To determine the `fieldKey` value, do one of the following:   *  open the app's plugin descriptor, then **app-key** is the key at the top and **field-key** is the key in the `jiraIssueFields` module. **app-key** can also be found in the app listing in the Atlassian Universal Plugin Manager.  *  run [Get fields](#api-rest-api-2-field-get) and in the field details the value is returned in `key`. For example, `"key": "teams-add-on__team-issue-field"` (required)
+     * @param fieldKey             The field key is specified in the following format: **$(app-key)\\_\\_$(field-key)**. For example, *example-add-on\\_\\_example-issue-field*. To determine the {@code fieldKey} value, do one of the following:   *  open the app's plugin descriptor, then **app-key** is the key at the top and **field-key** is the key in the {@code jiraIssueFields} module. **app-key** can also be found in the app listing in the Atlassian Universal Plugin Manager.  *  run [Get fields](#api-rest-api-2-field-get) and in the field details the value is returned in {@code key}. For example, {@code "key": "teams-add-on__team-issue-field"} (required)
      * @param optionId             The ID of the option to be deselected. (required)
      * @param replaceWith          The ID of the option that will replace the currently selected option. (optional)
      * @param jql                  A JQL query that specifies the issues to be updated. For example, *project=10000*. (optional)
@@ -10970,7 +10986,7 @@ public interface JiraRESTV2Api {
     /**
      * Reset user default columns
      * <p>
-     * Resets the default [ issue table columns](https://confluence.atlassian.com/x/XYdKLg) for the user to the system default. If `accountId` is not passed, the calling user's default columns are reset.
+     * Resets the default [ issue table columns](https://confluence.atlassian.com/x/XYdKLg) for the user to the system default. If {@code accountId} is not passed, the calling user's default columns are reset.
      * **[Permissions](#permissions) required:**
      *  *
      * *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg), to set the columns on any user.
@@ -11050,12 +11066,12 @@ public interface JiraRESTV2Api {
      * *Administer Jira* [project permission.](https://confluence.atlassian.com/x/yodKLg)
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  `usages` Returns the project and issue types that use the status in their workflow.  *  `workflowUsages` Returns the workflows that use the status. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code usages} Returns the project and issue types that use the status in their workflow.  *  {@code workflowUsages} Returns the workflows that use the status. (optional)
      * @param projectId            The project the status is part of or null for global statuses. (optional)
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 200)
      * @param searchString         Term to match status names against or null to search for all statuses in the search scope. (optional)
-     * @param statusCategory       Category of the status to filter by. The supported values are: `TODO`, `IN_PROGRESS`, and `DONE`. (optional)
+     * @param statusCategory       Category of the status to filter by. The supported values are: {@code TODO}, {@code IN_PROGRESS}, and {@code DONE}. (optional)
      */
     @RequestLine("GET /rest/api/2/statuses/search?expand={expand}&projectId={projectId}&startAt={startAt}&maxResults={maxResults}&searchString={searchString}&statusCategory={statusCategory}")
     @Headers({
@@ -11076,13 +11092,13 @@ public interface JiraRESTV2Api {
      * If [issue-level security](https://confluence.atlassian.com/x/J4lKLg) is configured, issue-level security permission to view the issue.
      *
      * Authentication - Required Scopes: [read:jira-work]
-     * @param jql                  The [JQL](https://confluence.atlassian.com/x/egORLQ) that defines the search. Note:   *  If no JQL expression is provided, all issues are returned.  *  `username` and `userkey` cannot be used as search terms due to privacy reasons. Use `accountId` instead.  *  If a user has hidden their email address in their user profile, partial matches of the email address will not find the user. An exact match is required. (optional)
+     * @param jql                  The [JQL](https://confluence.atlassian.com/x/egORLQ) that defines the search. Note:   *  If no JQL expression is provided, all issues are returned.  *  {@code username} and {@code userkey} cannot be used as search terms due to privacy reasons. Use {@code accountId} instead.  *  If a user has hidden their email address in their user profile, partial matches of the email address will not find the user. An exact match is required. (optional)
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
-     * @param maxResults           The maximum number of items to return per page. To manage page size, Jira may return fewer items per page where a large number of fields are requested. The greatest number of items returned per page is achieved when requesting `id` or `key` only. (optional, defaults to 50)
-     * @param validateQuery        Determines how to validate the JQL query and treat the validation results. Supported values are:   *  `strict` Returns a 400 response code if any errors are found, along with a list of all errors (and warnings).  *  `warn` Returns all errors as warnings.  *  `none` No validation is performed.  *  `true` *Deprecated* A legacy synonym for `strict`.  *  `false` *Deprecated* A legacy synonym for `warn`.  Note: If the JQL is not correctly formed a 400 response code is returned, regardless of the `validateQuery` value. (optional, defaults to strict)
-     * @param fields               A list of fields to return for each issue, use it to retrieve a subset of fields. This parameter accepts a comma-separated list. Expand options include:   *  `*all` Returns all fields.  *  `*navigable` Returns navigable fields.  *  Any issue field, prefixed with a minus to exclude.  Examples:   *  `summary,comment` Returns only the summary and comments fields.  *  `-description` Returns all navigable (default) fields except description.  *  `*all,-comment` Returns all fields except comments.  This parameter may be specified multiple times. For example, `fields=field1,field2&amp;fields=field3`.  Note: All navigable fields are returned by default. This differs from [GET issue](#api-rest-api-2-issue-issueIdOrKey-get) where the default is all fields. (optional)
-     * @param expand               Use [expand](#expansion) to include additional information about issues in the response. This parameter accepts a comma-separated list. Expand options include:   *  `renderedFields` Returns field values rendered in HTML format.  *  `names` Returns the display name of each field.  *  `schema` Returns the schema describing a field type.  *  `transitions` Returns all possible transitions for the issue.  *  `operations` Returns all possible operations for the issue.  *  `editmeta` Returns information about how each field can be edited.  *  `changelog` Returns a list of recent updates to an issue, sorted by date, starting from the most recent.  *  `versionedRepresentations` Instead of `fields`, returns `versionedRepresentations` a JSON array containing each version of a field's value, with the highest numbered item representing the most recent version. (optional)
-     * @param properties           A list of issue property keys for issue properties to include in the results. This parameter accepts a comma-separated list. Multiple properties can also be provided using an ampersand separated list. For example, `properties=prop1,prop2&amp;properties=prop3`. A maximum of 5 issue property keys can be specified. (optional)
+     * @param maxResults           The maximum number of items to return per page. To manage page size, Jira may return fewer items per page where a large number of fields are requested. The greatest number of items returned per page is achieved when requesting {@code id} or {@code key} only. (optional, defaults to 50)
+     * @param validateQuery        Determines how to validate the JQL query and treat the validation results. Supported values are:   *  {@code strict} Returns a 400 response code if any errors are found, along with a list of all errors (and warnings).  *  {@code warn} Returns all errors as warnings.  *  {@code none} No validation is performed.  *  {@code true} *Deprecated* A legacy synonym for {@code strict}.  *  {@code false} *Deprecated* A legacy synonym for {@code warn}.  Note: If the JQL is not correctly formed a 400 response code is returned, regardless of the {@code validateQuery} value. (optional, defaults to strict)
+     * @param fields               A list of fields to return for each issue, use it to retrieve a subset of fields. This parameter accepts a comma-separated list. Expand options include:   *  {@code *all} Returns all fields.  *  {@code *navigable} Returns navigable fields.  *  Any issue field, prefixed with a minus to exclude.  Examples:   *  {@code summary,comment} Returns only the summary and comments fields.  *  {@code -description} Returns all navigable (default) fields except description.  *  {@code *all,-comment} Returns all fields except comments.  This parameter may be specified multiple times. For example, {@code fields=field1,field2&amp;fields=field3}.  Note: All navigable fields are returned by default. This differs from [GET issue](#api-rest-api-2-issue-issueIdOrKey-get) where the default is all fields. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information about issues in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code renderedFields} Returns field values rendered in HTML format.  *  {@code names} Returns the display name of each field.  *  {@code schema} Returns the schema describing a field type.  *  {@code transitions} Returns all possible transitions for the issue.  *  {@code operations} Returns all possible operations for the issue.  *  {@code editmeta} Returns information about how each field can be edited.  *  {@code changelog} Returns a list of recent updates to an issue, sorted by date, starting from the most recent.  *  {@code versionedRepresentations} Instead of {@code fields}, returns {@code versionedRepresentations} a JSON array containing each version of a field's value, with the highest numbered item representing the most recent version. (optional)
+     * @param properties           A list of issue property keys for issue properties to include in the results. This parameter accepts a comma-separated list. Multiple properties can also be provided using an ampersand separated list. For example, {@code properties=prop1,prop2&amp;properties=prop3}. A maximum of 5 issue property keys can be specified. (optional)
      * @param fieldsByKeys         Reference fields by their key (rather than ID). (optional, defaults to false)
      */
     @RequestLine("GET /rest/api/2/search?jql={jql}&startAt={startAt}&maxResults={maxResults}&validateQuery={validateQuery}&fields={fields}&expand={expand}&properties={properties}&fieldsByKeys={fieldsByKeys}")
@@ -11126,7 +11142,7 @@ public interface JiraRESTV2Api {
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
-     * @param id                   The list of priority IDs. To include multiple IDs, provide an ampersand-separated list. For example, `id=2&amp;id=3`. (optional)
+     * @param id                   The list of priority IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code id=2&amp;id=3}. (optional)
      * @param onlyDefault          Whether only the default priority is returned. (optional, defaults to false)
      */
     @RequestLine("GET /rest/api/2/priority/search?startAt={startAt}&maxResults={maxResults}&id={id}&onlyDefault={onlyDefault}")
@@ -11151,17 +11167,17 @@ public interface JiraRESTV2Api {
      * Authentication - Required Scopes: [read:jira-work]
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
-     * @param orderBy              [Order](#ordering) the results by a field.   *  `category` Sorts by project category. A complete list of category IDs is found using [Get all project categories](#api-rest-api-2-projectCategory-get).  *  `issueCount` Sorts by the total number of issues in each project.  *  `key` Sorts by project key.  *  `lastIssueUpdatedTime` Sorts by the last issue update time.  *  `name` Sorts by project name.  *  `owner` Sorts by project lead.  *  `archivedDate` EXPERIMENTAL. Sorts by project archived date.  *  `deletedDate` EXPERIMENTAL. Sorts by project deleted date. (optional, defaults to key)
-     * @param id                   The project IDs to filter the results by. To include multiple IDs, provide an ampersand-separated list. For example, `id=10000&amp;id=10001`. Up to 50 project IDs can be provided. (optional)
-     * @param keys                 The project keys to filter the results by. To include multiple keys, provide an ampersand-separated list. For example, `keys=PA&amp;keys=PB`. Up to 50 project keys can be provided. (optional)
-     * @param query                Filter the results using a literal string. Projects with a matching `key` or `name` are returned (case insensitive). (optional)
-     * @param typeKey              Orders results by the [project type](https://confluence.atlassian.com/x/GwiiLQ#Jiraapplicationsoverview-Productfeaturesandprojecttypes). This parameter accepts a comma-separated list. Valid values are `business`, `service_desk`, and `software`. (optional)
+     * @param orderBy              [Order](#ordering) the results by a field.   *  {@code category} Sorts by project category. A complete list of category IDs is found using [Get all project categories](#api-rest-api-2-projectCategory-get).  *  {@code issueCount} Sorts by the total number of issues in each project.  *  {@code key} Sorts by project key.  *  {@code lastIssueUpdatedTime} Sorts by the last issue update time.  *  {@code name} Sorts by project name.  *  {@code owner} Sorts by project lead.  *  {@code archivedDate} EXPERIMENTAL. Sorts by project archived date.  *  {@code deletedDate} EXPERIMENTAL. Sorts by project deleted date. (optional, defaults to key)
+     * @param id                   The project IDs to filter the results by. To include multiple IDs, provide an ampersand-separated list. For example, {@code id=10000&amp;id=10001}. Up to 50 project IDs can be provided. (optional)
+     * @param keys                 The project keys to filter the results by. To include multiple keys, provide an ampersand-separated list. For example, {@code keys=PA&amp;keys=PB}. Up to 50 project keys can be provided. (optional)
+     * @param query                Filter the results using a literal string. Projects with a matching {@code key} or {@code name} are returned (case insensitive). (optional)
+     * @param typeKey              Orders results by the [project type](https://confluence.atlassian.com/x/GwiiLQ#Jiraapplicationsoverview-Productfeaturesandprojecttypes). This parameter accepts a comma-separated list. Valid values are {@code business}, {@code service_desk}, and {@code software}. (optional)
      * @param categoryId           The ID of the project's category. A complete list of category IDs is found using the [Get all project categories](#api-rest-api-2-projectCategory-get) operation. (optional)
-     * @param action               Filter results by projects for which the user can:   *  `view` the project, meaning that they have one of the following permissions:           *  *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.      *  *Administer projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.      *  *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).  *  `browse` the project, meaning that they have the *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.  *  `edit` the project, meaning that they have one of the following permissions:           *  *Administer projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.      *  *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). (optional, defaults to view)
-     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expanded options include:   *  `description` Returns the project description.  *  `projectKeys` Returns all project keys associated with a project.  *  `lead` Returns information about the project lead.  *  `issueTypes` Returns all issue types associated with the project.  *  `url` Returns the URL associated with the project.  *  `insight` EXPERIMENTAL. Returns the insight details of total issue count and last issue update time for the project. (optional)
-     * @param status               EXPERIMENTAL. Filter results by project status:   *  `live` Search live projects.  *  `archived` Search archived projects.  *  `deleted` Search deleted projects, those in the recycle bin. (optional)
+     * @param action               Filter results by projects for which the user can:   *  {@code view} the project, meaning that they have one of the following permissions:           *  *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.      *  *Administer projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.      *  *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).  *  {@code browse} the project, meaning that they have the *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.  *  {@code edit} the project, meaning that they have one of the following permissions:           *  *Administer projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.      *  *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). (optional, defaults to view)
+     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expanded options include:   *  {@code description} Returns the project description.  *  {@code projectKeys} Returns all project keys associated with a project.  *  {@code lead} Returns information about the project lead.  *  {@code issueTypes} Returns all issue types associated with the project.  *  {@code url} Returns the URL associated with the project.  *  {@code insight} EXPERIMENTAL. Returns the insight details of total issue count and last issue update time for the project. (optional)
+     * @param status               EXPERIMENTAL. Filter results by project status:   *  {@code live} Search live projects.  *  {@code archived} Search archived projects.  *  {@code deleted} Search deleted projects, those in the recycle bin. (optional)
      * @param properties           EXPERIMENTAL. A list of project properties to return for the project. This parameter accepts a comma-separated list. (optional)
-     * @param propertyQuery        EXPERIMENTAL. A query string used to search properties. The query string cannot be specified using a JSON object. For example, to search for the value of `nested` from `{"something":{"nested":1,"other":2}}` use `[thepropertykey].something.nested=1`. Note that the propertyQuery key is enclosed in square brackets to enable searching where the propertyQuery key includes dot (.) or equals (=) characters. Note that `thepropertykey` is only returned when included in `properties`. (optional)
+     * @param propertyQuery        EXPERIMENTAL. A query string used to search properties. The query string cannot be specified using a JSON object. For example, to search for the value of {@code nested} from {@code {"something":{"nested":1,"other":2}}} use {@code [thepropertykey].something.nested=1}. Note that the propertyQuery key is enclosed in square brackets to enable searching where the propertyQuery key includes dot (.) or equals (=) characters. Note that {@code thepropertykey} is only returned when included in {@code properties}. (optional)
      */
     @RequestLine("GET /rest/api/2/project/search?startAt={startAt}&maxResults={maxResults}&orderBy={orderBy}&id={id}&keys={keys}&query={query}&typeKey={typeKey}&categoryId={categoryId}&action={action}&expand={expand}&status={status}&properties={properties}&propertyQuery={propertyQuery}")
     @Headers({
@@ -11216,8 +11232,8 @@ public interface JiraRESTV2Api {
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
-     * @param id                   The list of issue security scheme IDs. To include multiple issue security scheme IDs, separate IDs with an ampersand: `id=10000&amp;id=10001`. (optional)
-     * @param projectId            The list of project IDs. To include multiple project IDs, separate IDs with an ampersand: `projectId=10000&amp;projectId=10001`. (optional)
+     * @param id                   The list of issue security scheme IDs. To include multiple issue security scheme IDs, separate IDs with an ampersand: {@code id=10000&amp;id=10001}. (optional)
+     * @param projectId            The list of project IDs. To include multiple project IDs, separate IDs with an ampersand: {@code projectId=10000&amp;projectId=10001}. (optional)
      */
     @RequestLine("GET /rest/api/2/issuesecurityschemes/search?startAt={startAt}&maxResults={maxResults}&id={id}&projectId={projectId}")
     @Headers({
@@ -11263,46 +11279,46 @@ public interface JiraRESTV2Api {
     /**
      * Set application property
      * <p>
-     * Changes the value of an application property. For example, you can change the value of the `jira.clone.prefix` from its default value of *CLONE -* to *Clone -* if you prefer sentence case capitalization. Editable properties are described below along with their default values.
+     * Changes the value of an application property. For example, you can change the value of the {@code jira.clone.prefix} from its default value of *CLONE -* to *Clone -* if you prefer sentence case capitalization. Editable properties are described below along with their default values.
      * #### Advanced settings ####
      * The advanced settings below are also accessible in [Jira](https://confluence.atlassian.com/x/vYXKM).
      * | Key | Description | Default value |
      *  | -- | -- | -- |
-     *  | `jira.clone.prefix` | The string of text prefixed to the title of a cloned issue. | `CLONE -` |
-     *  | `jira.date.picker.java.format` | The date format for the Java (server-side) generated dates. This must be the same as the `jira.date.picker.javascript.format` format setting. | `d/MMM/yy` |
-     *  | `jira.date.picker.javascript.format` | The date format for the JavaScript (client-side) generated dates. This must be the same as the `jira.date.picker.java.format` format setting. | `%e/%b/%y` |
-     *  | `jira.date.time.picker.java.format` | The date format for the Java (server-side) generated date times. This must be the same as the `jira.date.time.picker.javascript.format` format setting. | `dd/MMM/yy h:mm a` |
-     *  | `jira.date.time.picker.javascript.format` | The date format for the JavaScript (client-side) generated date times. This must be the same as the `jira.date.time.picker.java.format` format setting. | `%e/%b/%y %I:%M %p` |
-     *  | `jira.issue.actions.order` | The default order of actions (such as *Comments* or *Change history*) displayed on the issue view. | `asc` |
-     *  | `jira.table.cols.subtasks` | The columns to show while viewing subtask issues in a table. For example, a list of subtasks on an issue. | `issuetype, status, assignee, progress` |
-     *  | `jira.view.issue.links.sort.order` | The sort order of the list of issue links on the issue view. | `type, status, priority` |
-     *  | `jira.comment.collapsing.minimum.hidden` | The minimum number of comments required for comment collapsing to occur. A value of `0` disables comment collapsing. | `4` |
-     *  | `jira.newsletter.tip.delay.days` | The number of days before a prompt to sign up to the Jira Insiders newsletter is shown. A value of `-1` disables this feature. | `7` |
+     *  | {@code jira.clone.prefix} | The string of text prefixed to the title of a cloned issue. | {@code CLONE -} |
+     *  | {@code jira.date.picker.java.format} | The date format for the Java (server-side) generated dates. This must be the same as the {@code jira.date.picker.javascript.format} format setting. | {@code d/MMM/yy} |
+     *  | {@code jira.date.picker.javascript.format} | The date format for the JavaScript (client-side) generated dates. This must be the same as the {@code jira.date.picker.java.format} format setting. | {@code %e/%b/%y} |
+     *  | {@code jira.date.time.picker.java.format} | The date format for the Java (server-side) generated date times. This must be the same as the {@code jira.date.time.picker.javascript.format} format setting. | {@code dd/MMM/yy h:mm a} |
+     *  | {@code jira.date.time.picker.javascript.format} | The date format for the JavaScript (client-side) generated date times. This must be the same as the {@code jira.date.time.picker.java.format} format setting. | {@code %e/%b/%y %I:%M %p} |
+     *  | {@code jira.issue.actions.order} | The default order of actions (such as *Comments* or *Change history*) displayed on the issue view. | {@code asc} |
+     *  | {@code jira.table.cols.subtasks} | The columns to show while viewing subtask issues in a table. For example, a list of subtasks on an issue. | {@code issuetype, status, assignee, progress} |
+     *  | {@code jira.view.issue.links.sort.order} | The sort order of the list of issue links on the issue view. | {@code type, status, priority} |
+     *  | {@code jira.comment.collapsing.minimum.hidden} | The minimum number of comments required for comment collapsing to occur. A value of {@code 0} disables comment collapsing. | {@code 4} |
+     *  | {@code jira.newsletter.tip.delay.days} | The number of days before a prompt to sign up to the Jira Insiders newsletter is shown. A value of {@code -1} disables this feature. | {@code 7} |
      * 
      *  #### Look and feel ####
      * The settings listed below adjust the [look and feel](https://confluence.atlassian.com/x/VwCLLg).
      * | Key | Description | Default value |
      *  | -- | -- | -- |
-     *  | `jira.lf.date.time` | The [ time format](https://docs.oracle.com/javase/6/docs/api/index.html?java/text/SimpleDateFormat.html). | `h:mm a` |
-     *  | `jira.lf.date.day` | The [ day format](https://docs.oracle.com/javase/6/docs/api/index.html?java/text/SimpleDateFormat.html). | `EEEE h:mm a` |
-     *  | `jira.lf.date.complete` | The [ date and time format](https://docs.oracle.com/javase/6/docs/api/index.html?java/text/SimpleDateFormat.html). | `dd/MMM/yy h:mm a` |
-     *  | `jira.lf.date.dmy` | The [ date format](https://docs.oracle.com/javase/6/docs/api/index.html?java/text/SimpleDateFormat.html). | `dd/MMM/yy` |
-     *  | `jira.date.time.picker.use.iso8061` | When enabled, sets Monday as the first day of the week in the date picker, as specified by the ISO8601 standard. | `false` |
-     *  | `jira.lf.logo.url` | The URL of the logo image file. | `/images/icon-jira-logo.png` |
-     *  | `jira.lf.logo.show.application.title` | Controls the visibility of the application title on the sidebar. | `false` |
-     *  | `jira.lf.favicon.url` | The URL of the favicon. | `/favicon.ico` |
-     *  | `jira.lf.favicon.hires.url` | The URL of the high-resolution favicon. | `/images/64jira.png` |
-     *  | `jira.lf.navigation.bgcolour` | The background color of the sidebar. | `#0747A6` |
-     *  | `jira.lf.navigation.highlightcolour` | The color of the text and logo of the sidebar. | `#DEEBFF` |
-     *  | `jira.lf.hero.button.base.bg.colour` | The background color of the hero button. | `#3b7fc4` |
-     *  | `jira.title` | The text for the application title. The application title can also be set in *General settings*. | `Jira` |
-     *  | `jira.option.globalsharing` | Whether filters and dashboards can be shared with anyone signed into Jira. | `true` |
-     *  | `xflow.product.suggestions.enabled` | Whether to expose product suggestions for other Atlassian products within Jira. | `true` |
+     *  | {@code jira.lf.date.time} | The [ time format](https://docs.oracle.com/javase/6/docs/api/index.html?java/text/SimpleDateFormat.html). | {@code h:mm a} |
+     *  | {@code jira.lf.date.day} | The [ day format](https://docs.oracle.com/javase/6/docs/api/index.html?java/text/SimpleDateFormat.html). | {@code EEEE h:mm a} |
+     *  | {@code jira.lf.date.complete} | The [ date and time format](https://docs.oracle.com/javase/6/docs/api/index.html?java/text/SimpleDateFormat.html). | {@code dd/MMM/yy h:mm a} |
+     *  | {@code jira.lf.date.dmy} | The [ date format](https://docs.oracle.com/javase/6/docs/api/index.html?java/text/SimpleDateFormat.html). | {@code dd/MMM/yy} |
+     *  | {@code jira.date.time.picker.use.iso8061} | When enabled, sets Monday as the first day of the week in the date picker, as specified by the ISO8601 standard. | {@code false} |
+     *  | {@code jira.lf.logo.url} | The URL of the logo image file. | {@code /images/icon-jira-logo.png} |
+     *  | {@code jira.lf.logo.show.application.title} | Controls the visibility of the application title on the sidebar. | {@code false} |
+     *  | {@code jira.lf.favicon.url} | The URL of the favicon. | {@code /favicon.ico} |
+     *  | {@code jira.lf.favicon.hires.url} | The URL of the high-resolution favicon. | {@code /images/64jira.png} |
+     *  | {@code jira.lf.navigation.bgcolour} | The background color of the sidebar. | {@code #0747A6} |
+     *  | {@code jira.lf.navigation.highlightcolour} | The color of the text and logo of the sidebar. | {@code #DEEBFF} |
+     *  | {@code jira.lf.hero.button.base.bg.colour} | The background color of the hero button. | {@code #3b7fc4} |
+     *  | {@code jira.title} | The text for the application title. The application title can also be set in *General settings*. | {@code Jira} |
+     *  | {@code jira.option.globalsharing} | Whether filters and dashboards can be shared with anyone signed into Jira. | {@code true} |
+     *  | {@code xflow.product.suggestions.enabled} | Whether to expose product suggestions for other Atlassian products within Jira. | {@code true} |
      * 
      *  #### Other settings ####
      * | Key | Description | Default value |
      *  | -- | -- | -- |
-     *  | `jira.issuenav.criteria.autoupdate` | Whether instant updates to search criteria is active. | `true` |
+     *  | {@code jira.issuenav.criteria.autoupdate} | Whether instant updates to search criteria is active. | {@code true} |
      * 
      *  *Note: Be careful when changing [application properties and advanced settings](https://confluence.atlassian.com/x/vYXKM).*
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
@@ -11337,9 +11353,9 @@ public interface JiraRESTV2Api {
     /**
      * Set columns
      * <p>
-     * Sets the columns for a filter. Only navigable fields can be set as columns. Use [Get fields](#api-rest-api-2-field-get) to get the list fields in Jira. A navigable field has `navigable` set to `true`.
+     * Sets the columns for a filter. Only navigable fields can be set as columns. Use [Get fields](#api-rest-api-2-field-get) to get the list fields in Jira. A navigable field has {@code navigable} set to {@code true}.
      * The parameters for this resource are expressed as HTML form data. For example, in curl:
-     * `curl -X PUT -d columns=summary -d columns=description https://your-domain.atlassian.net/rest/api/2/filter/10000/columns`
+     * {@code curl -X PUT -d columns=summary -d columns=description https://your-domain.atlassian.net/rest/api/2/filter/10000/columns}
      * **[Permissions](#permissions) required:** Permission to access Jira, however, columns are only set for:
      *  *
      * filters owned by the user.
@@ -11354,7 +11370,7 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [write:jira-work]
      * @param id                   The ID of the filter. (required)
-     * @param requestBody          The IDs of the fields to set as columns. In the form data, specify each field as `columns=id`, where `id` is the *id* of a field (as seen in the response for [Get fields](#api-rest-api-&amp;lt;ver&amp;gt;-field-get)). For example, `columns=summary`. (optional)
+     * @param requestBody          The IDs of the fields to set as columns. In the form data, specify each field as {@code columns=id}, where {@code id} is the *id* of a field (as seen in the response for [Get fields](#api-rest-api-&amp;lt;ver&amp;gt;-field-get)). For example, {@code columns=summary}. (optional)
      */
     @RequestLine("PUT /rest/api/2/filter/{id}/columns")
     @Headers({
@@ -11418,14 +11434,14 @@ public interface JiraRESTV2Api {
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param requestBody           (required)
+     * @param setDefaultLevelsRequest  (required)
      */
     @RequestLine("PUT /rest/api/2/issuesecurityschemes/level/default")
     @Headers({
         "Content-Type: application/json", 
         "Accept: application/json"
     })
-    Object setDefaultLevels(@NotNull Map<String, Object> requestBody);
+    Object setDefaultLevels(@NotNull SetDefaultLevelsRequest setDefaultLevelsRequest);
 
     /**
      * Set default priority
@@ -11480,61 +11496,61 @@ public interface JiraRESTV2Api {
      * <p>
      * Sets default for contexts of a custom field. Default are defined using these objects:
      *  *
-     * `CustomFieldContextDefaultValueDate` (type `datepicker`) for date fields.
+     * {@code CustomFieldContextDefaultValueDate} (type {@code datepicker}) for date fields.
      * *
-     * `CustomFieldContextDefaultValueDateTime` (type `datetimepicker`) for date-time fields.
+     * {@code CustomFieldContextDefaultValueDateTime} (type {@code datetimepicker}) for date-time fields.
      * *
-     * `CustomFieldContextDefaultValueSingleOption` (type `option.single`) for single choice select lists and radio buttons.
+     * {@code CustomFieldContextDefaultValueSingleOption} (type {@code option.single}) for single choice select lists and radio buttons.
      * *
-     * `CustomFieldContextDefaultValueMultipleOption` (type `option.multiple`) for multiple choice select lists and checkboxes.
+     * {@code CustomFieldContextDefaultValueMultipleOption} (type {@code option.multiple}) for multiple choice select lists and checkboxes.
      * *
-     * `CustomFieldContextDefaultValueCascadingOption` (type `option.cascading`) for cascading select lists.
+     * {@code CustomFieldContextDefaultValueCascadingOption} (type {@code option.cascading}) for cascading select lists.
      * *
-     * `CustomFieldContextSingleUserPickerDefaults` (type `single.user.select`) for single users.
+     * {@code CustomFieldContextSingleUserPickerDefaults} (type {@code single.user.select}) for single users.
      * *
-     * `CustomFieldContextDefaultValueMultiUserPicker` (type `multi.user.select`) for user lists.
+     * {@code CustomFieldContextDefaultValueMultiUserPicker} (type {@code multi.user.select}) for user lists.
      * *
-     * `CustomFieldContextDefaultValueSingleGroupPicker` (type `grouppicker.single`) for single choice group pickers.
+     * {@code CustomFieldContextDefaultValueSingleGroupPicker} (type {@code grouppicker.single}) for single choice group pickers.
      * *
-     * `CustomFieldContextDefaultValueMultipleGroupPicker` (type `grouppicker.multiple`) for multiple choice group pickers.
+     * {@code CustomFieldContextDefaultValueMultipleGroupPicker} (type {@code grouppicker.multiple}) for multiple choice group pickers.
      * *
-     * `CustomFieldContextDefaultValueURL` (type `url`) for URLs.
+     * {@code CustomFieldContextDefaultValueURL} (type {@code url}) for URLs.
      * *
-     * `CustomFieldContextDefaultValueProject` (type `project`) for project pickers.
+     * {@code CustomFieldContextDefaultValueProject} (type {@code project}) for project pickers.
      * *
-     * `CustomFieldContextDefaultValueFloat` (type `float`) for floats (floating-point numbers).
+     * {@code CustomFieldContextDefaultValueFloat} (type {@code float}) for floats (floating-point numbers).
      * *
-     * `CustomFieldContextDefaultValueLabels` (type `labels`) for labels.
+     * {@code CustomFieldContextDefaultValueLabels} (type {@code labels}) for labels.
      * *
-     * `CustomFieldContextDefaultValueTextField` (type `textfield`) for text fields.
+     * {@code CustomFieldContextDefaultValueTextField} (type {@code textfield}) for text fields.
      * *
-     * `CustomFieldContextDefaultValueTextArea` (type `textarea`) for text area fields.
+     * {@code CustomFieldContextDefaultValueTextArea} (type {@code textarea}) for text area fields.
      * *
-     * `CustomFieldContextDefaultValueReadOnly` (type `readonly`) for read only (text) fields.
+     * {@code CustomFieldContextDefaultValueReadOnly} (type {@code readonly}) for read only (text) fields.
      * *
-     * `CustomFieldContextDefaultValueMultipleVersion` (type `version.multiple`) for single choice version pickers.
+     * {@code CustomFieldContextDefaultValueMultipleVersion} (type {@code version.multiple}) for single choice version pickers.
      * *
-     * `CustomFieldContextDefaultValueSingleVersion` (type `version.single`) for multiple choice version pickers.
+     * {@code CustomFieldContextDefaultValueSingleVersion} (type {@code version.single}) for multiple choice version pickers.
      * Forge custom fields [types](https://developer.atlassian.com/platform/forge/manifest-reference/modules/jira-custom-field-type/#data-types) are also supported, returning:
      *  *
-     * `CustomFieldContextDefaultValueForgeStringFieldBean` (type `forge.string`) for Forge string fields.
+     * {@code CustomFieldContextDefaultValueForgeStringFieldBean} (type {@code forge.string}) for Forge string fields.
      * *
-     * `CustomFieldContextDefaultValueForgeMultiStringFieldBean` (type `forge.string.list`) for Forge string collection fields.
+     * {@code CustomFieldContextDefaultValueForgeMultiStringFieldBean} (type {@code forge.string.list}) for Forge string collection fields.
      * *
-     * `CustomFieldContextDefaultValueForgeObjectFieldBean` (type `forge.object`) for Forge object fields.
+     * {@code CustomFieldContextDefaultValueForgeObjectFieldBean} (type {@code forge.object}) for Forge object fields.
      * *
-     * `CustomFieldContextDefaultValueForgeDateTimeFieldBean` (type `forge.datetime`) for Forge date-time fields.
+     * {@code CustomFieldContextDefaultValueForgeDateTimeFieldBean} (type {@code forge.datetime}) for Forge date-time fields.
      * *
-     * `CustomFieldContextDefaultValueForgeGroupFieldBean` (type `forge.group`) for Forge group fields.
+     * {@code CustomFieldContextDefaultValueForgeGroupFieldBean} (type {@code forge.group}) for Forge group fields.
      * *
-     * `CustomFieldContextDefaultValueForgeMultiGroupFieldBean` (type `forge.group.list`) for Forge group collection fields.
+     * {@code CustomFieldContextDefaultValueForgeMultiGroupFieldBean} (type {@code forge.group.list}) for Forge group collection fields.
      * *
-     * `CustomFieldContextDefaultValueForgeNumberFieldBean` (type `forge.number`) for Forge number fields.
+     * {@code CustomFieldContextDefaultValueForgeNumberFieldBean} (type {@code forge.number}) for Forge number fields.
      * *
-     * `CustomFieldContextDefaultValueForgeUserFieldBean` (type `forge.user`) for Forge user fields.
+     * {@code CustomFieldContextDefaultValueForgeUserFieldBean} (type {@code forge.user}) for Forge user fields.
      * *
-     * `CustomFieldContextDefaultValueForgeMultiUserFieldBean` (type `forge.user.list`) for Forge user collection fields.
-     * Only one type of default object can be included in a request. To remove a default for a context, set the default parameter to `null`.
+     * {@code CustomFieldContextDefaultValueForgeMultiUserFieldBean} (type {@code forge.user.list}) for Forge user collection fields.
+     * Only one type of default object can be included in a request. To remove a default for a context, set the default parameter to {@code null}.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
@@ -11566,7 +11582,7 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [write:jira-work]
      * @param id                   The ID of the filter. (required)
-     * @param expand               Use [expand](#expansion) to include additional information about filter in the response. This parameter accepts a comma-separated list. Expand options include:   *  `sharedUsers` Returns the users that the filter is shared with. This includes users that can browse projects that the filter is shared with. If you don't specify `sharedUsers`, then the `sharedUsers` object is returned but it doesn't list any users. The list of users returned is limited to 1000, to access additional users append `[start-index:end-index]` to the expand request. For example, to access the next 1000 users, use `?expand=sharedUsers[1001:2000]`.  *  `subscriptions` Returns the users that are subscribed to the filter. If you don't specify `subscriptions`, the `subscriptions` object is returned but it doesn't list any subscriptions. The list of subscriptions returned is limited to 1000, to access additional subscriptions append `[start-index:end-index]` to the expand request. For example, to access the next 1000 subscriptions, use `?expand=subscriptions[1001:2000]`. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information about filter in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code sharedUsers} Returns the users that the filter is shared with. This includes users that can browse projects that the filter is shared with. If you don't specify {@code sharedUsers}, then the {@code sharedUsers} object is returned but it doesn't list any users. The list of users returned is limited to 1000, to access additional users append {@code [start-index:end-index]} to the expand request. For example, to access the next 1000 users, use {@code ?expand=sharedUsers[1001:2000]}.  *  {@code subscriptions} Returns the users that are subscribed to the filter. If you don't specify {@code subscriptions}, the {@code subscriptions} object is returned but it doesn't list any subscriptions. The list of subscriptions returned is limited to 1000, to access additional subscriptions append {@code [start-index:end-index]} to the expand request. For example, to access the next 1000 subscriptions, use {@code ?expand=subscriptions[1001:2000]}. (optional)
      */
     @RequestLine("PUT /rest/api/2/filter/{id}/favourite?expand={expand}")
     @Headers({
@@ -11596,8 +11612,8 @@ public interface JiraRESTV2Api {
      * Set issue navigator default columns
      * <p>
      * Sets the default issue navigator columns.
-     * The `columns` parameter accepts a navigable field value and is expressed as HTML form data. To specify multiple columns, pass multiple `columns` parameters. For example, in curl:
-     * `curl -X PUT -d columns=summary -d columns=description https://your-domain.atlassian.net/rest/api/2/settings/columns`
+     * The {@code columns} parameter accepts a navigable field value and is expressed as HTML form data. To specify multiple columns, pass multiple {@code columns} parameters. For example, in curl:
+     * {@code curl -X PUT -d columns=summary -d columns=description https://your-domain.atlassian.net/rest/api/2/settings/columns}
      * If no column details are sent, then all default columns are removed.
      * A navigable field is one that can be used as a column on the issue navigator. Find details of navigable issue columns using [Get fields](#api-rest-api-2-field-get).
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
@@ -11675,15 +11691,15 @@ public interface JiraRESTV2Api {
     /**
      * Set preference
      * <p>
-     * Creates a preference for the user or updates a preference's value by sending a plain text string. For example, `false`. An arbitrary preference can be created with the value containing up to 255 characters. In addition, the following keys define system preferences that can be set or created:
+     * Creates a preference for the user or updates a preference's value by sending a plain text string. For example, {@code false}. An arbitrary preference can be created with the value containing up to 255 characters. In addition, the following keys define system preferences that can be set or created:
      *  *
-     * *user.notifications.mimetype* The mime type used in notifications sent to the user. Defaults to `html`.
+     * *user.notifications.mimetype* The mime type used in notifications sent to the user. Defaults to {@code html}.
      * *
-     * *user.notify.own.changes* Whether the user gets notified of their own changes. Defaults to `false`.
+     * *user.notify.own.changes* Whether the user gets notified of their own changes. Defaults to {@code false}.
      * *
-     * *user.default.share.private* Whether new [ filters](https://confluence.atlassian.com/x/eQiiLQ) are set to private. Defaults to `true`.
+     * *user.default.share.private* Whether new [ filters](https://confluence.atlassian.com/x/eQiiLQ) are set to private. Defaults to {@code true}.
      * *
-     * *user.keyboard.shortcuts.disabled* Whether keyboard shortcuts are disabled. Defaults to `false`.
+     * *user.keyboard.shortcuts.disabled* Whether keyboard shortcuts are disabled. Defaults to {@code false}.
      * *
      * *user.autowatch.disabled* Whether the user automatically watches issues they create or add a comment to. By default, not set: the user takes the instance autowatch setting.
      * Note that these keys are deprecated:
@@ -11746,7 +11762,7 @@ public interface JiraRESTV2Api {
      * <p>
      * Sets the default [ issue table columns](https://confluence.atlassian.com/x/XYdKLg) for the user. If an account ID is not passed, the calling user's default columns are set. If no column details are sent, then all default columns are removed.
      * The parameters for this resource are expressed as HTML form data. For example, in curl:
-     * `curl -X PUT -d columns=summary -d columns=description https://your-domain.atlassian.net/rest/api/2/user/columns?accountId=5b10ac8d82e05b22cc7d4ef5'`
+     * {@code curl -X PUT -d columns=summary -d columns=description https://your-domain.atlassian.net/rest/api/2/user/columns?accountId=5b10ac8d82e05b22cc7d4ef5'}
      * **[Permissions](#permissions) required:**
      *  *
      * *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg), to set the columns on any user.
@@ -11754,7 +11770,7 @@ public interface JiraRESTV2Api {
      * Permission to access Jira, to set the calling user's columns.
      *
      * @param accountId            The account ID of the user, which uniquely identifies the user across all Atlassian products. For example, *5b10ac8d82e05b22cc7d4ef5*. (optional)
-     * @param requestBody          The ID of a column to set. To set multiple columns, send multiple `columns` parameters. (optional)
+     * @param requestBody          The ID of a column to set. To set multiple columns, send multiple {@code columns} parameters. (optional)
      */
     @RequestLine("PUT /rest/api/2/user/columns?accountId={accountId}")
     @Headers({
@@ -11810,7 +11826,7 @@ public interface JiraRESTV2Api {
      * Set workflow for issue type in workflow scheme
      * <p>
      * Sets the workflow for an issue type in a workflow scheme.
-     * Note that active workflow schemes cannot be edited. If the workflow scheme is active, set `updateDraftIfNeeded` to `true` in the request body and a draft workflow scheme is created or updated with the new issue type-workflow mapping. The draft workflow scheme can be published in Jira.
+     * Note that active workflow schemes cannot be edited. If the workflow scheme is active, set {@code updateDraftIfNeeded} to {@code true} in the request body and a draft workflow scheme is created or updated with the new issue type-workflow mapping. The draft workflow scheme can be published in Jira.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
@@ -11860,16 +11876,16 @@ public interface JiraRESTV2Api {
      * Loads a custom avatar for a project or issue type.
      * Specify the avatar's local file location in the body of the request. Also, include the following headers:
      *  *
-     * `X-Atlassian-Token: no-check` To prevent XSRF protection blocking the request, for more information see [Special Headers](#special-request-headers).
+     * {@code X-Atlassian-Token: no-check} To prevent XSRF protection blocking the request, for more information see [Special Headers](#special-request-headers).
      * *
-     * `Content-Type: image/image type` Valid image types are JPEG, GIF, or PNG.
+     * {@code Content-Type: image/image type} Valid image types are JPEG, GIF, or PNG.
      * For example:
-     *  `curl --request POST `
-     * `--user email@example.com:&amp;lt;api_token&amp;gt; `
-     * `--header 'X-Atlassian-Token: no-check' `
-     * `--header 'Content-Type: image/&amp;lt; image_type&amp;gt;' `
-     * `--data-binary "&amp;lt;@/path/to/file/with/your/avatar&amp;gt;" `
-     * `--url 'https://your-domain.atlassian.net/rest/api/2/universal_avatar/type/{type}/owner/{entityId}'`
+     *  {@code curl --request POST }
+     * {@code --user email@example.com:&amp;lt;api_token&amp;gt; }
+     * {@code --header 'X-Atlassian-Token: no-check' }
+     * {@code --header 'Content-Type: image/&amp;lt; image_type&amp;gt;' }
+     * {@code --data-binary "&amp;lt;@/path/to/file/with/your/avatar&amp;gt;" }
+     * {@code --url 'https://your-domain.atlassian.net/rest/api/2/universal_avatar/type/{type}/owner/{entityId}'}
      * The avatar is cropped to a square. If no crop parameters are specified, the square originates at the top left of the image. The length of the square's sides is set to the smaller of the height or width of the image.
      * The cropped image is then used to create avatars of 16x16, 24x24, 32x32, and 48x48 in size.
      * After creating the avatar use:
@@ -11944,22 +11960,22 @@ public interface JiraRESTV2Api {
      * Authentication - Required Scopes: [write:jira-work]
      * @param issueIdOrKey         The ID or key of the issue. (required)
      * @param id                   The ID of the comment. (required)
-     * @param requestBody           (required)
+     * @param comment               (required)
      * @param notifyUsers          Whether users are notified when a comment is updated. (optional, defaults to true)
      * @param overrideEditableFlag Whether screen security is overridden to enable uneditable fields to be edited. Available to Connect app users with the *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) and Forge apps acting on behalf of users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). (optional, defaults to false)
-     * @param expand               Use [expand](#expansion) to include additional information about comments in the response. This parameter accepts `renderedBody`, which returns the comment body rendered in HTML. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information about comments in the response. This parameter accepts {@code renderedBody}, which returns the comment body rendered in HTML. (optional)
      */
     @RequestLine("PUT /rest/api/2/issue/{issueIdOrKey}/comment/{id}?notifyUsers={notifyUsers}&overrideEditableFlag={overrideEditableFlag}&expand={expand}")
     @Headers({
         "Content-Type: application/json", 
         "Accept: application/json"
     })
-    Comment updateComment(@Param("issueIdOrKey") @NotNull String issueIdOrKey, @Param("id") @NotNull String id, @NotNull Map<String, Object> requestBody, @Param("notifyUsers") @Nullable Boolean notifyUsers, @Param("overrideEditableFlag") @Nullable Boolean overrideEditableFlag, @Param("expand") @Nullable String expand);
+    Comment updateComment(@Param("issueIdOrKey") @NotNull String issueIdOrKey, @Param("id") @NotNull String id, @NotNull Comment comment, @Param("notifyUsers") @Nullable Boolean notifyUsers, @Param("overrideEditableFlag") @Nullable Boolean overrideEditableFlag, @Param("expand") @Nullable String expand);
 
     /**
      * Update component
      * <p>
-     * Updates a component. Any fields included in the request are overwritten. If `leadAccountId` is an empty string ("") the component lead is removed.
+     * Updates a component. Any fields included in the request are overwritten. If {@code leadAccountId} is an empty string ("") the component lead is removed.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Administer projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project containing the component or *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
@@ -11998,7 +12014,7 @@ public interface JiraRESTV2Api {
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). Jira permissions are not required for the Forge app that created the custom field.
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param fieldIdOrKey         The ID or key of the custom field, for example `customfield_10000`. (required)
+     * @param fieldIdOrKey         The ID or key of the custom field, for example {@code customfield_10000}. (required)
      * @param customFieldConfigurations  (required)
      */
     @RequestLine("PUT /rest/api/2/app/field/{fieldIdOrKey}/context/configuration")
@@ -12052,7 +12068,7 @@ public interface JiraRESTV2Api {
      * Updates the value of a custom field on one or more issues. Custom fields can only be updated by the Forge app that created them.
      * **[Permissions](#permissions) required:** Only the app that created the custom field can update its values with this operation.
      *
-     * @param fieldIdOrKey         The ID or key of the custom field. For example, `customfield_10010`. (required)
+     * @param fieldIdOrKey         The ID or key of the custom field. For example, {@code customfield_10010}. (required)
      * @param customFieldValueUpdateDetails  (required)
      * @param generateChangelog    Whether to generate a changelog for this update. (optional, defaults to true)
      */
@@ -12102,7 +12118,7 @@ public interface JiraRESTV2Api {
      * Update default workflow
      * <p>
      * Sets the default workflow for a workflow scheme.
-     * Note that active workflow schemes cannot be edited. If the workflow scheme is active, set `updateDraftIfNeeded` to `true` in the request object and a draft workflow scheme is created or updated with the new default workflow. The draft workflow scheme can be published in Jira.
+     * Note that active workflow schemes cannot be edited. If the workflow scheme is active, set {@code updateDraftIfNeeded} to {@code true} in the request object and a draft workflow scheme is created or updated with the new default workflow. The draft workflow scheme can be published in Jira.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
@@ -12174,7 +12190,7 @@ public interface JiraRESTV2Api {
      * <p>
      * Updates fields in a field configuration. The properties of the field configuration fields provided override the existing values.
      * This operation can only update field configurations used in company-managed (classic) projects.
-     * The operation can set the renderer for text fields to the default text renderer (`text-renderer`) or wiki style renderer (`wiki-renderer`). However, the renderer cannot be updated for fields using the autocomplete renderer (`autocomplete-renderer`).
+     * The operation can set the renderer for text fields to the default text renderer ({@code text-renderer}) or wiki style renderer ({@code wiki-renderer}). However, the renderer cannot be updated for fields using the autocomplete renderer ({@code autocomplete-renderer}).
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
@@ -12215,7 +12231,7 @@ public interface JiraRESTV2Api {
      * Authentication - Required Scopes: [write:jira-work]
      * @param id                   The ID of the filter to update. (required)
      * @param filter               The filter to update. (required)
-     * @param expand               Use [expand](#expansion) to include additional information about filter in the response. This parameter accepts a comma-separated list. Expand options include:   *  `sharedUsers` Returns the users that the filter is shared with. This includes users that can browse projects that the filter is shared with. If you don't specify `sharedUsers`, then the `sharedUsers` object is returned but it doesn't list any users. The list of users returned is limited to 1000, to access additional users append `[start-index:end-index]` to the expand request. For example, to access the next 1000 users, use `?expand=sharedUsers[1001:2000]`.  *  `subscriptions` Returns the users that are subscribed to the filter. If you don't specify `subscriptions`, the `subscriptions` object is returned but it doesn't list any subscriptions. The list of subscriptions returned is limited to 1000, to access additional subscriptions append `[start-index:end-index]` to the expand request. For example, to access the next 1000 subscriptions, use `?expand=subscriptions[1001:2000]`. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information about filter in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code sharedUsers} Returns the users that the filter is shared with. This includes users that can browse projects that the filter is shared with. If you don't specify {@code sharedUsers}, then the {@code sharedUsers} object is returned but it doesn't list any users. The list of users returned is limited to 1000, to access additional users append {@code [start-index:end-index]} to the expand request. For example, to access the next 1000 users, use {@code ?expand=sharedUsers[1001:2000]}.  *  {@code subscriptions} Returns the users that are subscribed to the filter. If you don't specify {@code subscriptions}, the {@code subscriptions} object is returned but it doesn't list any subscriptions. The list of subscriptions returned is limited to 1000, to access additional subscriptions append {@code [start-index:end-index]} to the expand request. For example, to access the next 1000 subscriptions, use {@code ?expand=subscriptions[1001:2000]}. (optional)
      * @param overrideSharePermissions EXPERIMENTAL: Whether share permissions are overridden to enable the addition of any share permissions to filters. Available to users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). (optional, defaults to false)
      */
     @RequestLine("PUT /rest/api/2/filter/{id}?expand={expand}&overrideSharePermissions={overrideSharePermissions}")
@@ -12251,7 +12267,7 @@ public interface JiraRESTV2Api {
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). Jira permissions are not required for the app providing the field.
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param fieldKey             The field key is specified in the following format: **$(app-key)\\_\\_$(field-key)**. For example, *example-add-on\\_\\_example-issue-field*. To determine the `fieldKey` value, do one of the following:   *  open the app's plugin descriptor, then **app-key** is the key at the top and **field-key** is the key in the `jiraIssueFields` module. **app-key** can also be found in the app listing in the Atlassian Universal Plugin Manager.  *  run [Get fields](#api-rest-api-2-field-get) and in the field details the value is returned in `key`. For example, `"key": "teams-add-on__team-issue-field"` (required)
+     * @param fieldKey             The field key is specified in the following format: **$(app-key)\\_\\_$(field-key)**. For example, *example-add-on\\_\\_example-issue-field*. To determine the {@code fieldKey} value, do one of the following:   *  open the app's plugin descriptor, then **app-key** is the key at the top and **field-key** is the key in the {@code jiraIssueFields} module. **app-key** can also be found in the app listing in the Atlassian Universal Plugin Manager.  *  run [Get fields](#api-rest-api-2-field-get) and in the field details the value is returned in {@code key}. For example, {@code "key": "teams-add-on__team-issue-field"} (required)
      * @param optionId             The ID of the option to be updated. (required)
      * @param issueFieldOption      (required)
      */
@@ -12372,14 +12388,14 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param id                   The ID of the notification scheme. (required)
-     * @param requestBody           (required)
+     * @param updateNotificationSchemeDetails  (required)
      */
     @RequestLine("PUT /rest/api/2/notificationscheme/{id}")
     @Headers({
         "Content-Type: application/json", 
         "Accept: application/json"
     })
-    Object updateNotificationScheme(@Param("id") @NotNull String id, @NotNull Map<String, Object> requestBody);
+    Object updateNotificationScheme(@Param("id") @NotNull String id, @NotNull UpdateNotificationSchemeDetails updateNotificationSchemeDetails);
 
     /**
      * Update permission scheme
@@ -12397,15 +12413,15 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param schemeId             The ID of the permission scheme to update. (required)
-     * @param requestBody           (required)
-     * @param expand               Use expand to include additional information in the response. This parameter accepts a comma-separated list. Note that permissions are always included when you specify any value. Expand options include:   *  `all` Returns all expandable information.  *  `field` Returns information about the custom field granted the permission.  *  `group` Returns information about the group that is granted the permission.  *  `permissions` Returns all permission grants for each permission scheme.  *  `projectRole` Returns information about the project role granted the permission.  *  `user` Returns information about the user who is granted the permission. (optional)
+     * @param permissionScheme      (required)
+     * @param expand               Use expand to include additional information in the response. This parameter accepts a comma-separated list. Note that permissions are always included when you specify any value. Expand options include:   *  {@code all} Returns all expandable information.  *  {@code field} Returns information about the custom field granted the permission.  *  {@code group} Returns information about the group that is granted the permission.  *  {@code permissions} Returns all permission grants for each permission scheme.  *  {@code projectRole} Returns information about the project role granted the permission.  *  {@code user} Returns information about the user who is granted the permission. (optional)
      */
     @RequestLine("PUT /rest/api/2/permissionscheme/{schemeId}?expand={expand}")
     @Headers({
         "Content-Type: application/json", 
         "Accept: application/json"
     })
-    PermissionScheme updatePermissionScheme(@Param("schemeId") @NotNull Long schemeId, @NotNull Map<String, Object> requestBody, @Param("expand") @Nullable String expand);
+    PermissionScheme updatePermissionScheme(@Param("schemeId") @NotNull Long schemeId, @NotNull PermissionScheme permissionScheme, @Param("expand") @Nullable String expand);
 
     /**
      * Update precomputations (apps)
@@ -12430,14 +12446,14 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param id                   The ID of the issue priority. (required)
-     * @param requestBody           (required)
+     * @param updatePriorityDetails  (required)
      */
     @RequestLine("PUT /rest/api/2/priority/{id}")
     @Headers({
         "Content-Type: application/json", 
         "Accept: application/json"
     })
-    Object updatePriority(@Param("id") @NotNull String id, @NotNull Map<String, Object> requestBody);
+    Object updatePriority(@Param("id") @NotNull String id, @NotNull UpdatePriorityDetails updatePriorityDetails);
 
     /**
      * Update project
@@ -12449,7 +12465,7 @@ public interface JiraRESTV2Api {
      * Authentication - Required Scopes: [manage:jira-project]
      * @param projectIdOrKey       The project ID or project key (case sensitive). (required)
      * @param updateProjectDetails The project details to be updated. (required)
-     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Note that the project description, issue types, and project lead are included in all responses by default. Expand options include:   *  `description` The project description.  *  `issueTypes` The issue types associated with the project.  *  `lead` The project lead.  *  `projectKeys` All project keys associated with the project. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Note that the project description, issue types, and project lead are included in all responses by default. Expand options include:   *  {@code description} The project description.  *  {@code issueTypes} The issue types associated with the project.  *  {@code lead} The project lead.  *  {@code projectKeys} All project keys associated with the project. (optional)
      */
     @RequestLine("PUT /rest/api/2/project/{projectIdOrKey}?expand={expand}")
     @Headers({
@@ -12467,14 +12483,14 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [manage:jira-project]
      * @param projectIdOrKey       The ID or (case-sensitive) key of the project. (required)
-     * @param requestBody           (required)
+     * @param avatar                (required)
      */
     @RequestLine("PUT /rest/api/2/project/{projectIdOrKey}/avatar")
     @Headers({
         "Content-Type: application/json", 
         "Accept: application/json"
     })
-    Object updateProjectAvatar(@Param("projectIdOrKey") @NotNull String projectIdOrKey, @NotNull Map<String, Object> requestBody);
+    Object updateProjectAvatar(@Param("projectIdOrKey") @NotNull String projectIdOrKey, @NotNull Avatar avatar);
 
     /**
      * Update project category
@@ -12497,7 +12513,7 @@ public interface JiraRESTV2Api {
      * Set project's sender email
      * <p>
      * Sets the [project's sender email address](https://confluence.atlassian.com/x/dolKLg).
-     * If `emailAddress` is an empty string, the default email address is restored.
+     * If {@code emailAddress} is an empty string, the default email address is restored.
      * **[Permissions](#permissions) required:** *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.
      *
      * Authentication - Required Scopes: [manage:jira-project]
@@ -12527,14 +12543,14 @@ public interface JiraRESTV2Api {
      * Authentication - Required Scopes: [write:jira-work]
      * @param issueIdOrKey         The ID or key of the issue. (required)
      * @param linkId               The ID of the remote issue link. (required)
-     * @param requestBody           (required)
+     * @param remoteIssueLinkRequest  (required)
      */
     @RequestLine("PUT /rest/api/2/issue/{issueIdOrKey}/remotelink/{linkId}")
     @Headers({
         "Content-Type: application/json", 
         "Accept: application/json"
     })
-    Object updateRemoteIssueLink(@Param("issueIdOrKey") @NotNull String issueIdOrKey, @Param("linkId") @NotNull String linkId, @NotNull Map<String, Object> requestBody);
+    Object updateRemoteIssueLink(@Param("issueIdOrKey") @NotNull String issueIdOrKey, @Param("linkId") @NotNull String linkId, @NotNull RemoteIssueLinkRequest remoteIssueLinkRequest);
 
     /**
      * Update resolution
@@ -12544,14 +12560,14 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param id                   The ID of the issue resolution. (required)
-     * @param requestBody           (required)
+     * @param updateResolutionDetails  (required)
      */
     @RequestLine("PUT /rest/api/2/resolution/{id}")
     @Headers({
         "Content-Type: application/json", 
         "Accept: application/json"
     })
-    Object updateResolution(@Param("id") @NotNull String id, @NotNull Map<String, Object> requestBody);
+    Object updateResolution(@Param("id") @NotNull String id, @NotNull UpdateResolutionDetails updateResolutionDetails);
 
     /**
      * Update screen
@@ -12596,14 +12612,14 @@ public interface JiraRESTV2Api {
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param schemeId             The ID of the issue security scheme level belongs to. (required)
      * @param levelId              The ID of the issue security level to update. (required)
-     * @param requestBody           (required)
+     * @param updateIssueSecurityLevelDetails  (required)
      */
     @RequestLine("PUT /rest/api/2/issuesecurityschemes/{schemeId}/level/{levelId}")
     @Headers({
         "Content-Type: application/json", 
         "Accept: application/json"
     })
-    Object updateSecurityLevel(@Param("schemeId") @NotNull String schemeId, @Param("levelId") @NotNull String levelId, @NotNull Map<String, Object> requestBody);
+    Object updateSecurityLevel(@Param("schemeId") @NotNull String schemeId, @Param("levelId") @NotNull String levelId, @NotNull UpdateIssueSecurityLevelDetails updateIssueSecurityLevelDetails);
 
     /**
      * Bulk update statuses
@@ -12669,7 +12685,7 @@ public interface JiraRESTV2Api {
      * Set issue types for workflow in workflow scheme
      * <p>
      * Sets the issue types for a workflow in a workflow scheme. The workflow can also be set as the default workflow for the workflow scheme. Unmapped issues types are mapped to the default workflow.
-     * Note that active workflow schemes cannot be edited. If the workflow scheme is active, set `updateDraftIfNeeded` to `true` in the request body and a draft workflow scheme is created or updated with the new workflow-issue types mappings. The draft workflow scheme can be published in Jira.
+     * Note that active workflow schemes cannot be edited. If the workflow scheme is active, set {@code updateDraftIfNeeded} to {@code true} in the request body and a draft workflow scheme is created or updated with the new workflow-issue types mappings. The draft workflow scheme can be published in Jira.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
@@ -12687,11 +12703,11 @@ public interface JiraRESTV2Api {
     /**
      * Update workflow scheme
      * <p>
-     * Updates a workflow scheme, including the name, default workflow, issue type to project mappings, and more. If the workflow scheme is active (that is, being used by at least one project), then a draft workflow scheme is created or updated instead, provided that `updateDraftIfNeeded` is set to `true`.
+     * Updates a workflow scheme, including the name, default workflow, issue type to project mappings, and more. If the workflow scheme is active (that is, being used by at least one project), then a draft workflow scheme is created or updated instead, provided that {@code updateDraftIfNeeded} is set to {@code true}.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param id                   The ID of the workflow scheme. Find this ID by editing the desired workflow scheme in Jira. The ID is shown in the URL as `schemeId`. For example, *schemeId=10301*. (required)
+     * @param id                   The ID of the workflow scheme. Find this ID by editing the desired workflow scheme in Jira. The ID is shown in the URL as {@code schemeId}. For example, *schemeId=10301*. (required)
      * @param workflowScheme        (required)
      */
     @RequestLine("PUT /rest/api/2/workflowscheme/{id}")
@@ -12726,17 +12742,17 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param transitionId         The ID of the transition. To get the ID, view the workflow in text mode in the Jira admin settings. The ID is shown next to the transition. (required)
-     * @param key                  The key of the property being updated, also known as the name of the property. Set this to the same value as the `key` defined in the request body. (required)
+     * @param key                  The key of the property being updated, also known as the name of the property. Set this to the same value as the {@code key} defined in the request body. (required)
      * @param workflowName         The name of the workflow that the transition belongs to. (required)
-     * @param requestBody           (required)
-     * @param workflowMode         The workflow status. Set to `live` for inactive workflows or `draft` for draft workflows. Active workflows cannot be edited. (optional)
+     * @param workflowTransitionProperty  (required)
+     * @param workflowMode         The workflow status. Set to {@code live} for inactive workflows or {@code draft} for draft workflows. Active workflows cannot be edited. (optional)
      */
     @RequestLine("PUT /rest/api/2/workflow/transitions/{transitionId}/properties?key={key}&workflowName={workflowName}&workflowMode={workflowMode}")
     @Headers({
         "Content-Type: application/json", 
         "Accept: application/json"
     })
-    WorkflowTransitionProperty updateWorkflowTransitionProperty(@Param("transitionId") @NotNull Long transitionId, @Param("key") @NotNull String key, @Param("workflowName") @NotNull String workflowName, @NotNull Map<String, Object> requestBody, @Param("workflowMode") @Nullable String workflowMode);
+    WorkflowTransitionProperty updateWorkflowTransitionProperty(@Param("transitionId") @NotNull Long transitionId, @Param("key") @NotNull String key, @Param("workflowName") @NotNull String workflowName, @NotNull WorkflowTransitionProperty workflowTransitionProperty, @Param("workflowMode") @Nullable String workflowMode);
 
     /**
      * Update workflow transition rule configurations
@@ -12753,8 +12769,8 @@ public interface JiraRESTV2Api {
      *  *
      * Disable a rule.
      * *
-     * Add a `tag`. Use this to filter rules in the [Get workflow transition rule configurations](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-workflow-transition-rules/#api-rest-api-3-workflow-rule-config-get).
-     * Rules are enabled if the `disabled` parameter is not provided.
+     * Add a {@code tag}. Use this to filter rules in the [Get workflow transition rule configurations](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-workflow-transition-rules/#api-rest-api-3-workflow-rule-config-get).
+     * Rules are enabled if the {@code disabled} parameter is not provided.
      * **[Permissions](#permissions) required:** Only Connect apps can use this operation.
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
@@ -12779,7 +12795,7 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param workflowUpdateRequest  (required)
-     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  `workflows.usages` Returns the project and issue types that each workflow is associated with.  *  `statuses.usages` Returns the project and issue types that each status is associated with. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code workflows.usages} Returns the project and issue types that each workflow is associated with.  *  {@code statuses.usages} Returns the project and issue types that each status is associated with. (optional)
      */
     @RequestLine("POST /rest/api/2/workflows/update?expand={expand}")
     @Headers({
@@ -12807,11 +12823,11 @@ public interface JiraRESTV2Api {
      * Authentication - Required Scopes: [write:jira-work]
      * @param issueIdOrKey         The ID or key the issue. (required)
      * @param id                   The ID of the worklog. (required)
-     * @param requestBody           (required)
+     * @param worklog               (required)
      * @param notifyUsers          Whether users watching the issue are notified by email. (optional, defaults to true)
-     * @param adjustEstimate       Defines how to update the issue's time estimate, the options are:   *  `new` Sets the estimate to a specific value, defined in `newEstimate`.  *  `leave` Leaves the estimate unchanged.  *  `auto` Updates the estimate by the difference between the original and updated value of `timeSpent` or `timeSpentSeconds`. (optional, defaults to auto)
-     * @param newEstimate          The value to set as the issue's remaining time estimate, as days (\\#d), hours (\\#h), or minutes (\\#m or \\#). For example, *2d*. Required when `adjustEstimate` is `new`. (optional)
-     * @param expand               Use [expand](#expansion) to include additional information about worklogs in the response. This parameter accepts `properties`, which returns worklog properties. (optional)
+     * @param adjustEstimate       Defines how to update the issue's time estimate, the options are:   *  {@code new} Sets the estimate to a specific value, defined in {@code newEstimate}.  *  {@code leave} Leaves the estimate unchanged.  *  {@code auto} Updates the estimate by the difference between the original and updated value of {@code timeSpent} or {@code timeSpentSeconds}. (optional, defaults to auto)
+     * @param newEstimate          The value to set as the issue's remaining time estimate, as days (\\#d), hours (\\#h), or minutes (\\#m or \\#). For example, *2d*. Required when {@code adjustEstimate} is {@code new}. (optional)
+     * @param expand               Use [expand](#expansion) to include additional information about worklogs in the response. This parameter accepts {@code properties}, which returns worklog properties. (optional)
      * @param overrideEditableFlag Whether the worklog should be added to the issue even if the issue is not editable. For example, because the issue is closed. Connect and Forge app users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) can use this flag. (optional, defaults to false)
      */
     @RequestLine("PUT /rest/api/2/issue/{issueIdOrKey}/worklog/{id}?notifyUsers={notifyUsers}&adjustEstimate={adjustEstimate}&newEstimate={newEstimate}&expand={expand}&overrideEditableFlag={overrideEditableFlag}")
@@ -12819,7 +12835,7 @@ public interface JiraRESTV2Api {
         "Content-Type: application/json", 
         "Accept: application/json"
     })
-    Worklog updateWorklog(@Param("issueIdOrKey") @NotNull String issueIdOrKey, @Param("id") @NotNull String id, @NotNull Map<String, Object> requestBody, @Param("notifyUsers") @Nullable Boolean notifyUsers, @Param("adjustEstimate") @Nullable String adjustEstimate, @Param("newEstimate") @Nullable String newEstimate, @Param("expand") @Nullable String expand, @Param("overrideEditableFlag") @Nullable Boolean overrideEditableFlag);
+    Worklog updateWorklog(@Param("issueIdOrKey") @NotNull String issueIdOrKey, @Param("id") @NotNull String id, @NotNull Worklog worklog, @Param("notifyUsers") @Nullable Boolean notifyUsers, @Param("adjustEstimate") @Nullable String adjustEstimate, @Param("newEstimate") @Nullable String newEstimate, @Param("expand") @Nullable String expand, @Param("overrideEditableFlag") @Nullable Boolean overrideEditableFlag);
 
     /**
      * Validate create workflows
@@ -12915,7 +12931,7 @@ public interface JiraRESTV2Api {
      * }
      * Parameters:
      *  *
-     * `permissionKey` The permission required to perform the transition. Allowed values: [built-in Jira permissions](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-permission-schemes/#built-in-permissions).
+     * {@code permissionKey} The permission required to perform the transition. Allowed values: [built-in Jira permissions](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-permission-schemes/#built-in-permissions).
      * ##### Parent or child blocking validator #####
      * A validator to block the child issue’s transition depending on the parent issue’s status.
      * 
@@ -12948,9 +12964,9 @@ public interface JiraRESTV2Api {
      * }
      * Parameters:
      *  *
-     * `blocker` currently only supports `PARENT`.
+     * {@code blocker} currently only supports {@code PARENT}.
      * *
-     * `statusIds` a comma-separated list of status IDs.
+     * {@code statusIds} a comma-separated list of status IDs.
      * ##### Previous status validator #####
      * A validator that checks if an issue has transitioned through specified previous status(es) before allowing the current transition to occur.
      * 
@@ -12983,9 +12999,9 @@ public interface JiraRESTV2Api {
      * }
      * Parameters:
      *  *
-     * `previousStatusIds` a comma-separated list of status IDs, currently only support one ID.
+     * {@code previousStatusIds} a comma-separated list of status IDs, currently only support one ID.
      * *
-     * `mostRecentStatusOnly` when `true` only considers the most recent status for the condition evaluation. Allowed values: `true`, `false`.
+     * {@code mostRecentStatusOnly} when {@code true} only considers the most recent status for the condition evaluation. Allowed values: {@code true}, {@code false}.
      * ##### Validate a field value #####
      * A validation that ensures a specific field's value meets the defined criteria before allowing an issue to transition in the workflow.
      * Depending on the rule type, the result will vary:
@@ -13030,11 +13046,11 @@ public interface JiraRESTV2Api {
      * }
      * Parameters:
      *  *
-     * `fieldsRequired` the ID of the field that is required. For a custom field, it would look like `customfield_123`.
+     * {@code fieldsRequired} the ID of the field that is required. For a custom field, it would look like {@code customfield_123}.
      * *
-     * `ignoreContext` controls the impact of context settings on field validation. When set to `true`, the validator doesn't check a required field if its context isn't configured for the current issue. When set to `false`, the validator requires a field even if its context is invalid. Allowed values: `true`, `false`.
+     * {@code ignoreContext} controls the impact of context settings on field validation. When set to {@code true}, the validator doesn't check a required field if its context isn't configured for the current issue. When set to {@code false}, the validator requires a field even if its context is invalid. Allowed values: {@code true}, {@code false}.
      * *
-     * `errorMessage` is the error message to display if the user does not provide a value during the transition. A default error message will be shown if you don't provide one (Optional).
+     * {@code errorMessage} is the error message to display if the user does not provide a value during the transition. A default error message will be shown if you don't provide one (Optional).
      * ###### Field changed ######
      * 
      * 
@@ -13076,11 +13092,11 @@ public interface JiraRESTV2Api {
      * }
      * Parameters:
      *  *
-     * `groupsExemptFromValidation` a comma-separated list of group IDs to be exempt from the validation.
+     * {@code groupsExemptFromValidation} a comma-separated list of group IDs to be exempt from the validation.
      * *
-     * `fieldKey` the ID of the field that has changed. For a custom field, it would look like `customfield_123`.
+     * {@code fieldKey} the ID of the field that has changed. For a custom field, it would look like {@code customfield_123}.
      * *
-     * `errorMessage` the error message to display if the user does not provide a value during the transition. A default error message will be shown if you don't provide one (Optional).
+     * {@code errorMessage} the error message to display if the user does not provide a value during the transition. A default error message will be shown if you don't provide one (Optional).
      * ###### Field has a single value ######
      * 
      * 
@@ -13117,9 +13133,9 @@ public interface JiraRESTV2Api {
      * }
      * Parameters:
      *  *
-     * `fieldKey` the ID of the field to validate. For a custom field, it would look like `customfield_123`.
+     * {@code fieldKey} the ID of the field to validate. For a custom field, it would look like {@code customfield_123}.
      * *
-     * `excludeSubtasks` Option to exclude values copied from sub-tasks. Allowed values: `true`, `false`.
+     * {@code excludeSubtasks} Option to exclude values copied from sub-tasks. Allowed values: {@code true}, {@code false}.
      * ###### Field matches regular expression ######
      * 
      * 
@@ -13156,9 +13172,9 @@ public interface JiraRESTV2Api {
      * }
      * Parameters:
      *  *
-     * `regexp` the regular expression used to validate the field’s content.
+     * {@code regexp} the regular expression used to validate the field’s content.
      * *
-     * `fieldKey` the ID of the field to validate. For a custom field, it would look like `customfield_123`.
+     * {@code fieldKey} the ID of the field to validate. For a custom field, it would look like {@code customfield_123}.
      * ###### Date field comparison ######
      * 
      * 
@@ -13205,13 +13221,13 @@ public interface JiraRESTV2Api {
      * }
      * Parameters:
      *  *
-     * `date1FieldKey` the ID of the first field to compare. For a custom field, it would look like `customfield_123`.
+     * {@code date1FieldKey} the ID of the first field to compare. For a custom field, it would look like {@code customfield_123}.
      * *
-     * `date2FieldKey` the ID of the second field to compare. For a custom field, it would look like `customfield_123`.
+     * {@code date2FieldKey} the ID of the second field to compare. For a custom field, it would look like {@code customfield_123}.
      * *
-     * `includeTime` if `true`, compares both date and time. Allowed values: `true`, `false`.
+     * {@code includeTime} if {@code true}, compares both date and time. Allowed values: {@code true}, {@code false}.
      * *
-     * `conditionSelected` the condition to compare with. Allowed values: `&amp;gt;`, `&amp;gt;=`, `=`, `&amp;lt;=`, `&amp;lt;`, `!=`.
+     * {@code conditionSelected} the condition to compare with. Allowed values: {@code &amp;gt;}, {@code &amp;gt;=}, {@code =}, {@code &amp;lt;=}, {@code &amp;lt;}, {@code !=}.
      * ###### Date range comparison ######
      * 
      * 
@@ -13253,11 +13269,11 @@ public interface JiraRESTV2Api {
      * }
      * Parameters:
      *  *
-     * `date1FieldKey` the ID of the first field to compare. For a custom field, it would look like `customfield_123`.
+     * {@code date1FieldKey} the ID of the first field to compare. For a custom field, it would look like {@code customfield_123}.
      * *
-     * `date2FieldKey` the ID of the second field to compare. For a custom field, it would look like `customfield_123`.
+     * {@code date2FieldKey} the ID of the second field to compare. For a custom field, it would look like {@code customfield_123}.
      * *
-     * `numberOfDays` maximum number of days past the reference date (`date2FieldKey`) to pass validation.
+     * {@code numberOfDays} maximum number of days past the reference date ({@code date2FieldKey}) to pass validation.
      * This rule is composed by aggregating the following legacy rules:
      *  *
      * FieldRequiredValidator
@@ -13347,15 +13363,15 @@ public interface JiraRESTV2Api {
      * }
      * Parameters:
      *  *
-     * `fieldId` The ID of the field to check the value of. For non-system fields, it will look like `customfield_123`. Note: `fieldId` is used interchangeably with the idea of `fieldKey` here, they refer to the same field.
+     * {@code fieldId} The ID of the field to check the value of. For non-system fields, it will look like {@code customfield_123}. Note: {@code fieldId} is used interchangeably with the idea of {@code fieldKey} here, they refer to the same field.
      * *
-     * `fieldValue` the list of values to check against the field’s value.
+     * {@code fieldValue} the list of values to check against the field’s value.
      * *
-     * `comparator` The comparison logic. Allowed values: `&amp;gt;`, `&amp;gt;=`, `=`, `&amp;lt;=`, `&amp;lt;`, `!=`.
+     * {@code comparator} The comparison logic. Allowed values: {@code &amp;gt;}, {@code &amp;gt;=}, {@code =}, {@code &amp;lt;=}, {@code &amp;lt;}, {@code !=}.
      * *
-     * `comparisonType` The type of data being compared. Allowed values: `STRING`, `NUMBER`, `DATE`, `DATE_WITHOUT_TIME`, `OPTIONID`.
+     * {@code comparisonType} The type of data being compared. Allowed values: {@code STRING}, {@code NUMBER}, {@code DATE}, {@code DATE_WITHOUT_TIME}, {@code OPTIONID}.
      * ##### Restrict issue transition #####
-     * This rule ensures that issue transitions are restricted based on user accounts, roles, group memberships, and permissions, maintaining control over who can transition an issue. This condition evaluates as `true` if any of the following criteria is met.
+     * This rule ensures that issue transitions are restricted based on user accounts, roles, group memberships, and permissions, maintaining control over who can transition an issue. This condition evaluates as {@code true} if any of the following criteria is met.
      * 
      * 
      * {
@@ -13411,19 +13427,19 @@ public interface JiraRESTV2Api {
      * }
      * Parameters:
      *  *
-     * `accountIds` a comma-separated list of the user account IDs. It also allows generic values like: `allow-assignee`, `allow-reporter`, and `accountIds` Note: This is only supported in team-managed projects
+     * {@code accountIds} a comma-separated list of the user account IDs. It also allows generic values like: {@code allow-assignee}, {@code allow-reporter}, and {@code accountIds} Note: This is only supported in team-managed projects
      * *
-     * `roleIds` a comma-separated list of role IDs.
+     * {@code roleIds} a comma-separated list of role IDs.
      * *
-     * `groupIds` a comma-separated list of group IDs.
+     * {@code groupIds} a comma-separated list of group IDs.
      * *
-     * `permissionKeys` a comma-separated list of permission keys. Allowed values: [built-in Jira permissions](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-permission-schemes/#built-in-permissions).
+     * {@code permissionKeys} a comma-separated list of permission keys. Allowed values: [built-in Jira permissions](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-permission-schemes/#built-in-permissions).
      * *
-     * `groupCustomFields` a comma-separated list of group custom field IDs.
+     * {@code groupCustomFields} a comma-separated list of group custom field IDs.
      * *
-     * `allowUserCustomFields` a comma-separated list of user custom field IDs to allow for issue transition.
+     * {@code allowUserCustomFields} a comma-separated list of user custom field IDs to allow for issue transition.
      * *
-     * `denyUserCustomFields` a comma-separated list of user custom field IDs to deny for issue transition.
+     * {@code denyUserCustomFields} a comma-separated list of user custom field IDs to deny for issue transition.
      * This rule is composed by aggregating the following legacy rules:
      *  *
      * AllowOnlyAssignee
@@ -13490,15 +13506,15 @@ public interface JiraRESTV2Api {
      * }
      * Parameters:
      *  *
-     * `previousStatusIds` a comma-separated list of status IDs, current only support one ID.
+     * {@code previousStatusIds} a comma-separated list of status IDs, current only support one ID.
      * *
-     * `not` indicates if the condition should be reversed. When `true` it checks that the issue has not been in the selected statuses. Allowed values: `true`, `false`.
+     * {@code not} indicates if the condition should be reversed. When {@code true} it checks that the issue has not been in the selected statuses. Allowed values: {@code true}, {@code false}.
      * *
-     * `mostRecentStatusOnly` when true only considers the most recent status for the condition evaluation. Allowed values: `true`, `false`.
+     * {@code mostRecentStatusOnly} when true only considers the most recent status for the condition evaluation. Allowed values: {@code true}, {@code false}.
      * *
-     * `includeCurrentStatus` includes the current status when evaluating if the issue has been through the selected statuses. Allowed values: `true`, `false`.
+     * {@code includeCurrentStatus} includes the current status when evaluating if the issue has been through the selected statuses. Allowed values: {@code true}, {@code false}.
      * *
-     * `ignoreLoopTransitions` ignore loop transitions. Allowed values: `true`, `false`.
+     * {@code ignoreLoopTransitions} ignore loop transitions. Allowed values: {@code true}, {@code false}.
      * ##### Parent or child blocking condition #####
      * A condition to block the parent’s issue transition depending on the child’s issue status.
      * 
@@ -13531,9 +13547,9 @@ public interface JiraRESTV2Api {
      * }
      * Parameters:
      *  *
-     * `blocker` currently only supports `CHILD`.
+     * {@code blocker} currently only supports {@code CHILD}.
      * *
-     * `statusIds` a comma-separated list of status IDs.
+     * {@code statusIds} a comma-separated list of status IDs.
      * ##### Separation of duties #####
      * A condition preventing the user from performing, if the user has already performed a transition on the issue.
      * 
@@ -13566,9 +13582,9 @@ public interface JiraRESTV2Api {
      * }
      * Parameters:
      *  *
-     * `fromStatusId` represents the status ID from which the issue is transitioning. It ensures that the user performing the current transition has not performed any actions when the issue was in the specified status.
+     * {@code fromStatusId} represents the status ID from which the issue is transitioning. It ensures that the user performing the current transition has not performed any actions when the issue was in the specified status.
      * *
-     * `toStatusId` represents the status ID to which the issue is transitioning. It ensures that the user performing the current transition is not the same user who has previously transitioned the issue.
+     * {@code toStatusId} represents the status ID to which the issue is transitioning. It ensures that the user performing the current transition is not the same user who has previously transitioned the issue.
      * ##### Restrict transitions #####
      * A condition preventing all users from transitioning the issue can also optionally include APIs as well.
      * 
@@ -13596,7 +13612,7 @@ public interface JiraRESTV2Api {
      * }
      * Parameters:
      *  *
-     * `restrictMode` restricts the issue transition including/excluding APIs. Allowed values: `"users"`, `"usersAndAPI"`.
+     * {@code restrictMode} restricts the issue transition including/excluding APIs. Allowed values: {@code "users"}, {@code "usersAndAPI"}.
      * ##### Jira Service Management block until approved #####
      * Block an issue transition until approval. Note: This is only supported in team-managed projects.
      * 
@@ -13624,7 +13640,7 @@ public interface JiraRESTV2Api {
      * }
      * Parameters:
      *  *
-     * `approvalConfigurationJson` a stringified JSON holding the Jira Service Management approval configuration.
+     * {@code approvalConfigurationJson} a stringified JSON holding the Jira Service Management approval configuration.
      * ##### Jira Service Management block until rejected #####
      * Block an issue transition until rejected. Note: This is only supported in team-managed projects.
      * 
@@ -13652,7 +13668,7 @@ public interface JiraRESTV2Api {
      * }
      * Parameters:
      *  *
-     * `approvalConfigurationJson` a stringified JSON holding the Jira Service Management approval configuration.
+     * {@code approvalConfigurationJson} a stringified JSON holding the Jira Service Management approval configuration.
      * ##### Block in progress approval #####
      * Condition to block issue transition if there is pending approval. Note: This is only supported in company-managed projects.
      * 
@@ -13703,9 +13719,9 @@ public interface JiraRESTV2Api {
      * }
      * Parameters:
      *  *
-     * `type` the parameter used to determine the new assignee. Allowed values: `to-selected-user`, `to-unassigned`, `to-current-user`, `to-current-user`, `to-default-user`, `to-default-user`
+     * {@code type} the parameter used to determine the new assignee. Allowed values: {@code to-selected-user}, {@code to-unassigned}, {@code to-current-user}, {@code to-current-user}, {@code to-default-user}, {@code to-default-user}
      * *
-     * `accountId` the account ID of the user to assign the issue to. This parameter is required only when the type is `"to-selected-user"`.
+     * {@code accountId} the account ID of the user to assign the issue to. This parameter is required only when the type is {@code "to-selected-user"}.
      * ##### Copy field value #####
      * A post function that automates the process of copying values between fields during a specific transition, ensuring data consistency and reducing manual effort.
      * 
@@ -13743,11 +13759,11 @@ public interface JiraRESTV2Api {
      * }
      * Parameters:
      *  *
-     * `sourceFieldKey` the field key to copy from. For a custom field, it would look like `customfield_123`
+     * {@code sourceFieldKey} the field key to copy from. For a custom field, it would look like {@code customfield_123}
      * *
-     * `targetFieldKey` the field key to copy to. For a custom field, it would look like `customfield_123`
+     * {@code targetFieldKey} the field key to copy to. For a custom field, it would look like {@code customfield_123}
      * *
-     * `issueSource` `SAME` or `PARENT`. Defaults to `SAME` if no value is provided.
+     * {@code issueSource} {@code SAME} or {@code PARENT}. Defaults to {@code SAME} if no value is provided.
      * ##### Update field #####
      * A post function that updates or appends a specific field with the given value.
      * 
@@ -13785,11 +13801,11 @@ public interface JiraRESTV2Api {
      * }
      * Parameters:
      *  *
-     * `field` the ID of the field to update. For a custom field, it would look like `customfield_123`
+     * {@code field} the ID of the field to update. For a custom field, it would look like {@code customfield_123}
      * *
-     * `value` the value to update the field with.
+     * {@code value} the value to update the field with.
      * *
-     * `mode` `append` or `replace`. Determines if a value will be appended to the current value, or if the current value will be replaced.
+     * {@code mode} {@code append} or {@code replace}. Determines if a value will be appended to the current value, or if the current value will be replaced.
      * ##### Trigger webhook #####
      * A post function that automatically triggers a predefined webhook when a transition occurs in the workflow.
      * 
@@ -13817,7 +13833,7 @@ public interface JiraRESTV2Api {
      * }
      * Parameters:
      *  *
-     * `webhookId` the ID of the webhook.
+     * {@code webhookId} the ID of the webhook.
      * #### Screen ####
      * ##### Remind people to update fields #####
      * A screen rule that prompts users to update a specific field when they interact with an issue screen during a transition. This rule is useful for ensuring that users provide or modify necessary information before moving an issue to the next step in the workflow.
@@ -13856,11 +13872,11 @@ public interface JiraRESTV2Api {
      * }
      * Parameters:
      *  *
-     * `remindingFieldIds` a comma-separated list of field IDs. Note: `fieldId` is used interchangeably with the idea of `fieldKey` here, they refer to the same field.
+     * {@code remindingFieldIds} a comma-separated list of field IDs. Note: {@code fieldId} is used interchangeably with the idea of {@code fieldKey} here, they refer to the same field.
      * *
-     * `remindingMessage` the message to display when prompting the users to update the fields.
+     * {@code remindingMessage} the message to display when prompting the users to update the fields.
      * *
-     * `remindingAlwaysAsk` always remind to update fields. Allowed values: `true`, `false`.
+     * {@code remindingAlwaysAsk} always remind to update fields. Allowed values: {@code true}, {@code false}.
      * ##### Shared transition screen #####
      * A common screen that is shared between transitions in a workflow.
      * 
@@ -13888,7 +13904,7 @@ public interface JiraRESTV2Api {
      * }
      * Parameters:
      *  *
-     * `screenId` the ID of the screen.
+     * {@code screenId} the ID of the screen.
      * #### Connect &amp; Forge ####
      * ##### Connect rules #####
      * Validator/Condition/Post function for Connect app.
@@ -13937,17 +13953,17 @@ public interface JiraRESTV2Api {
      * }
      * Parameters:
      *  *
-     * `ruleKey` Validator: `connect:expression-validator`, Condition: `connect:expression-condition`, and Post function: `connect:remote-workflow-function`
+     * {@code ruleKey} Validator: {@code connect:expression-validator}, Condition: {@code connect:expression-condition}, and Post function: {@code connect:remote-workflow-function}
      * *
-     * `appKey` the reference to the Connect app
+     * {@code appKey} the reference to the Connect app
      * *
-     * `config` a JSON payload string describing the configuration
+     * {@code config} a JSON payload string describing the configuration
      * *
-     * `id` the ID of the rule
+     * {@code id} the ID of the rule
      * *
-     * `disabled` determine if the Connect app is disabled. Allowed values: `true`, `false`.
+     * {@code disabled} determine if the Connect app is disabled. Allowed values: {@code true}, {@code false}.
      * *
-     * `tag` additional tags for the Connect app
+     * {@code tag} additional tags for the Connect app
      * ##### Forge rules #####
      * Validator/Condition/Post function for Forge app.
      * 
@@ -13985,13 +14001,13 @@ public interface JiraRESTV2Api {
      * }
      * Parameters:
      *  *
-     * `ruleKey` Validator: `forge:expression-validator`, Condition: `forge:expression-condition`, and Post function: `forge:workflow-post-function`
+     * {@code ruleKey} Validator: {@code forge:expression-validator}, Condition: {@code forge:expression-condition}, and Post function: {@code forge:workflow-post-function}
      * *
-     * `key` the identifier for the Forge app
+     * {@code key} the identifier for the Forge app
      * *
-     * `config` the persistent stringified JSON configuration for the Forge rule
+     * {@code config} the persistent stringified JSON configuration for the Forge rule
      * *
-     * `id` the ID of the Forge rule
+     * {@code id} the ID of the Forge rule
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param workflowId            (optional)

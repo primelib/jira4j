@@ -6,9 +6,14 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import javax.annotation.processing.Generated;
 
+import java.util.Set;
 import io.github.primelib.jira4j.restv2.model.Worklog;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -20,9 +25,13 @@ import java.util.function.Consumer;
  * <p>
  * Get issue worklogs
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class GetIssueWorklogOperationSpec {
     /**
@@ -41,13 +50,13 @@ public class GetIssueWorklogOperationSpec {
      * The index of the first item to return in a page of results (page offset).
      */
     @Nullable 
-    private Long startAt = 0L;
+    private Long startAt;
 
     /**
      * The maximum number of items to return per page.
      */
     @Nullable 
-    private Integer maxResults = 5000;
+    private Integer maxResults;
 
     /**
      * The worklog start date and time, as a UNIX timestamp in milliseconds, after which worklogs are returned.
@@ -62,19 +71,43 @@ public class GetIssueWorklogOperationSpec {
     private Long startedBefore;
 
     /**
-     * Use [expand](#expansion) to include additional information about worklogs in the response. This parameter accepts`properties`, which returns worklog properties.
+     * Use [expand](#expansion) to include additional information about worklogs in the response. This parameter accepts{@code properties}, which returns worklog properties.
      */
     @Nullable 
     private String expand;
 
     /**
-     * Constructs a validated implementation of {@link GetIssueWorklogOperationSpec}.
+     * Constructs a validated instance of {@link GetIssueWorklogOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public GetIssueWorklogOperationSpec(Consumer<GetIssueWorklogOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link GetIssueWorklogOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param issueIdOrKey         The ID or key of the issue.
+     * @param startAt              The index of the first item to return in a page of results (page offset).
+     * @param maxResults           The maximum number of items to return per page.
+     * @param startedAfter         The worklog start date and time, as a UNIX timestamp in milliseconds, after which worklogs are returned.
+     * @param startedBefore        The worklog start date and time, as a UNIX timestamp in milliseconds, before which worklogs are returned.
+     * @param expand               Use [expand](#expansion) to include additional information about worklogs in the response. This parameter accepts{@code properties}, which returns worklog properties.
+     */
+    @ApiStatus.Internal
+    public GetIssueWorklogOperationSpec(String issueIdOrKey, Long startAt, Integer maxResults, Long startedAfter, Long startedBefore, String expand) {
+        this.issueIdOrKey = issueIdOrKey;
+        this.startAt = startAt;
+        this.maxResults = maxResults;
+        this.startedAfter = startedAfter;
+        this.startedBefore = startedBefore;
+        this.expand = expand;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -87,5 +120,4 @@ public class GetIssueWorklogOperationSpec {
     public void validate() {
         Objects.requireNonNull(issueIdOrKey, "issueIdOrKey is a required parameter!");
     }
-
 }

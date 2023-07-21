@@ -3,13 +3,15 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.LinkedHashSet;
 import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -19,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * IssueChangelogIds
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "changelogIds"
 })
@@ -31,20 +36,29 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class IssueChangelogIds {
 
     /**
-     * Constructs a validated implementation of {@link IssueChangelogIds}.
+     * The list of changelog IDs.
+     */
+    @JsonProperty("changelogIds")
+    protected Set<Long> changelogIds;
+
+    /**
+     * Constructs a validated instance of {@link IssueChangelogIds}.
      *
      * @param spec the specification to process
      */
-    @ApiStatus.Internal
     public IssueChangelogIds(Consumer<IssueChangelogIds> spec) {
         spec.accept(this);
     }
 
     /**
-     * The list of changelog IDs.
+     * Constructs a validated instance of {@link IssueChangelogIds}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #IssueChangelogIds(Consumer)} instead.
+     * @param changelogIds The list of changelog IDs.
      */
-    @JsonProperty("changelogIds")
-    protected Set<Long> changelogIds = new LinkedHashSet<>();
-
+    @ApiStatus.Internal
+    public IssueChangelogIds(Set<Long> changelogIds) {
+        this.changelogIds = changelogIds;
+    }
 
 }

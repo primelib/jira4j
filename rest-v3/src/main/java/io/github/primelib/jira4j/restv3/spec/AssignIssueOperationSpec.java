@@ -5,9 +5,14 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import javax.annotation.processing.Generated;
 
+import java.util.Set;
 import io.github.primelib.jira4j.restv3.model.User;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -19,9 +24,13 @@ import java.util.function.Consumer;
  * <p>
  * Assign issue
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class AssignIssueOperationSpec {
     /**
@@ -43,13 +52,29 @@ public class AssignIssueOperationSpec {
     private User user;
 
     /**
-     * Constructs a validated implementation of {@link AssignIssueOperationSpec}.
+     * Constructs a validated instance of {@link AssignIssueOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public AssignIssueOperationSpec(Consumer<AssignIssueOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link AssignIssueOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param issueIdOrKey         The ID or key of the issue to be assigned.
+     * @param user                 The request object with the user that the issue is assigned to.
+     */
+    @ApiStatus.Internal
+    public AssignIssueOperationSpec(String issueIdOrKey, User user) {
+        this.issueIdOrKey = issueIdOrKey;
+        this.user = user;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -63,5 +88,4 @@ public class AssignIssueOperationSpec {
         Objects.requireNonNull(issueIdOrKey, "issueIdOrKey is a required parameter!");
         Objects.requireNonNull(user, "user is a required parameter!");
     }
-
 }

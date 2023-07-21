@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.util.Set;
@@ -18,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * FieldDetails
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "clauseNames",
     "custom",
@@ -37,16 +43,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("FieldDetails")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class FieldDetails {
-
-    /**
-     * Constructs a validated implementation of {@link FieldDetails}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public FieldDetails(Consumer<FieldDetails> spec) {
-        spec.accept(this);
-    }
 
     /**
      * The names that can be used to reference the field in an advanced search. For more information, see [Advanced searching - fields reference](https://confluence.atlassian.com/x/gwORLQ).
@@ -102,5 +98,42 @@ public class FieldDetails {
     @JsonProperty("searchable")
     protected Boolean searchable;
 
+    /**
+     * Constructs a validated instance of {@link FieldDetails}.
+     *
+     * @param spec the specification to process
+     */
+    public FieldDetails(Consumer<FieldDetails> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link FieldDetails}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #FieldDetails(Consumer)} instead.
+     * @param clauseNames The names that can be used to reference the field in an advanced search. For more information, see [Advanced searching - fields reference](https://confluence.atlassian.com/x/gwORLQ).
+     * @param custom Whether the field is a custom field.
+     * @param id The ID of the field.
+     * @param key The key of the field.
+     * @param name The name of the field.
+     * @param navigable Whether the field can be used as a column on the issue navigator.
+     * @param orderable Whether the content of the field can be used to order lists.
+     * @param schema var.name
+     * @param scope var.name
+     * @param searchable Whether the content of the field can be searched.
+     */
+    @ApiStatus.Internal
+    public FieldDetails(Set<String> clauseNames, Boolean custom, String id, String key, String name, Boolean navigable, Boolean orderable, FieldDetailsSchema schema, FieldDetailsScope scope, Boolean searchable) {
+        this.clauseNames = clauseNames;
+        this.custom = custom;
+        this.id = id;
+        this.key = key;
+        this.name = name;
+        this.navigable = navigable;
+        this.orderable = orderable;
+        this.schema = schema;
+        this.scope = scope;
+        this.searchable = searchable;
+    }
 
 }

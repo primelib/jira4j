@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -17,10 +20,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * DashboardGadgetSettings
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "color",
     "ignoreUriAndModuleKeyValidation",
@@ -34,17 +40,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class DashboardGadgetSettings {
 
     /**
-     * Constructs a validated implementation of {@link DashboardGadgetSettings}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public DashboardGadgetSettings(Consumer<DashboardGadgetSettings> spec) {
-        spec.accept(this);
-    }
-
-    /**
-     * The color of the gadget. Should be one of `blue`, `red`, `yellow`, `green`, `cyan`, `purple`, `gray`, or `white`.
+     * The color of the gadget. Should be one of {@code blue}, {@code red}, {@code yellow}, {@code green}, {@code cyan}, {@code purple}, {@code gray}, or {@code white}.
      */
     @JsonProperty("color")
     protected String color;
@@ -56,7 +52,7 @@ public class DashboardGadgetSettings {
     protected Boolean ignoreUriAndModuleKeyValidation;
 
     /**
-     * The module key of the gadget type. Can't be provided with `uri`.
+     * The module key of the gadget type. Can't be provided with {@code uri}.
      */
     @JsonProperty("moduleKey")
     protected String moduleKey;
@@ -71,10 +67,39 @@ public class DashboardGadgetSettings {
     protected String title;
 
     /**
-     * The URI of the gadget type. Can't be provided with `moduleKey`.
+     * The URI of the gadget type. Can't be provided with {@code moduleKey}.
      */
     @JsonProperty("uri")
     protected String uri;
 
+    /**
+     * Constructs a validated instance of {@link DashboardGadgetSettings}.
+     *
+     * @param spec the specification to process
+     */
+    public DashboardGadgetSettings(Consumer<DashboardGadgetSettings> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link DashboardGadgetSettings}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #DashboardGadgetSettings(Consumer)} instead.
+     * @param color The color of the gadget. Should be one of {@code blue}, {@code red}, {@code yellow}, {@code green}, {@code cyan}, {@code purple}, {@code gray}, or {@code white}.
+     * @param ignoreUriAndModuleKeyValidation Whether to ignore the validation of module key and URI. For example, when a gadget is created that is a part of an application that isn't installed.
+     * @param moduleKey The module key of the gadget type. Can't be provided with {@code uri}.
+     * @param position var.name
+     * @param title The title of the gadget.
+     * @param uri The URI of the gadget type. Can't be provided with {@code moduleKey}.
+     */
+    @ApiStatus.Internal
+    public DashboardGadgetSettings(String color, Boolean ignoreUriAndModuleKeyValidation, String moduleKey, DashboardGadgetSettingsPosition position, String title, String uri) {
+        this.color = color;
+        this.ignoreUriAndModuleKeyValidation = ignoreUriAndModuleKeyValidation;
+        this.moduleKey = moduleKey;
+        this.position = position;
+        this.title = title;
+        this.uri = uri;
+    }
 
 }

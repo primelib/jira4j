@@ -6,8 +6,13 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.processing.Generated;
 
 import io.github.primelib.jira4j.restv3.model.PermissionScheme;
+import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -19,9 +24,13 @@ import java.util.function.Consumer;
  * <p>
  * Delete permission scheme grant
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class DeletePermissionSchemeEntityOperationSpec {
     /**
@@ -43,13 +52,29 @@ public class DeletePermissionSchemeEntityOperationSpec {
     private Long permissionId;
 
     /**
-     * Constructs a validated implementation of {@link DeletePermissionSchemeEntityOperationSpec}.
+     * Constructs a validated instance of {@link DeletePermissionSchemeEntityOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public DeletePermissionSchemeEntityOperationSpec(Consumer<DeletePermissionSchemeEntityOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link DeletePermissionSchemeEntityOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param schemeId             The ID of the permission scheme to delete the permission grant from.
+     * @param permissionId         The ID of the permission grant to delete.
+     */
+    @ApiStatus.Internal
+    public DeletePermissionSchemeEntityOperationSpec(Long schemeId, Long permissionId) {
+        this.schemeId = schemeId;
+        this.permissionId = permissionId;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -63,5 +88,4 @@ public class DeletePermissionSchemeEntityOperationSpec {
         Objects.requireNonNull(schemeId, "schemeId is a required parameter!");
         Objects.requireNonNull(permissionId, "permissionId is a required parameter!");
     }
-
 }

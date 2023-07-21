@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -17,10 +20,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Field
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "contextsCount",
     "description",
@@ -38,16 +44,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("Field")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class Field {
-
-    /**
-     * Constructs a validated implementation of {@link Field}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public Field(Consumer<Field> spec) {
-        spec.accept(this);
-    }
 
     /**
      * Number of contexts where the field is used.
@@ -115,5 +111,46 @@ public class Field {
     @JsonProperty("searcherKey")
     protected String searcherKey;
 
+    /**
+     * Constructs a validated instance of {@link Field}.
+     *
+     * @param spec the specification to process
+     */
+    public Field(Consumer<Field> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link Field}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #Field(Consumer)} instead.
+     * @param contextsCount Number of contexts where the field is used.
+     * @param description The description of the field.
+     * @param id The ID of the field.
+     * @param isLocked Whether the field is locked.
+     * @param isUnscreenable Whether the field is shown on screen or not.
+     * @param key The key of the field.
+     * @param lastUsed var.name
+     * @param name The name of the field.
+     * @param projectsCount Number of projects where the field is used.
+     * @param schema var.name
+     * @param screensCount Number of screens where the field is used.
+     * @param searcherKey The searcher key of the field. Returned for custom fields.
+     */
+    @ApiStatus.Internal
+    public Field(Long contextsCount, String description, String id, Boolean isLocked, Boolean isUnscreenable, String key, FieldLastUsed lastUsed, String name, Long projectsCount, JsonTypeBean schema, Long screensCount, String searcherKey) {
+        this.contextsCount = contextsCount;
+        this.description = description;
+        this.id = id;
+        this.isLocked = isLocked;
+        this.isUnscreenable = isUnscreenable;
+        this.key = key;
+        this.lastUsed = lastUsed;
+        this.name = name;
+        this.projectsCount = projectsCount;
+        this.schema = schema;
+        this.screensCount = screensCount;
+        this.searcherKey = searcherKey;
+    }
 
 }

@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.time.OffsetDateTime;
@@ -19,10 +22,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Workflow
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "created",
     "description",
@@ -39,16 +45,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("Workflow")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class Workflow {
-
-    /**
-     * Constructs a validated implementation of {@link Workflow}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public Workflow(Consumer<Workflow> spec) {
-        spec.accept(this);
-    }
 
     /**
      * The creation date of the workflow.
@@ -110,5 +106,44 @@ public class Workflow {
     @JsonProperty("updated")
     protected OffsetDateTime updated;
 
+    /**
+     * Constructs a validated instance of {@link Workflow}.
+     *
+     * @param spec the specification to process
+     */
+    public Workflow(Consumer<Workflow> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link Workflow}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #Workflow(Consumer)} instead.
+     * @param created The creation date of the workflow.
+     * @param description The description of the workflow.
+     * @param hasDraftWorkflow Whether the workflow has a draft version.
+     * @param id var.name
+     * @param isDefault Whether this is the default workflow.
+     * @param operations var.name
+     * @param projects The projects the workflow is assigned to, through workflow schemes.
+     * @param schemes The workflow schemes the workflow is assigned to.
+     * @param statuses The statuses of the workflow.
+     * @param transitions The transitions of the workflow.
+     * @param updated The last edited date of the workflow.
+     */
+    @ApiStatus.Internal
+    public Workflow(OffsetDateTime created, String description, Boolean hasDraftWorkflow, PublishedWorkflowId id, Boolean isDefault, WorkflowOperations operations, List<ProjectDetails> projects, List<WorkflowSchemeIdName> schemes, List<WorkflowStatus> statuses, List<Transition> transitions, OffsetDateTime updated) {
+        this.created = created;
+        this.description = description;
+        this.hasDraftWorkflow = hasDraftWorkflow;
+        this.id = id;
+        this.isDefault = isDefault;
+        this.operations = operations;
+        this.projects = projects;
+        this.schemes = schemes;
+        this.statuses = statuses;
+        this.transitions = transitions;
+        this.updated = updated;
+    }
 
 }

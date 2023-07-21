@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.util.Set;
@@ -18,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * JiraWorkflow
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "description",
     "id",
@@ -38,16 +44,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("JiraWorkflow")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class JiraWorkflow {
-
-    /**
-     * Constructs a validated implementation of {@link JiraWorkflow}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public JiraWorkflow(Consumer<JiraWorkflow> spec) {
-        spec.accept(this);
-    }
 
     /**
      * The description of the workflow.
@@ -98,7 +94,7 @@ public class JiraWorkflow {
     protected Set<WorkflowTransitions> transitions;
 
     /**
-     * The `workflows.usages` expand is an optional parameter that can be used when reading and updating workflows in Jira. It provides additional information about the projects and issue types associated with the requested workflows.
+     * The {@code workflows.usages} expand is an optional parameter that can be used when reading and updating workflows in Jira. It provides additional information about the projects and issue types associated with the requested workflows.
      */
     @JsonProperty("usages")
     protected Set<ProjectIssueTypes> usages;
@@ -106,5 +102,44 @@ public class JiraWorkflow {
     @JsonProperty("version")
     protected DocumentVersion version;
 
+    /**
+     * Constructs a validated instance of {@link JiraWorkflow}.
+     *
+     * @param spec the specification to process
+     */
+    public JiraWorkflow(Consumer<JiraWorkflow> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link JiraWorkflow}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #JiraWorkflow(Consumer)} instead.
+     * @param description The description of the workflow.
+     * @param id The ID of the workflow.
+     * @param isEditable Indicates if the workflow can be edited.
+     * @param name The name of the workflow.
+     * @param scope var.name
+     * @param startPointLayout var.name
+     * @param statuses The statuses referenced in this workflow.
+     * @param taskId If there is a current [asynchronous task](#async-operations) operation for this workflow.
+     * @param transitions The transitions of the workflow.
+     * @param usages The {@code workflows.usages} expand is an optional parameter that can be used when reading and updating workflows in Jira. It provides additional information about the projects and issue types associated with the requested workflows.
+     * @param version var.name
+     */
+    @ApiStatus.Internal
+    public JiraWorkflow(String description, String id, Boolean isEditable, String name, WorkflowScope scope, WorkflowLayout startPointLayout, Set<WorkflowReferenceStatus> statuses, String taskId, Set<WorkflowTransitions> transitions, Set<ProjectIssueTypes> usages, DocumentVersion version) {
+        this.description = description;
+        this.id = id;
+        this.isEditable = isEditable;
+        this.name = name;
+        this.scope = scope;
+        this.startPointLayout = startPointLayout;
+        this.statuses = statuses;
+        this.taskId = taskId;
+        this.transitions = transitions;
+        this.usages = usages;
+        this.version = version;
+    }
 
 }

@@ -6,8 +6,13 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.processing.Generated;
 
 import io.github.primelib.jira4j.restv3.model.Resolution;
+import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -19,9 +24,13 @@ import java.util.function.Consumer;
  * <p>
  * Search resolutions
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class SearchResolutionsOperationSpec {
     /**
@@ -34,13 +43,13 @@ public class SearchResolutionsOperationSpec {
      * The index of the first item to return in a page of results (page offset).
      */
     @Nullable 
-    private String startAt = "0";
+    private String startAt;
 
     /**
      * The maximum number of items to return per page.
      */
     @Nullable 
-    private String maxResults = "50";
+    private String maxResults;
 
     /**
      * The list of resolutions IDs to be filtered out
@@ -52,10 +61,10 @@ public class SearchResolutionsOperationSpec {
      * When set to true, return default only, when IDs provided, if none of them is default, return empty page. Default value is false
      */
     @Nullable 
-    private Boolean onlyDefault = false;
+    private Boolean onlyDefault;
 
     /**
-     * Constructs a validated implementation of {@link SearchResolutionsOperationSpec}.
+     * Constructs a validated instance of {@link SearchResolutionsOperationSpec}.
      *
      * @param spec the specification to process
      */
@@ -67,11 +76,30 @@ public class SearchResolutionsOperationSpec {
     }
 
     /**
+     * Constructs a validated instance of {@link SearchResolutionsOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param startAt              The index of the first item to return in a page of results (page offset).
+     * @param maxResults           The maximum number of items to return per page.
+     * @param id                   The list of resolutions IDs to be filtered out
+     * @param onlyDefault          When set to true, return default only, when IDs provided, if none of them is default, return empty page. Default value is false
+     */
+    @ApiStatus.Internal
+    public SearchResolutionsOperationSpec(String startAt, String maxResults, List<String> id, Boolean onlyDefault) {
+        this.startAt = startAt;
+        this.maxResults = maxResults;
+        this.id = id;
+        this.onlyDefault = onlyDefault;
+
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
      * Validates the Spec, will throw a exception if required parameters are missing
      *
      * @throws NullPointerException
      */
     public void validate() {
     }
-
 }

@@ -4,9 +4,14 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.Nullable;
 import javax.annotation.processing.Generated;
 
+import java.util.Set;
 import io.github.primelib.jira4j.restv2.model.User;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -18,9 +23,13 @@ import java.util.function.Consumer;
  * <p>
  * Find users with browse permission
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class FindUsersWithBrowsePermissionOperationSpec {
     /**
@@ -30,7 +39,7 @@ public class FindUsersWithBrowsePermissionOperationSpec {
     public static Boolean VALIDATION_ENABLED = true;
 
     /**
-     * A query string that is matched against user attributes, such as `displayName` and `emailAddress`, to find relevant users. The string can match the prefix of the attribute's value. For example, *query=john* matches a user with a `displayName` of *John Smith* and a user with an `emailAddress` of *johnson@example.com*. Required, unless `accountId` is specified.
+     * A query string that is matched against user attributes, such as {@code displayName} and {@code emailAddress}, to find relevant users. The string can match the prefix of the attribute's value. For example, *query=john* matches a user with a {@code displayName} of *John Smith* and a user with an {@code emailAddress} of *johnson@example.com*. Required, unless {@code accountId} is specified.
      */
     @Nullable 
     private String query;
@@ -42,19 +51,19 @@ public class FindUsersWithBrowsePermissionOperationSpec {
     private String username;
 
     /**
-     * A query string that is matched exactly against user `accountId`. Required, unless `query` is specified.
+     * A query string that is matched exactly against user {@code accountId}. Required, unless {@code query} is specified.
      */
     @Nullable 
     private String accountId;
 
     /**
-     * The issue key for the issue. Required, unless `projectKey` is specified.
+     * The issue key for the issue. Required, unless {@code projectKey} is specified.
      */
     @Nullable 
     private String issueKey;
 
     /**
-     * The project key for the project (case sensitive). Required, unless `issueKey` is specified.
+     * The project key for the project (case sensitive). Required, unless {@code issueKey} is specified.
      */
     @Nullable 
     private String projectKey;
@@ -63,16 +72,16 @@ public class FindUsersWithBrowsePermissionOperationSpec {
      * The index of the first item to return in a page of results (page offset).
      */
     @Nullable 
-    private Integer startAt = 0;
+    private Integer startAt;
 
     /**
      * The maximum number of items to return per page.
      */
     @Nullable 
-    private Integer maxResults = 50;
+    private Integer maxResults;
 
     /**
-     * Constructs a validated implementation of {@link FindUsersWithBrowsePermissionOperationSpec}.
+     * Constructs a validated instance of {@link FindUsersWithBrowsePermissionOperationSpec}.
      *
      * @param spec the specification to process
      */
@@ -84,11 +93,36 @@ public class FindUsersWithBrowsePermissionOperationSpec {
     }
 
     /**
+     * Constructs a validated instance of {@link FindUsersWithBrowsePermissionOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param query                A query string that is matched against user attributes, such as {@code displayName} and {@code emailAddress}, to find relevant users. The string can match the prefix of the attribute's value. For example, *query=john* matches a user with a {@code displayName} of *John Smith* and a user with an {@code emailAddress} of *johnson@example.com*. Required, unless {@code accountId} is specified.
+     * @param username             This parameter is no longer available. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.
+     * @param accountId            A query string that is matched exactly against user {@code accountId}. Required, unless {@code query} is specified.
+     * @param issueKey             The issue key for the issue. Required, unless {@code projectKey} is specified.
+     * @param projectKey           The project key for the project (case sensitive). Required, unless {@code issueKey} is specified.
+     * @param startAt              The index of the first item to return in a page of results (page offset).
+     * @param maxResults           The maximum number of items to return per page.
+     */
+    @ApiStatus.Internal
+    public FindUsersWithBrowsePermissionOperationSpec(String query, String username, String accountId, String issueKey, String projectKey, Integer startAt, Integer maxResults) {
+        this.query = query;
+        this.username = username;
+        this.accountId = accountId;
+        this.issueKey = issueKey;
+        this.projectKey = projectKey;
+        this.startAt = startAt;
+        this.maxResults = maxResults;
+
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
      * Validates the Spec, will throw a exception if required parameters are missing
      *
      * @throws NullPointerException
      */
     public void validate() {
     }
-
 }

@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.util.List;
@@ -18,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * NotificationRecipientsRestrictions
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "groupIds",
     "groups",
@@ -30,16 +36,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("NotificationRecipientsRestrictions")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class NotificationRecipientsRestrictions {
-
-    /**
-     * Constructs a validated implementation of {@link NotificationRecipientsRestrictions}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public NotificationRecipientsRestrictions(Consumer<NotificationRecipientsRestrictions> spec) {
-        spec.accept(this);
-    }
 
     /**
      * List of groupId memberships required to receive the notification.
@@ -59,5 +55,28 @@ public class NotificationRecipientsRestrictions {
     @JsonProperty("permissions")
     protected List<RestrictedPermission> permissions;
 
+    /**
+     * Constructs a validated instance of {@link NotificationRecipientsRestrictions}.
+     *
+     * @param spec the specification to process
+     */
+    public NotificationRecipientsRestrictions(Consumer<NotificationRecipientsRestrictions> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link NotificationRecipientsRestrictions}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #NotificationRecipientsRestrictions(Consumer)} instead.
+     * @param groupIds List of groupId memberships required to receive the notification.
+     * @param groups List of group memberships required to receive the notification.
+     * @param permissions List of permissions required to receive the notification.
+     */
+    @ApiStatus.Internal
+    public NotificationRecipientsRestrictions(List<String> groupIds, List<GroupName> groups, List<RestrictedPermission> permissions) {
+        this.groupIds = groupIds;
+        this.groups = groups;
+        this.permissions = permissions;
+    }
 
 }

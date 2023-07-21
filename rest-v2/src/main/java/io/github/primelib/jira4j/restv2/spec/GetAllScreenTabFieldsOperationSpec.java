@@ -7,8 +7,13 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.processing.Generated;
 
 import io.github.primelib.jira4j.restv2.model.Screen;
+import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -20,9 +25,13 @@ import java.util.function.Consumer;
  * <p>
  * Get all screen tab fields
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class GetAllScreenTabFieldsOperationSpec {
     /**
@@ -50,13 +59,31 @@ public class GetAllScreenTabFieldsOperationSpec {
     private String projectKey;
 
     /**
-     * Constructs a validated implementation of {@link GetAllScreenTabFieldsOperationSpec}.
+     * Constructs a validated instance of {@link GetAllScreenTabFieldsOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public GetAllScreenTabFieldsOperationSpec(Consumer<GetAllScreenTabFieldsOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link GetAllScreenTabFieldsOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param screenId             The ID of the screen.
+     * @param tabId                The ID of the screen tab.
+     * @param projectKey           The key of the project.
+     */
+    @ApiStatus.Internal
+    public GetAllScreenTabFieldsOperationSpec(Long screenId, Long tabId, String projectKey) {
+        this.screenId = screenId;
+        this.tabId = tabId;
+        this.projectKey = projectKey;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -70,5 +97,4 @@ public class GetAllScreenTabFieldsOperationSpec {
         Objects.requireNonNull(screenId, "screenId is a required parameter!");
         Objects.requireNonNull(tabId, "tabId is a required parameter!");
     }
-
 }

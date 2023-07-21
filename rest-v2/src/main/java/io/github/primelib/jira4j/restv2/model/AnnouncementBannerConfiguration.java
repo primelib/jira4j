@@ -3,10 +3,14 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -17,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * AnnouncementBannerConfiguration
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "hashId",
     "isDismissible",
@@ -31,16 +38,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("AnnouncementBannerConfiguration")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class AnnouncementBannerConfiguration {
-
-    /**
-     * Constructs a validated implementation of {@link AnnouncementBannerConfiguration}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public AnnouncementBannerConfiguration(Consumer<AnnouncementBannerConfiguration> spec) {
-        spec.accept(this);
-    }
 
     /**
      * Hash of the banner data. The client detects updates by comparing hash IDs.
@@ -72,6 +69,33 @@ public class AnnouncementBannerConfiguration {
     @JsonProperty("visibility")
     protected VisibilityEnum visibility;
 
+    /**
+     * Constructs a validated instance of {@link AnnouncementBannerConfiguration}.
+     *
+     * @param spec the specification to process
+     */
+    public AnnouncementBannerConfiguration(Consumer<AnnouncementBannerConfiguration> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link AnnouncementBannerConfiguration}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #AnnouncementBannerConfiguration(Consumer)} instead.
+     * @param hashId Hash of the banner data. The client detects updates by comparing hash IDs.
+     * @param isDismissible Flag indicating if the announcement banner can be dismissed by the user.
+     * @param isEnabled Flag indicating if the announcement banner is enabled or not.
+     * @param message The text on the announcement banner.
+     * @param visibility Visibility of the announcement banner.
+     */
+    @ApiStatus.Internal
+    public AnnouncementBannerConfiguration(String hashId, Boolean isDismissible, Boolean isEnabled, String message, VisibilityEnum visibility) {
+        this.hashId = hashId;
+        this.isDismissible = isDismissible;
+        this.isEnabled = isEnabled;
+        this.message = message;
+        this.visibility = visibility;
+    }
 
     /**
      * Visibility of the announcement banner.

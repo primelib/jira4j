@@ -3,14 +3,15 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -21,10 +22,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * IssuesAndJQLQueries
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "issueIds",
     "jqls"
@@ -34,26 +38,37 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class IssuesAndJQLQueries {
 
     /**
-     * Constructs a validated implementation of {@link IssuesAndJQLQueries}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public IssuesAndJQLQueries(Consumer<IssuesAndJQLQueries> spec) {
-        spec.accept(this);
-    }
-
-    /**
      * A list of issue IDs.
      */
     @JsonProperty("issueIds")
-    protected Set<Long> issueIds = new LinkedHashSet<>();
+    protected Set<Long> issueIds;
 
     /**
      * A list of JQL queries.
      */
     @JsonProperty("jqls")
-    protected List<String> jqls = new ArrayList<>();
+    protected List<String> jqls;
 
+    /**
+     * Constructs a validated instance of {@link IssuesAndJQLQueries}.
+     *
+     * @param spec the specification to process
+     */
+    public IssuesAndJQLQueries(Consumer<IssuesAndJQLQueries> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link IssuesAndJQLQueries}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #IssuesAndJQLQueries(Consumer)} instead.
+     * @param issueIds A list of issue IDs.
+     * @param jqls A list of JQL queries.
+     */
+    @ApiStatus.Internal
+    public IssuesAndJQLQueries(Set<Long> issueIds, List<String> jqls) {
+        this.issueIds = issueIds;
+        this.jqls = jqls;
+    }
 
 }

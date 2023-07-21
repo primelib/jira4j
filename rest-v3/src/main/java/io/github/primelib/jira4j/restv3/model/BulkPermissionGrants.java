@@ -4,13 +4,15 @@ import java.util.List;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.LinkedHashSet;
 import java.util.Set;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -20,10 +22,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * BulkPermissionGrants
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "globalPermissions",
     "projectPermissions"
@@ -33,26 +38,37 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class BulkPermissionGrants {
 
     /**
-     * Constructs a validated implementation of {@link BulkPermissionGrants}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public BulkPermissionGrants(Consumer<BulkPermissionGrants> spec) {
-        spec.accept(this);
-    }
-
-    /**
      * List of permissions granted to the user.
      */
     @JsonProperty("globalPermissions")
-    protected Set<String> globalPermissions = new LinkedHashSet<>();
+    protected Set<String> globalPermissions;
 
     /**
      * List of project permissions and the projects and issues those permissions provide access to.
      */
     @JsonProperty("projectPermissions")
-    protected Set<BulkProjectPermissionGrants> projectPermissions = new LinkedHashSet<>();
+    protected Set<BulkProjectPermissionGrants> projectPermissions;
 
+    /**
+     * Constructs a validated instance of {@link BulkPermissionGrants}.
+     *
+     * @param spec the specification to process
+     */
+    public BulkPermissionGrants(Consumer<BulkPermissionGrants> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link BulkPermissionGrants}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #BulkPermissionGrants(Consumer)} instead.
+     * @param globalPermissions List of permissions granted to the user.
+     * @param projectPermissions List of project permissions and the projects and issues those permissions provide access to.
+     */
+    @ApiStatus.Internal
+    public BulkPermissionGrants(Set<String> globalPermissions, Set<BulkProjectPermissionGrants> projectPermissions) {
+        this.globalPermissions = globalPermissions;
+        this.projectPermissions = projectPermissions;
+    }
 
 }

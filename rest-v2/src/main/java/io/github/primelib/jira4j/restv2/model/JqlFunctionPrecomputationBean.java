@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.time.OffsetDateTime;
@@ -19,10 +22,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * JqlFunctionPrecomputationBean
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "arguments",
     "created",
@@ -38,16 +44,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("JqlFunctionPrecomputationBean")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class JqlFunctionPrecomputationBean {
-
-    /**
-     * Constructs a validated implementation of {@link JqlFunctionPrecomputationBean}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public JqlFunctionPrecomputationBean(Consumer<JqlFunctionPrecomputationBean> spec) {
-        spec.accept(this);
-    }
 
     @JsonProperty("arguments")
     protected List<String> arguments;
@@ -79,5 +75,42 @@ public class JqlFunctionPrecomputationBean {
     @JsonProperty("value")
     protected String value;
 
+    /**
+     * Constructs a validated instance of {@link JqlFunctionPrecomputationBean}.
+     *
+     * @param spec the specification to process
+     */
+    public JqlFunctionPrecomputationBean(Consumer<JqlFunctionPrecomputationBean> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link JqlFunctionPrecomputationBean}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #JqlFunctionPrecomputationBean(Consumer)} instead.
+     * @param arguments var.name
+     * @param created var.name
+     * @param field var.name
+     * @param functionKey var.name
+     * @param functionName var.name
+     * @param id var.name
+     * @param operator var.name
+     * @param updated var.name
+     * @param used var.name
+     * @param value var.name
+     */
+    @ApiStatus.Internal
+    public JqlFunctionPrecomputationBean(List<String> arguments, OffsetDateTime created, String field, String functionKey, String functionName, String id, String operator, OffsetDateTime updated, OffsetDateTime used, String value) {
+        this.arguments = arguments;
+        this.created = created;
+        this.field = field;
+        this.functionKey = functionKey;
+        this.functionName = functionName;
+        this.id = id;
+        this.operator = operator;
+        this.updated = updated;
+        this.used = used;
+        this.value = value;
+    }
 
 }

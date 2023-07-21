@@ -3,13 +3,15 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.ArrayList;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -19,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * WorkflowCreateRequest
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "scope",
     "statuses",
@@ -32,16 +37,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class WorkflowCreateRequest {
 
-    /**
-     * Constructs a validated implementation of {@link WorkflowCreateRequest}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public WorkflowCreateRequest(Consumer<WorkflowCreateRequest> spec) {
-        spec.accept(this);
-    }
-
     @JsonProperty("scope")
     protected WorkflowScope scope;
 
@@ -49,13 +44,36 @@ public class WorkflowCreateRequest {
      * The statuses to associate with the workflows.
      */
     @JsonProperty("statuses")
-    protected List<WorkflowStatusUpdate> statuses = new ArrayList<>();
+    protected List<WorkflowStatusUpdate> statuses;
 
     /**
      * The details of the workflows to create.
      */
     @JsonProperty("workflows")
-    protected List<WorkflowCreate> workflows = new ArrayList<>();
+    protected List<WorkflowCreate> workflows;
 
+    /**
+     * Constructs a validated instance of {@link WorkflowCreateRequest}.
+     *
+     * @param spec the specification to process
+     */
+    public WorkflowCreateRequest(Consumer<WorkflowCreateRequest> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link WorkflowCreateRequest}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #WorkflowCreateRequest(Consumer)} instead.
+     * @param scope var.name
+     * @param statuses The statuses to associate with the workflows.
+     * @param workflows The details of the workflows to create.
+     */
+    @ApiStatus.Internal
+    public WorkflowCreateRequest(WorkflowScope scope, List<WorkflowStatusUpdate> statuses, List<WorkflowCreate> workflows) {
+        this.scope = scope;
+        this.statuses = statuses;
+        this.workflows = workflows;
+    }
 
 }

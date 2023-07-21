@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.util.List;
@@ -18,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * SimpleListWrapperApplicationRole
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "callback",
     "items",
@@ -32,16 +38,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("SimpleListWrapperApplicationRole")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class SimpleListWrapperApplicationRole {
-
-    /**
-     * Constructs a validated implementation of {@link SimpleListWrapperApplicationRole}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public SimpleListWrapperApplicationRole(Consumer<SimpleListWrapperApplicationRole> spec) {
-        spec.accept(this);
-    }
 
     @JsonProperty("callback")
     protected Object callback;
@@ -58,5 +54,32 @@ public class SimpleListWrapperApplicationRole {
     @JsonProperty("size")
     protected Integer size;
 
+    /**
+     * Constructs a validated instance of {@link SimpleListWrapperApplicationRole}.
+     *
+     * @param spec the specification to process
+     */
+    public SimpleListWrapperApplicationRole(Consumer<SimpleListWrapperApplicationRole> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link SimpleListWrapperApplicationRole}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #SimpleListWrapperApplicationRole(Consumer)} instead.
+     * @param callback var.name
+     * @param items var.name
+     * @param maxResults var.name
+     * @param pagingCallback var.name
+     * @param size var.name
+     */
+    @ApiStatus.Internal
+    public SimpleListWrapperApplicationRole(Object callback, List<ApplicationRole> items, Integer maxResults, Object pagingCallback, Integer size) {
+        this.callback = callback;
+        this.items = items;
+        this.maxResults = maxResults;
+        this.pagingCallback = pagingCallback;
+        this.size = size;
+    }
 
 }

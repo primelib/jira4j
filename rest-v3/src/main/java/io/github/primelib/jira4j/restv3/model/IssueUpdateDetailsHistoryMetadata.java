@@ -3,13 +3,15 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.HashMap;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -19,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * IssueUpdateDetailsHistoryMetadata
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "activityDescription",
     "activityDescriptionKey",
@@ -39,16 +44,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("IssueUpdateDetails_historyMetadata")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class IssueUpdateDetailsHistoryMetadata {
-
-    /**
-     * Constructs a validated implementation of {@link IssueUpdateDetailsHistoryMetadata}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public IssueUpdateDetailsHistoryMetadata(Consumer<IssueUpdateDetailsHistoryMetadata> spec) {
-        spec.accept(this);
-    }
 
     /**
      * The activity described in the history record.
@@ -96,7 +91,7 @@ public class IssueUpdateDetailsHistoryMetadata {
      * Additional arbitrary information about the history record.
      */
     @JsonProperty("extraData")
-    protected Map<String, String> extraData = new HashMap<>();
+    protected Map<String, String> extraData;
 
     @JsonProperty("generator")
     protected HistoryMetadataGenerator generator;
@@ -107,5 +102,44 @@ public class IssueUpdateDetailsHistoryMetadata {
     @JsonProperty("type")
     protected String type;
 
+    /**
+     * Constructs a validated instance of {@link IssueUpdateDetailsHistoryMetadata}.
+     *
+     * @param spec the specification to process
+     */
+    public IssueUpdateDetailsHistoryMetadata(Consumer<IssueUpdateDetailsHistoryMetadata> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link IssueUpdateDetailsHistoryMetadata}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #IssueUpdateDetailsHistoryMetadata(Consumer)} instead.
+     * @param activityDescription The activity described in the history record.
+     * @param activityDescriptionKey The key of the activity described in the history record.
+     * @param actor var.name
+     * @param cause var.name
+     * @param description The description of the history record.
+     * @param descriptionKey The description key of the history record.
+     * @param emailDescription The description of the email address associated the history record.
+     * @param emailDescriptionKey The description key of the email address associated the history record.
+     * @param extraData Additional arbitrary information about the history record.
+     * @param generator var.name
+     * @param type The type of the history record.
+     */
+    @ApiStatus.Internal
+    public IssueUpdateDetailsHistoryMetadata(String activityDescription, String activityDescriptionKey, HistoryMetadataActor actor, HistoryMetadataCause cause, String description, String descriptionKey, String emailDescription, String emailDescriptionKey, Map<String, String> extraData, HistoryMetadataGenerator generator, String type) {
+        this.activityDescription = activityDescription;
+        this.activityDescriptionKey = activityDescriptionKey;
+        this.actor = actor;
+        this.cause = cause;
+        this.description = description;
+        this.descriptionKey = descriptionKey;
+        this.emailDescription = emailDescription;
+        this.emailDescriptionKey = emailDescriptionKey;
+        this.extraData = extraData;
+        this.generator = generator;
+        this.type = type;
+    }
 
 }

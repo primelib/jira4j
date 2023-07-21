@@ -6,8 +6,13 @@ import org.jetbrains.annotations.NotNull;
 import javax.annotation.processing.Generated;
 
 import io.github.primelib.jira4j.restv3.model.SecurityLevel;
+import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -19,9 +24,13 @@ import java.util.function.Consumer;
  * <p>
  * Remove member from issue security level
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class RemoveMemberFromSecurityLevelOperationSpec {
     /**
@@ -49,13 +58,31 @@ public class RemoveMemberFromSecurityLevelOperationSpec {
     private String memberId;
 
     /**
-     * Constructs a validated implementation of {@link RemoveMemberFromSecurityLevelOperationSpec}.
+     * Constructs a validated instance of {@link RemoveMemberFromSecurityLevelOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public RemoveMemberFromSecurityLevelOperationSpec(Consumer<RemoveMemberFromSecurityLevelOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link RemoveMemberFromSecurityLevelOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param schemeId             The ID of the issue security scheme.
+     * @param levelId              The ID of the issue security level.
+     * @param memberId             The ID of the issue security level member to be removed.
+     */
+    @ApiStatus.Internal
+    public RemoveMemberFromSecurityLevelOperationSpec(String schemeId, String levelId, String memberId) {
+        this.schemeId = schemeId;
+        this.levelId = levelId;
+        this.memberId = memberId;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -70,5 +97,4 @@ public class RemoveMemberFromSecurityLevelOperationSpec {
         Objects.requireNonNull(levelId, "levelId is a required parameter!");
         Objects.requireNonNull(memberId, "memberId is a required parameter!");
     }
-
 }

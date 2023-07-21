@@ -7,9 +7,14 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.processing.Generated;
 
 import io.github.primelib.jira4j.restv3.model.Group;
+import java.util.Set;
 import io.github.primelib.jira4j.restv3.model.User;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -21,9 +26,13 @@ import java.util.function.Consumer;
  * <p>
  * Get user groups
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class GetUserGroupsOperationSpec {
     /**
@@ -51,13 +60,31 @@ public class GetUserGroupsOperationSpec {
     private String key;
 
     /**
-     * Constructs a validated implementation of {@link GetUserGroupsOperationSpec}.
+     * Constructs a validated instance of {@link GetUserGroupsOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public GetUserGroupsOperationSpec(Consumer<GetUserGroupsOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link GetUserGroupsOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param accountId            The account ID of the user, which uniquely identifies the user across all Atlassian products. For example, *5b10ac8d82e05b22cc7d4ef5*.
+     * @param username             This parameter is no longer available. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.
+     * @param key                  This parameter is no longer available. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.
+     */
+    @ApiStatus.Internal
+    public GetUserGroupsOperationSpec(String accountId, String username, String key) {
+        this.accountId = accountId;
+        this.username = username;
+        this.key = key;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -70,5 +97,4 @@ public class GetUserGroupsOperationSpec {
     public void validate() {
         Objects.requireNonNull(accountId, "accountId is a required parameter!");
     }
-
 }

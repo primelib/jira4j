@@ -3,13 +3,15 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.ArrayList;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -19,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * CustomFieldContextDefaultValueLabels
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "labels",
     "type"
@@ -32,23 +37,34 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class CustomFieldContextDefaultValueLabels {
 
     /**
-     * Constructs a validated implementation of {@link CustomFieldContextDefaultValueLabels}.
+     * The default labels value.
+     */
+    @JsonProperty("labels")
+    protected List<String> labels;
+
+    @JsonProperty("type")
+    protected String type;
+
+    /**
+     * Constructs a validated instance of {@link CustomFieldContextDefaultValueLabels}.
      *
      * @param spec the specification to process
      */
-    @ApiStatus.Internal
     public CustomFieldContextDefaultValueLabels(Consumer<CustomFieldContextDefaultValueLabels> spec) {
         spec.accept(this);
     }
 
     /**
-     * The default labels value.
+     * Constructs a validated instance of {@link CustomFieldContextDefaultValueLabels}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #CustomFieldContextDefaultValueLabels(Consumer)} instead.
+     * @param labels The default labels value.
+     * @param type var.name
      */
-    @JsonProperty("labels")
-    protected List<String> labels = new ArrayList<>();
-
-    @JsonProperty("type")
-    protected String type;
-
+    @ApiStatus.Internal
+    public CustomFieldContextDefaultValueLabels(List<String> labels, String type) {
+        this.labels = labels;
+        this.type = type;
+    }
 
 }

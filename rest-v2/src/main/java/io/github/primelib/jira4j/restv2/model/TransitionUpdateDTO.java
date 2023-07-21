@@ -3,14 +3,16 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -21,11 +23,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * TransitionUpdateDTO
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
-@EqualsAndHashCode(callSuper = true)
+@Builder
 @JsonPropertyOrder({
     "actions",
     "conditions",
@@ -43,17 +47,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 })
 @JsonTypeName("TransitionUpdateDTO")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
-public class TransitionUpdateDTO extends HashMap<String, Object> {
-
-    /**
-     * Constructs a validated implementation of {@link TransitionUpdateDTO}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public TransitionUpdateDTO(Consumer<TransitionUpdateDTO> spec) {
-        spec.accept(this);
-    }
+public class TransitionUpdateDTO {
 
     /**
      * The post-functions of the transition.
@@ -98,7 +92,7 @@ public class TransitionUpdateDTO extends HashMap<String, Object> {
      * The properties of the transition.
      */
     @JsonProperty("properties")
-    protected Map<String, String> properties = new HashMap<>();
+    protected Map<String, String> properties;
 
     @JsonProperty("to")
     protected StatusReferenceAndPort to;
@@ -124,6 +118,49 @@ public class TransitionUpdateDTO extends HashMap<String, Object> {
     @JsonProperty("validators")
     protected List<WorkflowRuleConfiguration> validators;
 
+    /**
+     * Constructs a validated instance of {@link TransitionUpdateDTO}.
+     *
+     * @param spec the specification to process
+     */
+    public TransitionUpdateDTO(Consumer<TransitionUpdateDTO> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link TransitionUpdateDTO}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #TransitionUpdateDTO(Consumer)} instead.
+     * @param actions The post-functions of the transition.
+     * @param conditions var.name
+     * @param customIssueEventId The custom event ID of the transition.
+     * @param description The description of the transition.
+     * @param from The statuses the transition can start from.
+     * @param id The ID of the transition.
+     * @param name The name of the transition.
+     * @param properties The properties of the transition.
+     * @param to var.name
+     * @param transitionScreen var.name
+     * @param triggers The triggers of the transition.
+     * @param type The transition type.
+     * @param validators The validators of the transition.
+     */
+    @ApiStatus.Internal
+    public TransitionUpdateDTO(List<WorkflowRuleConfiguration> actions, ConditionGroupUpdate conditions, String customIssueEventId, String description, List<StatusReferenceAndPort> from, String id, String name, Map<String, String> properties, StatusReferenceAndPort to, WorkflowRuleConfiguration transitionScreen, List<WorkflowTrigger> triggers, TypeEnum type, List<WorkflowRuleConfiguration> validators) {
+        this.actions = actions;
+        this.conditions = conditions;
+        this.customIssueEventId = customIssueEventId;
+        this.description = description;
+        this.from = from;
+        this.id = id;
+        this.name = name;
+        this.properties = properties;
+        this.to = to;
+        this.transitionScreen = transitionScreen;
+        this.triggers = triggers;
+        this.type = type;
+        this.validators = validators;
+    }
 
     /**
      * The transition type.

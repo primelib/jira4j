@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -17,10 +20,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * CustomFieldContextDefaultValueURL
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "contextId",
     "type",
@@ -29,16 +35,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("CustomFieldContextDefaultValueURL")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class CustomFieldContextDefaultValueURL {
-
-    /**
-     * Constructs a validated implementation of {@link CustomFieldContextDefaultValueURL}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public CustomFieldContextDefaultValueURL(Consumer<CustomFieldContextDefaultValueURL> spec) {
-        spec.accept(this);
-    }
 
     /**
      * The ID of the context.
@@ -55,5 +51,28 @@ public class CustomFieldContextDefaultValueURL {
     @JsonProperty("url")
     protected String url;
 
+    /**
+     * Constructs a validated instance of {@link CustomFieldContextDefaultValueURL}.
+     *
+     * @param spec the specification to process
+     */
+    public CustomFieldContextDefaultValueURL(Consumer<CustomFieldContextDefaultValueURL> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link CustomFieldContextDefaultValueURL}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #CustomFieldContextDefaultValueURL(Consumer)} instead.
+     * @param contextId The ID of the context.
+     * @param type var.name
+     * @param url The default URL.
+     */
+    @ApiStatus.Internal
+    public CustomFieldContextDefaultValueURL(String contextId, String type, String url) {
+        this.contextId = contextId;
+        this.type = type;
+        this.url = url;
+    }
 
 }

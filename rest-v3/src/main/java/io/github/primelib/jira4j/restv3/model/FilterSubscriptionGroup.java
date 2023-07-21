@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.net.URI;
@@ -18,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * FilterSubscriptionGroup
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "groupId",
     "name",
@@ -30,16 +36,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("FilterSubscription_group")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class FilterSubscriptionGroup {
-
-    /**
-     * Constructs a validated implementation of {@link FilterSubscriptionGroup}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public FilterSubscriptionGroup(Consumer<FilterSubscriptionGroup> spec) {
-        spec.accept(this);
-    }
 
     /**
      * The ID of the group, which uniquely identifies the group across all Atlassian products. For example, *952d12c3-5b5b-4d04-bb32-44d383afc4b2*.
@@ -59,5 +55,28 @@ public class FilterSubscriptionGroup {
     @JsonProperty("self")
     protected URI self;
 
+    /**
+     * Constructs a validated instance of {@link FilterSubscriptionGroup}.
+     *
+     * @param spec the specification to process
+     */
+    public FilterSubscriptionGroup(Consumer<FilterSubscriptionGroup> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link FilterSubscriptionGroup}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #FilterSubscriptionGroup(Consumer)} instead.
+     * @param groupId The ID of the group, which uniquely identifies the group across all Atlassian products. For example, *952d12c3-5b5b-4d04-bb32-44d383afc4b2*.
+     * @param name The name of group.
+     * @param self The URL for these group details.
+     */
+    @ApiStatus.Internal
+    public FilterSubscriptionGroup(String groupId, String name, URI self) {
+        this.groupId = groupId;
+        this.name = name;
+        this.self = self;
+    }
 
 }

@@ -7,8 +7,13 @@ import javax.annotation.processing.Generated;
 
 import io.github.primelib.jira4j.restv3.model.Dashboard;
 import io.github.primelib.jira4j.restv3.model.DashboardDetails;
+import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -20,9 +25,13 @@ import java.util.function.Consumer;
  * <p>
  * Create dashboard
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class CreateDashboardOperationSpec {
     /**
@@ -38,13 +47,27 @@ public class CreateDashboardOperationSpec {
     private DashboardDetails dashboardDetails;
 
     /**
-     * Constructs a validated implementation of {@link CreateDashboardOperationSpec}.
+     * Constructs a validated instance of {@link CreateDashboardOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public CreateDashboardOperationSpec(Consumer<CreateDashboardOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link CreateDashboardOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param dashboardDetails     Dashboard details.
+     */
+    @ApiStatus.Internal
+    public CreateDashboardOperationSpec(DashboardDetails dashboardDetails) {
+        this.dashboardDetails = dashboardDetails;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -57,5 +80,4 @@ public class CreateDashboardOperationSpec {
     public void validate() {
         Objects.requireNonNull(dashboardDetails, "dashboardDetails is a required parameter!");
     }
-
 }

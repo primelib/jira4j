@@ -8,7 +8,11 @@ import javax.annotation.processing.Generated;
 import io.github.primelib.jira4j.restv2.model.DefaultShareScope;
 import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -20,9 +24,13 @@ import java.util.function.Consumer;
  * <p>
  * Set default share scope
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class SetDefaultShareScopeOperationSpec {
     /**
@@ -37,13 +45,27 @@ public class SetDefaultShareScopeOperationSpec {
     private DefaultShareScope defaultShareScope;
 
     /**
-     * Constructs a validated implementation of {@link SetDefaultShareScopeOperationSpec}.
+     * Constructs a validated instance of {@link SetDefaultShareScopeOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public SetDefaultShareScopeOperationSpec(Consumer<SetDefaultShareScopeOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link SetDefaultShareScopeOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param defaultShareScope    
+     */
+    @ApiStatus.Internal
+    public SetDefaultShareScopeOperationSpec(DefaultShareScope defaultShareScope) {
+        this.defaultShareScope = defaultShareScope;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -56,5 +78,4 @@ public class SetDefaultShareScopeOperationSpec {
     public void validate() {
         Objects.requireNonNull(defaultShareScope, "defaultShareScope is a required parameter!");
     }
-
 }

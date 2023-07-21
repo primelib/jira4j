@@ -8,8 +8,13 @@ import javax.annotation.processing.Generated;
 
 import io.github.primelib.jira4j.restv2.model.Project;
 import io.github.primelib.jira4j.restv2.model.ProjectRole;
+import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -21,9 +26,13 @@ import java.util.function.Consumer;
  * <p>
  * Delete default actors from project role
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class DeleteProjectRoleActorsFromRoleOperationSpec {
     /**
@@ -45,25 +54,45 @@ public class DeleteProjectRoleActorsFromRoleOperationSpec {
     private String user;
 
     /**
-     * The group ID of the group to be removed as a default actor. This parameter cannot be used with the `group` parameter.
+     * The group ID of the group to be removed as a default actor. This parameter cannot be used with the {@code group} parameter.
      */
     @Nullable 
     private String groupId;
 
     /**
-     * The group name of the group to be removed as a default actor.This parameter cannot be used with the `groupId` parameter. As a group's name can change, use of `groupId` is recommended.
+     * The group name of the group to be removed as a default actor.This parameter cannot be used with the {@code groupId} parameter. As a group's name can change, use of {@code groupId} is recommended.
      */
     @Nullable 
     private String group;
 
     /**
-     * Constructs a validated implementation of {@link DeleteProjectRoleActorsFromRoleOperationSpec}.
+     * Constructs a validated instance of {@link DeleteProjectRoleActorsFromRoleOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public DeleteProjectRoleActorsFromRoleOperationSpec(Consumer<DeleteProjectRoleActorsFromRoleOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link DeleteProjectRoleActorsFromRoleOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param id                   The ID of the project role. Use [Get all project roles](#api-rest-api-2-role-get) to get a list of project role IDs.
+     * @param user                 The user account ID of the user to remove as a default actor.
+     * @param groupId              The group ID of the group to be removed as a default actor. This parameter cannot be used with the {@code group} parameter.
+     * @param group                The group name of the group to be removed as a default actor.This parameter cannot be used with the {@code groupId} parameter. As a group's name can change, use of {@code groupId} is recommended.
+     */
+    @ApiStatus.Internal
+    public DeleteProjectRoleActorsFromRoleOperationSpec(Long id, String user, String groupId, String group) {
+        this.id = id;
+        this.user = user;
+        this.groupId = groupId;
+        this.group = group;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -76,5 +105,4 @@ public class DeleteProjectRoleActorsFromRoleOperationSpec {
     public void validate() {
         Objects.requireNonNull(id, "id is a required parameter!");
     }
-
 }

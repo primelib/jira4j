@@ -7,8 +7,13 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.processing.Generated;
 
 import io.github.primelib.jira4j.restv2.model.MultipleCustomFieldValuesUpdateDetails;
+import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -20,9 +25,13 @@ import java.util.function.Consumer;
  * <p>
  * Update custom fields
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class UpdateMultipleCustomFieldValuesOperationSpec {
     /**
@@ -40,16 +49,32 @@ public class UpdateMultipleCustomFieldValuesOperationSpec {
      * Whether to generate a changelog for this update.
      */
     @Nullable 
-    private Boolean generateChangelog = true;
+    private Boolean generateChangelog;
 
     /**
-     * Constructs a validated implementation of {@link UpdateMultipleCustomFieldValuesOperationSpec}.
+     * Constructs a validated instance of {@link UpdateMultipleCustomFieldValuesOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public UpdateMultipleCustomFieldValuesOperationSpec(Consumer<UpdateMultipleCustomFieldValuesOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link UpdateMultipleCustomFieldValuesOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param multipleCustomFieldValuesUpdateDetails 
+     * @param generateChangelog    Whether to generate a changelog for this update.
+     */
+    @ApiStatus.Internal
+    public UpdateMultipleCustomFieldValuesOperationSpec(MultipleCustomFieldValuesUpdateDetails multipleCustomFieldValuesUpdateDetails, Boolean generateChangelog) {
+        this.multipleCustomFieldValuesUpdateDetails = multipleCustomFieldValuesUpdateDetails;
+        this.generateChangelog = generateChangelog;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -62,5 +87,4 @@ public class UpdateMultipleCustomFieldValuesOperationSpec {
     public void validate() {
         Objects.requireNonNull(multipleCustomFieldValuesUpdateDetails, "multipleCustomFieldValuesUpdateDetails is a required parameter!");
     }
-
 }

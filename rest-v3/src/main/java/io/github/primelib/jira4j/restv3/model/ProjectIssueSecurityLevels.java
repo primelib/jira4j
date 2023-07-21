@@ -3,13 +3,15 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.ArrayList;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -19,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * ProjectIssueSecurityLevels
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "levels"
 })
@@ -31,20 +36,29 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class ProjectIssueSecurityLevels {
 
     /**
-     * Constructs a validated implementation of {@link ProjectIssueSecurityLevels}.
+     * Issue level security items list.
+     */
+    @JsonProperty("levels")
+    protected List<SecurityLevel> levels;
+
+    /**
+     * Constructs a validated instance of {@link ProjectIssueSecurityLevels}.
      *
      * @param spec the specification to process
      */
-    @ApiStatus.Internal
     public ProjectIssueSecurityLevels(Consumer<ProjectIssueSecurityLevels> spec) {
         spec.accept(this);
     }
 
     /**
-     * Issue level security items list.
+     * Constructs a validated instance of {@link ProjectIssueSecurityLevels}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #ProjectIssueSecurityLevels(Consumer)} instead.
+     * @param levels Issue level security items list.
      */
-    @JsonProperty("levels")
-    protected List<SecurityLevel> levels = new ArrayList<>();
-
+    @ApiStatus.Internal
+    public ProjectIssueSecurityLevels(List<SecurityLevel> levels) {
+        this.levels = levels;
+    }
 
 }

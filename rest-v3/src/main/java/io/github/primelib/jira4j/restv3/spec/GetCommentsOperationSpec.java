@@ -7,8 +7,13 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.processing.Generated;
 
 import io.github.primelib.jira4j.restv3.model.Comment;
+import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -20,9 +25,13 @@ import java.util.function.Consumer;
  * <p>
  * Get comments
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class GetCommentsOperationSpec {
     /**
@@ -41,13 +50,13 @@ public class GetCommentsOperationSpec {
      * The index of the first item to return in a page of results (page offset).
      */
     @Nullable 
-    private Long startAt = 0L;
+    private Long startAt;
 
     /**
      * The maximum number of items to return per page.
      */
     @Nullable 
-    private Integer maxResults = 5000;
+    private Integer maxResults;
 
     /**
      * [Order](#ordering) the results by a field. Accepts *created* to sort comments by their created date.
@@ -56,19 +65,41 @@ public class GetCommentsOperationSpec {
     private String orderBy;
 
     /**
-     * Use [expand](#expansion) to include additional information about comments in the response. This parameter accepts `renderedBody`, which returns the comment body rendered in HTML.
+     * Use [expand](#expansion) to include additional information about comments in the response. This parameter accepts {@code renderedBody}, which returns the comment body rendered in HTML.
      */
     @Nullable 
     private String expand;
 
     /**
-     * Constructs a validated implementation of {@link GetCommentsOperationSpec}.
+     * Constructs a validated instance of {@link GetCommentsOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public GetCommentsOperationSpec(Consumer<GetCommentsOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link GetCommentsOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param issueIdOrKey         The ID or key of the issue.
+     * @param startAt              The index of the first item to return in a page of results (page offset).
+     * @param maxResults           The maximum number of items to return per page.
+     * @param orderBy              [Order](#ordering) the results by a field. Accepts *created* to sort comments by their created date.
+     * @param expand               Use [expand](#expansion) to include additional information about comments in the response. This parameter accepts {@code renderedBody}, which returns the comment body rendered in HTML.
+     */
+    @ApiStatus.Internal
+    public GetCommentsOperationSpec(String issueIdOrKey, Long startAt, Integer maxResults, String orderBy, String expand) {
+        this.issueIdOrKey = issueIdOrKey;
+        this.startAt = startAt;
+        this.maxResults = maxResults;
+        this.orderBy = orderBy;
+        this.expand = expand;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -81,5 +112,4 @@ public class GetCommentsOperationSpec {
     public void validate() {
         Objects.requireNonNull(issueIdOrKey, "issueIdOrKey is a required parameter!");
     }
-
 }

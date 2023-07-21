@@ -3,10 +3,14 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -17,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * JqlQueryOrderByClauseElement
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "direction",
     "field"
@@ -28,16 +35,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("JqlQueryOrderByClauseElement")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class JqlQueryOrderByClauseElement {
-
-    /**
-     * Constructs a validated implementation of {@link JqlQueryOrderByClauseElement}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public JqlQueryOrderByClauseElement(Consumer<JqlQueryOrderByClauseElement> spec) {
-        spec.accept(this);
-    }
 
     /**
      * The direction in which to order the results.
@@ -48,6 +45,27 @@ public class JqlQueryOrderByClauseElement {
     @JsonProperty("field")
     protected JqlQueryField field;
 
+    /**
+     * Constructs a validated instance of {@link JqlQueryOrderByClauseElement}.
+     *
+     * @param spec the specification to process
+     */
+    public JqlQueryOrderByClauseElement(Consumer<JqlQueryOrderByClauseElement> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link JqlQueryOrderByClauseElement}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #JqlQueryOrderByClauseElement(Consumer)} instead.
+     * @param direction The direction in which to order the results.
+     * @param field var.name
+     */
+    @ApiStatus.Internal
+    public JqlQueryOrderByClauseElement(DirectionEnum direction, JqlQueryField field) {
+        this.direction = direction;
+        this.field = field;
+    }
 
     /**
      * The direction in which to order the results.

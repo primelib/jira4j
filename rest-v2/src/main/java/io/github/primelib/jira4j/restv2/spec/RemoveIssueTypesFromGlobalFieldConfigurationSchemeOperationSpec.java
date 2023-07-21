@@ -5,12 +5,18 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import javax.annotation.processing.Generated;
 
+import io.github.primelib.jira4j.restv2.model.Configuration;
 import io.github.primelib.jira4j.restv2.model.FieldConfiguration;
 import io.github.primelib.jira4j.restv2.model.FieldConfigurationScheme;
 import io.github.primelib.jira4j.restv2.model.IssueTypeIds;
 import io.github.primelib.jira4j.restv2.model.IssueTypeIdsToRemove;
+import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -22,9 +28,13 @@ import java.util.function.Consumer;
  * <p>
  * Remove issue types from field configuration scheme
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class RemoveIssueTypesFromGlobalFieldConfigurationSchemeOperationSpec {
     /**
@@ -46,13 +56,29 @@ public class RemoveIssueTypesFromGlobalFieldConfigurationSchemeOperationSpec {
     private IssueTypeIdsToRemove issueTypeIdsToRemove;
 
     /**
-     * Constructs a validated implementation of {@link RemoveIssueTypesFromGlobalFieldConfigurationSchemeOperationSpec}.
+     * Constructs a validated instance of {@link RemoveIssueTypesFromGlobalFieldConfigurationSchemeOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public RemoveIssueTypesFromGlobalFieldConfigurationSchemeOperationSpec(Consumer<RemoveIssueTypesFromGlobalFieldConfigurationSchemeOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link RemoveIssueTypesFromGlobalFieldConfigurationSchemeOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param id                   The ID of the field configuration scheme.
+     * @param issueTypeIdsToRemove The issue type IDs to remove.
+     */
+    @ApiStatus.Internal
+    public RemoveIssueTypesFromGlobalFieldConfigurationSchemeOperationSpec(Long id, IssueTypeIdsToRemove issueTypeIdsToRemove) {
+        this.id = id;
+        this.issueTypeIdsToRemove = issueTypeIdsToRemove;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -66,5 +92,4 @@ public class RemoveIssueTypesFromGlobalFieldConfigurationSchemeOperationSpec {
         Objects.requireNonNull(id, "id is a required parameter!");
         Objects.requireNonNull(issueTypeIdsToRemove, "issueTypeIdsToRemove is a required parameter!");
     }
-
 }

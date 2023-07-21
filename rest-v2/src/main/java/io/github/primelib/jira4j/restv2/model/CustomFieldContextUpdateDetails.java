@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -17,10 +20,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * CustomFieldContextUpdateDetails
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "description",
     "name"
@@ -28,16 +34,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("CustomFieldContextUpdateDetails")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class CustomFieldContextUpdateDetails {
-
-    /**
-     * Constructs a validated implementation of {@link CustomFieldContextUpdateDetails}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public CustomFieldContextUpdateDetails(Consumer<CustomFieldContextUpdateDetails> spec) {
-        spec.accept(this);
-    }
 
     /**
      * The description of the custom field context. The maximum length is 255 characters.
@@ -51,5 +47,26 @@ public class CustomFieldContextUpdateDetails {
     @JsonProperty("name")
     protected String name;
 
+    /**
+     * Constructs a validated instance of {@link CustomFieldContextUpdateDetails}.
+     *
+     * @param spec the specification to process
+     */
+    public CustomFieldContextUpdateDetails(Consumer<CustomFieldContextUpdateDetails> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link CustomFieldContextUpdateDetails}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #CustomFieldContextUpdateDetails(Consumer)} instead.
+     * @param description The description of the custom field context. The maximum length is 255 characters.
+     * @param name The name of the custom field context. The name must be unique. The maximum length is 255 characters.
+     */
+    @ApiStatus.Internal
+    public CustomFieldContextUpdateDetails(String description, String name) {
+        this.description = description;
+        this.name = name;
+    }
 
 }

@@ -6,9 +6,14 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import javax.annotation.processing.Generated;
 
+import java.util.Set;
 import io.github.primelib.jira4j.restv2.model.WorkflowReadRequest;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -20,9 +25,13 @@ import java.util.function.Consumer;
  * <p>
  * Bulk get workflows
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class ReadWorkflowsOperationSpec {
     /**
@@ -39,21 +48,37 @@ public class ReadWorkflowsOperationSpec {
     /**
      * Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:
      *  *
-     * `workflows.usages` Returns the project and issue types that each workflow is associated with.
+     * {@code workflows.usages} Returns the project and issue types that each workflow is associated with.
      * *
-     * `statuses.usages` Returns the project and issue types that each status is associated with.
+     * {@code statuses.usages} Returns the project and issue types that each status is associated with.
      */
     @Nullable 
     private String expand;
 
     /**
-     * Constructs a validated implementation of {@link ReadWorkflowsOperationSpec}.
+     * Constructs a validated instance of {@link ReadWorkflowsOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public ReadWorkflowsOperationSpec(Consumer<ReadWorkflowsOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link ReadWorkflowsOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param workflowReadRequest  
+     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code workflows.usages} Returns the project and issue types that each workflow is associated with.  *  {@code statuses.usages} Returns the project and issue types that each status is associated with.
+     */
+    @ApiStatus.Internal
+    public ReadWorkflowsOperationSpec(WorkflowReadRequest workflowReadRequest, String expand) {
+        this.workflowReadRequest = workflowReadRequest;
+        this.expand = expand;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -66,5 +91,4 @@ public class ReadWorkflowsOperationSpec {
     public void validate() {
         Objects.requireNonNull(workflowReadRequest, "workflowReadRequest is a required parameter!");
     }
-
 }

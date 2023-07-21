@@ -6,7 +6,11 @@ import javax.annotation.processing.Generated;
 
 import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -18,9 +22,13 @@ import java.util.function.Consumer;
  * <p>
  * Get all issue type schemes
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class GetAllIssueTypeSchemesOperationSpec {
     /**
@@ -33,16 +41,16 @@ public class GetAllIssueTypeSchemesOperationSpec {
      * The index of the first item to return in a page of results (page offset).
      */
     @Nullable 
-    private Long startAt = 0L;
+    private Long startAt;
 
     /**
      * The maximum number of items to return per page.
      */
     @Nullable 
-    private Integer maxResults = 50;
+    private Integer maxResults;
 
     /**
-     * The list of issue type schemes IDs. To include multiple IDs, provide an ampersand-separated list. For example, `id=10000&amp;id=10001`.
+     * The list of issue type schemes IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code id=10000&amp;id=10001}.
      */
     @Nullable 
     private Set<Long> id;
@@ -50,19 +58,19 @@ public class GetAllIssueTypeSchemesOperationSpec {
     /**
      * [Order](#ordering) the results by a field:
      *  *
-     * `name` Sorts by issue type scheme name.
+     * {@code name} Sorts by issue type scheme name.
      * *
-     * `id` Sorts by issue type scheme ID.
+     * {@code id} Sorts by issue type scheme ID.
      */
     @Nullable 
-    private String orderBy = "id";
+    private String orderBy;
 
     /**
      * Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:
      *  *
-     * `projects` For each issue type schemes, returns information about the projects the issue type scheme is assigned to.
+     * {@code projects} For each issue type schemes, returns information about the projects the issue type scheme is assigned to.
      * *
-     * `issueTypes` For each issue type schemes, returns information about the issueTypes the issue type scheme have.
+     * {@code issueTypes} For each issue type schemes, returns information about the issueTypes the issue type scheme have.
      */
     @Nullable 
     private String expand;
@@ -74,7 +82,7 @@ public class GetAllIssueTypeSchemesOperationSpec {
     private String queryString;
 
     /**
-     * Constructs a validated implementation of {@link GetAllIssueTypeSchemesOperationSpec}.
+     * Constructs a validated instance of {@link GetAllIssueTypeSchemesOperationSpec}.
      *
      * @param spec the specification to process
      */
@@ -86,11 +94,34 @@ public class GetAllIssueTypeSchemesOperationSpec {
     }
 
     /**
+     * Constructs a validated instance of {@link GetAllIssueTypeSchemesOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param startAt              The index of the first item to return in a page of results (page offset).
+     * @param maxResults           The maximum number of items to return per page.
+     * @param id                   The list of issue type schemes IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code id=10000&amp;id=10001}.
+     * @param orderBy              [Order](#ordering) the results by a field:   *  {@code name} Sorts by issue type scheme name.  *  {@code id} Sorts by issue type scheme ID.
+     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code projects} For each issue type schemes, returns information about the projects the issue type scheme is assigned to.  *  {@code issueTypes} For each issue type schemes, returns information about the issueTypes the issue type scheme have.
+     * @param queryString          String used to perform a case-insensitive partial match with issue type scheme name.
+     */
+    @ApiStatus.Internal
+    public GetAllIssueTypeSchemesOperationSpec(Long startAt, Integer maxResults, Set<Long> id, String orderBy, String expand, String queryString) {
+        this.startAt = startAt;
+        this.maxResults = maxResults;
+        this.id = id;
+        this.orderBy = orderBy;
+        this.expand = expand;
+        this.queryString = queryString;
+
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
      * Validates the Spec, will throw a exception if required parameters are missing
      *
      * @throws NullPointerException
      */
     public void validate() {
     }
-
 }

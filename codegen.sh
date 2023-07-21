@@ -14,6 +14,8 @@ case $1 in
     jq '.info.title="Jira REST V2"' "$RESTV2_SPEC" | sponge "$RESTV2_SPEC" # overwrite name
     jq '.components.schemas.Attachment.properties.size."x-alias"="fileSize"' "$RESTV2_SPEC" | sponge "$RESTV2_SPEC" # size is usually a reserved word on a Map
     jq '.paths."/rest/api/2/issuesecurityschemes/search".get.description="Returns a paginated list of issue security schemes."' "$RESTV2_SPEC" | sponge "$RESTV2_SPEC" # description is broken
+    jq 'del(.components.schemas.Fields.properties.issuetype)' "$RESTV2_SPEC" | sponge "$RESTV2_SPEC" # remove duplicate property
+    jq 'walk(if type == "object" and .additionalProperties and (.properties | length > 0) then del(.additionalProperties) else . end)' "$RESTV2_SPEC" | sponge "$RESTV2_SPEC" # remove additionalProperties from all schemas
 
     # source: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#version
     RESTV3_SPEC="$PROJECT_DIR/rest-v3/openapi.json"
@@ -21,6 +23,8 @@ case $1 in
     jq '.info.title="Jira REST V3"' "$RESTV3_SPEC" | sponge "$RESTV3_SPEC" # overwrite name
     jq '.components.schemas.Attachment.properties.size."x-alias"="fileSize"' "$RESTV3_SPEC" | sponge "$RESTV3_SPEC" # size is usually a reserved word on a Map
     jq '.paths."/rest/api/3/issuesecurityschemes/search".get.description="Returns a paginated list of issue security schemes."' "$RESTV3_SPEC" | sponge "$RESTV3_SPEC" # description is broken
+    jq 'del(.components.schemas.Fields.properties.issuetype)' "$RESTV3_SPEC" | sponge "$RESTV3_SPEC" # remove duplicate property
+    jq 'walk(if type == "object" and .additionalProperties and (.properties | length > 0) then del(.additionalProperties) else . end)' "$RESTV3_SPEC" | sponge "$RESTV3_SPEC" # remove additionalProperties from all schemas
     ;;
 
   "generate")

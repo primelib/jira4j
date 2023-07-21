@@ -9,7 +9,11 @@ import javax.annotation.processing.Generated;
 import io.github.primelib.jira4j.restv2.model.DefaultWorkflow;
 import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -21,9 +25,13 @@ import java.util.function.Consumer;
  * <p>
  * Delete default workflow
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class DeleteDefaultWorkflowOperationSpec {
     /**
@@ -39,19 +47,35 @@ public class DeleteDefaultWorkflowOperationSpec {
     private Long id;
 
     /**
-     * Set to true to create or update the draft of a workflow scheme and delete the mapping from the draft, when the workflow scheme cannot be edited. Defaults to `false`.
+     * Set to true to create or update the draft of a workflow scheme and delete the mapping from the draft, when the workflow scheme cannot be edited. Defaults to {@code false}.
      */
     @Nullable 
     private Boolean updateDraftIfNeeded;
 
     /**
-     * Constructs a validated implementation of {@link DeleteDefaultWorkflowOperationSpec}.
+     * Constructs a validated instance of {@link DeleteDefaultWorkflowOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public DeleteDefaultWorkflowOperationSpec(Consumer<DeleteDefaultWorkflowOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link DeleteDefaultWorkflowOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param id                   The ID of the workflow scheme.
+     * @param updateDraftIfNeeded  Set to true to create or update the draft of a workflow scheme and delete the mapping from the draft, when the workflow scheme cannot be edited. Defaults to {@code false}.
+     */
+    @ApiStatus.Internal
+    public DeleteDefaultWorkflowOperationSpec(Long id, Boolean updateDraftIfNeeded) {
+        this.id = id;
+        this.updateDraftIfNeeded = updateDraftIfNeeded;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -64,5 +88,4 @@ public class DeleteDefaultWorkflowOperationSpec {
     public void validate() {
         Objects.requireNonNull(id, "id is a required parameter!");
     }
-
 }

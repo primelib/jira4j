@@ -4,10 +4,13 @@ import java.util.Map;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -18,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * ProjectIssueTypeMapping
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "issueTypeId",
     "projectId"
@@ -29,16 +35,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("ProjectIssueTypeMapping")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class ProjectIssueTypeMapping {
-
-    /**
-     * Constructs a validated implementation of {@link ProjectIssueTypeMapping}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public ProjectIssueTypeMapping(Consumer<ProjectIssueTypeMapping> spec) {
-        spec.accept(this);
-    }
 
     /**
      * The ID of the issue type.
@@ -52,5 +48,26 @@ public class ProjectIssueTypeMapping {
     @JsonProperty("projectId")
     protected String projectId;
 
+    /**
+     * Constructs a validated instance of {@link ProjectIssueTypeMapping}.
+     *
+     * @param spec the specification to process
+     */
+    public ProjectIssueTypeMapping(Consumer<ProjectIssueTypeMapping> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link ProjectIssueTypeMapping}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #ProjectIssueTypeMapping(Consumer)} instead.
+     * @param issueTypeId The ID of the issue type.
+     * @param projectId The ID of the project.
+     */
+    @ApiStatus.Internal
+    public ProjectIssueTypeMapping(String issueTypeId, String projectId) {
+        this.issueTypeId = issueTypeId;
+        this.projectId = projectId;
+    }
 
 }

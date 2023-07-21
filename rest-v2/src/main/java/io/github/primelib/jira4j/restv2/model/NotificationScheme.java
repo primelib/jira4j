@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.util.List;
@@ -18,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * NotificationScheme
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "description",
     "expand",
@@ -35,16 +41,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("NotificationScheme")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class NotificationScheme {
-
-    /**
-     * Constructs a validated implementation of {@link NotificationScheme}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public NotificationScheme(Consumer<NotificationScheme> spec) {
-        spec.accept(this);
-    }
 
     /**
      * The description of the notification scheme.
@@ -88,5 +84,38 @@ public class NotificationScheme {
     @JsonProperty("self")
     protected String self;
 
+    /**
+     * Constructs a validated instance of {@link NotificationScheme}.
+     *
+     * @param spec the specification to process
+     */
+    public NotificationScheme(Consumer<NotificationScheme> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link NotificationScheme}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #NotificationScheme(Consumer)} instead.
+     * @param description The description of the notification scheme.
+     * @param expand Expand options that include additional notification scheme details in the response.
+     * @param id The ID of the notification scheme.
+     * @param name The name of the notification scheme.
+     * @param notificationSchemeEvents The notification events and associated recipients.
+     * @param projects The list of project IDs associated with the notification scheme.
+     * @param scope var.name
+     * @param self var.name
+     */
+    @ApiStatus.Internal
+    public NotificationScheme(String description, String expand, Long id, String name, List<NotificationSchemeEvent> notificationSchemeEvents, List<Long> projects, NotificationSchemeScope scope, String self) {
+        this.description = description;
+        this.expand = expand;
+        this.id = id;
+        this.name = name;
+        this.notificationSchemeEvents = notificationSchemeEvents;
+        this.projects = projects;
+        this.scope = scope;
+        this.self = self;
+    }
 
 }

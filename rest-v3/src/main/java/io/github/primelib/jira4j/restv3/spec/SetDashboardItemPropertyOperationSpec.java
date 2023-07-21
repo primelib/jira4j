@@ -9,7 +9,11 @@ import io.github.primelib.jira4j.restv3.model.Dashboard;
 import java.util.Set;
 import java.net.URI;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -21,9 +25,13 @@ import java.util.function.Consumer;
  * <p>
  * Set dashboard item property
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class SetDashboardItemPropertyOperationSpec {
     /**
@@ -56,13 +64,33 @@ public class SetDashboardItemPropertyOperationSpec {
     private Object body;
 
     /**
-     * Constructs a validated implementation of {@link SetDashboardItemPropertyOperationSpec}.
+     * Constructs a validated instance of {@link SetDashboardItemPropertyOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public SetDashboardItemPropertyOperationSpec(Consumer<SetDashboardItemPropertyOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link SetDashboardItemPropertyOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param dashboardId          The ID of the dashboard.
+     * @param itemId               The ID of the dashboard item.
+     * @param propertyKey          The key of the dashboard item property. The maximum length is 255 characters. For dashboard items with a spec URI and no complete module key, if the provided propertyKey is equal to "config", the request body's JSON must be an object with all keys and values as strings.
+     * @param body                 
+     */
+    @ApiStatus.Internal
+    public SetDashboardItemPropertyOperationSpec(String dashboardId, String itemId, String propertyKey, Object body) {
+        this.dashboardId = dashboardId;
+        this.itemId = itemId;
+        this.propertyKey = propertyKey;
+        this.body = body;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -78,5 +106,4 @@ public class SetDashboardItemPropertyOperationSpec {
         Objects.requireNonNull(propertyKey, "propertyKey is a required parameter!");
         Objects.requireNonNull(body, "body is a required parameter!");
     }
-
 }

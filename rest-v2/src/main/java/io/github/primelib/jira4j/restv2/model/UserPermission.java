@@ -3,15 +3,16 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.HashMap;
-import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -20,11 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * UserPermission
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
-@EqualsAndHashCode(callSuper = true)
+@Builder
 @JsonPropertyOrder({
     "deprecatedKey",
     "description",
@@ -36,20 +39,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 })
 @JsonTypeName("UserPermission")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
-public class UserPermission extends HashMap<String, Object> {
+public class UserPermission {
 
     /**
-     * Constructs a validated implementation of {@link UserPermission}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public UserPermission(Consumer<UserPermission> spec) {
-        spec.accept(this);
-    }
-
-    /**
-     * Indicate whether the permission key is deprecated. Note that deprecated keys cannot be used in the `permissions parameter of Get my permissions. Deprecated keys are not returned by Get all permissions.`
+     * Indicate whether the permission key is deprecated. Note that deprecated keys cannot be used in the {@code permissions parameter of Get my permissions. Deprecated keys are not returned by Get all permissions.}
      */
     @JsonProperty("deprecatedKey")
     protected Boolean deprecatedKey;
@@ -67,13 +60,13 @@ public class UserPermission extends HashMap<String, Object> {
     protected Boolean havePermission;
 
     /**
-     * The ID of the permission. Either `id` or `key` must be specified. Use [Get all permissions](#api-rest-api-2-permissions-get) to get the list of permissions.
+     * The ID of the permission. Either {@code id} or {@code key} must be specified. Use [Get all permissions](#api-rest-api-2-permissions-get) to get the list of permissions.
      */
     @JsonProperty("id")
     protected String id;
 
     /**
-     * The key of the permission. Either `id` or `key` must be specified. Use [Get all permissions](#api-rest-api-2-permissions-get) to get the list of permissions.
+     * The key of the permission. Either {@code id} or {@code key} must be specified. Use [Get all permissions](#api-rest-api-2-permissions-get) to get the list of permissions.
      */
     @JsonProperty("key")
     protected String key;
@@ -90,6 +83,37 @@ public class UserPermission extends HashMap<String, Object> {
     @JsonProperty("type")
     protected TypeEnum type;
 
+    /**
+     * Constructs a validated instance of {@link UserPermission}.
+     *
+     * @param spec the specification to process
+     */
+    public UserPermission(Consumer<UserPermission> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link UserPermission}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #UserPermission(Consumer)} instead.
+     * @param deprecatedKey Indicate whether the permission key is deprecated. Note that deprecated keys cannot be used in the {@code permissions parameter of Get my permissions. Deprecated keys are not returned by Get all permissions.}
+     * @param description The description of the permission.
+     * @param havePermission Whether the permission is available to the user in the queried context.
+     * @param id The ID of the permission. Either {@code id} or {@code key} must be specified. Use [Get all permissions](#api-rest-api-2-permissions-get) to get the list of permissions.
+     * @param key The key of the permission. Either {@code id} or {@code key} must be specified. Use [Get all permissions](#api-rest-api-2-permissions-get) to get the list of permissions.
+     * @param name The name of the permission.
+     * @param type The type of the permission.
+     */
+    @ApiStatus.Internal
+    public UserPermission(Boolean deprecatedKey, String description, Boolean havePermission, String id, String key, String name, TypeEnum type) {
+        this.deprecatedKey = deprecatedKey;
+        this.description = description;
+        this.havePermission = havePermission;
+        this.id = id;
+        this.key = key;
+        this.name = name;
+        this.type = type;
+    }
 
     /**
      * The type of the permission.

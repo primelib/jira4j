@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -17,10 +20,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * CustomFieldContextDefaultValueDateTime
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "dateTime",
     "type",
@@ -31,17 +37,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class CustomFieldContextDefaultValueDateTime {
 
     /**
-     * Constructs a validated implementation of {@link CustomFieldContextDefaultValueDateTime}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public CustomFieldContextDefaultValueDateTime(Consumer<CustomFieldContextDefaultValueDateTime> spec) {
-        spec.accept(this);
-    }
-
-    /**
-     * The default date-time in ISO format. Ignored if `useCurrent` is true.
+     * The default date-time in ISO format. Ignored if {@code useCurrent} is true.
      */
     @JsonProperty("dateTime")
     protected String dateTime;
@@ -53,7 +49,30 @@ public class CustomFieldContextDefaultValueDateTime {
      * Whether to use the current date.
      */
     @JsonProperty("useCurrent")
-    protected Boolean useCurrent = false;
+    protected Boolean useCurrent;
 
+    /**
+     * Constructs a validated instance of {@link CustomFieldContextDefaultValueDateTime}.
+     *
+     * @param spec the specification to process
+     */
+    public CustomFieldContextDefaultValueDateTime(Consumer<CustomFieldContextDefaultValueDateTime> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link CustomFieldContextDefaultValueDateTime}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #CustomFieldContextDefaultValueDateTime(Consumer)} instead.
+     * @param dateTime The default date-time in ISO format. Ignored if {@code useCurrent} is true.
+     * @param type var.name
+     * @param useCurrent Whether to use the current date.
+     */
+    @ApiStatus.Internal
+    public CustomFieldContextDefaultValueDateTime(String dateTime, String type, Boolean useCurrent) {
+        this.dateTime = dateTime;
+        this.type = type;
+        this.useCurrent = useCurrent;
+    }
 
 }

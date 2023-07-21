@@ -7,8 +7,13 @@ import javax.annotation.processing.Generated;
 
 import io.github.primelib.jira4j.restv3.model.IssueLink;
 import io.github.primelib.jira4j.restv3.model.RemoteIssueLink;
+import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -20,9 +25,13 @@ import java.util.function.Consumer;
  * <p>
  * Delete remote issue link by ID
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class DeleteRemoteIssueLinkByIdOperationSpec {
     /**
@@ -44,13 +53,29 @@ public class DeleteRemoteIssueLinkByIdOperationSpec {
     private String linkId;
 
     /**
-     * Constructs a validated implementation of {@link DeleteRemoteIssueLinkByIdOperationSpec}.
+     * Constructs a validated instance of {@link DeleteRemoteIssueLinkByIdOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public DeleteRemoteIssueLinkByIdOperationSpec(Consumer<DeleteRemoteIssueLinkByIdOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link DeleteRemoteIssueLinkByIdOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param issueIdOrKey         The ID or key of the issue.
+     * @param linkId               The ID of a remote issue link.
+     */
+    @ApiStatus.Internal
+    public DeleteRemoteIssueLinkByIdOperationSpec(String issueIdOrKey, String linkId) {
+        this.issueIdOrKey = issueIdOrKey;
+        this.linkId = linkId;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -64,5 +89,4 @@ public class DeleteRemoteIssueLinkByIdOperationSpec {
         Objects.requireNonNull(issueIdOrKey, "issueIdOrKey is a required parameter!");
         Objects.requireNonNull(linkId, "linkId is a required parameter!");
     }
-
 }

@@ -9,7 +9,11 @@ import io.github.primelib.jira4j.restv3.model.Project;
 import io.github.primelib.jira4j.restv3.model.ProjectEmailAddress;
 import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -21,9 +25,13 @@ import java.util.function.Consumer;
  * <p>
  * Set project's sender email
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class UpdateProjectEmailOperationSpec {
     /**
@@ -45,13 +53,29 @@ public class UpdateProjectEmailOperationSpec {
     private ProjectEmailAddress projectEmailAddress;
 
     /**
-     * Constructs a validated implementation of {@link UpdateProjectEmailOperationSpec}.
+     * Constructs a validated instance of {@link UpdateProjectEmailOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public UpdateProjectEmailOperationSpec(Consumer<UpdateProjectEmailOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link UpdateProjectEmailOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param projectId            The project ID.
+     * @param projectEmailAddress  The project's sender email address to be set.
+     */
+    @ApiStatus.Internal
+    public UpdateProjectEmailOperationSpec(Long projectId, ProjectEmailAddress projectEmailAddress) {
+        this.projectId = projectId;
+        this.projectEmailAddress = projectEmailAddress;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -65,5 +89,4 @@ public class UpdateProjectEmailOperationSpec {
         Objects.requireNonNull(projectId, "projectId is a required parameter!");
         Objects.requireNonNull(projectEmailAddress, "projectEmailAddress is a required parameter!");
     }
-
 }

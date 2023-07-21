@@ -7,8 +7,13 @@ import javax.annotation.processing.Generated;
 
 import io.github.primelib.jira4j.restv3.model.MoveFieldBean;
 import io.github.primelib.jira4j.restv3.model.Screen;
+import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -20,9 +25,13 @@ import java.util.function.Consumer;
  * <p>
  * Move screen tab field
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class MoveScreenTabFieldOperationSpec {
     /**
@@ -55,13 +64,33 @@ public class MoveScreenTabFieldOperationSpec {
     private MoveFieldBean moveFieldBean;
 
     /**
-     * Constructs a validated implementation of {@link MoveScreenTabFieldOperationSpec}.
+     * Constructs a validated instance of {@link MoveScreenTabFieldOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public MoveScreenTabFieldOperationSpec(Consumer<MoveScreenTabFieldOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link MoveScreenTabFieldOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param screenId             The ID of the screen.
+     * @param tabId                The ID of the screen tab.
+     * @param id                   The ID of the field.
+     * @param moveFieldBean        
+     */
+    @ApiStatus.Internal
+    public MoveScreenTabFieldOperationSpec(Long screenId, Long tabId, String id, MoveFieldBean moveFieldBean) {
+        this.screenId = screenId;
+        this.tabId = tabId;
+        this.id = id;
+        this.moveFieldBean = moveFieldBean;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -77,5 +106,4 @@ public class MoveScreenTabFieldOperationSpec {
         Objects.requireNonNull(id, "id is a required parameter!");
         Objects.requireNonNull(moveFieldBean, "moveFieldBean is a required parameter!");
     }
-
 }

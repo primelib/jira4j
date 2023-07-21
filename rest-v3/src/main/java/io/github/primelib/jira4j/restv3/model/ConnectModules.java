@@ -3,13 +3,15 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.ArrayList;
 import java.util.List;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
@@ -19,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * ConnectModules
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "modules"
 })
@@ -31,20 +36,29 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class ConnectModules {
 
     /**
-     * Constructs a validated implementation of {@link ConnectModules}.
+     * A list of app modules in the same format as the {@code modules} property in the [app descriptor](https://developer.atlassian.com/cloud/jira/platform/app-descriptor/).
+     */
+    @JsonProperty("modules")
+    protected List<Object> modules;
+
+    /**
+     * Constructs a validated instance of {@link ConnectModules}.
      *
      * @param spec the specification to process
      */
-    @ApiStatus.Internal
     public ConnectModules(Consumer<ConnectModules> spec) {
         spec.accept(this);
     }
 
     /**
-     * A list of app modules in the same format as the `modules` property in the [app descriptor](https://developer.atlassian.com/cloud/jira/platform/app-descriptor/).
+     * Constructs a validated instance of {@link ConnectModules}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #ConnectModules(Consumer)} instead.
+     * @param modules A list of app modules in the same format as the {@code modules} property in the [app descriptor](https://developer.atlassian.com/cloud/jira/platform/app-descriptor/).
      */
-    @JsonProperty("modules")
-    protected List<Object> modules = new ArrayList<>();
-
+    @ApiStatus.Internal
+    public ConnectModules(List<Object> modules) {
+        this.modules = modules;
+    }
 
 }

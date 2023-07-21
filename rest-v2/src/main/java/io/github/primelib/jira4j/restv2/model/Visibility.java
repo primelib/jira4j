@@ -3,15 +3,16 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.HashMap;
-import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -20,11 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * Visibility
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
-@EqualsAndHashCode(callSuper = true)
+@Builder
 @JsonPropertyOrder({
     "identifier",
     "type",
@@ -32,17 +35,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 })
 @JsonTypeName("Visibility")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
-public class Visibility extends HashMap<String, Object> {
-
-    /**
-     * Constructs a validated implementation of {@link Visibility}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public Visibility(Consumer<Visibility> spec) {
-        spec.accept(this);
-    }
+public class Visibility {
 
     /**
      * The ID of the group or the name of the role that visibility of this item is restricted to.
@@ -57,11 +50,34 @@ public class Visibility extends HashMap<String, Object> {
     protected TypeEnum type;
 
     /**
-     * The name of the group or role that visibility of this item is restricted to. Please note that the name of a group is mutable, to reliably identify a group use `identifier`.
+     * The name of the group or role that visibility of this item is restricted to. Please note that the name of a group is mutable, to reliably identify a group use {@code identifier}.
      */
     @JsonProperty("value")
     protected String value;
 
+    /**
+     * Constructs a validated instance of {@link Visibility}.
+     *
+     * @param spec the specification to process
+     */
+    public Visibility(Consumer<Visibility> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link Visibility}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #Visibility(Consumer)} instead.
+     * @param identifier The ID of the group or the name of the role that visibility of this item is restricted to.
+     * @param type Whether visibility of this item is restricted to a group or role.
+     * @param value The name of the group or role that visibility of this item is restricted to. Please note that the name of a group is mutable, to reliably identify a group use {@code identifier}.
+     */
+    @ApiStatus.Internal
+    public Visibility(String identifier, TypeEnum type, String value) {
+        this.identifier = identifier;
+        this.type = type;
+        this.value = value;
+    }
 
     /**
      * Whether visibility of this item is restricted to a group or role.

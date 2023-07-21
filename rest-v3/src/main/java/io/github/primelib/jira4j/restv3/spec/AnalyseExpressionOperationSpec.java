@@ -7,8 +7,13 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.processing.Generated;
 
 import io.github.primelib.jira4j.restv3.model.JiraExpressionForAnalysis;
+import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -20,9 +25,13 @@ import java.util.function.Consumer;
  * <p>
  * Analyse Jira expression
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class AnalyseExpressionOperationSpec {
     /**
@@ -40,23 +49,39 @@ public class AnalyseExpressionOperationSpec {
     /**
      * The check to perform:
      *  *
-     * `syntax` Each expression's syntax is checked to ensure the expression can be parsed. Also, syntactic limits are validated. For example, the expression's length.
+     * {@code syntax} Each expression's syntax is checked to ensure the expression can be parsed. Also, syntactic limits are validated. For example, the expression's length.
      * *
-     * `type` EXPERIMENTAL. Each expression is type checked and the final type of the expression inferred. Any type errors that would result in the expression failure at runtime are reported. For example, accessing properties that don't exist or passing the wrong number of arguments to functions. Also performs the syntax check.
+     * {@code type} EXPERIMENTAL. Each expression is type checked and the final type of the expression inferred. Any type errors that would result in the expression failure at runtime are reported. For example, accessing properties that don't exist or passing the wrong number of arguments to functions. Also performs the syntax check.
      * *
-     * `complexity` EXPERIMENTAL. Determines the formulae for how many [expensive operations](https://developer.atlassian.com/cloud/jira/platform/jira-expressions/#expensive-operations) each expression may execute.
+     * {@code complexity} EXPERIMENTAL. Determines the formulae for how many [expensive operations](https://developer.atlassian.com/cloud/jira/platform/jira-expressions/#expensive-operations) each expression may execute.
      */
     @Nullable 
-    private String check = "syntax";
+    private String check;
 
     /**
-     * Constructs a validated implementation of {@link AnalyseExpressionOperationSpec}.
+     * Constructs a validated instance of {@link AnalyseExpressionOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public AnalyseExpressionOperationSpec(Consumer<AnalyseExpressionOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link AnalyseExpressionOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param jiraExpressionForAnalysis The Jira expressions to analyse.
+     * @param check                The check to perform:   *  {@code syntax} Each expression's syntax is checked to ensure the expression can be parsed. Also, syntactic limits are validated. For example, the expression's length.  *  {@code type} EXPERIMENTAL. Each expression is type checked and the final type of the expression inferred. Any type errors that would result in the expression failure at runtime are reported. For example, accessing properties that don't exist or passing the wrong number of arguments to functions. Also performs the syntax check.  *  {@code complexity} EXPERIMENTAL. Determines the formulae for how many [expensive operations](https://developer.atlassian.com/cloud/jira/platform/jira-expressions/#expensive-operations) each expression may execute.
+     */
+    @ApiStatus.Internal
+    public AnalyseExpressionOperationSpec(JiraExpressionForAnalysis jiraExpressionForAnalysis, String check) {
+        this.jiraExpressionForAnalysis = jiraExpressionForAnalysis;
+        this.check = check;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -69,5 +94,4 @@ public class AnalyseExpressionOperationSpec {
     public void validate() {
         Objects.requireNonNull(jiraExpressionForAnalysis, "jiraExpressionForAnalysis is a required parameter!");
     }
-
 }

@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.util.List;
@@ -18,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * CreateWorkflowTransitionDetailsRules
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "conditions",
     "postFunctions",
@@ -30,16 +36,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("CreateWorkflowTransitionDetails_rules")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class CreateWorkflowTransitionDetailsRules {
-
-    /**
-     * Constructs a validated implementation of {@link CreateWorkflowTransitionDetailsRules}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public CreateWorkflowTransitionDetailsRules(Consumer<CreateWorkflowTransitionDetailsRules> spec) {
-        spec.accept(this);
-    }
 
     @JsonProperty("conditions")
     protected CreateWorkflowTransitionRulesDetailsConditions conditions;
@@ -316,5 +312,28 @@ public class CreateWorkflowTransitionDetailsRules {
     @JsonProperty("validators")
     protected List<CreateWorkflowTransitionRule> validators;
 
+    /**
+     * Constructs a validated instance of {@link CreateWorkflowTransitionDetailsRules}.
+     *
+     * @param spec the specification to process
+     */
+    public CreateWorkflowTransitionDetailsRules(Consumer<CreateWorkflowTransitionDetailsRules> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link CreateWorkflowTransitionDetailsRules}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #CreateWorkflowTransitionDetailsRules(Consumer)} instead.
+     * @param conditions var.name
+     * @param postFunctions The workflow post functions.  **Note:** The default post functions are always added to the *initial* transition, as in:      "postFunctions": [         {             "type": "IssueCreateFunction"         },         {             "type": "IssueReindexFunction"         },         {             "type": "FireIssueEventFunction",             "configuration": {                 "event": {                     "id": "1",                     "name": "issue_created"                 }             }         }     ]  **Note:** The default post functions are always added to the *global* and *directed* transitions, as in:      "postFunctions": [         {             "type": "UpdateIssueStatusFunction"         },         {             "type": "CreateCommentFunction"         },         {             "type": "GenerateChangeHistoryFunction"         },         {             "type": "IssueReindexFunction"         },         {             "type": "FireIssueEventFunction",             "configuration": {                 "event": {                     "id": "13",                     "name": "issue_generic"                 }             }         }     ]
+     * @param validators The workflow validators.  **Note:** The default permission validator is always added to the *initial* transition, as in:      "validators": [         {             "type": "PermissionValidator",             "configuration": {                 "permissionKey": "CREATE_ISSUES"             }         }     ]
+     */
+    @ApiStatus.Internal
+    public CreateWorkflowTransitionDetailsRules(CreateWorkflowTransitionRulesDetailsConditions conditions, List<CreateWorkflowTransitionRule> postFunctions, List<CreateWorkflowTransitionRule> validators) {
+        this.conditions = conditions;
+        this.postFunctions = postFunctions;
+        this.validators = validators;
+    }
 
 }

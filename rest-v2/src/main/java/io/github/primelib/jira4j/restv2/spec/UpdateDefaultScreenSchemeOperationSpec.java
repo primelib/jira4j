@@ -7,9 +7,14 @@ import javax.annotation.processing.Generated;
 
 import io.github.primelib.jira4j.restv2.model.Screen;
 import io.github.primelib.jira4j.restv2.model.ScreenSchemeId;
+import java.util.Set;
 import io.github.primelib.jira4j.restv2.model.UpdateDefaultScreenScheme;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -21,9 +26,13 @@ import java.util.function.Consumer;
  * <p>
  * Update issue type screen scheme default screen scheme
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class UpdateDefaultScreenSchemeOperationSpec {
     /**
@@ -44,13 +53,29 @@ public class UpdateDefaultScreenSchemeOperationSpec {
     private UpdateDefaultScreenScheme updateDefaultScreenScheme;
 
     /**
-     * Constructs a validated implementation of {@link UpdateDefaultScreenSchemeOperationSpec}.
+     * Constructs a validated instance of {@link UpdateDefaultScreenSchemeOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public UpdateDefaultScreenSchemeOperationSpec(Consumer<UpdateDefaultScreenSchemeOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link UpdateDefaultScreenSchemeOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param issueTypeScreenSchemeId The ID of the issue type screen scheme.
+     * @param updateDefaultScreenScheme 
+     */
+    @ApiStatus.Internal
+    public UpdateDefaultScreenSchemeOperationSpec(String issueTypeScreenSchemeId, UpdateDefaultScreenScheme updateDefaultScreenScheme) {
+        this.issueTypeScreenSchemeId = issueTypeScreenSchemeId;
+        this.updateDefaultScreenScheme = updateDefaultScreenScheme;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -64,5 +89,4 @@ public class UpdateDefaultScreenSchemeOperationSpec {
         Objects.requireNonNull(issueTypeScreenSchemeId, "issueTypeScreenSchemeId is a required parameter!");
         Objects.requireNonNull(updateDefaultScreenScheme, "updateDefaultScreenScheme is a required parameter!");
     }
-
 }

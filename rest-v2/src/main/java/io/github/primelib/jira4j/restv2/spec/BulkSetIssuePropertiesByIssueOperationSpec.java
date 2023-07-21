@@ -9,7 +9,11 @@ import io.github.primelib.jira4j.restv2.model.IssueEntityProperties;
 import io.github.primelib.jira4j.restv2.model.MultiIssueEntityProperties;
 import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -21,9 +25,13 @@ import java.util.function.Consumer;
  * <p>
  * Bulk set issue properties by issue
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class BulkSetIssuePropertiesByIssueOperationSpec {
     /**
@@ -39,13 +47,27 @@ public class BulkSetIssuePropertiesByIssueOperationSpec {
     private MultiIssueEntityProperties multiIssueEntityProperties;
 
     /**
-     * Constructs a validated implementation of {@link BulkSetIssuePropertiesByIssueOperationSpec}.
+     * Constructs a validated instance of {@link BulkSetIssuePropertiesByIssueOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public BulkSetIssuePropertiesByIssueOperationSpec(Consumer<BulkSetIssuePropertiesByIssueOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link BulkSetIssuePropertiesByIssueOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param multiIssueEntityProperties Details of the issue properties to be set or updated. Note that if an issue is not found, it is ignored.
+     */
+    @ApiStatus.Internal
+    public BulkSetIssuePropertiesByIssueOperationSpec(MultiIssueEntityProperties multiIssueEntityProperties) {
+        this.multiIssueEntityProperties = multiIssueEntityProperties;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -58,5 +80,4 @@ public class BulkSetIssuePropertiesByIssueOperationSpec {
     public void validate() {
         Objects.requireNonNull(multiIssueEntityProperties, "multiIssueEntityProperties is a required parameter!");
     }
-
 }

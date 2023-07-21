@@ -5,9 +5,14 @@ import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
 import javax.annotation.processing.Generated;
 
+import java.util.Set;
 import io.github.primelib.jira4j.restv3.model.WorkflowScheme;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -19,9 +24,13 @@ import java.util.function.Consumer;
  * <p>
  * Delete draft workflow scheme
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class DeleteWorkflowSchemeDraftOperationSpec {
     /**
@@ -37,13 +46,27 @@ public class DeleteWorkflowSchemeDraftOperationSpec {
     private Long id;
 
     /**
-     * Constructs a validated implementation of {@link DeleteWorkflowSchemeDraftOperationSpec}.
+     * Constructs a validated instance of {@link DeleteWorkflowSchemeDraftOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public DeleteWorkflowSchemeDraftOperationSpec(Consumer<DeleteWorkflowSchemeDraftOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link DeleteWorkflowSchemeDraftOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param id                   The ID of the active workflow scheme that the draft was created from.
+     */
+    @ApiStatus.Internal
+    public DeleteWorkflowSchemeDraftOperationSpec(Long id) {
+        this.id = id;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -56,5 +79,4 @@ public class DeleteWorkflowSchemeDraftOperationSpec {
     public void validate() {
         Objects.requireNonNull(id, "id is a required parameter!");
     }
-
 }

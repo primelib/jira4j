@@ -8,8 +8,13 @@ import javax.annotation.processing.Generated;
 import io.github.primelib.jira4j.restv2.model.CreateUpdateRoleRequestBean;
 import io.github.primelib.jira4j.restv2.model.Project;
 import io.github.primelib.jira4j.restv2.model.ProjectRole;
+import java.util.Set;
 import lombok.AccessLevel;
-import lombok.Data;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 import java.util.function.Consumer;
@@ -21,9 +26,13 @@ import java.util.function.Consumer;
  * <p>
  * Partial update project role
  */
-@Data
-@Accessors(fluent = true)
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
+@NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class PartialUpdateProjectRoleOperationSpec {
     /**
@@ -44,13 +53,29 @@ public class PartialUpdateProjectRoleOperationSpec {
     private CreateUpdateRoleRequestBean createUpdateRoleRequestBean;
 
     /**
-     * Constructs a validated implementation of {@link PartialUpdateProjectRoleOperationSpec}.
+     * Constructs a validated instance of {@link PartialUpdateProjectRoleOperationSpec}.
      *
      * @param spec the specification to process
      */
     @ApiStatus.Internal
     public PartialUpdateProjectRoleOperationSpec(Consumer<PartialUpdateProjectRoleOperationSpec> spec) {
         spec.accept(this);
+        if (VALIDATION_ENABLED)
+            validate();
+    }
+
+    /**
+     * Constructs a validated instance of {@link PartialUpdateProjectRoleOperationSpec}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the operation is updated.
+     * @param id                   The ID of the project role. Use [Get all project roles](#api-rest-api-2-role-get) to get a list of project role IDs.
+     * @param createUpdateRoleRequestBean 
+     */
+    @ApiStatus.Internal
+    public PartialUpdateProjectRoleOperationSpec(Long id, CreateUpdateRoleRequestBean createUpdateRoleRequestBean) {
+        this.id = id;
+        this.createUpdateRoleRequestBean = createUpdateRoleRequestBean;
+
         if (VALIDATION_ENABLED)
             validate();
     }
@@ -64,5 +89,4 @@ public class PartialUpdateProjectRoleOperationSpec {
         Objects.requireNonNull(id, "id is a required parameter!");
         Objects.requireNonNull(createUpdateRoleRequestBean, "createUpdateRoleRequestBean is a required parameter!");
     }
-
 }

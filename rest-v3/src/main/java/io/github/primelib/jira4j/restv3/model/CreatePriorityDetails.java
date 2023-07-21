@@ -3,15 +3,16 @@ package io.github.primelib.jira4j.restv3.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.HashMap;
-import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -20,11 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * CreatePriorityDetails
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
-@EqualsAndHashCode(callSuper = true)
+@Builder
 @JsonPropertyOrder({
     "description",
     "iconUrl",
@@ -33,17 +36,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 })
 @JsonTypeName("CreatePriorityDetails")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
-public class CreatePriorityDetails extends HashMap<String, Object> {
-
-    /**
-     * Constructs a validated implementation of {@link CreatePriorityDetails}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public CreatePriorityDetails(Consumer<CreatePriorityDetails> spec) {
-        spec.accept(this);
-    }
+public class CreatePriorityDetails {
 
     /**
      * The description of the priority.
@@ -69,6 +62,31 @@ public class CreatePriorityDetails extends HashMap<String, Object> {
     @JsonProperty("statusColor")
     protected String statusColor;
 
+    /**
+     * Constructs a validated instance of {@link CreatePriorityDetails}.
+     *
+     * @param spec the specification to process
+     */
+    public CreatePriorityDetails(Consumer<CreatePriorityDetails> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link CreatePriorityDetails}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #CreatePriorityDetails(Consumer)} instead.
+     * @param description The description of the priority.
+     * @param iconUrl The URL of an icon for the priority. Accepted protocols are HTTP and HTTPS. Built in icons can also be used.
+     * @param name The name of the priority. Must be unique.
+     * @param statusColor The status color of the priority in 3-digit or 6-digit hexadecimal format.
+     */
+    @ApiStatus.Internal
+    public CreatePriorityDetails(String description, IconUrlEnum iconUrl, String name, String statusColor) {
+        this.description = description;
+        this.iconUrl = iconUrl;
+        this.name = name;
+        this.statusColor = statusColor;
+    }
 
     /**
      * The URL of an icon for the priority. Accepted protocols are HTTP and HTTPS. Built in icons can also be used.

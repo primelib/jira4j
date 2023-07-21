@@ -4,10 +4,13 @@ import java.util.Map;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -18,10 +21,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * IssueTypeToContextMapping
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "contextId",
     "isAnyIssueType",
@@ -30,16 +36,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("IssueTypeToContextMapping")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class IssueTypeToContextMapping {
-
-    /**
-     * Constructs a validated implementation of {@link IssueTypeToContextMapping}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public IssueTypeToContextMapping(Consumer<IssueTypeToContextMapping> spec) {
-        spec.accept(this);
-    }
 
     /**
      * The ID of the context.
@@ -59,5 +55,28 @@ public class IssueTypeToContextMapping {
     @JsonProperty("issueTypeId")
     protected String issueTypeId;
 
+    /**
+     * Constructs a validated instance of {@link IssueTypeToContextMapping}.
+     *
+     * @param spec the specification to process
+     */
+    public IssueTypeToContextMapping(Consumer<IssueTypeToContextMapping> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link IssueTypeToContextMapping}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #IssueTypeToContextMapping(Consumer)} instead.
+     * @param contextId The ID of the context.
+     * @param isAnyIssueType Whether the context is mapped to any issue type.
+     * @param issueTypeId The ID of the issue type.
+     */
+    @ApiStatus.Internal
+    public IssueTypeToContextMapping(String contextId, Boolean isAnyIssueType, String issueTypeId) {
+        this.contextId = contextId;
+        this.isAnyIssueType = isAnyIssueType;
+        this.issueTypeId = issueTypeId;
+    }
 
 }

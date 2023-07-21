@@ -3,10 +3,13 @@ package io.github.primelib.jira4j.restv2.model;
 import java.util.function.Consumer;
 import org.jetbrains.annotations.ApiStatus;
 import javax.annotation.processing.Generated;
-import lombok.Data;
-import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import lombok.AccessLevel;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.EqualsAndHashCode;
+import lombok.ToString;
+import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
@@ -17,10 +20,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
  * ScreenableField
  *
  */
-@Data
-@AllArgsConstructor
-@Accessors(fluent = true)
+@Getter
+@Setter
+@EqualsAndHashCode
+@ToString
+@Accessors(fluent = true, chain = true)
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
+@Builder
 @JsonPropertyOrder({
     "id",
     "name"
@@ -28,16 +34,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("ScreenableField")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class ScreenableField {
-
-    /**
-     * Constructs a validated implementation of {@link ScreenableField}.
-     *
-     * @param spec the specification to process
-     */
-    @ApiStatus.Internal
-    public ScreenableField(Consumer<ScreenableField> spec) {
-        spec.accept(this);
-    }
 
     /**
      * The ID of the screen tab field.
@@ -51,5 +47,26 @@ public class ScreenableField {
     @JsonProperty("name")
     protected String name;
 
+    /**
+     * Constructs a validated instance of {@link ScreenableField}.
+     *
+     * @param spec the specification to process
+     */
+    public ScreenableField(Consumer<ScreenableField> spec) {
+        spec.accept(this);
+    }
+
+    /**
+     * Constructs a validated instance of {@link ScreenableField}.
+     * <p>
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #ScreenableField(Consumer)} instead.
+     * @param id The ID of the screen tab field.
+     * @param name The name of the screen tab field. Required on create and update. The maximum length is 255 characters.
+     */
+    @ApiStatus.Internal
+    public ScreenableField(String id, String name) {
+        this.id = id;
+        this.name = name;
+    }
 
 }
