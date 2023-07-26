@@ -7,7 +7,6 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.processing.Generated;
 
 import io.github.primelib.jira4j.restv3.api.JiraRESTV3Api;
-import io.github.primelib.jira4j.restv3.auth.AuthMethod;
 import io.github.primelib.jira4j.restv3.auth.BasicAuthSpec;
 import io.github.primelib.jira4j.restv3.auth.BearerAuthSpec;
 import lombok.AccessLevel;
@@ -17,6 +16,9 @@ import lombok.experimental.Accessors;
 
 import io.micrometer.core.instrument.MeterRegistry;
 import io.micrometer.core.instrument.composite.CompositeMeterRegistry;
+
+import io.github.primelib.primecodegenlib.java.feign.common.api.AuthMethod;
+import io.github.primelib.primecodegenlib.java.feign.common.config.ProxySpec;
 
 import java.util.Objects;
 import java.util.function.Consumer;
@@ -58,10 +60,10 @@ public final class JiraRESTV3FactorySpec<T> {
      * The proxy server to use, if applicable
      * <p>
      * Defaults to {@code null}.
-     * Set to {@code JiraRESTV3ProxySpec.detect()} to detect the proxy based on the os environment automatically.
+     * Set to {@code ProxySpec.detect()} to detect the proxy based on the os environment automatically.
      */
     @Nullable
-    private JiraRESTV3ProxySpec proxy = null;
+    private ProxySpec proxy = null;
 
     /**
      * MeterRegistry to use for metrics
@@ -104,8 +106,8 @@ public final class JiraRESTV3FactorySpec<T> {
         Objects.requireNonNull(logLevel, "logLevel must not be null");
     }
 
-    public JiraRESTV3ProxySpec httpProxy(Consumer<JiraRESTV3ProxySpec> proxySpec) {
-        JiraRESTV3ProxySpec proxy = new JiraRESTV3ProxySpec(proxySpec);
+    public ProxySpec httpProxy(Consumer<ProxySpec> proxySpec) {
+        ProxySpec proxy = new ProxySpec(proxySpec);
         proxy(proxy);
         return proxy;
     }
