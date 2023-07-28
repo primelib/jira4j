@@ -17,6 +17,8 @@ import java.util.List;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * FieldReferenceData
@@ -157,7 +159,25 @@ public class FieldReferenceData {
         TRUE("true"),
         FALSE("false");
 
+        private static final AutoEnum[] VALUES = values(); // prevent allocating a new array for every call to values()
         private final String value;
+
+        @JsonCreator
+        public static AutoEnum of(String input) {
+            if (input != null) {
+                for (AutoEnum v : VALUES) {
+                    if (input.equalsIgnoreCase(v.value)) 
+                        return v;
+                }
+            }
+
+            return null;
+        }
+
+        @JsonValue
+        public String getValue() {
+            return value;
+        }
     }
 
     /**
@@ -168,7 +188,25 @@ public class FieldReferenceData {
         TRUE("true"),
         FALSE("false");
 
+        private static final DeprecatedEnum[] VALUES = values(); // prevent allocating a new array for every call to values()
         private final String value;
+
+        @JsonCreator
+        public static DeprecatedEnum of(String input) {
+            if (input != null) {
+                for (DeprecatedEnum v : VALUES) {
+                    if (input.equalsIgnoreCase(v.value)) 
+                        return v;
+                }
+            }
+
+            return null;
+        }
+
+        @JsonValue
+        public String getValue() {
+            return value;
+        }
     }
 
     /**
@@ -179,7 +217,25 @@ public class FieldReferenceData {
         TRUE("true"),
         FALSE("false");
 
+        private static final OrderableEnum[] VALUES = values(); // prevent allocating a new array for every call to values()
         private final String value;
+
+        @JsonCreator
+        public static OrderableEnum of(String input) {
+            if (input != null) {
+                for (OrderableEnum v : VALUES) {
+                    if (input.equalsIgnoreCase(v.value)) 
+                        return v;
+                }
+            }
+
+            return null;
+        }
+
+        @JsonValue
+        public String getValue() {
+            return value;
+        }
     }
 
     /**
@@ -190,7 +246,25 @@ public class FieldReferenceData {
         TRUE("true"),
         FALSE("false");
 
+        private static final SearchableEnum[] VALUES = values(); // prevent allocating a new array for every call to values()
         private final String value;
+
+        @JsonCreator
+        public static SearchableEnum of(String input) {
+            if (input != null) {
+                for (SearchableEnum v : VALUES) {
+                    if (input.equalsIgnoreCase(v.value)) 
+                        return v;
+                }
+            }
+
+            return null;
+        }
+
+        @JsonValue
+        public String getValue() {
+            return value;
+        }
     }
 
 }

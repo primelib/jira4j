@@ -16,6 +16,8 @@ import lombok.experimental.Accessors;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * ConfigurationTimeTrackingConfiguration
@@ -98,7 +100,25 @@ public class ConfigurationTimeTrackingConfiguration {
         DAY("day"),
         WEEK("week");
 
+        private static final DefaultUnitEnum[] VALUES = values(); // prevent allocating a new array for every call to values()
         private final String value;
+
+        @JsonCreator
+        public static DefaultUnitEnum of(String input) {
+            if (input != null) {
+                for (DefaultUnitEnum v : VALUES) {
+                    if (input.equalsIgnoreCase(v.value)) 
+                        return v;
+                }
+            }
+
+            return null;
+        }
+
+        @JsonValue
+        public String getValue() {
+            return value;
+        }
     }
 
     /**
@@ -110,7 +130,25 @@ public class ConfigurationTimeTrackingConfiguration {
         DAYS("days"),
         HOURS("hours");
 
+        private static final TimeFormatEnum[] VALUES = values(); // prevent allocating a new array for every call to values()
         private final String value;
+
+        @JsonCreator
+        public static TimeFormatEnum of(String input) {
+            if (input != null) {
+                for (TimeFormatEnum v : VALUES) {
+                    if (input.equalsIgnoreCase(v.value)) 
+                        return v;
+                }
+            }
+
+            return null;
+        }
+
+        @JsonValue
+        public String getValue() {
+            return value;
+        }
     }
 
 }
