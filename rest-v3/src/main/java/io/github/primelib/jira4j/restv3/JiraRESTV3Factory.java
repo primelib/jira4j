@@ -7,7 +7,6 @@ import lombok.Builder;
 import io.github.primelib.jira4j.restv3.api.JiraRESTV3Api;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import com.fasterxml.jackson.module.blackbird.BlackbirdModule;
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.MapperFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -25,18 +24,8 @@ import feign.okhttp.OkHttpClient;
 import feign.slf4j.Slf4jLogger;
 import okhttp3.Credentials;
 
-import io.github.resilience4j.bulkhead.BulkheadRegistry;
-import io.github.resilience4j.circuitbreaker.CircuitBreakerRegistry;
-import io.github.resilience4j.feign.FeignDecorators;
-import io.github.resilience4j.micrometer.tagged.TaggedBulkheadMetrics;
-import io.github.resilience4j.micrometer.tagged.TaggedCircuitBreakerMetrics;
-import io.github.resilience4j.micrometer.tagged.TaggedRateLimiterMetrics;
-import io.github.resilience4j.micrometer.tagged.TaggedRetryMetrics;
-import io.github.resilience4j.ratelimiter.RateLimiterRegistry;
-import io.github.resilience4j.retry.RetryRegistry;
-
 import io.github.primelib.primecodegenlib.java.feign.common.interceptor.AuthInterceptor;
-import io.github.primelib.primecodegenlib.java.feign.resilience4j.Resilience4JCapability;
+import io.github.primelib.primecodegenlib.java.feign.common.capabilities.PrimeCapability;
 
 import lombok.AccessLevel;
 import lombok.NoArgsConstructor;
@@ -51,17 +40,6 @@ import java.util.function.Consumer;
 @Slf4j
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class JiraRESTV3Factory {
-    private static final ObjectMapper MAPPER = JsonMapper.builder()
-            .enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS)
-            .enable(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_USING_DEFAULT_VALUE)
-            .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
-            .propertyNamingStrategy(PropertyNamingStrategies.LOWER_CAMEL_CASE)
-            .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
-            .serializationInclusion(JsonInclude.Include.NON_NULL)
-            .addModule(new JavaTimeModule())
-            .addModule(new BlackbirdModule())
-            .build();
-
     public static <T> T create(Consumer<JiraRESTV3FactorySpec<T>> spec) {
         JiraRESTV3FactorySpec<T> config = new JiraRESTV3FactorySpec<>(spec);
 
@@ -87,26 +65,6 @@ public class JiraRESTV3Factory {
     private static <T> T buildClient(Consumer<JiraRESTV3FactorySpec<T>> spec) {
         JiraRESTV3FactorySpec<T> config = new JiraRESTV3FactorySpec<>(spec);
 
-        // registries
-        BulkheadRegistry bulkheadRegistry = BulkheadRegistry.ofDefaults();
-        RateLimiterRegistry rateLimiterRegistry = RateLimiterRegistry.ofDefaults();
-        CircuitBreakerRegistry circuitBreakerRegistry = CircuitBreakerRegistry.ofDefaults();
-        RetryRegistry retryRegistry = RetryRegistry.ofDefaults();
-
-        // decorators
-        FeignDecorators decorators = FeignDecorators.builder()
-                .withBulkhead(bulkheadRegistry.bulkhead(config.backendName()))
-                .withRateLimiter(rateLimiterRegistry.rateLimiter(config.backendName()))
-                .withCircuitBreaker(circuitBreakerRegistry.circuitBreaker(config.backendName()))
-                .withRetry(retryRegistry.retry(config.backendName()))
-                .build();
-
-        // metrics
-        TaggedBulkheadMetrics.ofBulkheadRegistry(bulkheadRegistry).bindTo(config.meterRegistry());
-        TaggedRateLimiterMetrics.ofRateLimiterRegistry(rateLimiterRegistry).bindTo(config.meterRegistry());
-        TaggedCircuitBreakerMetrics.ofCircuitBreakerRegistry(circuitBreakerRegistry).bindTo(config.meterRegistry());
-        TaggedRetryMetrics.ofRetryRegistry(retryRegistry).bindTo(config.meterRegistry());
-
         // http client
         okhttp3.OkHttpClient.Builder clientBuilder = new okhttp3.OkHttpClient.Builder();
         if (config.proxy() != null && config.proxy().type() != Proxy.Type.DIRECT) {
@@ -120,15 +78,27 @@ public class JiraRESTV3Factory {
             }
         }
 
+        // objectMapper
+        JsonMapper.Builder objectMapperBuilder = JsonMapper.builder()
+            .enable(MapperFeature.ACCEPT_CASE_INSENSITIVE_ENUMS)
+            .enable(DeserializationFeature.READ_UNKNOWN_ENUM_VALUES_USING_DEFAULT_VALUE)
+            .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
+            .propertyNamingStrategy(PropertyNamingStrategies.LOWER_CAMEL_CASE)
+            .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
+            .serializationInclusion(JsonInclude.Include.NON_NULL)
+            .addModule(new JavaTimeModule());
+        config.extensions().forEach(extension -> extension.customizeObjectMapper(objectMapperBuilder));
+        ObjectMapper objectMapper = objectMapperBuilder.build();
+
         // builder
         return Feign.builder()
                 .client(new OkHttpClient(clientBuilder.build()))
-                .encoder(new JacksonEncoder(MAPPER))
-                .decoder(new JacksonDecoder(MAPPER))
+                .encoder(new JacksonEncoder(objectMapper))
+                .decoder(new JacksonDecoder(objectMapper))
                 .logger(new Slf4jLogger())
                 .logLevel(Logger.Level.valueOf(config.logLevel().toUpperCase()))
                 .addCapability(new MicrometerCapability(config.meterRegistry()))
-                .addCapability(new Resilience4JCapability(decorators))
+                .addCapability(new PrimeCapability(config.backendName(), config.extensions()))
                 .requestInterceptor(new AuthInterceptor(config.auth()))
                 .target(config.api(), config.baseUrl());
     }
