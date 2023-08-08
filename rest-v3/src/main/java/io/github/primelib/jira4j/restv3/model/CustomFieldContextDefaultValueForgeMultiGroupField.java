@@ -67,7 +67,7 @@ public class CustomFieldContextDefaultValueForgeMultiGroupField {
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #CustomFieldContextDefaultValueForgeMultiGroupField(Consumer)} instead.
      * @param contextId The ID of the context.
      * @param groupIds The IDs of the default groups.
-     * @param type var.name
+     * @param type type
      */
     @ApiStatus.Internal
     public CustomFieldContextDefaultValueForgeMultiGroupField(String contextId, Set<String> groupIds, String type) {

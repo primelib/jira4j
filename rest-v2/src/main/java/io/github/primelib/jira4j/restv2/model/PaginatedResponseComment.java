@@ -63,10 +63,10 @@ public class PaginatedResponseComment {
      * Constructs a validated instance of {@link PaginatedResponseComment}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #PaginatedResponseComment(Consumer)} instead.
-     * @param maxResults var.name
-     * @param results var.name
-     * @param startAt var.name
-     * @param total var.name
+     * @param maxResults maxResults
+     * @param results results
+     * @param startAt startAt
+     * @param total total
      */
     @ApiStatus.Internal
     public PaginatedResponseComment(Integer maxResults, List<Comment> results, Long startAt, Long total) {

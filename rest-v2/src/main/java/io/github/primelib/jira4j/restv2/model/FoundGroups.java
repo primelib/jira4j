@@ -65,7 +65,7 @@ public class FoundGroups {
      * Constructs a validated instance of {@link FoundGroups}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #FoundGroups(Consumer)} instead.
-     * @param groups var.name
+     * @param groups groups
      * @param header Header text indicating the number of groups in the response and the total number of groups found in the search.
      * @param total The total number of groups found in the search.
      */

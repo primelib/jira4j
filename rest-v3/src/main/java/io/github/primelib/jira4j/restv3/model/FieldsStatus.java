@@ -90,7 +90,7 @@ public class FieldsStatus {
      * @param id The ID of the status.
      * @param name The name of the status.
      * @param self The URL of the status.
-     * @param statusCategory var.name
+     * @param statusCategory statusCategory
      */
     @ApiStatus.Internal
     public FieldsStatus(String description, String iconUrl, String id, String name, String self, StatusDetailsStatusCategory statusCategory) {

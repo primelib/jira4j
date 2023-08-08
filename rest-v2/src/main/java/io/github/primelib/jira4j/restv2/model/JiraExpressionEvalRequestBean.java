@@ -57,7 +57,7 @@ public class JiraExpressionEvalRequestBean {
      * Constructs a validated instance of {@link JiraExpressionEvalRequestBean}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #JiraExpressionEvalRequestBean(Consumer)} instead.
-     * @param context var.name
+     * @param context context
      * @param expression The Jira expression to evaluate.
      */
     @ApiStatus.Internal

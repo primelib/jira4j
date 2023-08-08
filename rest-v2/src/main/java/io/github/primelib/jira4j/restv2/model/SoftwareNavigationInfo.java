@@ -62,10 +62,10 @@ public class SoftwareNavigationInfo {
      * Constructs a validated instance of {@link SoftwareNavigationInfo}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #SoftwareNavigationInfo(Consumer)} instead.
-     * @param boardId var.name
-     * @param boardName var.name
-     * @param simpleBoard var.name
-     * @param totalBoardsInProject var.name
+     * @param boardId boardId
+     * @param boardName boardName
+     * @param simpleBoard simpleBoard
+     * @param totalBoardsInProject totalBoardsInProject
      */
     @ApiStatus.Internal
     public SoftwareNavigationInfo(Long boardId, String boardName, Boolean simpleBoard, Long totalBoardsInProject) {

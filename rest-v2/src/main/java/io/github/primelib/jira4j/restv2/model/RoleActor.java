@@ -93,8 +93,8 @@ public class RoleActor {
      * Constructs a validated instance of {@link RoleActor}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #RoleActor(Consumer)} instead.
-     * @param actorGroup var.name
-     * @param actorUser var.name
+     * @param actorGroup actorGroup
+     * @param actorUser actorUser
      * @param avatarUrl The avatar of the role actor.
      * @param displayName The display name of the role actor. For users, depending on the user’s privacy setting, this may return an alternative value for the user's name.
      * @param id The ID of the role actor.

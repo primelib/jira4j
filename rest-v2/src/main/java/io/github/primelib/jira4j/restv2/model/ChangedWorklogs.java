@@ -87,7 +87,7 @@ public class ChangedWorklogs {
      * Constructs a validated instance of {@link ChangedWorklogs}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #ChangedWorklogs(Consumer)} instead.
-     * @param lastPage var.name
+     * @param lastPage lastPage
      * @param nextPage The URL of the next list of changed worklogs.
      * @param self The URL of this changed worklogs list.
      * @param since The datetime of the first worklog item in the list.

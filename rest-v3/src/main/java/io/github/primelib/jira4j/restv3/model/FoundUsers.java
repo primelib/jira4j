@@ -67,7 +67,7 @@ public class FoundUsers {
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #FoundUsers(Consumer)} instead.
      * @param header Header text indicating the number of users in the response and the total number of users found in the search.
      * @param total The total number of users found in the search.
-     * @param users var.name
+     * @param users users
      */
     @ApiStatus.Internal
     public FoundUsers(String header, Integer total, List<UserPickerUser> users) {

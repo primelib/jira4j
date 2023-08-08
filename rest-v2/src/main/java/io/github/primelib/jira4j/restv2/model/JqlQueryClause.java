@@ -81,8 +81,8 @@ public class JqlQueryClause {
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #JqlQueryClause(Consumer)} instead.
      * @param clauses The list of nested clauses.
      * @param operator The operator applied to the field.
-     * @param field var.name
-     * @param operand var.name
+     * @param field field
+     * @param operand operand
      * @param predicates The list of time predicates.
      */
     @ApiStatus.Internal

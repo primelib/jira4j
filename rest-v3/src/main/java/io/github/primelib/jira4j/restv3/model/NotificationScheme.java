@@ -103,8 +103,8 @@ public class NotificationScheme {
      * @param name The name of the notification scheme.
      * @param notificationSchemeEvents The notification events and associated recipients.
      * @param projects The list of project IDs associated with the notification scheme.
-     * @param scope var.name
-     * @param self var.name
+     * @param scope scope
+     * @param self self
      */
     @ApiStatus.Internal
     public NotificationScheme(String description, String expand, Long id, String name, List<NotificationSchemeEvent> notificationSchemeEvents, List<Long> projects, NotificationSchemeScope scope, String self) {

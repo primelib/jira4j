@@ -37,13 +37,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class RuleConfiguration {
 
     /**
-     * EXPERIMENTAL: Whether the rule is disabled.
+     * Whether the rule is disabled.
      */
     @JsonProperty("disabled")
     protected Boolean disabled;
 
     /**
-     * EXPERIMENTAL: A tag used to filter rules in [Get workflow transition rule configurations](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-workflow-transition-rules/#api-rest-api-3-workflow-rule-config-get).
+     * A tag used to filter rules in [Get workflow transition rule configurations](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-workflow-transition-rules/#api-rest-api-3-workflow-rule-config-get).
      */
     @JsonProperty("tag")
     protected String tag;
@@ -67,8 +67,8 @@ public class RuleConfiguration {
      * Constructs a validated instance of {@link RuleConfiguration}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #RuleConfiguration(Consumer)} instead.
-     * @param disabled EXPERIMENTAL: Whether the rule is disabled.
-     * @param tag EXPERIMENTAL: A tag used to filter rules in [Get workflow transition rule configurations](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-workflow-transition-rules/#api-rest-api-3-workflow-rule-config-get).
+     * @param disabled Whether the rule is disabled.
+     * @param tag A tag used to filter rules in [Get workflow transition rule configurations](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-workflow-transition-rules/#api-rest-api-3-workflow-rule-config-get).
      * @param value Configuration of the rule, as it is stored by the Connect or the Forge app on the rule configuration page.
      */
     @ApiStatus.Internal

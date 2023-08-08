@@ -99,11 +99,11 @@ public class ScopeProject {
      * Constructs a validated instance of {@link ScopeProject}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #ScopeProject(Consumer)} instead.
-     * @param avatarUrls var.name
+     * @param avatarUrls avatarUrls
      * @param id The ID of the project.
      * @param key The key of the project.
      * @param name The name of the project.
-     * @param projectCategory var.name
+     * @param projectCategory projectCategory
      * @param projectTypeKey The [project type](https://confluence.atlassian.com/x/GwiiLQ#Jiraapplicationsoverview-Productfeaturesandprojecttypes) of the project.
      * @param self The URL of the project details.
      * @param simplified Whether or not the project is simplified.

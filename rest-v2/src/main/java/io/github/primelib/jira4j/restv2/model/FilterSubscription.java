@@ -61,9 +61,9 @@ public class FilterSubscription {
      * Constructs a validated instance of {@link FilterSubscription}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #FilterSubscription(Consumer)} instead.
-     * @param group var.name
+     * @param group group
      * @param id The ID of the filter subscription.
-     * @param user var.name
+     * @param user user
      */
     @ApiStatus.Internal
     public FilterSubscription(FilterSubscriptionGroup group, Long id, FilterSubscriptionUser user) {

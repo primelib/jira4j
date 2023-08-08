@@ -65,7 +65,7 @@ public class RemoveOptionFromIssuesResult {
      * Constructs a validated instance of {@link RemoveOptionFromIssuesResult}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #RemoveOptionFromIssuesResult(Consumer)} instead.
-     * @param errors var.name
+     * @param errors errors
      * @param modifiedIssues The IDs of the modified issues.
      * @param unmodifiedIssues The IDs of the unchanged issues, those issues where errors prevent modification.
      */

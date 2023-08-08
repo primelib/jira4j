@@ -54,8 +54,8 @@ public class JqlQuery {
      * Constructs a validated instance of {@link JqlQuery}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #JqlQuery(Consumer)} instead.
-     * @param orderBy var.name
-     * @param where var.name
+     * @param orderBy orderBy
+     * @param where where
      */
     @ApiStatus.Internal
     public JqlQuery(JqlQueryOrderByClause orderBy, JqlQueryClause where) {

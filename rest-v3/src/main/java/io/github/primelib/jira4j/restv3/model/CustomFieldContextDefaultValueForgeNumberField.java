@@ -66,7 +66,7 @@ public class CustomFieldContextDefaultValueForgeNumberField {
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #CustomFieldContextDefaultValueForgeNumberField(Consumer)} instead.
      * @param contextId The ID of the context.
      * @param number The default floating-point number.
-     * @param type var.name
+     * @param type type
      */
     @ApiStatus.Internal
     public CustomFieldContextDefaultValueForgeNumberField(String contextId, Double number, String type) {

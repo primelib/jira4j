@@ -51,7 +51,7 @@ public class IssuesUpdateBean {
      * Constructs a validated instance of {@link IssuesUpdateBean}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #IssuesUpdateBean(Consumer)} instead.
-     * @param issueUpdates var.name
+     * @param issueUpdates issueUpdates
      */
     @ApiStatus.Internal
     public IssuesUpdateBean(List<IssueUpdateDetails> issueUpdates) {

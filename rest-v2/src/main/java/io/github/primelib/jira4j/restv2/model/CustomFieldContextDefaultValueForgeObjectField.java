@@ -58,7 +58,7 @@ public class CustomFieldContextDefaultValueForgeObjectField {
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #CustomFieldContextDefaultValueForgeObjectField(Consumer)} instead.
      * @param object The default JSON object.
-     * @param type var.name
+     * @param type type
      */
     @ApiStatus.Internal
     public CustomFieldContextDefaultValueForgeObjectField(Object object, String type) {

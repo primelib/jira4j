@@ -59,7 +59,7 @@ public class WorkflowSchemeAssociations {
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #WorkflowSchemeAssociations(Consumer)} instead.
      * @param projectIds The list of projects that use the workflow scheme.
-     * @param workflowScheme var.name
+     * @param workflowScheme workflowScheme
      */
     @ApiStatus.Internal
     public WorkflowSchemeAssociations(List<String> projectIds, WorkflowSchemeAssociationsWorkflowScheme workflowScheme) {

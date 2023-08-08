@@ -58,9 +58,9 @@ public class BulkOperationErrorResult {
      * Constructs a validated instance of {@link BulkOperationErrorResult}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #BulkOperationErrorResult(Consumer)} instead.
-     * @param elementErrors var.name
-     * @param failedElementNumber var.name
-     * @param status var.name
+     * @param elementErrors elementErrors
+     * @param failedElementNumber failedElementNumber
+     * @param status status
      */
     @ApiStatus.Internal
     public BulkOperationErrorResult(ErrorCollection elementErrors, Integer failedElementNumber, Integer status) {

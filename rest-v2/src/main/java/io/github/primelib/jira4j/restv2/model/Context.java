@@ -66,7 +66,7 @@ public class Context {
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #Context(Consumer)} instead.
      * @param id The ID of the context.
      * @param name The name of the context.
-     * @param scope var.name
+     * @param scope scope
      */
     @ApiStatus.Internal
     public Context(Long id, String name, ContextScope scope) {

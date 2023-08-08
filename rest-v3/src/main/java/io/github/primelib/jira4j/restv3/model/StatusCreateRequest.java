@@ -58,7 +58,7 @@ public class StatusCreateRequest {
      * Constructs a validated instance of {@link StatusCreateRequest}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #StatusCreateRequest(Consumer)} instead.
-     * @param scope var.name
+     * @param scope scope
      * @param statuses Details of the statuses being created.
      */
     @ApiStatus.Internal

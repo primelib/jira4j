@@ -58,9 +58,9 @@ public class CreatedIssueTransition {
      * Constructs a validated instance of {@link CreatedIssueTransition}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #CreatedIssueTransition(Consumer)} instead.
-     * @param errorCollection var.name
-     * @param status var.name
-     * @param warningCollection var.name
+     * @param errorCollection errorCollection
+     * @param status status
+     * @param warningCollection warningCollection
      */
     @ApiStatus.Internal
     public CreatedIssueTransition(ErrorCollection errorCollection, Integer status, WarningCollection warningCollection) {

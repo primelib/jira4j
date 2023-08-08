@@ -58,9 +58,9 @@ public class UserMigrationBean {
      * Constructs a validated instance of {@link UserMigrationBean}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #UserMigrationBean(Consumer)} instead.
-     * @param accountId var.name
-     * @param key var.name
-     * @param username var.name
+     * @param accountId accountId
+     * @param key key
+     * @param username username
      */
     @ApiStatus.Internal
     public UserMigrationBean(String accountId, String key, String username) {

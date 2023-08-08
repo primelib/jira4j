@@ -65,7 +65,7 @@ public class CustomFieldContextDefaultValueDateTime {
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #CustomFieldContextDefaultValueDateTime(Consumer)} instead.
      * @param dateTime The default date-time in ISO format. Ignored if {@code useCurrent} is true.
-     * @param type var.name
+     * @param type type
      * @param useCurrent Whether to use the current date.
      */
     @ApiStatus.Internal

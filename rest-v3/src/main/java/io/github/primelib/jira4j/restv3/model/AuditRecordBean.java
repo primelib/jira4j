@@ -130,7 +130,7 @@ public class AuditRecordBean {
      * @param description The description of the audit record.
      * @param eventSource The event the audit record originated from.
      * @param id The ID of the audit record.
-     * @param objectItem var.name
+     * @param objectItem objectItem
      * @param remoteAddress The URL of the computer where the creation of the audit record was initiated.
      * @param summary The summary of the audit record.
      */

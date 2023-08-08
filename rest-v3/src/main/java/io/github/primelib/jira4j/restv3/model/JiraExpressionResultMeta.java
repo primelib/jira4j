@@ -54,8 +54,8 @@ public class JiraExpressionResultMeta {
      * Constructs a validated instance of {@link JiraExpressionResultMeta}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #JiraExpressionResultMeta(Consumer)} instead.
-     * @param complexity var.name
-     * @param issues var.name
+     * @param complexity complexity
+     * @param issues issues
      */
     @ApiStatus.Internal
     public JiraExpressionResultMeta(JiraExpressionEvaluationMetaDataBeanComplexity complexity, JiraExpressionEvaluationMetaDataBeanIssues issues) {

@@ -75,8 +75,8 @@ public class RemoteIssueLinkObject {
      * Constructs a validated instance of {@link RemoteIssueLinkObject}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #RemoteIssueLinkObject(Consumer)} instead.
-     * @param icon var.name
-     * @param status var.name
+     * @param icon icon
+     * @param status status
      * @param summary The summary details of the item.
      * @param title The title of the item.
      * @param url The URL of the item.

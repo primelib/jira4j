@@ -51,7 +51,7 @@ public class WarningCollection {
      * Constructs a validated instance of {@link WarningCollection}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #WarningCollection(Consumer)} instead.
-     * @param warnings var.name
+     * @param warnings warnings
      */
     @ApiStatus.Internal
     public WarningCollection(List<String> warnings) {

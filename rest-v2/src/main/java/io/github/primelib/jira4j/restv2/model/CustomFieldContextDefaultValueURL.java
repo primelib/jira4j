@@ -65,7 +65,7 @@ public class CustomFieldContextDefaultValueURL {
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #CustomFieldContextDefaultValueURL(Consumer)} instead.
      * @param contextId The ID of the context.
-     * @param type var.name
+     * @param type type
      * @param url The default URL.
      */
     @ApiStatus.Internal

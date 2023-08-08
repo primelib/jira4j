@@ -58,7 +58,7 @@ public class CustomFieldContextDefaultValueTextArea {
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #CustomFieldContextDefaultValueTextArea(Consumer)} instead.
      * @param text The default text. The maximum length is 32767 characters.
-     * @param type var.name
+     * @param type type
      */
     @ApiStatus.Internal
     public CustomFieldContextDefaultValueTextArea(String text, String type) {

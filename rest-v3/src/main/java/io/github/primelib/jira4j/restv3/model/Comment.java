@@ -123,7 +123,7 @@ public class Comment {
      * Constructs a validated instance of {@link Comment}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #Comment(Consumer)} instead.
-     * @param author var.name
+     * @param author author
      * @param body The comment text in [Atlassian Document Format](https://developer.atlassian.com/cloud/jira/platform/apis/document/structure/).
      * @param created The date and time at which the comment was created.
      * @param id The ID of the comment.
@@ -132,9 +132,9 @@ public class Comment {
      * @param properties A list of comment properties. Optional on create and update.
      * @param renderedBody The rendered version of the comment.
      * @param self The URL of the comment.
-     * @param updateAuthor var.name
+     * @param updateAuthor updateAuthor
      * @param updated The date and time at which the comment was updated last.
-     * @param visibility var.name
+     * @param visibility visibility
      */
     @ApiStatus.Internal
     public Comment(CommentAuthor author, Object body, OffsetDateTime created, String id, Boolean jsdAuthorCanSeeRequest, Boolean jsdPublic, List<EntityProperty> properties, String renderedBody, String self, CommentUpdateAuthor updateAuthor, OffsetDateTime updated, CommentVisibility visibility) {

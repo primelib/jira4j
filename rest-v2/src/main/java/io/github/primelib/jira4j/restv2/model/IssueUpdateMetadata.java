@@ -51,7 +51,7 @@ public class IssueUpdateMetadata {
      * Constructs a validated instance of {@link IssueUpdateMetadata}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #IssueUpdateMetadata(Consumer)} instead.
-     * @param fields var.name
+     * @param fields fields
      */
     @ApiStatus.Internal
     public IssueUpdateMetadata(Map<String, FieldMetadata> fields) {

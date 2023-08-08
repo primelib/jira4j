@@ -105,8 +105,8 @@ public class CreateWorkflowTransitionDetails {
      * @param from The statuses the transition can start from.
      * @param name The name of the transition. The maximum length is 60 characters.
      * @param properties The properties of the transition.
-     * @param rules var.name
-     * @param screen var.name
+     * @param rules rules
+     * @param screen screen
      * @param to The status the transition goes to.
      * @param type The type of the transition.
      */

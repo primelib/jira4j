@@ -50,7 +50,7 @@ public class WorkManagementNavigationInfo {
      * Constructs a validated instance of {@link WorkManagementNavigationInfo}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #WorkManagementNavigationInfo(Consumer)} instead.
-     * @param boardName var.name
+     * @param boardName boardName
      */
     @ApiStatus.Internal
     public WorkManagementNavigationInfo(String boardName) {

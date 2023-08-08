@@ -50,7 +50,7 @@ public class JexpIssues {
      * Constructs a validated instance of {@link JexpIssues}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #JexpIssues(Consumer)} instead.
-     * @param jql var.name
+     * @param jql jql
      */
     @ApiStatus.Internal
     public JexpIssues(JexpIssuesJql jql) {

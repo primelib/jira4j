@@ -65,7 +65,7 @@ public class IssueFieldOptionCreateBean {
      * Constructs a validated instance of {@link IssueFieldOptionCreateBean}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #IssueFieldOptionCreateBean(Consumer)} instead.
-     * @param config var.name
+     * @param config config
      * @param properties The properties of the option as arbitrary key-value pairs. These properties can be searched using JQL, if the extractions (see https://developer.atlassian.com/cloud/jira/platform/modules/issue-field-option-property-index/) are defined in the descriptor for the issue field module.
      * @param value The option's name, which is displayed in Jira.
      */

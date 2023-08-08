@@ -67,7 +67,7 @@ public class CustomFieldContextDefaultValueMultipleOption {
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #CustomFieldContextDefaultValueMultipleOption(Consumer)} instead.
      * @param contextId The ID of the context.
      * @param optionIds The list of IDs of the default options.
-     * @param type var.name
+     * @param type type
      */
     @ApiStatus.Internal
     public CustomFieldContextDefaultValueMultipleOption(String contextId, List<String> optionIds, String type) {

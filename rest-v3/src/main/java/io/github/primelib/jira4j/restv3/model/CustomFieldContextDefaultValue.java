@@ -206,10 +206,10 @@ public class CustomFieldContextDefaultValue {
      * @param cascadingOptionId The ID of the default cascading option.
      * @param contextId The ID of the context.
      * @param optionId The ID of the default option.
-     * @param type var.name
+     * @param type type
      * @param optionIds The list of IDs of the default options.
      * @param accountId The ID of the default user.
-     * @param userFilter var.name
+     * @param userFilter userFilter
      * @param accountIds The IDs of the default users.
      * @param groupId The ID of the the default group.
      * @param groupIds The IDs of the default groups.

@@ -131,7 +131,7 @@ public class Worklog {
      * Constructs a validated instance of {@link Worklog}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #Worklog(Consumer)} instead.
-     * @param author var.name
+     * @param author author
      * @param comment A comment about the worklog in [Atlassian Document Format](https://developer.atlassian.com/cloud/jira/platform/apis/document/structure/). Optional when creating or updating a worklog.
      * @param created The datetime on which the worklog was created.
      * @param id The ID of the worklog record.
@@ -141,9 +141,9 @@ public class Worklog {
      * @param started The datetime on which the worklog effort was started. Required when creating a worklog. Optional when updating a worklog.
      * @param timeSpent The time spent working on the issue as days (\\#d), hours (\\#h), or minutes (\\#m or \\#). Required when creating a worklog if {@code timeSpentSeconds} isn't provided. Optional when updating a worklog. Cannot be provided if {@code timeSpentSecond} is provided.
      * @param timeSpentSeconds The time in seconds spent working on the issue. Required when creating a worklog if {@code timeSpent} isn't provided. Optional when updating a worklog. Cannot be provided if {@code timeSpent} is provided.
-     * @param updateAuthor var.name
+     * @param updateAuthor updateAuthor
      * @param updated The datetime on which the worklog was last updated.
-     * @param visibility var.name
+     * @param visibility visibility
      */
     @ApiStatus.Internal
     public Worklog(WorklogAuthor author, Object comment, OffsetDateTime created, String id, String issueId, List<EntityProperty> properties, URI self, OffsetDateTime started, String timeSpent, Long timeSpentSeconds, WorklogUpdateAuthor updateAuthor, OffsetDateTime updated, WorklogVisibility visibility) {

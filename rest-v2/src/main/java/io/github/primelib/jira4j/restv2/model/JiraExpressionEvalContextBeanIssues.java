@@ -50,7 +50,7 @@ public class JiraExpressionEvalContextBeanIssues {
      * Constructs a validated instance of {@link JiraExpressionEvalContextBeanIssues}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #JiraExpressionEvalContextBeanIssues(Consumer)} instead.
-     * @param jql var.name
+     * @param jql jql
      */
     @ApiStatus.Internal
     public JiraExpressionEvalContextBeanIssues(JexpIssuesJql jql) {

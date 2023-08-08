@@ -74,13 +74,13 @@ public class SimpleLink {
      * Constructs a validated instance of {@link SimpleLink}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #SimpleLink(Consumer)} instead.
-     * @param href var.name
-     * @param iconClass var.name
-     * @param id var.name
-     * @param label var.name
-     * @param styleClass var.name
-     * @param title var.name
-     * @param weight var.name
+     * @param href href
+     * @param iconClass iconClass
+     * @param id id
+     * @param label label
+     * @param styleClass styleClass
+     * @param title title
+     * @param weight weight
      */
     @ApiStatus.Internal
     public SimpleLink(String href, String iconClass, String id, String label, String styleClass, String title, Integer weight) {

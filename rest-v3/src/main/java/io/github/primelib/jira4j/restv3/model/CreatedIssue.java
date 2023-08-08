@@ -78,8 +78,8 @@ public class CreatedIssue {
      * @param id The ID of the created issue or subtask.
      * @param key The key of the created issue or subtask.
      * @param self The URL of the created issue or subtask.
-     * @param transition var.name
-     * @param watchers var.name
+     * @param transition transition
+     * @param watchers watchers
      */
     @ApiStatus.Internal
     public CreatedIssue(String id, String key, String self, CreatedIssueTransition transition, CreatedIssueWatchers watchers) {

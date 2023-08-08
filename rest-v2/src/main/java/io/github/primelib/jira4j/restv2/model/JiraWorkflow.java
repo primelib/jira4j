@@ -119,13 +119,13 @@ public class JiraWorkflow {
      * @param id The ID of the workflow.
      * @param isEditable Indicates if the workflow can be edited.
      * @param name The name of the workflow.
-     * @param scope var.name
-     * @param startPointLayout var.name
+     * @param scope scope
+     * @param startPointLayout startPointLayout
      * @param statuses The statuses referenced in this workflow.
      * @param taskId If there is a current [asynchronous task](#async-operations) operation for this workflow.
      * @param transitions The transitions of the workflow.
      * @param usages The {@code workflows.usages} expand is an optional parameter that can be used when reading and updating workflows in Jira. It provides additional information about the projects and issue types associated with the requested workflows.
-     * @param version var.name
+     * @param version version
      */
     @ApiStatus.Internal
     public JiraWorkflow(String description, String id, Boolean isEditable, String name, WorkflowScope scope, WorkflowLayout startPointLayout, Set<WorkflowReferenceStatus> statuses, String taskId, Set<WorkflowTransitions> transitions, Set<ProjectIssueTypes> usages, DocumentVersion version) {

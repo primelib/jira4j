@@ -66,11 +66,11 @@ public class AttachmentArchiveEntry {
      * Constructs a validated instance of {@link AttachmentArchiveEntry}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #AttachmentArchiveEntry(Consumer)} instead.
-     * @param abbreviatedName var.name
-     * @param entryIndex var.name
-     * @param mediaType var.name
-     * @param name var.name
-     * @param size var.name
+     * @param abbreviatedName abbreviatedName
+     * @param entryIndex entryIndex
+     * @param mediaType mediaType
+     * @param name name
+     * @param size size
      */
     @ApiStatus.Internal
     public AttachmentArchiveEntry(String abbreviatedName, Long entryIndex, String mediaType, String name, Long size) {

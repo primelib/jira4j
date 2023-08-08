@@ -62,7 +62,7 @@ public class IssueFieldOptionConfiguration {
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #IssueFieldOptionConfiguration(Consumer)} instead.
      * @param attributes DEPRECATED
-     * @param scope var.name
+     * @param scope scope
      */
     @ApiStatus.Internal
     public IssueFieldOptionConfiguration(Set<AttributesEnum> attributes, IssueFieldOptionConfigurationScope scope) {

@@ -65,7 +65,7 @@ public class StatusLayoutUpdate {
      * Constructs a validated instance of {@link StatusLayoutUpdate}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #StatusLayoutUpdate(Consumer)} instead.
-     * @param layout var.name
+     * @param layout layout
      * @param properties The properties for this status layout.
      * @param statusReference A unique ID which the status will use to refer to this layout configuration.
      */

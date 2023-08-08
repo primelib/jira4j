@@ -96,13 +96,13 @@ public class DeprecatedWorkflow {
      * Constructs a validated instance of {@link DeprecatedWorkflow}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #DeprecatedWorkflow(Consumer)} instead.
-     * @param _default var.name
+     * @param _default _default
      * @param description The description of the workflow.
      * @param lastModifiedDate The datetime the workflow was last modified.
      * @param lastModifiedUser This property is no longer available and will be removed from the documentation soon. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.
      * @param lastModifiedUserAccountId The account ID of the user that last modified the workflow.
      * @param name The name of the workflow.
-     * @param scope var.name
+     * @param scope scope
      * @param steps The number of steps included in the workflow.
      */
     @ApiStatus.Internal

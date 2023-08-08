@@ -89,7 +89,7 @@ public class SecurityScheme {
      * @param defaultSecurityLevelId The ID of the default security level.
      * @param description The description of the issue security scheme.
      * @param id The ID of the issue security scheme.
-     * @param levels var.name
+     * @param levels levels
      * @param name The name of the issue security scheme.
      * @param self The URL of the issue security scheme.
      */

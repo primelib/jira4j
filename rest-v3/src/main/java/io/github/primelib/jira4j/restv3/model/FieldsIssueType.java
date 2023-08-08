@@ -121,7 +121,7 @@ public class FieldsIssueType {
      * @param iconUrl The URL of the issue type's avatar.
      * @param id The ID of the issue type.
      * @param name The name of the issue type.
-     * @param scope var.name
+     * @param scope scope
      * @param self The URL of these issue type details.
      * @param subtask Whether this issue type is used to create subtasks.
      */

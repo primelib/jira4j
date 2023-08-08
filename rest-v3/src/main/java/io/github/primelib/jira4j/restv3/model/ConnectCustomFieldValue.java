@@ -49,7 +49,7 @@ public class ConnectCustomFieldValue {
      * The type of custom field.
      */
     @JsonProperty("_type")
-    protected TypeEnum type;
+    protected TypeEnum _type;
 
     /**
      * The custom field ID.
@@ -106,7 +106,7 @@ public class ConnectCustomFieldValue {
      * Constructs a validated instance of {@link ConnectCustomFieldValue}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #ConnectCustomFieldValue(Consumer)} instead.
-     * @param type The type of custom field.
+     * @param _type The type of custom field.
      * @param fieldID The custom field ID.
      * @param issueID The issue ID.
      * @param number The value of number type custom field when {@code _type} is {@code NumberIssueField}.
@@ -116,8 +116,8 @@ public class ConnectCustomFieldValue {
      * @param text The value of of text custom field type when {@code _type} is {@code TextIssueField}.
      */
     @ApiStatus.Internal
-    public ConnectCustomFieldValue(TypeEnum type, Integer fieldID, Integer issueID, BigDecimal number, String optionID, String richText, String string, String text) {
-        this.type = type;
+    public ConnectCustomFieldValue(TypeEnum _type, Integer fieldID, Integer issueID, BigDecimal number, String optionID, String richText, String string, String text) {
+        this._type = _type;
         this.fieldID = fieldID;
         this.issueID = issueID;
         this.number = number;

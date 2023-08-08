@@ -81,7 +81,7 @@ public class WorkflowCreate {
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #WorkflowCreate(Consumer)} instead.
      * @param description The description of the workflow to create.
      * @param name The name of the workflow to create.
-     * @param startPointLayout var.name
+     * @param startPointLayout startPointLayout
      * @param statuses The statuses associated with this workflow.
      * @param transitions The transitions of this workflow.
      */

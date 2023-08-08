@@ -70,12 +70,12 @@ public class ResolutionJsonBean {
      * Constructs a validated instance of {@link ResolutionJsonBean}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #ResolutionJsonBean(Consumer)} instead.
-     * @param _default var.name
-     * @param description var.name
-     * @param iconUrl var.name
-     * @param id var.name
-     * @param name var.name
-     * @param self var.name
+     * @param _default _default
+     * @param description description
+     * @param iconUrl iconUrl
+     * @param id id
+     * @param name name
+     * @param self self
      */
     @ApiStatus.Internal
     public ResolutionJsonBean(Boolean _default, String description, String iconUrl, String id, String name, String self) {

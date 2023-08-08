@@ -59,7 +59,7 @@ public class ProjectIssueTypes {
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #ProjectIssueTypes(Consumer)} instead.
      * @param issueTypes IDs of the issue types
-     * @param project var.name
+     * @param project project
      */
     @ApiStatus.Internal
     public ProjectIssueTypes(Set<String> issueTypes, ProjectId project) {

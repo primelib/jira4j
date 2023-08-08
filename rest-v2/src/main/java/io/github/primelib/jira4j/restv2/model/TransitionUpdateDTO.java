@@ -134,15 +134,15 @@ public class TransitionUpdateDTO {
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #TransitionUpdateDTO(Consumer)} instead.
      * @param actions The post-functions of the transition.
-     * @param conditions var.name
+     * @param conditions conditions
      * @param customIssueEventId The custom event ID of the transition.
      * @param description The description of the transition.
      * @param from The statuses the transition can start from.
      * @param id The ID of the transition.
      * @param name The name of the transition.
      * @param properties The properties of the transition.
-     * @param to var.name
-     * @param transitionScreen var.name
+     * @param to to
+     * @param transitionScreen transitionScreen
      * @param triggers The triggers of the transition.
      * @param type The transition type.
      * @param validators The validators of the transition.

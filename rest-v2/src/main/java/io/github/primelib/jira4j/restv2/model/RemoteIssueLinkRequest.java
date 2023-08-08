@@ -70,9 +70,9 @@ public class RemoteIssueLinkRequest {
      * Constructs a validated instance of {@link RemoteIssueLinkRequest}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #RemoteIssueLinkRequest(Consumer)} instead.
-     * @param application var.name
+     * @param application application
      * @param globalId An identifier for the remote item in the remote system. For example, the global ID for a remote item in Confluence would consist of the app ID and page ID, like this: {@code appId=456&amp;pageId=123}.  Setting this field enables the remote issue link details to be updated or deleted using remote system and item details as the record identifier, rather than using the record's Jira ID.  The maximum length is 255 characters.
-     * @param object var.name
+     * @param object object
      * @param relationship Description of the relationship between the issue and the linked item. If not set, the relationship description "links to" is used in Jira.
      */
     @ApiStatus.Internal

@@ -72,8 +72,8 @@ public class FieldWasClause {
      * Constructs a validated instance of {@link FieldWasClause}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #FieldWasClause(Consumer)} instead.
-     * @param field var.name
-     * @param operand var.name
+     * @param field field
+     * @param operand operand
      * @param operator The operator between the field and operand.
      * @param predicates The list of time predicates.
      */

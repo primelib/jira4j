@@ -78,8 +78,8 @@ public class ScreenWithTab {
      * @param description The description of the screen.
      * @param id The ID of the screen.
      * @param name The name of the screen.
-     * @param scope var.name
-     * @param tab var.name
+     * @param scope scope
+     * @param tab tab
      */
     @ApiStatus.Internal
     public ScreenWithTab(String description, Long id, String name, ScreenScope scope, ScreenWithTabTab tab) {

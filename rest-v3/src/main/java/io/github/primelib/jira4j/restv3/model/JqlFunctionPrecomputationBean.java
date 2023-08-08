@@ -88,16 +88,16 @@ public class JqlFunctionPrecomputationBean {
      * Constructs a validated instance of {@link JqlFunctionPrecomputationBean}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #JqlFunctionPrecomputationBean(Consumer)} instead.
-     * @param arguments var.name
-     * @param created var.name
-     * @param field var.name
-     * @param functionKey var.name
-     * @param functionName var.name
-     * @param id var.name
-     * @param operator var.name
-     * @param updated var.name
-     * @param used var.name
-     * @param value var.name
+     * @param arguments arguments
+     * @param created created
+     * @param field field
+     * @param functionKey functionKey
+     * @param functionName functionName
+     * @param id id
+     * @param operator operator
+     * @param updated updated
+     * @param used used
+     * @param value value
      */
     @ApiStatus.Internal
     public JqlFunctionPrecomputationBean(List<String> arguments, OffsetDateTime created, String field, String functionKey, String functionName, String id, String operator, OffsetDateTime updated, OffsetDateTime used, String value) {

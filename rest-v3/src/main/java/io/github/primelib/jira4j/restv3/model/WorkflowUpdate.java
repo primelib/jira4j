@@ -101,11 +101,11 @@ public class WorkflowUpdate {
      * @param defaultStatusMappings The mapping of old to new status ID.
      * @param description The new description for this workflow.
      * @param id The ID of this workflow.
-     * @param startPointLayout var.name
+     * @param startPointLayout startPointLayout
      * @param statusMappings The mapping of old to new status ID for a specific project and issue type.
      * @param statuses The statuses associated with this workflow.
      * @param transitions The transitions of this workflow.
-     * @param version var.name
+     * @param version version
      */
     @ApiStatus.Internal
     public WorkflowUpdate(List<StatusMigration> defaultStatusMappings, String description, String id, WorkflowLayout startPointLayout, List<StatusMappingDTO> statusMappings, List<StatusLayoutUpdate> statuses, List<TransitionUpdateDTO> transitions, DocumentVersion version) {

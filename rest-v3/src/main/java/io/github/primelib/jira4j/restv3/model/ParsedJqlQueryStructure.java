@@ -54,8 +54,8 @@ public class ParsedJqlQueryStructure {
      * Constructs a validated instance of {@link ParsedJqlQueryStructure}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #ParsedJqlQueryStructure(Consumer)} instead.
-     * @param orderBy var.name
-     * @param where var.name
+     * @param orderBy orderBy
+     * @param where where
      */
     @ApiStatus.Internal
     public ParsedJqlQueryStructure(JqlQueryOrderByClause orderBy, JqlQueryClause where) {

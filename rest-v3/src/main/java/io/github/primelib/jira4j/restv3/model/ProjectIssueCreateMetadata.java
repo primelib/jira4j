@@ -93,7 +93,7 @@ public class ProjectIssueCreateMetadata {
      * Constructs a validated instance of {@link ProjectIssueCreateMetadata}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #ProjectIssueCreateMetadata(Consumer)} instead.
-     * @param avatarUrls var.name
+     * @param avatarUrls avatarUrls
      * @param expand Expand options that include additional project issue create metadata details in the response.
      * @param id The ID of the project.
      * @param issuetypes List of the issue types supported by the project.

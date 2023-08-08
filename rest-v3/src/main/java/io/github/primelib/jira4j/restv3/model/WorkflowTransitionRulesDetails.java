@@ -58,7 +58,7 @@ public class WorkflowTransitionRulesDetails {
      * Constructs a validated instance of {@link WorkflowTransitionRulesDetails}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #WorkflowTransitionRulesDetails(Consumer)} instead.
-     * @param workflowId var.name
+     * @param workflowId workflowId
      * @param workflowRuleIds The list of connect workflow rule IDs.
      */
     @ApiStatus.Internal

@@ -54,8 +54,8 @@ public class DashboardGadgetSettingsPosition {
      * Constructs a validated instance of {@link DashboardGadgetSettingsPosition}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #DashboardGadgetSettingsPosition(Consumer)} instead.
-     * @param theColumnPositionOfTheGadget var.name
-     * @param theRowPositionOfTheGadget var.name
+     * @param theColumnPositionOfTheGadget theColumnPositionOfTheGadget
+     * @param theRowPositionOfTheGadget theRowPositionOfTheGadget
      */
     @ApiStatus.Internal
     public DashboardGadgetSettingsPosition(Integer theColumnPositionOfTheGadget, Integer theRowPositionOfTheGadget) {

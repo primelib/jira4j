@@ -63,10 +63,10 @@ public class AttachmentArchive {
      * Constructs a validated instance of {@link AttachmentArchive}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #AttachmentArchive(Consumer)} instead.
-     * @param entries var.name
-     * @param moreAvailable var.name
-     * @param totalEntryCount var.name
-     * @param totalNumberOfEntriesAvailable var.name
+     * @param entries entries
+     * @param moreAvailable moreAvailable
+     * @param totalEntryCount totalEntryCount
+     * @param totalNumberOfEntriesAvailable totalNumberOfEntriesAvailable
      */
     @ApiStatus.Internal
     public AttachmentArchive(List<AttachmentArchiveEntry> entries, Boolean moreAvailable, Integer totalEntryCount, Integer totalNumberOfEntriesAvailable) {

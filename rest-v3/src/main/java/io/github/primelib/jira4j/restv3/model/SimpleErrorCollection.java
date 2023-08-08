@@ -68,7 +68,7 @@ public class SimpleErrorCollection {
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #SimpleErrorCollection(Consumer)} instead.
      * @param errorMessages The list of error messages produced by this operation. For example, "input parameter 'key' must be provided"
      * @param errors The list of errors by parameter returned by the operation. For example,"projectKey": "Project keys must start with an uppercase letter, followed by one or more uppercase alphanumeric characters."
-     * @param httpStatusCode var.name
+     * @param httpStatusCode httpStatusCode
      */
     @ApiStatus.Internal
     public SimpleErrorCollection(List<String> errorMessages, Map<String, String> errors, Integer httpStatusCode) {

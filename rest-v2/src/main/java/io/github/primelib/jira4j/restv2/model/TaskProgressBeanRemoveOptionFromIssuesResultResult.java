@@ -65,7 +65,7 @@ public class TaskProgressBeanRemoveOptionFromIssuesResultResult {
      * Constructs a validated instance of {@link TaskProgressBeanRemoveOptionFromIssuesResultResult}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #TaskProgressBeanRemoveOptionFromIssuesResultResult(Consumer)} instead.
-     * @param errors var.name
+     * @param errors errors
      * @param modifiedIssues The IDs of the modified issues.
      * @param unmodifiedIssues The IDs of the unchanged issues, those issues where errors prevent modification.
      */

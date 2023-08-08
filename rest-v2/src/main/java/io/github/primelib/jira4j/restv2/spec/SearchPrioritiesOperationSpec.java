@@ -57,6 +57,12 @@ public class SearchPrioritiesOperationSpec {
     private List<String> id;
 
     /**
+     * The list of projects IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code projectid=10010&amp;projectid=10111}.
+     */
+    @Nullable 
+    private List<String> projectId;
+
+    /**
      * Whether only the default priority is returned.
      */
     @Nullable 
@@ -81,13 +87,15 @@ public class SearchPrioritiesOperationSpec {
      * @param startAt              The index of the first item to return in a page of results (page offset).
      * @param maxResults           The maximum number of items to return per page.
      * @param id                   The list of priority IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code id=2&amp;id=3}.
+     * @param projectId            The list of projects IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code projectid=10010&amp;projectid=10111}.
      * @param onlyDefault          Whether only the default priority is returned.
      */
     @ApiStatus.Internal
-    public SearchPrioritiesOperationSpec(String startAt, String maxResults, List<String> id, Boolean onlyDefault) {
+    public SearchPrioritiesOperationSpec(String startAt, String maxResults, List<String> id, List<String> projectId, Boolean onlyDefault) {
         this.startAt = startAt;
         this.maxResults = maxResults;
         this.id = id;
+        this.projectId = projectId;
         this.onlyDefault = onlyDefault;
 
         if (VALIDATION_ENABLED)

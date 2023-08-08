@@ -76,10 +76,10 @@ public class Notification {
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #Notification(Consumer)} instead.
      * @param htmlBody The HTML body of the email notification for the issue.
-     * @param restrict var.name
+     * @param restrict restrict
      * @param subject The subject of the email notification for the issue. If this is not specified, then the subject is set to the issue key and summary.
      * @param textBody The plain text body of the email notification for the issue.
-     * @param to var.name
+     * @param to to
      */
     @ApiStatus.Internal
     public Notification(String htmlBody, NotificationRestrict restrict, String subject, String textBody, NotificationTo to) {

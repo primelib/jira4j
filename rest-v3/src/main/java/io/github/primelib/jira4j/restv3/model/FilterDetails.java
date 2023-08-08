@@ -151,7 +151,7 @@ public class FilterDetails {
      * @param id The unique identifier for the filter.
      * @param jql The JQL query for the filter. For example, *project = SSP AND issuetype = Bug*.
      * @param name The name of the filter.
-     * @param owner var.name
+     * @param owner owner
      * @param searchUrl A URL to view the filter results in Jira, using the [Search for issues using JQL](#api-rest-api-3-filter-search-get) operation with the filter's JQL string to return the filter results. For example, *https://your-domain.atlassian.net/rest/api/3/search?jql=project+%3D+SSP+AND+issuetype+%3D+Bug*.
      * @param self The URL of the filter.
      * @param sharePermissions The groups and projects that the filter is shared with. This can be specified when updating a filter, but not when creating a filter.

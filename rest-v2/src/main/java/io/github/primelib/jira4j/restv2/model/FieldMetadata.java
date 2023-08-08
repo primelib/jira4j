@@ -124,7 +124,7 @@ public class FieldMetadata {
      * @param name The name of the field.
      * @param operations The list of operations that can be performed on the field.
      * @param required Whether the field is required.
-     * @param schema var.name
+     * @param schema schema
      */
     @ApiStatus.Internal
     public FieldMetadata(List<Object> allowedValues, String autoCompleteUrl, Map<String, Object> configuration, Object defaultValue, Boolean hasDefaultValue, String key, String name, List<String> operations, Boolean required, FieldMetadataSchema schema) {

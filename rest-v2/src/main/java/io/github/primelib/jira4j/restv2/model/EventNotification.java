@@ -129,14 +129,14 @@ public class EventNotification {
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #EventNotification(Consumer)} instead.
      * @param emailAddress The email address.
      * @param expand Expand options that include additional event notification details in the response.
-     * @param field var.name
-     * @param group var.name
+     * @param field field
+     * @param group group
      * @param id The ID of the notification.
      * @param notificationType Identifies the recipients of the notification.
      * @param parameter As a group's name can change, use of {@code recipient} is recommended. The identifier associated with the {@code notificationType} value that defines the receiver of the notification, where the receiver isn't implied by {@code notificationType} value. So, when {@code notificationType} is:   *  {@code User} The {@code parameter} is the user account ID.  *  {@code Group} The {@code parameter} is the group name.  *  {@code ProjectRole} The {@code parameter} is the project role ID.  *  {@code UserCustomField} The {@code parameter} is the ID of the custom field.  *  {@code GroupCustomField} The {@code parameter} is the ID of the custom field.
-     * @param projectRole var.name
+     * @param projectRole projectRole
      * @param recipient The identifier associated with the {@code notificationType} value that defines the receiver of the notification, where the receiver isn't implied by the {@code notificationType} value. So, when {@code notificationType} is:   *  {@code User}, {@code recipient} is the user account ID.  *  {@code Group}, {@code recipient} is the group ID.  *  {@code ProjectRole}, {@code recipient} is the project role ID.  *  {@code UserCustomField}, {@code recipient} is the ID of the custom field.  *  {@code GroupCustomField}, {@code recipient} is the ID of the custom field.
-     * @param user var.name
+     * @param user user
      */
     @ApiStatus.Internal
     public EventNotification(String emailAddress, String expand, EventNotificationField field, EventNotificationGroup group, Long id, NotificationTypeEnum notificationType, String parameter, EventNotificationProjectRole projectRole, String recipient, EventNotificationUser user) {

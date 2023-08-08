@@ -68,7 +68,7 @@ public class WorkflowTransitionRulesUpdateErrorDetails {
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #WorkflowTransitionRulesUpdateErrorDetails(Consumer)} instead.
      * @param ruleUpdateErrors A list of transition rule update errors, indexed by the transition rule ID. Any transition rule that appears here wasn't updated.
      * @param updateErrors The list of errors that specify why the workflow update failed. The workflow was not updated if the list contains any entries.
-     * @param workflowId var.name
+     * @param workflowId workflowId
      */
     @ApiStatus.Internal
     public WorkflowTransitionRulesUpdateErrorDetails(Map<String, Set<String>> ruleUpdateErrors, Set<String> updateErrors, WorkflowId workflowId) {

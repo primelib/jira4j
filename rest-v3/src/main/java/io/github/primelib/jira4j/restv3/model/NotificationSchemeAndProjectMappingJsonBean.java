@@ -55,8 +55,8 @@ public class NotificationSchemeAndProjectMappingJsonBean {
      * Constructs a validated instance of {@link NotificationSchemeAndProjectMappingJsonBean}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #NotificationSchemeAndProjectMappingJsonBean(Consumer)} instead.
-     * @param notificationSchemeId var.name
-     * @param projectId var.name
+     * @param notificationSchemeId notificationSchemeId
+     * @param projectId projectId
      */
     @ApiStatus.Internal
     public NotificationSchemeAndProjectMappingJsonBean(String notificationSchemeId, String projectId) {

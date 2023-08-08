@@ -70,8 +70,8 @@ public class CustomFieldContextSingleUserPickerDefaults {
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #CustomFieldContextSingleUserPickerDefaults(Consumer)} instead.
      * @param accountId The ID of the default user.
      * @param contextId The ID of the context.
-     * @param type var.name
-     * @param userFilter var.name
+     * @param type type
+     * @param userFilter userFilter
      */
     @ApiStatus.Internal
     public CustomFieldContextSingleUserPickerDefaults(String accountId, String contextId, String type, UserFilter userFilter) {

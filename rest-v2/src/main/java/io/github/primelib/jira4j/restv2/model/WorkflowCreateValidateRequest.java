@@ -54,8 +54,8 @@ public class WorkflowCreateValidateRequest {
      * Constructs a validated instance of {@link WorkflowCreateValidateRequest}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #WorkflowCreateValidateRequest(Consumer)} instead.
-     * @param payload var.name
-     * @param validationOptions var.name
+     * @param payload payload
+     * @param validationOptions validationOptions
      */
     @ApiStatus.Internal
     public WorkflowCreateValidateRequest(WorkflowCreateRequest payload, ValidationOptionsForCreate validationOptions) {

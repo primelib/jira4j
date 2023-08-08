@@ -93,12 +93,12 @@ public class SharePermission {
      * Constructs a validated instance of {@link SharePermission}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #SharePermission(Consumer)} instead.
-     * @param group var.name
+     * @param group group
      * @param id The unique identifier of the share permission.
-     * @param project var.name
-     * @param role var.name
+     * @param project project
+     * @param role role
      * @param type The type of share permission:   *  {@code user} Shared with a user.  *  {@code group} Shared with a group. If set in a request, then specify {@code sharePermission.group} as well.  *  {@code project} Shared with a project. If set in a request, then specify {@code sharePermission.project} as well.  *  {@code projectRole} Share with a project role in a project. This value is not returned in responses. It is used in requests, where it needs to be specify with {@code projectId} and {@code projectRoleId}.  *  {@code global} Shared globally. If set in a request, no other {@code sharePermission} properties need to be specified.  *  {@code loggedin} Shared with all logged-in users. Note: This value is set in a request by specifying {@code authenticated} as the {@code type}.  *  {@code project-unknown} Shared with a project that the user does not have access to. Cannot be set in a request.
-     * @param user var.name
+     * @param user user
      */
     @ApiStatus.Internal
     public SharePermission(SharePermissionGroup group, Long id, SharePermissionProject project, SharePermissionRole role, TypeEnum type, SharePermissionUser user) {

@@ -266,29 +266,29 @@ public class SharePermissionProject {
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #SharePermissionProject(Consumer)} instead.
      * @param archived Whether the project is archived.
-     * @param archivedBy var.name
+     * @param archivedBy archivedBy
      * @param archivedDate The date when the project was archived.
      * @param assigneeType The default assignee when creating issues for this project.
-     * @param avatarUrls var.name
+     * @param avatarUrls avatarUrls
      * @param components List of the components contained in the project.
      * @param deleted Whether the project is marked as deleted.
-     * @param deletedBy var.name
+     * @param deletedBy deletedBy
      * @param deletedDate The date when the project was marked as deleted.
      * @param description A brief description of the project.
      * @param email An email address associated with the project.
      * @param expand Expand options that include additional project details in the response.
      * @param favourite Whether the project is selected as a favorite.
      * @param id The ID of the project.
-     * @param insight var.name
+     * @param insight insight
      * @param isPrivate Whether the project is private.
-     * @param issueTypeHierarchy var.name
+     * @param issueTypeHierarchy issueTypeHierarchy
      * @param issueTypes List of the issue types available in the project.
      * @param key The key of the project.
-     * @param landingPageInfo var.name
-     * @param lead var.name
+     * @param landingPageInfo landingPageInfo
+     * @param lead lead
      * @param name The name of the project.
-     * @param permissions var.name
-     * @param projectCategory var.name
+     * @param permissions permissions
+     * @param projectCategory projectCategory
      * @param projectTypeKey The [project type](https://confluence.atlassian.com/x/GwiiLQ#Jiraapplicationsoverview-Productfeaturesandprojecttypes) of the project.
      * @param properties Map of project properties
      * @param retentionTillDate The date when the project is deleted permanently.

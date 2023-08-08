@@ -71,12 +71,12 @@ public class LinkGroup {
      * Constructs a validated instance of {@link LinkGroup}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #LinkGroup(Consumer)} instead.
-     * @param groups var.name
-     * @param header var.name
-     * @param id var.name
-     * @param links var.name
-     * @param styleClass var.name
-     * @param weight var.name
+     * @param groups groups
+     * @param header header
+     * @param id id
+     * @param links links
+     * @param styleClass styleClass
+     * @param weight weight
      */
     @ApiStatus.Internal
     public LinkGroup(List<LinkGroup> groups, SimpleLink header, String id, List<SimpleLink> links, String styleClass, Integer weight) {

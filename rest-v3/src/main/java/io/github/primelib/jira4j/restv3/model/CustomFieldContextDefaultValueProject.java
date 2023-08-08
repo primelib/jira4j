@@ -66,7 +66,7 @@ public class CustomFieldContextDefaultValueProject {
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #CustomFieldContextDefaultValueProject(Consumer)} instead.
      * @param contextId The ID of the context.
      * @param projectId The ID of the default project.
-     * @param type var.name
+     * @param type type
      */
     @ApiStatus.Internal
     public CustomFieldContextDefaultValueProject(String contextId, String projectId, String type) {

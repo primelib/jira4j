@@ -122,9 +122,9 @@ public class Workflow {
      * @param created The creation date of the workflow.
      * @param description The description of the workflow.
      * @param hasDraftWorkflow Whether the workflow has a draft version.
-     * @param id var.name
+     * @param id id
      * @param isDefault Whether this is the default workflow.
-     * @param operations var.name
+     * @param operations operations
      * @param projects The projects the workflow is assigned to, through workflow schemes.
      * @param schemes The workflow schemes the workflow is assigned to.
      * @param statuses The statuses of the workflow.

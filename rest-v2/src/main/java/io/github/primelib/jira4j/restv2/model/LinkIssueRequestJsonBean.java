@@ -62,10 +62,10 @@ public class LinkIssueRequestJsonBean {
      * Constructs a validated instance of {@link LinkIssueRequestJsonBean}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #LinkIssueRequestJsonBean(Consumer)} instead.
-     * @param comment var.name
-     * @param inwardIssue var.name
-     * @param outwardIssue var.name
-     * @param type var.name
+     * @param comment comment
+     * @param inwardIssue inwardIssue
+     * @param outwardIssue outwardIssue
+     * @param type type
      */
     @ApiStatus.Internal
     public LinkIssueRequestJsonBean(Comment comment, LinkedIssue inwardIssue, LinkedIssue outwardIssue, IssueLinkType type) {

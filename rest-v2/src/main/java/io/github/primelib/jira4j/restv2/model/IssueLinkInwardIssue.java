@@ -72,7 +72,7 @@ public class IssueLinkInwardIssue {
      * Constructs a validated instance of {@link IssueLinkInwardIssue}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #IssueLinkInwardIssue(Consumer)} instead.
-     * @param fields var.name
+     * @param fields fields
      * @param id The ID of an issue. Required if {@code key} isn't provided.
      * @param key The key of an issue. Required if {@code id} isn't provided.
      * @param self The URL of the issue.

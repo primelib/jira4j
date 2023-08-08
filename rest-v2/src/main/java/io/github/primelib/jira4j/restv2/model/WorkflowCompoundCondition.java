@@ -69,7 +69,7 @@ public class WorkflowCompoundCondition {
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #WorkflowCompoundCondition(Consumer)} instead.
      * @param conditions The list of workflow conditions.
-     * @param nodeType var.name
+     * @param nodeType nodeType
      * @param operator The compound condition operator.
      */
     @ApiStatus.Internal

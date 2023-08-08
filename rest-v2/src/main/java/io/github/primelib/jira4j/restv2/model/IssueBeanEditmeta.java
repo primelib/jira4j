@@ -51,7 +51,7 @@ public class IssueBeanEditmeta {
      * Constructs a validated instance of {@link IssueBeanEditmeta}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #IssueBeanEditmeta(Consumer)} instead.
-     * @param fields var.name
+     * @param fields fields
      */
     @ApiStatus.Internal
     public IssueBeanEditmeta(Map<String, FieldMetadata> fields) {

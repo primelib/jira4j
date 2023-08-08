@@ -99,7 +99,7 @@ public class PermissionScheme {
      * @param id The ID of the permission scheme.
      * @param name The name of the permission scheme. Must be unique.
      * @param permissions The permission scheme to create or update. See [About permission schemes and grants](../api-group-permission-schemes/#about-permission-schemes-and-grants) for more information.
-     * @param scope var.name
+     * @param scope scope
      * @param self The URL of the permission scheme.
      */
     @ApiStatus.Internal

@@ -36,7 +36,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class JqlFunctionPrecomputationUpdateBean {
 
     @JsonProperty("id")
-    protected Long id;
+    protected String id;
 
     @JsonProperty("value")
     protected String value;
@@ -54,11 +54,11 @@ public class JqlFunctionPrecomputationUpdateBean {
      * Constructs a validated instance of {@link JqlFunctionPrecomputationUpdateBean}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #JqlFunctionPrecomputationUpdateBean(Consumer)} instead.
-     * @param id var.name
-     * @param value var.name
+     * @param id id
+     * @param value value
      */
     @ApiStatus.Internal
-    public JqlFunctionPrecomputationUpdateBean(Long id, String value) {
+    public JqlFunctionPrecomputationUpdateBean(String id, String value) {
         this.id = id;
         this.value = value;
     }

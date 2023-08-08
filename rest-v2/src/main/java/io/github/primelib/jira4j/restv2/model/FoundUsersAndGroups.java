@@ -54,8 +54,8 @@ public class FoundUsersAndGroups {
      * Constructs a validated instance of {@link FoundUsersAndGroups}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #FoundUsersAndGroups(Consumer)} instead.
-     * @param groups var.name
-     * @param users var.name
+     * @param groups groups
+     * @param users users
      */
     @ApiStatus.Internal
     public FoundUsersAndGroups(FoundGroups groups, FoundUsers users) {

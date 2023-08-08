@@ -74,7 +74,7 @@ public class NotificationEventTemplateEvent {
      * @param description The description of the event.
      * @param id The ID of the event. The event can be a [Jira system event](https://confluence.atlassian.com/x/8YdKLg#Creatinganotificationscheme-eventsEvents) or a [custom event](https://confluence.atlassian.com/x/AIlKLg).
      * @param name The name of the event.
-     * @param templateEvent var.name
+     * @param templateEvent templateEvent
      */
     @ApiStatus.Internal
     public NotificationEventTemplateEvent(String description, Long id, String name, NotificationEventTemplateEvent templateEvent) {

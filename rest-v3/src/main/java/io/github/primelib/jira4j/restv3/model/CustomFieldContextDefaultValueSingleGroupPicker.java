@@ -66,7 +66,7 @@ public class CustomFieldContextDefaultValueSingleGroupPicker {
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #CustomFieldContextDefaultValueSingleGroupPicker(Consumer)} instead.
      * @param contextId The ID of the context.
      * @param groupId The ID of the the default group.
-     * @param type var.name
+     * @param type type
      */
     @ApiStatus.Internal
     public CustomFieldContextDefaultValueSingleGroupPicker(String contextId, String groupId, String type) {

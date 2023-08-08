@@ -148,17 +148,17 @@ public class ComponentWithIssueCount {
      * Constructs a validated instance of {@link ComponentWithIssueCount}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #ComponentWithIssueCount(Consumer)} instead.
-     * @param assignee var.name
+     * @param assignee assignee
      * @param assigneeType The nominal user type used to determine the assignee for issues created with this component. See {@code realAssigneeType} for details on how the type of the user, and hence the user, assigned to issues is determined. Takes the following values:   *  {@code PROJECT_LEAD} the assignee to any issues created with this component is nominally the lead for the project the component is in.  *  {@code COMPONENT_LEAD} the assignee to any issues created with this component is nominally the lead for the component.  *  {@code UNASSIGNED} an assignee is not set for issues created with this component.  *  {@code PROJECT_DEFAULT} the assignee to any issues created with this component is nominally the default assignee for the project that the component is in.
      * @param description The description for the component.
      * @param id The unique identifier for the component.
      * @param isAssigneeTypeValid Whether a user is associated with {@code assigneeType}. For example, if the {@code assigneeType} is set to {@code COMPONENT_LEAD} but the component lead is not set, then {@code false} is returned.
      * @param issueCount Count of issues for the component.
-     * @param lead var.name
+     * @param lead lead
      * @param name The name for the component.
      * @param project The key of the project to which the component is assigned.
      * @param projectId Not used.
-     * @param realAssignee var.name
+     * @param realAssignee realAssignee
      * @param realAssigneeType The type of the assignee that is assigned to issues created with this component, when an assignee cannot be set from the {@code assigneeType}. For example, {@code assigneeType} is set to {@code COMPONENT_LEAD} but no component lead is set. This property is set to one of the following values:   *  {@code PROJECT_LEAD} when {@code assigneeType} is {@code PROJECT_LEAD} and the project lead has permission to be assigned issues in the project that the component is in.  *  {@code COMPONENT_LEAD} when {@code assignee}Type is {@code COMPONENT_LEAD} and the component lead has permission to be assigned issues in the project that the component is in.  *  {@code UNASSIGNED} when {@code assigneeType} is {@code UNASSIGNED} and Jira is configured to allow unassigned issues.  *  {@code PROJECT_DEFAULT} when none of the preceding cases are true.
      * @param self The URL for this count of the issues contained in the component.
      */

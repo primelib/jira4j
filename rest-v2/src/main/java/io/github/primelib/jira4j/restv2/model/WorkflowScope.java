@@ -60,7 +60,7 @@ public class WorkflowScope {
      * Constructs a validated instance of {@link WorkflowScope}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #WorkflowScope(Consumer)} instead.
-     * @param project var.name
+     * @param project project
      * @param type The scope of the workflow. {@code GLOBAL} for company-managed projects and {@code PROJECT} for team-managed projects.
      */
     @ApiStatus.Internal

@@ -126,9 +126,9 @@ public class IssueTransition {
      * @param isConditional Whether the issue has to meet criteria before the issue transition is applied.
      * @param isGlobal Whether the issue transition is global, that is, the transition is applied to issues regardless of their status.
      * @param isInitial Whether this is the initial issue transition for the workflow.
-     * @param looped var.name
+     * @param looped looped
      * @param name The name of the issue transition.
-     * @param to var.name
+     * @param to to
      */
     @ApiStatus.Internal
     public IssueTransition(String expand, Map<String, FieldMetadata> fields, Boolean hasScreen, String id, Boolean isAvailable, Boolean isConditional, Boolean isGlobal, Boolean isInitial, Boolean looped, String name, IssueTransitionTo to) {

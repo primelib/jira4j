@@ -99,7 +99,7 @@ public class JiraStatus {
      * @param description The description of the status.
      * @param id The ID of the status.
      * @param name The name of the status.
-     * @param scope var.name
+     * @param scope scope
      * @param statusCategory The category of the status.
      * @param usages Projects and issue types where the status is used. Only available if the {@code usages} expand is requested.
      * @param workflowUsages The workflows that use this status. Only available if the {@code workflowUsages} expand is requested.

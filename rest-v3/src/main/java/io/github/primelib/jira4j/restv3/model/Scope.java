@@ -60,7 +60,7 @@ public class Scope {
      * Constructs a validated instance of {@link Scope}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #Scope(Consumer)} instead.
-     * @param project var.name
+     * @param project project
      * @param type The type of scope.
      */
     @ApiStatus.Internal

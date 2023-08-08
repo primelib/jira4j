@@ -61,7 +61,7 @@ public class JqlQueryOrderByClauseElement {
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #JqlQueryOrderByClauseElement(Consumer)} instead.
      * @param direction The direction in which to order the results.
-     * @param field var.name
+     * @param field field
      */
     @ApiStatus.Internal
     public JqlQueryOrderByClauseElement(DirectionEnum direction, JqlQueryField field) {

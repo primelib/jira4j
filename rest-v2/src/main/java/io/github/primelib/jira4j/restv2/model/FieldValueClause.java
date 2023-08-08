@@ -64,8 +64,8 @@ public class FieldValueClause {
      * Constructs a validated instance of {@link FieldValueClause}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #FieldValueClause(Consumer)} instead.
-     * @param field var.name
-     * @param operand var.name
+     * @param field field
+     * @param operand operand
      * @param operator The operator between the field and operand.
      */
     @ApiStatus.Internal

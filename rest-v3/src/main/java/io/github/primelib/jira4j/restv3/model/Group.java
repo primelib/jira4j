@@ -83,7 +83,7 @@ public class Group {
      * @param groupId The ID of the group, which uniquely identifies the group across all Atlassian products. For example, *952d12c3-5b5b-4d04-bb32-44d383afc4b2*.
      * @param name The name of group.
      * @param self The URL for these group details.
-     * @param users var.name
+     * @param users users
      */
     @ApiStatus.Internal
     public Group(String expand, String groupId, String name, URI self, GroupUsers users) {

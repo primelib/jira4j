@@ -16,6 +16,8 @@ import io.github.primelib.jira4j.restv2.model.AnnouncementBannerConfiguration;
 import io.github.primelib.jira4j.restv2.model.AnnouncementBannerConfigurationUpdate;
 import io.github.primelib.jira4j.restv2.model.ApplicationProperty;
 import io.github.primelib.jira4j.restv2.model.ApplicationRole;
+import io.github.primelib.jira4j.restv2.model.ArchiveIssueAsyncRequest;
+import io.github.primelib.jira4j.restv2.model.ArchivedIssuesFilterRequest;
 import io.github.primelib.jira4j.restv2.model.AssociateFieldConfigurationsWithIssueTypesRequest;
 import io.github.primelib.jira4j.restv2.model.AssociateSecuritySchemeWithProjectDetails;
 import io.github.primelib.jira4j.restv2.model.Attachment;
@@ -79,6 +81,7 @@ import io.github.primelib.jira4j.restv2.model.DeprecatedWorkflow;
 import io.github.primelib.jira4j.restv2.model.EntityProperty;
 import io.github.primelib.jira4j.restv2.model.EntityPropertyDetails;
 import io.github.primelib.jira4j.restv2.model.ErrorCollection;
+import io.github.primelib.jira4j.restv2.model.ExportArchivedIssuesTaskProgressResponse;
 import io.github.primelib.jira4j.restv2.model.FailedWebhooks;
 import io.github.primelib.jira4j.restv2.model.FieldConfiguration;
 import io.github.primelib.jira4j.restv2.model.FieldConfigurationDetails;
@@ -93,6 +96,8 @@ import io.github.primelib.jira4j.restv2.model.FoundUsersAndGroups;
 import io.github.primelib.jira4j.restv2.model.Group;
 import io.github.primelib.jira4j.restv2.model.GroupName;
 import io.github.primelib.jira4j.restv2.model.IdBean;
+import io.github.primelib.jira4j.restv2.model.IssueArchivalSyncRequest;
+import io.github.primelib.jira4j.restv2.model.IssueArchivalSyncResponse;
 import io.github.primelib.jira4j.restv2.model.IssueBean;
 import io.github.primelib.jira4j.restv2.model.IssueChangelogIds;
 import io.github.primelib.jira4j.restv2.model.IssueCommentListRequestBean;
@@ -1263,11 +1268,11 @@ public interface JiraRESTV2AsyncApi {
      */
     @RequestLine("PUT /rest/atlassian-connect/1/migration/field")
     @Headers({
-        "Atlassian-Transfer-Id: {Atlassian_Transfer_Id}", 
+        "Atlassian-Transfer-Id: {atlassianTransferId}", 
         "Content-Type: application/json", 
         "Accept: application/json"
     })
-    CompletableFuture<Object> appIssueFieldValueUpdateResourceUpdateIssueFieldsPut(@Param("Atlassian_Transfer_Id") @NotNull UUID atlassianTransferId, @NotNull ConnectCustomFieldValues connectCustomFieldValues);
+    CompletableFuture<Object> appIssueFieldValueUpdateResourceUpdateIssueFieldsPut(@Param("atlassianTransferId") @NotNull UUID atlassianTransferId, @NotNull ConnectCustomFieldValues connectCustomFieldValues);
 
     /**
      * Append mappings to issue type screen scheme
@@ -1285,6 +1290,58 @@ public interface JiraRESTV2AsyncApi {
         "Accept: application/json"
     })
     CompletableFuture<Object> appendMappingsForIssueTypeScreenScheme(@Param("issueTypeScreenSchemeId") @NotNull String issueTypeScreenSchemeId, @NotNull IssueTypeScreenSchemeMappingDetails issueTypeScreenSchemeMappingDetails);
+
+    /**
+     * Archive issue(s) by issue ID/key
+     * <p>
+     * Enables admins to archive up to 1000 issues in a single request using issue ID/key, returning details of the issue(s) archived in the process and the errors encountered, if any.
+     * **Note that:**
+     *  *
+     * you can't archive subtasks directly, only through their parent issues
+     * *
+     * you can only archive issues from software, service management, and business projects
+     * **[Permissions](#permissions) required:** Jira admin or site admin: [global permission](https://confluence.atlassian.com/x/x4dKLg)
+     * **License required:** Premium or Enterprise
+     * **Signed-in users only:** This API can't be accessed anonymously.
+     * 
+     *  
+     *
+     * Authentication - Required Scopes: [write:jira-work]
+     * @param issueArchivalSyncRequest Contains a list of issue keys or IDs to be archived. (required)
+     */
+    @RequestLine("PUT /rest/api/2/issue/archive")
+    @Headers({
+        "Content-Type: application/json", 
+        "Accept: application/json"
+    })
+    CompletableFuture<IssueArchivalSyncResponse> archiveIssues(@NotNull IssueArchivalSyncRequest issueArchivalSyncRequest);
+
+    /**
+     * Archive issue(s) by JQL
+     * <p>
+     * Enables admins to archive up to 100,000 issues in a single request using JQL, returning the URL to check the status of the submitted request.
+     * You can use the [get task](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-tasks/#api-rest-api-3-task-taskid-get) and [cancel task](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-tasks/#api-rest-api-3-task-taskid-cancel-post) APIs to manage the request.
+     * **Note that:**
+     *  *
+     * you can't archive subtasks directly, only through their parent issues
+     * *
+     * you can only archive issues from software, service management, and business projects
+     * **[Permissions](#permissions) required:** Jira admin or site admin: [global permission](https://confluence.atlassian.com/x/x4dKLg)
+     * **License required:** Premium or Enterprise
+     * **Signed-in users only:** This API can't be accessed anonymously.
+     * **Rate limiting:** Only a single request per user can be active at any given time.
+     * 
+     *  
+     *
+     * Authentication - Required Scopes: [write:jira-work]
+     * @param archiveIssueAsyncRequest A JQL query specifying the issues to archive. Note that subtasks can only be archived through their parent issues. (required)
+     */
+    @RequestLine("POST /rest/api/2/issue/archive")
+    @Headers({
+        "Content-Type: application/json", 
+        "Accept: application/json"
+    })
+    CompletableFuture<String> archiveIssuesAsync(@NotNull ArchiveIssueAsyncRequest archiveIssueAsyncRequest);
 
     /**
      * Archive project
@@ -4911,6 +4968,7 @@ public interface JiraRESTV2AsyncApi {
     /**
      * Delete priority
      * <p>
+     * *Deprecated: please refer to the* [changelog](https://developer.atlassian.com/changelog/#CHANGE-1066) *for more details.*
      * Deletes an issue priority.
      * This operation is [asynchronous](#async). Follow the {@code location} link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
@@ -4918,7 +4976,9 @@ public interface JiraRESTV2AsyncApi {
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param id                   The ID of the issue priority. (required)
      * @param replaceWith          The ID of the issue priority that will replace the currently selected resolution. (required)
+     * @deprecated
      */
+    @Deprecated
     @RequestLine("DELETE /rest/api/2/priority/{id}?replaceWith={replaceWith}")
     @Headers({
         "Accept: application/json"
@@ -4934,7 +4994,7 @@ public interface JiraRESTV2AsyncApi {
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param projectIdOrKey       The project ID or project key (case sensitive). (required)
-     * @param enableUndo           Whether this project is placed in the Jira recycle bin where it will be available for restoration. (optional, defaults to false)
+     * @param enableUndo           Whether this project is placed in the Jira recycle bin where it will be available for restoration. (optional, defaults to true)
      */
     @RequestLine("DELETE /rest/api/2/project/{projectIdOrKey}?enableUndo={enableUndo}")
     @Headers({
@@ -5623,6 +5683,28 @@ public interface JiraRESTV2AsyncApi {
         "Accept: application/json"
     })
     CompletableFuture<AttachmentArchiveImpl> expandAttachmentForMachines(@Param("id") @NotNull String id);
+
+    /**
+     * Export archived issue(s)
+     * <p>
+     * Enables admins to retrieve details of all archived issues. Upon a successful request, the admin who submitted it will receive an email with a link to download a CSV file with the issue details.
+     * Note that this API only exports the values of system fields and archival-specific fields ({@code ArchivedBy} and {@code ArchivedDate}). Custom fields aren't supported.
+     * **[Permissions](#permissions) required:** Jira admin or site admin: [global permission](https://confluence.atlassian.com/x/x4dKLg)
+     * **License required:** Premium or Enterprise
+     * **Signed-in users only:** This API can't be accessed anonymously.
+     * **Rate limiting:** Only a single request can be active at any given time.
+     * 
+     *  
+     *
+     * Authentication - Required Scopes: [read:jira-work]
+     * @param archivedIssuesFilterRequest You can filter the issues in your request by the {@code projects}, {@code archivedBy}, {@code archivedDate}, {@code issueTypes}, and {@code reporters} fields. All filters are optional. If you don't provide any filters, you'll get a list of up to one million archived issues. (required)
+     */
+    @RequestLine("PUT /rest/api/2/issues/archive/export")
+    @Headers({
+        "Content-Type: application/json", 
+        "Accept: application/json"
+    })
+    CompletableFuture<ExportArchivedIssuesTaskProgressResponse> exportArchivedIssues(@NotNull ArchivedIssuesFilterRequest archivedIssuesFilterRequest);
 
     /**
      * Find users assignable to issues
@@ -8806,7 +8888,7 @@ public interface JiraRESTV2AsyncApi {
      * @param functionKey          The function key in format:   *  Forge: {@code ari:cloud:ecosystem::extension/[App ID]/[Environment ID]/static/[Function key from manifest]}.  *  Connect: {@code [App key]__[Module key]}. (optional)
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 100)
-     * @param orderBy              Not supported yet. (optional)
+     * @param orderBy              [Order](#ordering) the results by a field:   *  {@code functionKey} Sorts by the functionKey.  *  {@code used} Sorts by the used timestamp.  *  {@code created} Sorts by the created timestamp.  *  {@code updated} Sorts by the updated timestamp. (optional)
      * @param filter               Not supported yet. (optional)
      */
     @RequestLine("GET /rest/api/2/jql/function/computation?functionKey={functionKey}&startAt={startAt}&maxResults={maxResults}&orderBy={orderBy}&filter={filter}")
@@ -10079,9 +10161,9 @@ public interface JiraRESTV2AsyncApi {
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 10)
      * @param keys                 The transition rule class keys, as defined in the Connect or the Forge app descriptor, of the transition rules to return. (optional)
-     * @param workflowNames        EXPERIMENTAL: The list of workflow names to filter by. (optional)
-     * @param withTags             EXPERIMENTAL: The list of {@code tags} to filter by. (optional)
-     * @param draft                EXPERIMENTAL: Whether draft or published workflows are returned. If not provided, both workflow types are returned. (optional)
+     * @param workflowNames        The list of workflow names to filter by. (optional)
+     * @param withTags             The list of {@code tags} to filter by. (optional)
+     * @param draft                Whether draft or published workflows are returned. If not provided, both workflow types are returned. (optional)
      * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts {@code transition}, which, for each rule, returns information about the transition the rule is assigned to. (optional)
      */
     @RequestLine("GET /rest/api/2/workflow/rule/config?startAt={startAt}&maxResults={maxResults}&types={types}&keys={keys}&workflowNames={workflowNames}&withTags={withTags}&draft={draft}&expand={expand}")
@@ -10299,11 +10381,11 @@ public interface JiraRESTV2AsyncApi {
      */
     @RequestLine("PUT /rest/atlassian-connect/1/migration/properties/{entityType}")
     @Headers({
-        "Atlassian-Transfer-Id: {Atlassian_Transfer_Id}", 
+        "Atlassian-Transfer-Id: {atlassianTransferId}", 
         "Content-Type: application/json", 
         "Accept: application/json"
     })
-    CompletableFuture<Void> migrationResourceUpdateEntityPropertiesValuePut(@Param("Atlassian_Transfer_Id") @NotNull UUID atlassianTransferId, @Param("entityType") @NotNull String entityType, @NotNull List<EntityPropertyDetails> entityPropertyDetails);
+    CompletableFuture<Void> migrationResourceUpdateEntityPropertiesValuePut(@Param("atlassianTransferId") @NotNull UUID atlassianTransferId, @Param("entityType") @NotNull String entityType, @NotNull List<EntityPropertyDetails> entityPropertyDetails);
 
     /**
      * Get workflow transition rule configurations
@@ -10315,11 +10397,11 @@ public interface JiraRESTV2AsyncApi {
      */
     @RequestLine("POST /rest/atlassian-connect/1/migration/workflow/rule/search")
     @Headers({
-        "Atlassian-Transfer-Id: {Atlassian_Transfer_Id}", 
+        "Atlassian-Transfer-Id: {atlassianTransferId}", 
         "Content-Type: application/json", 
         "Accept: application/json"
     })
-    CompletableFuture<WorkflowRulesSearchDetails> migrationResourceWorkflowRuleSearchPost(@Param("Atlassian_Transfer_Id") @NotNull UUID atlassianTransferId, @NotNull WorkflowRulesSearch workflowRulesSearch);
+    CompletableFuture<WorkflowRulesSearchDetails> migrationResourceWorkflowRuleSearchPost(@Param("atlassianTransferId") @NotNull UUID atlassianTransferId, @NotNull WorkflowRulesSearch workflowRulesSearch);
 
     /**
      * Move priorities
@@ -11137,6 +11219,8 @@ public interface JiraRESTV2AsyncApi {
      *  *
      * a list of priority IDs. Any invalid priority IDs are ignored.
      * *
+     * a list of project IDs. Only priorities that are available in these projects will be returned. Any invalid project IDs are ignored.
+     * *
      * whether the field configuration is a default. This returns priorities from company-managed (classic) projects only, as there is no concept of default priorities in team-managed projects.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      *
@@ -11144,13 +11228,14 @@ public interface JiraRESTV2AsyncApi {
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
      * @param id                   The list of priority IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code id=2&amp;id=3}. (optional)
+     * @param projectId            The list of projects IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code projectid=10010&amp;projectid=10111}. (optional)
      * @param onlyDefault          Whether only the default priority is returned. (optional, defaults to false)
      */
-    @RequestLine("GET /rest/api/2/priority/search?startAt={startAt}&maxResults={maxResults}&id={id}&onlyDefault={onlyDefault}")
+    @RequestLine("GET /rest/api/2/priority/search?startAt={startAt}&maxResults={maxResults}&id={id}&projectId={projectId}&onlyDefault={onlyDefault}")
     @Headers({
         "Accept: application/json"
     })
-    CompletableFuture<PageBeanPriority> searchPriorities(@Param("startAt") @Nullable String startAt, @Param("maxResults") @Nullable String maxResults, @Param("id") @Nullable List<String> id, @Param("onlyDefault") @Nullable Boolean onlyDefault);
+    CompletableFuture<PageBeanPriority> searchPriorities(@Param("startAt") @Nullable String startAt, @Param("maxResults") @Nullable String maxResults, @Param("id") @Nullable List<String> id, @Param("projectId") @Nullable List<String> projectId, @Param("onlyDefault") @Nullable Boolean onlyDefault);
 
     /**
      * Get projects paginated
@@ -11942,6 +12027,31 @@ public interface JiraRESTV2AsyncApi {
         "Accept: application/json"
     })
     CompletableFuture<Object> trashCustomField(@Param("id") @NotNull String id);
+
+    /**
+     * Unarchive issue(s) by issue keys/ID
+     * <p>
+     * Enables admins to unarchive up to 1000 issues in a single request using issue ID/key, returning details of the issue(s) unarchived in the process and the errors encountered, if any.
+     * **Note that:**
+     *  *
+     * you can't unarchive subtasks directly, only through their parent issues
+     * *
+     * you can only unarchive issues from software, service management, and business projects
+     * **[Permissions](#permissions) required:** Jira admin or site admin: [global permission](https://confluence.atlassian.com/x/x4dKLg)
+     * **License required:** Premium or Enterprise
+     * **Signed-in users only:** This API can't be accessed anonymously.
+     * 
+     *  
+     *
+     * Authentication - Required Scopes: [write:jira-work]
+     * @param issueArchivalSyncRequest Contains a list of issue keys or IDs to be unarchived. (required)
+     */
+    @RequestLine("PUT /rest/api/2/issue/unarchive")
+    @Headers({
+        "Content-Type: application/json", 
+        "Accept: application/json"
+    })
+    CompletableFuture<IssueArchivalSyncResponse> unarchiveIssues(@NotNull IssueArchivalSyncRequest issueArchivalSyncRequest);
 
     /**
      * Update comment
@@ -12765,14 +12875,14 @@ public interface JiraRESTV2AsyncApi {
      * [conditions](https://developer.atlassian.com/cloud/jira/platform/modules/workflow-condition/)
      * *
      * [validators](https://developer.atlassian.com/cloud/jira/platform/modules/workflow-validator/)
-     * Only rules created by the calling Connect app can be updated.
+     * Only rules created by the calling [Connect](https://developer.atlassian.com/cloud/jira/platform/index/#connect-apps) or [Forge](https://developer.atlassian.com/cloud/jira/platform/index/#forge-apps) app can be updated.
      * To assist with app migration, this operation can be used to:
      *  *
      * Disable a rule.
      * *
      * Add a {@code tag}. Use this to filter rules in the [Get workflow transition rule configurations](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-workflow-transition-rules/#api-rest-api-3-workflow-rule-config-get).
      * Rules are enabled if the {@code disabled} parameter is not provided.
-     * **[Permissions](#permissions) required:** Only Connect apps can use this operation.
+     * **[Permissions](#permissions) required:** Only [Connect](https://developer.atlassian.com/cloud/jira/platform/index/#connect-apps) or [Forge](https://developer.atlassian.com/cloud/jira/platform/index/#forge-apps) apps can use this operation.
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param workflowTransitionRulesUpdate  (required)

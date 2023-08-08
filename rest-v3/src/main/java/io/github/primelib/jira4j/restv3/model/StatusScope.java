@@ -60,7 +60,7 @@ public class StatusScope {
      * Constructs a validated instance of {@link StatusScope}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #StatusScope(Consumer)} instead.
-     * @param project var.name
+     * @param project project
      * @param type The scope of the status. {@code GLOBAL} for company-managed projects and {@code PROJECT} for team-managed projects.
      */
     @ApiStatus.Internal

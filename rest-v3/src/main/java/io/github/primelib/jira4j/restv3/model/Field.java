@@ -130,10 +130,10 @@ public class Field {
      * @param isLocked Whether the field is locked.
      * @param isUnscreenable Whether the field is shown on screen or not.
      * @param key The key of the field.
-     * @param lastUsed var.name
+     * @param lastUsed lastUsed
      * @param name The name of the field.
      * @param projectsCount Number of projects where the field is used.
-     * @param schema var.name
+     * @param schema schema
      * @param screensCount Number of screens where the field is used.
      * @param searcherKey The searcher key of the field. Returned for custom fields.
      */

@@ -65,7 +65,7 @@ public class WorkflowCreateRequest {
      * Constructs a validated instance of {@link WorkflowCreateRequest}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #WorkflowCreateRequest(Consumer)} instead.
-     * @param scope var.name
+     * @param scope scope
      * @param statuses The statuses to associate with the workflows.
      * @param workflows The details of the workflows to create.
      */

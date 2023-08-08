@@ -60,7 +60,7 @@ public class ContextScope {
      * Constructs a validated instance of {@link ContextScope}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #ContextScope(Consumer)} instead.
-     * @param project var.name
+     * @param project project
      * @param type The type of scope.
      */
     @ApiStatus.Internal

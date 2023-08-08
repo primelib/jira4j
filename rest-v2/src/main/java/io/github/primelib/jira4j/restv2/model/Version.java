@@ -174,7 +174,7 @@ public class Version {
      * @param description The description of the version. Optional when creating or updating a version.
      * @param expand Use [expand](em&amp;gt;#expansion) to include additional information about version in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code operations} Returns the list of operations available for this version.  *  {@code issuesstatus} Returns the count of issues in this version for each of the status categories *to do*, *in progress*, *done*, and *unmapped*. The *unmapped* property contains a count of issues with a status other than *to do*, *in progress*, and *done*.  Optional for create and update.
      * @param id The ID of the version.
-     * @param issuesStatusForFixVersion var.name
+     * @param issuesStatusForFixVersion issuesStatusForFixVersion
      * @param moveUnfixedIssuesTo The URL of the self link to the version to which all unfixed issues are moved when a version is released. Not applicable when creating a version. Optional when updating a version.
      * @param name The unique name of the version. Required when creating a version. Optional when updating a version. The maximum length is 255 characters.
      * @param operations If the expand option {@code operations} is used, returns the list of operations available for this version.

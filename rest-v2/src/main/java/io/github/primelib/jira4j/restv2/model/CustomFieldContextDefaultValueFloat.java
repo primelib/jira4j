@@ -58,7 +58,7 @@ public class CustomFieldContextDefaultValueFloat {
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #CustomFieldContextDefaultValueFloat(Consumer)} instead.
      * @param number The default floating-point number.
-     * @param type var.name
+     * @param type type
      */
     @ApiStatus.Internal
     public CustomFieldContextDefaultValueFloat(Double number, String type) {

@@ -57,7 +57,7 @@ public class JiraExpressionResult {
      * Constructs a validated instance of {@link JiraExpressionResult}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #JiraExpressionResult(Consumer)} instead.
-     * @param meta var.name
+     * @param meta meta
      * @param value The value of the evaluated expression. It may be a primitive JSON value or a Jira REST API object. (Some expressions do not produce any meaningful results—for example, an expression that returns a lambda function—if that's the case a simple string representation is returned. These string representations should not be relied upon and may change without notice.)
      */
     @ApiStatus.Internal

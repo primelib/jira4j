@@ -81,7 +81,7 @@ public class WorkflowElementReference {
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #WorkflowElementReference(Consumer)} instead.
      * @param propertyKey A property key.
      * @param ruleId A rule ID.
-     * @param statusMappingReference var.name
+     * @param statusMappingReference statusMappingReference
      * @param statusReference A status reference.
      * @param transitionId A transition ID.
      */

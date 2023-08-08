@@ -99,7 +99,7 @@ public class JiraWorkflowStatus {
      * @param description The description of the status.
      * @param id The ID of the status.
      * @param name The name of the status.
-     * @param scope var.name
+     * @param scope scope
      * @param statusCategory The category of the status.
      * @param statusReference The reference of the status.
      * @param usages The {@code statuses.usages} expand is an optional parameter that can be used when reading and updating statuses in Jira. It provides additional information about the projects and issue types associated with the requested statuses.

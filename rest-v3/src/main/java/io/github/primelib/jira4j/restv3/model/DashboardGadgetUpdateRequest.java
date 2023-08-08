@@ -65,7 +65,7 @@ public class DashboardGadgetUpdateRequest {
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #DashboardGadgetUpdateRequest(Consumer)} instead.
      * @param color The color of the gadget. Should be one of {@code blue}, {@code red}, {@code yellow}, {@code green}, {@code cyan}, {@code purple}, {@code gray}, or {@code white}.
-     * @param position var.name
+     * @param position position
      * @param title The title of the gadget.
      */
     @ApiStatus.Internal

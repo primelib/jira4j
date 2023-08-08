@@ -58,7 +58,7 @@ public class NotificationSchemeEventDetails {
      * Constructs a validated instance of {@link NotificationSchemeEventDetails}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #NotificationSchemeEventDetails(Consumer)} instead.
-     * @param event var.name
+     * @param event event
      * @param notifications The list of notifications mapped to a specified event.
      */
     @ApiStatus.Internal

@@ -130,7 +130,7 @@ public class EventNotificationProjectRole {
      * @param id The ID of the project role.
      * @param name The name of the project role.
      * @param roleConfigurable Whether the roles are configurable for this project.
-     * @param scope var.name
+     * @param scope scope
      * @param self The URL the project role details.
      * @param translatedName The translated name of the project role.
      */

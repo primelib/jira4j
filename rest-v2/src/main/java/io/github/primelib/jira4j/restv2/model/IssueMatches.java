@@ -51,7 +51,7 @@ public class IssueMatches {
      * Constructs a validated instance of {@link IssueMatches}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #IssueMatches(Consumer)} instead.
-     * @param matches var.name
+     * @param matches matches
      */
     @ApiStatus.Internal
     public IssueMatches(List<IssueMatchesForJQL> matches) {

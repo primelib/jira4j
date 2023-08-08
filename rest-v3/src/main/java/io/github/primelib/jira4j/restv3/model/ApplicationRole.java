@@ -148,7 +148,7 @@ public class ApplicationRole {
      * @param defined Deprecated.
      * @param groupDetails The groups associated with the application role.
      * @param groups The groups associated with the application role. As a group's name can change, use of {@code groupDetails} is recommended to identify a groups.
-     * @param hasUnlimitedSeats var.name
+     * @param hasUnlimitedSeats hasUnlimitedSeats
      * @param key The key of the application role.
      * @param name The display name of the application role.
      * @param numberOfSeats The maximum count of users on your license.

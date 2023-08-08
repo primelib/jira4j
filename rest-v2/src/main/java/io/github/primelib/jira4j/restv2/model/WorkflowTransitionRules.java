@@ -75,7 +75,7 @@ public class WorkflowTransitionRules {
      * @param conditions The list of conditions within the workflow.
      * @param postFunctions The list of post functions within the workflow.
      * @param validators The list of validators within the workflow.
-     * @param workflowId var.name
+     * @param workflowId workflowId
      */
     @ApiStatus.Internal
     public WorkflowTransitionRules(List<AppWorkflowTransitionRule> conditions, List<AppWorkflowTransitionRule> postFunctions, List<AppWorkflowTransitionRule> validators, WorkflowId workflowId) {

@@ -62,10 +62,10 @@ public class JiraExpressionsComplexityBean {
      * Constructs a validated instance of {@link JiraExpressionsComplexityBean}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #JiraExpressionsComplexityBean(Consumer)} instead.
-     * @param beans var.name
-     * @param expensiveOperations var.name
-     * @param primitiveValues var.name
-     * @param steps var.name
+     * @param beans beans
+     * @param expensiveOperations expensiveOperations
+     * @param primitiveValues primitiveValues
+     * @param steps steps
      */
     @ApiStatus.Internal
     public JiraExpressionsComplexityBean(JiraExpressionsComplexityBeanBeans beans, JiraExpressionsComplexityBeanExpensiveOperations expensiveOperations, JiraExpressionsComplexityBeanPrimitiveValues primitiveValues, JiraExpressionsComplexityBeanSteps steps) {

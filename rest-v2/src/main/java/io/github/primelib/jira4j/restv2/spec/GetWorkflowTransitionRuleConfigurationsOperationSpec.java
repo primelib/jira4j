@@ -65,19 +65,19 @@ public class GetWorkflowTransitionRuleConfigurationsOperationSpec {
     private Set<String> keys;
 
     /**
-     * EXPERIMENTAL: The list of workflow names to filter by.
+     * The list of workflow names to filter by.
      */
     @Nullable 
     private Set<String> workflowNames;
 
     /**
-     * EXPERIMENTAL: The list of {@code tags} to filter by.
+     * The list of {@code tags} to filter by.
      */
     @Nullable 
     private Set<String> withTags;
 
     /**
-     * EXPERIMENTAL: Whether draft or published workflows are returned. If not provided, both workflow types are returned.
+     * Whether draft or published workflows are returned. If not provided, both workflow types are returned.
      */
     @Nullable 
     private Boolean draft;
@@ -108,9 +108,9 @@ public class GetWorkflowTransitionRuleConfigurationsOperationSpec {
      * @param startAt              The index of the first item to return in a page of results (page offset).
      * @param maxResults           The maximum number of items to return per page.
      * @param keys                 The transition rule class keys, as defined in the Connect or the Forge app descriptor, of the transition rules to return.
-     * @param workflowNames        EXPERIMENTAL: The list of workflow names to filter by.
-     * @param withTags             EXPERIMENTAL: The list of {@code tags} to filter by.
-     * @param draft                EXPERIMENTAL: Whether draft or published workflows are returned. If not provided, both workflow types are returned.
+     * @param workflowNames        The list of workflow names to filter by.
+     * @param withTags             The list of {@code tags} to filter by.
+     * @param draft                Whether draft or published workflows are returned. If not provided, both workflow types are returned.
      * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts {@code transition}, which, for each rule, returns information about the transition the rule is assigned to.
      */
     @ApiStatus.Internal

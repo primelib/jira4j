@@ -79,7 +79,7 @@ public class JiraExpressionAnalysis {
      * Constructs a validated instance of {@link JiraExpressionAnalysis}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #JiraExpressionAnalysis(Consumer)} instead.
-     * @param complexity var.name
+     * @param complexity complexity
      * @param errors A list of validation errors. Not included if the expression is valid.
      * @param expression The analysed expression.
      * @param type EXPERIMENTAL. The inferred type of the expression.

@@ -148,12 +148,12 @@ public class ProjectArchivedBy {
      * @param accountId The account ID of the user, which uniquely identifies the user across all Atlassian products. For example, *5b10ac8d82e05b22cc7d4ef5*. Required in requests.
      * @param accountType The user account type. Can take the following values:   *  {@code atlassian} regular Atlassian user account  *  {@code app} system account used for Connect applications and OAuth to represent external systems  *  {@code customer} Jira Service Desk account representing an external service desk
      * @param active Whether the user is active.
-     * @param applicationRoles var.name
-     * @param avatarUrls var.name
+     * @param applicationRoles applicationRoles
+     * @param avatarUrls avatarUrls
      * @param displayName The display name of the user. Depending on the user’s privacy setting, this may return an alternative value.
      * @param emailAddress The email address of the user. Depending on the user’s privacy setting, this may be returned as null.
      * @param expand Expand options that include additional user details in the response.
-     * @param groups var.name
+     * @param groups groups
      * @param key This property is no longer available and will be removed from the documentation soon. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.
      * @param locale The locale of the user. Depending on the user’s privacy setting, this may be returned as null.
      * @param name This property is no longer available and will be removed from the documentation soon. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.

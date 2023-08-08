@@ -67,11 +67,11 @@ public class SimpleListWrapperGroupName {
      * Constructs a validated instance of {@link SimpleListWrapperGroupName}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #SimpleListWrapperGroupName(Consumer)} instead.
-     * @param callback var.name
-     * @param items var.name
-     * @param maxResults var.name
-     * @param pagingCallback var.name
-     * @param size var.name
+     * @param callback callback
+     * @param items items
+     * @param maxResults maxResults
+     * @param pagingCallback pagingCallback
+     * @param size size
      */
     @ApiStatus.Internal
     public SimpleListWrapperGroupName(Object callback, List<GroupName> items, Integer maxResults, Object pagingCallback, Integer size) {

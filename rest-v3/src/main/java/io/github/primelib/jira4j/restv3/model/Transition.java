@@ -113,8 +113,8 @@ public class Transition {
      * @param id The ID of the transition.
      * @param name The name of the transition.
      * @param properties The properties of the transition.
-     * @param rules var.name
-     * @param screen var.name
+     * @param rules rules
+     * @param screen screen
      * @param to The status the transition goes to.
      * @param type The type of the transition.
      */

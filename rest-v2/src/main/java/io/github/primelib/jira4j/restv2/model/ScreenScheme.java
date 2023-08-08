@@ -77,9 +77,9 @@ public class ScreenScheme {
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #ScreenScheme(Consumer)} instead.
      * @param description The description of the screen scheme.
      * @param id The ID of the screen scheme.
-     * @param issueTypeScreenSchemes var.name
+     * @param issueTypeScreenSchemes issueTypeScreenSchemes
      * @param name The name of the screen scheme.
-     * @param screens var.name
+     * @param screens screens
      */
     @ApiStatus.Internal
     public ScreenScheme(String description, Long id, ScreenSchemeIssueTypeScreenSchemes issueTypeScreenSchemes, String name, ScreenSchemeScreens screens) {

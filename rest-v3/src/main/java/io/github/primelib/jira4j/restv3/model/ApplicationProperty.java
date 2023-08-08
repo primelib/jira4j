@@ -110,7 +110,7 @@ public class ApplicationProperty {
      * @param allowedValues The allowed values, if applicable.
      * @param defaultValue The default value of the application property.
      * @param desc The description of the application property.
-     * @param example var.name
+     * @param example example
      * @param id The ID of the application property. The ID and key are the same.
      * @param key The key of the application property. The ID and key are the same.
      * @param name The name of the application property.

@@ -65,7 +65,7 @@ public class WorkflowSimpleCondition {
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #WorkflowSimpleCondition(Consumer)} instead.
      * @param configuration EXPERIMENTAL. The configuration of the transition rule.
-     * @param nodeType var.name
+     * @param nodeType nodeType
      * @param type The type of the transition rule.
      */
     @ApiStatus.Internal

@@ -68,10 +68,10 @@ public class AppWorkflowTransitionRule {
      * Constructs a validated instance of {@link AppWorkflowTransitionRule}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #AppWorkflowTransitionRule(Consumer)} instead.
-     * @param configuration var.name
+     * @param configuration configuration
      * @param id The ID of the transition rule.
      * @param key The key of the rule, as defined in the Connect or the Forge app descriptor.
-     * @param transition var.name
+     * @param transition transition
      */
     @ApiStatus.Internal
     public AppWorkflowTransitionRule(RuleConfiguration configuration, String id, String key, WorkflowTransition transition) {

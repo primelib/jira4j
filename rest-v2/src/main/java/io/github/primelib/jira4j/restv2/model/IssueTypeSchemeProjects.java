@@ -58,7 +58,7 @@ public class IssueTypeSchemeProjects {
      * Constructs a validated instance of {@link IssueTypeSchemeProjects}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #IssueTypeSchemeProjects(Consumer)} instead.
-     * @param issueTypeScheme var.name
+     * @param issueTypeScheme issueTypeScheme
      * @param projectIds The IDs of the projects using the issue type scheme.
      */
     @ApiStatus.Internal

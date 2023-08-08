@@ -72,7 +72,7 @@ public class SanitizedJqlQuery {
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #SanitizedJqlQuery(Consumer)} instead.
      * @param accountId The account ID of the user for whom sanitization was performed.
-     * @param errors var.name
+     * @param errors errors
      * @param initialQuery The initial query.
      * @param sanitizedQuery The sanitized query, if there were no errors.
      */

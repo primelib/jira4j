@@ -51,7 +51,7 @@ public class CustomFieldContextDefaultValueUpdate {
      * Constructs a validated instance of {@link CustomFieldContextDefaultValueUpdate}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #CustomFieldContextDefaultValueUpdate(Consumer)} instead.
-     * @param defaultValues var.name
+     * @param defaultValues defaultValues
      */
     @ApiStatus.Internal
     public CustomFieldContextDefaultValueUpdate(List<CustomFieldContextDefaultValue> defaultValues) {

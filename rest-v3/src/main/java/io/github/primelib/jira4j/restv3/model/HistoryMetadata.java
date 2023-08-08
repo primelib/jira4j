@@ -117,14 +117,14 @@ public class HistoryMetadata {
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #HistoryMetadata(Consumer)} instead.
      * @param activityDescription The activity described in the history record.
      * @param activityDescriptionKey The key of the activity described in the history record.
-     * @param actor var.name
-     * @param cause var.name
+     * @param actor actor
+     * @param cause cause
      * @param description The description of the history record.
      * @param descriptionKey The description key of the history record.
      * @param emailDescription The description of the email address associated the history record.
      * @param emailDescriptionKey The description key of the email address associated the history record.
      * @param extraData Additional arbitrary information about the history record.
-     * @param generator var.name
+     * @param generator generator
      * @param type The type of the history record.
      */
     @ApiStatus.Internal

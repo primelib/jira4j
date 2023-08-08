@@ -139,15 +139,15 @@ public class IssueBean {
      * Constructs a validated instance of {@link IssueBean}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #IssueBean(Consumer)} instead.
-     * @param changelog var.name
-     * @param editmeta var.name
+     * @param changelog changelog
+     * @param editmeta editmeta
      * @param expand Expand options that include additional issue details in the response.
-     * @param fields var.name
-     * @param fieldsToInclude var.name
+     * @param fields fields
+     * @param fieldsToInclude fieldsToInclude
      * @param id The ID of the issue.
      * @param key The key of the issue.
      * @param names The ID and name of each field present on the issue.
-     * @param operations var.name
+     * @param operations operations
      * @param properties Details of the issue properties identified in the request.
      * @param renderedFields The rendered value of each field present on the issue.
      * @param schema The schema describing each field present on the issue.

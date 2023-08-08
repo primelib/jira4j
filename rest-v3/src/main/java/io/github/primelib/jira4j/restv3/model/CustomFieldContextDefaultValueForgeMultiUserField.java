@@ -67,7 +67,7 @@ public class CustomFieldContextDefaultValueForgeMultiUserField {
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #CustomFieldContextDefaultValueForgeMultiUserField(Consumer)} instead.
      * @param accountIds The IDs of the default users.
      * @param contextId The ID of the context.
-     * @param type var.name
+     * @param type type
      */
     @ApiStatus.Internal
     public CustomFieldContextDefaultValueForgeMultiUserField(List<String> accountIds, String contextId, String type) {

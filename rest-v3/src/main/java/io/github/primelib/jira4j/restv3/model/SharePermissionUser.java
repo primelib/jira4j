@@ -97,7 +97,7 @@ public class SharePermissionUser {
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #SharePermissionUser(Consumer)} instead.
      * @param accountId The account ID of the user, which uniquely identifies the user across all Atlassian products. For example, *5b10ac8d82e05b22cc7d4ef5*.
      * @param active Whether the user is active.
-     * @param avatarUrls var.name
+     * @param avatarUrls avatarUrls
      * @param displayName The display name of the user. Depending on the user’s privacy setting, this may return an alternative value.
      * @param key This property is deprecated in favor of {@code accountId} because of privacy changes. See the [migration guide](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.   The key of the user.
      * @param name This property is deprecated in favor of {@code accountId} because of privacy changes. See the [migration guide](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.   The username of the user.

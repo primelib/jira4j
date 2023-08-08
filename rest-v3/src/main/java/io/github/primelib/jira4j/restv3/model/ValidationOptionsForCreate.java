@@ -54,7 +54,7 @@ public class ValidationOptionsForCreate {
      * Constructs a validated instance of {@link ValidationOptionsForCreate}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #ValidationOptionsForCreate(Consumer)} instead.
-     * @param levels var.name
+     * @param levels levels
      */
     @ApiStatus.Internal
     public ValidationOptionsForCreate(List<LevelsEnum> levels) {

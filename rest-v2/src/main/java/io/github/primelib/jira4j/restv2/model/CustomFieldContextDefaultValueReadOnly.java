@@ -58,7 +58,7 @@ public class CustomFieldContextDefaultValueReadOnly {
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #CustomFieldContextDefaultValueReadOnly(Consumer)} instead.
      * @param text The default text. The maximum length is 255 characters.
-     * @param type var.name
+     * @param type type
      */
     @ApiStatus.Internal
     public CustomFieldContextDefaultValueReadOnly(String text, String type) {

@@ -66,7 +66,7 @@ public class ScreenSchemeDetails {
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #ScreenSchemeDetails(Consumer)} instead.
      * @param description The description of the screen scheme. The maximum length is 255 characters.
      * @param name The name of the screen scheme. The name must be unique. The maximum length is 255 characters.
-     * @param screens var.name
+     * @param screens screens
      */
     @ApiStatus.Internal
     public ScreenSchemeDetails(String description, String name, ScreenSchemeDetailsScreens screens) {

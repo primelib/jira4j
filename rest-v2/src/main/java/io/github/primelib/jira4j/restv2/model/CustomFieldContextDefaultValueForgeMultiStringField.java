@@ -58,7 +58,7 @@ public class CustomFieldContextDefaultValueForgeMultiStringField {
      * Constructs a validated instance of {@link CustomFieldContextDefaultValueForgeMultiStringField}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #CustomFieldContextDefaultValueForgeMultiStringField(Consumer)} instead.
-     * @param type var.name
+     * @param type type
      * @param values List of string values. The maximum length for a value is 254 characters.
      */
     @ApiStatus.Internal

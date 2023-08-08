@@ -62,10 +62,10 @@ public class RichText {
      * Constructs a validated instance of {@link RichText}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #RichText(Consumer)} instead.
-     * @param empty var.name
-     * @param emptyAdf var.name
-     * @param finalised var.name
-     * @param valueSet var.name
+     * @param empty empty
+     * @param emptyAdf emptyAdf
+     * @param finalised finalised
+     * @param valueSet valueSet
      */
     @ApiStatus.Internal
     public RichText(Boolean empty, Boolean emptyAdf, Boolean finalised, Boolean valueSet) {

@@ -54,8 +54,8 @@ public class WorkflowUpdateValidateRequestBean {
      * Constructs a validated instance of {@link WorkflowUpdateValidateRequestBean}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #WorkflowUpdateValidateRequestBean(Consumer)} instead.
-     * @param payload var.name
-     * @param validationOptions var.name
+     * @param payload payload
+     * @param validationOptions validationOptions
      */
     @ApiStatus.Internal
     public WorkflowUpdateValidateRequestBean(WorkflowUpdateRequest payload, ValidationOptionsForUpdate validationOptions) {

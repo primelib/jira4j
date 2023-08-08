@@ -65,7 +65,7 @@ public class BulkIssuePropertyUpdateRequest {
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #BulkIssuePropertyUpdateRequest(Consumer)} instead.
      * @param expression EXPERIMENTAL. The Jira expression to calculate the value of the property. The value of the expression must be an object that can be converted to JSON, such as a number, boolean, string, list, or map. The context variables available to the expression are {@code issue} and {@code user}. Issues for which the expression returns a value whose JSON representation is longer than 32768 characters are ignored.
-     * @param filter var.name
+     * @param filter filter
      * @param value The value of the property. The value must be a [valid](https://tools.ietf.org/html/rfc4627), non-empty JSON blob. The maximum length is 32768 characters.
      */
     @ApiStatus.Internal

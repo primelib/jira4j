@@ -71,7 +71,7 @@ public class SecurityLevelMember {
      * Constructs a validated instance of {@link SecurityLevelMember}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #SecurityLevelMember(Consumer)} instead.
-     * @param holder var.name
+     * @param holder holder
      * @param id The ID of the issue security level member.
      * @param issueSecurityLevelId The ID of the issue security level.
      * @param issueSecuritySchemeId The ID of the issue security scheme.

@@ -73,7 +73,7 @@ public class WorkflowReferenceStatus {
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #WorkflowReferenceStatus(Consumer)} instead.
      * @param deprecated Indicates if the status is deprecated.
-     * @param layout var.name
+     * @param layout layout
      * @param properties The properties associated with the status.
      * @param statusReference The reference of the status.
      */

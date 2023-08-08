@@ -50,7 +50,7 @@ public class IssuesMetaBean {
      * Constructs a validated instance of {@link IssuesMetaBean}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #IssuesMetaBean(Consumer)} instead.
-     * @param jql var.name
+     * @param jql jql
      */
     @ApiStatus.Internal
     public IssuesMetaBean(IssuesJqlMetaDataBean jql) {

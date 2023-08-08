@@ -51,7 +51,7 @@ public class JqlFunctionPrecomputationUpdateRequestBean {
      * Constructs a validated instance of {@link JqlFunctionPrecomputationUpdateRequestBean}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #JqlFunctionPrecomputationUpdateRequestBean(Consumer)} instead.
-     * @param values var.name
+     * @param values values
      */
     @ApiStatus.Internal
     public JqlFunctionPrecomputationUpdateRequestBean(List<JqlFunctionPrecomputationUpdateBean> values) {

@@ -74,7 +74,7 @@ public class Screen {
      * @param description The description of the screen.
      * @param id The ID of the screen.
      * @param name The name of the screen.
-     * @param scope var.name
+     * @param scope scope
      */
     @ApiStatus.Internal
     public Screen(String description, Long id, String name, ScreenScope scope) {

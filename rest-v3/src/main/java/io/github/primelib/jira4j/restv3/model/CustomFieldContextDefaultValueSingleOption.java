@@ -66,7 +66,7 @@ public class CustomFieldContextDefaultValueSingleOption {
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #CustomFieldContextDefaultValueSingleOption(Consumer)} instead.
      * @param contextId The ID of the context.
      * @param optionId The ID of the default option.
-     * @param type var.name
+     * @param type type
      */
     @ApiStatus.Internal
     public CustomFieldContextDefaultValueSingleOption(String contextId, String optionId, String type) {

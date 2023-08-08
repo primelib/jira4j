@@ -65,7 +65,7 @@ public class CustomFieldContextDefaultValueMultipleVersionPicker {
      * Constructs a validated instance of {@link CustomFieldContextDefaultValueMultipleVersionPicker}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #CustomFieldContextDefaultValueMultipleVersionPicker(Consumer)} instead.
-     * @param type var.name
+     * @param type type
      * @param versionIds The IDs of the default versions.
      * @param versionOrder The order the pickable versions are displayed in. If not provided, the released-first order is used. Available version orders are {@code "releasedFirst"} and {@code "unreleasedFirst"}.
      */

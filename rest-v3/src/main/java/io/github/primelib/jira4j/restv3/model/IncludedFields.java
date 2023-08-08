@@ -59,9 +59,9 @@ public class IncludedFields {
      * Constructs a validated instance of {@link IncludedFields}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #IncludedFields(Consumer)} instead.
-     * @param actuallyIncluded var.name
-     * @param excluded var.name
-     * @param included var.name
+     * @param actuallyIncluded actuallyIncluded
+     * @param excluded excluded
+     * @param included included
      */
     @ApiStatus.Internal
     public IncludedFields(Set<String> actuallyIncluded, Set<String> excluded, Set<String> included) {

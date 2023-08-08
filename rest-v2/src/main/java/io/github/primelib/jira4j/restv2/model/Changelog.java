@@ -77,9 +77,9 @@ public class Changelog {
      * Constructs a validated instance of {@link Changelog}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #Changelog(Consumer)} instead.
-     * @param author var.name
+     * @param author author
      * @param created The date on which the change took place.
-     * @param historyMetadata var.name
+     * @param historyMetadata historyMetadata
      * @param id The ID of the changelog.
      * @param items The list of items changed.
      */

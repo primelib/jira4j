@@ -58,7 +58,7 @@ public class FieldConfigurationSchemeProjects {
      * Constructs a validated instance of {@link FieldConfigurationSchemeProjects}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #FieldConfigurationSchemeProjects(Consumer)} instead.
-     * @param fieldConfigurationScheme var.name
+     * @param fieldConfigurationScheme fieldConfigurationScheme
      * @param projectIds The IDs of projects using the field configuration scheme.
      */
     @ApiStatus.Internal

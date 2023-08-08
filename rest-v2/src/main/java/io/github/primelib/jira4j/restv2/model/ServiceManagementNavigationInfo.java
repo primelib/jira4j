@@ -58,9 +58,9 @@ public class ServiceManagementNavigationInfo {
      * Constructs a validated instance of {@link ServiceManagementNavigationInfo}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #ServiceManagementNavigationInfo(Consumer)} instead.
-     * @param queueCategory var.name
-     * @param queueId var.name
-     * @param queueName var.name
+     * @param queueCategory queueCategory
+     * @param queueId queueId
+     * @param queueName queueName
      */
     @ApiStatus.Internal
     public ServiceManagementNavigationInfo(String queueCategory, Long queueId, String queueName) {

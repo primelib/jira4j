@@ -141,13 +141,13 @@ public class Dashboard {
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #Dashboard(Consumer)} instead.
      * @param automaticRefreshMs The automatic refresh interval for the dashboard in milliseconds.
-     * @param description var.name
+     * @param description description
      * @param editPermissions The details of any edit share permissions for the dashboard.
      * @param id The ID of the dashboard.
      * @param isFavourite Whether the dashboard is selected as a favorite by the user.
      * @param isWritable Whether the current user has permission to edit the dashboard.
      * @param name The name of the dashboard.
-     * @param owner var.name
+     * @param owner owner
      * @param popularity The number of users who have this dashboard as a favorite.
      * @param rank The rank of this dashboard.
      * @param self The URL of these dashboard details.

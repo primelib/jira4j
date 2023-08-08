@@ -83,7 +83,7 @@ public class WorkflowCondition {
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #WorkflowCondition(Consumer)} instead.
      * @param configuration EXPERIMENTAL. The configuration of the transition rule.
-     * @param nodeType var.name
+     * @param nodeType nodeType
      * @param type The type of the transition rule.
      * @param conditions The list of workflow conditions.
      * @param operator The compound condition operator.

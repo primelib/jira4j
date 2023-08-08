@@ -60,7 +60,7 @@ public class NotificationSchemeScope {
      * Constructs a validated instance of {@link NotificationSchemeScope}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #NotificationSchemeScope(Consumer)} instead.
-     * @param project var.name
+     * @param project project
      * @param type The type of scope.
      */
     @ApiStatus.Internal

@@ -91,17 +91,17 @@ public class ProjectLandingPageInfo {
      * Constructs a validated instance of {@link ProjectLandingPageInfo}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #ProjectLandingPageInfo(Consumer)} instead.
-     * @param attributes var.name
-     * @param boardId var.name
-     * @param boardName var.name
-     * @param projectKey var.name
-     * @param projectType var.name
-     * @param queueCategory var.name
-     * @param queueId var.name
-     * @param queueName var.name
-     * @param simpleBoard var.name
-     * @param simplified var.name
-     * @param url var.name
+     * @param attributes attributes
+     * @param boardId boardId
+     * @param boardName boardName
+     * @param projectKey projectKey
+     * @param projectType projectType
+     * @param queueCategory queueCategory
+     * @param queueId queueId
+     * @param queueName queueName
+     * @param simpleBoard simpleBoard
+     * @param simplified simplified
+     * @param url url
      */
     @ApiStatus.Internal
     public ProjectLandingPageInfo(Map<String, String> attributes, Long boardId, String boardName, String projectKey, String projectType, String queueCategory, Long queueId, String queueName, Boolean simpleBoard, Boolean simplified, String url) {

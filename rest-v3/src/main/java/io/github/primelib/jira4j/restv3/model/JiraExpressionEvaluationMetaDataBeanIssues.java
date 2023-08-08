@@ -50,7 +50,7 @@ public class JiraExpressionEvaluationMetaDataBeanIssues {
      * Constructs a validated instance of {@link JiraExpressionEvaluationMetaDataBeanIssues}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #JiraExpressionEvaluationMetaDataBeanIssues(Consumer)} instead.
-     * @param jql var.name
+     * @param jql jql
      */
     @ApiStatus.Internal
     public JiraExpressionEvaluationMetaDataBeanIssues(IssuesJqlMetaDataBean jql) {

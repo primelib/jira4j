@@ -107,7 +107,7 @@ public class Attachment {
      * Constructs a validated instance of {@link Attachment}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #Attachment(Consumer)} instead.
-     * @param author var.name
+     * @param author author
      * @param content The content of the attachment.
      * @param created The datetime the attachment was created.
      * @param filename The file name of the attachment.

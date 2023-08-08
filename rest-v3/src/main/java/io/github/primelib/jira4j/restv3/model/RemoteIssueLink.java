@@ -83,10 +83,10 @@ public class RemoteIssueLink {
      * Constructs a validated instance of {@link RemoteIssueLink}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #RemoteIssueLink(Consumer)} instead.
-     * @param application var.name
+     * @param application application
      * @param globalId The global ID of the link, such as the ID of the item on the remote system.
      * @param id The ID of the link.
-     * @param object var.name
+     * @param object object
      * @param relationship Description of the relationship between the issue and the linked item.
      * @param self The URL of the link.
      */

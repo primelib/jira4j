@@ -54,7 +54,7 @@ public class ValidationOptionsForUpdate {
      * Constructs a validated instance of {@link ValidationOptionsForUpdate}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #ValidationOptionsForUpdate(Consumer)} instead.
-     * @param levels var.name
+     * @param levels levels
      */
     @ApiStatus.Internal
     public ValidationOptionsForUpdate(List<LevelsEnum> levels) {

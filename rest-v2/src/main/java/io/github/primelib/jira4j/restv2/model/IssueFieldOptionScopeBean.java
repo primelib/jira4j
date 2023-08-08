@@ -65,7 +65,7 @@ public class IssueFieldOptionScopeBean {
      * Constructs a validated instance of {@link IssueFieldOptionScopeBean}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #IssueFieldOptionScopeBean(Consumer)} instead.
-     * @param global var.name
+     * @param global global
      * @param projects DEPRECATED
      * @param projects2 Defines the projects in which the option is available and the behavior of the option within each project. Specify one object per project. The behavior of the option in a project context overrides the behavior in the global context.
      */

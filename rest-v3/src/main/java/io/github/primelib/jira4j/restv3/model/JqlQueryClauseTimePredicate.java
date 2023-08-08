@@ -60,7 +60,7 @@ public class JqlQueryClauseTimePredicate {
      * Constructs a validated instance of {@link JqlQueryClauseTimePredicate}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #JqlQueryClauseTimePredicate(Consumer)} instead.
-     * @param operand var.name
+     * @param operand operand
      * @param operator The operator between the field and the operand.
      */
     @ApiStatus.Internal

@@ -82,7 +82,7 @@ public class WorkflowValidationError {
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #WorkflowValidationError(Consumer)} instead.
      * @param code An error code.
-     * @param elementReference var.name
+     * @param elementReference elementReference
      * @param level The validation error level.
      * @param message An error message.
      * @param type The type of element the error or warning references.

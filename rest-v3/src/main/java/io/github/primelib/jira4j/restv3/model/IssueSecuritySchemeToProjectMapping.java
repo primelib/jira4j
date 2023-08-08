@@ -55,8 +55,8 @@ public class IssueSecuritySchemeToProjectMapping {
      * Constructs a validated instance of {@link IssueSecuritySchemeToProjectMapping}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #IssueSecuritySchemeToProjectMapping(Consumer)} instead.
-     * @param issueSecuritySchemeId var.name
-     * @param projectId var.name
+     * @param issueSecuritySchemeId issueSecuritySchemeId
+     * @param projectId projectId
      */
     @ApiStatus.Internal
     public IssueSecuritySchemeToProjectMapping(String issueSecuritySchemeId, String projectId) {

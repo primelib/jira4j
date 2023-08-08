@@ -51,7 +51,7 @@ public class MultipleCustomFieldValuesUpdateDetails {
      * Constructs a validated instance of {@link MultipleCustomFieldValuesUpdateDetails}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #MultipleCustomFieldValuesUpdateDetails(Consumer)} instead.
-     * @param updates var.name
+     * @param updates updates
      */
     @ApiStatus.Internal
     public MultipleCustomFieldValuesUpdateDetails(List<MultipleCustomFieldValuesUpdate> updates) {

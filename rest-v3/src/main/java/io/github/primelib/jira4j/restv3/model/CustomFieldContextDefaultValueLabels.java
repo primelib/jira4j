@@ -59,7 +59,7 @@ public class CustomFieldContextDefaultValueLabels {
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #CustomFieldContextDefaultValueLabels(Consumer)} instead.
      * @param labels The default labels value.
-     * @param type var.name
+     * @param type type
      */
     @ApiStatus.Internal
     public CustomFieldContextDefaultValueLabels(List<String> labels, String type) {

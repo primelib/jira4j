@@ -67,11 +67,11 @@ public class SimpleListWrapperApplicationRole {
      * Constructs a validated instance of {@link SimpleListWrapperApplicationRole}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #SimpleListWrapperApplicationRole(Consumer)} instead.
-     * @param callback var.name
-     * @param items var.name
-     * @param maxResults var.name
-     * @param pagingCallback var.name
-     * @param size var.name
+     * @param callback callback
+     * @param items items
+     * @param maxResults maxResults
+     * @param pagingCallback pagingCallback
+     * @param size size
      */
     @ApiStatus.Internal
     public SimpleListWrapperApplicationRole(Object callback, List<ApplicationRole> items, Integer maxResults, Object pagingCallback, Integer size) {

@@ -65,7 +65,7 @@ public class WorkflowRules {
      * Constructs a validated instance of {@link WorkflowRules}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #WorkflowRules(Consumer)} instead.
-     * @param conditionsTree var.name
+     * @param conditionsTree conditionsTree
      * @param postFunctions The workflow post functions.
      * @param validators The workflow validators.
      */

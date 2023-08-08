@@ -66,7 +66,7 @@ public class CustomFieldContextDefaultValueForgeStringField {
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #CustomFieldContextDefaultValueForgeStringField(Consumer)} instead.
      * @param contextId The ID of the context.
      * @param text The default text. The maximum length is 254 characters.
-     * @param type var.name
+     * @param type type
      */
     @ApiStatus.Internal
     public CustomFieldContextDefaultValueForgeStringField(String contextId, String text, String type) {

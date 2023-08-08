@@ -88,7 +88,7 @@ public class DashboardGadgetSettings {
      * @param color The color of the gadget. Should be one of {@code blue}, {@code red}, {@code yellow}, {@code green}, {@code cyan}, {@code purple}, {@code gray}, or {@code white}.
      * @param ignoreUriAndModuleKeyValidation Whether to ignore the validation of module key and URI. For example, when a gadget is created that is a part of an application that isn't installed.
      * @param moduleKey The module key of the gadget type. Can't be provided with {@code uri}.
-     * @param position var.name
+     * @param position position
      * @param title The title of the gadget.
      * @param uri The URI of the gadget type. Can't be provided with {@code moduleKey}.
      */

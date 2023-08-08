@@ -91,7 +91,7 @@ public class DashboardGadget {
      * @param color The color of the gadget. Should be one of {@code blue}, {@code red}, {@code yellow}, {@code green}, {@code cyan}, {@code purple}, {@code gray}, or {@code white}.
      * @param id The ID of the gadget instance.
      * @param moduleKey The module key of the gadget type.
-     * @param position var.name
+     * @param position position
      * @param title The title of the gadget.
      * @param uri The URI of the gadget type.
      */

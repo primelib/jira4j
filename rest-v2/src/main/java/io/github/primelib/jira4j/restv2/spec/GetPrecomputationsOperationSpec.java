@@ -61,7 +61,15 @@ public class GetPrecomputationsOperationSpec {
     private Integer maxResults;
 
     /**
-     * Not supported yet.
+     * [Order](#ordering) the results by a field:
+     *  *
+     * {@code functionKey} Sorts by the functionKey.
+     * *
+     * {@code used} Sorts by the used timestamp.
+     * *
+     * {@code created} Sorts by the created timestamp.
+     * *
+     * {@code updated} Sorts by the updated timestamp.
      */
     @Nullable 
     private String orderBy;
@@ -91,7 +99,7 @@ public class GetPrecomputationsOperationSpec {
      * @param functionKey          The function key in format:   *  Forge: {@code ari:cloud:ecosystem::extension/[App ID]/[Environment ID]/static/[Function key from manifest]}.  *  Connect: {@code [App key]__[Module key]}.
      * @param startAt              The index of the first item to return in a page of results (page offset).
      * @param maxResults           The maximum number of items to return per page.
-     * @param orderBy              Not supported yet.
+     * @param orderBy              [Order](#ordering) the results by a field:   *  {@code functionKey} Sorts by the functionKey.  *  {@code used} Sorts by the used timestamp.  *  {@code created} Sorts by the created timestamp.  *  {@code updated} Sorts by the updated timestamp.
      * @param filter               Not supported yet.
      */
     @ApiStatus.Internal

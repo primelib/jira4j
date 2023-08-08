@@ -67,7 +67,7 @@ public class ParsedJqlQuery {
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #ParsedJqlQuery(Consumer)} instead.
      * @param errors The list of syntax or validation errors.
      * @param query The JQL query that was parsed and validated.
-     * @param structure var.name
+     * @param structure structure
      */
     @ApiStatus.Internal
     public ParsedJqlQuery(Set<String> errors, String query, ParsedJqlQueryStructure structure) {

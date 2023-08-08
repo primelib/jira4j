@@ -118,8 +118,8 @@ public class FieldDetails {
      * @param name The name of the field.
      * @param navigable Whether the field can be used as a column on the issue navigator.
      * @param orderable Whether the content of the field can be used to order lists.
-     * @param schema var.name
-     * @param scope var.name
+     * @param schema schema
+     * @param scope scope
      * @param searchable Whether the content of the field can be searched.
      */
     @ApiStatus.Internal

@@ -74,10 +74,10 @@ public class IssueLink {
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #IssueLink(Consumer)} instead.
      * @param id The ID of the issue link.
-     * @param inwardIssue var.name
-     * @param outwardIssue var.name
+     * @param inwardIssue inwardIssue
+     * @param outwardIssue outwardIssue
      * @param self The URL of the issue link.
-     * @param type var.name
+     * @param type type
      */
     @ApiStatus.Internal
     public IssueLink(String id, IssueLinkInwardIssue inwardIssue, IssueLinkOutwardIssue outwardIssue, URI self, IssueLinkType type) {

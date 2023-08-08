@@ -74,7 +74,7 @@ public class CustomFieldContextDefaultValueCascadingOption {
      * @param cascadingOptionId The ID of the default cascading option.
      * @param contextId The ID of the context.
      * @param optionId The ID of the default option.
-     * @param type var.name
+     * @param type type
      */
     @ApiStatus.Internal
     public CustomFieldContextDefaultValueCascadingOption(String cascadingOptionId, String contextId, String optionId, String type) {

@@ -116,7 +116,7 @@ public class AttachmentMetadata {
      * Constructs a validated instance of {@link AttachmentMetadata}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #AttachmentMetadata(Consumer)} instead.
-     * @param author var.name
+     * @param author author
      * @param content The URL of the attachment.
      * @param created The datetime the attachment was created.
      * @param filename The name of the attachment file.

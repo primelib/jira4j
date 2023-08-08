@@ -68,7 +68,7 @@ public class FieldChangedClause {
      * Constructs a validated instance of {@link FieldChangedClause}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #FieldChangedClause(Consumer)} instead.
-     * @param field var.name
+     * @param field field
      * @param operator The operator applied to the field.
      * @param predicates The list of time predicates.
      */

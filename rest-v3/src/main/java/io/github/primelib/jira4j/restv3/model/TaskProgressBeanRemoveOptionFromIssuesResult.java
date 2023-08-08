@@ -145,7 +145,7 @@ public class TaskProgressBeanRemoveOptionFromIssuesResult {
      * @param lastUpdate A timestamp recording when the task progress was last updated.
      * @param message Information about the progress of the task.
      * @param progress The progress of the task, as a percentage complete.
-     * @param result var.name
+     * @param result result
      * @param self The URL of the task.
      * @param started A timestamp recording when the task was started.
      * @param status The status of the task.

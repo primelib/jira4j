@@ -105,9 +105,9 @@ public class JiraExpressionEvalRequestBeanContext {
      * @param board The ID of the board that is available under the {@code board} variable when evaluating the expression.
      * @param custom Custom context variables and their types. These variable types are available for use in a custom context:   *  {@code user}: A [user](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#user) specified as an Atlassian account ID.  *  {@code issue}: An [issue](https://developer.atlassian.com/cloud/jira/platform/jira-expressions-type-reference#issue) specified by ID or key. All the fields of the issue object are available in the Jira expression.  *  {@code json}: A JSON object containing custom content.  *  {@code list}: A JSON list of {@code user}, {@code issue}, or {@code json} variable types.
      * @param customerRequest The ID of the customer request that is available under the {@code customerRequest} variable when evaluating the expression. This is the same as the ID of the underlying Jira issue, but the customer request context variable will have a different type.
-     * @param issue var.name
-     * @param issues var.name
-     * @param project var.name
+     * @param issue issue
+     * @param issues issues
+     * @param project project
      * @param serviceDesk The ID of the service desk that is available under the {@code serviceDesk} variable when evaluating the expression.
      * @param sprint The ID of the sprint that is available under the {@code sprint} variable when evaluating the expression.
      */

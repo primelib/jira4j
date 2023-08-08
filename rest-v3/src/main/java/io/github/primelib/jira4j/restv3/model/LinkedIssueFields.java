@@ -73,12 +73,12 @@ public class LinkedIssueFields {
      * Constructs a validated instance of {@link LinkedIssueFields}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #LinkedIssueFields(Consumer)} instead.
-     * @param assignee var.name
-     * @param issueType var.name
-     * @param priority var.name
-     * @param status var.name
+     * @param assignee assignee
+     * @param issueType issueType
+     * @param priority priority
+     * @param status status
      * @param summary The summary description of the linked issue.
-     * @param timetracking var.name
+     * @param timetracking timetracking
      */
     @ApiStatus.Internal
     public LinkedIssueFields(FieldsAssignee assignee, FieldsIssueType issueType, FieldsPriority priority, FieldsStatus status, String summary, FieldsTimetracking timetracking) {

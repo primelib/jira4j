@@ -57,7 +57,7 @@ public class RemoteObjectStatus {
      * Constructs a validated instance of {@link RemoteObjectStatus}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #RemoteObjectStatus(Consumer)} instead.
-     * @param icon var.name
+     * @param icon icon
      * @param resolved Whether the item is resolved. If set to "true", the link to the issue is displayed in a strikethrough font, otherwise the link displays in normal font.
      */
     @ApiStatus.Internal

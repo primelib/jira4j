@@ -44,6 +44,7 @@ import io.github.primelib.jira4j.restv2.model.DefaultWorkflow;
 import io.github.primelib.jira4j.restv2.model.DeprecatedWorkflow;
 import io.github.primelib.jira4j.restv2.model.EntityProperty;
 import io.github.primelib.jira4j.restv2.model.ErrorCollection;
+import io.github.primelib.jira4j.restv2.model.ExportArchivedIssuesTaskProgressResponse;
 import io.github.primelib.jira4j.restv2.model.FailedWebhooks;
 import io.github.primelib.jira4j.restv2.model.FieldConfiguration;
 import io.github.primelib.jira4j.restv2.model.FieldConfigurationDetails;
@@ -55,6 +56,7 @@ import io.github.primelib.jira4j.restv2.model.FoundUsers;
 import io.github.primelib.jira4j.restv2.model.FoundUsersAndGroups;
 import io.github.primelib.jira4j.restv2.model.Group;
 import io.github.primelib.jira4j.restv2.model.GroupName;
+import io.github.primelib.jira4j.restv2.model.IssueArchivalSyncResponse;
 import io.github.primelib.jira4j.restv2.model.IssueBean;
 import io.github.primelib.jira4j.restv2.model.IssueCreateMetadata;
 import io.github.primelib.jira4j.restv2.model.IssueEntityProperties;
@@ -247,6 +249,8 @@ import io.github.primelib.jira4j.restv2.spec.AddonPropertiesResourcePutAppProper
 import io.github.primelib.jira4j.restv2.spec.AnalyseExpressionOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.AppIssueFieldValueUpdateResourceUpdateIssueFieldsPutOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.AppendMappingsForIssueTypeScreenSchemeOperationSpec;
+import io.github.primelib.jira4j.restv2.spec.ArchiveIssuesOperationSpec;
+import io.github.primelib.jira4j.restv2.spec.ArchiveIssuesAsyncOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.ArchiveProjectOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.AssignFieldConfigurationSchemeToProjectOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.AssignIssueOperationSpec;
@@ -372,6 +376,7 @@ import io.github.primelib.jira4j.restv2.spec.EditIssueOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.EvaluateJiraExpressionOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.ExpandAttachmentForHumansOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.ExpandAttachmentForMachinesOperationSpec;
+import io.github.primelib.jira4j.restv2.spec.ExportArchivedIssuesOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.FindAssignableUsersOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.FindBulkAssignableUsersOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.FindGroupsOperationSpec;
@@ -644,6 +649,7 @@ import io.github.primelib.jira4j.restv2.spec.SetWorklogPropertyOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.StoreAvatarOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.ToggleFeatureForProjectOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.TrashCustomFieldOperationSpec;
+import io.github.primelib.jira4j.restv2.spec.UnarchiveIssuesOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.UpdateCommentOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.UpdateComponentOperationSpec;
 import io.github.primelib.jira4j.restv2.spec.UpdateCustomFieldOperationSpec;
@@ -1659,6 +1665,58 @@ public class JiraRESTV2AsyncConsumerApi {
     public CompletableFuture<Object> appendMappingsForIssueTypeScreenScheme(Consumer<AppendMappingsForIssueTypeScreenSchemeOperationSpec> spec) {
         AppendMappingsForIssueTypeScreenSchemeOperationSpec r = new AppendMappingsForIssueTypeScreenSchemeOperationSpec(spec);
         return api.appendMappingsForIssueTypeScreenScheme(r.issueTypeScreenSchemeId(), r.issueTypeScreenSchemeMappingDetails());
+    }
+
+    /**
+     * Archive issue(s) by issue ID/key
+     * <p>
+     * Enables admins to archive up to 1000 issues in a single request using issue ID/key, returning details of the issue(s) archived in the process and the errors encountered, if any.
+     * **Note that:**
+     *  *
+     * you can't archive subtasks directly, only through their parent issues
+     * *
+     * you can only archive issues from software, service management, and business projects
+     * **[Permissions](#permissions) required:** Jira admin or site admin: [global permission](https://confluence.atlassian.com/x/x4dKLg)
+     * **License required:** Premium or Enterprise
+     * **Signed-in users only:** This API can't be accessed anonymously.
+     * 
+     *  
+     * Authentication - Required Scopes: [write:jira-work]
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueArchivalSyncRequest: Contains a list of issue keys or IDs to be archived.</li>
+     * </ul>
+     */
+    public CompletableFuture<IssueArchivalSyncResponse> archiveIssues(Consumer<ArchiveIssuesOperationSpec> spec) {
+        ArchiveIssuesOperationSpec r = new ArchiveIssuesOperationSpec(spec);
+        return api.archiveIssues(r.issueArchivalSyncRequest());
+    }
+
+    /**
+     * Archive issue(s) by JQL
+     * <p>
+     * Enables admins to archive up to 100,000 issues in a single request using JQL, returning the URL to check the status of the submitted request.
+     * You can use the [get task](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-tasks/#api-rest-api-3-task-taskid-get) and [cancel task](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-tasks/#api-rest-api-3-task-taskid-cancel-post) APIs to manage the request.
+     * **Note that:**
+     *  *
+     * you can't archive subtasks directly, only through their parent issues
+     * *
+     * you can only archive issues from software, service management, and business projects
+     * **[Permissions](#permissions) required:** Jira admin or site admin: [global permission](https://confluence.atlassian.com/x/x4dKLg)
+     * **License required:** Premium or Enterprise
+     * **Signed-in users only:** This API can't be accessed anonymously.
+     * **Rate limiting:** Only a single request per user can be active at any given time.
+     * 
+     *  
+     * Authentication - Required Scopes: [write:jira-work]
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>archiveIssueAsyncRequest: A JQL query specifying the issues to archive. Note that subtasks can only be archived through their parent issues.</li>
+     * </ul>
+     */
+    public CompletableFuture<String> archiveIssuesAsync(Consumer<ArchiveIssuesAsyncOperationSpec> spec) {
+        ArchiveIssuesAsyncOperationSpec r = new ArchiveIssuesAsyncOperationSpec(spec);
+        return api.archiveIssuesAsync(r.archiveIssueAsyncRequest());
     }
 
     /**
@@ -5319,6 +5377,7 @@ public class JiraRESTV2AsyncConsumerApi {
     /**
      * Delete priority
      * <p>
+     * *Deprecated: please refer to the* [changelog](https://developer.atlassian.com/changelog/#CHANGE-1066) *for more details.*
      * Deletes an issue priority.
      * This operation is [asynchronous](#async). Follow the {@code location} link in the response to determine the status of the task and use [Get task](#api-rest-api-2-task-taskId-get) to obtain subsequent updates.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
@@ -5328,7 +5387,9 @@ public class JiraRESTV2AsyncConsumerApi {
      *   <li>id: The ID of the issue priority.</li>
      *   <li>replaceWith: The ID of the issue priority that will replace the currently selected resolution.</li>
      * </ul>
+     * @deprecated
      */
+    @Deprecated
     public CompletableFuture<Void> deletePriority(Consumer<DeletePriorityOperationSpec> spec) {
         DeletePriorityOperationSpec r = new DeletePriorityOperationSpec(spec);
         return api.deletePriority(r.id(), r.replaceWith());
@@ -6057,6 +6118,28 @@ public class JiraRESTV2AsyncConsumerApi {
     public CompletableFuture<AttachmentArchiveImpl> expandAttachmentForMachines(Consumer<ExpandAttachmentForMachinesOperationSpec> spec) {
         ExpandAttachmentForMachinesOperationSpec r = new ExpandAttachmentForMachinesOperationSpec(spec);
         return api.expandAttachmentForMachines(r.id());
+    }
+
+    /**
+     * Export archived issue(s)
+     * <p>
+     * Enables admins to retrieve details of all archived issues. Upon a successful request, the admin who submitted it will receive an email with a link to download a CSV file with the issue details.
+     * Note that this API only exports the values of system fields and archival-specific fields ({@code ArchivedBy} and {@code ArchivedDate}). Custom fields aren't supported.
+     * **[Permissions](#permissions) required:** Jira admin or site admin: [global permission](https://confluence.atlassian.com/x/x4dKLg)
+     * **License required:** Premium or Enterprise
+     * **Signed-in users only:** This API can't be accessed anonymously.
+     * **Rate limiting:** Only a single request can be active at any given time.
+     * 
+     *  
+     * Authentication - Required Scopes: [read:jira-work]
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>archivedIssuesFilterRequest: You can filter the issues in your request by the {@code projects}, {@code archivedBy}, {@code archivedDate}, {@code issueTypes}, and {@code reporters} fields. All filters are optional. If you don't provide any filters, you'll get a list of up to one million archived issues.</li>
+     * </ul>
+     */
+    public CompletableFuture<ExportArchivedIssuesTaskProgressResponse> exportArchivedIssues(Consumer<ExportArchivedIssuesOperationSpec> spec) {
+        ExportArchivedIssuesOperationSpec r = new ExportArchivedIssuesOperationSpec(spec);
+        return api.exportArchivedIssues(r.archivedIssuesFilterRequest());
     }
 
     /**
@@ -9286,7 +9369,7 @@ public class JiraRESTV2AsyncConsumerApi {
      *   <li>functionKey: The function key in format:   *  Forge: {@code ari:cloud:ecosystem::extension/[App ID]/[Environment ID]/static/[Function key from manifest]}.  *  Connect: {@code [App key]__[Module key]}.</li>
      *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
      *   <li>maxResults: The maximum number of items to return per page.</li>
-     *   <li>orderBy: Not supported yet.</li>
+     *   <li>orderBy: [Order](#ordering) the results by a field:   *  {@code functionKey} Sorts by the functionKey.  *  {@code used} Sorts by the used timestamp.  *  {@code created} Sorts by the created timestamp.  *  {@code updated} Sorts by the updated timestamp.</li>
      *   <li>filter: Not supported yet.</li>
      * </ul>
      */
@@ -10601,9 +10684,9 @@ public class JiraRESTV2AsyncConsumerApi {
      *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
      *   <li>maxResults: The maximum number of items to return per page.</li>
      *   <li>keys: The transition rule class keys, as defined in the Connect or the Forge app descriptor, of the transition rules to return.</li>
-     *   <li>workflowNames: EXPERIMENTAL: The list of workflow names to filter by.</li>
-     *   <li>withTags: EXPERIMENTAL: The list of {@code tags} to filter by.</li>
-     *   <li>draft: EXPERIMENTAL: Whether draft or published workflows are returned. If not provided, both workflow types are returned.</li>
+     *   <li>workflowNames: The list of workflow names to filter by.</li>
+     *   <li>withTags: The list of {@code tags} to filter by.</li>
+     *   <li>draft: Whether draft or published workflows are returned. If not provided, both workflow types are returned.</li>
      *   <li>expand: Use [expand](#expansion) to include additional information in the response. This parameter accepts {@code transition}, which, for each rule, returns information about the transition the rule is assigned to.</li>
      * </ul>
      */
@@ -11684,6 +11767,8 @@ public class JiraRESTV2AsyncConsumerApi {
      *  *
      * a list of priority IDs. Any invalid priority IDs are ignored.
      * *
+     * a list of project IDs. Only priorities that are available in these projects will be returned. Any invalid project IDs are ignored.
+     * *
      * whether the field configuration is a default. This returns priorities from company-managed (classic) projects only, as there is no concept of default priorities in team-managed projects.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [manage:jira-configuration]
@@ -11692,12 +11777,13 @@ public class JiraRESTV2AsyncConsumerApi {
      *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
      *   <li>maxResults: The maximum number of items to return per page.</li>
      *   <li>id: The list of priority IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code id=2&amp;id=3}.</li>
+     *   <li>projectId: The list of projects IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code projectid=10010&amp;projectid=10111}.</li>
      *   <li>onlyDefault: Whether only the default priority is returned.</li>
      * </ul>
      */
     public CompletableFuture<PageBeanPriority> searchPriorities(Consumer<SearchPrioritiesOperationSpec> spec) {
         SearchPrioritiesOperationSpec r = new SearchPrioritiesOperationSpec(spec);
-        return api.searchPriorities(r.startAt(), r.maxResults(), r.id(), r.onlyDefault());
+        return api.searchPriorities(r.startAt(), r.maxResults(), r.id(), r.projectId(), r.onlyDefault());
     }
 
     /**
@@ -12495,6 +12581,31 @@ public class JiraRESTV2AsyncConsumerApi {
     public CompletableFuture<Object> trashCustomField(Consumer<TrashCustomFieldOperationSpec> spec) {
         TrashCustomFieldOperationSpec r = new TrashCustomFieldOperationSpec(spec);
         return api.trashCustomField(r.id());
+    }
+
+    /**
+     * Unarchive issue(s) by issue keys/ID
+     * <p>
+     * Enables admins to unarchive up to 1000 issues in a single request using issue ID/key, returning details of the issue(s) unarchived in the process and the errors encountered, if any.
+     * **Note that:**
+     *  *
+     * you can't unarchive subtasks directly, only through their parent issues
+     * *
+     * you can only unarchive issues from software, service management, and business projects
+     * **[Permissions](#permissions) required:** Jira admin or site admin: [global permission](https://confluence.atlassian.com/x/x4dKLg)
+     * **License required:** Premium or Enterprise
+     * **Signed-in users only:** This API can't be accessed anonymously.
+     * 
+     *  
+     * Authentication - Required Scopes: [write:jira-work]
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>issueArchivalSyncRequest: Contains a list of issue keys or IDs to be unarchived.</li>
+     * </ul>
+     */
+    public CompletableFuture<IssueArchivalSyncResponse> unarchiveIssues(Consumer<UnarchiveIssuesOperationSpec> spec) {
+        UnarchiveIssuesOperationSpec r = new UnarchiveIssuesOperationSpec(spec);
+        return api.unarchiveIssues(r.issueArchivalSyncRequest());
     }
 
     /**
@@ -13319,14 +13430,14 @@ public class JiraRESTV2AsyncConsumerApi {
      * [conditions](https://developer.atlassian.com/cloud/jira/platform/modules/workflow-condition/)
      * *
      * [validators](https://developer.atlassian.com/cloud/jira/platform/modules/workflow-validator/)
-     * Only rules created by the calling Connect app can be updated.
+     * Only rules created by the calling [Connect](https://developer.atlassian.com/cloud/jira/platform/index/#connect-apps) or [Forge](https://developer.atlassian.com/cloud/jira/platform/index/#forge-apps) app can be updated.
      * To assist with app migration, this operation can be used to:
      *  *
      * Disable a rule.
      * *
      * Add a {@code tag}. Use this to filter rules in the [Get workflow transition rule configurations](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-workflow-transition-rules/#api-rest-api-3-workflow-rule-config-get).
      * Rules are enabled if the {@code disabled} parameter is not provided.
-     * **[Permissions](#permissions) required:** Only Connect apps can use this operation.
+     * **[Permissions](#permissions) required:** Only [Connect](https://developer.atlassian.com/cloud/jira/platform/index/#connect-apps) or [Forge](https://developer.atlassian.com/cloud/jira/platform/index/#forge-apps) apps can use this operation.
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param spec a consumer that creates the payload for this operation. Supports the following properties:
      * <ul>
