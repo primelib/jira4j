@@ -58,10 +58,10 @@ public class ChangelogHistoryMetadata {
     protected String activityDescriptionKey;
 
     @JsonProperty("actor")
-    protected HistoryMetadataActor actor;
+    protected HistoryMetadataParticipant actor;
 
     @JsonProperty("cause")
-    protected HistoryMetadataCause cause;
+    protected HistoryMetadataParticipant cause;
 
     /**
      * The description of the history record.
@@ -94,7 +94,7 @@ public class ChangelogHistoryMetadata {
     protected Map<String, String> extraData;
 
     @JsonProperty("generator")
-    protected HistoryMetadataGenerator generator;
+    protected HistoryMetadataParticipant generator;
 
     /**
      * The type of the history record.
@@ -128,7 +128,7 @@ public class ChangelogHistoryMetadata {
      * @param type The type of the history record.
      */
     @ApiStatus.Internal
-    public ChangelogHistoryMetadata(String activityDescription, String activityDescriptionKey, HistoryMetadataActor actor, HistoryMetadataCause cause, String description, String descriptionKey, String emailDescription, String emailDescriptionKey, Map<String, String> extraData, HistoryMetadataGenerator generator, String type) {
+    public ChangelogHistoryMetadata(String activityDescription, String activityDescriptionKey, HistoryMetadataParticipant actor, HistoryMetadataParticipant cause, String description, String descriptionKey, String emailDescription, String emailDescriptionKey, Map<String, String> extraData, HistoryMetadataParticipant generator, String type) {
         this.activityDescription = activityDescription;
         this.activityDescriptionKey = activityDescriptionKey;
         this.actor = actor;

@@ -43,7 +43,7 @@ public class WorkflowSchemeAssociations {
     protected List<String> projectIds;
 
     @JsonProperty("workflowScheme")
-    protected WorkflowSchemeAssociationsWorkflowScheme workflowScheme;
+    protected WorkflowScheme workflowScheme;
 
     /**
      * Constructs a validated instance of {@link WorkflowSchemeAssociations}.
@@ -62,7 +62,7 @@ public class WorkflowSchemeAssociations {
      * @param workflowScheme workflowScheme
      */
     @ApiStatus.Internal
-    public WorkflowSchemeAssociations(List<String> projectIds, WorkflowSchemeAssociationsWorkflowScheme workflowScheme) {
+    public WorkflowSchemeAssociations(List<String> projectIds, WorkflowScheme workflowScheme) {
         this.projectIds = projectIds;
         this.workflowScheme = workflowScheme;
     }

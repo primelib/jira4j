@@ -37,7 +37,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class IssueTypeScreenSchemesProjects {
 
     @JsonProperty("issueTypeScreenScheme")
-    protected IssueTypeScreenSchemesProjectsIssueTypeScreenScheme issueTypeScreenScheme;
+    protected IssueTypeScreenScheme issueTypeScreenScheme;
 
     /**
      * The IDs of the projects using the issue type screen scheme.
@@ -62,7 +62,7 @@ public class IssueTypeScreenSchemesProjects {
      * @param projectIds The IDs of the projects using the issue type screen scheme.
      */
     @ApiStatus.Internal
-    public IssueTypeScreenSchemesProjects(IssueTypeScreenSchemesProjectsIssueTypeScreenScheme issueTypeScreenScheme, List<String> projectIds) {
+    public IssueTypeScreenSchemesProjects(IssueTypeScreenScheme issueTypeScreenScheme, List<String> projectIds) {
         this.issueTypeScreenScheme = issueTypeScreenScheme;
         this.projectIds = projectIds;
     }

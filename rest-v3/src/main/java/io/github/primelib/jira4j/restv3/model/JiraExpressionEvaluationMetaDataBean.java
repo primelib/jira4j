@@ -36,10 +36,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class JiraExpressionEvaluationMetaDataBean {
 
     @JsonProperty("complexity")
-    protected JiraExpressionEvaluationMetaDataBeanComplexity complexity;
+    protected JiraExpressionsComplexityBean complexity;
 
     @JsonProperty("issues")
-    protected JiraExpressionEvaluationMetaDataBeanIssues issues;
+    protected IssuesMetaBean issues;
 
     /**
      * Constructs a validated instance of {@link JiraExpressionEvaluationMetaDataBean}.
@@ -58,7 +58,7 @@ public class JiraExpressionEvaluationMetaDataBean {
      * @param issues issues
      */
     @ApiStatus.Internal
-    public JiraExpressionEvaluationMetaDataBean(JiraExpressionEvaluationMetaDataBeanComplexity complexity, JiraExpressionEvaluationMetaDataBeanIssues issues) {
+    public JiraExpressionEvaluationMetaDataBean(JiraExpressionsComplexityBean complexity, IssuesMetaBean issues) {
         this.complexity = complexity;
         this.issues = issues;
     }

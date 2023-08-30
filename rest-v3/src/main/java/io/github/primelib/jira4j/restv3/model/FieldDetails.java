@@ -87,10 +87,10 @@ public class FieldDetails {
     protected Boolean orderable;
 
     @JsonProperty("schema")
-    protected FieldDetailsSchema schema;
+    protected JsonTypeBean schema;
 
     @JsonProperty("scope")
-    protected FieldDetailsScope scope;
+    protected Scope scope;
 
     /**
      * Whether the content of the field can be searched.
@@ -123,7 +123,7 @@ public class FieldDetails {
      * @param searchable Whether the content of the field can be searched.
      */
     @ApiStatus.Internal
-    public FieldDetails(Set<String> clauseNames, Boolean custom, String id, String key, String name, Boolean navigable, Boolean orderable, FieldDetailsSchema schema, FieldDetailsScope scope, Boolean searchable) {
+    public FieldDetails(Set<String> clauseNames, Boolean custom, String id, String key, String name, Boolean navigable, Boolean orderable, JsonTypeBean schema, Scope scope, Boolean searchable) {
         this.clauseNames = clauseNames;
         this.custom = custom;
         this.id = id;

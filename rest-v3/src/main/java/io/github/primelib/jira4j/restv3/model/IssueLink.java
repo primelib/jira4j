@@ -46,10 +46,10 @@ public class IssueLink {
     protected String id;
 
     @JsonProperty("inwardIssue")
-    protected IssueLinkInwardIssue inwardIssue;
+    protected LinkedIssue inwardIssue;
 
     @JsonProperty("outwardIssue")
-    protected IssueLinkOutwardIssue outwardIssue;
+    protected LinkedIssue outwardIssue;
 
     /**
      * The URL of the issue link.
@@ -80,7 +80,7 @@ public class IssueLink {
      * @param type type
      */
     @ApiStatus.Internal
-    public IssueLink(String id, IssueLinkInwardIssue inwardIssue, IssueLinkOutwardIssue outwardIssue, URI self, IssueLinkType type) {
+    public IssueLink(String id, LinkedIssue inwardIssue, LinkedIssue outwardIssue, URI self, IssueLinkType type) {
         this.id = id;
         this.inwardIssue = inwardIssue;
         this.outwardIssue = outwardIssue;

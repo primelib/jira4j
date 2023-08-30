@@ -37,7 +37,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class NotificationSchemeEventDetails {
 
     @JsonProperty("event")
-    protected NotificationSchemeEventDetailsEvent event;
+    protected NotificationSchemeEventTypeId event;
 
     /**
      * The list of notifications mapped to a specified event.
@@ -62,7 +62,7 @@ public class NotificationSchemeEventDetails {
      * @param notifications The list of notifications mapped to a specified event.
      */
     @ApiStatus.Internal
-    public NotificationSchemeEventDetails(NotificationSchemeEventDetailsEvent event, List<NotificationSchemeNotificationDetails> notifications) {
+    public NotificationSchemeEventDetails(NotificationSchemeEventTypeId event, List<NotificationSchemeNotificationDetails> notifications) {
         this.event = event;
         this.notifications = notifications;
     }

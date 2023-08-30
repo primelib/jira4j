@@ -56,7 +56,7 @@ public class NotificationEvent {
     protected String name;
 
     @JsonProperty("templateEvent")
-    protected NotificationEventTemplateEvent templateEvent;
+    protected NotificationEvent templateEvent;
 
     /**
      * Constructs a validated instance of {@link NotificationEvent}.
@@ -77,7 +77,7 @@ public class NotificationEvent {
      * @param templateEvent templateEvent
      */
     @ApiStatus.Internal
-    public NotificationEvent(String description, Long id, String name, NotificationEventTemplateEvent templateEvent) {
+    public NotificationEvent(String description, Long id, String name, NotificationEvent templateEvent) {
         this.description = description;
         this.id = id;
         this.name = name;

@@ -72,6 +72,18 @@ public class EditIssueOperationSpec {
     private Boolean overrideEditableFlag;
 
     /**
+     * Whether the response should contain the issue with fields edited in this request. The returned issue will have the same format as in the [Get issue API](#api-rest-api-3-issue-issueidorkey-get).
+     */
+    @Nullable 
+    private Boolean returnIssue;
+
+    /**
+     * The Get issue API expand parameter to use in the response if the {@code returnIssue} parameter is {@code true}.
+     */
+    @Nullable 
+    private String expand;
+
+    /**
      * Constructs a validated instance of {@link EditIssueOperationSpec}.
      *
      * @param spec the specification to process
@@ -92,14 +104,18 @@ public class EditIssueOperationSpec {
      * @param notifyUsers          Whether a notification email about the issue update is sent to all watchers. To disable the notification, administer Jira or administer project permissions are required. If the user doesn't have the necessary permission the request is ignored.
      * @param overrideScreenSecurity Whether screen security is overridden to enable hidden fields to be edited. Available to Connect app users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) and Forge apps acting on behalf of users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * @param overrideEditableFlag Whether screen security is overridden to enable uneditable fields to be edited. Available to Connect app users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) and Forge apps acting on behalf of users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
+     * @param returnIssue          Whether the response should contain the issue with fields edited in this request. The returned issue will have the same format as in the [Get issue API](#api-rest-api-3-issue-issueidorkey-get).
+     * @param expand               The Get issue API expand parameter to use in the response if the {@code returnIssue} parameter is {@code true}.
      */
     @ApiStatus.Internal
-    public EditIssueOperationSpec(String issueIdOrKey, IssueUpdateDetails issueUpdateDetails, Boolean notifyUsers, Boolean overrideScreenSecurity, Boolean overrideEditableFlag) {
+    public EditIssueOperationSpec(String issueIdOrKey, IssueUpdateDetails issueUpdateDetails, Boolean notifyUsers, Boolean overrideScreenSecurity, Boolean overrideEditableFlag, Boolean returnIssue, String expand) {
         this.issueIdOrKey = issueIdOrKey;
         this.issueUpdateDetails = issueUpdateDetails;
         this.notifyUsers = notifyUsers;
         this.overrideScreenSecurity = overrideScreenSecurity;
         this.overrideEditableFlag = overrideEditableFlag;
+        this.returnIssue = returnIssue;
+        this.expand = expand;
 
         if (VALIDATION_ENABLED)
             validate();

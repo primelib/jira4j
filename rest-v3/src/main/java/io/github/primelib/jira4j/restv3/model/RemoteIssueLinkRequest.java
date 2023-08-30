@@ -38,7 +38,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class RemoteIssueLinkRequest {
 
     @JsonProperty("application")
-    protected RemoteIssueLinkRequestApplication application;
+    protected Application application;
 
     /**
      * An identifier for the remote item in the remote system. For example, the global ID for a remote item in Confluence would consist of the app ID and page ID, like this: {@code appId=456&amp;pageId=123}.
@@ -49,7 +49,7 @@ public class RemoteIssueLinkRequest {
     protected String globalId;
 
     @JsonProperty("object")
-    protected RemoteIssueLinkObject object;
+    protected RemoteObject object;
 
     /**
      * Description of the relationship between the issue and the linked item. If not set, the relationship description "links to" is used in Jira.
@@ -76,7 +76,7 @@ public class RemoteIssueLinkRequest {
      * @param relationship Description of the relationship between the issue and the linked item. If not set, the relationship description "links to" is used in Jira.
      */
     @ApiStatus.Internal
-    public RemoteIssueLinkRequest(RemoteIssueLinkRequestApplication application, String globalId, RemoteIssueLinkObject object, String relationship) {
+    public RemoteIssueLinkRequest(Application application, String globalId, RemoteObject object, String relationship) {
         this.application = application;
         this.globalId = globalId;
         this.object = object;

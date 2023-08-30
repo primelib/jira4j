@@ -37,7 +37,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class IssueTypeSchemeProjects {
 
     @JsonProperty("issueTypeScheme")
-    protected IssueTypeSchemeProjectsIssueTypeScheme issueTypeScheme;
+    protected IssueTypeScheme issueTypeScheme;
 
     /**
      * The IDs of the projects using the issue type scheme.
@@ -62,7 +62,7 @@ public class IssueTypeSchemeProjects {
      * @param projectIds The IDs of the projects using the issue type scheme.
      */
     @ApiStatus.Internal
-    public IssueTypeSchemeProjects(IssueTypeSchemeProjectsIssueTypeScheme issueTypeScheme, List<String> projectIds) {
+    public IssueTypeSchemeProjects(IssueTypeScheme issueTypeScheme, List<String> projectIds) {
         this.issueTypeScheme = issueTypeScheme;
         this.projectIds = projectIds;
     }

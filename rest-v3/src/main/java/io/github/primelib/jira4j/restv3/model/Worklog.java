@@ -116,7 +116,7 @@ public class Worklog {
     protected OffsetDateTime updated;
 
     @JsonProperty("visibility")
-    protected WorklogVisibility visibility;
+    protected Visibility visibility;
 
     /**
      * Constructs a validated instance of {@link Worklog}.
@@ -146,7 +146,7 @@ public class Worklog {
      * @param visibility visibility
      */
     @ApiStatus.Internal
-    public Worklog(WorklogAuthor author, Object comment, OffsetDateTime created, String id, String issueId, List<EntityProperty> properties, URI self, OffsetDateTime started, String timeSpent, Long timeSpentSeconds, WorklogUpdateAuthor updateAuthor, OffsetDateTime updated, WorklogVisibility visibility) {
+    public Worklog(WorklogAuthor author, Object comment, OffsetDateTime created, String id, String issueId, List<EntityProperty> properties, URI self, OffsetDateTime started, String timeSpent, Long timeSpentSeconds, WorklogUpdateAuthor updateAuthor, OffsetDateTime updated, Visibility visibility) {
         this.author = author;
         this.comment = comment;
         this.created = created;

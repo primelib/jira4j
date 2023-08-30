@@ -22,7 +22,7 @@ import java.util.function.Consumer;
  * <p>
  * Specification for the UpdateWorkflowScheme operation.
  * <p>
- * Update workflow scheme
+ * Classic update workflow scheme
  */
 @Getter
 @Setter

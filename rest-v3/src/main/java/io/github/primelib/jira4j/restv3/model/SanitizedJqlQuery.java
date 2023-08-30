@@ -44,7 +44,7 @@ public class SanitizedJqlQuery {
     protected String accountId;
 
     @JsonProperty("errors")
-    protected SanitizedJqlQueryErrors errors;
+    protected ErrorCollection errors;
 
     /**
      * The initial query.
@@ -77,7 +77,7 @@ public class SanitizedJqlQuery {
      * @param sanitizedQuery The sanitized query, if there were no errors.
      */
     @ApiStatus.Internal
-    public SanitizedJqlQuery(String accountId, SanitizedJqlQueryErrors errors, String initialQuery, String sanitizedQuery) {
+    public SanitizedJqlQuery(String accountId, ErrorCollection errors, String initialQuery, String sanitizedQuery) {
         this.accountId = accountId;
         this.errors = errors;
         this.initialQuery = initialQuery;
