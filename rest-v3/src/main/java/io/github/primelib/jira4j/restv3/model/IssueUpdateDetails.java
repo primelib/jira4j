@@ -47,7 +47,7 @@ public class IssueUpdateDetails {
     protected Map<String, Object> fields;
 
     @JsonProperty("historyMetadata")
-    protected IssueUpdateDetailsHistoryMetadata historyMetadata;
+    protected HistoryMetadata historyMetadata;
 
     /**
      * Details of issue properties to be add or update.
@@ -56,7 +56,7 @@ public class IssueUpdateDetails {
     protected List<EntityProperty> properties;
 
     @JsonProperty("transition")
-    protected IssueUpdateDetailsTransition transition;
+    protected IssueTransition transition;
 
     /**
      * A Map containing the field field name and a list of operations to perform on the issue screen field. Note that fields included in here cannot be included in {@code fields}.
@@ -84,7 +84,7 @@ public class IssueUpdateDetails {
      * @param update A Map containing the field field name and a list of operations to perform on the issue screen field. Note that fields included in here cannot be included in {@code fields}.
      */
     @ApiStatus.Internal
-    public IssueUpdateDetails(Map<String, Object> fields, IssueUpdateDetailsHistoryMetadata historyMetadata, List<EntityProperty> properties, IssueUpdateDetailsTransition transition, Map<String, List<FieldUpdateOperation>> update) {
+    public IssueUpdateDetails(Map<String, Object> fields, HistoryMetadata historyMetadata, List<EntityProperty> properties, IssueTransition transition, Map<String, List<FieldUpdateOperation>> update) {
         this.fields = fields;
         this.historyMetadata = historyMetadata;
         this.properties = properties;

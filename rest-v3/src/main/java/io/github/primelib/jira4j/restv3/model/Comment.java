@@ -108,7 +108,7 @@ public class Comment {
     protected OffsetDateTime updated;
 
     @JsonProperty("visibility")
-    protected CommentVisibility visibility;
+    protected Visibility visibility;
 
     /**
      * Constructs a validated instance of {@link Comment}.
@@ -137,7 +137,7 @@ public class Comment {
      * @param visibility visibility
      */
     @ApiStatus.Internal
-    public Comment(CommentAuthor author, Object body, OffsetDateTime created, String id, Boolean jsdAuthorCanSeeRequest, Boolean jsdPublic, List<EntityProperty> properties, String renderedBody, String self, CommentUpdateAuthor updateAuthor, OffsetDateTime updated, CommentVisibility visibility) {
+    public Comment(CommentAuthor author, Object body, OffsetDateTime created, String id, Boolean jsdAuthorCanSeeRequest, Boolean jsdPublic, List<EntityProperty> properties, String renderedBody, String self, CommentUpdateAuthor updateAuthor, OffsetDateTime updated, Visibility visibility) {
         this.author = author;
         this.body = body;
         this.created = created;

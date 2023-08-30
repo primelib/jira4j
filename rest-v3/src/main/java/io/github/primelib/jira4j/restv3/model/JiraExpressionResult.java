@@ -36,7 +36,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class JiraExpressionResult {
 
     @JsonProperty("meta")
-    protected JiraExpressionResultMeta meta;
+    protected JiraExpressionEvaluationMetaDataBean meta;
 
     /**
      * The value of the evaluated expression. It may be a primitive JSON value or a Jira REST API object. (Some expressions do not produce any meaningful results—for example, an expression that returns a lambda function—if that's the case a simple string representation is returned. These string representations should not be relied upon and may change without notice.)
@@ -61,7 +61,7 @@ public class JiraExpressionResult {
      * @param value The value of the evaluated expression. It may be a primitive JSON value or a Jira REST API object. (Some expressions do not produce any meaningful results—for example, an expression that returns a lambda function—if that's the case a simple string representation is returned. These string representations should not be relied upon and may change without notice.)
      */
     @ApiStatus.Internal
-    public JiraExpressionResult(JiraExpressionResultMeta meta, Object value) {
+    public JiraExpressionResult(JiraExpressionEvaluationMetaDataBean meta, Object value) {
         this.meta = meta;
         this.value = value;
     }

@@ -69,13 +69,13 @@ public class JiraExpressionEvalContextBean {
     protected Long customerRequest;
 
     @JsonProperty("issue")
-    protected JiraExpressionEvalContextBeanIssue issue;
+    protected IdOrKeyBean issue;
 
     @JsonProperty("issues")
-    protected JiraExpressionEvalContextBeanIssues issues;
+    protected JexpIssues issues;
 
     @JsonProperty("project")
-    protected JiraExpressionEvalContextBeanProject project;
+    protected IdOrKeyBean project;
 
     /**
      * The ID of the service desk that is available under the {@code serviceDesk} variable when evaluating the expression.
@@ -112,7 +112,7 @@ public class JiraExpressionEvalContextBean {
      * @param sprint The ID of the sprint that is available under the {@code sprint} variable when evaluating the expression.
      */
     @ApiStatus.Internal
-    public JiraExpressionEvalContextBean(Long board, List<CustomContextVariable> custom, Long customerRequest, JiraExpressionEvalContextBeanIssue issue, JiraExpressionEvalContextBeanIssues issues, JiraExpressionEvalContextBeanProject project, Long serviceDesk, Long sprint) {
+    public JiraExpressionEvalContextBean(Long board, List<CustomContextVariable> custom, Long customerRequest, IdOrKeyBean issue, JexpIssues issues, IdOrKeyBean project, Long serviceDesk, Long sprint) {
         this.board = board;
         this.custom = custom;
         this.customerRequest = customerRequest;

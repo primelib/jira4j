@@ -50,7 +50,7 @@ public class ParsedJqlQuery {
     protected String query;
 
     @JsonProperty("structure")
-    protected ParsedJqlQueryStructure structure;
+    protected JqlQuery structure;
 
     /**
      * Constructs a validated instance of {@link ParsedJqlQuery}.
@@ -70,7 +70,7 @@ public class ParsedJqlQuery {
      * @param structure structure
      */
     @ApiStatus.Internal
-    public ParsedJqlQuery(Set<String> errors, String query, ParsedJqlQueryStructure structure) {
+    public ParsedJqlQuery(Set<String> errors, String query, JqlQuery structure) {
         this.errors = errors;
         this.query = query;
         this.structure = structure;

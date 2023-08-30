@@ -73,7 +73,7 @@ public class PermissionScheme {
     protected List<PermissionGrant> permissions;
 
     @JsonProperty("scope")
-    protected PermissionSchemeScope scope;
+    protected Scope scope;
 
     /**
      * The URL of the permission scheme.
@@ -103,7 +103,7 @@ public class PermissionScheme {
      * @param self The URL of the permission scheme.
      */
     @ApiStatus.Internal
-    public PermissionScheme(String description, String expand, Long id, String name, List<PermissionGrant> permissions, PermissionSchemeScope scope, URI self) {
+    public PermissionScheme(String description, String expand, Long id, String name, List<PermissionGrant> permissions, Scope scope, URI self) {
         this.description = description;
         this.expand = expand;
         this.id = id;

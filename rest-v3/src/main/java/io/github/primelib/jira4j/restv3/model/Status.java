@@ -36,7 +36,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Status {
 
     @JsonProperty("icon")
-    protected StatusIcon icon;
+    protected Icon icon;
 
     /**
      * Whether the item is resolved. If set to "true", the link to the issue is displayed in a strikethrough font, otherwise the link displays in normal font.
@@ -61,7 +61,7 @@ public class Status {
      * @param resolved Whether the item is resolved. If set to "true", the link to the issue is displayed in a strikethrough font, otherwise the link displays in normal font.
      */
     @ApiStatus.Internal
-    public Status(StatusIcon icon, Boolean resolved) {
+    public Status(Icon icon, Boolean resolved) {
         this.icon = icon;
         this.resolved = resolved;
     }

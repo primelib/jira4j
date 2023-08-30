@@ -58,7 +58,7 @@ public class DashboardGadgetSettings {
     protected String moduleKey;
 
     @JsonProperty("position")
-    protected DashboardGadgetSettingsPosition position;
+    protected DashboardGadgetPosition position;
 
     /**
      * The title of the gadget.
@@ -93,7 +93,7 @@ public class DashboardGadgetSettings {
      * @param uri The URI of the gadget type. Can't be provided with {@code moduleKey}.
      */
     @ApiStatus.Internal
-    public DashboardGadgetSettings(String color, Boolean ignoreUriAndModuleKeyValidation, String moduleKey, DashboardGadgetSettingsPosition position, String title, String uri) {
+    public DashboardGadgetSettings(String color, Boolean ignoreUriAndModuleKeyValidation, String moduleKey, DashboardGadgetPosition position, String title, String uri) {
         this.color = color;
         this.ignoreUriAndModuleKeyValidation = ignoreUriAndModuleKeyValidation;
         this.moduleKey = moduleKey;

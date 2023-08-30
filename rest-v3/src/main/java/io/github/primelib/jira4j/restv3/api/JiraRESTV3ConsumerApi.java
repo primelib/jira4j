@@ -17,6 +17,7 @@ import io.github.primelib.jira4j.restv3.model.AutoCompleteSuggestions;
 import io.github.primelib.jira4j.restv3.model.AvailableDashboardGadgetsResponse;
 import io.github.primelib.jira4j.restv3.model.Avatar;
 import io.github.primelib.jira4j.restv3.model.Avatars;
+import io.github.primelib.jira4j.restv3.model.BulkEditShareableEntityResponse;
 import io.github.primelib.jira4j.restv3.model.BulkIssueIsWatching;
 import io.github.primelib.jira4j.restv3.model.BulkPermissionGrants;
 import io.github.primelib.jira4j.restv3.model.ChangeFilterOwner;
@@ -260,6 +261,7 @@ import io.github.primelib.jira4j.restv3.spec.AssignProjectsToCustomFieldContextO
 import io.github.primelib.jira4j.restv3.spec.AssignSchemeToProjectOperationSpec;
 import io.github.primelib.jira4j.restv3.spec.AssociateSchemesToProjectsOperationSpec;
 import io.github.primelib.jira4j.restv3.spec.BulkDeleteIssuePropertyOperationSpec;
+import io.github.primelib.jira4j.restv3.spec.BulkEditDashboardsOperationSpec;
 import io.github.primelib.jira4j.restv3.spec.BulkGetGroupsOperationSpec;
 import io.github.primelib.jira4j.restv3.spec.BulkGetUsersOperationSpec;
 import io.github.primelib.jira4j.restv3.spec.BulkGetUsersMigrationOperationSpec;
@@ -1920,6 +1922,23 @@ public class JiraRESTV3ConsumerApi {
     }
 
     /**
+     * Bulk edit dashboards
+     * <p>
+     * Bulk edit dashboards. Maximum number of dashboards to be edited at the same time is 100.
+     * **[Permissions](#permissions) required:** None
+     * The dashboards to be updated must be owned by the user, or the user must be an administrator.
+     * Authentication - Required Scopes: [write:jira-work]
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>bulkEditShareableEntityRequest: The details of dashboards being updated in bulk.</li>
+     * </ul>
+     */
+    public BulkEditShareableEntityResponse bulkEditDashboards(Consumer<BulkEditDashboardsOperationSpec> spec) {
+        BulkEditDashboardsOperationSpec r = new BulkEditDashboardsOperationSpec(spec);
+        return api.bulkEditDashboards(r.bulkEditShareableEntityRequest());
+    }
+
+    /**
      * Bulk get groups
      * <p>
      * Returns a [paginated](#pagination) list of groups.
@@ -2564,7 +2583,7 @@ public class JiraRESTV3ConsumerApi {
      * | Project Type Key | Project Template Key |
      *  |--|--|
      *  | {@code business} | {@code com.atlassian.jira-core-project-templates:jira-core-simplified-content-management}, {@code com.atlassian.jira-core-project-templates:jira-core-simplified-document-approval}, {@code com.atlassian.jira-core-project-templates:jira-core-simplified-lead-tracking}, {@code com.atlassian.jira-core-project-templates:jira-core-simplified-process-control}, {@code com.atlassian.jira-core-project-templates:jira-core-simplified-procurement}, {@code com.atlassian.jira-core-project-templates:jira-core-simplified-project-management}, {@code com.atlassian.jira-core-project-templates:jira-core-simplified-recruitment}, {@code com.atlassian.jira-core-project-templates:jira-core-simplified-task-tracking} |
-     *  | {@code service_desk} | {@code com.atlassian.servicedesk:simplified-it-service-management}, {@code com.atlassian.servicedesk:simplified-general-service-desk-it}, {@code com.atlassian.servicedesk:simplified-general-service-desk-business}, {@code com.atlassian.servicedesk:simplified-external-service-desk}, {@code com.atlassian.servicedesk:simplified-hr-service-desk}, {@code com.atlassian.servicedesk:simplified-facilities-service-desk}, {@code com.atlassian.servicedesk:simplified-legal-service-desk}, {@code com.atlassian.servicedesk:simplified-analytics-service-desk}, {@code com.atlassian.servicedesk:simplified-marketing-service-desk}, {@code com.atlassian.servicedesk:simplified-design-service-desk}, {@code com.atlassian.servicedesk:simplified-sales-service-desk}, {@code com.atlassian.servicedesk:simplified-finance-service-desk} |
+     *  | {@code service_desk} | {@code com.atlassian.servicedesk:simplified-it-service-management}, {@code com.atlassian.servicedesk:simplified-general-service-desk-it}, {@code com.atlassian.servicedesk:simplified-general-service-desk-business}, {@code com.atlassian.servicedesk:simplified-external-service-desk}, {@code com.atlassian.servicedesk:simplified-hr-service-desk}, {@code com.atlassian.servicedesk:simplified-facilities-service-desk}, {@code com.atlassian.servicedesk:simplified-legal-service-desk}, {@code com.atlassian.servicedesk:simplified-analytics-service-desk}, {@code com.atlassian.servicedesk:simplified-marketing-service-desk}, {@code com.atlassian.servicedesk:simplified-design-service-desk}, {@code com.atlassian.servicedesk:simplified-sales-service-desk}, {@code com.atlassian.servicedesk:simplified-finance-service-desk}, {@code com.atlassian.servicedesk:next-gen-it-service-desk}, {@code com.atlassian.servicedesk:next-gen-hr-service-desk}, {@code com.atlassian.servicedesk:next-gen-legal-service-desk}, {@code com.atlassian.servicedesk:next-gen-marketing-service-desk}, {@code com.atlassian.servicedesk:next-gen-facilities-service-desk}, {@code com.atlassian.servicedesk:next-gen-general-service-desk}, {@code com.atlassian.servicedesk:next-gen-general-it-service-desk}, {@code com.atlassian.servicedesk:next-gen-general-business-service-desk}, {@code com.atlassian.servicedesk:next-gen-analytics-service-desk}, {@code com.atlassian.servicedesk:next-gen-finance-service-desk}, {@code com.atlassian.servicedesk:next-gen-design-service-desk}, {@code com.atlassian.servicedesk:next-gen-sales-service-desk} |
      *  | {@code software} | {@code com.pyxis.greenhopper.jira:gh-simplified-agility-kanban}, {@code com.pyxis.greenhopper.jira:gh-simplified-agility-scrum}, {@code com.pyxis.greenhopper.jira:gh-simplified-basic}, {@code com.pyxis.greenhopper.jira:gh-simplified-kanban-classic}, {@code com.pyxis.greenhopper.jira:gh-simplified-scrum-classic} |
      *  The project types are available according to the installed Jira features as follows:
      *  *
@@ -4706,7 +4725,9 @@ public class JiraRESTV3ConsumerApi {
      * <ul>
      *   <li>createWorkflowDetails: The workflow details.</li>
      * </ul>
+     * @deprecated
      */
+    @Deprecated
     public WorkflowIDs createWorkflow(Consumer<CreateWorkflowOperationSpec> spec) {
         CreateWorkflowOperationSpec r = new CreateWorkflowOperationSpec(spec);
         return api.createWorkflow(r.createWorkflowDetails());
@@ -6020,11 +6041,13 @@ public class JiraRESTV3ConsumerApi {
      *   <li>notifyUsers: Whether a notification email about the issue update is sent to all watchers. To disable the notification, administer Jira or administer project permissions are required. If the user doesn't have the necessary permission the request is ignored.</li>
      *   <li>overrideScreenSecurity: Whether screen security is overridden to enable hidden fields to be edited. Available to Connect app users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) and Forge apps acting on behalf of users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).</li>
      *   <li>overrideEditableFlag: Whether screen security is overridden to enable uneditable fields to be edited. Available to Connect app users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) and Forge apps acting on behalf of users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).</li>
+     *   <li>returnIssue: Whether the response should contain the issue with fields edited in this request. The returned issue will have the same format as in the [Get issue API](#api-rest-api-3-issue-issueidorkey-get).</li>
+     *   <li>expand: The Get issue API expand parameter to use in the response if the {@code returnIssue} parameter is {@code true}.</li>
      * </ul>
      */
     public Object editIssue(Consumer<EditIssueOperationSpec> spec) {
         EditIssueOperationSpec r = new EditIssueOperationSpec(spec);
-        return api.editIssue(r.issueIdOrKey(), r.issueUpdateDetails(), r.notifyUsers(), r.overrideScreenSecurity(), r.overrideEditableFlag());
+        return api.editIssue(r.issueIdOrKey(), r.issueUpdateDetails(), r.notifyUsers(), r.overrideScreenSecurity(), r.overrideEditableFlag(), r.returnIssue(), r.expand());
     }
 
     /**
@@ -11101,7 +11124,7 @@ public class JiraRESTV3ConsumerApi {
      * Returns a list of workflows and related statuses by providing workflow names, workflow IDs, or project and issue types.
      * **[Permissions](#permissions) required:**
      *  *
-     * *Administer Jira* project permission to access all, including global-scoped, workflows
+     * *Administer Jira* global permission to access all, including project-scoped, workflows
      * *
      * At least one of the *Administer projects* and *View (read-only) workflow* project permissions to access project-scoped workflows
      * Authentication - Required Scopes: [manage:jira-configuration]
@@ -13125,8 +13148,8 @@ public class JiraRESTV3ConsumerApi {
      * Update project
      * <p>
      * Updates the [project details](https://confluence.atlassian.com/x/ahLpNw) of a project.
-     * All parameters are optional in the body of the request.
-     * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
+     * All parameters are optional in the body of the request. Schemes will only be updated if they are included in the request, any omitted schemes will be left unchanged.
+     * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). is only needed when changing the schemes or project key. Otherwise you will only need *Administer Projects* [project permission](https://confluence.atlassian.com/x/yodKLg)
      * Authentication - Required Scopes: [manage:jira-project]
      * @param spec a consumer that creates the payload for this operation. Supports the following properties:
      * <ul>
@@ -13367,9 +13390,9 @@ public class JiraRESTV3ConsumerApi {
     }
 
     /**
-     * Update workflow scheme
+     * Classic update workflow scheme
      * <p>
-     * Updates a workflow scheme, including the name, default workflow, issue type to project mappings, and more. If the workflow scheme is active (that is, being used by at least one project), then a draft workflow scheme is created or updated instead, provided that {@code updateDraftIfNeeded} is set to {@code true}.
+     * Updates a company-manged project workflow scheme, including the name, default workflow, issue type to project mappings, and more. If the workflow scheme is active (that is, being used by at least one project), then a draft workflow scheme is created or updated instead, provided that {@code updateDraftIfNeeded} is set to {@code true}.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param spec a consumer that creates the payload for this operation. Supports the following properties:

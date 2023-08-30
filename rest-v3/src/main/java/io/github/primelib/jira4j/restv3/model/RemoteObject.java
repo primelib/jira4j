@@ -39,10 +39,10 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class RemoteObject {
 
     @JsonProperty("icon")
-    protected RemoteObjectIcon icon;
+    protected Icon icon;
 
     @JsonProperty("status")
-    protected RemoteObjectStatus status;
+    protected Status status;
 
     /**
      * The summary details of the item.
@@ -82,7 +82,7 @@ public class RemoteObject {
      * @param url The URL of the item.
      */
     @ApiStatus.Internal
-    public RemoteObject(RemoteObjectIcon icon, RemoteObjectStatus status, String summary, String title, String url) {
+    public RemoteObject(Icon icon, Status status, String summary, String title, String url) {
         this.icon = icon;
         this.status = status;
         this.summary = summary;

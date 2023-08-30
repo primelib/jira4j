@@ -79,7 +79,7 @@ public class NotificationScheme {
     protected List<Long> projects;
 
     @JsonProperty("scope")
-    protected NotificationSchemeScope scope;
+    protected Scope scope;
 
     @JsonProperty("self")
     protected String self;
@@ -107,7 +107,7 @@ public class NotificationScheme {
      * @param self self
      */
     @ApiStatus.Internal
-    public NotificationScheme(String description, String expand, Long id, String name, List<NotificationSchemeEvent> notificationSchemeEvents, List<Long> projects, NotificationSchemeScope scope, String self) {
+    public NotificationScheme(String description, String expand, Long id, String name, List<NotificationSchemeEvent> notificationSchemeEvents, List<Long> projects, Scope scope, String self) {
         this.description = description;
         this.expand = expand;
         this.id = id;

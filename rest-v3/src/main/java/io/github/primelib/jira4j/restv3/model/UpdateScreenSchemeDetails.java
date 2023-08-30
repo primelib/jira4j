@@ -49,7 +49,7 @@ public class UpdateScreenSchemeDetails {
     protected String name;
 
     @JsonProperty("screens")
-    protected UpdateScreenSchemeDetailsScreens screens;
+    protected UpdateScreenTypes screens;
 
     /**
      * Constructs a validated instance of {@link UpdateScreenSchemeDetails}.
@@ -69,7 +69,7 @@ public class UpdateScreenSchemeDetails {
      * @param screens screens
      */
     @ApiStatus.Internal
-    public UpdateScreenSchemeDetails(String description, String name, UpdateScreenSchemeDetailsScreens screens) {
+    public UpdateScreenSchemeDetails(String description, String name, UpdateScreenTypes screens) {
         this.description = description;
         this.name = name;
         this.screens = screens;

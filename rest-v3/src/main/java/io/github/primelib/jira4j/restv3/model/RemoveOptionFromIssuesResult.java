@@ -38,7 +38,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class RemoveOptionFromIssuesResult {
 
     @JsonProperty("errors")
-    protected RemoveOptionFromIssuesResultErrors errors;
+    protected SimpleErrorCollection errors;
 
     /**
      * The IDs of the modified issues.
@@ -70,7 +70,7 @@ public class RemoveOptionFromIssuesResult {
      * @param unmodifiedIssues The IDs of the unchanged issues, those issues where errors prevent modification.
      */
     @ApiStatus.Internal
-    public RemoveOptionFromIssuesResult(RemoveOptionFromIssuesResultErrors errors, List<Long> modifiedIssues, List<Long> unmodifiedIssues) {
+    public RemoveOptionFromIssuesResult(SimpleErrorCollection errors, List<Long> modifiedIssues, List<Long> unmodifiedIssues) {
         this.errors = errors;
         this.modifiedIssues = modifiedIssues;
         this.unmodifiedIssues = unmodifiedIssues;

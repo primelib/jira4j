@@ -37,7 +37,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class IssueSecurityLevelMember {
 
     @JsonProperty("holder")
-    protected IssueSecurityLevelMemberHolder holder;
+    protected PermissionHolder holder;
 
     /**
      * The ID of the issue security level member.
@@ -69,7 +69,7 @@ public class IssueSecurityLevelMember {
      * @param issueSecurityLevelId The ID of the issue security level.
      */
     @ApiStatus.Internal
-    public IssueSecurityLevelMember(IssueSecurityLevelMemberHolder holder, Long id, Long issueSecurityLevelId) {
+    public IssueSecurityLevelMember(PermissionHolder holder, Long id, Long issueSecurityLevelId) {
         this.holder = holder;
         this.id = id;
         this.issueSecurityLevelId = issueSecurityLevelId;
