@@ -45,7 +45,7 @@ public class Notification {
     protected String htmlBody;
 
     @JsonProperty("restrict")
-    protected NotificationRestrict restrict;
+    protected NotificationRecipientsRestrictions restrict;
 
     /**
      * The subject of the email notification for the issue. If this is not specified, then the subject is set to the issue key and summary.
@@ -60,7 +60,7 @@ public class Notification {
     protected String textBody;
 
     @JsonProperty("to")
-    protected NotificationTo to;
+    protected NotificationRecipients to;
 
     /**
      * Constructs a validated instance of {@link Notification}.
@@ -82,7 +82,7 @@ public class Notification {
      * @param to to
      */
     @ApiStatus.Internal
-    public Notification(String htmlBody, NotificationRestrict restrict, String subject, String textBody, NotificationTo to) {
+    public Notification(String htmlBody, NotificationRecipientsRestrictions restrict, String subject, String textBody, NotificationRecipients to) {
         this.htmlBody = htmlBody;
         this.restrict = restrict;
         this.subject = subject;

@@ -49,7 +49,7 @@ public class Context {
     protected String name;
 
     @JsonProperty("scope")
-    protected ContextScope scope;
+    protected Scope scope;
 
     /**
      * Constructs a validated instance of {@link Context}.
@@ -69,7 +69,7 @@ public class Context {
      * @param scope scope
      */
     @ApiStatus.Internal
-    public Context(Long id, String name, ContextScope scope) {
+    public Context(Long id, String name, Scope scope) {
         this.id = id;
         this.name = name;
         this.scope = scope;

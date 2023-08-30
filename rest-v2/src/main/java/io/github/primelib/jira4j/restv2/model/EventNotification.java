@@ -59,10 +59,10 @@ public class EventNotification {
     protected String expand;
 
     @JsonProperty("field")
-    protected EventNotificationField field;
+    protected FieldDetails field;
 
     @JsonProperty("group")
-    protected EventNotificationGroup group;
+    protected GroupName group;
 
     /**
      * The ID of the notification.
@@ -93,7 +93,7 @@ public class EventNotification {
     protected String parameter;
 
     @JsonProperty("projectRole")
-    protected EventNotificationProjectRole projectRole;
+    protected ProjectRole projectRole;
 
     /**
      * The identifier associated with the {@code notificationType} value that defines the receiver of the notification, where the receiver isn't implied by the {@code notificationType} value. So, when {@code notificationType} is:
@@ -112,7 +112,7 @@ public class EventNotification {
     protected String recipient;
 
     @JsonProperty("user")
-    protected EventNotificationUser user;
+    protected UserDetails user;
 
     /**
      * Constructs a validated instance of {@link EventNotification}.
@@ -139,7 +139,7 @@ public class EventNotification {
      * @param user user
      */
     @ApiStatus.Internal
-    public EventNotification(String emailAddress, String expand, EventNotificationField field, EventNotificationGroup group, Long id, NotificationTypeEnum notificationType, String parameter, EventNotificationProjectRole projectRole, String recipient, EventNotificationUser user) {
+    public EventNotification(String emailAddress, String expand, FieldDetails field, GroupName group, Long id, NotificationTypeEnum notificationType, String parameter, ProjectRole projectRole, String recipient, UserDetails user) {
         this.emailAddress = emailAddress;
         this.expand = expand;
         this.field = field;

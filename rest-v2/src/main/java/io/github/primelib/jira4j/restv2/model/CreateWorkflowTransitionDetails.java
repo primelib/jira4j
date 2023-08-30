@@ -71,10 +71,10 @@ public class CreateWorkflowTransitionDetails {
     protected Map<String, String> properties;
 
     @JsonProperty("rules")
-    protected CreateWorkflowTransitionDetailsRules rules;
+    protected CreateWorkflowTransitionRulesDetails rules;
 
     @JsonProperty("screen")
-    protected CreateWorkflowTransitionDetailsScreen screen;
+    protected CreateWorkflowTransitionScreenDetails screen;
 
     /**
      * The status the transition goes to.
@@ -111,7 +111,7 @@ public class CreateWorkflowTransitionDetails {
      * @param type The type of the transition.
      */
     @ApiStatus.Internal
-    public CreateWorkflowTransitionDetails(String description, List<String> from, String name, Map<String, String> properties, CreateWorkflowTransitionDetailsRules rules, CreateWorkflowTransitionDetailsScreen screen, String to, TypeEnum type) {
+    public CreateWorkflowTransitionDetails(String description, List<String> from, String name, Map<String, String> properties, CreateWorkflowTransitionRulesDetails rules, CreateWorkflowTransitionScreenDetails screen, String to, TypeEnum type) {
         this.description = description;
         this.from = from;
         this.name = name;

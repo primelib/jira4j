@@ -56,7 +56,7 @@ public class Screen {
     protected String name;
 
     @JsonProperty("scope")
-    protected ScreenScope scope;
+    protected Scope scope;
 
     /**
      * Constructs a validated instance of {@link Screen}.
@@ -77,7 +77,7 @@ public class Screen {
      * @param scope scope
      */
     @ApiStatus.Internal
-    public Screen(String description, Long id, String name, ScreenScope scope) {
+    public Screen(String description, Long id, String name, Scope scope) {
         this.description = description;
         this.id = id;
         this.name = name;

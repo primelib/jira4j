@@ -38,7 +38,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class IssueFieldOptionScopeBean {
 
     @JsonProperty("global")
-    protected IssueFieldOptionScopeBeanGlobal global;
+    protected GlobalScopeBean global;
 
     /**
      * DEPRECATED
@@ -70,7 +70,7 @@ public class IssueFieldOptionScopeBean {
      * @param projects2 Defines the projects in which the option is available and the behavior of the option within each project. Specify one object per project. The behavior of the option in a project context overrides the behavior in the global context.
      */
     @ApiStatus.Internal
-    public IssueFieldOptionScopeBean(IssueFieldOptionScopeBeanGlobal global, Set<Long> projects, Set<ProjectScopeBean> projects2) {
+    public IssueFieldOptionScopeBean(GlobalScopeBean global, Set<Long> projects, Set<ProjectScopeBean> projects2) {
         this.global = global;
         this.projects = projects;
         this.projects2 = projects2;

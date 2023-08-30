@@ -38,16 +38,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class JiraExpressionsComplexityBean {
 
     @JsonProperty("beans")
-    protected JiraExpressionsComplexityBeanBeans beans;
+    protected JiraExpressionsComplexityValueBean beans;
 
     @JsonProperty("expensiveOperations")
-    protected JiraExpressionsComplexityBeanExpensiveOperations expensiveOperations;
+    protected JiraExpressionsComplexityValueBean expensiveOperations;
 
     @JsonProperty("primitiveValues")
-    protected JiraExpressionsComplexityBeanPrimitiveValues primitiveValues;
+    protected JiraExpressionsComplexityValueBean primitiveValues;
 
     @JsonProperty("steps")
-    protected JiraExpressionsComplexityBeanSteps steps;
+    protected JiraExpressionsComplexityValueBean steps;
 
     /**
      * Constructs a validated instance of {@link JiraExpressionsComplexityBean}.
@@ -68,7 +68,7 @@ public class JiraExpressionsComplexityBean {
      * @param steps steps
      */
     @ApiStatus.Internal
-    public JiraExpressionsComplexityBean(JiraExpressionsComplexityBeanBeans beans, JiraExpressionsComplexityBeanExpensiveOperations expensiveOperations, JiraExpressionsComplexityBeanPrimitiveValues primitiveValues, JiraExpressionsComplexityBeanSteps steps) {
+    public JiraExpressionsComplexityBean(JiraExpressionsComplexityValueBean beans, JiraExpressionsComplexityValueBean expensiveOperations, JiraExpressionsComplexityValueBean primitiveValues, JiraExpressionsComplexityValueBean steps) {
         this.beans = beans;
         this.expensiveOperations = expensiveOperations;
         this.primitiveValues = primitiveValues;

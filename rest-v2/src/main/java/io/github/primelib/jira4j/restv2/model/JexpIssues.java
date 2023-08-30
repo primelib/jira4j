@@ -35,7 +35,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class JexpIssues {
 
     @JsonProperty("jql")
-    protected JexpIssuesJql jql;
+    protected JexpJqlIssues jql;
 
     /**
      * Constructs a validated instance of {@link JexpIssues}.
@@ -53,7 +53,7 @@ public class JexpIssues {
      * @param jql jql
      */
     @ApiStatus.Internal
-    public JexpIssues(JexpIssuesJql jql) {
+    public JexpIssues(JexpJqlIssues jql) {
         this.jql = jql;
     }
 

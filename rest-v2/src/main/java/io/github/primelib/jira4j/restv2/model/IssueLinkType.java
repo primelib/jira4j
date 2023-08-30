@@ -35,7 +35,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
     "outward",
     "self"
 })
-@JsonTypeName("IssueLink_type")
+@JsonTypeName("IssueLinkType")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class IssueLinkType {
 

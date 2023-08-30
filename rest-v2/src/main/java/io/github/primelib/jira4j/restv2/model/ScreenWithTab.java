@@ -57,10 +57,10 @@ public class ScreenWithTab {
     protected String name;
 
     @JsonProperty("scope")
-    protected ScreenScope scope;
+    protected Scope scope;
 
     @JsonProperty("tab")
-    protected ScreenWithTabTab tab;
+    protected ScreenableTab tab;
 
     /**
      * Constructs a validated instance of {@link ScreenWithTab}.
@@ -82,7 +82,7 @@ public class ScreenWithTab {
      * @param tab tab
      */
     @ApiStatus.Internal
-    public ScreenWithTab(String description, Long id, String name, ScreenScope scope, ScreenWithTabTab tab) {
+    public ScreenWithTab(String description, Long id, String name, Scope scope, ScreenableTab tab) {
         this.description = description;
         this.id = id;
         this.name = name;

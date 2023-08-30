@@ -39,7 +39,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class PermissionGrant {
 
     @JsonProperty("holder")
-    protected PermissionGrantHolder holder;
+    protected PermissionHolder holder;
 
     /**
      * The ID of the permission granted details.
@@ -78,7 +78,7 @@ public class PermissionGrant {
      * @param self The URL of the permission granted details.
      */
     @ApiStatus.Internal
-    public PermissionGrant(PermissionGrantHolder holder, Long id, String permission, URI self) {
+    public PermissionGrant(PermissionHolder holder, Long id, String permission, URI self) {
         this.holder = holder;
         this.id = id;
         this.permission = permission;

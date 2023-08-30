@@ -38,7 +38,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class CreateWorkflowTransitionRulesDetails {
 
     @JsonProperty("conditions")
-    protected CreateWorkflowTransitionRulesDetailsConditions conditions;
+    protected CreateWorkflowCondition conditions;
 
     /**
      * The workflow post functions.
@@ -330,7 +330,7 @@ public class CreateWorkflowTransitionRulesDetails {
      * @param validators The workflow validators.  **Note:** The default permission validator is always added to the *initial* transition, as in:      "validators": [         {             "type": "PermissionValidator",             "configuration": {                 "permissionKey": "CREATE_ISSUES"             }         }     ]
      */
     @ApiStatus.Internal
-    public CreateWorkflowTransitionRulesDetails(CreateWorkflowTransitionRulesDetailsConditions conditions, List<CreateWorkflowTransitionRule> postFunctions, List<CreateWorkflowTransitionRule> validators) {
+    public CreateWorkflowTransitionRulesDetails(CreateWorkflowCondition conditions, List<CreateWorkflowTransitionRule> postFunctions, List<CreateWorkflowTransitionRule> validators) {
         this.conditions = conditions;
         this.postFunctions = postFunctions;
         this.validators = validators;

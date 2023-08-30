@@ -43,7 +43,7 @@ public class DashboardGadgetUpdateRequest {
     protected String color;
 
     @JsonProperty("position")
-    protected DashboardGadgetUpdateRequestPosition position;
+    protected DashboardGadgetPosition position;
 
     /**
      * The title of the gadget.
@@ -69,7 +69,7 @@ public class DashboardGadgetUpdateRequest {
      * @param title The title of the gadget.
      */
     @ApiStatus.Internal
-    public DashboardGadgetUpdateRequest(String color, DashboardGadgetUpdateRequestPosition position, String title) {
+    public DashboardGadgetUpdateRequest(String color, DashboardGadgetPosition position, String title) {
         this.color = color;
         this.position = position;
         this.title = title;

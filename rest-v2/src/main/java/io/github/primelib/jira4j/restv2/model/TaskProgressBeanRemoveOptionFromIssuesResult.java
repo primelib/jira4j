@@ -93,7 +93,7 @@ public class TaskProgressBeanRemoveOptionFromIssuesResult {
     protected Long progress;
 
     @JsonProperty("result")
-    protected TaskProgressBeanRemoveOptionFromIssuesResultResult result;
+    protected RemoveOptionFromIssuesResult result;
 
     /**
      * The URL of the task.
@@ -153,7 +153,7 @@ public class TaskProgressBeanRemoveOptionFromIssuesResult {
      * @param submittedBy The ID of the user who submitted the task.
      */
     @ApiStatus.Internal
-    public TaskProgressBeanRemoveOptionFromIssuesResult(String description, Long elapsedRuntime, Long finished, String id, Long lastUpdate, String message, Long progress, TaskProgressBeanRemoveOptionFromIssuesResultResult result, URI self, Long started, StatusEnum status, Long submitted, Long submittedBy) {
+    public TaskProgressBeanRemoveOptionFromIssuesResult(String description, Long elapsedRuntime, Long finished, String id, Long lastUpdate, String message, Long progress, RemoveOptionFromIssuesResult result, URI self, Long started, StatusEnum status, Long submitted, Long submittedBy) {
         this.description = description;
         this.elapsedRuntime = elapsedRuntime;
         this.finished = finished;
