@@ -1,0 +1,23 @@
+modules:
+  # source: https://developer.atlassian.com/cloud/jira/platform/rest/v2/intro/#version
+  - name: jira-rest-v2
+    dir: rest-v2
+    spec_file: openapi.json
+    spec_url: https://dac-static.atlassian.com/cloud/jira/platform/swagger.v3.json
+    spec_script: |
+      jq '.info.title="Jira REST V2"' "$1" | sponge "$1" # overwrite name
+      jq '.components.schemas.Attachment.properties.size."x-name-overwrite"="fileSize"' "$1" | sponge "$1" # size is usually a reserved word on a Map
+      jq '.paths."/rest/api/2/issuesecurityschemes/search".get.description="Returns a paginated list of issue security schemes."' "$1" | sponge "$1" # description is broken
+      jq 'del(.components.schemas.Fields.properties.issuetype)' "$1" | sponge "$1" # remove duplicate property
+      jq 'walk(if type == "object" and .additionalProperties and (.properties | length > 0) then del(.additionalProperties) else . end)' "$1" | sponge "$1" # remove additionalProperties from all schemas
+  # source: https://developer.atlassian.com/cloud/jira/platform/rest/v3/intro/#version
+  - name: jira-rest-v3
+    dir: rest-v3
+    spec_file: openapi.json
+    spec_url: https://dac-static.atlassian.com/cloud/jira/platform/swagger-v3.v3.json
+    spec_script: |
+      jq '.info.title="Jira REST V3"' "$1" | sponge "$1" # overwrite name
+      jq '.components.schemas.Attachment.properties.size."x-name-overwrite"="fileSize"' "$1" | sponge "$1" # size is usually a reserved word on a Map
+      jq '.paths."/rest/api/3/issuesecurityschemes/search".get.description="Returns a paginated list of issue security schemes."' "$1" | sponge "$1" # description is broken
+      jq 'del(.components.schemas.Fields.properties.issuetype)' "$1" | sponge "$1" # remove duplicate property
+      jq 'walk(if type == "object" and .additionalProperties and (.properties | length > 0) then del(.additionalProperties) else . end)' "$1" | sponge "$1" # remove additionalProperties from all schemas
