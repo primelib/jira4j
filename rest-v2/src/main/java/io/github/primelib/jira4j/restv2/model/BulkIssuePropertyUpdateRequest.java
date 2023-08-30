@@ -43,7 +43,7 @@ public class BulkIssuePropertyUpdateRequest {
     protected String expression;
 
     @JsonProperty("filter")
-    protected BulkIssuePropertyUpdateRequestFilter filter;
+    protected IssueFilterForBulkPropertySet filter;
 
     /**
      * The value of the property. The value must be a [valid](https://tools.ietf.org/html/rfc4627), non-empty JSON blob. The maximum length is 32768 characters.
@@ -69,7 +69,7 @@ public class BulkIssuePropertyUpdateRequest {
      * @param value The value of the property. The value must be a [valid](https://tools.ietf.org/html/rfc4627), non-empty JSON blob. The maximum length is 32768 characters.
      */
     @ApiStatus.Internal
-    public BulkIssuePropertyUpdateRequest(String expression, BulkIssuePropertyUpdateRequestFilter filter, Object value) {
+    public BulkIssuePropertyUpdateRequest(String expression, IssueFilterForBulkPropertySet filter, Object value) {
         this.expression = expression;
         this.filter = filter;
         this.value = value;

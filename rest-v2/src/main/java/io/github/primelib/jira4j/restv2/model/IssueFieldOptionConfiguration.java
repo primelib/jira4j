@@ -46,7 +46,7 @@ public class IssueFieldOptionConfiguration {
     protected Set<AttributesEnum> attributes;
 
     @JsonProperty("scope")
-    protected IssueFieldOptionConfigurationScope scope;
+    protected IssueFieldOptionScopeBean scope;
 
     /**
      * Constructs a validated instance of {@link IssueFieldOptionConfiguration}.
@@ -65,7 +65,7 @@ public class IssueFieldOptionConfiguration {
      * @param scope scope
      */
     @ApiStatus.Internal
-    public IssueFieldOptionConfiguration(Set<AttributesEnum> attributes, IssueFieldOptionConfigurationScope scope) {
+    public IssueFieldOptionConfiguration(Set<AttributesEnum> attributes, IssueFieldOptionScopeBean scope) {
         this.attributes = attributes;
         this.scope = scope;
     }

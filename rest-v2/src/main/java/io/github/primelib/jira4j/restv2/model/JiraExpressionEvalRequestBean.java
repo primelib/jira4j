@@ -36,7 +36,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class JiraExpressionEvalRequestBean {
 
     @JsonProperty("context")
-    protected JiraExpressionEvalRequestBeanContext context;
+    protected JiraExpressionEvalContextBean context;
 
     /**
      * The Jira expression to evaluate.
@@ -61,7 +61,7 @@ public class JiraExpressionEvalRequestBean {
      * @param expression The Jira expression to evaluate.
      */
     @ApiStatus.Internal
-    public JiraExpressionEvalRequestBean(JiraExpressionEvalRequestBeanContext context, String expression) {
+    public JiraExpressionEvalRequestBean(JiraExpressionEvalContextBean context, String expression) {
         this.context = context;
         this.expression = expression;
     }

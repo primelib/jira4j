@@ -41,7 +41,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class RemoteIssueLink {
 
     @JsonProperty("application")
-    protected RemoteIssueLinkApplication application;
+    protected Application application;
 
     /**
      * The global ID of the link, such as the ID of the item on the remote system.
@@ -56,7 +56,7 @@ public class RemoteIssueLink {
     protected Long id;
 
     @JsonProperty("object")
-    protected RemoteIssueLinkObject object;
+    protected RemoteObject object;
 
     /**
      * Description of the relationship between the issue and the linked item.
@@ -91,7 +91,7 @@ public class RemoteIssueLink {
      * @param self The URL of the link.
      */
     @ApiStatus.Internal
-    public RemoteIssueLink(RemoteIssueLinkApplication application, String globalId, Long id, RemoteIssueLinkObject object, String relationship, URI self) {
+    public RemoteIssueLink(Application application, String globalId, Long id, RemoteObject object, String relationship, URI self) {
         this.application = application;
         this.globalId = globalId;
         this.id = id;

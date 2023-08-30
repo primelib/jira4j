@@ -43,7 +43,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public class SharePermission {
 
     @JsonProperty("group")
-    protected SharePermissionGroup group;
+    protected GroupName group;
 
     /**
      * The unique identifier of the share permission.
@@ -52,10 +52,10 @@ public class SharePermission {
     protected Long id;
 
     @JsonProperty("project")
-    protected SharePermissionProject project;
+    protected Project project;
 
     @JsonProperty("role")
-    protected SharePermissionRole role;
+    protected ProjectRole role;
 
     /**
      * The type of share permission:
@@ -78,7 +78,7 @@ public class SharePermission {
     protected TypeEnum type;
 
     @JsonProperty("user")
-    protected SharePermissionUser user;
+    protected UserBean user;
 
     /**
      * Constructs a validated instance of {@link SharePermission}.
@@ -101,7 +101,7 @@ public class SharePermission {
      * @param user user
      */
     @ApiStatus.Internal
-    public SharePermission(SharePermissionGroup group, Long id, SharePermissionProject project, SharePermissionRole role, TypeEnum type, SharePermissionUser user) {
+    public SharePermission(GroupName group, Long id, Project project, ProjectRole role, TypeEnum type, UserBean user) {
         this.group = group;
         this.id = id;
         this.project = project;

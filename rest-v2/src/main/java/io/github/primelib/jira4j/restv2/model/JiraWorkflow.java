@@ -94,7 +94,7 @@ public class JiraWorkflow {
     protected Set<WorkflowTransitions> transitions;
 
     /**
-     * The {@code workflows.usages} expand is an optional parameter that can be used when reading and updating workflows in Jira. It provides additional information about the projects and issue types associated with the requested workflows.
+     * Use the optional {@code workflows.usages} expand to get additional information about the projects and issue types associated with the requested workflows.
      */
     @JsonProperty("usages")
     protected Set<ProjectIssueTypes> usages;
@@ -124,7 +124,7 @@ public class JiraWorkflow {
      * @param statuses The statuses referenced in this workflow.
      * @param taskId If there is a current [asynchronous task](#async-operations) operation for this workflow.
      * @param transitions The transitions of the workflow.
-     * @param usages The {@code workflows.usages} expand is an optional parameter that can be used when reading and updating workflows in Jira. It provides additional information about the projects and issue types associated with the requested workflows.
+     * @param usages Use the optional {@code workflows.usages} expand to get additional information about the projects and issue types associated with the requested workflows.
      * @param version version
      */
     @ApiStatus.Internal

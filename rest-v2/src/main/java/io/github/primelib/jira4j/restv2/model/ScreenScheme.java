@@ -51,7 +51,7 @@ public class ScreenScheme {
     protected Long id;
 
     @JsonProperty("issueTypeScreenSchemes")
-    protected ScreenSchemeIssueTypeScreenSchemes issueTypeScreenSchemes;
+    protected PageBeanIssueTypeScreenScheme issueTypeScreenSchemes;
 
     /**
      * The name of the screen scheme.
@@ -60,7 +60,7 @@ public class ScreenScheme {
     protected String name;
 
     @JsonProperty("screens")
-    protected ScreenSchemeScreens screens;
+    protected ScreenTypes screens;
 
     /**
      * Constructs a validated instance of {@link ScreenScheme}.
@@ -82,7 +82,7 @@ public class ScreenScheme {
      * @param screens screens
      */
     @ApiStatus.Internal
-    public ScreenScheme(String description, Long id, ScreenSchemeIssueTypeScreenSchemes issueTypeScreenSchemes, String name, ScreenSchemeScreens screens) {
+    public ScreenScheme(String description, Long id, PageBeanIssueTypeScreenScheme issueTypeScreenSchemes, String name, ScreenTypes screens) {
         this.description = description;
         this.id = id;
         this.issueTypeScreenSchemes = issueTypeScreenSchemes;

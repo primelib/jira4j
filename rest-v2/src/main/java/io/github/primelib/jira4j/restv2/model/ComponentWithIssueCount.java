@@ -51,7 +51,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public class ComponentWithIssueCount {
 
     @JsonProperty("assignee")
-    protected ComponentWithIssueCountAssignee assignee;
+    protected User assignee;
 
     /**
      * The nominal user type used to determine the assignee for issues created with this component. See {@code realAssigneeType} for details on how the type of the user, and hence the user, assigned to issues is determined. Takes the following values:
@@ -92,7 +92,7 @@ public class ComponentWithIssueCount {
     protected Long issueCount;
 
     @JsonProperty("lead")
-    protected ComponentWithIssueCountLead lead;
+    protected User lead;
 
     /**
      * The name for the component.
@@ -113,7 +113,7 @@ public class ComponentWithIssueCount {
     protected Long projectId;
 
     @JsonProperty("realAssignee")
-    protected ComponentWithIssueCountRealAssignee realAssignee;
+    protected User realAssignee;
 
     /**
      * The type of the assignee that is assigned to issues created with this component, when an assignee cannot be set from the {@code assigneeType}. For example, {@code assigneeType} is set to {@code COMPONENT_LEAD} but no component lead is set. This property is set to one of the following values:
@@ -163,7 +163,7 @@ public class ComponentWithIssueCount {
      * @param self The URL for this count of the issues contained in the component.
      */
     @ApiStatus.Internal
-    public ComponentWithIssueCount(ComponentWithIssueCountAssignee assignee, AssigneeTypeEnum assigneeType, String description, String id, Boolean isAssigneeTypeValid, Long issueCount, ComponentWithIssueCountLead lead, String name, String project, Long projectId, ComponentWithIssueCountRealAssignee realAssignee, RealAssigneeTypeEnum realAssigneeType, URI self) {
+    public ComponentWithIssueCount(User assignee, AssigneeTypeEnum assigneeType, String description, String id, Boolean isAssigneeTypeValid, Long issueCount, User lead, String name, String project, Long projectId, User realAssignee, RealAssigneeTypeEnum realAssigneeType, URI self) {
         this.assignee = assignee;
         this.assigneeType = assigneeType;
         this.description = description;
