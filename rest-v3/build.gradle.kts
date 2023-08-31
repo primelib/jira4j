@@ -30,9 +30,9 @@ projectConfiguration {
         }
         pom.licenses {
             license {
-                name.set("MIT")
+                name.set("MIT License")
                 distribution.set("repo")
-                url.set("https://github.com/primelib/jira4j/blob/main/LICENSE")
+                url.set("https://raw.githubusercontent.com/primelib/jira4j/main/LICENSE")
             }
         }
         pom.scm {
