@@ -100,6 +100,7 @@ public class JiraRESTV3Factory {
                 .addCapability(new MicrometerCapability(config.meterRegistry()))
                 .addCapability(new PrimeCapability(config.backendName(), config.extensions()))
                 .requestInterceptor(new AuthInterceptor(config.auth()))
+                .decodeVoid()
                 .target(config.api(), config.baseUrl());
     }
 }
