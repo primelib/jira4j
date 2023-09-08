@@ -307,6 +307,7 @@ import io.github.primelib.jira4j.restv3.model.UserMigrationBean;
 import io.github.primelib.jira4j.restv3.model.Version;
 import io.github.primelib.jira4j.restv3.model.VersionIssueCounts;
 import io.github.primelib.jira4j.restv3.model.VersionMoveBean;
+import io.github.primelib.jira4j.restv3.model.VersionRelatedWork;
 import io.github.primelib.jira4j.restv3.model.VersionUnresolvedIssuesCount;
 import io.github.primelib.jira4j.restv3.model.Votes;
 import io.github.primelib.jira4j.restv3.model.Watchers;
@@ -323,6 +324,11 @@ import io.github.primelib.jira4j.restv3.model.WorkflowRulesSearch;
 import io.github.primelib.jira4j.restv3.model.WorkflowRulesSearchDetails;
 import io.github.primelib.jira4j.restv3.model.WorkflowScheme;
 import io.github.primelib.jira4j.restv3.model.WorkflowSchemeProjectAssociation;
+import io.github.primelib.jira4j.restv3.model.WorkflowSchemeReadRequest;
+import io.github.primelib.jira4j.restv3.model.WorkflowSchemeReadResponse;
+import io.github.primelib.jira4j.restv3.model.WorkflowSchemeUpdateRequest;
+import io.github.primelib.jira4j.restv3.model.WorkflowSchemeUpdateRequiredMappingsRequest;
+import io.github.primelib.jira4j.restv3.model.WorkflowSchemeUpdateRequiredMappingsResponse;
 import io.github.primelib.jira4j.restv3.model.WorkflowTransitionProperty;
 import io.github.primelib.jira4j.restv3.model.WorkflowTransitionRulesUpdate;
 import io.github.primelib.jira4j.restv3.model.WorkflowTransitionRulesUpdateErrors;
@@ -2294,6 +2300,24 @@ public interface JiraRESTV3AsyncApi {
     CompletableFuture<ProjectRole> createProjectRole(@NotNull CreateUpdateRoleRequestBean createUpdateRoleRequestBean);
 
     /**
+     * Create related work
+     * <p>
+     * Creates a related work for the given version. You can only create a generic link type of related works via this API. relatedWorkId will be auto-generated UUID, that does not need to be provided.
+     * This operation can be accessed anonymously.
+     * **[Permissions](#permissions) required:** *Resolve issues:* and *Edit issues* [Managing project permissions](https://confluence.atlassian.com/adminjiraserver/managing-project-permissions-938847145.html) for the project that contains the version.
+     *
+     * Authentication - Required Scopes: [write:jira-work]
+     * @param id                    (required)
+     * @param versionRelatedWork    (required)
+     */
+    @RequestLine("POST /rest/api/3/version/{id}/relatedwork")
+    @Headers({
+        "Content-Type: application/json", 
+        "Accept: application/json"
+    })
+    CompletableFuture<VersionRelatedWork> createRelatedWork(@Param("id") @NotNull String id, @NotNull VersionRelatedWork versionRelatedWork);
+
+    /**
      * Create resolution
      * <p>
      * Creates an issue resolution.
@@ -2365,7 +2389,7 @@ public interface JiraRESTV3AsyncApi {
      * Create UI modification
      * <p>
      * Creates a UI modification. UI modification can only be created by Forge apps.
-     * Each app can define up to 100 UI modifications. Each UI modification can define up to 1000 contexts.
+     * Each app can define up to 3000 UI modifications. Each UI modification can define up to 1000 contexts. The same context can be assigned to maximum 100 UI modifications.
      * **[Permissions](#permissions) required:**
      *  *
      * *None* if the UI modification is created without contexts.
@@ -5111,6 +5135,23 @@ public interface JiraRESTV3AsyncApi {
         "Accept: application/json"
     })
     CompletableFuture<ProjectRole> deleteProjectRoleActorsFromRole(@Param("id") @NotNull Long id, @Param("user") @Nullable String user, @Param("groupId") @Nullable String groupId, @Param("group") @Nullable String group);
+
+    /**
+     * Delete related work
+     * <p>
+     * Deletes the given related work for the given version.
+     * This operation can be accessed anonymously.
+     * **[Permissions](#permissions) required:** *Resolve issues:* and *Edit issues* [Managing project permissions](https://confluence.atlassian.com/adminjiraserver/managing-project-permissions-938847145.html) for the project that contains the version.
+     *
+     * Authentication - Required Scopes: [write:jira-work]
+     * @param versionId            The ID of the version that the target related work belongs to. (required)
+     * @param relatedWorkId        The ID of the related work to delete. (required)
+     */
+    @RequestLine("DELETE /rest/api/3/version/{versionId}/relatedwork/{relatedWorkId}")
+    @Headers({
+        "Accept: application/json"
+    })
+    CompletableFuture<Void> deleteRelatedWork(@Param("versionId") @NotNull String versionId, @Param("relatedWorkId") @NotNull String relatedWorkId);
 
     /**
      * Delete remote issue link by global ID
@@ -9305,6 +9346,22 @@ public interface JiraRESTV3AsyncApi {
     CompletableFuture<List<Project>> getRecent(@Param("expand") @Nullable String expand, @Param("properties") @Nullable List<Object> properties);
 
     /**
+     * Get related work
+     * <p>
+     * Returns related work items for the given version id.
+     * This operation can be accessed anonymously.
+     * **[Permissions](#permissions) required:** *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project containing the version.
+     *
+     * Authentication - Required Scopes: [read:jira-work]
+     * @param id                   The ID of the version. (required)
+     */
+    @RequestLine("GET /rest/api/3/version/{id}/relatedwork")
+    @Headers({
+        "Accept: application/json"
+    })
+    CompletableFuture<List<VersionRelatedWork>> getRelatedWork(@Param("id") @NotNull String id);
+
+    /**
      * Get remote issue link by ID
      * <p>
      * Returns a remote issue link for an issue.
@@ -10593,6 +10650,27 @@ public interface JiraRESTV3AsyncApi {
     CompletableFuture<Void> publishDraftWorkflowScheme(@Param("id") @NotNull Long id, @NotNull PublishDraftWorkflowScheme publishDraftWorkflowScheme, @Param("validateOnly") @Nullable Boolean validateOnly);
 
     /**
+     * Bulk get workflow schemes
+     * <p>
+     * Returns a list of workflow schemes by providing workflow scheme IDs or project IDs.
+     * **[Permissions](#permissions) required:**
+     *  *
+     * *Administer Jira* global permission to access all, including project-scoped, workflow schemes
+     * *
+     * *Administer projects* project permissions to access project-scoped workflow schemes
+     *
+     * Authentication - Required Scopes: [manage:jira-configuration]
+     * @param workflowSchemeReadRequest  (required)
+     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code workflows.usages} Returns the project and issue types that each workflow in the workflow scheme is associated with. (optional)
+     */
+    @RequestLine("POST /rest/api/3/workflowscheme/read?expand={expand}")
+    @Headers({
+        "Content-Type: application/json", 
+        "Accept: application/json"
+    })
+    CompletableFuture<List<WorkflowSchemeReadResponse>> readWorkflowSchemes(@NotNull WorkflowSchemeReadRequest workflowSchemeReadRequest, @Param("expand") @Nullable String expand);
+
+    /**
      * Bulk get workflows
      * <p>
      * Returns a list of workflows and related statuses by providing workflow names, workflow IDs, or project and issue types.
@@ -11252,7 +11330,7 @@ public interface JiraRESTV3AsyncApi {
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
      * @param id                   The list of priority IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code id=2&amp;id=3}. (optional)
-     * @param projectId            The list of projects IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code projectid=10010&amp;projectid=10111}. (optional)
+     * @param projectId            The list of projects IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code projectId=10010&amp;projectId=10111}. (optional)
      * @param onlyDefault          Whether only the default priority is returned. (optional, defaults to false)
      */
     @RequestLine("GET /rest/api/3/priority/search?startAt={startAt}&maxResults={maxResults}&id={id}&projectId={projectId}&onlyDefault={onlyDefault}")
@@ -12663,6 +12741,24 @@ public interface JiraRESTV3AsyncApi {
     CompletableFuture<Object> updateProjectEmail(@Param("projectId") @NotNull Long projectId, @NotNull ProjectEmailAddress projectEmailAddress);
 
     /**
+     * Update related work
+     * <p>
+     * Updates the given related work. You can only update generic link related works via Rest APIs. Any archived version related works can't be edited.
+     * This operation can be accessed anonymously.
+     * **[Permissions](#permissions) required:** *Resolve issues:* and *Edit issues* [Managing project permissions](https://confluence.atlassian.com/adminjiraserver/managing-project-permissions-938847145.html) for the project that contains the version.
+     *
+     * Authentication - Required Scopes: [write:jira-work]
+     * @param id                   The ID of the version to update the related work on. For the related work id, pass it to the input JSON. (required)
+     * @param versionRelatedWork    (required)
+     */
+    @RequestLine("PUT /rest/api/3/version/{id}/relatedwork")
+    @Headers({
+        "Content-Type: application/json", 
+        "Accept: application/json"
+    })
+    CompletableFuture<VersionRelatedWork> updateRelatedWork(@Param("id") @NotNull String id, @NotNull VersionRelatedWork versionRelatedWork);
+
+    /**
      * Update remote issue link by ID
      * <p>
      * Updates a remote issue link for an issue.
@@ -12703,6 +12799,26 @@ public interface JiraRESTV3AsyncApi {
         "Accept: application/json"
     })
     CompletableFuture<Object> updateResolution(@Param("id") @NotNull String id, @NotNull UpdateResolutionDetails updateResolutionDetails);
+
+    /**
+     * Update workflow scheme
+     * <p>
+     * Updates company-managed and team-managed project workflow schemes. This API doesn't have a concept of draft, so any changes made to a workflow scheme are immediately available. When changing the available statuses for issue types, an [asynchronous task](#async) migrates the issues as defined in the provided mappings.
+     * **[Permissions](#permissions) required:**
+     *  *
+     * *Administer Jira* project permission to update all, including global-scoped, workflow schemes.
+     * *
+     * *Administer projects* project permission to update project-scoped workflow schemes.
+     *
+     * Authentication - Required Scopes: [manage:jira-configuration]
+     * @param workflowSchemeUpdateRequest  (required)
+     */
+    @RequestLine("POST /rest/api/3/workflowscheme/update")
+    @Headers({
+        "Content-Type: application/json", 
+        "Accept: application/json"
+    })
+    CompletableFuture<Object> updateSchemes(@NotNull WorkflowSchemeUpdateRequest workflowSchemeUpdateRequest);
 
     /**
      * Update screen
@@ -12780,7 +12896,7 @@ public interface JiraRESTV3AsyncApi {
      * Update UI modification
      * <p>
      * Updates a UI modification. UI modification can only be updated by Forge apps.
-     * Each UI modification can define up to 1000 contexts.
+     * Each UI modification can define up to 1000 contexts. The same context can be assigned to maximum 100 UI modifications.
      * **[Permissions](#permissions) required:**
      *  *
      * *None* if the UI modification is created without contexts.
@@ -12868,6 +12984,26 @@ public interface JiraRESTV3AsyncApi {
         "Accept: application/json"
     })
     CompletableFuture<WorkflowScheme> updateWorkflowSchemeDraft(@Param("id") @NotNull Long id, @NotNull WorkflowScheme workflowScheme);
+
+    /**
+     * Get required status mappings for workflow scheme update
+     * <p>
+     * Gets the required status mappings for the desired changes to a workflow scheme. The results are provided per issue type and workflow. When updating a workflow scheme, status mappings can be provided per issue type, per workflow, or both.
+     * **[Permissions](#permissions) required:**
+     *  *
+     * *Administer Jira* permission to update all, including global-scoped, workflow schemes.
+     * *
+     * *Administer projects* project permission to update project-scoped workflow schemes.
+     *
+     * Authentication - Required Scopes: [manage:jira-configuration]
+     * @param workflowSchemeUpdateRequiredMappingsRequest  (required)
+     */
+    @RequestLine("POST /rest/api/3/workflowscheme/update/mappings")
+    @Headers({
+        "Content-Type: application/json", 
+        "Accept: application/json"
+    })
+    CompletableFuture<WorkflowSchemeUpdateRequiredMappingsResponse> updateWorkflowSchemeMappings(@NotNull WorkflowSchemeUpdateRequiredMappingsRequest workflowSchemeUpdateRequiredMappingsRequest);
 
     /**
      * Update workflow transition property

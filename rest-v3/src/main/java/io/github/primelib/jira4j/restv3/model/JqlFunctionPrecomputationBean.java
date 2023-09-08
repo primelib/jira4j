@@ -32,6 +32,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonPropertyOrder({
     "arguments",
     "created",
+    "error",
     "field",
     "functionKey",
     "functionName",
@@ -50,6 +51,9 @@ public class JqlFunctionPrecomputationBean {
 
     @JsonProperty("created")
     protected OffsetDateTime created;
+
+    @JsonProperty("error")
+    protected String error;
 
     @JsonProperty("field")
     protected String field;
@@ -90,6 +94,7 @@ public class JqlFunctionPrecomputationBean {
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #JqlFunctionPrecomputationBean(Consumer)} instead.
      * @param arguments arguments
      * @param created created
+     * @param error error
      * @param field field
      * @param functionKey functionKey
      * @param functionName functionName
@@ -100,9 +105,10 @@ public class JqlFunctionPrecomputationBean {
      * @param value value
      */
     @ApiStatus.Internal
-    public JqlFunctionPrecomputationBean(List<String> arguments, OffsetDateTime created, String field, String functionKey, String functionName, String id, String operator, OffsetDateTime updated, OffsetDateTime used, String value) {
+    public JqlFunctionPrecomputationBean(List<String> arguments, OffsetDateTime created, String error, String field, String functionKey, String functionName, String id, String operator, OffsetDateTime updated, OffsetDateTime used, String value) {
         this.arguments = arguments;
         this.created = created;
+        this.error = error;
         this.field = field;
         this.functionKey = functionKey;
         this.functionName = functionName;

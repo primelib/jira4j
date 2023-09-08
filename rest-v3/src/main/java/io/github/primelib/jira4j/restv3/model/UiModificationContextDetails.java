@@ -10,11 +10,14 @@ import lombok.Setter;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
 import lombok.NoArgsConstructor;
+import lombok.AllArgsConstructor;
 import lombok.experimental.Accessors;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonValue;
 
 /**
  * UiModificationContextDetails
@@ -63,10 +66,10 @@ public class UiModificationContextDetails {
     protected String projectId;
 
     /**
-     * The view type of the context. Only {@code GIC} (Global Issue Create) is supported.
+     * The view type of the context. Only {@code GIC}(Global Issue Create) and {@code IssueView} are supported.
      */
     @JsonProperty("viewType")
-    protected String viewType;
+    protected ViewTypeEnum viewType;
 
     /**
      * Constructs a validated instance of {@link UiModificationContextDetails}.
@@ -85,15 +88,44 @@ public class UiModificationContextDetails {
      * @param isAvailable Whether a context is available. For example, when a project is deleted the context becomes unavailable.
      * @param issueTypeId The issue type ID of the context.
      * @param projectId The project ID of the context.
-     * @param viewType The view type of the context. Only {@code GIC} (Global Issue Create) is supported.
+     * @param viewType The view type of the context. Only {@code GIC}(Global Issue Create) and {@code IssueView} are supported.
      */
     @ApiStatus.Internal
-    public UiModificationContextDetails(String id, Boolean isAvailable, String issueTypeId, String projectId, String viewType) {
+    public UiModificationContextDetails(String id, Boolean isAvailable, String issueTypeId, String projectId, ViewTypeEnum viewType) {
         this.id = id;
         this.isAvailable = isAvailable;
         this.issueTypeId = issueTypeId;
         this.projectId = projectId;
         this.viewType = viewType;
+    }
+
+    /**
+     * The view type of the context. Only {@code GIC}(Global Issue Create) and {@code IssueView} are supported.
+     */
+    @AllArgsConstructor
+    public enum ViewTypeEnum {
+        GIC("GIC"),
+        ISSUEVIEW("IssueView");
+
+        private static final ViewTypeEnum[] VALUES = values(); // prevent allocating a new array for every call to values()
+        private final String value;
+
+        @JsonCreator
+        public static ViewTypeEnum of(String input) {
+            if (input != null) {
+                for (ViewTypeEnum v : VALUES) {
+                    if (input.equalsIgnoreCase(v.value)) 
+                        return v;
+                }
+            }
+
+            return null;
+        }
+
+        @JsonValue
+        public String getValue() {
+            return value;
+        }
     }
 
 }
