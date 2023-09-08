@@ -12,13 +12,13 @@ import lombok.ToString;
 import lombok.NoArgsConstructor;
 import lombok.experimental.Accessors;
 
-import java.util.Map;
+import java.util.List;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * IssueBeanEditmeta
+ * SimpleUsage
  *
  */
 @Getter
@@ -29,33 +29,45 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
 @Builder
 @JsonPropertyOrder({
-    "fields"
+    "issueTypeIds",
+    "projectId"
 })
-@JsonTypeName("IssueBean_editmeta")
+@JsonTypeName("SimpleUsage")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
-public class IssueBeanEditmeta {
-
-    @JsonProperty("fields")
-    protected Map<String, FieldMetadata> fields;
+public class SimpleUsage {
 
     /**
-     * Constructs a validated instance of {@link IssueBeanEditmeta}.
+     * The issue type IDs for the usage.
+     */
+    @JsonProperty("issueTypeIds")
+    protected List<String> issueTypeIds;
+
+    /**
+     * The project ID for the usage.
+     */
+    @JsonProperty("projectId")
+    protected String projectId;
+
+    /**
+     * Constructs a validated instance of {@link SimpleUsage}.
      *
      * @param spec the specification to process
      */
-    public IssueBeanEditmeta(Consumer<IssueBeanEditmeta> spec) {
+    public SimpleUsage(Consumer<SimpleUsage> spec) {
         spec.accept(this);
     }
 
     /**
-     * Constructs a validated instance of {@link IssueBeanEditmeta}.
+     * Constructs a validated instance of {@link SimpleUsage}.
      * <p>
-     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #IssueBeanEditmeta(Consumer)} instead.
-     * @param fields fields
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #SimpleUsage(Consumer)} instead.
+     * @param issueTypeIds The issue type IDs for the usage.
+     * @param projectId The project ID for the usage.
      */
     @ApiStatus.Internal
-    public IssueBeanEditmeta(Map<String, FieldMetadata> fields) {
-        this.fields = fields;
+    public SimpleUsage(List<String> issueTypeIds, String projectId) {
+        this.issueTypeIds = issueTypeIds;
+        this.projectId = projectId;
     }
 
 }

@@ -28,12 +28,16 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
 @Builder
 @JsonPropertyOrder({
+    "error",
     "id",
     "value"
 })
 @JsonTypeName("JqlFunctionPrecomputationUpdateBean")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class JqlFunctionPrecomputationUpdateBean {
+
+    @JsonProperty("error")
+    protected String error;
 
     @JsonProperty("id")
     protected String id;
@@ -54,11 +58,13 @@ public class JqlFunctionPrecomputationUpdateBean {
      * Constructs a validated instance of {@link JqlFunctionPrecomputationUpdateBean}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #JqlFunctionPrecomputationUpdateBean(Consumer)} instead.
+     * @param error error
      * @param id id
      * @param value value
      */
     @ApiStatus.Internal
-    public JqlFunctionPrecomputationUpdateBean(String id, String value) {
+    public JqlFunctionPrecomputationUpdateBean(String error, String id, String value) {
+        this.error = error;
         this.id = id;
         this.value = value;
     }
