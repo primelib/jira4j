@@ -35,6 +35,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class IssueBeanEditmeta {
 
+    /**
+     * A list of editable field details.
+     */
     @JsonProperty("fields")
     protected Map<String, FieldMetadata> fields;
 
@@ -51,7 +54,7 @@ public class IssueBeanEditmeta {
      * Constructs a validated instance of {@link IssueBeanEditmeta}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #IssueBeanEditmeta(Consumer)} instead.
-     * @param fields fields
+     * @param fields A list of editable field details.
      */
     @ApiStatus.Internal
     public IssueBeanEditmeta(Map<String, FieldMetadata> fields) {
