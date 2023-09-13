@@ -1,8 +1,10 @@
+release: true
 modules:
   # source: https://developer.atlassian.com/cloud/jira/platform/rest/v2/intro/#version
   - name: jira-rest-v2
     dir: rest-v2
     spec_file: openapi.json
+    spec_format: openapi
     spec_url: https://dac-static.atlassian.com/cloud/jira/platform/swagger.v3.json
     spec_script: |
       jq '.info.title="Jira REST V2"' "$1" | sponge "$1" # overwrite name
@@ -31,6 +33,7 @@ modules:
   - name: jira-rest-v3
     dir: rest-v3
     spec_file: openapi.json
+    spec_format: openapi
     spec_url: https://dac-static.atlassian.com/cloud/jira/platform/swagger-v3.v3.json
     spec_script: |
       jq '.info.title="Jira REST V3"' "$1" | sponge "$1" # overwrite name
