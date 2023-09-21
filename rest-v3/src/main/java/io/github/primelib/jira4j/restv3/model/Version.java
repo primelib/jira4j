@@ -33,6 +33,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonPropertyOrder({
     "archived",
     "description",
+    "driver",
     "expand",
     "id",
     "issuesStatusForFixVersion",
@@ -66,11 +67,19 @@ public class Version {
     protected String description;
 
     /**
+     * If the expand option {@code driver} is used, returns the Atlassian account ID of the driver.
+     */
+    @JsonProperty("driver")
+    protected String driver;
+
+    /**
      * Use [expand](em&amp;gt;#expansion) to include additional information about version in the response. This parameter accepts a comma-separated list. Expand options include:
      *  *
      * {@code operations} Returns the list of operations available for this version.
      * *
      * {@code issuesstatus} Returns the count of issues in this version for each of the status categories *to do*, *in progress*, *done*, and *unmapped*. The *unmapped* property contains a count of issues with a status other than *to do*, *in progress*, and *done*.
+     * *
+     * {@code driver} Returns the Atlassian account ID of the version driver.
      * Optional for create and update.
      */
     @JsonProperty("expand")
@@ -172,7 +181,8 @@ public class Version {
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #Version(Consumer)} instead.
      * @param archived Indicates that the version is archived. Optional when creating or updating a version.
      * @param description The description of the version. Optional when creating or updating a version.
-     * @param expand Use [expand](em&amp;gt;#expansion) to include additional information about version in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code operations} Returns the list of operations available for this version.  *  {@code issuesstatus} Returns the count of issues in this version for each of the status categories *to do*, *in progress*, *done*, and *unmapped*. The *unmapped* property contains a count of issues with a status other than *to do*, *in progress*, and *done*.  Optional for create and update.
+     * @param driver If the expand option {@code driver} is used, returns the Atlassian account ID of the driver.
+     * @param expand Use [expand](em&amp;gt;#expansion) to include additional information about version in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code operations} Returns the list of operations available for this version.  *  {@code issuesstatus} Returns the count of issues in this version for each of the status categories *to do*, *in progress*, *done*, and *unmapped*. The *unmapped* property contains a count of issues with a status other than *to do*, *in progress*, and *done*.  *  {@code driver} Returns the Atlassian account ID of the version driver.  Optional for create and update.
      * @param id The ID of the version.
      * @param issuesStatusForFixVersion issuesStatusForFixVersion
      * @param moveUnfixedIssuesTo The URL of the self link to the version to which all unfixed issues are moved when a version is released. Not applicable when creating a version. Optional when updating a version.
@@ -189,9 +199,10 @@ public class Version {
      * @param userStartDate The date on which work on this version is expected to start, expressed in the instance's *Day/Month/Year Format* date format.
      */
     @ApiStatus.Internal
-    public Version(Boolean archived, String description, String expand, String id, VersionIssuesStatusForFixVersion issuesStatusForFixVersion, URI moveUnfixedIssuesTo, String name, List<SimpleLink> operations, Boolean overdue, String project, Long projectId, LocalDate releaseDate, Boolean released, URI self, LocalDate startDate, String userReleaseDate, String userStartDate) {
+    public Version(Boolean archived, String description, String driver, String expand, String id, VersionIssuesStatusForFixVersion issuesStatusForFixVersion, URI moveUnfixedIssuesTo, String name, List<SimpleLink> operations, Boolean overdue, String project, Long projectId, LocalDate releaseDate, Boolean released, URI self, LocalDate startDate, String userReleaseDate, String userStartDate) {
         this.archived = archived;
         this.description = description;
+        this.driver = driver;
         this.expand = expand;
         this.id = id;
         this.issuesStatusForFixVersion = issuesStatusForFixVersion;
