@@ -94,6 +94,8 @@ public class GetProjectVersionsPaginatedOperationSpec {
      * {@code issuesstatus} Returns the number of issues in each status category for each version.
      * *
      * {@code operations} Returns actions that can be performed on the specified version.
+     * *
+     * {@code driver} Returns the Atlassian account ID of the version driver.
      */
     @Nullable 
     private String expand;
@@ -120,7 +122,7 @@ public class GetProjectVersionsPaginatedOperationSpec {
      * @param orderBy              [Order](#ordering) the results by a field:   *  {@code description} Sorts by version description.  *  {@code name} Sorts by version name.  *  {@code releaseDate} Sorts by release date, starting with the oldest date. Versions with no release date are listed last.  *  {@code sequence} Sorts by the order of appearance in the user interface.  *  {@code startDate} Sorts by start date, starting with the oldest date. Versions with no start date are listed last.
      * @param query                Filter the results using a literal string. Versions with matching {@code name} or {@code description} are returned (case insensitive).
      * @param status               A list of status values used to filter the results by version status. This parameter accepts a comma-separated list. The status values are {@code released}, {@code unreleased}, and {@code archived}.
-     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code issuesstatus} Returns the number of issues in each status category for each version.  *  {@code operations} Returns actions that can be performed on the specified version.
+     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code issuesstatus} Returns the number of issues in each status category for each version.  *  {@code operations} Returns actions that can be performed on the specified version.  *  {@code driver} Returns the Atlassian account ID of the version driver.
      */
     @ApiStatus.Internal
     public GetProjectVersionsPaginatedOperationSpec(String projectIdOrKey, Long startAt, Integer maxResults, String orderBy, String query, String status, String expand) {

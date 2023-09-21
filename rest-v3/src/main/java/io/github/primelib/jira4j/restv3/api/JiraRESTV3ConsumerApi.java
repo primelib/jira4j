@@ -430,6 +430,7 @@ import io.github.primelib.jira4j.restv3.spec.GetAvatarImageByOwnerOperationSpec;
 import io.github.primelib.jira4j.restv3.spec.GetAvatarImageByTypeOperationSpec;
 import io.github.primelib.jira4j.restv3.spec.GetAvatarsOperationSpec;
 import io.github.primelib.jira4j.restv3.spec.GetBulkPermissionsOperationSpec;
+import io.github.primelib.jira4j.restv3.spec.GetBulkScreenTabsOperationSpec;
 import io.github.primelib.jira4j.restv3.spec.GetChangeLogsOperationSpec;
 import io.github.primelib.jira4j.restv3.spec.GetChangeLogsByIdsOperationSpec;
 import io.github.primelib.jira4j.restv3.spec.GetColumnsOperationSpec;
@@ -7584,6 +7585,27 @@ public class JiraRESTV3ConsumerApi {
     }
 
     /**
+     * Get bulk screen tabs
+     * <p>
+     * Returns the list of tabs for a bulk of screens.
+     * **[Permissions](#permissions) required:**
+     *  *
+     * *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
+     * Authentication - Required Scopes: [manage:jira-project]
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>screenId: The list of screen IDs. To include multiple screen IDs, provide an ampersand-separated list. For example, {@code screenId=10000&amp;screenId=10001}.</li>
+     *   <li>tabId: The list of tab IDs. To include multiple tab IDs, provide an ampersand-separated list. For example, {@code tabId=10000&amp;tabId=10001}.</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResult: The maximum number of items to return per page. The maximum number is 100,</li>
+     * </ul>
+     */
+    public void getBulkScreenTabs(Consumer<GetBulkScreenTabsOperationSpec> spec) {
+        GetBulkScreenTabsOperationSpec r = new GetBulkScreenTabsOperationSpec(spec);
+        api.getBulkScreenTabs(r.screenId(), r.tabId(), r.startAt(), r.maxResult());
+    }
+
+    /**
      * Get changelogs
      * <p>
      * Returns a [paginated](#pagination) list of all changelogs for an issue sorted by date, starting from the oldest.
@@ -9797,7 +9819,7 @@ public class JiraRESTV3ConsumerApi {
      *   <li>orderBy: [Order](#ordering) the results by a field:   *  {@code description} Sorts by version description.  *  {@code name} Sorts by version name.  *  {@code releaseDate} Sorts by release date, starting with the oldest date. Versions with no release date are listed last.  *  {@code sequence} Sorts by the order of appearance in the user interface.  *  {@code startDate} Sorts by start date, starting with the oldest date. Versions with no start date are listed last.</li>
      *   <li>query: Filter the results using a literal string. Versions with matching {@code name} or {@code description} are returned (case insensitive).</li>
      *   <li>status: A list of status values used to filter the results by version status. This parameter accepts a comma-separated list. The status values are {@code released}, {@code unreleased}, and {@code archived}.</li>
-     *   <li>expand: Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code issuesstatus} Returns the number of issues in each status category for each version.  *  {@code operations} Returns actions that can be performed on the specified version.</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code issuesstatus} Returns the number of issues in each status category for each version.  *  {@code operations} Returns actions that can be performed on the specified version.  *  {@code driver} Returns the Atlassian account ID of the version driver.</li>
      * </ul>
      */
     public PageBeanVersion getProjectVersionsPaginated(Consumer<GetProjectVersionsPaginatedOperationSpec> spec) {
@@ -10534,7 +10556,7 @@ public class JiraRESTV3ConsumerApi {
      * @param spec a consumer that creates the payload for this operation. Supports the following properties:
      * <ul>
      *   <li>id: The ID of the version.</li>
-     *   <li>expand: Use [expand](#expansion) to include additional information about version in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code operations} Returns the list of operations available for this version.  *  {@code issuesstatus} Returns the count of issues in this version for each of the status categories *to do*, *in progress*, *done*, and *unmapped*. The *unmapped* property represents the number of issues with a status other than *to do*, *in progress*, and *done*.</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information about version in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code operations} Returns the list of operations available for this version.  *  {@code issuesstatus} Returns the count of issues in this version for each of the status categories *to do*, *in progress*, *done*, and *unmapped*. The *unmapped* property represents the number of issues with a status other than *to do*, *in progress*, and *done*.  *  {@code driver} Returns the Atlassian account ID of the version driver.</li>
      * </ul>
      */
     public Version getVersion(Consumer<GetVersionOperationSpec> spec) {
