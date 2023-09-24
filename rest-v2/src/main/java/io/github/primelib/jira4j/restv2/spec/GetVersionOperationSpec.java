@@ -54,6 +54,8 @@ public class GetVersionOperationSpec {
      * {@code issuesstatus} Returns the count of issues in this version for each of the status categories *to do*, *in progress*, *done*, and *unmapped*. The *unmapped* property represents the number of issues with a status other than *to do*, *in progress*, and *done*.
      * *
      * {@code driver} Returns the Atlassian account ID of the version driver.
+     * *
+     * {@code approvers} Returns a list containing the Atlassian account IDs of approvers for this version.
      */
     @Nullable 
     private String expand;
@@ -75,7 +77,7 @@ public class GetVersionOperationSpec {
      * <p>
      * NOTE: This constructor is not considered stable and may change if the operation is updated.
      * @param id                   The ID of the version.
-     * @param expand               Use [expand](#expansion) to include additional information about version in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code operations} Returns the list of operations available for this version.  *  {@code issuesstatus} Returns the count of issues in this version for each of the status categories *to do*, *in progress*, *done*, and *unmapped*. The *unmapped* property represents the number of issues with a status other than *to do*, *in progress*, and *done*.  *  {@code driver} Returns the Atlassian account ID of the version driver.
+     * @param expand               Use [expand](#expansion) to include additional information about version in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code operations} Returns the list of operations available for this version.  *  {@code issuesstatus} Returns the count of issues in this version for each of the status categories *to do*, *in progress*, *done*, and *unmapped*. The *unmapped* property represents the number of issues with a status other than *to do*, *in progress*, and *done*.  *  {@code driver} Returns the Atlassian account ID of the version driver.  *  {@code approvers} Returns a list containing the Atlassian account IDs of approvers for this version.
      */
     @ApiStatus.Internal
     public GetVersionOperationSpec(String id, String expand) {

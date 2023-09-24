@@ -31,6 +31,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
 @Builder
 @JsonPropertyOrder({
+    "approvers",
     "archived",
     "description",
     "driver",
@@ -53,6 +54,12 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonTypeName("Version")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class Version {
+
+    /**
+     * If the expand option {@code approvers} is used, returns a list containing the approvers for this version.
+     */
+    @JsonProperty("approvers")
+    protected List<VersionApprover> approvers;
 
     /**
      * Indicates that the version is archived. Optional when creating or updating a version.
@@ -80,6 +87,8 @@ public class Version {
      * {@code issuesstatus} Returns the count of issues in this version for each of the status categories *to do*, *in progress*, *done*, and *unmapped*. The *unmapped* property contains a count of issues with a status other than *to do*, *in progress*, and *done*.
      * *
      * {@code driver} Returns the Atlassian account ID of the version driver.
+     * *
+     * {@code approvers} Returns a list containing approvers for this version.
      * Optional for create and update.
      */
     @JsonProperty("expand")
@@ -179,10 +188,11 @@ public class Version {
      * Constructs a validated instance of {@link Version}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #Version(Consumer)} instead.
+     * @param approvers If the expand option {@code approvers} is used, returns a list containing the approvers for this version.
      * @param archived Indicates that the version is archived. Optional when creating or updating a version.
      * @param description The description of the version. Optional when creating or updating a version.
      * @param driver If the expand option {@code driver} is used, returns the Atlassian account ID of the driver.
-     * @param expand Use [expand](em&amp;gt;#expansion) to include additional information about version in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code operations} Returns the list of operations available for this version.  *  {@code issuesstatus} Returns the count of issues in this version for each of the status categories *to do*, *in progress*, *done*, and *unmapped*. The *unmapped* property contains a count of issues with a status other than *to do*, *in progress*, and *done*.  *  {@code driver} Returns the Atlassian account ID of the version driver.  Optional for create and update.
+     * @param expand Use [expand](em&amp;gt;#expansion) to include additional information about version in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code operations} Returns the list of operations available for this version.  *  {@code issuesstatus} Returns the count of issues in this version for each of the status categories *to do*, *in progress*, *done*, and *unmapped*. The *unmapped* property contains a count of issues with a status other than *to do*, *in progress*, and *done*.  *  {@code driver} Returns the Atlassian account ID of the version driver.  *  {@code approvers} Returns a list containing approvers for this version.  Optional for create and update.
      * @param id The ID of the version.
      * @param issuesStatusForFixVersion issuesStatusForFixVersion
      * @param moveUnfixedIssuesTo The URL of the self link to the version to which all unfixed issues are moved when a version is released. Not applicable when creating a version. Optional when updating a version.
@@ -199,7 +209,8 @@ public class Version {
      * @param userStartDate The date on which work on this version is expected to start, expressed in the instance's *Day/Month/Year Format* date format.
      */
     @ApiStatus.Internal
-    public Version(Boolean archived, String description, String driver, String expand, String id, VersionIssuesStatusForFixVersion issuesStatusForFixVersion, URI moveUnfixedIssuesTo, String name, List<SimpleLink> operations, Boolean overdue, String project, Long projectId, LocalDate releaseDate, Boolean released, URI self, LocalDate startDate, String userReleaseDate, String userStartDate) {
+    public Version(List<VersionApprover> approvers, Boolean archived, String description, String driver, String expand, String id, VersionIssuesStatusForFixVersion issuesStatusForFixVersion, URI moveUnfixedIssuesTo, String name, List<SimpleLink> operations, Boolean overdue, String project, Long projectId, LocalDate releaseDate, Boolean released, URI self, LocalDate startDate, String userReleaseDate, String userStartDate) {
+        this.approvers = approvers;
         this.archived = archived;
         this.description = description;
         this.driver = driver;
