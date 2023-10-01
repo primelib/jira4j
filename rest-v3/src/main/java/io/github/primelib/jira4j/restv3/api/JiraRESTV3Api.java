@@ -1783,7 +1783,7 @@ public interface JiraRESTV3Api {
     /**
      * Create component
      * <p>
-     * Creates a component. Use components to provide containers for issues within a project.
+     * Creates a project component only. To create a Compass Component, use Compass. Use components to provide containers for issues within a project.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Administer projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project in which the component is created or *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
@@ -8969,17 +8969,16 @@ public interface JiraRESTV3Api {
      * Returns the list of a function's precomputations along with information about when they were created, updated, and last used. Each precomputation has a {@code value} \\- the JQL fragment to replace the custom function clause with.
      * **[Permissions](#permissions) required:** This API is only accessible to apps and apps can only inspect their own functions.
      *
-     * @param functionKey          The function key in format:   *  Forge: {@code ari:cloud:ecosystem::extension/[App ID]/[Environment ID]/static/[Function key from manifest]}.  *  Connect: {@code [App key]__[Module key]}. (optional)
+     * @param functionKey          The function key in format:   *  Forge: {@code ari:cloud:ecosystem::extension/[App ID]/[Environment ID]/static/[Function key from manifest]}  *  Connect: {@code [App key]__[Module key]} (optional)
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 100)
      * @param orderBy              [Order](#ordering) the results by a field:   *  {@code functionKey} Sorts by the functionKey.  *  {@code used} Sorts by the used timestamp.  *  {@code created} Sorts by the created timestamp.  *  {@code updated} Sorts by the updated timestamp. (optional)
-     * @param filter               Not supported yet. (optional)
      */
-    @RequestLine("GET /rest/api/3/jql/function/computation?functionKey={functionKey}&startAt={startAt}&maxResults={maxResults}&orderBy={orderBy}&filter={filter}")
+    @RequestLine("GET /rest/api/3/jql/function/computation?functionKey={functionKey}&startAt={startAt}&maxResults={maxResults}&orderBy={orderBy}")
     @Headers({
         "Accept: application/json"
     })
-    PageBeanJqlFunctionPrecomputationBean getPrecomputations(@Param("functionKey") @Nullable List<String> functionKey, @Param("startAt") @Nullable Long startAt, @Param("maxResults") @Nullable Integer maxResults, @Param("orderBy") @Nullable String orderBy, @Param("filter") @Nullable String filter);
+    PageBeanJqlFunctionPrecomputationBean getPrecomputations(@Param("functionKey") @Nullable List<String> functionKey, @Param("startAt") @Nullable Long startAt, @Param("maxResults") @Nullable Integer maxResults, @Param("orderBy") @Nullable String orderBy);
 
     /**
      * Get preference
@@ -12207,7 +12206,7 @@ public interface JiraRESTV3Api {
     /**
      * Update component
      * <p>
-     * Updates a component. Any fields included in the request are overwritten. If {@code leadAccountId} is an empty string ("") the component lead is removed.
+     * Updates a project component only. A compass component needs to be updated in Compass. Any fields included in the request are overwritten. If {@code leadAccountId} is an empty string ("") the component lead is removed.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Administer projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project containing the component or *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
