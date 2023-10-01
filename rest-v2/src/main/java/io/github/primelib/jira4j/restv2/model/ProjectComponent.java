@@ -14,6 +14,7 @@ import lombok.AllArgsConstructor;
 import lombok.experimental.Accessors;
 
 import java.net.URI;
+import java.util.Map;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -32,6 +33,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
 @Builder
 @JsonPropertyOrder({
+    "ari",
     "assignee",
     "assigneeType",
     "description",
@@ -40,6 +42,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
     "lead",
     "leadAccountId",
     "leadUserName",
+    "metadata",
     "name",
     "project",
     "projectId",
@@ -50,6 +53,12 @@ import com.fasterxml.jackson.annotation.JsonValue;
 @JsonTypeName("ProjectComponent")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class ProjectComponent {
+
+    /**
+     * Compass component's ID. Can't be updated. Not required for creating a Project Component.
+     */
+    @JsonProperty("ari")
+    protected String ari;
 
     @JsonProperty("assignee")
     protected ProjectComponentAssignee assignee;
@@ -102,6 +111,12 @@ public class ProjectComponent {
      */
     @JsonProperty("leadUserName")
     protected String leadUserName;
+
+    /**
+     * Compass component's metadata. Can't be updated. Not required for creating a Project Component.
+     */
+    @JsonProperty("metadata")
+    protected Map<String, String> metadata;
 
     /**
      * The unique name for the component in the project. Required when creating a component. Optional when updating a component. The maximum length is 255 characters.
@@ -157,6 +172,7 @@ public class ProjectComponent {
      * Constructs a validated instance of {@link ProjectComponent}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #ProjectComponent(Consumer)} instead.
+     * @param ari Compass component's ID. Can't be updated. Not required for creating a Project Component.
      * @param assignee assignee
      * @param assigneeType The nominal user type used to determine the assignee for issues created with this component. See {@code realAssigneeType} for details on how the type of the user, and hence the user, assigned to issues is determined. Can take the following values:   *  {@code PROJECT_LEAD} the assignee to any issues created with this component is nominally the lead for the project the component is in.  *  {@code COMPONENT_LEAD} the assignee to any issues created with this component is nominally the lead for the component.  *  {@code UNASSIGNED} an assignee is not set for issues created with this component.  *  {@code PROJECT_DEFAULT} the assignee to any issues created with this component is nominally the default assignee for the project that the component is in.  Default value: {@code PROJECT_DEFAULT}.   Optional when creating or updating a component.
      * @param description The description for the component. Optional when creating or updating a component.
@@ -165,6 +181,7 @@ public class ProjectComponent {
      * @param lead lead
      * @param leadAccountId The accountId of the component's lead user. The accountId uniquely identifies the user across all Atlassian products. For example, *5b10ac8d82e05b22cc7d4ef5*.
      * @param leadUserName This property is no longer available and will be removed from the documentation soon. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.
+     * @param metadata Compass component's metadata. Can't be updated. Not required for creating a Project Component.
      * @param name The unique name for the component in the project. Required when creating a component. Optional when updating a component. The maximum length is 255 characters.
      * @param project The key of the project the component is assigned to. Required when creating a component. Can't be updated.
      * @param projectId The ID of the project the component is assigned to.
@@ -173,7 +190,8 @@ public class ProjectComponent {
      * @param self The URL of the component.
      */
     @ApiStatus.Internal
-    public ProjectComponent(ProjectComponentAssignee assignee, AssigneeTypeEnum assigneeType, String description, String id, Boolean isAssigneeTypeValid, ProjectComponentLead lead, String leadAccountId, String leadUserName, String name, String project, Long projectId, ProjectComponentRealAssignee realAssignee, RealAssigneeTypeEnum realAssigneeType, URI self) {
+    public ProjectComponent(String ari, ProjectComponentAssignee assignee, AssigneeTypeEnum assigneeType, String description, String id, Boolean isAssigneeTypeValid, ProjectComponentLead lead, String leadAccountId, String leadUserName, Map<String, String> metadata, String name, String project, Long projectId, ProjectComponentRealAssignee realAssignee, RealAssigneeTypeEnum realAssigneeType, URI self) {
+        this.ari = ari;
         this.assignee = assignee;
         this.assigneeType = assigneeType;
         this.description = description;
@@ -182,6 +200,7 @@ public class ProjectComponent {
         this.lead = lead;
         this.leadAccountId = leadAccountId;
         this.leadUserName = leadUserName;
+        this.metadata = metadata;
         this.name = name;
         this.project = project;
         this.projectId = projectId;

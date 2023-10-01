@@ -41,9 +41,9 @@ public class GetPrecomputationsOperationSpec {
     /**
      * The function key in format:
      *  *
-     * Forge: {@code ari:cloud:ecosystem::extension/[App ID]/[Environment ID]/static/[Function key from manifest]}.
+     * Forge: {@code ari:cloud:ecosystem::extension/[App ID]/[Environment ID]/static/[Function key from manifest]}
      * *
-     * Connect: {@code [App key]__[Module key]}.
+     * Connect: {@code [App key]__[Module key]}
      */
     @Nullable 
     private List<String> functionKey;
@@ -75,12 +75,6 @@ public class GetPrecomputationsOperationSpec {
     private String orderBy;
 
     /**
-     * Not supported yet.
-     */
-    @Nullable 
-    private String filter;
-
-    /**
      * Constructs a validated instance of {@link GetPrecomputationsOperationSpec}.
      *
      * @param spec the specification to process
@@ -96,19 +90,17 @@ public class GetPrecomputationsOperationSpec {
      * Constructs a validated instance of {@link GetPrecomputationsOperationSpec}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the operation is updated.
-     * @param functionKey          The function key in format:   *  Forge: {@code ari:cloud:ecosystem::extension/[App ID]/[Environment ID]/static/[Function key from manifest]}.  *  Connect: {@code [App key]__[Module key]}.
+     * @param functionKey          The function key in format:   *  Forge: {@code ari:cloud:ecosystem::extension/[App ID]/[Environment ID]/static/[Function key from manifest]}  *  Connect: {@code [App key]__[Module key]}
      * @param startAt              The index of the first item to return in a page of results (page offset).
      * @param maxResults           The maximum number of items to return per page.
      * @param orderBy              [Order](#ordering) the results by a field:   *  {@code functionKey} Sorts by the functionKey.  *  {@code used} Sorts by the used timestamp.  *  {@code created} Sorts by the created timestamp.  *  {@code updated} Sorts by the updated timestamp.
-     * @param filter               Not supported yet.
      */
     @ApiStatus.Internal
-    public GetPrecomputationsOperationSpec(List<String> functionKey, Long startAt, Integer maxResults, String orderBy, String filter) {
+    public GetPrecomputationsOperationSpec(List<String> functionKey, Long startAt, Integer maxResults, String orderBy) {
         this.functionKey = functionKey;
         this.startAt = startAt;
         this.maxResults = maxResults;
         this.orderBy = orderBy;
-        this.filter = filter;
 
         if (VALIDATION_ENABLED)
             validate();
