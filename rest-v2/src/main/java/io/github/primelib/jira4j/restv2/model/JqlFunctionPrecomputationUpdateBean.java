@@ -36,12 +36,21 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
 public class JqlFunctionPrecomputationUpdateBean {
 
+    /**
+     * The error message to be displayed to the user if the given function clause is no longer valid during recalculation of the precomputation.
+     */
     @JsonProperty("error")
     protected String error;
 
+    /**
+     * The id of the precomputation to update.
+     */
     @JsonProperty("id")
     protected String id;
 
+    /**
+     * The new value of the precomputation.
+     */
     @JsonProperty("value")
     protected String value;
 
@@ -58,9 +67,9 @@ public class JqlFunctionPrecomputationUpdateBean {
      * Constructs a validated instance of {@link JqlFunctionPrecomputationUpdateBean}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #JqlFunctionPrecomputationUpdateBean(Consumer)} instead.
-     * @param error error
-     * @param id id
-     * @param value value
+     * @param error The error message to be displayed to the user if the given function clause is no longer valid during recalculation of the precomputation.
+     * @param id The id of the precomputation to update.
+     * @param value The new value of the precomputation.
      */
     @ApiStatus.Internal
     public JqlFunctionPrecomputationUpdateBean(String error, String id, String value) {

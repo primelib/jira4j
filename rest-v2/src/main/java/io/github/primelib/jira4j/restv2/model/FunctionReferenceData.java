@@ -34,6 +34,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 @JsonPropertyOrder({
     "displayName",
     "isList",
+    "supportsListAndSingleValueOperators",
     "types",
     "value"
 })
@@ -52,6 +53,12 @@ public class FunctionReferenceData {
      */
     @JsonProperty("isList")
     protected IsListEnum isList;
+
+    /**
+     * Whether the function supports both single and list value operators.
+     */
+    @JsonProperty("supportsListAndSingleValueOperators")
+    protected SupportsListAndSingleValueOperatorsEnum supportsListAndSingleValueOperators;
 
     /**
      * The data types returned by the function.
@@ -80,13 +87,15 @@ public class FunctionReferenceData {
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #FunctionReferenceData(Consumer)} instead.
      * @param displayName The display name of the function.
      * @param isList Whether the function can take a list of arguments.
+     * @param supportsListAndSingleValueOperators Whether the function supports both single and list value operators.
      * @param types The data types returned by the function.
      * @param value The function identifier.
      */
     @ApiStatus.Internal
-    public FunctionReferenceData(String displayName, IsListEnum isList, List<String> types, String value) {
+    public FunctionReferenceData(String displayName, IsListEnum isList, SupportsListAndSingleValueOperatorsEnum supportsListAndSingleValueOperators, List<String> types, String value) {
         this.displayName = displayName;
         this.isList = isList;
+        this.supportsListAndSingleValueOperators = supportsListAndSingleValueOperators;
         this.types = types;
         this.value = value;
     }
@@ -106,6 +115,35 @@ public class FunctionReferenceData {
         public static IsListEnum of(String input) {
             if (input != null) {
                 for (IsListEnum v : VALUES) {
+                    if (input.equalsIgnoreCase(v.value)) 
+                        return v;
+                }
+            }
+
+            return null;
+        }
+
+        @JsonValue
+        public String getValue() {
+            return value;
+        }
+    }
+
+    /**
+     * Whether the function supports both single and list value operators.
+     */
+    @AllArgsConstructor
+    public enum SupportsListAndSingleValueOperatorsEnum {
+        TRUE("true"),
+        FALSE("false");
+
+        private static final SupportsListAndSingleValueOperatorsEnum[] VALUES = values(); // prevent allocating a new array for every call to values()
+        private final String value;
+
+        @JsonCreator
+        public static SupportsListAndSingleValueOperatorsEnum of(String input) {
+            if (input != null) {
+                for (SupportsListAndSingleValueOperatorsEnum v : VALUES) {
                     if (input.equalsIgnoreCase(v.value)) 
                         return v;
                 }
