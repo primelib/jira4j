@@ -37,6 +37,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
     "healthChecks",
     "scmInfo",
     "serverTime",
+    "serverTimeZone",
     "serverTitle",
     "version",
     "versionNumbers"
@@ -87,6 +88,9 @@ public class ServerInformation {
     @JsonProperty("serverTime")
     protected OffsetDateTime serverTime;
 
+    @JsonProperty("serverTimeZone")
+    protected ServerInformationServerTimeZone serverTimeZone;
+
     /**
      * The name of the Jira instance.
      */
@@ -125,12 +129,13 @@ public class ServerInformation {
      * @param healthChecks Jira instance health check results. Deprecated and no longer returned.
      * @param scmInfo The unique identifier of the Jira version.
      * @param serverTime The time in Jira when this request was responded to.
+     * @param serverTimeZone serverTimeZone
      * @param serverTitle The name of the Jira instance.
      * @param version The version of Jira.
      * @param versionNumbers The major, minor, and revision version numbers of the Jira version.
      */
     @ApiStatus.Internal
-    public ServerInformation(String baseUrl, OffsetDateTime buildDate, Integer buildNumber, String deploymentType, List<HealthCheckResult> healthChecks, String scmInfo, OffsetDateTime serverTime, String serverTitle, String version, List<Integer> versionNumbers) {
+    public ServerInformation(String baseUrl, OffsetDateTime buildDate, Integer buildNumber, String deploymentType, List<HealthCheckResult> healthChecks, String scmInfo, OffsetDateTime serverTime, ServerInformationServerTimeZone serverTimeZone, String serverTitle, String version, List<Integer> versionNumbers) {
         this.baseUrl = baseUrl;
         this.buildDate = buildDate;
         this.buildNumber = buildNumber;
@@ -138,6 +143,7 @@ public class ServerInformation {
         this.healthChecks = healthChecks;
         this.scmInfo = scmInfo;
         this.serverTime = serverTime;
+        this.serverTimeZone = serverTimeZone;
         this.serverTitle = serverTitle;
         this.version = version;
         this.versionNumbers = versionNumbers;

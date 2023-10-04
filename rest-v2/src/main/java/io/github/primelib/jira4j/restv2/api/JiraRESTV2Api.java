@@ -6327,7 +6327,8 @@ public interface JiraRESTV2Api {
      * ### About permission schemes and grants ###
      * A permission scheme is a collection of permission grants. A permission grant consists of a {@code holder} and a {@code permission}.
      * #### Holder object ####
-     * The {@code holder} object contains information about the user or group being granted the permission. For example, the *Administer projects* permission is granted to a group named *Teams in space administrators*. In this case, the type is {@code "type": "group"}, and the parameter is the group name, {@code "parameter": "Teams in space administrators"} and the value is group ID, {@code "value": "ca85fac0-d974-40ca-a615-7af99c48d24f"}. The {@code holder} object is defined by the following properties:
+     * The {@code holder} object contains information about the user or group being granted the permission. For example, the *Administer projects* permission is granted to a group named *Teams in space administrators*. In this case, the type is {@code "type": "group"}, and the parameter is the group name, {@code "parameter": "Teams in space administrators"} and the value is group ID, {@code "value": "ca85fac0-d974-40ca-a615-7af99c48d24f"}.
+     * The {@code holder} object is defined by the following properties:
      *  *
      * {@code type} Identifies the user or group (see the list of types below).
      * *
