@@ -154,7 +154,7 @@ public class Project {
     protected ProjectInsight insight;
 
     /**
-     * Whether the project is private.
+     * Whether the project is private from the user's perspective. This means the user can't see the project or any associated issues.
      */
     @JsonProperty("isPrivate")
     protected Boolean isPrivate;
@@ -280,7 +280,7 @@ public class Project {
      * @param favourite Whether the project is selected as a favorite.
      * @param id The ID of the project.
      * @param insight insight
-     * @param isPrivate Whether the project is private.
+     * @param isPrivate Whether the project is private from the user's perspective. This means the user can't see the project or any associated issues.
      * @param issueTypeHierarchy issueTypeHierarchy
      * @param issueTypes List of the issue types available in the project.
      * @param key The key of the project.
