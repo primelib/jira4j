@@ -141,6 +141,7 @@ import io.github.primelib.jira4j.restv3.model.PageBeanWorkflowScheme;
 import io.github.primelib.jira4j.restv3.model.PageBeanWorkflowTransitionRules;
 import io.github.primelib.jira4j.restv3.model.PageOfChangelogs;
 import io.github.primelib.jira4j.restv3.model.PageOfComments;
+import io.github.primelib.jira4j.restv3.model.PageOfCreateMetaIssueType;
 import io.github.primelib.jira4j.restv3.model.PageOfDashboards;
 import io.github.primelib.jira4j.restv3.model.PageOfStatuses;
 import io.github.primelib.jira4j.restv3.model.PageOfWorklogs;
@@ -445,6 +446,7 @@ import io.github.primelib.jira4j.restv3.spec.GetComponentRelatedIssuesOperationS
 import io.github.primelib.jira4j.restv3.spec.GetContextsForFieldOperationSpec;
 import io.github.primelib.jira4j.restv3.spec.GetContextsForFieldDeprecatedOperationSpec;
 import io.github.primelib.jira4j.restv3.spec.GetCreateIssueMetaOperationSpec;
+import io.github.primelib.jira4j.restv3.spec.GetCreateIssueMetaIssueTypesOperationSpec;
 import io.github.primelib.jira4j.restv3.spec.GetCurrentUserOperationSpec;
 import io.github.primelib.jira4j.restv3.spec.GetCustomFieldConfigurationOperationSpec;
 import io.github.primelib.jira4j.restv3.spec.GetCustomFieldContextsForProjectsAndIssueTypesOperationSpec;
@@ -2171,7 +2173,7 @@ public class JiraRESTV3AsyncConsumerApi {
     /**
      * Create component
      * <p>
-     * Creates a project component only. To create a Compass Component, use Compass. Use components to provide containers for issues within a project.
+     * Creates a component. Use components to provide containers for issues within a project. Use components to provide containers for issues within a project.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Administer projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project in which the component is created or *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-project]
@@ -2596,7 +2598,7 @@ public class JiraRESTV3AsyncConsumerApi {
      * | Project Type Key | Project Template Key |
      *  |--|--|
      *  | {@code business} | {@code com.atlassian.jira-core-project-templates:jira-core-simplified-content-management}, {@code com.atlassian.jira-core-project-templates:jira-core-simplified-document-approval}, {@code com.atlassian.jira-core-project-templates:jira-core-simplified-lead-tracking}, {@code com.atlassian.jira-core-project-templates:jira-core-simplified-process-control}, {@code com.atlassian.jira-core-project-templates:jira-core-simplified-procurement}, {@code com.atlassian.jira-core-project-templates:jira-core-simplified-project-management}, {@code com.atlassian.jira-core-project-templates:jira-core-simplified-recruitment}, {@code com.atlassian.jira-core-project-templates:jira-core-simplified-task-tracking} |
-     *  | {@code service_desk} | {@code com.atlassian.servicedesk:simplified-it-service-management}, {@code com.atlassian.servicedesk:simplified-general-service-desk-it}, {@code com.atlassian.servicedesk:simplified-general-service-desk-business}, {@code com.atlassian.servicedesk:simplified-external-service-desk}, {@code com.atlassian.servicedesk:simplified-hr-service-desk}, {@code com.atlassian.servicedesk:simplified-facilities-service-desk}, {@code com.atlassian.servicedesk:simplified-legal-service-desk}, {@code com.atlassian.servicedesk:simplified-analytics-service-desk}, {@code com.atlassian.servicedesk:simplified-marketing-service-desk}, {@code com.atlassian.servicedesk:simplified-design-service-desk}, {@code com.atlassian.servicedesk:simplified-sales-service-desk}, {@code com.atlassian.servicedesk:simplified-finance-service-desk}, {@code com.atlassian.servicedesk:next-gen-it-service-desk}, {@code com.atlassian.servicedesk:next-gen-hr-service-desk}, {@code com.atlassian.servicedesk:next-gen-legal-service-desk}, {@code com.atlassian.servicedesk:next-gen-marketing-service-desk}, {@code com.atlassian.servicedesk:next-gen-facilities-service-desk}, {@code com.atlassian.servicedesk:next-gen-general-service-desk}, {@code com.atlassian.servicedesk:next-gen-general-it-service-desk}, {@code com.atlassian.servicedesk:next-gen-general-business-service-desk}, {@code com.atlassian.servicedesk:next-gen-analytics-service-desk}, {@code com.atlassian.servicedesk:next-gen-finance-service-desk}, {@code com.atlassian.servicedesk:next-gen-design-service-desk}, {@code com.atlassian.servicedesk:next-gen-sales-service-desk} |
+     *  | {@code service_desk} | {@code com.atlassian.servicedesk:simplified-it-service-management}, {@code com.atlassian.servicedesk:simplified-general-service-desk-it}, {@code com.atlassian.servicedesk:simplified-general-service-desk-business}, {@code com.atlassian.servicedesk:simplified-external-service-desk}, {@code com.atlassian.servicedesk:simplified-hr-service-desk}, {@code com.atlassian.servicedesk:simplified-facilities-service-desk}, {@code com.atlassian.servicedesk:simplified-legal-service-desk}, {@code com.atlassian.servicedesk:simplified-analytics-service-desk}, {@code com.atlassian.servicedesk:simplified-marketing-service-desk}, {@code com.atlassian.servicedesk:simplified-design-service-desk}, {@code com.atlassian.servicedesk:simplified-sales-service-desk}, {@code com.atlassian.servicedesk:simplified-blank-project-business}, {@code com.atlassian.servicedesk:simplified-blank-project-it}, {@code com.atlassian.servicedesk:simplified-finance-service-desk}, {@code com.atlassian.servicedesk:next-gen-it-service-desk}, {@code com.atlassian.servicedesk:next-gen-hr-service-desk}, {@code com.atlassian.servicedesk:next-gen-legal-service-desk}, {@code com.atlassian.servicedesk:next-gen-marketing-service-desk}, {@code com.atlassian.servicedesk:next-gen-facilities-service-desk}, {@code com.atlassian.servicedesk:next-gen-general-it-service-desk}, {@code com.atlassian.servicedesk:next-gen-general-business-service-desk}, {@code com.atlassian.servicedesk:next-gen-analytics-service-desk}, {@code com.atlassian.servicedesk:next-gen-finance-service-desk}, {@code com.atlassian.servicedesk:next-gen-design-service-desk}, {@code com.atlassian.servicedesk:next-gen-sales-service-desk} |
      *  | {@code software} | {@code com.pyxis.greenhopper.jira:gh-simplified-agility-kanban}, {@code com.pyxis.greenhopper.jira:gh-simplified-agility-scrum}, {@code com.pyxis.greenhopper.jira:gh-simplified-basic}, {@code com.pyxis.greenhopper.jira:gh-simplified-kanban-classic}, {@code com.pyxis.greenhopper.jira:gh-simplified-scrum-classic} |
      *  The project types are available according to the installed Jira features as follows:
      *  *
@@ -6227,7 +6229,7 @@ public class JiraRESTV3AsyncConsumerApi {
      * In all these cases, you can pass an account ID to determine if a user can be assigned to an issue. The user is returned in the response if they can be assigned to the issue or issue transition.
      * This operation takes the users in the range defined by {@code startAt} and {@code maxResults}, up to the thousandth user, and then returns only the users from that range that can be assigned the issue. This means the operation usually returns fewer users than specified in {@code maxResults}. To get all the users who can be assigned the issue, use [Get all users](#api-rest-api-3-users-search-get) and filter the records in your code.
      * Privacy controls are applied to the response based on the users' preferences. This could mean, for example, that the user's email address is hidden. See the [Profile visibility overview](https://developer.atlassian.com/cloud/jira/platform/profile-visibility/) for more details.
-     * **[Permissions](#permissions) required:** Permission to access Jira.
+     * **[Permissions](#permissions) required:** *Browse users and groups* [global permission](https://confluence.atlassian.com/x/x4dKLg) or *Assign issues* [project permission](https://confluence.atlassian.com/x/yodKLg)
      * Authentication - Required Scopes: [read:jira-user]
      * @param spec a consumer that creates the payload for this operation. Supports the following properties:
      * <ul>
@@ -6778,7 +6780,8 @@ public class JiraRESTV3AsyncConsumerApi {
      * ### About permission schemes and grants ###
      * A permission scheme is a collection of permission grants. A permission grant consists of a {@code holder} and a {@code permission}.
      * #### Holder object ####
-     * The {@code holder} object contains information about the user or group being granted the permission. For example, the *Administer projects* permission is granted to a group named *Teams in space administrators*. In this case, the type is {@code "type": "group"}, and the parameter is the group name, {@code "parameter": "Teams in space administrators"} and the value is group ID, {@code "value": "ca85fac0-d974-40ca-a615-7af99c48d24f"}. The {@code holder} object is defined by the following properties:
+     * The {@code holder} object contains information about the user or group being granted the permission. For example, the *Administer projects* permission is granted to a group named *Teams in space administrators*. In this case, the type is {@code "type": "group"}, and the parameter is the group name, {@code "parameter": "Teams in space administrators"} and the value is group ID, {@code "value": "ca85fac0-d974-40ca-a615-7af99c48d24f"}.
+     * The {@code holder} object is defined by the following properties:
      *  *
      * {@code type} Identifies the user or group (see the list of types below).
      * *
@@ -7915,6 +7918,25 @@ public class JiraRESTV3AsyncConsumerApi {
     public CompletableFuture<IssueCreateMetadata> getCreateIssueMeta(Consumer<GetCreateIssueMetaOperationSpec> spec) {
         GetCreateIssueMetaOperationSpec r = new GetCreateIssueMetaOperationSpec(spec);
         return api.getCreateIssueMeta(r.projectIds(), r.projectKeys(), r.issuetypeIds(), r.issuetypeNames(), r.expand());
+    }
+
+    /**
+     * Get create metadata issue types for a project
+     * <p>
+     * Returns a page of issue type metadata for a specified project Use the information to populate the requests in [ Create issue](#api-rest-api-3-issue-post) and [Create issues](#api-rest-api-3-issue-bulk-post).
+     * This operation can be accessed anonymously.
+     * **[Permissions](#permissions) required:** *Create issues* [project permission](https://confluence.atlassian.com/x/yodKLg) in the requested projects.
+     * Authentication - Required Scopes: [read:jira-work]
+     * @param spec a consumer that creates the payload for this operation. Supports the following properties:
+     * <ul>
+     *   <li>projectIdOrKey: The ID or key of the project.</li>
+     *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
+     *   <li>maxResults: The maximum number of items to return per page.</li>
+     * </ul>
+     */
+    public CompletableFuture<PageOfCreateMetaIssueType> getCreateIssueMetaIssueTypes(Consumer<GetCreateIssueMetaIssueTypesOperationSpec> spec) {
+        GetCreateIssueMetaIssueTypesOperationSpec r = new GetCreateIssueMetaIssueTypesOperationSpec(spec);
+        return api.getCreateIssueMetaIssueTypes(r.projectIdOrKey(), r.startAt(), r.maxResults());
     }
 
     /**
@@ -11939,7 +11961,7 @@ public class JiraRESTV3AsyncConsumerApi {
      *   <li>query: Filter the results using a literal string. Projects with a matching {@code key} or {@code name} are returned (case insensitive).</li>
      *   <li>typeKey: Orders results by the [project type](https://confluence.atlassian.com/x/GwiiLQ#Jiraapplicationsoverview-Productfeaturesandprojecttypes). This parameter accepts a comma-separated list. Valid values are {@code business}, {@code service_desk}, and {@code software}.</li>
      *   <li>categoryId: The ID of the project's category. A complete list of category IDs is found using the [Get all project categories](#api-rest-api-3-projectCategory-get) operation.</li>
-     *   <li>action: Filter results by projects for which the user can:   *  {@code view} the project, meaning that they have one of the following permissions:           *  *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.      *  *Administer projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.      *  *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).  *  {@code browse} the project, meaning that they have the *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.  *  {@code edit} the project, meaning that they have one of the following permissions:           *  *Administer projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.      *  *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).</li>
+     *   <li>action: Filter results by projects for which the user can:   *  {@code view} the project, meaning that they have one of the following permissions:           *  *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.      *  *Administer projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.      *  *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).  *  {@code browse} the project, meaning that they have the *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.  *  {@code edit} the project, meaning that they have one of the following permissions:           *  *Administer projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.      *  *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).  *  {@code create} the project, meaning that they have the *Create issues* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project in which the issue is created.</li>
      *   <li>expand: Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expanded options include:   *  {@code description} Returns the project description.  *  {@code projectKeys} Returns all project keys associated with a project.  *  {@code lead} Returns information about the project lead.  *  {@code issueTypes} Returns all issue types associated with the project.  *  {@code url} Returns the URL associated with the project.  *  {@code insight} EXPERIMENTAL. Returns the insight details of total issue count and last issue update time for the project.</li>
      *   <li>status: EXPERIMENTAL. Filter results by project status:   *  {@code live} Search live projects.  *  {@code archived} Search archived projects.  *  {@code deleted} Search deleted projects, those in the recycle bin.</li>
      *   <li>properties: EXPERIMENTAL. A list of project properties to return for the project. This parameter accepts a comma-separated list.</li>
@@ -12059,7 +12081,6 @@ public class JiraRESTV3AsyncConsumerApi {
      *  | {@code jira.date.time.picker.java.format} | The date format for the Java (server-side) generated date times. This must be the same as the {@code jira.date.time.picker.javascript.format} format setting. | {@code dd/MMM/yy h:mm a} |
      *  | {@code jira.date.time.picker.javascript.format} | The date format for the JavaScript (client-side) generated date times. This must be the same as the {@code jira.date.time.picker.java.format} format setting. | {@code %e/%b/%y %I:%M %p} |
      *  | {@code jira.issue.actions.order} | The default order of actions (such as *Comments* or *Change history*) displayed on the issue view. | {@code asc} |
-     *  | {@code jira.table.cols.subtasks} | The columns to show while viewing subtask issues in a table. For example, a list of subtasks on an issue. | {@code issuetype, status, assignee, progress} |
      *  | {@code jira.view.issue.links.sort.order} | The sort order of the list of issue links on the issue view. | {@code type, status, priority} |
      *  | {@code jira.comment.collapsing.minimum.hidden} | The minimum number of comments required for comment collapsing to occur. A value of {@code 0} disables comment collapsing. | {@code 4} |
      *  | {@code jira.newsletter.tip.delay.days} | The number of days before a prompt to sign up to the Jira Insiders newsletter is shown. A value of {@code -1} disables this feature. | {@code 7} |
@@ -12771,7 +12792,7 @@ public class JiraRESTV3AsyncConsumerApi {
     /**
      * Update component
      * <p>
-     * Updates a project component only. A compass component needs to be updated in Compass. Any fields included in the request are overwritten. If {@code leadAccountId} is an empty string ("") the component lead is removed.
+     * Updates a component. Any fields included in the request are overwritten. If {@code leadAccountId} is an empty string ("") the component lead is removed.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Administer projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project containing the component or *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * Authentication - Required Scopes: [manage:jira-project]
