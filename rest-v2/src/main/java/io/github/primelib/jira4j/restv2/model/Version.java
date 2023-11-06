@@ -68,7 +68,7 @@ public class Version {
     protected Boolean archived;
 
     /**
-     * The description of the version. Optional when creating or updating a version.
+     * The description of the version. Optional when creating or updating a version. The maximum size is 16,384 bytes.
      */
     @JsonProperty("description")
     protected String description;
@@ -190,7 +190,7 @@ public class Version {
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #Version(Consumer)} instead.
      * @param approvers If the expand option {@code approvers} is used, returns a list containing the approvers for this version.
      * @param archived Indicates that the version is archived. Optional when creating or updating a version.
-     * @param description The description of the version. Optional when creating or updating a version.
+     * @param description The description of the version. Optional when creating or updating a version. The maximum size is 16,384 bytes.
      * @param driver If the expand option {@code driver} is used, returns the Atlassian account ID of the driver.
      * @param expand Use [expand](em&amp;gt;#expansion) to include additional information about version in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code operations} Returns the list of operations available for this version.  *  {@code issuesstatus} Returns the count of issues in this version for each of the status categories *to do*, *in progress*, *done*, and *unmapped*. The *unmapped* property contains a count of issues with a status other than *to do*, *in progress*, and *done*.  *  {@code driver} Returns the Atlassian account ID of the version driver.  *  {@code approvers} Returns a list containing approvers for this version.  Optional for create and update.
      * @param id The ID of the version.
