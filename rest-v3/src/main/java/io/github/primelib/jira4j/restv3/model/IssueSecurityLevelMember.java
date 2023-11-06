@@ -30,7 +30,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @JsonPropertyOrder({
     "holder",
     "id",
-    "issueSecurityLevelId"
+    "issueSecurityLevelId",
+    "managed"
 })
 @JsonTypeName("IssueSecurityLevelMember")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
@@ -51,6 +52,9 @@ public class IssueSecurityLevelMember {
     @JsonProperty("issueSecurityLevelId")
     protected Long issueSecurityLevelId;
 
+    @JsonProperty("managed")
+    protected Boolean managed;
+
     /**
      * Constructs a validated instance of {@link IssueSecurityLevelMember}.
      *
@@ -67,12 +71,14 @@ public class IssueSecurityLevelMember {
      * @param holder holder
      * @param id The ID of the issue security level member.
      * @param issueSecurityLevelId The ID of the issue security level.
+     * @param managed managed
      */
     @ApiStatus.Internal
-    public IssueSecurityLevelMember(PermissionHolder holder, Long id, Long issueSecurityLevelId) {
+    public IssueSecurityLevelMember(PermissionHolder holder, Long id, Long issueSecurityLevelId, Boolean managed) {
         this.holder = holder;
         this.id = id;
         this.issueSecurityLevelId = issueSecurityLevelId;
+        this.managed = managed;
     }
 
 }
