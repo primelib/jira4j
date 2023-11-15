@@ -34,6 +34,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
     "buildDate",
     "buildNumber",
     "deploymentType",
+    "displayUrl",
+    "displayUrlServicedeskHelpCenter",
     "healthChecks",
     "scmInfo",
     "serverTime",
@@ -69,6 +71,18 @@ public class ServerInformation {
      */
     @JsonProperty("deploymentType")
     protected String deploymentType;
+
+    /**
+     * The display URL of the Jira instance.
+     */
+    @JsonProperty("displayUrl")
+    protected String displayUrl;
+
+    /**
+     * The display URL of the Servicedesk Help Center.
+     */
+    @JsonProperty("displayUrlServicedeskHelpCenter")
+    protected String displayUrlServicedeskHelpCenter;
 
     /**
      * Jira instance health check results. Deprecated and no longer returned.
@@ -126,6 +140,8 @@ public class ServerInformation {
      * @param buildDate The timestamp when the Jira version was built.
      * @param buildNumber The build number of the Jira version.
      * @param deploymentType The type of server deployment. This is always returned as *Cloud*.
+     * @param displayUrl The display URL of the Jira instance.
+     * @param displayUrlServicedeskHelpCenter The display URL of the Servicedesk Help Center.
      * @param healthChecks Jira instance health check results. Deprecated and no longer returned.
      * @param scmInfo The unique identifier of the Jira version.
      * @param serverTime The time in Jira when this request was responded to.
@@ -135,11 +151,13 @@ public class ServerInformation {
      * @param versionNumbers The major, minor, and revision version numbers of the Jira version.
      */
     @ApiStatus.Internal
-    public ServerInformation(String baseUrl, OffsetDateTime buildDate, Integer buildNumber, String deploymentType, List<HealthCheckResult> healthChecks, String scmInfo, OffsetDateTime serverTime, ServerInformationServerTimeZone serverTimeZone, String serverTitle, String version, List<Integer> versionNumbers) {
+    public ServerInformation(String baseUrl, OffsetDateTime buildDate, Integer buildNumber, String deploymentType, String displayUrl, String displayUrlServicedeskHelpCenter, List<HealthCheckResult> healthChecks, String scmInfo, OffsetDateTime serverTime, ServerInformationServerTimeZone serverTimeZone, String serverTitle, String version, List<Integer> versionNumbers) {
         this.baseUrl = baseUrl;
         this.buildDate = buildDate;
         this.buildNumber = buildNumber;
         this.deploymentType = deploymentType;
+        this.displayUrl = displayUrl;
+        this.displayUrlServicedeskHelpCenter = displayUrlServicedeskHelpCenter;
         this.healthChecks = healthChecks;
         this.scmInfo = scmInfo;
         this.serverTime = serverTime;

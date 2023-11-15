@@ -1,7 +1,9 @@
 package io.github.primelib.jira4j.restv3.spec;
 
 import java.util.List;
+import java.util.Objects;
 import org.jetbrains.annotations.ApiStatus;
+import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import javax.annotation.processing.Generated;
 
@@ -39,6 +41,13 @@ public class GetStatusesByIdOperationSpec {
     public static Boolean VALIDATION_ENABLED = true;
 
     /**
+     * The list of status IDs. To include multiple IDs, provide an ampersand-separated list. For example, id=10000&amp;id=10001.
+     * Min items {@code 1}, Max items {@code 50}
+     */
+    @NotNull 
+    private List<String> id;
+
+    /**
      * Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:
      *  *
      * {@code usages} Returns the project and issue types that use the status in their workflow.
@@ -47,13 +56,6 @@ public class GetStatusesByIdOperationSpec {
      */
     @Nullable 
     private String expand;
-
-    /**
-     * The list of status IDs. To include multiple IDs, provide an ampersand-separated list. For example, id=10000&amp;id=10001.
-     * Min items {@code 1}, Max items {@code 50}
-     */
-    @Nullable 
-    private List<String> id;
 
     /**
      * Constructs a validated instance of {@link GetStatusesByIdOperationSpec}.
@@ -71,13 +73,13 @@ public class GetStatusesByIdOperationSpec {
      * Constructs a validated instance of {@link GetStatusesByIdOperationSpec}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the operation is updated.
-     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code usages} Returns the project and issue types that use the status in their workflow.  *  {@code workflowUsages} Returns the workflows that use the status.
      * @param id                   The list of status IDs. To include multiple IDs, provide an ampersand-separated list. For example, id=10000&amp;id=10001.  Min items {@code 1}, Max items {@code 50}
+     * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code usages} Returns the project and issue types that use the status in their workflow.  *  {@code workflowUsages} Returns the workflows that use the status.
      */
     @ApiStatus.Internal
-    public GetStatusesByIdOperationSpec(String expand, List<String> id) {
-        this.expand = expand;
+    public GetStatusesByIdOperationSpec(List<String> id, String expand) {
         this.id = id;
+        this.expand = expand;
 
         if (VALIDATION_ENABLED)
             validate();
@@ -89,5 +91,6 @@ public class GetStatusesByIdOperationSpec {
      * @throws NullPointerException
      */
     public void validate() {
+        Objects.requireNonNull(id, "id is a required parameter!");
     }
 }

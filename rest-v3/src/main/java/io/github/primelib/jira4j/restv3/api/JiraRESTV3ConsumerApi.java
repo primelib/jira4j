@@ -141,7 +141,7 @@ import io.github.primelib.jira4j.restv3.model.PageBeanWorkflowScheme;
 import io.github.primelib.jira4j.restv3.model.PageBeanWorkflowTransitionRules;
 import io.github.primelib.jira4j.restv3.model.PageOfChangelogs;
 import io.github.primelib.jira4j.restv3.model.PageOfComments;
-import io.github.primelib.jira4j.restv3.model.PageOfCreateMetaIssueType;
+import io.github.primelib.jira4j.restv3.model.PageOfCreateMetaIssueTypes;
 import io.github.primelib.jira4j.restv3.model.PageOfDashboards;
 import io.github.primelib.jira4j.restv3.model.PageOfStatuses;
 import io.github.primelib.jira4j.restv3.model.PageOfWorklogs;
@@ -7922,7 +7922,7 @@ public class JiraRESTV3ConsumerApi {
     /**
      * Get create metadata issue types for a project
      * <p>
-     * Returns a page of issue type metadata for a specified project Use the information to populate the requests in [ Create issue](#api-rest-api-3-issue-post) and [Create issues](#api-rest-api-3-issue-bulk-post).
+     * Returns a page of issue type metadata for a specified project. Use the information to populate the requests in [ Create issue](#api-rest-api-3-issue-post) and [Create issues](#api-rest-api-3-issue-bulk-post).
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Create issues* [project permission](https://confluence.atlassian.com/x/yodKLg) in the requested projects.
      * Authentication - Required Scopes: [read:jira-work]
@@ -7933,7 +7933,7 @@ public class JiraRESTV3ConsumerApi {
      *   <li>maxResults: The maximum number of items to return per page.</li>
      * </ul>
      */
-    public PageOfCreateMetaIssueType getCreateIssueMetaIssueTypes(Consumer<GetCreateIssueMetaIssueTypesOperationSpec> spec) {
+    public PageOfCreateMetaIssueTypes getCreateIssueMetaIssueTypes(Consumer<GetCreateIssueMetaIssueTypesOperationSpec> spec) {
         GetCreateIssueMetaIssueTypesOperationSpec r = new GetCreateIssueMetaIssueTypesOperationSpec(spec);
         return api.getCreateIssueMetaIssueTypes(r.projectIdOrKey(), r.startAt(), r.maxResults());
     }
@@ -10285,13 +10285,13 @@ public class JiraRESTV3ConsumerApi {
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param spec a consumer that creates the payload for this operation. Supports the following properties:
      * <ul>
-     *   <li>expand: Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code usages} Returns the project and issue types that use the status in their workflow.  *  {@code workflowUsages} Returns the workflows that use the status.</li>
      *   <li>id: The list of status IDs. To include multiple IDs, provide an ampersand-separated list. For example, id=10000&amp;id=10001.  Min items {@code 1}, Max items {@code 50}</li>
+     *   <li>expand: Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code usages} Returns the project and issue types that use the status in their workflow.  *  {@code workflowUsages} Returns the workflows that use the status.</li>
      * </ul>
      */
     public List<JiraStatus> getStatusesById(Consumer<GetStatusesByIdOperationSpec> spec) {
         GetStatusesByIdOperationSpec r = new GetStatusesByIdOperationSpec(spec);
-        return api.getStatusesById(r.expand(), r.id());
+        return api.getStatusesById(r.id(), r.expand());
     }
 
     /**
@@ -11929,12 +11929,13 @@ public class JiraRESTV3ConsumerApi {
      *   <li>maxResults: The maximum number of items to return per page.</li>
      *   <li>id: The list of priority IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code id=2&amp;id=3}.</li>
      *   <li>projectId: The list of projects IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code projectId=10010&amp;projectId=10111}.</li>
+     *   <li>priorityName: The name of priority to search for.</li>
      *   <li>onlyDefault: Whether only the default priority is returned.</li>
      * </ul>
      */
     public PageBeanPriority searchPriorities(Consumer<SearchPrioritiesOperationSpec> spec) {
         SearchPrioritiesOperationSpec r = new SearchPrioritiesOperationSpec(spec);
-        return api.searchPriorities(r.startAt(), r.maxResults(), r.id(), r.projectId(), r.onlyDefault());
+        return api.searchPriorities(r.startAt(), r.maxResults(), r.id(), r.projectId(), r.priorityName(), r.onlyDefault());
     }
 
     /**
