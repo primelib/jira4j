@@ -215,7 +215,7 @@ import io.github.primelib.jira4j.restv2.model.PageBeanWorkflowScheme;
 import io.github.primelib.jira4j.restv2.model.PageBeanWorkflowTransitionRules;
 import io.github.primelib.jira4j.restv2.model.PageOfChangelogs;
 import io.github.primelib.jira4j.restv2.model.PageOfComments;
-import io.github.primelib.jira4j.restv2.model.PageOfCreateMetaIssueType;
+import io.github.primelib.jira4j.restv2.model.PageOfCreateMetaIssueTypes;
 import io.github.primelib.jira4j.restv2.model.PageOfDashboards;
 import io.github.primelib.jira4j.restv2.model.PageOfStatuses;
 import io.github.primelib.jira4j.restv2.model.PageOfWorklogs;
@@ -5303,13 +5303,13 @@ public interface JiraRESTV2AsyncApi {
      * *Administer Jira* [project permission.](https://confluence.atlassian.com/x/yodKLg)
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param id                   The list of status IDs. To include multiple IDs, provide an ampersand-separated list. For example, id=10000&amp;id=10001.  Min items {@code 1}, Max items {@code 50} (optional)
+     * @param id                   The list of status IDs. To include multiple IDs, provide an ampersand-separated list. For example, id=10000&amp;id=10001.  Min items {@code 1}, Max items {@code 50} (required)
      */
     @RequestLine("DELETE /rest/api/2/statuses?id={id}")
     @Headers({
         "Accept: application/json"
     })
-    CompletableFuture<Object> deleteStatusesById(@Param("id") @Nullable List<String> id);
+    CompletableFuture<Object> deleteStatusesById(@Param("id") @NotNull List<String> id);
 
     /**
      * Delete UI modification
@@ -7465,7 +7465,7 @@ public interface JiraRESTV2AsyncApi {
     /**
      * Get create metadata issue types for a project
      * <p>
-     * Returns a page of issue type metadata for a specified project Use the information to populate the requests in [ Create issue](#api-rest-api-2-issue-post) and [Create issues](#api-rest-api-2-issue-bulk-post).
+     * Returns a page of issue type metadata for a specified project. Use the information to populate the requests in [ Create issue](#api-rest-api-2-issue-post) and [Create issues](#api-rest-api-2-issue-bulk-post).
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Create issues* [project permission](https://confluence.atlassian.com/x/yodKLg) in the requested projects.
      *
@@ -7474,11 +7474,11 @@ public interface JiraRESTV2AsyncApi {
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
      */
-    @RequestLine("GET /rest/api/2/issue/createmeta/{projectIdOrKey}/issueTypes?startAt={startAt}&maxResults={maxResults}")
+    @RequestLine("GET /rest/api/2/issue/createmeta/{projectIdOrKey}/issuetypes?startAt={startAt}&maxResults={maxResults}")
     @Headers({
         "Accept: application/json"
     })
-    CompletableFuture<PageOfCreateMetaIssueType> getCreateIssueMetaIssueTypes(@Param("projectIdOrKey") @NotNull String projectIdOrKey, @Param("startAt") @Nullable Integer startAt, @Param("maxResults") @Nullable Integer maxResults);
+    CompletableFuture<PageOfCreateMetaIssueTypes> getCreateIssueMetaIssueTypes(@Param("projectIdOrKey") @NotNull String projectIdOrKey, @Param("startAt") @Nullable Integer startAt, @Param("maxResults") @Nullable Integer maxResults);
 
     /**
      * Get current user
@@ -9778,14 +9778,14 @@ public interface JiraRESTV2AsyncApi {
      * *Administer Jira* [project permission.](https://confluence.atlassian.com/x/yodKLg)
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
+     * @param id                   The list of status IDs. To include multiple IDs, provide an ampersand-separated list. For example, id=10000&amp;id=10001.  Min items {@code 1}, Max items {@code 50} (required)
      * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code usages} Returns the project and issue types that use the status in their workflow.  *  {@code workflowUsages} Returns the workflows that use the status. (optional)
-     * @param id                   The list of status IDs. To include multiple IDs, provide an ampersand-separated list. For example, id=10000&amp;id=10001.  Min items {@code 1}, Max items {@code 50} (optional)
      */
     @RequestLine("GET /rest/api/2/statuses?expand={expand}&id={id}")
     @Headers({
         "Accept: application/json"
     })
-    CompletableFuture<List<JiraStatus>> getStatusesById(@Param("expand") @Nullable String expand, @Param("id") @Nullable List<String> id);
+    CompletableFuture<List<JiraStatus>> getStatusesById(@Param("id") @NotNull List<String> id, @Param("expand") @Nullable String expand);
 
     /**
      * Get task
@@ -11369,13 +11369,14 @@ public interface JiraRESTV2AsyncApi {
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
      * @param id                   The list of priority IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code id=2&amp;id=3}. (optional)
      * @param projectId            The list of projects IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code projectId=10010&amp;projectId=10111}. (optional)
+     * @param priorityName         The name of priority to search for. (optional)
      * @param onlyDefault          Whether only the default priority is returned. (optional, defaults to false)
      */
-    @RequestLine("GET /rest/api/2/priority/search?startAt={startAt}&maxResults={maxResults}&id={id}&projectId={projectId}&onlyDefault={onlyDefault}")
+    @RequestLine("GET /rest/api/2/priority/search?startAt={startAt}&maxResults={maxResults}&id={id}&projectId={projectId}&priorityName={priorityName}&onlyDefault={onlyDefault}")
     @Headers({
         "Accept: application/json"
     })
-    CompletableFuture<PageBeanPriority> searchPriorities(@Param("startAt") @Nullable String startAt, @Param("maxResults") @Nullable String maxResults, @Param("id") @Nullable List<String> id, @Param("projectId") @Nullable List<String> projectId, @Param("onlyDefault") @Nullable Boolean onlyDefault);
+    CompletableFuture<PageBeanPriority> searchPriorities(@Param("startAt") @Nullable String startAt, @Param("maxResults") @Nullable String maxResults, @Param("id") @Nullable List<String> id, @Param("projectId") @Nullable List<String> projectId, @Param("priorityName") @Nullable String priorityName, @Param("onlyDefault") @Nullable Boolean onlyDefault);
 
     /**
      * Get projects paginated

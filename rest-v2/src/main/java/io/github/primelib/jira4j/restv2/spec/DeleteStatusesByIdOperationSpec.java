@@ -1,8 +1,9 @@
 package io.github.primelib.jira4j.restv2.spec;
 
 import java.util.List;
+import java.util.Objects;
 import org.jetbrains.annotations.ApiStatus;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 import javax.annotation.processing.Generated;
 
 import java.util.Set;
@@ -42,7 +43,7 @@ public class DeleteStatusesByIdOperationSpec {
      * The list of status IDs. To include multiple IDs, provide an ampersand-separated list. For example, id=10000&amp;id=10001.
      * Min items {@code 1}, Max items {@code 50}
      */
-    @Nullable 
+    @NotNull 
     private List<String> id;
 
     /**
@@ -77,5 +78,6 @@ public class DeleteStatusesByIdOperationSpec {
      * @throws NullPointerException
      */
     public void validate() {
+        Objects.requireNonNull(id, "id is a required parameter!");
     }
 }
