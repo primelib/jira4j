@@ -54,19 +54,19 @@ public class UiModificationContextDetails {
     protected Boolean isAvailable;
 
     /**
-     * The issue type ID of the context.
+     * The issue type ID of the context. Null is treated as a wildcard, meaning the UI modification will be applied to all issue types. Each UI modification context can have a maximum of one wildcard.
      */
     @JsonProperty("issueTypeId")
     protected String issueTypeId;
 
     /**
-     * The project ID of the context.
+     * The project ID of the context. Null is treated as a wildcard, meaning the UI modification will be applied to all projects. Each UI modification context can have a maximum of one wildcard.
      */
     @JsonProperty("projectId")
     protected String projectId;
 
     /**
-     * The view type of the context. Only {@code GIC}(Global Issue Create) and {@code IssueView} are supported.
+     * The view type of the context. Only {@code GIC}(Global Issue Create) and {@code IssueView} are supported. Null is treated as a wildcard, meaning the UI modification will be applied to all view types. Each UI modification context can have a maximum of one wildcard.
      */
     @JsonProperty("viewType")
     protected ViewTypeEnum viewType;
@@ -86,9 +86,9 @@ public class UiModificationContextDetails {
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #UiModificationContextDetails(Consumer)} instead.
      * @param id The ID of the UI modification context.
      * @param isAvailable Whether a context is available. For example, when a project is deleted the context becomes unavailable.
-     * @param issueTypeId The issue type ID of the context.
-     * @param projectId The project ID of the context.
-     * @param viewType The view type of the context. Only {@code GIC}(Global Issue Create) and {@code IssueView} are supported.
+     * @param issueTypeId The issue type ID of the context. Null is treated as a wildcard, meaning the UI modification will be applied to all issue types. Each UI modification context can have a maximum of one wildcard.
+     * @param projectId The project ID of the context. Null is treated as a wildcard, meaning the UI modification will be applied to all projects. Each UI modification context can have a maximum of one wildcard.
+     * @param viewType The view type of the context. Only {@code GIC}(Global Issue Create) and {@code IssueView} are supported. Null is treated as a wildcard, meaning the UI modification will be applied to all view types. Each UI modification context can have a maximum of one wildcard.
      */
     @ApiStatus.Internal
     public UiModificationContextDetails(String id, Boolean isAvailable, String issueTypeId, String projectId, ViewTypeEnum viewType) {
@@ -100,7 +100,7 @@ public class UiModificationContextDetails {
     }
 
     /**
-     * The view type of the context. Only {@code GIC}(Global Issue Create) and {@code IssueView} are supported.
+     * The view type of the context. Only {@code GIC}(Global Issue Create) and {@code IssueView} are supported. Null is treated as a wildcard, meaning the UI modification will be applied to all view types. Each UI modification context can have a maximum of one wildcard.
      */
     @AllArgsConstructor
     public enum ViewTypeEnum {

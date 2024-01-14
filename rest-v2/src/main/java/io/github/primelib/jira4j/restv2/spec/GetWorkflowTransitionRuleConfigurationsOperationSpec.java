@@ -7,6 +7,7 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.processing.Generated;
 
 import io.github.primelib.jira4j.restv2.model.Configuration;
+import io.github.primelib.jira4j.restv2.model.GetWorkflowTransitionRuleConfigurationsRequest;
 import java.util.Set;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -45,6 +46,11 @@ public class GetWorkflowTransitionRuleConfigurationsOperationSpec {
      */
     @NotNull 
     private Set<String> types;
+
+    /**
+     */
+    @NotNull 
+    private GetWorkflowTransitionRuleConfigurationsRequest getWorkflowTransitionRuleConfigurationsRequest;
 
     /**
      * The index of the first item to return in a page of results (page offset).
@@ -105,6 +111,7 @@ public class GetWorkflowTransitionRuleConfigurationsOperationSpec {
      * <p>
      * NOTE: This constructor is not considered stable and may change if the operation is updated.
      * @param types                The types of the transition rules to return.
+     * @param getWorkflowTransitionRuleConfigurationsRequest 
      * @param startAt              The index of the first item to return in a page of results (page offset).
      * @param maxResults           The maximum number of items to return per page.
      * @param keys                 The transition rule class keys, as defined in the Connect or the Forge app descriptor, of the transition rules to return.
@@ -114,8 +121,9 @@ public class GetWorkflowTransitionRuleConfigurationsOperationSpec {
      * @param expand               Use [expand](#expansion) to include additional information in the response. This parameter accepts {@code transition}, which, for each rule, returns information about the transition the rule is assigned to.
      */
     @ApiStatus.Internal
-    public GetWorkflowTransitionRuleConfigurationsOperationSpec(Set<String> types, Long startAt, Integer maxResults, Set<String> keys, Set<String> workflowNames, Set<String> withTags, Boolean draft, String expand) {
+    public GetWorkflowTransitionRuleConfigurationsOperationSpec(Set<String> types, GetWorkflowTransitionRuleConfigurationsRequest getWorkflowTransitionRuleConfigurationsRequest, Long startAt, Integer maxResults, Set<String> keys, Set<String> workflowNames, Set<String> withTags, Boolean draft, String expand) {
         this.types = types;
+        this.getWorkflowTransitionRuleConfigurationsRequest = getWorkflowTransitionRuleConfigurationsRequest;
         this.startAt = startAt;
         this.maxResults = maxResults;
         this.keys = keys;
@@ -135,5 +143,6 @@ public class GetWorkflowTransitionRuleConfigurationsOperationSpec {
      */
     public void validate() {
         Objects.requireNonNull(types, "types is a required parameter!");
+        Objects.requireNonNull(getWorkflowTransitionRuleConfigurationsRequest, "getWorkflowTransitionRuleConfigurationsRequest is a required parameter!");
     }
 }

@@ -19,7 +19,7 @@ import com.fasterxml.jackson.annotation.JsonTypeName;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
- * FieldMetadata
+ * FieldCreateMetadata
  *
  */
 @Getter
@@ -34,6 +34,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
     "autoCompleteUrl",
     "configuration",
     "defaultValue",
+    "fieldId",
     "hasDefaultValue",
     "key",
     "name",
@@ -41,9 +42,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
     "required",
     "schema"
 })
-@JsonTypeName("FieldMetadata")
+@JsonTypeName("FieldCreateMetadata")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
-public class FieldMetadata {
+public class FieldCreateMetadata {
 
     /**
      * The list of values allowed in the field.
@@ -68,6 +69,12 @@ public class FieldMetadata {
      */
     @JsonProperty("defaultValue")
     protected Object defaultValue;
+
+    /**
+     * The field id.
+     */
+    @JsonProperty("fieldId")
+    protected String fieldId;
 
     /**
      * Whether the field has a default value.
@@ -103,22 +110,23 @@ public class FieldMetadata {
     protected FieldCreateMetadataSchema schema;
 
     /**
-     * Constructs a validated instance of {@link FieldMetadata}.
+     * Constructs a validated instance of {@link FieldCreateMetadata}.
      *
      * @param spec the specification to process
      */
-    public FieldMetadata(Consumer<FieldMetadata> spec) {
+    public FieldCreateMetadata(Consumer<FieldCreateMetadata> spec) {
         spec.accept(this);
     }
 
     /**
-     * Constructs a validated instance of {@link FieldMetadata}.
+     * Constructs a validated instance of {@link FieldCreateMetadata}.
      * <p>
-     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #FieldMetadata(Consumer)} instead.
+     * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #FieldCreateMetadata(Consumer)} instead.
      * @param allowedValues The list of values allowed in the field.
      * @param autoCompleteUrl The URL that can be used to automatically complete the field.
      * @param configuration The configuration properties.
      * @param defaultValue The default value of the field.
+     * @param fieldId The field id.
      * @param hasDefaultValue Whether the field has a default value.
      * @param key The key of the field.
      * @param name The name of the field.
@@ -127,11 +135,12 @@ public class FieldMetadata {
      * @param schema schema
      */
     @ApiStatus.Internal
-    public FieldMetadata(List<Object> allowedValues, String autoCompleteUrl, Map<String, Object> configuration, Object defaultValue, Boolean hasDefaultValue, String key, String name, List<String> operations, Boolean required, FieldCreateMetadataSchema schema) {
+    public FieldCreateMetadata(List<Object> allowedValues, String autoCompleteUrl, Map<String, Object> configuration, Object defaultValue, String fieldId, Boolean hasDefaultValue, String key, String name, List<String> operations, Boolean required, FieldCreateMetadataSchema schema) {
         this.allowedValues = allowedValues;
         this.autoCompleteUrl = autoCompleteUrl;
         this.configuration = configuration;
         this.defaultValue = defaultValue;
+        this.fieldId = fieldId;
         this.hasDefaultValue = hasDefaultValue;
         this.key = key;
         this.name = name;
