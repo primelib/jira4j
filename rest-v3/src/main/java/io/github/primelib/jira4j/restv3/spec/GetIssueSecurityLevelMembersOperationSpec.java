@@ -64,7 +64,7 @@ public class GetIssueSecurityLevelMembersOperationSpec {
      * The list of issue security level IDs. To include multiple issue security levels separate IDs with ampersand: {@code issueSecurityLevelId=10000&amp;issueSecurityLevelId=10001}.
      */
     @Nullable 
-    private Set<Long> issueSecurityLevelId;
+    private Set<String> issueSecurityLevelId;
 
     /**
      * Use expand to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:
@@ -105,7 +105,7 @@ public class GetIssueSecurityLevelMembersOperationSpec {
      * @param expand               Use expand to include additional information in the response. This parameter accepts a comma-separated list. Expand options include:   *  {@code all} Returns all expandable information.  *  {@code field} Returns information about the custom field granted the permission.  *  {@code group} Returns information about the group that is granted the permission.  *  {@code projectRole} Returns information about the project role granted the permission.  *  {@code user} Returns information about the user who is granted the permission.
      */
     @ApiStatus.Internal
-    public GetIssueSecurityLevelMembersOperationSpec(Long issueSecuritySchemeId, Long startAt, Integer maxResults, Set<Long> issueSecurityLevelId, String expand) {
+    public GetIssueSecurityLevelMembersOperationSpec(Long issueSecuritySchemeId, Long startAt, Integer maxResults, Set<String> issueSecurityLevelId, String expand) {
         this.issueSecuritySchemeId = issueSecuritySchemeId;
         this.startAt = startAt;
         this.maxResults = maxResults;

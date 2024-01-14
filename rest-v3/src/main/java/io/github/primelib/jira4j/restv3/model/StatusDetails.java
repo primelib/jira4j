@@ -32,6 +32,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
     "iconUrl",
     "id",
     "name",
+    "scope",
     "self",
     "statusCategory"
 })
@@ -63,6 +64,9 @@ public class StatusDetails {
     @JsonProperty("name")
     protected String name;
 
+    @JsonProperty("scope")
+    protected StatusDetailsScope scope;
+
     /**
      * The URL of the status.
      */
@@ -89,15 +93,17 @@ public class StatusDetails {
      * @param iconUrl The URL of the icon used to represent the status.
      * @param id The ID of the status.
      * @param name The name of the status.
+     * @param scope scope
      * @param self The URL of the status.
      * @param statusCategory statusCategory
      */
     @ApiStatus.Internal
-    public StatusDetails(String description, String iconUrl, String id, String name, String self, StatusDetailsStatusCategory statusCategory) {
+    public StatusDetails(String description, String iconUrl, String id, String name, StatusDetailsScope scope, String self, StatusDetailsStatusCategory statusCategory) {
         this.description = description;
         this.iconUrl = iconUrl;
         this.id = id;
         this.name = name;
+        this.scope = scope;
         this.self = self;
         this.statusCategory = statusCategory;
     }
