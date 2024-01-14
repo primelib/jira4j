@@ -95,6 +95,7 @@ import io.github.primelib.jira4j.restv3.model.Filter;
 import io.github.primelib.jira4j.restv3.model.FoundGroups;
 import io.github.primelib.jira4j.restv3.model.FoundUsers;
 import io.github.primelib.jira4j.restv3.model.FoundUsersAndGroups;
+import io.github.primelib.jira4j.restv3.model.GetWorkflowTransitionRuleConfigurationsRequest;
 import io.github.primelib.jira4j.restv3.model.Group;
 import io.github.primelib.jira4j.restv3.model.GroupName;
 import io.github.primelib.jira4j.restv3.model.IdBean;
@@ -215,6 +216,7 @@ import io.github.primelib.jira4j.restv3.model.PageBeanWorkflowScheme;
 import io.github.primelib.jira4j.restv3.model.PageBeanWorkflowTransitionRules;
 import io.github.primelib.jira4j.restv3.model.PageOfChangelogs;
 import io.github.primelib.jira4j.restv3.model.PageOfComments;
+import io.github.primelib.jira4j.restv3.model.PageOfCreateMetaIssueTypeWithField;
 import io.github.primelib.jira4j.restv3.model.PageOfCreateMetaIssueTypes;
 import io.github.primelib.jira4j.restv3.model.PageOfDashboards;
 import io.github.primelib.jira4j.restv3.model.PageOfStatuses;
@@ -269,6 +271,7 @@ import io.github.primelib.jira4j.restv3.model.SecuritySchemeId;
 import io.github.primelib.jira4j.restv3.model.SecuritySchemeMembersRequest;
 import io.github.primelib.jira4j.restv3.model.SecuritySchemes;
 import io.github.primelib.jira4j.restv3.model.ServerInformation;
+import io.github.primelib.jira4j.restv3.model.ServiceRegistry;
 import java.util.Set;
 import io.github.primelib.jira4j.restv3.model.SetDefaultLevelsRequest;
 import io.github.primelib.jira4j.restv3.model.SetDefaultPriorityRequest;
@@ -304,6 +307,7 @@ import io.github.primelib.jira4j.restv3.model.UpdateUiModificationDetails;
 import io.github.primelib.jira4j.restv3.model.UpdateUserToGroupBean;
 import io.github.primelib.jira4j.restv3.model.UpdatedProjectCategory;
 import io.github.primelib.jira4j.restv3.model.User;
+import io.github.primelib.jira4j.restv3.model.UserColumnRequestBody;
 import io.github.primelib.jira4j.restv3.model.UserMigrationBean;
 import io.github.primelib.jira4j.restv3.model.Version;
 import io.github.primelib.jira4j.restv3.model.VersionIssueCounts;
@@ -1269,7 +1273,7 @@ public interface JiraRESTV3Api {
      * Bulk update custom field value
      * <p>
      * Updates the value of a custom field added by Connect apps on one or more issues. The values of up to 200 custom fields can be updated.
-     * **[Permissions](#permissions) required:** Only Connect apps can make this request.
+     * **[Permissions](#permissions) required:** Only Connect apps can make this request
      *
      * @param atlassianTransferId  The ID of the transfer. (required)
      * @param connectCustomFieldValues  (required)
@@ -1337,7 +1341,7 @@ public interface JiraRESTV3Api {
      * **[Permissions](#permissions) required:** Jira admin or site admin: [global permission](https://confluence.atlassian.com/x/x4dKLg)
      * **License required:** Premium or Enterprise
      * **Signed-in users only:** This API can't be accessed anonymously.
-     * **Rate limiting:** Only a single request per user can be active at any given time.
+     * **Rate limiting:** Only a single request per jira instance can be active at any given time.
      * 
      *  
      *
@@ -1965,6 +1969,7 @@ public interface JiraRESTV3Api {
      * <p>
      * Creates an option for a select list issue field.
      * Note that this operation **only works for issue field select list options added by Connect apps**, it cannot be used with issue field select list options created in Jira or using operations from the [Issue custom field options](#api-group-Issue-custom-field-options) resource.
+     * Each field can have a maximum of 10000 options, and each option can have a maximum of 10000 scopes.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). Jira permissions are not required for the app providing the field.
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
@@ -2544,7 +2549,7 @@ public interface JiraRESTV3Api {
      * 
      * 
      * }
-     * ##### Only Bamboo notifications workflow condition #####
+     * ##### Only Bamboo notifications workflow condition (deprecated) #####
      * A condition that makes the transition available only to Bamboo build notifications.
      * 
      * 
@@ -4093,7 +4098,7 @@ public interface JiraRESTV3Api {
      * {@code destinationFieldId} The ID of the destination field.
      * *
      * {@code copyType} Use {@code same} to copy the value from a field inside the issue, or {@code parent} to copy the value from the parent issue.
-     * ##### Create Crucible review workflow function #####
+     * ##### Create Crucible review workflow function (deprecated) #####
      * A post function that creates a Crucible review for all unreviewed code for the issue.
      * 
      * 
@@ -6197,24 +6202,6 @@ public interface JiraRESTV3Api {
     PageOfDashboards getAllDashboards(@Param("filter") @Nullable String filter, @Param("startAt") @Nullable Integer startAt, @Param("maxResults") @Nullable Integer maxResults);
 
     /**
-     * Get all field configuration schemes
-     * <p>
-     * Returns a [paginated](#pagination) list of field configuration schemes.
-     * Only field configuration schemes used in classic projects are returned.
-     * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
-     *
-     * Authentication - Required Scopes: [manage:jira-configuration]
-     * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
-     * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
-     * @param id                   The list of field configuration scheme IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code id=10000&amp;id=10001}. (optional)
-     */
-    @RequestLine("GET /rest/api/3/fieldconfigurationscheme?startAt={startAt}&maxResults={maxResults}&id={id}")
-    @Headers({
-        "Accept: application/json"
-    })
-    PageBeanFieldConfigurationScheme getAllFieldConfigurationSchemes(@Param("startAt") @Nullable Long startAt, @Param("maxResults") @Nullable Integer maxResults, @Param("id") @Nullable Set<Long> id);
-
-    /**
      * Get all field configurations
      * <p>
      * Returns a [paginated](#pagination) list of field configurations. The list can be for all field configurations or a subset determined by any combination of these criteria:
@@ -6239,6 +6226,24 @@ public interface JiraRESTV3Api {
         "Accept: application/json"
     })
     PageBeanFieldConfigurationDetails getAllFieldConfigurations(@Param("startAt") @Nullable Long startAt, @Param("maxResults") @Nullable Integer maxResults, @Param("id") @Nullable Set<Long> id, @Param("isDefault") @Nullable Boolean isDefault, @Param("query") @Nullable String query);
+
+    /**
+     * Get all fieldg rnfiguration schemes
+     * <p>
+     * Returns a [paginated](#pagination) list of field configuration schemes.
+     * Only field configuration schemes used in classic projects are returned.
+     * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
+     *
+     * Authentication - Required Scopes: [manage:jira-configuration]
+     * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
+     * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
+     * @param id                   The list of field configuration scheme IDs. To include multiple IDs, provide an ampersand-separated list. For example, {@code id=10000&amp;id=10001}. (optional)
+     */
+    @RequestLine("GET /rest/api/3/fieldconfigurationscheme?startAt={startAt}&maxResults={maxResults}&id={id}")
+    @Headers({
+        "Accept: application/json"
+    })
+    PageBeanFieldConfigurationScheme getAllFieldgRnfigurationSchemes(@Param("startAt") @Nullable Long startAt, @Param("maxResults") @Nullable Integer maxResults, @Param("id") @Nullable Set<Long> id);
 
     /**
      * Get gadgets
@@ -6502,11 +6507,11 @@ public interface JiraRESTV3Api {
      * <p>
      * Gets a list of all project roles, complete with project role details and default actors.
      * ### About project roles ###
-     * [Project roles](https://confluence.atlassian.com/x/3odKLg) are a flexible way to to associate users and groups with projects. In Jira Cloud, the list of project roles is shared globally with all projects, but each project can have a different set of actors associated with it (unlike groups, which have the same membership throughout all Jira applications).
+     * [Project roles](https://support.atlassian.com/jira-cloud-administration/docs/manage-project-roles/) are a flexible way to to associate users and groups with projects. In Jira Cloud, the list of project roles is shared globally with all projects, but each project can have a different set of actors associated with it (unlike groups, which have the same membership throughout all Jira applications).
      * Project roles are used in [permission schemes](#api-rest-api-3-permissionscheme-get), [email notification schemes](#api-rest-api-3-notificationscheme-get), [issue security levels](#api-rest-api-3-issuesecurityschemes-get), [comment visibility](#api-rest-api-3-comment-list-post), and workflow conditions.
      * #### Members and actors ####
      * In the Jira REST API, a member of a project role is called an *actor*. An *actor* is a group or user associated with a project role.
-     * Actors may be set as [default members](https://confluence.atlassian.com/x/3odKLg#Managingprojectroles-Specifying'defaultmembers'foraprojectrole) of the project role or set at the project level:
+     * Actors may be set as [default members](https://support.atlassian.com/jira-cloud-administration/docs/manage-project-roles/#Specifying-'default-members'-for-a-project-role) of the project role or set at the project level:
      *  *
      * Default actors: Users and groups that are assigned to the project role for all newly created projects. The default actors can be removed at the project level later if desired.
      * *
@@ -7127,6 +7132,11 @@ public interface JiraRESTV3Api {
      * Null values in {@code globalPermissions}, {@code projectPermissions}, {@code projectPermissions.projects}, and {@code projectPermissions.issues} are ignored.
      * *
      * Empty strings in {@code projectPermissions.permissions} are ignored.
+     * **Deprecation notice:** The required OAuth 2.0 scopes will be updated on June 15, 2024.
+     *  *
+     * **Classic**: {@code read:jira-work}
+     * *
+     * **Granular**: {@code read:permission:jira}
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) to check the permissions for other users, otherwise none. However, Connect apps can make a call from the app server to the product to obtain permission details for any user, without admin permission. This Connect app ability doesn't apply to calls made using AP.request() in a browser.
      *
@@ -7369,6 +7379,11 @@ public interface JiraRESTV3Api {
      * <p>
      * Returns the counts of issues assigned to the component.
      * This operation can be accessed anonymously.
+     * **Deprecation notice:** The required OAuth 2.0 scopes will be updated on June 15, 2024.
+     *  *
+     * **Classic**: {@code read:jira-work}
+     * *
+     * **Granular**: {@code read:field:jira}, {@code read:project.component:jira}
      * **[Permissions](#permissions) required:** None.
      *
      * Authentication - Required Scopes: [read:jira-work]
@@ -7455,12 +7470,33 @@ public interface JiraRESTV3Api {
      * @param issuetypeIds         List of issue type IDs. This parameter accepts a comma-separated list. Multiple issue type IDs can also be provided using an ampersand-separated list. For example, {@code issuetypeIds=10000,10001&amp;issuetypeIds=10020,10021}. This parameter may be provided with {@code issuetypeNames}. (optional)
      * @param issuetypeNames       List of issue type names. This parameter accepts a comma-separated list. Multiple issue type names can also be provided using an ampersand-separated list. For example, {@code issuetypeNames=name1,name2&amp;issuetypeNames=name3}. This parameter may be provided with {@code issuetypeIds}. (optional)
      * @param expand               Use [expand](#expansion) to include additional information about issue metadata in the response. This parameter accepts {@code projects.issuetypes.fields}, which returns information about the fields in the issue creation screen for each issue type. Fields hidden from the screen are not returned. Use the information to populate the {@code fields} and {@code update} fields in [Create issue](#api-rest-api-3-issue-post) and [Create issues](#api-rest-api-3-issue-bulk-post). (optional)
+     * @deprecated
      */
+    @Deprecated
     @RequestLine("GET /rest/api/3/issue/createmeta?projectIds={projectIds}&projectKeys={projectKeys}&issuetypeIds={issuetypeIds}&issuetypeNames={issuetypeNames}&expand={expand}")
     @Headers({
         "Accept: application/json"
     })
     IssueCreateMetadata getCreateIssueMeta(@Param("projectIds") @Nullable List<String> projectIds, @Param("projectKeys") @Nullable List<String> projectKeys, @Param("issuetypeIds") @Nullable List<String> issuetypeIds, @Param("issuetypeNames") @Nullable List<String> issuetypeNames, @Param("expand") @Nullable String expand);
+
+    /**
+     * Get create field metadata for a project and issue type id
+     * <p>
+     * Returns a page of field metadata for a specified project and issuetype id. Use the information to populate the requests in [ Create issue](#api-rest-api-3-issue-post) and [Create issues](#api-rest-api-3-issue-bulk-post).
+     * This operation can be accessed anonymously.
+     * **[Permissions](#permissions) required:** *Create issues* [project permission](https://confluence.atlassian.com/x/yodKLg) in the requested projects.
+     *
+     * Authentication - Required Scopes: [read:jira-work]
+     * @param projectIdOrKey       The ID or key of the project. (required)
+     * @param issueTypeId          The issuetype ID. (required)
+     * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
+     * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
+     */
+    @RequestLine("GET /rest/api/3/issue/createmeta/{projectIdOrKey}/issuetypes/{issueTypeId}?startAt={startAt}&maxResults={maxResults}")
+    @Headers({
+        "Accept: application/json"
+    })
+    PageOfCreateMetaIssueTypeWithField getCreateIssueMetaIssueTypeId(@Param("projectIdOrKey") @NotNull String projectIdOrKey, @Param("issueTypeId") @NotNull String issueTypeId, @Param("startAt") @Nullable Integer startAt, @Param("maxResults") @Nullable Integer maxResults);
 
     /**
      * Get create metadata issue types for a project
@@ -7498,7 +7534,7 @@ public interface JiraRESTV3Api {
     /**
      * Get custom field configurations
      * <p>
-     * Returns a [paginated](#pagination) list of configurations for a custom field created by a [Forge app](https://developer.atlassian.com/platform/forge/).
+     * Returns a [paginated](#pagination) list of configurations for a custom field of a [type](https://developer.atlassian.com/platform/forge/manifest-reference/modules/jira-custom-field-type/) created by a [Forge app](https://developer.atlassian.com/platform/forge/).
      * The result can be filtered by one of these criteria:
      *  *
      * {@code id}.
@@ -7509,7 +7545,7 @@ public interface JiraRESTV3Api {
      * *
      * {@code projectKeyOrId} and {@code issueTypeId}.
      * Otherwise, all configurations are returned.
-     * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). Jira permissions are not required for the Forge app that created the custom field.
+     * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). Jira permissions are not required for the Forge app that provided the custom field type.
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param fieldIdOrKey         The ID or key of the custom field, for example {@code customfield_10000}. (required)
@@ -7595,7 +7631,7 @@ public interface JiraRESTV3Api {
      * When an app creates a dashboard item it registers a callback to receive the dashboard item ID. The callback fires whenever the item is rendered or, where the item is configurable, the user edits the item. The app then uses this resource to store the item's content or configuration details. For more information on working with dashboard items, see [ Building a dashboard item for a JIRA Connect add-on](https://developer.atlassian.com/server/jira/platform/guide-building-a-dashboard-item-for-a-jira-connect-add-on-33746254/) and the [Dashboard Item](https://developer.atlassian.com/cloud/jira/platform/modules/dashboard-item/) documentation.
      * There is no resource to set or get dashboard items.
      * This operation can be accessed anonymously.
-     * **[Permissions](#permissions) required:** The user must be the owner of the dashboard or have the dashboard shared with them. Note, users with the *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) are considered owners of the System dashboard. The System dashboard is considered to be shared with all other users, and is accessible to anonymous users when Jira’s anonymous access is permitted.
+     * **[Permissions](#permissions) required:** The user must be the owner of the dashboard or have the dashboard shared with them. Note, users with the *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) are considered owners of the System dashboard. The System dashboard is considered to be shared with all other users, and is accessible to anonymous users when Jira\\\\u2019s anonymous access is permitted.
      *
      * Authentication - Required Scopes: [read:jira-work]
      * @param dashboardId          The ID of the dashboard. (required)
@@ -7613,7 +7649,7 @@ public interface JiraRESTV3Api {
      * <p>
      * Returns the keys of all properties for a dashboard item.
      * This operation can be accessed anonymously.
-     * **[Permissions](#permissions) required:** The user must be the owner of the dashboard or have the dashboard shared with them. Note, users with the *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) are considered owners of the System dashboard. The System dashboard is considered to be shared with all other users, and is accessible to anonymous users when Jira’s anonymous access is permitted.
+     * **[Permissions](#permissions) required:** The user must be the owner of the dashboard or have the dashboard shared with them. Note, users with the *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) are considered owners of the System dashboard. The System dashboard is considered to be shared with all other users, and is accessible to anonymous users when Jira\\\\u2019s anonymous access is permitted.
      *
      * Authentication - Required Scopes: [read:jira-work]
      * @param dashboardId          The ID of the dashboard. (required)
@@ -8465,7 +8501,7 @@ public interface JiraRESTV3Api {
     @Headers({
         "Accept: application/json"
     })
-    PageBeanIssueSecurityLevelMember getIssueSecurityLevelMembers(@Param("issueSecuritySchemeId") @NotNull Long issueSecuritySchemeId, @Param("startAt") @Nullable Long startAt, @Param("maxResults") @Nullable Integer maxResults, @Param("issueSecurityLevelId") @Nullable Set<Long> issueSecurityLevelId, @Param("expand") @Nullable String expand);
+    PageBeanIssueSecurityLevelMember getIssueSecurityLevelMembers(@Param("issueSecuritySchemeId") @NotNull Long issueSecuritySchemeId, @Param("startAt") @Nullable Long startAt, @Param("maxResults") @Nullable Integer maxResults, @Param("issueSecurityLevelId") @Nullable Set<String> issueSecurityLevelId, @Param("expand") @Nullable String expand);
 
     /**
      * Get issue security scheme
@@ -8808,6 +8844,11 @@ public interface JiraRESTV3Api {
      * for a comment, where the user has both the permission to browse the comment and the project permission for the comment's parent issue. Only the BROWSE\\_PROJECTS permission is supported. If a {@code commentId} is provided whose {@code permissions} does not equal BROWSE\\_PROJECTS, a 400 error will be returned.
      * This means that users may be shown as having an issue permission (such as EDIT\\_ISSUES) in the global context or a project context but may not have the permission for any or all issues. For example, if Reporters have the EDIT\\_ISSUES permission a user would be shown as having this permission in the global context or the context of a project, because any user can be a reporter. However, if they are not the user who reported the issue queried they would not have EDIT\\_ISSUES permission for that issue.
      * Global permissions are unaffected by context.
+     * **Deprecation notice:** The required OAuth 2.0 scopes will be updated on February 15, 2024.
+     *  *
+     * **Classic**: {@code read:jira-work}
+     * *
+     * **Granular**: {@code read:permission:jira}
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** None.
      *
@@ -8971,6 +9012,11 @@ public interface JiraRESTV3Api {
      * Get permitted projects
      * <p>
      * Returns all the projects where the user is granted a list of project permissions.
+     * **Deprecation notice:** The required OAuth 2.0 scopes will be updated on February 15, 2024.
+     *  *
+     * **Classic**: {@code read:jira-work}
+     * *
+     * **Granular**: {@code read:permission:jira}, {@code read:project:jira}
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** None.
      *
@@ -9089,6 +9135,7 @@ public interface JiraRESTV3Api {
      * Get project components
      * <p>
      * Returns all components in a project. See the [Get project components paginated](#api-rest-api-3-project-projectIdOrKey-component-get) resource if you want to get a full list of components with pagination.
+     * If your project uses Compass components, this API will return a paginated list of Compass components that are linked to issues in that project.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Browse Projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.
      *
@@ -9105,6 +9152,7 @@ public interface JiraRESTV3Api {
      * Get project components paginated
      * <p>
      * Returns a [paginated](#pagination) list of all components in a project. See the [Get project components](#api-rest-api-3-project-projectIdOrKey-components-get) resource if you want to get a full list of versions without pagination.
+     * If your project uses Compass components, this API will return a list of Compass components that are linked to issues in that project.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Browse Projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.
      *
@@ -9254,7 +9302,7 @@ public interface JiraRESTV3Api {
     /**
      * Get project role details
      * <p>
-     * Returns all [project roles](https://confluence.atlassian.com/x/3odKLg) and the details for each role. Note that the list of project roles is common to all projects.
+     * Returns all [project roles](https://support.atlassian.com/jira-cloud-administration/docs/manage-project-roles/) and the details for each role. Note that the list of project roles is common to all projects.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) or *Administer projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.
      *
@@ -9272,7 +9320,7 @@ public interface JiraRESTV3Api {
     /**
      * Get project roles for project
      * <p>
-     * Returns a list of [project roles](https://confluence.atlassian.com/x/3odKLg) for the project returning the name and self URL for each role.
+     * Returns a list of [project roles](https://support.atlassian.com/jira-cloud-administration/docs/manage-project-roles/) for the project returning the name and self URL for each role.
      * Note that all project roles are shared with all projects in Jira Cloud. See [Get all project roles](#api-rest-api-3-role-get) for more information.
      * This operation can be accessed anonymously.
      * **[Permissions](#permissions) required:** *Administer Projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for any project on the site or *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
@@ -9792,6 +9840,9 @@ public interface JiraRESTV3Api {
      * <p>
      * Returns the status of a [long-running asynchronous task](#async).
      * When a task has finished, this operation returns the JSON blob applicable to the task. See the documentation of the operation that created the task for details. Task details are not permanently retained. As of September 2019, details are retained for 14 days although this period may change without notice.
+     * **Deprecation notice:** The required OAuth 2.0 scopes will be updated on June 15, 2024.
+     *  *
+     * {@code read:jira-work}
      * **[Permissions](#permissions) required:** either of:
      *  *
      * *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
@@ -10277,6 +10328,7 @@ public interface JiraRESTV3Api {
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param types                The types of the transition rules to return. (required)
+     * @param getWorkflowTransitionRuleConfigurationsRequest  (required)
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 10)
      * @param keys                 The transition rule class keys, as defined in the Connect or the Forge app descriptor, of the transition rules to return. (optional)
@@ -10287,9 +10339,10 @@ public interface JiraRESTV3Api {
      */
     @RequestLine("GET /rest/api/3/workflow/rule/config?startAt={startAt}&maxResults={maxResults}&types={types}&keys={keys}&workflowNames={workflowNames}&withTags={withTags}&draft={draft}&expand={expand}")
     @Headers({
+        "Content-Type: application/json", 
         "Accept: application/json"
     })
-    PageBeanWorkflowTransitionRules getWorkflowTransitionRuleConfigurations(@Param("types") @NotNull Set<String> types, @Param("startAt") @Nullable Long startAt, @Param("maxResults") @Nullable Integer maxResults, @Param("keys") @Nullable Set<String> keys, @Param("workflowNames") @Nullable Set<String> workflowNames, @Param("withTags") @Nullable Set<String> withTags, @Param("draft") @Nullable Boolean draft, @Param("expand") @Nullable String expand);
+    PageBeanWorkflowTransitionRules getWorkflowTransitionRuleConfigurations(@Param("types") @NotNull Set<String> types, @NotNull GetWorkflowTransitionRuleConfigurationsRequest getWorkflowTransitionRuleConfigurationsRequest, @Param("startAt") @Nullable Long startAt, @Param("maxResults") @Nullable Integer maxResults, @Param("keys") @Nullable Set<String> keys, @Param("workflowNames") @Nullable Set<String> workflowNames, @Param("withTags") @Nullable Set<String> withTags, @Param("draft") @Nullable Boolean draft, @Param("expand") @Nullable String expand);
 
     /**
      * Get workflows paginated
@@ -11485,6 +11538,19 @@ public interface JiraRESTV3Api {
     Object selectTimeTrackingImplementation(@NotNull TimeTrackingProvider timeTrackingProvider);
 
     /**
+     * Retrieve the attributes of service registries
+     * <p>
+     * Retrieve the value of service registries. **[Permissions](#permissions) required:** Only Connect apps can make this request and the servicesIds belong to the tenant you are requesting
+     *
+     * @param serviceIds           The ID of the services (the strings starting with "b:" need to be decoded in Base64). (required)
+     */
+    @RequestLine("GET /rest/atlassian-connect/1/service-registry?serviceIds={serviceIds}")
+    @Headers({
+        "Accept: application/json"
+    })
+    List<ServiceRegistry> serviceRegistryResourceServicesGet(@Param("serviceIds") @NotNull List<String> serviceIds);
+
+    /**
      * Set actors for project role
      * <p>
      * Sets the actors for a project role for a project, replacing all existing actors.
@@ -11995,15 +12061,15 @@ public interface JiraRESTV3Api {
      * *
      * Permission to access Jira, to set the calling user's columns.
      *
+     * @param userColumnRequestBody The ID of a column to set. To set multiple columns, send multiple {@code columns} parameters. (required)
      * @param accountId            The account ID of the user, which uniquely identifies the user across all Atlassian products. For example, *5b10ac8d82e05b22cc7d4ef5*. (optional)
-     * @param requestBody          The ID of a column to set. To set multiple columns, send multiple {@code columns} parameters. (optional)
      */
     @RequestLine("PUT /rest/api/3/user/columns?accountId={accountId}")
     @Headers({
         "Content-Type: */*", 
         "Accept: application/json"
     })
-    Object setUserColumns(@Param("accountId") @Nullable String accountId, @Nullable List<String> requestBody);
+    Object setUserColumns(@NotNull UserColumnRequestBody userColumnRequestBody, @Param("accountId") @Nullable String accountId);
 
     /**
      * Set user property
@@ -12213,7 +12279,7 @@ public interface JiraRESTV3Api {
      * @param id                   The ID of the comment. (required)
      * @param comment               (required)
      * @param notifyUsers          Whether users are notified when a comment is updated. (optional, defaults to true)
-     * @param overrideEditableFlag Whether screen security is overridden to enable uneditable fields to be edited. Available to Connect app users with the *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) and Forge apps acting on behalf of users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). (optional, defaults to false)
+     * @param overrideEditableFlag Whether screen security is overridden to enable uneditable fields to be edited. Available to Connect app users with the *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) and Forge apps acting on behalf of users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). (optional)
      * @param expand               Use [expand](#expansion) to include additional information about comments in the response. This parameter accepts {@code renderedBody}, which returns the comment body rendered in HTML. (optional)
      */
     @RequestLine("PUT /rest/api/3/issue/{issueIdOrKey}/comment/{id}?notifyUsers={notifyUsers}&overrideEditableFlag={overrideEditableFlag}&expand={expand}")
@@ -12261,8 +12327,8 @@ public interface JiraRESTV3Api {
     /**
      * Update custom field configurations
      * <p>
-     * Update the configuration for contexts of a custom field created by a [Forge app](https://developer.atlassian.com/platform/forge/).
-     * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). Jira permissions are not required for the Forge app that created the custom field.
+     * Update the configuration for contexts of a custom field of a [type](https://developer.atlassian.com/platform/forge/manifest-reference/modules/jira-custom-field-type/) created by a [Forge app](https://developer.atlassian.com/platform/forge/).
+     * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). Jira permissions are not required for the Forge app that created the custom field type.
      *
      * Authentication - Required Scopes: [manage:jira-configuration]
      * @param fieldIdOrKey         The ID or key of the custom field, for example {@code customfield_10000}. (required)
@@ -12316,8 +12382,9 @@ public interface JiraRESTV3Api {
     /**
      * Update custom field value
      * <p>
-     * Updates the value of a custom field on one or more issues. Custom fields can only be updated by the Forge app that created them.
-     * **[Permissions](#permissions) required:** Only the app that created the custom field can update its values with this operation.
+     * Updates the value of a custom field on one or more issues.
+     * Apps can only perform this operation on [custom fields](https://developer.atlassian.com/platform/forge/manifest-reference/modules/jira-custom-field/) and [custom field types](https://developer.atlassian.com/platform/forge/manifest-reference/modules/jira-custom-field-type/) declared in their own manifests.
+     * **[Permissions](#permissions) required:** Only the app that owns the custom field or custom field type can update its values with this operation.
      *
      * @param fieldIdOrKey         The ID or key of the custom field. For example, {@code customfield_10010}. (required)
      * @param customFieldValueUpdateDetails  (required)
@@ -12618,8 +12685,9 @@ public interface JiraRESTV3Api {
     /**
      * Update custom fields
      * <p>
-     * Updates the value of one or more custom fields on one or more issues. Combinations of custom field and issue should be unique within the request. Custom fields can only be updated by the Forge app that created them.
-     * **[Permissions](#permissions) required:** Only the app that created the custom field can update its values with this operation.
+     * Updates the value of one or more custom fields on one or more issues. Combinations of custom field and issue should be unique within the request.
+     * Apps can only perform this operation on [custom fields](https://developer.atlassian.com/platform/forge/manifest-reference/modules/jira-custom-field/) and [custom field types](https://developer.atlassian.com/platform/forge/manifest-reference/modules/jira-custom-field-type/) declared in their own manifests.
+     * **[Permissions](#permissions) required:** Only the app that owns the custom field or custom field type can update its values with this operation.
      *
      * @param multipleCustomFieldValuesUpdateDetails  (required)
      * @param generateChangelog    Whether to generate a changelog for this update. (optional, defaults to true)
@@ -12765,7 +12833,7 @@ public interface JiraRESTV3Api {
      * <p>
      * Sets the [project's sender email address](https://confluence.atlassian.com/x/dolKLg).
      * If {@code emailAddress} is an empty string, the default email address is restored.
-     * **[Permissions](#permissions) required:** *Browse projects* [project permission](https://confluence.atlassian.com/x/yodKLg) for the project.
+     * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) or *Administer Projects* [project permission.](https://confluence.atlassian.com/x/yodKLg)
      *
      * Authentication - Required Scopes: [manage:jira-project]
      * @param projectId            The project ID. (required)
@@ -13242,7 +13310,7 @@ public interface JiraRESTV3Api {
      *  *
      * {@code permissionKey} The permission required to perform the transition. Allowed values: [built-in Jira permissions](https://developer.atlassian.com/cloud/jira/platform/rest/v3/api-group-permission-schemes/#built-in-permissions).
      * ##### Parent or child blocking validator #####
-     * A validator to block the child issue’s transition depending on the parent issue’s status.
+     * A validator to block the child issue\\\\u2019s transition depending on the parent issue\\\\u2019s status.
      * 
      * 
      * {
@@ -13481,7 +13549,7 @@ public interface JiraRESTV3Api {
      * }
      * Parameters:
      *  *
-     * {@code regexp} the regular expression used to validate the field’s content.
+     * {@code regexp} the regular expression used to validate the field\\\\u2019s content.
      * *
      * {@code fieldKey} the ID of the field to validate. For a custom field, it would look like {@code customfield_123}.
      * ###### Date field comparison ######
@@ -13674,7 +13742,7 @@ public interface JiraRESTV3Api {
      *  *
      * {@code fieldId} The ID of the field to check the value of. For non-system fields, it will look like {@code customfield_123}. Note: {@code fieldId} is used interchangeably with the idea of {@code fieldKey} here, they refer to the same field.
      * *
-     * {@code fieldValue} the list of values to check against the field’s value.
+     * {@code fieldValue} the list of values to check against the field\\\\u2019s value.
      * *
      * {@code comparator} The comparison logic. Allowed values: {@code &amp;gt;}, {@code &amp;gt;=}, {@code =}, {@code &amp;lt;=}, {@code &amp;lt;}, {@code !=}.
      * *
@@ -13825,7 +13893,7 @@ public interface JiraRESTV3Api {
      * *
      * {@code ignoreLoopTransitions} ignore loop transitions. Allowed values: {@code true}, {@code false}.
      * ##### Parent or child blocking condition #####
-     * A condition to block the parent’s issue transition depending on the child’s issue status.
+     * A condition to block the parent\\\\u2019s issue transition depending on the child\\\\u2019s issue status.
      * 
      * 
      * {
