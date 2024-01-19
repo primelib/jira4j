@@ -9055,6 +9055,17 @@ public interface JiraRESTV3Api {
      * *jira.user.locale* The locale of the user. By default this is not set and the user takes the locale of the instance.
      * *
      * *jira.user.timezone* The time zone of the user. By default this is not set and the user takes the timezone of the instance.
+     * These system preferences keys will be deprecated by 15/07/2024. You can still retrieve these keys, but it will not have any impact on Notification behaviour.
+     *  *
+     * *user.notifiy.own.changes* Whether the user gets notified of their own changes.
+     * *
+     * *user.notifications.watcher* Whether the user gets notified when they are watcher.
+     * *
+     * *user.notifications.assignee* Whether the user gets notified when they are assignee.
+     * *
+     * *user.notifications.reporter* Whether the user gets notified when they are reporter.
+     * *
+     * *user.notifications.mentions* Whether the user gets notified when they are mentions.
      * Use [ Update a user profile](https://developer.atlassian.com/cloud/admin/user-management/rest/#api-users-account-id-manage-profile-patch) from the user management REST API to manage timezone and locale instead.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      *
@@ -9141,12 +9152,13 @@ public interface JiraRESTV3Api {
      *
      * Authentication - Required Scopes: [read:jira-work]
      * @param projectIdOrKey       The project ID or project key (case sensitive). (required)
+     * @param componentSource       (optional, defaults to jira)
      */
-    @RequestLine("GET /rest/api/3/project/{projectIdOrKey}/components")
+    @RequestLine("GET /rest/api/3/project/{projectIdOrKey}/components?componentSource={componentSource}")
     @Headers({
         "Accept: application/json"
     })
-    List<ProjectComponent> getProjectComponents(@Param("projectIdOrKey") @NotNull String projectIdOrKey);
+    List<ProjectComponent> getProjectComponents(@Param("projectIdOrKey") @NotNull String projectIdOrKey, @Param("componentSource") @Nullable String componentSource);
 
     /**
      * Get project components paginated
@@ -9161,13 +9173,14 @@ public interface JiraRESTV3Api {
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
      * @param orderBy              [Order](#ordering) the results by a field:   *  {@code description} Sorts by the component description.  *  {@code issueCount} Sorts by the count of issues associated with the component.  *  {@code lead} Sorts by the user key of the component's project lead.  *  {@code name} Sorts by component name. (optional)
+     * @param componentSource       (optional, defaults to jira)
      * @param query                Filter the results using a literal string. Components with a matching {@code name} or {@code description} are returned (case insensitive). (optional)
      */
-    @RequestLine("GET /rest/api/3/project/{projectIdOrKey}/component?startAt={startAt}&maxResults={maxResults}&orderBy={orderBy}&query={query}")
+    @RequestLine("GET /rest/api/3/project/{projectIdOrKey}/component?startAt={startAt}&maxResults={maxResults}&orderBy={orderBy}&componentSource={componentSource}&query={query}")
     @Headers({
         "Accept: application/json"
     })
-    PageBeanComponentWithIssueCount getProjectComponentsPaginated(@Param("projectIdOrKey") @NotNull String projectIdOrKey, @Param("startAt") @Nullable Long startAt, @Param("maxResults") @Nullable Integer maxResults, @Param("orderBy") @Nullable String orderBy, @Param("query") @Nullable String query);
+    PageBeanComponentWithIssueCount getProjectComponentsPaginated(@Param("projectIdOrKey") @NotNull String projectIdOrKey, @Param("startAt") @Nullable Long startAt, @Param("maxResults") @Nullable Integer maxResults, @Param("orderBy") @Nullable String orderBy, @Param("componentSource") @Nullable String componentSource, @Param("query") @Nullable String query);
 
     /**
      * Get project mappings for custom field context
@@ -11987,8 +12000,6 @@ public interface JiraRESTV3Api {
      *  *
      * *user.notifications.mimetype* The mime type used in notifications sent to the user. Defaults to {@code html}.
      * *
-     * *user.notify.own.changes* Whether the user gets notified of their own changes. Defaults to {@code false}.
-     * *
      * *user.default.share.private* Whether new [ filters](https://confluence.atlassian.com/x/eQiiLQ) are set to private. Defaults to {@code true}.
      * *
      * *user.keyboard.shortcuts.disabled* Whether keyboard shortcuts are disabled. Defaults to {@code false}.
@@ -11999,6 +12010,17 @@ public interface JiraRESTV3Api {
      * *jira.user.locale* The locale of the user. By default, not set. The user takes the instance locale.
      * *
      * *jira.user.timezone* The time zone of the user. By default, not set. The user takes the instance timezone.
+     * These system preferences keys will be deprecated by 15/07/2024. You can still use these keys to create arbitrary preferences, but it will not have any impact on Notification behaviour.
+     *  *
+     * *user.notifiy.own.changes* Whether the user gets notified of their own changes.
+     * *
+     * *user.notifications.watcher* Whether the user gets notified when they are watcher.
+     * *
+     * *user.notifications.assignee* Whether the user gets notified when they are assignee.
+     * *
+     * *user.notifications.reporter* Whether the user gets notified when they are reporter.
+     * *
+     * *user.notifications.mentions* Whether the user gets notified when they are mentions.
      * Use [ Update a user profile](https://developer.atlassian.com/cloud/admin/user-management/rest/#api-users-account-id-manage-profile-patch) from the user management REST API to manage timezone and locale instead.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      *
@@ -12084,7 +12106,7 @@ public interface JiraRESTV3Api {
      *
      * Authentication - Required Scopes: [write:jira-work]
      * @param propertyKey          The key of the user's property. The maximum length is 255 characters. (required)
-     * @param body                  (required)
+     * @param body                 The request containing the value of the property. The value has to a valid, non-empty JSON array. The maximum length is 32768 characters. (required)
      * @param accountId            The account ID of the user, which uniquely identifies the user across all Atlassian products. For example, *5b10ac8d82e05b22cc7d4ef5*. (optional)
      * @param userKey              This parameter is no longer available and will be removed from the documentation soon. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details. (optional)
      * @param username             This parameter is no longer available and will be removed from the documentation soon. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details. (optional)
@@ -12279,7 +12301,7 @@ public interface JiraRESTV3Api {
      * @param id                   The ID of the comment. (required)
      * @param comment               (required)
      * @param notifyUsers          Whether users are notified when a comment is updated. (optional, defaults to true)
-     * @param overrideEditableFlag Whether screen security is overridden to enable uneditable fields to be edited. Available to Connect app users with the *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) and Forge apps acting on behalf of users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). (optional)
+     * @param overrideEditableFlag Whether screen security is overridden to enable uneditable fields to be edited. Available to Connect app users with the *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg) and Forge apps acting on behalf of users with *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg). (optional, defaults to false)
      * @param expand               Use [expand](#expansion) to include additional information about comments in the response. This parameter accepts {@code renderedBody}, which returns the comment body rendered in HTML. (optional)
      */
     @RequestLine("PUT /rest/api/3/issue/{issueIdOrKey}/comment/{id}?notifyUsers={notifyUsers}&overrideEditableFlag={overrideEditableFlag}&expand={expand}")

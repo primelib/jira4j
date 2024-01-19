@@ -75,6 +75,11 @@ public class GetProjectComponentsPaginatedOperationSpec {
     private String orderBy;
 
     /**
+     */
+    @Nullable 
+    private String componentSource;
+
+    /**
      * Filter the results using a literal string. Components with a matching {@code name} or {@code description} are returned (case insensitive).
      */
     @Nullable 
@@ -100,14 +105,16 @@ public class GetProjectComponentsPaginatedOperationSpec {
      * @param startAt              The index of the first item to return in a page of results (page offset).
      * @param maxResults           The maximum number of items to return per page.
      * @param orderBy              [Order](#ordering) the results by a field:   *  {@code description} Sorts by the component description.  *  {@code issueCount} Sorts by the count of issues associated with the component.  *  {@code lead} Sorts by the user key of the component's project lead.  *  {@code name} Sorts by component name.
+     * @param componentSource      
      * @param query                Filter the results using a literal string. Components with a matching {@code name} or {@code description} are returned (case insensitive).
      */
     @ApiStatus.Internal
-    public GetProjectComponentsPaginatedOperationSpec(String projectIdOrKey, Long startAt, Integer maxResults, String orderBy, String query) {
+    public GetProjectComponentsPaginatedOperationSpec(String projectIdOrKey, Long startAt, Integer maxResults, String orderBy, String componentSource, String query) {
         this.projectIdOrKey = projectIdOrKey;
         this.startAt = startAt;
         this.maxResults = maxResults;
         this.orderBy = orderBy;
+        this.componentSource = componentSource;
         this.query = query;
 
         if (VALIDATION_ENABLED)

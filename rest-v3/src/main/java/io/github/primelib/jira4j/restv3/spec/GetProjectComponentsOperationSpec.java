@@ -3,6 +3,7 @@ package io.github.primelib.jira4j.restv3.spec;
 import java.util.Objects;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import javax.annotation.processing.Generated;
 
 import io.github.primelib.jira4j.restv3.model.Project;
@@ -47,6 +48,11 @@ public class GetProjectComponentsOperationSpec {
     private String projectIdOrKey;
 
     /**
+     */
+    @Nullable 
+    private String componentSource;
+
+    /**
      * Constructs a validated instance of {@link GetProjectComponentsOperationSpec}.
      *
      * @param spec the specification to process
@@ -63,10 +69,12 @@ public class GetProjectComponentsOperationSpec {
      * <p>
      * NOTE: This constructor is not considered stable and may change if the operation is updated.
      * @param projectIdOrKey       The project ID or project key (case sensitive).
+     * @param componentSource      
      */
     @ApiStatus.Internal
-    public GetProjectComponentsOperationSpec(String projectIdOrKey) {
+    public GetProjectComponentsOperationSpec(String projectIdOrKey, String componentSource) {
         this.projectIdOrKey = projectIdOrKey;
+        this.componentSource = componentSource;
 
         if (VALIDATION_ENABLED)
             validate();

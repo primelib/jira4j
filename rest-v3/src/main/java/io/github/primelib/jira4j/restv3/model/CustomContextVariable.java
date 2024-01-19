@@ -28,7 +28,11 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 @NoArgsConstructor(access = AccessLevel.PROTECTED, force = true)
 @Builder
 @JsonPropertyOrder({
-    "type"
+    "type",
+    "accountId",
+    "id",
+    "key",
+    "value"
 })
 @JsonTypeName("CustomContextVariable")
 @Generated(value = "io.github.primelib.primecodegen.javafeign.JavaFeignGenerator")
@@ -39,6 +43,30 @@ public class CustomContextVariable {
      */
     @JsonProperty("type")
     protected String type;
+
+    /**
+     * The account ID of the user.
+     */
+    @JsonProperty("accountId")
+    protected String accountId;
+
+    /**
+     * The issue ID.
+     */
+    @JsonProperty("id")
+    protected Long id;
+
+    /**
+     * The issue key.
+     */
+    @JsonProperty("key")
+    protected String key;
+
+    /**
+     * A JSON object containing custom content.
+     */
+    @JsonProperty("value")
+    protected Object value;
 
     /**
      * Constructs a validated instance of {@link CustomContextVariable}.
@@ -54,10 +82,18 @@ public class CustomContextVariable {
      * <p>
      * NOTE: This constructor is not considered stable and may change if the model is updated. Consider using {@link #CustomContextVariable(Consumer)} instead.
      * @param type Type of custom context variable.
+     * @param accountId The account ID of the user.
+     * @param id The issue ID.
+     * @param key The issue key.
+     * @param value A JSON object containing custom content.
      */
     @ApiStatus.Internal
-    public CustomContextVariable(String type) {
+    public CustomContextVariable(String type, String accountId, Long id, String key, Object value) {
         this.type = type;
+        this.accountId = accountId;
+        this.id = id;
+        this.key = key;
+        this.value = value;
     }
 
 }
