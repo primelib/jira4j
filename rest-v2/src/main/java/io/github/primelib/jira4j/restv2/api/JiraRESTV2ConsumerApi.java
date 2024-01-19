@@ -9546,6 +9546,17 @@ public class JiraRESTV2ConsumerApi {
      * *jira.user.locale* The locale of the user. By default this is not set and the user takes the locale of the instance.
      * *
      * *jira.user.timezone* The time zone of the user. By default this is not set and the user takes the timezone of the instance.
+     * These system preferences keys will be deprecated by 15/07/2024. You can still retrieve these keys, but it will not have any impact on Notification behaviour.
+     *  *
+     * *user.notifiy.own.changes* Whether the user gets notified of their own changes.
+     * *
+     * *user.notifications.watcher* Whether the user gets notified when they are watcher.
+     * *
+     * *user.notifications.assignee* Whether the user gets notified when they are assignee.
+     * *
+     * *user.notifications.reporter* Whether the user gets notified when they are reporter.
+     * *
+     * *user.notifications.mentions* Whether the user gets notified when they are mentions.
      * Use [ Update a user profile](https://developer.atlassian.com/cloud/admin/user-management/rest/#api-users-account-id-manage-profile-patch) from the user management REST API to manage timezone and locale instead.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [manage:jira-configuration]
@@ -12552,8 +12563,6 @@ public class JiraRESTV2ConsumerApi {
      *  *
      * *user.notifications.mimetype* The mime type used in notifications sent to the user. Defaults to {@code html}.
      * *
-     * *user.notify.own.changes* Whether the user gets notified of their own changes. Defaults to {@code false}.
-     * *
      * *user.default.share.private* Whether new [ filters](https://confluence.atlassian.com/x/eQiiLQ) are set to private. Defaults to {@code true}.
      * *
      * *user.keyboard.shortcuts.disabled* Whether keyboard shortcuts are disabled. Defaults to {@code false}.
@@ -12564,6 +12573,17 @@ public class JiraRESTV2ConsumerApi {
      * *jira.user.locale* The locale of the user. By default, not set. The user takes the instance locale.
      * *
      * *jira.user.timezone* The time zone of the user. By default, not set. The user takes the instance timezone.
+     * These system preferences keys will be deprecated by 15/07/2024. You can still use these keys to create arbitrary preferences, but it will not have any impact on Notification behaviour.
+     *  *
+     * *user.notifiy.own.changes* Whether the user gets notified of their own changes.
+     * *
+     * *user.notifications.watcher* Whether the user gets notified when they are watcher.
+     * *
+     * *user.notifications.assignee* Whether the user gets notified when they are assignee.
+     * *
+     * *user.notifications.reporter* Whether the user gets notified when they are reporter.
+     * *
+     * *user.notifications.mentions* Whether the user gets notified when they are mentions.
      * Use [ Update a user profile](https://developer.atlassian.com/cloud/admin/user-management/rest/#api-users-account-id-manage-profile-patch) from the user management REST API to manage timezone and locale instead.
      * **[Permissions](#permissions) required:** Permission to access Jira.
      * Authentication - Required Scopes: [manage:jira-configuration]
