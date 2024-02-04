@@ -256,6 +256,7 @@ public class CreateProjectDetails {
         PYXIS_GREENHOPPER_JIRA_GH_SIMPLIFIED_KANBAN_CLASSIC("com.pyxis.greenhopper.jira:gh-simplified-kanban-classic"),
         PYXIS_GREENHOPPER_JIRA_GH_SIMPLIFIED_SCRUM_CLASSIC("com.pyxis.greenhopper.jira:gh-simplified-scrum-classic"),
         PYXIS_GREENHOPPER_JIRA_GH_CROSS_TEAM_TEMPLATE("com.pyxis.greenhopper.jira:gh-cross-team-template"),
+        PYXIS_GREENHOPPER_JIRA_GH_CROSS_TEAM_PLANNING_TEMPLATE("com.pyxis.greenhopper.jira:gh-cross-team-planning-template"),
         ATLASSIAN_SERVICEDESK_SIMPLIFIED_IT_SERVICE_MANAGEMENT("com.atlassian.servicedesk:simplified-it-service-management"),
         ATLASSIAN_SERVICEDESK_SIMPLIFIED_GENERAL_SERVICE_DESK("com.atlassian.servicedesk:simplified-general-service-desk"),
         ATLASSIAN_SERVICEDESK_SIMPLIFIED_GENERAL_SERVICE_DESK_IT("com.atlassian.servicedesk:simplified-general-service-desk-it"),

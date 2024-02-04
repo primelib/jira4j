@@ -47,6 +47,7 @@ public class SetUserPropertyOperationSpec {
     private String propertyKey;
 
     /**
+     * The request containing the value of the property. The value has to a valid, non-empty JSON array. The maximum length is 32768 characters.
      */
     @NotNull 
     private Object body;
@@ -86,7 +87,7 @@ public class SetUserPropertyOperationSpec {
      * <p>
      * NOTE: This constructor is not considered stable and may change if the operation is updated.
      * @param propertyKey          The key of the user's property. The maximum length is 255 characters.
-     * @param body                 
+     * @param body                 The request containing the value of the property. The value has to a valid, non-empty JSON array. The maximum length is 32768 characters.
      * @param accountId            The account ID of the user, which uniquely identifies the user across all Atlassian products. For example, *5b10ac8d82e05b22cc7d4ef5*.
      * @param userKey              This parameter is no longer available and will be removed from the documentation soon. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.
      * @param username             This parameter is no longer available and will be removed from the documentation soon. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.

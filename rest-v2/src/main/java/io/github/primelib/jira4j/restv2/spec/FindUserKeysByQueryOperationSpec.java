@@ -56,7 +56,7 @@ public class FindUserKeysByQueryOperationSpec {
      * The maximum number of items to return per page.
      */
     @Nullable 
-    private Integer maxResults;
+    private Integer maxResult;
 
     /**
      * Constructs a validated instance of {@link FindUserKeysByQueryOperationSpec}.
@@ -76,13 +76,13 @@ public class FindUserKeysByQueryOperationSpec {
      * NOTE: This constructor is not considered stable and may change if the operation is updated.
      * @param query                The search query.
      * @param startAt              The index of the first item to return in a page of results (page offset).
-     * @param maxResults           The maximum number of items to return per page.
+     * @param maxResult            The maximum number of items to return per page.
      */
     @ApiStatus.Internal
-    public FindUserKeysByQueryOperationSpec(String query, Long startAt, Integer maxResults) {
+    public FindUserKeysByQueryOperationSpec(String query, Long startAt, Integer maxResult) {
         this.query = query;
         this.startAt = startAt;
-        this.maxResults = maxResults;
+        this.maxResult = maxResult;
 
         if (VALIDATION_ENABLED)
             validate();
