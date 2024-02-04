@@ -59,6 +59,7 @@ public class SetDashboardItemPropertyOperationSpec {
     private String propertyKey;
 
     /**
+     * The request containing the value of the dashboard item's property.
      */
     @NotNull 
     private Object body;
@@ -82,7 +83,7 @@ public class SetDashboardItemPropertyOperationSpec {
      * @param dashboardId          The ID of the dashboard.
      * @param itemId               The ID of the dashboard item.
      * @param propertyKey          The key of the dashboard item property. The maximum length is 255 characters. For dashboard items with a spec URI and no complete module key, if the provided propertyKey is equal to "config", the request body's JSON must be an object with all keys and values as strings.
-     * @param body                 
+     * @param body                 The request containing the value of the dashboard item's property.
      */
     @ApiStatus.Internal
     public SetDashboardItemPropertyOperationSpec(String dashboardId, String itemId, String propertyKey, Object body) {

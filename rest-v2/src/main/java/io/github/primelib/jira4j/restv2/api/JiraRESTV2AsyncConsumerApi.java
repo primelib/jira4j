@@ -23,6 +23,7 @@ import io.github.primelib.jira4j.restv2.model.BulkPermissionGrants;
 import io.github.primelib.jira4j.restv2.model.ChangeFilterOwner;
 import io.github.primelib.jira4j.restv2.model.ChangedWorklogs;
 import io.github.primelib.jira4j.restv2.model.ColumnItem;
+import io.github.primelib.jira4j.restv2.model.ColumnRequestBody;
 import io.github.primelib.jira4j.restv2.model.Comment;
 import io.github.primelib.jira4j.restv2.model.ComponentIssuesCount;
 import io.github.primelib.jira4j.restv2.model.Configuration;
@@ -5051,7 +5052,7 @@ public class JiraRESTV2AsyncConsumerApi {
      *   <li>propertyKey: The key of the dashboard item property.</li>
      * </ul>
      */
-    public CompletableFuture<Void> deleteDashboardItemProperty(Consumer<DeleteDashboardItemPropertyOperationSpec> spec) {
+    public CompletableFuture<Object> deleteDashboardItemProperty(Consumer<DeleteDashboardItemPropertyOperationSpec> spec) {
         DeleteDashboardItemPropertyOperationSpec r = new DeleteDashboardItemPropertyOperationSpec(spec);
         return api.deleteDashboardItemProperty(r.dashboardId(), r.itemId(), r.propertyKey());
     }
@@ -6334,12 +6335,12 @@ public class JiraRESTV2AsyncConsumerApi {
      * <ul>
      *   <li>query: The search query.</li>
      *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
-     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>maxResult: The maximum number of items to return per page.</li>
      * </ul>
      */
     public CompletableFuture<PageBeanUserKey> findUserKeysByQuery(Consumer<FindUserKeysByQueryOperationSpec> spec) {
         FindUserKeysByQueryOperationSpec r = new FindUserKeysByQueryOperationSpec(spec);
-        return api.findUserKeysByQuery(r.query(), r.startAt(), r.maxResults());
+        return api.findUserKeysByQuery(r.query(), r.startAt(), r.maxResult());
     }
 
     /**
@@ -9646,11 +9647,12 @@ public class JiraRESTV2AsyncConsumerApi {
      * @param spec a consumer that creates the payload for this operation. Supports the following properties:
      * <ul>
      *   <li>projectIdOrKey: The project ID or project key (case sensitive).</li>
+     *   <li>componentSource: The source of the components to return. Can be {@code jira} (default), {@code compass} or {@code auto}. When {@code auto} is specified, the API will return connected Compass components if the project is opted into Compass, otherwise it will return Jira components. Defaults to {@code jira}.</li>
      * </ul>
      */
     public CompletableFuture<List<ProjectComponent>> getProjectComponents(Consumer<GetProjectComponentsOperationSpec> spec) {
         GetProjectComponentsOperationSpec r = new GetProjectComponentsOperationSpec(spec);
-        return api.getProjectComponents(r.projectIdOrKey());
+        return api.getProjectComponents(r.projectIdOrKey(), r.componentSource());
     }
 
     /**
@@ -9667,12 +9669,13 @@ public class JiraRESTV2AsyncConsumerApi {
      *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
      *   <li>maxResults: The maximum number of items to return per page.</li>
      *   <li>orderBy: [Order](#ordering) the results by a field:   *  {@code description} Sorts by the component description.  *  {@code issueCount} Sorts by the count of issues associated with the component.  *  {@code lead} Sorts by the user key of the component's project lead.  *  {@code name} Sorts by component name.</li>
+     *   <li>componentSource: The source of the components to return. Can be {@code jira} (default), {@code compass} or {@code auto}. When {@code auto} is specified, the API will return connected Compass components if the project is opted into Compass, otherwise it will return Jira components. Defaults to {@code jira}.</li>
      *   <li>query: Filter the results using a literal string. Components with a matching {@code name} or {@code description} are returned (case insensitive).</li>
      * </ul>
      */
     public CompletableFuture<PageBeanComponentWithIssueCount> getProjectComponentsPaginated(Consumer<GetProjectComponentsPaginatedOperationSpec> spec) {
         GetProjectComponentsPaginatedOperationSpec r = new GetProjectComponentsPaginatedOperationSpec(spec);
-        return api.getProjectComponentsPaginated(r.projectIdOrKey(), r.startAt(), r.maxResults(), r.orderBy(), r.query());
+        return api.getProjectComponentsPaginated(r.projectIdOrKey(), r.startAt(), r.maxResults(), r.orderBy(), r.componentSource(), r.query());
     }
 
     /**
@@ -12115,7 +12118,8 @@ public class JiraRESTV2AsyncConsumerApi {
     /**
      * Retrieve the attributes of service registries
      * <p>
-     * Retrieve the value of service registries. **[Permissions](#permissions) required:** Only Connect apps can make this request and the servicesIds belong to the tenant you are requesting
+     * Retrieve the attributes of given service registries.
+     * **[Permissions](#permissions) required:** Only Connect apps can make this request and the servicesIds belong to the tenant you are requesting
      * @param spec a consumer that creates the payload for this operation. Supports the following properties:
      * <ul>
      *   <li>serviceIds: The ID of the services (the strings starting with "b:" need to be decoded in Base64).</li>
@@ -12287,7 +12291,7 @@ public class JiraRESTV2AsyncConsumerApi {
      *   <li>dashboardId: The ID of the dashboard.</li>
      *   <li>itemId: The ID of the dashboard item.</li>
      *   <li>propertyKey: The key of the dashboard item property. The maximum length is 255 characters. For dashboard items with a spec URI and no complete module key, if the provided propertyKey is equal to "config", the request body's JSON must be an object with all keys and values as strings.</li>
-     *   <li>body: </li>
+     *   <li>body: The request containing the value of the dashboard item's property.</li>
      * </ul>
      */
     public CompletableFuture<Object> setDashboardItemProperty(Consumer<SetDashboardItemPropertyOperationSpec> spec) {
@@ -12488,12 +12492,12 @@ public class JiraRESTV2AsyncConsumerApi {
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * @param spec a consumer that creates the payload for this operation. Supports the following properties:
      * <ul>
-     *   <li>requestBody: A navigable field value.</li>
+     *   <li>columnRequestBody: A navigable field value.</li>
      * </ul>
      */
-    public CompletableFuture<Object> setIssueNavigatorDefaultColumns(Consumer<SetIssueNavigatorDefaultColumnsOperationSpec> spec) {
+    public CompletableFuture<Void> setIssueNavigatorDefaultColumns(Consumer<SetIssueNavigatorDefaultColumnsOperationSpec> spec) {
         SetIssueNavigatorDefaultColumnsOperationSpec r = new SetIssueNavigatorDefaultColumnsOperationSpec(spec);
-        return api.setIssueNavigatorDefaultColumns(r.requestBody());
+        return api.setIssueNavigatorDefaultColumns(r.columnRequestBody());
     }
 
     /**
@@ -12671,7 +12675,7 @@ public class JiraRESTV2AsyncConsumerApi {
      * @param spec a consumer that creates the payload for this operation. Supports the following properties:
      * <ul>
      *   <li>propertyKey: The key of the user's property. The maximum length is 255 characters.</li>
-     *   <li>body: </li>
+     *   <li>body: The request containing the value of the property. The value has to a valid, non-empty JSON array. The maximum length is 32768 characters.</li>
      *   <li>accountId: The account ID of the user, which uniquely identifies the user across all Atlassian products. For example, *5b10ac8d82e05b22cc7d4ef5*.</li>
      *   <li>userKey: This parameter is no longer available and will be removed from the documentation soon. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.</li>
      *   <li>username: This parameter is no longer available and will be removed from the documentation soon. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details.</li>

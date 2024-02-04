@@ -3,6 +3,7 @@ package io.github.primelib.jira4j.restv2.spec;
 import java.util.Objects;
 import org.jetbrains.annotations.ApiStatus;
 import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
 import javax.annotation.processing.Generated;
 
 import io.github.primelib.jira4j.restv2.model.Project;
@@ -47,6 +48,12 @@ public class GetProjectComponentsOperationSpec {
     private String projectIdOrKey;
 
     /**
+     * The source of the components to return. Can be {@code jira} (default), {@code compass} or {@code auto}. When {@code auto} is specified, the API will return connected Compass components if the project is opted into Compass, otherwise it will return Jira components. Defaults to {@code jira}.
+     */
+    @Nullable 
+    private String componentSource;
+
+    /**
      * Constructs a validated instance of {@link GetProjectComponentsOperationSpec}.
      *
      * @param spec the specification to process
@@ -63,10 +70,12 @@ public class GetProjectComponentsOperationSpec {
      * <p>
      * NOTE: This constructor is not considered stable and may change if the operation is updated.
      * @param projectIdOrKey       The project ID or project key (case sensitive).
+     * @param componentSource      The source of the components to return. Can be {@code jira} (default), {@code compass} or {@code auto}. When {@code auto} is specified, the API will return connected Compass components if the project is opted into Compass, otherwise it will return Jira components. Defaults to {@code jira}.
      */
     @ApiStatus.Internal
-    public GetProjectComponentsOperationSpec(String projectIdOrKey) {
+    public GetProjectComponentsOperationSpec(String projectIdOrKey, String componentSource) {
         this.projectIdOrKey = projectIdOrKey;
+        this.componentSource = componentSource;
 
         if (VALIDATION_ENABLED)
             validate();

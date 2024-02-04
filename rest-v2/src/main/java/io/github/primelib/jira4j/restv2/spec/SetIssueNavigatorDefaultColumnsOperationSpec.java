@@ -1,10 +1,11 @@
 package io.github.primelib.jira4j.restv2.spec;
 
-import java.util.List;
+import java.util.Objects;
 import org.jetbrains.annotations.ApiStatus;
-import org.jetbrains.annotations.Nullable;
+import org.jetbrains.annotations.NotNull;
 import javax.annotation.processing.Generated;
 
+import io.github.primelib.jira4j.restv2.model.ColumnRequestBody;
 import java.util.Set;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -41,8 +42,8 @@ public class SetIssueNavigatorDefaultColumnsOperationSpec {
     /**
      * A navigable field value.
      */
-    @Nullable 
-    private List<String> requestBody;
+    @NotNull 
+    private ColumnRequestBody columnRequestBody;
 
     /**
      * Constructs a validated instance of {@link SetIssueNavigatorDefaultColumnsOperationSpec}.
@@ -60,11 +61,11 @@ public class SetIssueNavigatorDefaultColumnsOperationSpec {
      * Constructs a validated instance of {@link SetIssueNavigatorDefaultColumnsOperationSpec}.
      * <p>
      * NOTE: This constructor is not considered stable and may change if the operation is updated.
-     * @param requestBody          A navigable field value.
+     * @param columnRequestBody    A navigable field value.
      */
     @ApiStatus.Internal
-    public SetIssueNavigatorDefaultColumnsOperationSpec(List<String> requestBody) {
-        this.requestBody = requestBody;
+    public SetIssueNavigatorDefaultColumnsOperationSpec(ColumnRequestBody columnRequestBody) {
+        this.columnRequestBody = columnRequestBody;
 
         if (VALIDATION_ENABLED)
             validate();
@@ -76,5 +77,6 @@ public class SetIssueNavigatorDefaultColumnsOperationSpec {
      * @throws NullPointerException
      */
     public void validate() {
+        Objects.requireNonNull(columnRequestBody, "columnRequestBody is a required parameter!");
     }
 }

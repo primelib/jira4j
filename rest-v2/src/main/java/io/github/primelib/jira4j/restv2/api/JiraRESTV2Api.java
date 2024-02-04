@@ -41,6 +41,7 @@ import io.github.primelib.jira4j.restv2.model.BulkPermissionsRequestBean;
 import io.github.primelib.jira4j.restv2.model.ChangeFilterOwner;
 import io.github.primelib.jira4j.restv2.model.ChangedWorklogs;
 import io.github.primelib.jira4j.restv2.model.ColumnItem;
+import io.github.primelib.jira4j.restv2.model.ColumnRequestBody;
 import io.github.primelib.jira4j.restv2.model.Comment;
 import io.github.primelib.jira4j.restv2.model.ComponentIssuesCount;
 import io.github.primelib.jira4j.restv2.model.Configuration;
@@ -158,7 +159,6 @@ import io.github.primelib.jira4j.restv2.model.NewUserDetails;
 import io.github.primelib.jira4j.restv2.model.Notification;
 import io.github.primelib.jira4j.restv2.model.NotificationScheme;
 import io.github.primelib.jira4j.restv2.model.NotificationSchemeId;
-import java.time.OffsetDateTime;
 import io.github.primelib.jira4j.restv2.model.OperationMessage;
 import io.github.primelib.jira4j.restv2.model.OrderOfCustomFieldOptions;
 import io.github.primelib.jira4j.restv2.model.OrderOfIssueTypes;
@@ -4654,7 +4654,7 @@ public interface JiraRESTV2Api {
     @Headers({
         "Accept: application/json"
     })
-    void deleteDashboardItemProperty(@Param("dashboardId") @NotNull String dashboardId, @Param("itemId") @NotNull String itemId, @Param("propertyKey") @NotNull String propertyKey);
+    Object deleteDashboardItemProperty(@Param("dashboardId") @NotNull String dashboardId, @Param("itemId") @NotNull String itemId, @Param("propertyKey") @NotNull String propertyKey);
 
     /**
      * Delete default workflow
@@ -5885,13 +5885,13 @@ public interface JiraRESTV2Api {
      * Authentication - Required Scopes: [read:jira-user]
      * @param query                The search query. (required)
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
-     * @param maxResults           The maximum number of items to return per page. (optional, defaults to 100)
+     * @param maxResult            The maximum number of items to return per page. (optional, defaults to 100)
      */
-    @RequestLine("GET /rest/api/2/user/search/query/key?query={query}&startAt={startAt}&maxResults={maxResults}")
+    @RequestLine("GET /rest/api/2/user/search/query/key?query={query}&startAt={startAt}&maxResult={maxResult}")
     @Headers({
         "Accept: application/json"
     })
-    PageBeanUserKey findUserKeysByQuery(@Param("query") @NotNull String query, @Param("startAt") @Nullable Long startAt, @Param("maxResults") @Nullable Integer maxResults);
+    PageBeanUserKey findUserKeysByQuery(@Param("query") @NotNull String query, @Param("startAt") @Nullable Long startAt, @Param("maxResult") @Nullable Integer maxResult);
 
     /**
      * Find users
@@ -6943,7 +6943,7 @@ public interface JiraRESTV2Api {
     @Headers({
         "Accept: application/json"
     })
-    AuditRecords getAuditRecords(@Param("offset") @Nullable Integer offset, @Param("limit") @Nullable Integer limit, @Param("filter") @Nullable String filter, @Param("from") @Nullable OffsetDateTime from, @Param("to") @Nullable OffsetDateTime to);
+    AuditRecords getAuditRecords(@Param("offset") @Nullable Integer offset, @Param("limit") @Nullable Integer limit, @Param("filter") @Nullable String filter, @Param("from") @Nullable String from, @Param("to") @Nullable String to);
 
     /**
      * Get field reference data (GET)
@@ -9151,12 +9151,13 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [read:jira-work]
      * @param projectIdOrKey       The project ID or project key (case sensitive). (required)
+     * @param componentSource      The source of the components to return. Can be {@code jira} (default), {@code compass} or {@code auto}. When {@code auto} is specified, the API will return connected Compass components if the project is opted into Compass, otherwise it will return Jira components. Defaults to {@code jira}. (optional, defaults to jira)
      */
-    @RequestLine("GET /rest/api/2/project/{projectIdOrKey}/components")
+    @RequestLine("GET /rest/api/2/project/{projectIdOrKey}/components?componentSource={componentSource}")
     @Headers({
         "Accept: application/json"
     })
-    List<ProjectComponent> getProjectComponents(@Param("projectIdOrKey") @NotNull String projectIdOrKey);
+    List<ProjectComponent> getProjectComponents(@Param("projectIdOrKey") @NotNull String projectIdOrKey, @Param("componentSource") @Nullable String componentSource);
 
     /**
      * Get project components paginated
@@ -9171,13 +9172,14 @@ public interface JiraRESTV2Api {
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
      * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
      * @param orderBy              [Order](#ordering) the results by a field:   *  {@code description} Sorts by the component description.  *  {@code issueCount} Sorts by the count of issues associated with the component.  *  {@code lead} Sorts by the user key of the component's project lead.  *  {@code name} Sorts by component name. (optional)
+     * @param componentSource      The source of the components to return. Can be {@code jira} (default), {@code compass} or {@code auto}. When {@code auto} is specified, the API will return connected Compass components if the project is opted into Compass, otherwise it will return Jira components. Defaults to {@code jira}. (optional, defaults to jira)
      * @param query                Filter the results using a literal string. Components with a matching {@code name} or {@code description} are returned (case insensitive). (optional)
      */
-    @RequestLine("GET /rest/api/2/project/{projectIdOrKey}/component?startAt={startAt}&maxResults={maxResults}&orderBy={orderBy}&query={query}")
+    @RequestLine("GET /rest/api/2/project/{projectIdOrKey}/component?startAt={startAt}&maxResults={maxResults}&orderBy={orderBy}&componentSource={componentSource}&query={query}")
     @Headers({
         "Accept: application/json"
     })
-    PageBeanComponentWithIssueCount getProjectComponentsPaginated(@Param("projectIdOrKey") @NotNull String projectIdOrKey, @Param("startAt") @Nullable Long startAt, @Param("maxResults") @Nullable Integer maxResults, @Param("orderBy") @Nullable String orderBy, @Param("query") @Nullable String query);
+    PageBeanComponentWithIssueCount getProjectComponentsPaginated(@Param("projectIdOrKey") @NotNull String projectIdOrKey, @Param("startAt") @Nullable Long startAt, @Param("maxResults") @Nullable Integer maxResults, @Param("orderBy") @Nullable String orderBy, @Param("componentSource") @Nullable String componentSource, @Param("query") @Nullable String query);
 
     /**
      * Get project mappings for custom field context
@@ -10172,7 +10174,7 @@ public interface JiraRESTV2Api {
      * Authentication - Required Scopes: [read:jira-work]
      * @param fieldKey             The field key is specified in the following format: **$(app-key)\\_\\_$(field-key)**. For example, *example-add-on\\_\\_example-issue-field*. To determine the {@code fieldKey} value, do one of the following:   *  open the app's plugin descriptor, then **app-key** is the key at the top and **field-key** is the key in the {@code jiraIssueFields} module. **app-key** can also be found in the app listing in the Atlassian Universal Plugin Manager.  *  run [Get fields](#api-rest-api-2-field-get) and in the field details the value is returned in {@code key}. For example, {@code "key": "teams-add-on__team-issue-field"} (required)
      * @param startAt              The index of the first item to return in a page of results (page offset). (optional, defaults to 0)
-     * @param maxResults           The maximum number of items to return per page. (optional)
+     * @param maxResults           The maximum number of items to return per page. (optional, defaults to 50)
      * @param projectId            Filters the results to options that are only available in the specified project. (optional)
      */
     @RequestLine("GET /rest/api/2/field/{fieldKey}/option/suggestions/search?startAt={startAt}&maxResults={maxResults}&projectId={projectId}")
@@ -11550,7 +11552,8 @@ public interface JiraRESTV2Api {
     /**
      * Retrieve the attributes of service registries
      * <p>
-     * Retrieve the value of service registries. **[Permissions](#permissions) required:** Only Connect apps can make this request and the servicesIds belong to the tenant you are requesting
+     * Retrieve the attributes of given service registries.
+     * **[Permissions](#permissions) required:** Only Connect apps can make this request and the servicesIds belong to the tenant you are requesting
      *
      * @param serviceIds           The ID of the services (the strings starting with "b:" need to be decoded in Base64). (required)
      */
@@ -11720,7 +11723,7 @@ public interface JiraRESTV2Api {
      * @param dashboardId          The ID of the dashboard. (required)
      * @param itemId               The ID of the dashboard item. (required)
      * @param propertyKey          The key of the dashboard item property. The maximum length is 255 characters. For dashboard items with a spec URI and no complete module key, if the provided propertyKey is equal to "config", the request body's JSON must be an object with all keys and values as strings. (required)
-     * @param body                  (required)
+     * @param body                 The request containing the value of the dashboard item's property. (required)
      */
     @RequestLine("PUT /rest/api/2/dashboard/{dashboardId}/items/{itemId}/properties/{propertyKey}")
     @Headers({
@@ -11920,14 +11923,14 @@ public interface JiraRESTV2Api {
      * A navigable field is one that can be used as a column on the issue navigator. Find details of navigable issue columns using [Get fields](#api-rest-api-2-field-get).
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      *
-     * @param requestBody          A navigable field value. (optional)
+     * @param columnRequestBody    A navigable field value. (required)
      */
     @RequestLine("PUT /rest/api/2/settings/columns")
     @Headers({
         "Content-Type: */*", 
         "Accept: application/json"
     })
-    Object setIssueNavigatorDefaultColumns(@Nullable List<String> requestBody);
+    void setIssueNavigatorDefaultColumns(@NotNull ColumnRequestBody columnRequestBody);
 
     /**
      * Set issue property
@@ -12103,7 +12106,7 @@ public interface JiraRESTV2Api {
      *
      * Authentication - Required Scopes: [write:jira-work]
      * @param propertyKey          The key of the user's property. The maximum length is 255 characters. (required)
-     * @param body                  (required)
+     * @param body                 The request containing the value of the property. The value has to a valid, non-empty JSON array. The maximum length is 32768 characters. (required)
      * @param accountId            The account ID of the user, which uniquely identifies the user across all Atlassian products. For example, *5b10ac8d82e05b22cc7d4ef5*. (optional)
      * @param userKey              This parameter is no longer available and will be removed from the documentation soon. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details. (optional)
      * @param username             This parameter is no longer available and will be removed from the documentation soon. See the [deprecation notice](https://developer.atlassian.com/cloud/jira/platform/deprecation-notice-user-privacy-api-migration-guide/) for details. (optional)
