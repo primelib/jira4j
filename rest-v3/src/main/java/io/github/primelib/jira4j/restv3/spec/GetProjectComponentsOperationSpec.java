@@ -48,6 +48,7 @@ public class GetProjectComponentsOperationSpec {
     private String projectIdOrKey;
 
     /**
+     * The source of the components to return. Can be {@code jira} (default), {@code compass} or {@code auto}. When {@code auto} is specified, the API will return connected Compass components if the project is opted into Compass, otherwise it will return Jira components. Defaults to {@code jira}.
      */
     @Nullable 
     private String componentSource;
@@ -69,7 +70,7 @@ public class GetProjectComponentsOperationSpec {
      * <p>
      * NOTE: This constructor is not considered stable and may change if the operation is updated.
      * @param projectIdOrKey       The project ID or project key (case sensitive).
-     * @param componentSource      
+     * @param componentSource      The source of the components to return. Can be {@code jira} (default), {@code compass} or {@code auto}. When {@code auto} is specified, the API will return connected Compass components if the project is opted into Compass, otherwise it will return Jira components. Defaults to {@code jira}.
      */
     @ApiStatus.Internal
     public GetProjectComponentsOperationSpec(String projectIdOrKey, String componentSource) {

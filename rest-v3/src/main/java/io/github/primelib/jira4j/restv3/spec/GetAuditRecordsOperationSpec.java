@@ -5,7 +5,6 @@ import org.jetbrains.annotations.Nullable;
 import javax.annotation.processing.Generated;
 
 import io.github.primelib.jira4j.restv3.model.AuditRecords;
-import java.time.OffsetDateTime;
 import java.util.Set;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -61,13 +60,13 @@ public class GetAuditRecordsOperationSpec {
      * The date and time on or after which returned audit records must have been created. If {@code to} is provided {@code from} must be before {@code to} or no audit records are returned.
      */
     @Nullable 
-    private OffsetDateTime from;
+    private String from;
 
     /**
      * The date and time on or before which returned audit results must have been created. If {@code from} is provided {@code to} must be after {@code from} or no audit records are returned.
      */
     @Nullable 
-    private OffsetDateTime to;
+    private String to;
 
     /**
      * Constructs a validated instance of {@link GetAuditRecordsOperationSpec}.
@@ -92,7 +91,7 @@ public class GetAuditRecordsOperationSpec {
      * @param to                   The date and time on or before which returned audit results must have been created. If {@code from} is provided {@code to} must be after {@code from} or no audit records are returned.
      */
     @ApiStatus.Internal
-    public GetAuditRecordsOperationSpec(Integer offset, Integer limit, String filter, OffsetDateTime from, OffsetDateTime to) {
+    public GetAuditRecordsOperationSpec(Integer offset, Integer limit, String filter, String from, String to) {
         this.offset = offset;
         this.limit = limit;
         this.filter = filter;
