@@ -23,6 +23,7 @@ import io.github.primelib.jira4j.restv3.model.BulkPermissionGrants;
 import io.github.primelib.jira4j.restv3.model.ChangeFilterOwner;
 import io.github.primelib.jira4j.restv3.model.ChangedWorklogs;
 import io.github.primelib.jira4j.restv3.model.ColumnItem;
+import io.github.primelib.jira4j.restv3.model.ColumnRequestBody;
 import io.github.primelib.jira4j.restv3.model.Comment;
 import io.github.primelib.jira4j.restv3.model.ComponentIssuesCount;
 import io.github.primelib.jira4j.restv3.model.Configuration;
@@ -5051,9 +5052,9 @@ public class JiraRESTV3ConsumerApi {
      *   <li>propertyKey: The key of the dashboard item property.</li>
      * </ul>
      */
-    public void deleteDashboardItemProperty(Consumer<DeleteDashboardItemPropertyOperationSpec> spec) {
+    public Object deleteDashboardItemProperty(Consumer<DeleteDashboardItemPropertyOperationSpec> spec) {
         DeleteDashboardItemPropertyOperationSpec r = new DeleteDashboardItemPropertyOperationSpec(spec);
-        api.deleteDashboardItemProperty(r.dashboardId(), r.itemId(), r.propertyKey());
+        return api.deleteDashboardItemProperty(r.dashboardId(), r.itemId(), r.propertyKey());
     }
 
     /**
@@ -6334,12 +6335,12 @@ public class JiraRESTV3ConsumerApi {
      * <ul>
      *   <li>query: The search query.</li>
      *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
-     *   <li>maxResults: The maximum number of items to return per page.</li>
+     *   <li>maxResult: The maximum number of items to return per page.</li>
      * </ul>
      */
     public PageBeanUserKey findUserKeysByQuery(Consumer<FindUserKeysByQueryOperationSpec> spec) {
         FindUserKeysByQueryOperationSpec r = new FindUserKeysByQueryOperationSpec(spec);
-        return api.findUserKeysByQuery(r.query(), r.startAt(), r.maxResults());
+        return api.findUserKeysByQuery(r.query(), r.startAt(), r.maxResult());
     }
 
     /**
@@ -9646,7 +9647,7 @@ public class JiraRESTV3ConsumerApi {
      * @param spec a consumer that creates the payload for this operation. Supports the following properties:
      * <ul>
      *   <li>projectIdOrKey: The project ID or project key (case sensitive).</li>
-     *   <li>componentSource: </li>
+     *   <li>componentSource: The source of the components to return. Can be {@code jira} (default), {@code compass} or {@code auto}. When {@code auto} is specified, the API will return connected Compass components if the project is opted into Compass, otherwise it will return Jira components. Defaults to {@code jira}.</li>
      * </ul>
      */
     public List<ProjectComponent> getProjectComponents(Consumer<GetProjectComponentsOperationSpec> spec) {
@@ -9668,7 +9669,7 @@ public class JiraRESTV3ConsumerApi {
      *   <li>startAt: The index of the first item to return in a page of results (page offset).</li>
      *   <li>maxResults: The maximum number of items to return per page.</li>
      *   <li>orderBy: [Order](#ordering) the results by a field:   *  {@code description} Sorts by the component description.  *  {@code issueCount} Sorts by the count of issues associated with the component.  *  {@code lead} Sorts by the user key of the component's project lead.  *  {@code name} Sorts by component name.</li>
-     *   <li>componentSource: </li>
+     *   <li>componentSource: The source of the components to return. Can be {@code jira} (default), {@code compass} or {@code auto}. When {@code auto} is specified, the API will return connected Compass components if the project is opted into Compass, otherwise it will return Jira components. Defaults to {@code jira}.</li>
      *   <li>query: Filter the results using a literal string. Components with a matching {@code name} or {@code description} are returned (case insensitive).</li>
      * </ul>
      */
@@ -12117,7 +12118,8 @@ public class JiraRESTV3ConsumerApi {
     /**
      * Retrieve the attributes of service registries
      * <p>
-     * Retrieve the value of service registries. **[Permissions](#permissions) required:** Only Connect apps can make this request and the servicesIds belong to the tenant you are requesting
+     * Retrieve the attributes of given service registries.
+     * **[Permissions](#permissions) required:** Only Connect apps can make this request and the servicesIds belong to the tenant you are requesting
      * @param spec a consumer that creates the payload for this operation. Supports the following properties:
      * <ul>
      *   <li>serviceIds: The ID of the services (the strings starting with "b:" need to be decoded in Base64).</li>
@@ -12289,7 +12291,7 @@ public class JiraRESTV3ConsumerApi {
      *   <li>dashboardId: The ID of the dashboard.</li>
      *   <li>itemId: The ID of the dashboard item.</li>
      *   <li>propertyKey: The key of the dashboard item property. The maximum length is 255 characters. For dashboard items with a spec URI and no complete module key, if the provided propertyKey is equal to "config", the request body's JSON must be an object with all keys and values as strings.</li>
-     *   <li>body: </li>
+     *   <li>body: The request containing the value of the dashboard item's property.</li>
      * </ul>
      */
     public Object setDashboardItemProperty(Consumer<SetDashboardItemPropertyOperationSpec> spec) {
@@ -12490,12 +12492,12 @@ public class JiraRESTV3ConsumerApi {
      * **[Permissions](#permissions) required:** *Administer Jira* [global permission](https://confluence.atlassian.com/x/x4dKLg).
      * @param spec a consumer that creates the payload for this operation. Supports the following properties:
      * <ul>
-     *   <li>requestBody: A navigable field value.</li>
+     *   <li>columnRequestBody: A navigable field value.</li>
      * </ul>
      */
-    public Object setIssueNavigatorDefaultColumns(Consumer<SetIssueNavigatorDefaultColumnsOperationSpec> spec) {
+    public void setIssueNavigatorDefaultColumns(Consumer<SetIssueNavigatorDefaultColumnsOperationSpec> spec) {
         SetIssueNavigatorDefaultColumnsOperationSpec r = new SetIssueNavigatorDefaultColumnsOperationSpec(spec);
-        return api.setIssueNavigatorDefaultColumns(r.requestBody());
+        api.setIssueNavigatorDefaultColumns(r.columnRequestBody());
     }
 
     /**

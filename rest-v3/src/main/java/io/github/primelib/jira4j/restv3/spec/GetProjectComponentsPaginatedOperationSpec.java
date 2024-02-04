@@ -75,6 +75,7 @@ public class GetProjectComponentsPaginatedOperationSpec {
     private String orderBy;
 
     /**
+     * The source of the components to return. Can be {@code jira} (default), {@code compass} or {@code auto}. When {@code auto} is specified, the API will return connected Compass components if the project is opted into Compass, otherwise it will return Jira components. Defaults to {@code jira}.
      */
     @Nullable 
     private String componentSource;
@@ -105,7 +106,7 @@ public class GetProjectComponentsPaginatedOperationSpec {
      * @param startAt              The index of the first item to return in a page of results (page offset).
      * @param maxResults           The maximum number of items to return per page.
      * @param orderBy              [Order](#ordering) the results by a field:   *  {@code description} Sorts by the component description.  *  {@code issueCount} Sorts by the count of issues associated with the component.  *  {@code lead} Sorts by the user key of the component's project lead.  *  {@code name} Sorts by component name.
-     * @param componentSource      
+     * @param componentSource      The source of the components to return. Can be {@code jira} (default), {@code compass} or {@code auto}. When {@code auto} is specified, the API will return connected Compass components if the project is opted into Compass, otherwise it will return Jira components. Defaults to {@code jira}.
      * @param query                Filter the results using a literal string. Components with a matching {@code name} or {@code description} are returned (case insensitive).
      */
     @ApiStatus.Internal

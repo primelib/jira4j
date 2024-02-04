@@ -6,6 +6,7 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import javax.annotation.processing.Generated;
 
+import io.github.primelib.jira4j.restv3.model.ColumnRequestBody;
 import java.util.Set;
 import io.github.primelib.jira4j.restv3.model.User;
 import io.github.primelib.jira4j.restv3.model.UserColumnRequestBody;
