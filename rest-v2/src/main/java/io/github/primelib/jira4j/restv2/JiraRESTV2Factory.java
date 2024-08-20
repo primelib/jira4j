@@ -85,7 +85,7 @@ public class JiraRESTV2Factory {
             .disable(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES)
             .propertyNamingStrategy(PropertyNamingStrategies.LOWER_CAMEL_CASE)
             .configure(SerializationFeature.FAIL_ON_EMPTY_BEANS, false)
-            .serializationInclusion(JsonInclude.Include.NON_NULL)
+            .serializationInclusion(JsonInclude.Include.ALWAYS)
             .addModule(new JavaTimeModule());
         config.extensions().forEach(extension -> extension.customizeObjectMapper(objectMapperBuilder));
         ObjectMapper objectMapper = objectMapperBuilder.build();
