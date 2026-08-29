@@ -1282,6 +1282,202 @@
           },
           {
             "id": "5",
+            "name": "gradle-publish [java]",
+            "slug": "gradle-publish-java",
+            "stage": "publish",
+            "scope": "module",
+            "action": "builtin://actions/gradle-publish",
+            "module": "gradle-sdk-java-build-gradle-kts",
+            "module-dir": "sdk/java",
+            "run-after": [
+              "gitleaks-scan",
+              "gradle-build-java",
+              "gradle-test-java",
+              "semgrep-scan",
+              "trivyfs-scan"
+            ],
+            "run-after-by-name": [
+              "gitleaks-scan",
+              "gradle-build [java]",
+              "gradle-test [java]",
+              "semgrep-scan",
+              "trivyfs-scan"
+            ],
+            "access": {
+              "env": [
+                {
+                  "name": "MAVEN_VERSION",
+                  "description": "Overwrites the version of the maven artifact to publish, defaults to the git tag or branch name."
+                },
+                {
+                  "name": "MAVEN_REPO_URL",
+                  "description": "The URL of the maven repository to publish to, used for releases and snapshots unless MAVEN_REPO_RELEASE_URL or MAVEN_REPO_SNAPSHOT_URL are set."
+                },
+                {
+                  "name": "MAVEN_REPO_USERNAME",
+                  "description": "The username to use for authentication with the maven repository.",
+                  "secret": true
+                },
+                {
+                  "name": "MAVEN_REPO_PASSWORD",
+                  "description": "The password to use for authentication with the maven repository.",
+                  "secret": true
+                },
+                {
+                  "name": "MAVEN_REPO_HEADER_NAME",
+                  "description": "The name of the HTTP header to use for authentication with the maven repository (e.g. Deploy-Token for a GitLab package registry), use this instead of MAVEN_REPO_USERNAME and MAVEN_REPO_PASSWORD."
+                },
+                {
+                  "name": "MAVEN_REPO_HEADER_VALUE",
+                  "description": "The value of the HTTP header to use for authentication with the maven repository.",
+                  "secret": true
+                },
+                {
+                  "name": "MAVEN_REPO_RELEASE_URL",
+                  "description": "The URL of the maven repository to publish release artifacts to, takes precedence over MAVEN_REPO_URL for releases."
+                },
+                {
+                  "name": "MAVEN_REPO_RELEASE_USERNAME",
+                  "description": "The username to use for authentication with the maven repository for releases, takes precedence over MAVEN_REPO_USERNAME.",
+                  "secret": true
+                },
+                {
+                  "name": "MAVEN_REPO_RELEASE_PASSWORD",
+                  "description": "The password to use for authentication with the maven repository for releases, takes precedence over MAVEN_REPO_PASSWORD.",
+                  "secret": true
+                },
+                {
+                  "name": "MAVEN_REPO_RELEASE_HEADER_NAME",
+                  "description": "The name of the HTTP header to use for authentication with the maven repository for releases, takes precedence over MAVEN_REPO_HEADER_NAME."
+                },
+                {
+                  "name": "MAVEN_REPO_RELEASE_HEADER_VALUE",
+                  "description": "The value of the HTTP header to use for authentication with the maven repository for releases, takes precedence over MAVEN_REPO_HEADER_VALUE.",
+                  "secret": true
+                },
+                {
+                  "name": "MAVEN_REPO_SNAPSHOT_URL",
+                  "description": "The URL of the maven repository to publish snapshot artifacts to, takes precedence over MAVEN_REPO_URL for snapshots."
+                },
+                {
+                  "name": "MAVEN_REPO_SNAPSHOT_USERNAME",
+                  "description": "The username to use for authentication with the maven repository for snapshots, takes precedence over MAVEN_REPO_USERNAME.",
+                  "secret": true
+                },
+                {
+                  "name": "MAVEN_REPO_SNAPSHOT_PASSWORD",
+                  "description": "The password to use for authentication with the maven repository for snapshots, takes precedence over MAVEN_REPO_PASSWORD.",
+                  "secret": true
+                },
+                {
+                  "name": "MAVEN_REPO_SNAPSHOT_HEADER_NAME",
+                  "description": "The name of the HTTP header to use for authentication with the maven repository for snapshots, takes precedence over MAVEN_REPO_HEADER_NAME."
+                },
+                {
+                  "name": "MAVEN_REPO_SNAPSHOT_HEADER_VALUE",
+                  "description": "The value of the HTTP header to use for authentication with the maven repository for snapshots, takes precedence over MAVEN_REPO_HEADER_VALUE.",
+                  "secret": true
+                },
+                {
+                  "name": "MAVEN_GPG_SIGN_PRIVATEKEY",
+                  "description": "The ASCII-armored private key (base64 encoded).",
+                  "secret": true
+                },
+                {
+                  "name": "MAVEN_GPG_SIGN_PASSWORD",
+                  "description": "The password for the private key.",
+                  "secret": true
+                },
+                {
+                  "name": "MAVEN_GPG_SIGN_KEYID",
+                  "description": "The GPG key ID, only required when using sub keys.",
+                  "secret": true
+                },
+                {
+                  "name": "GITHUB_ACTOR",
+                  "description": "The GitHub actor to use for pushing the artifacts to a maven repository on GitHub Packages (https://maven.pkg.github.com/)."
+                },
+                {
+                  "name": "GITHUB_TOKEN",
+                  "description": "The GitHub token to use for pushing the artifacts to a maven repository on GitHub Packages (https://maven.pkg.github.com/).",
+                  "secret": true
+                }
+              ],
+              "executables": [
+                {
+                  "name": "java",
+                  "constraint": "\u003e= 21.0.0-0"
+                }
+              ],
+              "network": [
+                {
+                  "host": "repo.maven.apache.org:443"
+                },
+                {
+                  "host": "repo1.maven.org:443"
+                },
+                {
+                  "host": "kotlinlang.org:443"
+                },
+                {
+                  "host": "plugins.gradle.org:443"
+                },
+                {
+                  "host": "plugins-artifacts.gradle.org:443"
+                },
+                {
+                  "host": "services.gradle.org:443"
+                },
+                {
+                  "host": "downloads.gradle.org:443"
+                },
+                {
+                  "host": "jcenter.bintray.com:443"
+                },
+                {
+                  "host": "javadoc.io:443"
+                },
+                {
+                  "host": "www.javadocs.dev:443"
+                },
+                {
+                  "host": "central.sonatype.com:443"
+                },
+                {
+                  "host": "maven.pkg.github.com:443"
+                },
+                {
+                  "host": "github.com:443"
+                },
+                {
+                  "host": "api.github.com:443"
+                },
+                {
+                  "host": "codeload.github.com:443"
+                },
+                {
+                  "host": "uploads.github.com:443"
+                },
+                {
+                  "host": "objects.githubusercontent.com:443"
+                },
+                {
+                  "host": "raw.githubusercontent.com:443"
+                },
+                {
+                  "host": "ghcr.io:443"
+                },
+                {
+                  "host": "pkg-containers.githubusercontent.com:443"
+                }
+              ]
+            },
+            "inputs": {},
+            "outputs": {},
+            "order": 5
+          },
+          {
+            "id": "6",
             "name": "changelog-generate",
             "slug": "changelog-generate",
             "stage": "publish",
@@ -1337,10 +1533,10 @@
                 }
               ]
             },
-            "order": 5
+            "order": 6
           },
           {
-            "id": "6",
+            "id": "7",
             "name": "gitlab-release-publish",
             "slug": "gitlab-release-publish",
             "stage": "publish",
@@ -1422,7 +1618,7 @@
               ]
             },
             "outputs": {},
-            "order": 6
+            "order": 7
           }
         ]
       },
@@ -1474,7 +1670,8 @@
         "stages": [
           "build",
           "test",
-          "scan"
+          "scan",
+          "publish"
         ],
         "steps": [
           {
@@ -1858,6 +2055,202 @@
               ]
             },
             "order": 4
+          },
+          {
+            "id": "5",
+            "name": "gradle-publish [java]",
+            "slug": "gradle-publish-java",
+            "stage": "publish",
+            "scope": "module",
+            "action": "builtin://actions/gradle-publish",
+            "module": "gradle-sdk-java-build-gradle-kts",
+            "module-dir": "sdk/java",
+            "run-after": [
+              "gitleaks-scan",
+              "gradle-build-java",
+              "gradle-test-java",
+              "semgrep-scan",
+              "trivyfs-scan"
+            ],
+            "run-after-by-name": [
+              "gitleaks-scan",
+              "gradle-build [java]",
+              "gradle-test [java]",
+              "semgrep-scan",
+              "trivyfs-scan"
+            ],
+            "access": {
+              "env": [
+                {
+                  "name": "MAVEN_VERSION",
+                  "description": "Overwrites the version of the maven artifact to publish, defaults to the git tag or branch name."
+                },
+                {
+                  "name": "MAVEN_REPO_URL",
+                  "description": "The URL of the maven repository to publish to, used for releases and snapshots unless MAVEN_REPO_RELEASE_URL or MAVEN_REPO_SNAPSHOT_URL are set."
+                },
+                {
+                  "name": "MAVEN_REPO_USERNAME",
+                  "description": "The username to use for authentication with the maven repository.",
+                  "secret": true
+                },
+                {
+                  "name": "MAVEN_REPO_PASSWORD",
+                  "description": "The password to use for authentication with the maven repository.",
+                  "secret": true
+                },
+                {
+                  "name": "MAVEN_REPO_HEADER_NAME",
+                  "description": "The name of the HTTP header to use for authentication with the maven repository (e.g. Deploy-Token for a GitLab package registry), use this instead of MAVEN_REPO_USERNAME and MAVEN_REPO_PASSWORD."
+                },
+                {
+                  "name": "MAVEN_REPO_HEADER_VALUE",
+                  "description": "The value of the HTTP header to use for authentication with the maven repository.",
+                  "secret": true
+                },
+                {
+                  "name": "MAVEN_REPO_RELEASE_URL",
+                  "description": "The URL of the maven repository to publish release artifacts to, takes precedence over MAVEN_REPO_URL for releases."
+                },
+                {
+                  "name": "MAVEN_REPO_RELEASE_USERNAME",
+                  "description": "The username to use for authentication with the maven repository for releases, takes precedence over MAVEN_REPO_USERNAME.",
+                  "secret": true
+                },
+                {
+                  "name": "MAVEN_REPO_RELEASE_PASSWORD",
+                  "description": "The password to use for authentication with the maven repository for releases, takes precedence over MAVEN_REPO_PASSWORD.",
+                  "secret": true
+                },
+                {
+                  "name": "MAVEN_REPO_RELEASE_HEADER_NAME",
+                  "description": "The name of the HTTP header to use for authentication with the maven repository for releases, takes precedence over MAVEN_REPO_HEADER_NAME."
+                },
+                {
+                  "name": "MAVEN_REPO_RELEASE_HEADER_VALUE",
+                  "description": "The value of the HTTP header to use for authentication with the maven repository for releases, takes precedence over MAVEN_REPO_HEADER_VALUE.",
+                  "secret": true
+                },
+                {
+                  "name": "MAVEN_REPO_SNAPSHOT_URL",
+                  "description": "The URL of the maven repository to publish snapshot artifacts to, takes precedence over MAVEN_REPO_URL for snapshots."
+                },
+                {
+                  "name": "MAVEN_REPO_SNAPSHOT_USERNAME",
+                  "description": "The username to use for authentication with the maven repository for snapshots, takes precedence over MAVEN_REPO_USERNAME.",
+                  "secret": true
+                },
+                {
+                  "name": "MAVEN_REPO_SNAPSHOT_PASSWORD",
+                  "description": "The password to use for authentication with the maven repository for snapshots, takes precedence over MAVEN_REPO_PASSWORD.",
+                  "secret": true
+                },
+                {
+                  "name": "MAVEN_REPO_SNAPSHOT_HEADER_NAME",
+                  "description": "The name of the HTTP header to use for authentication with the maven repository for snapshots, takes precedence over MAVEN_REPO_HEADER_NAME."
+                },
+                {
+                  "name": "MAVEN_REPO_SNAPSHOT_HEADER_VALUE",
+                  "description": "The value of the HTTP header to use for authentication with the maven repository for snapshots, takes precedence over MAVEN_REPO_HEADER_VALUE.",
+                  "secret": true
+                },
+                {
+                  "name": "MAVEN_GPG_SIGN_PRIVATEKEY",
+                  "description": "The ASCII-armored private key (base64 encoded).",
+                  "secret": true
+                },
+                {
+                  "name": "MAVEN_GPG_SIGN_PASSWORD",
+                  "description": "The password for the private key.",
+                  "secret": true
+                },
+                {
+                  "name": "MAVEN_GPG_SIGN_KEYID",
+                  "description": "The GPG key ID, only required when using sub keys.",
+                  "secret": true
+                },
+                {
+                  "name": "GITHUB_ACTOR",
+                  "description": "The GitHub actor to use for pushing the artifacts to a maven repository on GitHub Packages (https://maven.pkg.github.com/)."
+                },
+                {
+                  "name": "GITHUB_TOKEN",
+                  "description": "The GitHub token to use for pushing the artifacts to a maven repository on GitHub Packages (https://maven.pkg.github.com/).",
+                  "secret": true
+                }
+              ],
+              "executables": [
+                {
+                  "name": "java",
+                  "constraint": "\u003e= 21.0.0-0"
+                }
+              ],
+              "network": [
+                {
+                  "host": "repo.maven.apache.org:443"
+                },
+                {
+                  "host": "repo1.maven.org:443"
+                },
+                {
+                  "host": "kotlinlang.org:443"
+                },
+                {
+                  "host": "plugins.gradle.org:443"
+                },
+                {
+                  "host": "plugins-artifacts.gradle.org:443"
+                },
+                {
+                  "host": "services.gradle.org:443"
+                },
+                {
+                  "host": "downloads.gradle.org:443"
+                },
+                {
+                  "host": "jcenter.bintray.com:443"
+                },
+                {
+                  "host": "javadoc.io:443"
+                },
+                {
+                  "host": "www.javadocs.dev:443"
+                },
+                {
+                  "host": "central.sonatype.com:443"
+                },
+                {
+                  "host": "maven.pkg.github.com:443"
+                },
+                {
+                  "host": "github.com:443"
+                },
+                {
+                  "host": "api.github.com:443"
+                },
+                {
+                  "host": "codeload.github.com:443"
+                },
+                {
+                  "host": "uploads.github.com:443"
+                },
+                {
+                  "host": "objects.githubusercontent.com:443"
+                },
+                {
+                  "host": "raw.githubusercontent.com:443"
+                },
+                {
+                  "host": "ghcr.io:443"
+                },
+                {
+                  "host": "pkg-containers.githubusercontent.com:443"
+                }
+              ]
+            },
+            "inputs": {},
+            "outputs": {},
+            "order": 5
           }
         ]
       },

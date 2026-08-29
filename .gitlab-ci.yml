@@ -351,6 +351,24 @@ stages:
       expire_in: 1 day
       reports:
         codequality: .dist/trivyfs-scan/report/gl-codequality/*.json
+## gradle-publish [java]
+"release/gradle-publish [java]":
+    <<: *default_job
+    stage: publish
+    needs: ["release/gitleaks-scan", "release/gradle-build [java]", "release/gradle-test [java]", "release/semgrep-scan", "release/trivyfs-scan"]
+    dependencies: []
+    timeout: 20m
+    rules:
+      - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_TAG =~ /^v[0-9]+.[0-9]+.[0-9]+$/'
+        when: always
+      - when: never
+    script:
+        - cid --log-level=${CID_LOGLEVEL:-info} plan execute --state-file ".cid/state-gitlab.json" --state-wf-name "release" --step "gradle-publish-java"
+    artifacts:
+      name: "release/gradle-publish [java]"
+      paths:
+        - .dist/gradle-publish-java/
+      expire_in: 1 day
 ## changelog-generate
 "release/changelog-generate":
     <<: *default_job
@@ -492,3 +510,21 @@ stages:
       expire_in: 1 day
       reports:
         codequality: .dist/trivyfs-scan/report/gl-codequality/*.json
+## gradle-publish [java]
+"main/gradle-publish [java]":
+    <<: *default_job
+    stage: publish
+    needs: ["main/gitleaks-scan", "main/gradle-build [java]", "main/gradle-test [java]", "main/semgrep-scan", "main/trivyfs-scan"]
+    dependencies: []
+    timeout: 20m
+    rules:
+      - if: '$CI_PIPELINE_SOURCE == "push" && $CI_COMMIT_BRANCH == "main"'
+        when: always
+      - when: never
+    script:
+        - cid --log-level=${CID_LOGLEVEL:-info} plan execute --state-file ".cid/state-gitlab.json" --state-wf-name "main" --step "gradle-publish-java"
+    artifacts:
+      name: "main/gradle-publish [java]"
+      paths:
+        - .dist/gradle-publish-java/
+      expire_in: 1 day
