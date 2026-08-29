@@ -3,7 +3,7 @@ output: sdk
 outputSubDir: true
 
 repository:
-  name: Jira Client
+  name: Jira DataCenter Client
   description: Unofficial API client generated from the Jira OpenAPI specification.
   url: https://github.com/primelib/jira-client
   licenseName: MIT
@@ -44,4 +44,4 @@ presets:
   java:
     enabled: true
     groupId: io.github.primelib
-    artifactId: jira4j-rest-v2
+    artifactId: jira-datacenter-client

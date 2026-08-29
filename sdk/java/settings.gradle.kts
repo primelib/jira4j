@@ -7,7 +7,7 @@ pluginManagement {
     }
 }
 
-rootProject.name = "jira4j-rest-v2"
+rootProject.name = "jira-datacenter-client"
 
 include(
     "core",

@@ -6,7 +6,7 @@ plugins {
 }
 
 projectConfiguration {
-    artifactId.set("jira4j-rest-v2-spring-boot-starter")
+    artifactId.set("jira-datacenter-client-spring-boot-starter")
 }
 
 dependencies {
@@ -18,8 +18,4 @@ dependencies {
     api(libs.spring.boot.starter)
     annotationProcessor(libs.spring.boot.autoconfiguration.processor)
     annotationProcessor(libs.spring.boot.configuration.processor)
-
-    // micrometer
-    api(platform(libs.micrometer.bom))
-    api(libs.micrometer.core)
 }

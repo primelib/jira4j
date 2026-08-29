@@ -4,17 +4,18 @@ plugins {
     alias(libs.plugins.configuration)
 }
 
+val configurationPluginId = libs.plugins.configuration.get().pluginId
+
 subprojects {
-    apply(plugin = "me.philippheuer.configuration")
+    apply(plugin = configurationPluginId)
 
     projectConfiguration {
         type.set(me.philippheuer.projectcfg.domain.ProjectType.LIBRARY)
         javaVersion.set(JavaVersion.VERSION_17)
         artifactGroupId.set("io.github.primelib")
-        artifactDisplayName.set("Jira Client")
+        artifactDisplayName.set("Jira DataCenter Client")
         artifactDescription.set("Unofficial API client generated from the Jira OpenAPI specification.")
         javadocLint.set(listOf("none"))
-
         pom = { pom ->
             pom.url.set("https://https://github.com/primelib/jira-client")
             pom.issueManagement {

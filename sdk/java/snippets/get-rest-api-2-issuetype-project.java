@@ -1,0 +1,42 @@
+import io.github.primelib.jira.datacenter.client.JiraDataCenterClientFactory;
+import io.github.primelib.jira.datacenter.client.client.AbstractJiraDataCenterClientApiClient.ApiResponseException;
+import io.github.primelib.jira.datacenter.client.operations.Get2IssuetypeProjectV1OperationSpec;
+
+public class Get2IssuetypeProjectV1Example {
+    public void execute() {
+        // Maven coordinates: io.github.primelib:jira-datacenter-client:<version>
+        var client = JiraDataCenterClientFactory.create();
+
+        try {
+            var response = client.issueTypesApi().get2IssuetypeProjectV1(new Get2IssuetypeProjectV1OperationSpec(spec -> {
+                    // operation parameters (all available mutable fields)
+                    // spec.projectId(/* Long */); // projectId: required - The ID of the project.
+                    // spec.level(/* Integer */); // level: optional - The level of the issue type to filter by. Use:   *  `-1` for Subtask.  *  `0` for Base.  *  `1` for Epic.
+
+                    // optional request behavior controls
+                    // spec.failOnError(true); // default=true: true => throws ApiResponseException for error status codes (4xx/5xx)
+                    // spec.extraHeader("X-Request-Id", "demo-request-id");
+                    // spec.extraQueryParam("debug", "true");
+                    // spec.overrideAuthMethod(...);
+                }));
+
+            // Direct data access (failOnError = true)
+            var data = response.data();
+
+            /*
+            // Pattern matching (failOnError = false)
+            switch (response) {
+                case Get2IssuetypeProjectV1Response.OkResponse r -> {
+                    // handle 200, r.data() contains typed payload
+                }
+                case Get2IssuetypeProjectV1Response.Unknown r -> {
+                    // handle unexpected codes
+                }
+            }
+            */
+        } catch (ApiResponseException ex) {
+            // Triggered when failOnError=true and the API returns an error status.
+            // ex.getStatusCode(), ex.getResponseBody()
+        }
+    }
+}

@@ -6,42 +6,22 @@ plugins {
 }
 
 projectConfiguration {
-    artifactId.set("jira4j-rest-v2")
+    artifactId.set("jira-datacenter-client")
 }
 
 dependencies {
-    // bom
-    api(platform(libs.openfeign.bom))
-    api(platform(libs.resilience4j.bom))
+    // jackson
     api(platform(libs.jackson.bom))
-    api(platform(libs.micrometer.bom))
-    api(platform(libs.slf4j.bom))
-    api(platform(libs.primecodegenlib.java.bom))
+    implementation(libs.jackson.databind)
+    implementation(libs.jackson.dataformat.xml)
+    implementation(libs.jackson.dataformat.yaml)
+
+
+    // okhttp
+    implementation(libs.okhttp)
+    implementation(libs.okhttp.logging)
 
     // annotations
     implementation(libs.jspecify)
     implementation(libs.jetbrains.annotations)
-
-    // feign
-    implementation("io.github.openfeign:feign-core")
-    implementation("io.github.openfeign:feign-jackson")
-    implementation("io.github.openfeign:feign-slf4j")
-    implementation("io.github.openfeign:feign-okhttp")
-    implementation("io.github.openfeign:feign-micrometer")
-
-    // http client
-    implementation(libs.okhttp)
-
-    // codegen libs
-    api("io.github.primelib.primecodegenlib.java:feign-common")
-
-    // jackson
-    implementation("com.fasterxml.jackson.core:jackson-databind")
-    implementation("com.fasterxml.jackson.datatype:jackson-datatype-jsr310")
-
-    // metrics
-    api("io.micrometer:micrometer-core")
-
-    // test
-    testImplementation("org.slf4j:slf4j-simple")
 }
